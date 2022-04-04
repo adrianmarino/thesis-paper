@@ -9,6 +9,7 @@ Recomendar items utilizando los siguientes enfoques>
   * En estos casos se utiliza content based.
   * El enfoque hibrido propone una transicion suave de ambos enfoques.
 
+Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de prueba.
 
 # Candidate datasets
 
