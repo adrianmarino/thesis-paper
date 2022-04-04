@@ -19,6 +19,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
   * [Amazon Review Data](https://nijianmo.github.io/amazon/index.html)
   * [ Book-Crossing Dataset ](http://www2.informatik.uni-freiburg.de/~cziegler/BX/)
   * [Steam Video Games](https://www.kaggle.com/tamber/steam-video-games/data)
+  * [Retailrocket recommender system dataset](https://academictorrents.com/details/9b13183dc4d60676b773c9e2cd6de5e5542cee9a)
 
 * [9 Must-Have Datasets for Investigating Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
 
