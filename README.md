@@ -11,6 +11,9 @@
 
 * [9 Must-Have Datasets for Investigating Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
 
+* [Public Datasets For Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
+
+
 ## Others
 
 * [MELI](https://ml-challenge.mercadolibre.com/downloads)
