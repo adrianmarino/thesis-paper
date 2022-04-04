@@ -32,9 +32,9 @@
 # Ideas
 
 * Text cosine similatiry based un embeddings
- * Doc2Vec
-  * [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
-  * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
+  * Doc2Vec
+    * [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
+    * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
  * BERT
-  * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
-  * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
+   * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
+   * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
