@@ -1,5 +1,15 @@
 # Thesis-paper
 
+Recomendar items utilizando los siguientes enfoques>
+
+* Content based
+* Collabirative fitering
+* Enfoque hibirdo
+  * Es muy usado para soporta los casos en lo que los usaurios no llegan al numero de ratings minimo para que CF llegue a buenos recomendationes.
+  * En estos casos se utiliza content based.
+  * El enfoque hibrido propone una transicion suave de ambos enfoques.
+
+
 # Candidate datasets
 
 * [10 Open-Source Datasets One Must Know To Build Recommender Systems](https://analyticsindiamag.com/10-open-source-datasets-one-must-know-to-build-recommender-systems/)
