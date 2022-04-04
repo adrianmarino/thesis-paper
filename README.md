@@ -31,5 +31,6 @@
 
 # Ideas
 
-* [Conten Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
+* [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
+  * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
 
