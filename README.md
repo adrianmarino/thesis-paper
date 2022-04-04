@@ -50,3 +50,6 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
   * BERT
     * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
     * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
+* CF-CF Hybrid models
+  * [CB-CF_Hybrid_Neural_Recommender_System](https://cseweb.ucsd.edu//~jmcauley/datasets.html)
+ 
