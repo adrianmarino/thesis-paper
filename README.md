@@ -14,7 +14,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 # Candidate datasets
 
 * [10 Open-Source Datasets One Must Know To Build Recommender Systems](https://analyticsindiamag.com/10-open-source-datasets-one-must-know-to-build-recommender-systems/)
-  * [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/)
+  * [MovieLens 25M Dataset (CB + CF)](https://grouplens.org/datasets/movielens/25m/)
   * [Netflix Prize Dataset](http://academictorrents.com/details/9b13183dc4d60676b773c9e2cd6de5e5542cee9a)
   * [Amazon Review Data](https://nijianmo.github.io/amazon/index.html)
   * [ Book-Crossing Dataset ](http://www2.informatik.uni-freiburg.de/~cziegler/BX/)
@@ -24,7 +24,6 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 
 * [Public Datasets For Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
 
-
 ## Others
 
 * [MELI](https://ml-challenge.mercadolibre.com/downloads)
@@ -32,6 +31,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [Subte: Viajes Molinetes](https://data.buenosaires.gob.ar/dataset/subte-viajes-molinetes)
 * [Amazon Seller - Order Status Prediction](https://www.kaggle.com/datasets/pranalibose/amazon-seller-order-status-prediction)
 * [Google Play Store Apps](https://www.kaggle.com/datasets/lava18/google-play-store-apps)
+* [Top Trending Videos YouTube 2021 (CB)](https://www.kaggle.com/datasets/jyotmakadiya/top-trending-videos-youtube-2021)
 
 ### Fraud Detection
 
