@@ -23,7 +23,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [Recommender Systems and Personalization Datasets](https://cseweb.ucsd.edu/~jmcauley/datasets.html)
 * [9 Must-Have Datasets for Investigating Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
 * [Public Datasets For Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
-
+* [Recommender Systems and Personalization Datasets](https://cseweb.ucsd.edu//~jmcauley/datasets.html)
 
 ## Others
 
@@ -51,5 +51,5 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
     * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
     * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
 * CF-CF Hybrid models
-  * [CB-CF_Hybrid_Neural_Recommender_System](https://cseweb.ucsd.edu//~jmcauley/datasets.html)
+  * [CB-CF_Hybrid_Neural_Recommender_System](https://github.com/rengongzhizang/CB-CF_Hybrid_Neural_Recommender_System)
  
