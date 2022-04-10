@@ -25,7 +25,8 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [Public Datasets For Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
 * [themoviedb](https://www.themoviedb.org/)
 * [Recommender Systems and Personalization Datasets](https://cseweb.ucsd.edu//~jmcauley/datasets.html)
-
+* [eCommerce behavior data from multi category store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store)
+* [Free datasets with eCommerce behavior data](https://rees46.com/en/datasets)
 
 ## Others
 
