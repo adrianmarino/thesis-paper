@@ -55,3 +55,8 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * CF-CF Hybrid models
   * [CB-CF_Hybrid_Neural_Recommender_System](https://github.com/rengongzhizang/CB-CF_Hybrid_Neural_Recommender_System)
  
+
+### RecSys 2020 Tutorial: Feature Engineering for Recommender Systems
+
+* [Video](https://www.youtube.com/watch?v=uROvhp7cj6Q)
+* [Notebooks](https://github.com/rapidsai/deeplearning/tree/main/RecSys2020Tutorial)

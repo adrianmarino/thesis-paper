@@ -1,0 +1,17 @@
+name: thesis
+channels:
+  - defaults
+  - pytorch
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - click
+  - pytorch
+  - cudatoolkit=11.3
+  - pytest
+  - jupyterlab
+  - bunch
+  - pip
+  - pip:
+      - pytorch-common
