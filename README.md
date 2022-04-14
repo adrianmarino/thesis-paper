@@ -52,19 +52,18 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [Metadata Embeddings for User and Item Cold-start Recommendations](https://paperswithcode.com/paper/metadata-embeddings-for-user-and-item-cold)
 * [Modern Recommender Systems](https://towardsdatascience.com/modern-recommender-systems-a0c727609aa8)
 * [dlrm](https://github.com/facebookresearch/dlrm)
+* Se puede usar un embendding bag para cada campo de tipo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
+* BERT, para trasnformar campos texto a embeddings: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
 
 ## Definición
 
-* La idea principal es comparar la performance de 3 enfoques:
-  * RecSys basado en contenido.
-    * KNN simple usando simulitud coseno.
-    * MLP de capa densa y predecir similutud.
-    * BERT: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
-    * Se puede usar un embendding bg para cada campo te tpo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
-  * RecSys basado en filtros colaborativos.
+* La idea principal es comparar RecSys basado en filtros colaborativos:
+    * KNN usando dsitintas distancias.
     * Modelo con dos embeddings y una densa.
-    * DeepFM
-    * Modelo hibrido usando DeepFM.
+    * DeepFM solo para variables user y item.
+    * Modelo hibrido
+      * DeepFM.
+      * Wide and deep.
 * Usando pytorch, cuDF, Optuna y (airflow ?).
 * Explicar la ventajas y devilidades de cada enfoque.
 * Explicar la arquitectura de cada modelo.
