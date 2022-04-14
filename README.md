@@ -55,10 +55,11 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 
 ## Definición
 
-La idea principal es comparar la performance de 3 enfoques:
+- La idea principal es comparar la performance de 3 enfoques:
  - RecSys basado en contenido ?.
  - RecSys basado en filtros colaborativos (DeepFM).
  - RecSys hibrido (DeepFM).
 
-Usando pytorch, cuDF, Optuna y (airflow ?).
-
+- Usando pytorch, cuDF, Optuna y (airflow ?).
+- Explicar la ventajas y devilidades de cada enfoque.
+- Explicar la arquitectura de cada modelo.
