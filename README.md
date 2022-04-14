@@ -60,6 +60,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
     * KNN simple usando simulitud coseno.
     * MLP de capa densa y predecir similutud.
     * BERT: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
+    * Se puede usar un embendding bg para cada campo te tpo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
   * RecSys basado en filtros colaborativos.
     * Modelo con dos embeddings y una densa.
     * DeepFM
