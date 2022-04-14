@@ -1,15 +1,17 @@
-# Thesis-paper
 
-Recomendar items utilizando los siguientes enfoques>
+# Thesis-papes
 
-* Content based
-* Collabirative fitering
-* Enfoque hibirdo
-  * Es muy usado para soporta los casos en lo que los usaurios no llegan al numero de ratings minimo para que CF llegue a buenos recomendationes.
-  * En estos casos se utiliza content based.
-  * El enfoque hibrido propone una transicion suave de ambos enfoques.
-
-Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de prueba.
+* La idea principal es comparar RecSys basado en filtros colaborativos:
+    * KNN usando distintas distancias.
+    * Modelo con dos embeddings + bias y una densa.
+    * DeepFM.
+    * Wide and deep,
+    * Modelo hibrido
+      * DeepFM.
+      * Wide and deep.
+* Usando pytorch, cuDF, Optuna y (airflow ?).
+* Explicar la ventajas y debilidades de cada enfoque.
+* Explicar la arquitectura de cada modelo.
 
 # Candidate datasets
 
@@ -54,16 +56,3 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [dlrm](https://github.com/facebookresearch/dlrm)
 * Se puede usar un embendding bag para cada campo de tipo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
 * BERT, para trasnformar campos texto a embeddings: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
-
-## Definición
-
-* La idea principal es comparar RecSys basado en filtros colaborativos:
-    * KNN usando dsitintas distancias.
-    * Modelo con dos embeddings y una densa.
-    * DeepFM solo para variables user y item.
-    * Modelo hibrido
-      * DeepFM.
-      * Wide and deep.
-* Usando pytorch, cuDF, Optuna y (airflow ?).
-* Explicar la ventajas y devilidades de cada enfoque.
-* Explicar la arquitectura de cada modelo.
