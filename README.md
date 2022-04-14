@@ -59,7 +59,7 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
   * RecSys basado en contenido.
     * KNN simple usando simulitud coseno.
     * MLP de capa densa y predecir similutud.
-    * Factorizando matrices ?
+    * BERT: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
   * RecSys basado en filtros colaborativos.
     * Modelo con dos embeddings y una densa.
     * DeepFM
