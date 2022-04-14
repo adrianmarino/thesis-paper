@@ -51,3 +51,4 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 
 * [Metadata Embeddings for User and Item Cold-start Recommendations](https://paperswithcode.com/paper/metadata-embeddings-for-user-and-item-cold)
 * [Modern Recommender Systems](https://towardsdatascience.com/modern-recommender-systems-a0c727609aa8)
+* [dlrm](https://github.com/facebookresearch/dlrm)
