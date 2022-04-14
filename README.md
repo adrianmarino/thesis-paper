@@ -52,3 +52,13 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 * [Metadata Embeddings for User and Item Cold-start Recommendations](https://paperswithcode.com/paper/metadata-embeddings-for-user-and-item-cold)
 * [Modern Recommender Systems](https://towardsdatascience.com/modern-recommender-systems-a0c727609aa8)
 * [dlrm](https://github.com/facebookresearch/dlrm)
+
+## Definición
+
+La idea principal es comparar la performance de 3 enfoques:
+ - RecSys basado en contenido ?.
+ - RecSys basado en filtros colaborativos (DeepFM).
+ - RecSys hibrido (DeepFM).
+
+Usando pytorch, cuDF, Optuna y (airflow ?).
+
