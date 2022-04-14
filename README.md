@@ -56,9 +56,14 @@ Plantear las ventajas y desventaja de cada enfoque sobre uno o mas datasets de p
 ## Definición
 
 * La idea principal es comparar la performance de 3 enfoques:
-  * RecSys basado en contenido ?.
-  * RecSys basado en filtros colaborativos (DeepFM).
-  * RecSys hibrido (DeepFM).
+  * RecSys basado en contenido.
+    * KNN simple usando simulitud coseno.
+    * MLP de capa densa y predecir similutud.
+    * Factorizando matrices ?
+  * RecSys basado en filtros colaborativos.
+    * Modelo con dos embeddings y una densa.
+    * DeepFM
+    * Modelo hibrido usando DeepFM.
 * Usando pytorch, cuDF, Optuna y (airflow ?).
 * Explicar la ventajas y devilidades de cada enfoque.
 * Explicar la arquitectura de cada modelo.
