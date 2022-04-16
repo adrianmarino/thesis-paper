@@ -101,5 +101,4 @@ http://localhost:8888/?token=45efe99607fa6......
 ```
 
 **Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
-```
 
