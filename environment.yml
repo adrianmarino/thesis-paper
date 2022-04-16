@@ -3,15 +3,14 @@ channels:
   - defaults
   - pytorch
   - conda-forge
+  - rapidsai
 dependencies:
-  - numpy
-  - pandas
-  - click
+  - numpy<=1.21
+  - cudf
   - pytorch
-  - cudatoolkit=11.3
-  - pytest
+  - cudatoolkit
   - jupyterlab
-  - bunch
+  - pymongo
   - pip
   - pip:
-      - pytorch-common
+    - pytorch-common>=0.0.16
