@@ -13,7 +13,10 @@
 * Explicar la ventajas y debilidades de cada enfoque.
 * Explicar la arquitectura de cada modelo.
 
-# Candidate datasets
+
+## References
+
+### Candidate datasets
 
 * [10 Open-Source Datasets One Must Know To Build Recommender Systems](https://analyticsindiamag.com/10-open-source-datasets-one-must-know-to-build-recommender-systems/)
   * [MovieLens 25M Dataset (CB + CF)](https://grouplens.org/datasets/movielens/25m/)
@@ -30,20 +33,6 @@
 * [eCommerce behavior data from multi category store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store)
 * [Free datasets with eCommerce behavior data](https://rees46.com/en/datasets)
 
-
-# Ideas
-
-* Text cosine similatiry based un embeddings
-  * Doc2Vec
-    * [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
-    * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
-  * BERT
-    * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
-    * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
-* CF-CF Hybrid models
-  * [CB-CF_Hybrid_Neural_Recommender_System](https://github.com/rengongzhizang/CB-CF_Hybrid_Neural_Recommender_System)
- 
-
 ### RecSys 2020 Tutorial: Feature Engineering for Recommender Systems
 
 * [Video](https://www.youtube.com/watch?v=uROvhp7cj6Q)
@@ -56,3 +45,61 @@
 * [dlrm](https://github.com/facebookresearch/dlrm)
 * Se puede usar un embendding bag para cada campo de tipo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
 * BERT, para trasnformar campos texto a embeddings: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
+
+### Ideas
+
+* Text cosine similatiry based un embeddings
+  * Doc2Vec
+    * [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
+    * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
+  * BERT
+    * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
+    * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
+* CF-CF Hybrid models
+  * [CB-CF_Hybrid_Neural_Recommender_System](https://github.com/rengongzhizang/CB-CF_Hybrid_Neural_Recommender_System)
+ 
+### Notebooks
+
+* [Use example](https://github.com/adrianmarino/deep-fm/blob/master/notebooks/rs.ipynb)
+* [rs-check-how-works](https://github.com/adrianmarino/deep-fm/blob/master/notebooks/rs-check-how-works.ipynb)
+ 
+
+## Requisites
+
+* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+## Getting started
+
+**Step 1**: Clone repo.
+
+```bash
+$ git clone https://github.com/adrianmarino/thesis-paper.git
+$ cd thesis-paper
+```
+
+**Step 2**: Create environment.
+
+```bash
+$ conda env create -f environment.yml
+```
+
+## See notebooks in jupyter lab
+
+**Step 1**: Enable project environment.
+
+```bash
+$ conda activate thesis
+```
+
+**Step 2**: Under project directory boot jupyter lab.
+
+```bash
+$ jupyter lab
+
+Jupyter Notebook 6.1.4 is running at:
+http://localhost:8888/?token=45efe99607fa6......
+```
+
+**Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
+```
+
