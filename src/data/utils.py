@@ -1,5 +1,8 @@
 import numpy as np
+import pandas as pd
 
+MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec']
+WEEK   = ['mon', 'tue', 'wed', 'thus', 'fri', 'sat', 'sun']
 
 is_list = lambda type_: type_ != object and type_ != str and type_ == list
 
@@ -26,3 +29,25 @@ def is_nan_array(value):
             return response
         elif type(np.isnan(response)) == np.ndarray:
             return len(response) == 0
+
+
+def frequency(array, name,  ascending=False):
+    unique, counts = np.unique(array, return_counts=True)
+    df = pd.DataFrame(
+        np.asarray((unique, counts)).T, 
+        columns=[name, 'count']
+    )
+    df['count'] = df['count'].astype('long')  
+    return df.sort_values(by=['count'], ascending=ascending)
+
+
+def group_by(df, column, asc_order=False):
+    return df \
+    .groupby(column) \
+    .size() \
+    .reset_index(name='count') \
+    .sort_values(by='count', ascending=asc_order)
+
+
+def list_column_to_dummy_columns(df, column):
+    return df.drop(column, 1).join(df[column].str.join('|').str.get_dummies())

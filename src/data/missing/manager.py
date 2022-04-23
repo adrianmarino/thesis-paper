@@ -45,13 +45,16 @@ class MissingsManager:
         return pd.DataFrame(data if len(data) > 0 else [{'Column': 'Not found columns with missing values'}])
 
 
-    def remove_rows(self, df, max_percent=0.05):
+    def remove_rows(self, df, max_missings=0.05):
+        """
+        Remove dataset rows with missings values associated to columns with <= max_missings % of missing values".
+        """
         report = self.report(df, verbose=1)
         if is_empty(report): 
             return df
 
-        logging.info(f'Remove rows with missing <= {max_percent} %')
-        indexes_lists = report[report['Percent (%)'] <= max_percent]['indexes']
+        logging.info(f'Remove rows for columns <= {max_missings} % of missings values.')
+        indexes_lists = report[report['Percent (%)'] <= max_missings]['indexes']
 
         indexes = set([idx for idxs in indexes_lists for idx in idxs])
 

@@ -5,6 +5,10 @@ channels:
   - conda-forge
   - rapidsai
 dependencies:
+  - seaborn
+  - matplotlib
+  - wordcloud
+  - joypy
   - numpy<=1.21
   - cudf
   - pytorch
