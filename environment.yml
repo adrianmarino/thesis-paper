@@ -3,19 +3,17 @@ channels:
   - defaults
   - pytorch
   - conda-forge
-  - rapidsai
 dependencies:
   - seaborn
   - matplotlib
   - wordcloud
   - joypy
-  - numpy<=1.21
-  - cudf
-  - pytorch
-  - cudatoolkit
+  - numpy
+  - pytorch=1.11.0
+  - cudatoolkit=11.3
   - jupyterlab
-  - pymongo
-  - dtale
+  - pytest
   - pip
   - pip:
-    - pytorch-common>=0.0.16
+     - pykeops
+     - pytorch-common==0.0.19
