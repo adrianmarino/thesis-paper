@@ -9,7 +9,7 @@ from utils import *
 
 
 class TestKNNUserBasedPredictor:
-    def test_when_request_3_neighbors_it_gets_3_nearest(self):
+    def test_when_predict_rating_made_buy_a_user_for_a_given_item_it_returns_a_valid_value(self):
         # Prepare
         rm = dt.RatingsMatrix.from_tensor(torch.tensor([
             [2., 2., 4.], # a

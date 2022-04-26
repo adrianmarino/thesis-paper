@@ -8,7 +8,7 @@ from utils import *
 
 
 class TestNearestNeighbors:
-    def test_when_request_3_neighbors_it_gets_3_nearest(self):
+    def test_when_request_2_neighbors_it_gets_2_nearest(self):
         # Prepare
         matrix = torch.tensor([
             [2., 2., 4.], # a
