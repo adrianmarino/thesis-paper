@@ -1,0 +1,4 @@
+from .cosine_distance import CosineDistance
+from .distances_matrix import rows_distance_matrix
+from .nearest_neighbors import NearestNeighbors, NearestNeighborsResult
+from .module.knn_user_based_predictor import KNNUserBasedPredictor
