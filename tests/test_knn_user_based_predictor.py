@@ -24,14 +24,18 @@ class TestKNNUserBasedPredictor:
 
         predictor = ml.KNNUserBasedPredictor(
             rm, 
-            distance=ml.CosineDistance(), 
-            n_neighbors=2
+            distance=ml.CosineDistance()
         )
         user_idx = 0
         item_idx = 0
 
         # Perform
-        predicted_rating = predictor.predict(user_idx, item_idx, debug=True)
+        predicted_rating = predictor.predict(
+            user_idx, 
+            item_idx, 
+            n_neighbors=2,
+            debug=True
+        )
 
         # Asserts
         assert 2.4837491512298584 == predicted_rating
