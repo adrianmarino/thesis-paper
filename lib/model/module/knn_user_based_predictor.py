@@ -5,14 +5,13 @@ import logging
 
 
 class KNNUserBasedPredictor(AbstractPredictor):
-    def __init__(self, rm, distance, n_neighbors, name=None):
+    def __init__(self, rm, distance, name=None):
         super().__init__(name)
         self.rm = rm
         self.nn = NearestNeighbors(rm[:, :], distance)
-        self.n_neighbors = n_neighbors
 
-    def predict(self, user_idx, item_idx, debug=False):
-        result = self.nn.neighbors(user_idx, self.n_neighbors)
+    def predict(self, user_idx, item_idx, n_neighbors=10, debug=False):
+        result = self.nn.neighbors(user_idx, n_neighbors)
 
         if debug:
             numerator_str = []
@@ -45,4 +44,4 @@ class KNNUserBasedPredictor(AbstractPredictor):
             logging.info(f'distances:\n{self.nn.row_distances.cpu().numpy()}')
             logging.info(f'Ratting = {user_mean} - [ ({" + ".join(numerator_str)}) / ({" + ".join(total_sim_str)}) ] = {rating}')
 
-        return rating
+        return rating.item()
