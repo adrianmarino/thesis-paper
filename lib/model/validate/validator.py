@@ -24,6 +24,6 @@ class Validator:
                     metrics['sample']    = sample
 
                     summary.append(metrics)
-                    bar()
+                bar()
 
         return ValidatorSummary(summary)

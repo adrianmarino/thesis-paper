@@ -31,6 +31,9 @@ class RatingsMatrix:
     def __setitem__(self, index, value):  self.__data[index[0], index[1]] = value
 
     @property
+    def T(self): return RatingsMatrix(self.__data.T)
+
+    @property
     def n_rows(self): return self.__data.shape[0]
 
     @property

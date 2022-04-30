@@ -9,10 +9,11 @@ class ValidatorSummary:
         self.data = pd.DataFrame(metrics_log) 
 
     def plot(self, bins=10):
-        for pre_name in np.unique(self.data['predictor'].values):
-            print(f'Predictor: {pre_name}')
-            data = self.data[self.data.predictor == pre_name]
-            metric_names = set(data.columns) - set(['predictor', 'sample'])   
-            for name in metric_names:
+        metric_names = set(self.data.columns) - set(['predictor', 'sample'])   
+        for name in metric_names:
+            for pre_name in np.unique(self.data['predictor'].values):
+                print(f'Predictor: {pre_name}')
+                data = self.data[self.data.predictor == pre_name]
+
                 pl.l_flat_size()
                 pl.describe_num_var(data, name, bins=bins)
