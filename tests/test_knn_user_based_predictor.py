@@ -15,7 +15,7 @@ class TestKNNUserBasedPredictor:
             [2., 2., 4.], # a
             [4., 4., 3.], # b
             [1., 2., 2.], # c
-            [3., 1., 1.]  # d
+            [3., 1., 1.]  # dQ
         ]))
         # a-a: 0
         # Nearest:

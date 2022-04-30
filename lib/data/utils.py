@@ -58,3 +58,6 @@ def list_column_to_dummy_columns(df, column, prefix=None):
         data = data.rename(columns={c: f'{prefix}_{c}' for c in new_columns})
 
     return data
+
+
+exclude_cols = lambda df, columns: df.loc[:, ~df.columns.isin(columns)]

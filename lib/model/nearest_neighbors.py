@@ -1,6 +1,7 @@
 import torch
 import pytorch_common.util as pu
 import model as ml
+import data.plot as pl
 
 
 class NearestNeighborsResult:
@@ -30,4 +31,11 @@ class NearestNeighbors:
             rows      = self.matrix[k_nearest_row_indexes, :], 
             distances = k_nearest_row_distances, 
             indexes   = k_nearest_row_indexes
+        )
+
+    def plot(self, prefix=''):
+        dist = self.row_distances.cpu()
+        pl.headmap(
+            dist,
+            title=f'{prefix}Distances Matrix ({dist.shape[0]},{dist.shape[1]})'
         )

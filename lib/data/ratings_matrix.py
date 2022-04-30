@@ -1,21 +1,21 @@
 import data.plot as pl
 import torch
 import pytorch_common.util as pu
-import logging
+import data as dt
 
 
 class RatingsMatrix:
     @classmethod
     def from_dataframe(cls, df, user_seq_column, item_seq_column, rating_column, device=pu.get_device()):
-        sw = pu.Stopwatch()
         n_users = df[user_seq_column].max() + 1
         n_items = df[item_seq_column].max() + 1
         tensor = torch.zeros([n_users, n_items], dtype=torch.float).to(device)
 
-        for _, row in df.iterrows():
-            tensor[int(row[user_seq_column]), int(row[item_seq_column])] = row[rating_column]
+        with dt.progress_bar(len(df), 'build ratting matrix') as bar:
+            for index, row in df.iterrows():
+                tensor[int(row[user_seq_column]), int(row[item_seq_column])] = row[rating_column]
+                bar()
 
-        logging.info(f'Create ratting matrix - computing time: {sw.to_str()}')
         return cls.from_tensor(tensor)
 
     @staticmethod

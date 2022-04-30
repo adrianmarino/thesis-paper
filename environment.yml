@@ -15,5 +15,5 @@ dependencies:
   - pytest
   - pip
   - pip:
-     - pykeops
      - pytorch-common==0.0.19
+     - alive-progress==2.4.0
