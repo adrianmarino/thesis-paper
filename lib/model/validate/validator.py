@@ -4,10 +4,10 @@ from .validator_summary import ValidatorSummary
 
 
 class Validator:
-    def __init__(self, n_samples, batch_size, metrics_fn, predictors):
+    def __init__(self, n_samples, batch_size, metrics, predictors):
         self.n_samples  = n_samples
         self.batch_size = batch_size
-        self.metrics_fn = metrics_fn
+        self.metrics    = metrics
         self.predictors = predictors
 
     def validate(self, ds, **kwargs):
@@ -19,7 +19,7 @@ class Validator:
                 for p in self.predictors:
                     y_pred = p.predict_batch(X, **kwargs)
 
-                    metrics = {name: fn(y_pred, y_true) for name, fn in self.metrics_fn.items()}
+                    metrics = {m.name: m.perform(y_pred, y_true).item() for m in self.metrics}
                     metrics['predictor'] = p.name
                     metrics['sample']    = sample
 
