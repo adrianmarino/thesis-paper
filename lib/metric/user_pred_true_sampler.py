@@ -2,33 +2,41 @@ from random import sample
 import logging
 import torch
 import numpy as np
+import util as ut
 
 
-class UserPredTrueSampler:
-    def __init__(self, k, decimals=None): 
-        self._k = k
-        self._decimals = decimals
+class UserYPredYTrueSampler:
+    def __init__(self, user_index, sample_size, decimals=0):
+        self.__user_index = user_index
+        self.__sample_size = sample_size
+        self.__decimals = decimals
 
-    def sample(self, ctx, predictor_name):
-        for user_id in ctx.user_ids:
-            true_values, pred_values = ctx.true_pred_by_user(user_id, predictor_name)
-            k_true_values, k_pred_values = self._k_sample(true_values, pred_values)
+    def sample(self, y_true, y_pred, X):
+        user_seq = X[:, self.__user_index]
 
-            k_ordered_indexes = np.argsort(k_true_values)[::-1]
-            yield k_true_values[k_ordered_indexes], k_pred_values[k_ordered_indexes]
+        for user_idx in torch.unique(user_seq):
+            y_true_sample, y_pred_sample = \
+                self.__y_true_y_pred_sample_by_user_idx(y_true, y_pred, user_seq, user_idx)
 
+            if y_true_sample == None:
+                continue
 
-    def _k_sample(self, true_values, pred_values):
-        values_size  = len(true_values)
-        k = self._k
+            indexes_desc_by_val = torch.argsort(y_true_sample, dim=0, descending=True) 
 
-        if k > values_size:
-            logging.debug(f'Use K={values_size} because defined k={self._k} is greater than values size ({values_size}).')
-            k = values_size
+            yield y_true_sample[indexes_desc_by_val], y_pred_sample[indexes_desc_by_val]
 
-        indexes = np.array(sample(list(range(values_size)), k))
+    def __y_true_y_pred_sample_by_user_idx(self, y_true, y_pred, user_seq, user_idx):
+        indexes = ut.indexes_of(user_seq, user_idx)
 
-        k_pred_values = [round_(pred_values[i], self._decimals) for i in indexes]
-        k_true_values = [round_(true_values[i], self._decimals) for i in indexes]
+        if indexes.size()[0] < self.__sample_size:
+            return None, None       
 
-        return k_true_values, k_pred_values
+        indexes_sample = ut.random_choice(indexes, self.__sample_size)
+
+        y_true_sample = torch.index_select(y_true, 0, indexes_sample)
+        y_true_sample = torch.round(y_true_sample, decimals=self.__decimals)
+
+        y_pred_sample = torch.index_select(y_pred, 0, indexes_sample)
+        y_pred_sample = torch.round(y_pred_sample, decimals=self.__decimals)
+
+        return y_true_sample, y_pred_sample

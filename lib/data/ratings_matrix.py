@@ -11,10 +11,10 @@ class RatingsMatrix:
         n_items = df[item_seq_column].max() + 1
         tensor = torch.zeros([n_users, n_items], dtype=torch.float).to(device)
 
-        with dt.progress_bar(len(df), 'build ratting matrix') as bar:
+        with dt.progress_bar(len(df), 'Building Ratting Matrix') as bar:
             for index, row in df.iterrows():
                 tensor[int(row[user_seq_column]), int(row[item_seq_column])] = row[rating_column]
-                bar()
+                bar.update()
 
         return cls.from_tensor(tensor)
 

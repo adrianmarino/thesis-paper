@@ -13,8 +13,8 @@ class PrecisionMetric(AbstractMetric):
         self._average = average
         self._rating_decimals = rating_decimals
 
-    def _calculate(self, pred_values, true_values, opts):
-        true_values = torch.round(true_values, decimals=self._rating_decimals)
-        pred_values = torch.round(pred_values, decimals=self._rating_decimals)
+    def _calculate(self, y_pred, y_true, X):
+        rounded_y_true = torch.round(y_true, decimals=self._rating_decimals)
+        rounded_y_pred = torch.round(y_pred, decimals=self._rating_decimals)
 
-        return precision_score(true_values, pred_values, average=self._average, zero_division=0)
+        return precision_score(rounded_y_true, rounded_y_pred, average=self._average, zero_division=0)

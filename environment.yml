@@ -13,7 +13,7 @@ dependencies:
   - cudatoolkit=11.3
   - jupyterlab
   - pytest
+  - tqdm
   - pip
   - pip:
      - pytorch-common==0.0.19
-     - alive-progress==2.4.0

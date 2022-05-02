@@ -1,15 +1,4 @@
-from alive_progress import alive_bar
+from tqdm.notebook import tqdm_notebook
 
-
-def progress_bar(count, title=''):
-    return alive_bar(
-        count, 
-        title=title, 
-        force_tty=True, 
-        bar='blocks', 
-        spinner='twirls'
-    )
-
-def update_bar(bar, index, times=5000):
-    if index % times == 0:
-        bar(times)
+def progress_bar(count, title='Processing'): 
+    return tqdm_notebook(total=count, desc = title)

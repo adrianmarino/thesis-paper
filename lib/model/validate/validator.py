@@ -1,6 +1,7 @@
 import data as dt
 import data.dataset as ds
 from .validator_summary import ValidatorSummary
+import torch
 
 
 class Validator:
@@ -10,7 +11,7 @@ class Validator:
         self.metrics    = metrics
         self.predictors = predictors
 
-    def validate(self, ds, **kwargs):
+    def validate(self, ds,  **kwargs):
         summary = []
         with dt.progress_bar(self.n_samples) as bar:
             for sample in range(self.n_samples):
@@ -19,11 +20,11 @@ class Validator:
                 for p in self.predictors:
                     y_pred = p.predict_batch(X, **kwargs)
 
-                    metrics = {m.name: m.perform(y_pred, y_true).item() for m in self.metrics}
+                    metrics = {m.name: m.perform(y_pred, y_true, X).item() for m in self.metrics}
                     metrics['predictor'] = p.name
                     metrics['sample']    = sample
 
                     summary.append(metrics)
-                bar()
+                bar.update()
 
         return ValidatorSummary(summary)

@@ -4,7 +4,8 @@ from math import sqrt
 
 
 class RMSEMetric(AbstractMetric):
-    def __init__(self, decimals=4): super().__init__('RMSE', decimals)
+    def __init__(self, decimals=4):
+        super().__init__('RMSE', decimals)
 
-    def _calculate(self, pred_values, true_values, opts):
-        return sqrt(mean_squared_error(true_values, pred_values))
+    def _calculate(self, y_pred, y_true, X):
+        return sqrt(mean_squared_error(y_true, y_pred))

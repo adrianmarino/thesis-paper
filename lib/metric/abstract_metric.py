@@ -7,9 +7,9 @@ class AbstractMetric(ABC):
         self.name = name
         self._decimals = decimals
 
-    def perform(self, pred_values, true_values, opts={}):
-        metric = self._calculate(pred_values, true_values, opts)
+    def perform(self, y_pred, y_true, X):
+        metric = self._calculate(y_pred, y_true, X)
         return torch.round(torch.tensor(metric), decimals=self._decimals)
 
-    def _calculate(self, pred_values, true_values, opts):
+    def _calculate(self, y_pred, y_true, X):
         pass
