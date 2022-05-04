@@ -9,7 +9,7 @@ class AbstractMetric(ABC):
 
     def perform(self, y_pred, y_true, X):
         metric = self._calculate(y_pred, y_true, X)
-        return torch.round(torch.tensor(metric), decimals=self._decimals)
+        return torch.round(metric, decimals=self._decimals)
 
     def _calculate(self, y_pred, y_true, X):
         pass
