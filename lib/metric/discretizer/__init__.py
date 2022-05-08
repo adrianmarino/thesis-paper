@@ -47,10 +47,10 @@ class sequence:
 
 
 class round_sequence:
-    def __init__(self, values, min_value, max_value):
+    def __init__(self, values):
         self.seq = sequence(values).closure()
-        self.min_value = min_value
-        self.max_value = max_value
+        self.min_value = values[0]
+        self.max_value = values[-1]
 
     @property
     def desc(self): return f'round-seq'
@@ -66,5 +66,5 @@ class round_sequence:
         else:
             return value
 
-    def closure(self): 
-        return self.perform
+    def closure(self):
+        return lambda it: self.seq(self.perform(it))

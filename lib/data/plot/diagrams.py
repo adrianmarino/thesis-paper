@@ -34,8 +34,8 @@ def lineplot(data, x, y, x_rotation=60, figsize=(15, 6), title='', title_fontsiz
     plt.ylabel(y, fontsize=axis_fontsize)
     plt.show()
 
-    
-def histplot(df, column, bins='auto', stat='count'):
+
+def histplot(df, column, bins='auto', stat='count', title='', title_fontsize=16):
     f, (ax_box, ax_hist) = plt.subplots(
         2, 
         sharex=True, 
@@ -57,12 +57,15 @@ def histplot(df, column, bins='auto', stat='count'):
 
     ax_hist.legend()
 
-    ax_hist.set_title(f'Histogram - {column}')
+    ax_hist.set_title(f'Histogram')
     ax_hist.set(ylabel='Frequency')
     ax_hist.set(xlabel='Values')
 
-    ax_box.set_title(f'Boxplot - {column}')
+    ax_box.set_title(f'Boxplot')
     ax_box.set(xlabel='')
+
+    title = f'{title} - {column}' if title else column
+    f.suptitle(title, fontsize=title_fontsize)
 
     plt.show()
 

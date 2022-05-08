@@ -2,18 +2,40 @@ import pandas as pd
 import data.plot as pl
 import data as dt
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class ValidatorSummary:
-    def __init__(self, metrics_log):
-        self.data = pd.DataFrame(metrics_log) 
+
+    @staticmethod
+    def load(file_path): return ValidatorSummary(pd.read_json(f'{file_path}.json'))
+
+    @staticmethod
+    def from_list(metrics_log): return ValidatorSummary(pd.DataFrame(metrics_log))
+    
+    def save(self, file_path): self.data.to_json(f'{file_path}.json')
+
+    def __init__(self, data): self.data = data
+
+    def __predictor_names(self):
+        return np.unique(self.data['predictor'].values)
+
+    def __metric_names(self):
+        return set(self.data.columns) - set(['predictor', 'sample'])
 
     def plot(self, bins=10):
-        metric_names = set(self.data.columns) - set(['predictor', 'sample'])   
-        for name in metric_names:
-            for pre_name in np.unique(self.data['predictor'].values):
-                print(f'Predictor: {pre_name}')
-                data = self.data[self.data.predictor == pre_name]
+        metric_names    = self.__metric_names()
+        predictor_names = self.__predictor_names()
 
-                pl.l_flat_size()
-                pl.describe_num_var(data, name, bins=bins)
+        pl.xl_flat_size()
+
+        for metric_name in metric_names:
+            for pre_name in predictor_names:
+                pl.describe_num_var(
+                    df         = self.data[self.data.predictor == pre_name],
+                    column     = metric_name,
+                    bins       = bins, 
+                    title      = pre_name, 
+                    show_table = False,
+                    show_range = False
+                )

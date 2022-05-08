@@ -20,8 +20,15 @@ class MeanUserAtkMetric(AbstractMetric):
 
             scores.append(self._score(y_pred_sample, y_true_sample).item())
 
-        logging.info(f'n_users_found: {len(scores)}')
-        return torch.mean(torch.tensor(scores))
+        n_users_found = len(scores)
+        logging.debug(f'n_users_found: {len(scores)}')
+        return torch.mean(torch.tensor(scores)), n_users_found
 
     def _score(self, y_pred, y_true):
         pass
+
+    def _build_result(self, metrics):
+        return {
+            self.name: metrics[0],
+            f'{self.name} users found': metrics[1]
+        }

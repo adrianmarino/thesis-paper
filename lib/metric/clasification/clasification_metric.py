@@ -14,4 +14,4 @@ class ClasificationMetric(AbstractMetric):
         y_pred_ = ut.apply(y_pred, self.__discretizer_fn).int()
         y_true_ = ut.apply(y_true, self.__discretizer_fn).int()
 
-        return self.__metric(y_pred_, y_true_)
+        return (self.__metric(y_pred_, y_true_),)

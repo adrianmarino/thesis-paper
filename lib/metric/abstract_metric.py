@@ -8,8 +8,15 @@ class AbstractMetric(ABC):
         self._decimals = decimals
 
     def perform(self, y_pred, y_true, X):
-        metric = self._calculate(y_pred, y_true, X)
-        return torch.round(metric, decimals=self._decimals)
+        metrics = self._calculate(y_pred, y_true, X)
+
+        value = torch.round(metrics[0], decimals=self._decimals).item()
+        metrics = (value,) + metrics[1:]
+
+        return self._build_result(metrics)
 
     def _calculate(self, y_pred, y_true, X):
         pass
+
+    def _build_result(self,  metrics):
+        return {self.name: metrics[0]}

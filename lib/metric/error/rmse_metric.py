@@ -10,4 +10,4 @@ class RMSE(AbstractMetric):
         self.__metric = MeanSquaredError()
 
     def _calculate(self, y_pred, y_true, X):
-        return torch.sqrt(self.__metric(y_true, y_pred))
+        return torch.sqrt(self.__metric(y_true, y_pred)),

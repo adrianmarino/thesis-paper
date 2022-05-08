@@ -3,4 +3,4 @@ from .distances_matrix import rows_distance_matrix, plot_rows_distance_matrix
 from .nearest_neighbors import NearestNeighbors, NearestNeighborsResult
 from .module.knn_user_based_predictor import KNNUserBasedPredictor
 from .module.knn_item_based_predictor import KNNItemBasedPredictor
-from .validate.validator import Validator
+from .validate.validator import Validator, ValidatorSummary
