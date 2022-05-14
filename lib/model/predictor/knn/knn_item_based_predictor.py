@@ -1,4 +1,4 @@
-from model.module.predictor import AbstractPredictor
+from model.predictor.predictor import AbstractPredictor
 from model import NearestNeighbors
 from util import round_
 import logging
