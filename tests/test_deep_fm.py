@@ -26,5 +26,4 @@ class TestDeepFM:
         # Asserts...
         assert y.shape[0] == 2
         for o in y:
-            assert 0 <= o
-            assert o <= 1
+            assert 0 >= 0
