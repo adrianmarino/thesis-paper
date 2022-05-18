@@ -5,6 +5,7 @@ from .neighbors.nearest_neighbors            import NearestNeighbors, NearestNei
 
 from .predictor.knn.knn_user_based_predictor import KNNUserBasedPredictor
 from .predictor.knn.knn_item_based_predictor import KNNItemBasedPredictor
+from .predictor.module_predictor             import ModulePredictor
 
 from .module.categorical_features_lineal     import CategoricalFeaturesLineal
 from .module.deep_fm                         import DeepFM

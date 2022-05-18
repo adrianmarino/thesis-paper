@@ -33,10 +33,12 @@ class UserYPredYTrueSampler:
 
         indexes_sample = ut.random_choice(indexes, self.__sample_size)
 
-        y_true_sample = torch.index_select(y_true, 0, indexes_sample)
-        y_true_sample = torch.round(y_true_sample, decimals=self.__decimals)
+        y_true_sample = torch.index_select(y_true, dim=0, index=indexes_sample)
+        if not ut.is_int(y_true_sample):
+            y_true_sample = torch.round(y_true_sample, decimals=self.__decimals)
 
-        y_pred_sample = torch.index_select(y_pred, 0, indexes_sample)
-        y_pred_sample = torch.round(y_pred_sample, decimals=self.__decimals)
+        y_pred_sample = torch.index_select(y_pred, dim=0, index=indexes_sample)
+        if not ut.is_int(y_pred_sample):
+            y_pred_sample = torch.round(y_pred_sample, decimals=self.__decimals)
 
         return y_true_sample, y_pred_sample

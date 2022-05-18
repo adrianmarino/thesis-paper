@@ -23,7 +23,7 @@ class ValidatorSummary:
     def __metric_names(self):
         return set(self.data.columns) - set(['predictor', 'sample'])
 
-    def plot(self, bins=10):
+    def plot(self, bins=10, show_table = False, show_range = False):
         metric_names    = self.__metric_names()
         predictor_names = self.__predictor_names()
 
@@ -36,6 +36,6 @@ class ValidatorSummary:
                     column     = metric_name,
                     bins       = bins, 
                     title      = pre_name, 
-                    show_table = False,
-                    show_range = False
+                    show_table = show_table,
+                    show_range = show_range
                 )

@@ -17,3 +17,11 @@ def apply(tensor, fn):
     copy = torch.clone(tensor)
     copy.apply_(fn)
     return copy
+
+
+def is_int(tensor): 
+    return tensor.dtype == torch.uint8 \
+        or tensor.dtype == torch.int8 \
+        or tensor.dtype == torch.int16 \
+        or tensor.dtype == torch.int32 \
+        or tensor.dtype == torch.int64

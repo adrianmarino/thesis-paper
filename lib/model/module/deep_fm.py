@@ -1,6 +1,6 @@
 from pytorch_common.modules import FitMixin
 from torch import sigmoid
-from torch.nn import Module
+from torch.nn import Module, ReLU
 from .categorical_features_lineal import CategoricalFeaturesLineal
 from .embedding_factorization_machine import EmbeddingFactorizationMachine
 from .mlp import MultiLayerPerceptron
@@ -20,6 +20,7 @@ class DeepFM(Module, FitMixin):
         self.fm = EmbeddingFactorizationMachine()
         self.embedding = MultiFeatureEmbedding(features_n_values, embedding_size)
         self.__init_mlp(features_n_values, embedding_size, units_per_layer, dropout)
+        self.act = ReLU()
 
     def __init_mlp(self, features_n_values, embedding_size, units_per_layer, dropout):
         # Embedding output must be flattened to pass through mlp...
@@ -33,4 +34,4 @@ class DeepFM(Module, FitMixin):
 
         output = self.lineal(x) + self.fm(x_emb) + self.mlp(self.__flatten_emb(x_emb))
 
-        return sigmoid(output.squeeze(1))
+        return self.act(output.squeeze(1))

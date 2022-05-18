@@ -1,21 +1,23 @@
 name: thesis
 channels:
-  - defaults
-  - pytorch
-  - conda-forge
+    - defaults
+    - pytorch
+    - conda-forge
 dependencies:
-  - seaborn
-  - matplotlib
-  - wordcloud
-  - joypy
-  - numpy
-  - pytorch=1.11.0
-  - ignite
-  - torchmetrics
-  - cudatoolkit=11.3
-  - jupyterlab
-  - pytest
-  - tqdm
-  - pip
-  - pip:
-     - pytorch-common==0.0.19
+    - seaborn
+    - matplotlib
+    - wordcloud
+    - joypy
+    - numpy
+    - pytorch=1.11.0
+    - ignite
+    - torchmetrics
+    - cudatoolkit=11.3
+    - jupyterlab
+    - pytest
+    - tqdm
+    - pip
+    - pip:
+        - pytorch-common==0.0.19
+        - graphviz
+        - torchviz

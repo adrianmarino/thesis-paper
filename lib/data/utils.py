@@ -1,8 +1,11 @@
 import numpy as np
 import pandas as pd
+from torch.utils.data import DataLoader, Subset
+
 
 MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec']
 WEEK   = ['mon', 'tue', 'wed', 'thus', 'fri', 'sat', 'sun']
+
 
 is_list = lambda type_: type_ != object and type_ != str and type_ == list
 
@@ -61,3 +64,6 @@ def list_column_to_dummy_columns(df, column, prefix=None):
 
 
 exclude_cols = lambda df, columns: df.loc[:, ~df.columns.isin(columns)]
+
+
+subset = lambda ds, indexes, **kwargs: DataLoader(Subset(ds, indexes), **kwargs)
