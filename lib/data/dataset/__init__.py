@@ -1,1 +1,1 @@
-from .movie_leans_tmdb_dataset_json import MovieLensTMDbJSONDataset
+from .movie_leans_tmdb.movie_lens_tmdb_dataset_factory import MovieLensTMDBDatasetFactory
