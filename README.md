@@ -1,18 +1,19 @@
 
 # Thesis-papes
 
-* La idea principal es comparar RecSys basado en filtros colaborativos y enfoques hibridos (CB+CF) para lidiar cold-start scenarios:
-    * Memory based CF
-        * KNN usando distintas distancias (User-User y Item-Item). **Done**
-    * Model Based CF
-        * DeepFM model. **Done**
-        * Embedding + dense model.
-        * Embedding + dot + u/m bias model.
+La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir,  una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque y la arquitectura y funcionamiento de cada modelo.
+
+## Modelos
+ * Memory based CF
+     * KNN usando distintas distancias (User-User y Item-Item). **Done**
+ * Model Based
+   * Collaborative Filtering
+      * DeepFM model. **Done**
+      * Embedding + dense model.
+      * Embedding + dot + u/m bias model.
     * Hybrid CB + CF model.
-        * DeepFM.
-        * Embedding + dense model.
-* Explicar ventajas y debilidades de cada enfoque.
-* Explicar la arquitectura de cada modelo.
+      * DeepFM.
+      * Embedding + dense model.
 
 ### Notebooks
 
