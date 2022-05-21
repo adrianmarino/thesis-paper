@@ -15,6 +15,18 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
       * DeepFM.
       * Embedding + dense model.
 
+## Metricas
+
+Estyo utilizando **Mean Average Precision at k (mAP@k)**. Dada una lista de k items ordenados desc por un rating predicho para el usuario; esta metricas permite medir la frecuencia con que la que se encuentra X ratings en las primeras posicioens de la llista. Por ejemplo: ratings entre 4 y 5.
+
+Otras métricas implementadas que estoy utilizando:
+* RMSE
+* FBetaScore
+* Precision@K
+* Recall@K
+* FBetaScore@K
+
+
 ### Notebooks
 
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/preprocessing-integration.ipynb)
