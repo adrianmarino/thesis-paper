@@ -28,7 +28,7 @@ Otras métricas utilizadas:
 
 ## Hipótesis
 
-Intentó determinar si modelos basados en deep learning obtienen mejores resultados que modelos no basado en deep learning y cuales son las ventajas y desventajas a la hora de implementar cada enfoque.
+Intentó determinar si modelos basados en deep learning obtienen mejores resultados que modelos no estan basado en deep learning y cuales son las ventajas y desventajas a la hora de implementar cada enfoque.
 
 ## Datos
 
