@@ -42,6 +42,11 @@ Dado esto, combine los siguientes datasets:
 * [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior pero tiene varios features para las películas que es lo que necesito.
 
 
+## Referencias
+
+[References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+
+
 ## Extras
 
 Dada la demanda de procesamiento que tienen estos modelos estoy implementado todo en pytorch para poder usar GPU, ya que scikit learn no lo permite. También estuve trabajando en un modelo de capas para poder pasar como input las variables overview y tags de las películas ([Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)).
@@ -55,8 +60,6 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * Model based CF
   * [Deep FM CF](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
-* [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
-
 
 ## Using or based on
 
