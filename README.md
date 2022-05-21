@@ -1,72 +1,42 @@
 
 # Thesis-papes
 
-* La idea principal es comparar RecSys basado en filtros colaborativos:
-    * KNN usando distintas distancias.
-    * Modelo con dos embeddings + bias y una densa.
-    * DeepFM.
-    * Wide and deep,
-    * Modelo hibrido
-      * DeepFM.
-      * Wide and deep.
-* Usando pytorch, cuDF, Optuna y (airflow ?).
+* La idea principal es comparar RecSys basado en filtros colaborativos y enfoques hibridos (CB+CF) para lidiar cold-start scenarios:
+    * Memory based CF
+        * KNN usando distintas distancias (User-User y Item-Item). **Done**
+    * Model Based CF
+        * DeepFM model. **Done**
+        * Embedding + dense model.
+        * Embedding + dot + u/m bias model.
+    * Hybrid CB + CF model.
+        * DeepFM.
+        * Embedding + dense model.
 * Explicar la ventajas y debilidades de cada enfoque.
 * Explicar la arquitectura de cada modelo.
 
-
-## References
-
-### Candidate datasets
-
-* [10 Open-Source Datasets One Must Know To Build Recommender Systems](https://analyticsindiamag.com/10-open-source-datasets-one-must-know-to-build-recommender-systems/)
-  * [MovieLens 25M Dataset (CB + CF)](https://grouplens.org/datasets/movielens/25m/)
-  * [Netflix Prize Dataset](http://academictorrents.com/details/9b13183dc4d60676b773c9e2cd6de5e5542cee9a)
-  * [Amazon Review Data](https://nijianmo.github.io/amazon/index.html)
-  * [ Book-Crossing Dataset ](http://www2.informatik.uni-freiburg.de/~cziegler/BX/)
-  * [Steam Video Games](https://www.kaggle.com/tamber/steam-video-games/data)
-  * [Retailrocket recommender system dataset](https://academictorrents.com/details/9b13183dc4d60676b773c9e2cd6de5e5542cee9a)
-* [Recommender Systems and Personalization Datasets](https://cseweb.ucsd.edu/~jmcauley/datasets.html)
-* [9 Must-Have Datasets for Investigating Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
-* [Public Datasets For Recommender Systems](https://www.kdnuggets.com/2016/02/nine-datasets-investigating-recommender-systems.html)
-* [themoviedb](https://www.themoviedb.org/)
-* [Recommender Systems and Personalization Datasets](https://cseweb.ucsd.edu//~jmcauley/datasets.html)
-* [eCommerce behavior data from multi category store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store)
-* [Free datasets with eCommerce behavior data](https://rees46.com/en/datasets)
-
-### RecSys 2020 Tutorial: Feature Engineering for Recommender Systems
-
-* [Video](https://www.youtube.com/watch?v=uROvhp7cj6Q)
-* [Notebooks](https://github.com/rapidsai/deeplearning/tree/main/RecSys2020Tutorial)
-
-### Hybrid RecSys
-
-* [Metadata Embeddings for User and Item Cold-start Recommendations](https://paperswithcode.com/paper/metadata-embeddings-for-user-and-item-cold)
-* [Modern Recommender Systems](https://towardsdatascience.com/modern-recommender-systems-a0c727609aa8)
-* [dlrm](https://github.com/facebookresearch/dlrm)
-* Se puede usar un embendding bag para cada campo de tipo texto con mean. https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html
-* BERT, para trasnformar campos texto a embeddings: https://towardsdatascience.com/hands-on-content-based-recommender-system-using-python-1d643bf314e4
-
-### Ideas
-
-* Text cosine similatiry based un embeddings
-  * Doc2Vec
-    * [Content Based usand tags](https://towardsdatascience.com/how-to-build-a-simple-movie-recommender-system-with-tags-b9ab5cb3b616)
-    * [movie-rec-tags](https://github.com/JohnsonKuan/movie-rec-tags) 
-  * BERT
-    * [Semantic Similarity with BERT](https://keras.io/examples/nlp/semantic_similarity_with_bert/)
-    * [Recommendation system using BERT embeddings](https://medium.com/analytics-vidhya/recommendation-system-using-bert-embeddings-1d8de5fc3c56)
-* CF-CF Hybrid models
-  * [CB-CF_Hybrid_Neural_Recommender_System](https://github.com/rengongzhizang/CB-CF_Hybrid_Neural_Recommender_System)
- 
 ### Notebooks
 
-* [Use example](https://github.com/adrianmarino/deep-fm/blob/master/notebooks/rs.ipynb)
-* [rs-check-how-works](https://github.com/adrianmarino/deep-fm/blob/master/notebooks/rs-check-how-works.ipynb)
- 
+* [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/preprocessing-integration.ipynb)
+* [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
+* Memory based CF
+  * [KNN CF Model (User-User/Item-Item)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb)
+* Model based CF
+  * [Deep FM CF](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
+* [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+* [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+
+
+## Using or based on
+
+* [pytorch-common](https://github.com/adrianmarino/pytorch-common)
+* [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
+* [deep-fm](https://github.com/adrianmarino/deep-fm)
+
 
 ## Requisites
 
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
 
 ## Getting started
 
