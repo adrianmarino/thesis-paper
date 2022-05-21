@@ -11,7 +11,7 @@
     * Hybrid CB + CF model.
         * DeepFM.
         * Embedding + dense model.
-* Explicar la ventajas y debilidades de cada enfoque.
+* Explicar ventajas y debilidades de cada enfoque.
 * Explicar la arquitectura de cada modelo.
 
 ### Notebooks
