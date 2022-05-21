@@ -26,6 +26,25 @@ Otras métricas implementadas que estoy utilizando:
 * Recall@K
 * FBetaScore@K
 
+## Hipótesis
+
+Intento de terminar si los modelos de deep learning obtienen mejores resultados que un modelos no basado en deep learning  y cuales son sus ventajas i desventajas a la hora de implementar cada enfoje.
+
+## Datos
+
+Para tener los datos necesario para probar los enfoques de filtros colaborativos(CF) y basados en contenido(CB) necesito:
+* Calificaciones de los ítems(movies) de los usuarios (CF)
+* Features propies de los ítems (CB)
+
+Dado esto, combine los siguientes datasets:
+
+* [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
+* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior pero tiene varios features para las películas que es lo que necesito.
+
+
+## Extras
+
+Dada la demanda de procesamiento que tienen estos modelos estoy implementado todo en pytorch para poder usar GPU, ya que scikit learn no lo permite. También estuve trabajando en un modelo de capas para poder pasar como input las variables overview y tags de las películas ([Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)).
 
 ## Notebooks
 
