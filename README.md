@@ -6,6 +6,7 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 ## Modelos
  * Memory based CF
      * KNN usando distintas distancias (User-User y Item-Item). **Done**
+     * SVD
  * Model Based
    * Collaborative Filtering
       * DeepFM model. **Done**
