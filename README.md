@@ -28,7 +28,7 @@ Otras métricas utilizadas:
 
 ## Hipótesis
 
-Intentó determinar si modelos basados en deep learning obtienen mejores resultados a modelos que no estan basado en deep learning y cuales son las ventajas y desventajas a la hora de implementar cada enfoque.
+Intentó determinar si modelos basados en deep learning obtienen mejores resultados a modelos que no estan basado en deep learning y cuales son las ventajas y desventajas a la hora de implementar cada enfoque. Los modelos a comparar son distintas implementaciones de filtros colaborativos y modelos hibridos (CB + CF).
 
 ## Datos
 
