@@ -27,7 +27,7 @@ Otras métricas implementadas que estoy utilizando:
 * FBetaScore@K
 
 
-### Notebooks
+## Notebooks
 
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/preprocessing-integration.ipynb)
 * [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
