@@ -16,7 +16,7 @@ A continuacion se especifican los modelos a comaprar:
         * Embedding's + dot product + user bias + item bias.
       * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
       * [Deep Matrix Factorization ](https://arxiv.org/pdf/1703.04247.pdf) **Done**
-    * Hybrid CB + CF model: Combinan filtros colaborativos y el eofoque basado en contenido.
+    * Hybrid CB + CF model: Combinan filtros colaborativos con el enfoque basado en contenido.
         * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
         * [Deep Matrix Factorization ](https://arxiv.org/pdf/1703.04247.pdf)
 
