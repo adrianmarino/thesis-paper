@@ -4,16 +4,19 @@
 La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir,  una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque y la arquitectura y funcionamiento de cada modelo.
 
 ## Modelos
- * Memory based CF
+
+A continuacion se especifican los modelos a comaprar:
+
+ * Memory based CF: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
      * [KNN usando distintas distancias (User-User y Item-Item)](https://github.com/adrianmarino/knn-cf-rec-sys). **Done**
- * Model Based
+ * Model Based CF: Modelos de filtros colaborativos basados en redes neuronales.
    * Collaborative Filtering
-      * Generalized Matrix Factorization (GMF):
+      * Generalized Matrix Factorization (GMF)
         * Embedding's + dot product.
         * Embedding's + dot product + user bias + item bias.
       * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
       * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf). **Done**
-    * Hybrid CB + CF model.
+    * Hybrid CB + CF model: Combinan filtros colaborativos y el eofoque basado en contenido. 
       * Neural Network model: Embedding's + Full Connected Layers.
       * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf).
 
