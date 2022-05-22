@@ -5,7 +5,7 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 
 ## Modelos
 
-A continuacion se especifican los modelos a comaprar:
+A continuacion se especifican los modelos a comparar:
 
  * Memory based CF: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
      * KNN usando distintas distancias (User-User y Item-Item). **Done**
