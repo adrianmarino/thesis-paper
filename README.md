@@ -10,8 +10,8 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
    * Collaborative Filtering
       * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf). **Done**
       * Generalized Matrix Factorization (GMF):
-        * Embedding's + dot.
-        * Embedding's + dot + u/m bias.
+        * Embedding's + dot product.
+        * Embedding's + dot product + user bias + item bias.
       * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
     * Hybrid CB + CF model.
       * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf).
