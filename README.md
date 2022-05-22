@@ -8,8 +8,8 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
      * KNN usando distintas distancias (User-User y Item-Item). **Done**
  * Model Based
    * Collaborative Filtering
-      * DeepFM model. **Done**
-      * Embedding + dense model.
+      * (DeepFM model)[DeepFM: A Factorization-Machine based Neural Network for CTR Prediction]. **Done**
+      * [Neural Collaborative Filtering model∗](https://arxiv.org/pdf/1708.05031.pdf) (Embedding's + dense).
       * Embedding + dot + u/m bias model.
     * Hybrid CB + CF model.
       * DeepFM.
