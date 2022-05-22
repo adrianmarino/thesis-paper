@@ -12,8 +12,8 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
       * [Neural Collaborative Filtering model∗](https://arxiv.org/pdf/1708.05031.pdf) (Embedding's + dense).
       * Embedding + dot + u/m bias model.
     * Hybrid CB + CF model.
-      * DeepFM.
-      * Embedding + dense model.
+      * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf).
+      * [Neural Collaborative Filtering model∗](https://arxiv.org/pdf/1708.05031.pdf).
 
 ## Metricas
 
