@@ -5,7 +5,7 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 
 ## Modelos
  * Memory based CF
-     * KNN usando distintas distancias (User-User y Item-Item). **Done**
+     * [KNN usando distintas distancias (User-User y Item-Item)](https://github.com/adrianmarino/knn-cf-rec-sys). **Done**
  * Model Based
    * Collaborative Filtering
       * [DeepFM model](https://arxiv.org/pdf/1703.04247.pdf). **Done**
