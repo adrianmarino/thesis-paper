@@ -5,7 +5,12 @@ from torch.nn.init import xavier_uniform_
 
 
 class MultiFeatureEmbedding(Module, CommonMixin):
-    def __init__(self, features_n_values: list[int], embedding_size: int):
+    def __init__(
+        self, 
+        features_n_values: list[int], 
+        embedding_size: int, 
+        sparse: bool
+    ):
         """
             This layer allows creates only one embedding for multiples feature variables. Because is not necessary
             create an embedding layer for each input feature allowing save memory.
@@ -15,11 +20,14 @@ class MultiFeatureEmbedding(Module, CommonMixin):
                possible values respectively.
 
         :param embedding_size: Embedding vector len. Same for all features.
+
+        :param sparse (bool, optional): If True, gradient w.r.t. weight matrix will be a sparse tensor. ents.
         """
         super().__init__()
         self.embedding = Embedding(
             num_embeddings=sum(features_n_values),
-            embedding_dim=embedding_size
+            embedding_dim=embedding_size,
+            sparse = sparse
         )
         xavier_uniform_(self.embedding.weight.data)
 

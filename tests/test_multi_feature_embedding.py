@@ -38,8 +38,8 @@ class TestMultiFeatureEmbedding:
         )
         X = LongTensor([
             [0, 0],  # Features vector 1
-            [1, 1],   # Features vector 2
-            [1, 2]   # Features vector 2
+            [1, 1],  # Features vector 2
+            [1, 2]   # Features vector 3
         ])
 
         # Perform...
