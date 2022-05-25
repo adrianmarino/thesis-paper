@@ -11,5 +11,6 @@ from .module.categorical_features_lineal     import CategoricalFeaturesLineal
 from .module.deep_fm                         import DeepFM
 from .module.embedding_factorization_machine import EmbeddingFactorizationMachine
 from .module.multi_feature_embedding         import MultiFeatureEmbedding
+from .module.mse_loss_fn                     import MSELossFn
 
 from .validate.validator                     import Validator, ValidatorSummary

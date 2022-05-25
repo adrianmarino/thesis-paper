@@ -11,8 +11,8 @@ class MultiFeatureEmbedding(Module, CommonMixin):
             create an embedding layer for each input feature allowing save memory.
 
         :param features_n_values: A list that contains count of all possible values for each categorical feature.
-                             i.e.: [3, 2, 5], to create an embedding for 3 categorical features with 3, 2, and 5
-                            possible values respectively.
+               i.e.: [3, 2, 5], to create an embedding for 3 categorical features with 3, 2, and 5
+               possible values respectively.
 
         :param embedding_size: Embedding vector len. Same for all features.
         """
