@@ -11,6 +11,7 @@ from .module.categorical_features_lineal     import CategoricalFeaturesLineal
 from .module.deep_fm                         import DeepFM
 from .module.batch_dot                       import BatchDot
 from .module.gmf                             import GMF
+from .module.gmf_bias                        import GMFBias
 from .module.embedding_factorization_machine import EmbeddingFactorizationMachine
 from .module.multi_feature_embedding         import MultiFeatureEmbedding
 from .module.mse_loss_fn                     import MSELossFn
