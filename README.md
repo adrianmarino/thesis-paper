@@ -12,8 +12,8 @@ A continuacion se especifican los modelos a comparar:
  * Model Based CF: Modelos de filtros colaborativos basados en redes neuronales.
    * Collaborative Filtering
       * Generalized Matrix Factorization (GMF)
-        * Embedding's + dot product.
-        * Embedding's + dot product + user bias + item bias.
+        * User/Item embeddings dot product.
+        * User/Item embeddings dot product + user/item biases.
       * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
       * Deep Factorization Machine **Done**
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
@@ -63,8 +63,8 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * Memory based CF
   * [KNN CF Model (User-User/Item-Item)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb)
 * Model based CF
-  * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
-  * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
+  * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): User/Item embeddings dot product.
+  * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): User/Item embeddings dot product + user/item biases.
   * [Deep FM CF](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
