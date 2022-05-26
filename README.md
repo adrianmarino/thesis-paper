@@ -61,7 +61,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
 * [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
 * Memory based CF
-  * [KNN CF Model (User-User/Item-Item)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb)
+  * [KNN User-User/Item-Item](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb)
 * Model based CF
   * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): User/Item embeddings dot product.
   * [Biased Generalized Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): User/Item embeddings dot product + user/item biases.
