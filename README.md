@@ -8,7 +8,7 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 A continuacion se especifican los modelos a comparar:
 
  * Memory based CF: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-     * KNN usando distintas distancias (User-User y Item-Item). **Done**
+     * KNN usando distintas coseno (User-User y Item-Item). **Done**
  * Model Based CF: Modelos de filtros colaborativos basados en redes neuronales.
    * Collaborative Filtering
       * Generalized Matrix Factorization (GMF)
@@ -61,7 +61,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
 * [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
 * Memory based CF
-  * [KNN User-User/Item-Item](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb)
+  * [KNN User-User/Item-Item](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno.
 * Model based CF
   * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): User/Item embeddings dot product.
   * [Biased Generalized Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): User/Item embeddings dot product + user/item biases.
