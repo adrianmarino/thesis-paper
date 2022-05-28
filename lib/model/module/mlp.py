@@ -3,7 +3,7 @@ from pytorch_common.modules import CommonMixin
 
 
 class MultiLayerPerceptron(Module, CommonMixin):
-    def __init__(self, input_units, units_per_layer, dropout, n_outputs=1):
+    def __init__(self, input_units: int, units_per_layer: list[int], dropout: float, n_outputs: int=1):
         super().__init__()
         layers = []
 

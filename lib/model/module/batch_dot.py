@@ -1,7 +1,7 @@
 import torch
 
 class BatchDot(torch.nn.Module):
-    def forward(self, a, b, transpose=True):
+    def forward(self, a, b, transpose: bool=True):
         if transpose:
             b = torch.transpose(b, 1, 2)
 

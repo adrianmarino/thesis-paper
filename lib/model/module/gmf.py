@@ -5,10 +5,10 @@ import model as ml
 
 class GMF(torch.nn.Module, FitMixin):
     def __init__(self,
-            n_users,
-            n_items,
-            embedding_size,
-            sparse=False
+            n_users: int,
+            n_items: int,
+            embedding_size: int,
+            sparse: bool=False
     ):
         super().__init__()
         self.embedding = ml.MultiFeatureEmbedding(
