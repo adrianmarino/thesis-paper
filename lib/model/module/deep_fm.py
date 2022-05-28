@@ -1,5 +1,4 @@
 from pytorch_common.modules import FitMixin
-from torch import sigmoid
 from torch.nn import Module, ReLU
 from .categorical_features_lineal import CategoricalFeaturesLineal
 from .embedding_factorization_machine import EmbeddingFactorizationMachine
@@ -11,14 +10,15 @@ class DeepFM(Module, FitMixin):
     def __init__(
         self,
         features_n_values: list[int], 
-        embedding_size, 
-        units_per_layer, 
-        dropout
+        embedding_size: int, 
+        units_per_layer: list[int], 
+        dropout: float,
+        sparse: bool = False
     ):
         super().__init__()
-        self.lineal = CategoricalFeaturesLineal(features_n_values)
+        self.lineal = CategoricalFeaturesLineal(features_n_values, sparse=sparse)
         self.fm = EmbeddingFactorizationMachine()
-        self.embedding = MultiFeatureEmbedding(features_n_values, embedding_size)
+        self.embedding = MultiFeatureEmbedding(features_n_values, embedding_size, sparse=sparse)
         self.__init_mlp(features_n_values, embedding_size, units_per_layer, dropout)
         self.act = ReLU()
 

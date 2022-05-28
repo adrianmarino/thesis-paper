@@ -8,14 +8,14 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 A continuacion se especifican los modelos a comparar:
 
  * Memory based CF: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-     * KNN usando distintas coseno (User-User y Item-Item). **Done**
+     * KNN usando distintas distancias (User-User y Item-Item).
  * Model Based CF: Modelos de filtros colaborativos basados en redes neuronales.
    * Collaborative Filtering
       * Generalized Matrix Factorization (GMF)
         * User/Item embeddings dot product.
         * User/Item embeddings dot product + user/item biases.
       * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
-      * Deep Factorization Machine **Done**
+      * Deep Factorization Machine.
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
         * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
         * Deep Factorization Machine
@@ -63,9 +63,13 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * Memory based CF
   * [KNN User-User/Item-Item](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno.
 * Model based CF
-  * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): User/Item embeddings dot product.
-  * [Biased Generalized Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): User/Item embeddings dot product + user/item biases.
-  * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
+  * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
+  * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
+  * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb): Embedding's + Full Connected Layers.
+  * [Deep FM CF](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
+* Enfoque Híbrido
+    * Neural Network Matrix Factorization: Embedding's + Full Connected Layers. **Pending**
+    * Deep Factorization Machine. **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 ## Using or based on

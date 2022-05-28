@@ -9,7 +9,7 @@ class MultiFeatureEmbedding(Module, CommonMixin):
         self, 
         features_n_values: list[int], 
         embedding_size: int, 
-        sparse: bool
+        sparse: bool=False
     ):
         """
             This layer allows creates only one embedding for multiples feature variables. Because is not necessary
