@@ -14,10 +14,10 @@ A continuacion se especifican los modelos a comparar:
       * Generalized Matrix Factorization (GMF)
         * User/Item embeddings dot product.
         * User/Item embeddings dot product + user/item biases.
-      * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
+      * Neural Network Matrix Factorization: User/Item Embedding + flatten + Full Connected.
       * Deep Factorization Machine.
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
-        * Neural Network Matrix Factorization: Embedding's + Full Connected Layers.
+        * Neural Network Matrix Factorization: User/Item/Item-Metadata Embedding + flatten + Full Connected.
         * Deep Factorization Machine
 
 ## Metricas
@@ -65,10 +65,10 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * Model based CF
   * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
   * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
-  * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb): Embedding's + Full Connected Layers.
+  * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
   * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * Enfoque Híbrido
-    * Neural Network Matrix Factorization: Embedding's + Full Connected Layers. **Pending**
+    * Neural Network Matrix Factorization:  User/Item/Item-Metadata Embedding + flatten + Full Connected. **Pending**
     * Deep Factorization Machine. **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
