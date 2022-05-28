@@ -17,8 +17,7 @@ A continuacion se especifican los modelos a comparar:
       * Neural Network Matrix Factorization: User/Item Embedding + flatten + Full Connected.
       * Deep Factorization Machine.
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
-        * Neural Network Matrix Factorization: User/Item/Item-Metadata Embedding + flatten + Full Connected.
-        * Deep Factorization Machine
+        * Ensamble: CF+CB
  * Ensample/Staking de modelos.
  
  
@@ -70,8 +69,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
   * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
   * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * Enfoque Híbrido
-    * Neural Network Matrix Factorization:  User/Item/Item-Metadata Embedding + flatten + Full Connected. **Pending**
-    * Deep Factorization Machine. **Pending**
+    * Ensamble: CF+CB **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 ## Using or based on
