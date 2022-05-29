@@ -8,7 +8,7 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 A continuacion se especifican los modelos a comparar:
 
  * Memory based CF: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-     * KNN(User-User, Item-Item, Ensemple) usando distancia coseno y distacia coseno ajustada.
+     * KNN(User-User/Item-Item/Ensemple) usando distancia coseno y distacia coseno ajustada.
  * Model Based CF: Modelos de filtros colaborativos basados en redes neuronales.
    * Collaborative Filtering
       * Generalized Matrix Factorization (GMF)
