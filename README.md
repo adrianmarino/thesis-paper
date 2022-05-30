@@ -7,24 +7,24 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 
 A continuacion se especifican los modelos a comparar:
 
- * **Memory based CF**: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-     * KNN(User-User/Item-Item/Ensemple) usando distancia coseno y distacia coseno ajustada.
- * **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
-      * **Generalized Matrix Factorization (GMF)**
+ *  **Memory based CF**: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
+    * KNN(User-User/Item-Item/Ensemple) usando distancia coseno y distacia coseno ajustada.
+ *  **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
+    *   **Generalized Matrix Factorization (GMF)**
         * User/Item embeddings dot product.
         * User/Item embeddings dot product + user/item biases.
-      * **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
-      * **Deep Factorization Machine**.
+    *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
+    *   **Deep Factorization Machine**.
  * **Enfoque Híbrido**: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start que tiene CF.
-        * **Any CF model + Sparse auto-encoder + mean distance**: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
-        * **Any CF model + BERT + mean distance**: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
-        * **Any CF model + Sequence-to-sequence auto-encoder + mean distance**.
-        * **Any CF model + Any auto-encoder + weigthed mean distance**
-            * Promedio de las distancias coseno pesado por la cantidad de interacciones actuales del usuario.
-            * De esta forma, los usuario con mas interaciones, tendran recomendaciones con mas influenciada de CF que CB y vise versa.
-            * Lo usuario solo interacciones no solo tendran recomendacionde del modelo CB.
-            * Este enfoque es una variación de los enfoque anteriores.
- * Ensample/Staking de modelos.
+    * **Any CF model + Sparse auto-encoder + mean distance**: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
+    * **Any CF model + BERT + mean distance**: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
+    * **Any CF model + Sequence-to-sequence auto-encoder + mean distance**.
+    * **Any CF model + Any auto-encoder + weigthed mean distance**
+        * Promedio de las distancias coseno pesado por la cantidad de interacciones actuales del usuario.
+        * De esta forma, los usuario con mas interaciones, tendran recomendaciones con mas influenciada de CF que CB y vise versa.
+        * Lo usuario solo interacciones no solo tendran recomendacionde del modelo CB.
+        * Este enfoque es una variación de los enfoque anteriores.
+ * **Ensample/Staking de modelos**.
 
 ## Metricas
 
