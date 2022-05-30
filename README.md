@@ -20,9 +20,11 @@ A continuacion se especifican los modelos a comparar:
         * Enfoque 1: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
         * Enfoque 2: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
         * Enfoque 3: Item a Enfoque 1, èrp usando un sequence-to-sequence auto-encoder.
-        * Enfoque 4
-            * Promedio las distancias coseno, pesado por la cantidad de interacciones actuales del usuario. 
-            * De esta forma, los usuario con mas interaciiones recomendaciones mas influenciada por CF que CB y vise versa.
+        * Enfoque 4  
+            * Promedio de las distancias coseno pesado por la cantidad de interacciones actuales del usuario.
+            * De esta forma, los usuario con mas interaciones, tendran recomendaciones con mas influenciada de CF que CB y vise versa.
+            * Lo usuario solo interacciones no solo tendran recomendacionde del modelo CB.
+            * Este enfoque es una variación de los enfoque anteriores.
  * Ensample/Staking de modelos.
 
 ## Metricas
