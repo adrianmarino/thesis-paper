@@ -24,7 +24,7 @@ A continuacion se especifican los modelos a comparar:
         * De esta forma, los usuario con mas interaciones, tendran recomendaciones con mas influenciada de CF que CB y vise versa.
         * Lo usuario solo interacciones no solo tendran recomendacionde del modelo CB.
         * Este enfoque es una variación de los enfoque anteriores.
- * **Ensample/Staking de modelos**.
+ * **Ensample/Stacking de modelos**.
 
 ## Metricas
 
