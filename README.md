@@ -22,7 +22,7 @@ A continuacion se especifican los modelos a comparar:
     * **Any CF model + Any auto-encoder + weigthed mean distance**
         * Promedio de las distancias coseno pesado por la cantidad de interacciones actuales del usuario.
         * De esta forma, los usuarios con mas interaciones, tendran recomendaciones mas influenciada por CF que CB y vise versa.
-        * Lo usuario solo interacciones no solo tendran recomendacionde del modelo CB.
+        * Los usuarios sin interacciones solo tendran recomendacionde del modelo CB ya que no hay aporte de similitudes del modelo CF. 
         * Este enfoque es una variación de los enfoques anteriores.
  * **Ensample/Stacking de modelos**.
 
