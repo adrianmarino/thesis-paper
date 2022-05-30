@@ -16,7 +16,7 @@ A continuacion se especifican los modelos a comparar:
     *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
     *   **Deep Factorization Machine**.
  * **Enfoque Híbrido**: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start que tiene CF.
-    * **Any CF model + Sparse auto-encoder + mean distance**: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
+    * **Any CF model + Sparse auto-encoder + mean distance**: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con un auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
     * **Any CF model + BERT + mean distance**: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
     * **Any CF model + Sequence-to-sequence auto-encoder + mean distance**.
     * **Any CF model + Any auto-encoder + weigthed mean distance**
