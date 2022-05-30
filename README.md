@@ -18,6 +18,8 @@ A continuacion se especifican los modelos a comparar:
       * Deep Factorization Machine.
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
         * Enfoque 1: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
+        * Emfoque 2: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
+        * Emfoque 3: Item a Enfoque 1, èrp usando un sequence-to-sequence auto-encoder. 
  * Ensample/Staking de modelos.
  
  
@@ -69,7 +71,9 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
   * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
   * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * Enfoque Híbrido
-   * Enfoque 1: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos. **Pending**
+   * Enfoque 1: **Pending**
+   * Enfoque 2: **Pending**
+   * Enfoque 3: **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 ## Using or based on
