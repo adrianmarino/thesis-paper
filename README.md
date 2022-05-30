@@ -1,7 +1,7 @@
 
 # Thesis-papes
 
-La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir,  una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque y la arquitectura y funcionamiento de cada modelo.
+La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir,  una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y rl funcionamiento de cada modelo.
 
 ## Modelos
 
