@@ -18,11 +18,13 @@ A continuacion se especifican los modelos a comparar:
       * Deep Factorization Machine.
     * Enfoque Híbrido: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB).
         * Enfoque 1: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con alguna varaicion de auto-encoder. Finalmente se genera una lista de recomendaciones para in item promediando las distancias coseno de ambos modelos.
-        * Emfoque 2: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
-        * Emfoque 3: Item a Enfoque 1, èrp usando un sequence-to-sequence auto-encoder. 
+        * Enfoque 2: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
+        * Enfoque 3: Item a Enfoque 1, èrp usando un sequence-to-sequence auto-encoder.
+        * Enfoque 4
+            * Promedio las distancias coseno, pesado por la cantidad de interacciones actuales del usuario. 
+            * De esta forma, los usuario con mas interaciiones recomendaciones mas influenciada por CF que CB y vise versa.
  * Ensample/Staking de modelos.
- 
- 
+
 ## Metricas
 
 Para compara todos los modelos se esta utilizando la metrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k items ordenados desc. por ratings predicho para el usuario; esta metrica, permite medir la frecuencia con que la que se encuentram X ratings en las primeras posiciones en una lsita de items recomendados. Por ejemplo: ratings entre 4 y 5.
@@ -74,6 +76,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
    * Enfoque 1: **Pending**
    * Enfoque 2: **Pending**
    * Enfoque 3: **Pending**
+   * Enfoque 4: **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 ## Using or based on
