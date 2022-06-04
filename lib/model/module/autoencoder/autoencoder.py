@@ -1,4 +1,5 @@
 import torch
+from torch.nn import Module
 from .encoder import Encoder
 from .decoder import Decoder
 from pytorch_common.callbacks import CallbackManager
@@ -6,19 +7,17 @@ from pytorch_common.callbacks import CallbackManager
 from pytorch_common.modules.common_mixin import CommonMixin
 
 
-class AutoEncoder(torch.nn.Module, CommonMixin):
+class AutoEncoder(Module, CommonMixin):
     def __init__(self, data_size, intermediate_size=1000, encoded_size=100, dropout=0.2):
-        super(AutoEncoder, self).__init__()
+        super().__init__()
         self.encoder = Encoder(data_size, intermediate_size, encoded_size, dropout)
         self.decoder = Decoder(encoded_size, intermediate_size, data_size, dropout)
 
     def train(self):
-        super.train()
         self.encoder.train()
         self.decoder.train()
 
     def eval(self):
-        super.eval()
         self.encoder.eval()
         self.decoder.eval()
 

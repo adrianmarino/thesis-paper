@@ -1,10 +1,11 @@
 import torch
+from torch.nn import Module, Sequential
 from .layer_group import LayerGroup
 
 
-class Decoder(torch.nn.Module):
+class Decoder(Module):
     def __init__(self, encoding_size, intermediate_size, output_size, dropout=0.2):
-        super(Decoder, self).__init__()
+        super().__init__()
         layers = LayerGroup.linearBatchNormReluDropout(encoding_size, intermediate_size, dropout) + \
                  LayerGroup.linearBatchNormSigmoid(intermediate_size, output_size)
         self.mlp = Sequential(*layers)

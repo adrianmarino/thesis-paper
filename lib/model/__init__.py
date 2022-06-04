@@ -43,5 +43,5 @@ from .module.gmf_bias                         import GMFBias
 
 # Content Based way...
 from .module.autoencoder.autoencoder          import AutoEncoder 
-from .module.autoencoder.autoencoder_trainter import AutoEncoderTrainer
+from .module.autoencoder.autoencoder_trainer import AutoEncoderTrainer
 # -----------------------------------------------------------------------------

@@ -3,18 +3,18 @@ from torch.nn import  Linear, BatchNorm1d, ReLU, Dropout, Sigmoid
 
 class LayerGroup:
     @staticmethod
-    def linearBatchNormReluDropout(self, input_size, output_size, dropout=0.2):
+    def linearBatchNormReluDropout(input_size, output_size, dropout=0.2):
         return [
-            Linear(input_size, output_size),
-            BatchNorm1d(output_size),
+            Linear(in_features=input_size, out_features=output_size),
+            BatchNorm1d(num_features=output_size),
             ReLU(True),
             Dropout(dropout)
         ]
 
     @staticmethod
-    def linearBatchNormSigmoid(self, input_size, output_size):
+    def linearBatchNormSigmoid(input_size, output_size):
         return [
-            Linear(input_size, output_size),
-            BatchNorm1d(output_size),
+            Linear(in_features=input_size, out_features=output_size),
+            BatchNorm1d(num_features=output_size),
             Sigmoid()
         ]

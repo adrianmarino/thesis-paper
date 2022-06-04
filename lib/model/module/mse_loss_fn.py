@@ -13,7 +13,7 @@ class MSELossFn(torch.nn.Module):
               phase because it support automatic differentiation.
             - When is true return a float number. Used in evaluation phase.
     """
-    def __init__(self, float_result: bool=False): 
+    def __init__(self, reduction='mean', float_result: bool=False): 
         super().__init__()
         self.__fn = MSELoss()
         self.__float_result = float_result
