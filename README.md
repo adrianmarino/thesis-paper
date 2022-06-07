@@ -42,7 +42,10 @@ Otras métricas utilizadas:
 
 ## Hipótesis
 
-Intentó determinar si modelos basados en deep learning obtienen mejores resultados a modelos que no estan basado en deep learning y cuales son las ventajas y desventajas a la hora de implementar cada enfoque. Los modelos a comparar son distintas implementaciones de filtros colaborativos y modelos hibridos (CB + CF).
+Intentó contestar las siguientes preguntas:
+
+* ¿Los modelos basados en deep learning obtienen mejores resultados a modelos que no estan basado en deep learning? ¿Cuales son las ventajas y desventajas de cada enfoque?
+* ¿Como se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?.
 
 ## Datos
 
