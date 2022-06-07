@@ -10,6 +10,8 @@ dependencies:
     - joypy
     - numpy
     - pytorch=1.11.0
+    - torchtext
+    - spacy
     - ignite
     - torchmetrics
     - cudatoolkit=11.3
