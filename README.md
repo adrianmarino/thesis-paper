@@ -74,7 +74,11 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
   * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
   * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
 * Enfoque Híbrido
-   * Enfoque 1: **Pending**
+   * **Any CF model + Sparse auto-encoder + mean distance**
+       * [Models: Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sparse_autoencoder.ipynb)
+       * [Models: Movie Overview Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sparse_autoencoder.ipynb)
+       * [Models: Movie Genres Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sparse_autoencoder.ipynb)
+       * [Ensemple CB recommender based on Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sparse_autoencoder.ipynb)
    * Enfoque 2: **Pending**
    * Enfoque 3: **Pending**
    * Enfoque 4: **Pending**
