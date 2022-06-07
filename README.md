@@ -49,11 +49,12 @@ Intentó contestar las siguientes preguntas:
 
 ## Datos
 
-Para tener los datos necesario para probar los enfoques de filtros colaborativos(CF) y basados en contenido(CB) necesito:
-* Calificaciones de los ítems(movies) de los usuarios (CF)
-* Features propies de los ítems (CB)
+Para poder realizar las pruebas necesarias con ambios enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
 
-Dado esto, combine los siguientes datasets:
+* Calificaciones de cada ítems(movies) por parte de los usuarios (CF).
+* Features propios de los ítems (CB).
+
+Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
 * [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior pero tiene varios features para las películas que es lo que necesito.
