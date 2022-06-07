@@ -23,8 +23,8 @@ class AutoEncoderTrainer:
         :param data_loader: data_loader with train set.
         :param loss_fn: function to minimize.
         :param epochs: number of epochs to train model.
-        :param encoder_optimizer: optimizer used to adjust encoder and encoder.
-        :param decoder_optimizer: optimizer used to adjust encoder and decoder.
+        :param encoder_optimizer: optimizer used to adjust encoder.
+        :param decoder_optimizer: optimizer used to adjust decoder.
         :param callbacks: callback collection. See Callback.
         :param verbose: show/hide logs.
         """

@@ -5,6 +5,7 @@ from .decoder import Decoder
 from pytorch_common.callbacks import CallbackManager
 from pytorch_common.callbacks import CallbackManager
 from pytorch_common.modules.common_mixin import CommonMixin
+from torch.utils.data import DataLoader
 
 
 class AutoEncoder(Module, CommonMixin):
@@ -26,6 +27,11 @@ class AutoEncoder(Module, CommonMixin):
         inputs_reconstruction = self.decoder(encoded_representation)
         return inputs_reconstruction
 
-    def encoded_representation(self, inputs):
+    def encode_from_data_loader(self, data_loader: DataLoader):
         self.eval()
-        return self.encoder(inputs.to(self.device))
+        return torch.vstack([self.encoder(feat.to(self.device)) for (feat, _) in data_loader])
+
+    def encode_from_batch(self, input_batch):
+        self.eval()
+        return torch.vstack([self.encoder(input_batch.to(self.device).float())])
+
