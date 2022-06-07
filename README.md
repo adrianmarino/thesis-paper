@@ -1,7 +1,7 @@
 
 # Thesis-papes
 
-La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir,  una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura, funcionamiento de cada modelo y cada arquitectura propuesta.
+La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir, una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura, funcionamiento de cada modelo y cada arquitectura propuesta.
 
 ## Modelos
 
@@ -31,7 +31,8 @@ A continuacion se especifican los modelos a comparar:
 
 ## Metricas
 
-Para compara todos los modelos se esta utilizando la metrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k items ordenados desc. por ratings predicho para el usuario; esta metrica, permite medir la frecuencia con que la que se encuentram X ratings en las primeras posiciones en una lsita de items recomendados. Por ejemplo: ratings entre 4 y 5.
+Para comparar los modelos basados en filtros colaborativos estoy utilizando la métrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k ítems ordenados desc. por ratings predicho para el usuario; esta métrica, permite medir la frecuencia con que la que se encuentran X ratings en las primeras posiciones en una lista de ítems recomendados. Por ejemplo: ratings entre 4 y 5.
+
 
 Otras métricas utilizadas:
 * RMSE
