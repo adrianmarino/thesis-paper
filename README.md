@@ -8,7 +8,10 @@ La idea principal es comparar distintos enfoques para construir modelos de recom
 A continuacion se especifican los modelos a comparar:
 
  *  **Memory based CF**: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-    * KNN(User-Item/Item-Item/Ensemple) usando distancia coseno y distacia coseno ajustada(item-to-item).
+    * KNN usando distancia coseno.
+      * User Base Prediction.
+      * Item Base Prediction.
+      * Ensample de ambos enfoques.
  *  **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
     *   **Generalized Matrix Factorization (GMF)**
         * User/Item embeddings dot product.
@@ -67,7 +70,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
 * [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
 * Memory based CF
-  * [KNN User-Item/Item-Item/Ensemple](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
+  * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
 * Model based CF
   * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
   * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
