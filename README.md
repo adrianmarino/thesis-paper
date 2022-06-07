@@ -44,8 +44,8 @@ Otras métricas utilizadas:
 
 Intentó contestar las siguientes preguntas:
 
-* ¿Los modelos basados en deep learning obtienen mejores resultados a modelos que no estan basado en deep learning? ¿Cuales son las ventajas y desventajas de cada enfoque?
-* ¿Como se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?.
+* ¿Los modelos basados en deep learning obtienen mejores resultados que los modelos que no están basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
+* ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
 
 ## Datos
 
