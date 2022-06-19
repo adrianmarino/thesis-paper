@@ -62,7 +62,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 ## Referencias
 
-[References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+[References (In progress)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
 
 
 ## Extras
