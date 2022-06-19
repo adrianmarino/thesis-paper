@@ -1,5 +1,5 @@
 
-# UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Hibridos 
+# UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos y Híbridos 
 
 La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir, una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura, funcionamiento de cada modelo y cada arquitectura propuesta.
 
