@@ -91,6 +91,11 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
    * Enfoque 4: **Pending**
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
+
+## Thesis docs
+
+[Thesis](https://github.com/adrianmarino/thesis-paper/blob/master/docs/tesis/tesis.pdf)
+
 ## Using or based on
 
 * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
