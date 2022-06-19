@@ -1,5 +1,5 @@
 
-# Thesis-papes
+# Thesis: Sistemas de recomendación Colaborativos e Hibridos 
 
 La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir, una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura, funcionamiento de cada modelo y cada arquitectura propuesta.
 
