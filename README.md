@@ -62,7 +62,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 ## Referencias
 
-[References (In progress)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+[References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
 
 
 ## Extras
@@ -94,7 +94,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 
 ## Thesis docs
 
-[Thesis](https://github.com/adrianmarino/thesis-paper/blob/master/docs/tesis/tesis.pdf)
+[Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/tesis/tesis.pdf)
 
 ## Using or based on
 
