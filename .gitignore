@@ -129,3 +129,10 @@ dmypy.json
 
 datasets/
 weights/*auto-encoder*.pt
+
+docs/thesis/*.gz
+docs/thesis/*.toc
+docs/thesis/*.log
+docs/thesis/*.aux
+
+
