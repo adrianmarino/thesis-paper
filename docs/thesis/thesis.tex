@@ -4,6 +4,9 @@
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
 \usepackage{titlesec}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -42,7 +45,7 @@
 
 \chapter{Introducción}
 
-Los sistemas de recomendación tienen por objetivo acercar a sus usuarios información productos, contenido (Textos,  audio, videos), etc.. relevantes a sus preferencias o necesidades, permitiendo a estos encontrar con mayor facilidad aquello que buscan.Formalizando esta definición podemos decir que:  Los sistemas de recomendación apuntan a ayudar a un usuario o grupo de usuarios a seleccionar items de forma personalizada dado un de conjunto de items de gran extensión o un gran espacio de búsqueda.
+Los sistemas de recomendación tienen por objetivo acercar a sus usuarios información productos, contenido (Textos,  audio, videos), etc..relevantes a sus preferencias o necesidades, permitiendo a estos encontrar con mayor facilidad aquello que buscan.Formalizando esta definición podemos decir que:  Los sistemas de recomendación apuntan a ayudar a un usuario o grupo de usuarios a seleccionar items de forma personalizada dado un de conjunto de items de gran extensión o un gran espacio de búsqueda.
 
 Este objetivo puede cambiar según el contexto de cada negocio. Para un e-commerce de delivery de comidas, el objetivo es acercar a los usuarios el tipo de comida que quieren probar en ese mismo momento, a un precio que puedan pagar con tiempo de entrega aceptable. Para un e-commerce de venta de productos, se busca acercar al usuario aquellos productos que este necesitando en ese mismo momento, los cuales tienen un precio que el mismo puede pagar y por otro lado, asegurar una experiencia satisfactoria con el vendedor. En el negocio de visualización de contenido (Ya sea audio o video), el objetivo es acercar al usuario contenido a fin a sus gustos para mejorar su experiencia en la plataforma y así aumentar el engagement de sus usuarios.
 
@@ -54,7 +57,7 @@ En general, se puede lograr aplicando de un algoritmo de optimización, el cual 
 
 \section{Tipos de sistemas de recomendación}
 
-A continuación se puede ver un gráfico que describe las clasificaciones y sub-clasificaciones de los sistemas de recomendación:
+A continuación se puede ver un gráfico que describe las clasificaciones y subclasificaciones de los sistemas de recomendación:
 
 \begin{center}
 \includegraphics[width=11cm]{./images/reco-clasification.png}
@@ -112,7 +115,7 @@ Dentro de los sistemas de recomendación basados en filtros colaborativos, tenem
  
 Algunos ejemplos de estos modelos son los clasificadores bayesianos, redes neuronales, algoritmos genéticos, sistemas difusos y la técnica de descomposición matricial (SVD) en memoria. Estos modelos en general buscan directa o indirectamente reducir la dimensionalidad de los datos. De esta forma, es posible utilizarlos en dominios con una gran cantidad de datos.
 
-\section{Descripción del problema y motivación ($>$ 1/2 carilla)}
+\section{Descripción del problema y motivación}
 
 Con este trabajo se busca contestar las siguientes preguntas:
 
@@ -130,59 +133,157 @@ Como ya se comentó en la introducción, los modelos de filtro colaborativos nec
 
 \section{Trabajos previos ($>$ 1 carilla)}
 
+COMPLETAR
+
 \section{Objetivos ($>$ 1/2 carilla)}
 
 Como primer objetivos, se pretender comprender cuales son los fundamentos teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios puede ser con conveniente aplicarlas. Por otro lado, se intenta determinar cual es la diferencia en performance de cada técnica aplicada sobre el mismo set de datos, midiendo su performance utilizando las mismas métricas. ¿Obtenemos diferencias significativas?
 
 Como segundo objetivo se busca proponer nuevas técnicas y/o explorar técnicas existentes que permite lidiar o solucionar el problema de cold start que sufren los sistemas de recomendación basados en filtros colaborativos. Finalmente, se compararan esta técnicas mediante el benchmark propuesto para compara como se comporta cada modelos ante usuarios con escasas o ninguna interacción en el set de datos propuesto.
 
+COMPLETAR
+
 \chapter{Materiales y Métodos}
 
-\section{Datos ($>$ 1 carilla)} 
+\section{Datos} 
 
+Para realizar este trabajo se selecciono el dominio del cine, ya que existen conjuntos de datos bien definidor y actualizados. 
+Estos datasets en general están pensados para probar modelos de recomendación. Por otro lado, es el dominio clásico en papers 
+y literatura de sistemas de recomendación en general.
 
-Para realizar este trabajo se selecciono el dominio del cine, ya que existen conjuntos de datos bien definidor y actualizados. Por otro lado, es el dominio clásico para papers y literatura de sistemas de recomendación en general.
-
-Dada la propuesta de este trabajo, es necesario contar con datos de interacciones de usuario con items(películas). Ademas, dado que lo buscamos solucionar el problema de cold-start con el enfoque de filtros colaborativos, se necesitara contar otro enfoque de recomendación, el cual posiblemente pueda ser uno basado en contenido. Por esta cuestión, necesitamos contar con features completos y consistentes para los items(películas).
+Dada la propuesta de este trabajo, es necesario contar con datos de interacciones de usuarios con items(películas en este caso). 
+Ademas, dado que se busca solucionar el problema de cold-start para el enfoque de filtros colaborativos, se necesitara contar 
+con otro enfoque de recomendación, el cual posiblemente pueda ser basado en contenido. Por esta cuestión, necesitamos contar 
+con features completos y consistentes para los items(películas).
 
 Dadas estas necesidades se decidió utilizar los siguientes datasets:
 
-\subsection{MovieLens 25M Dataset}
 
-Esta dataset prácticamente no tiene información de lis items(películas) pero si tiene las calificaciones de realizadas por los usuarios. También contamos con un conjunto de tags o palabras clase cargadas por los usuarios para cada item(película). Otro punto importante, es que todos los usuarios tienen al menos 20 interacciones, lo cual asegura que no habrá problemas de baja performance por falta de datos. De esta forma, este dataset sera muy util para entrenar a modelos de recomendación basados en filtros colaborativos y ademas cuenta con columnas extras como tags que serán útiles a la hora de entrenar modelos basados en contenido.
+\subsection{\href{https://grouplens.org/datasets/movielens/25m/}{MovieLens 25M Dataset}}
+
+Esta dataset prácticamente no tiene features para los items(películas) pero si tiene las calificaciones realizadas 
+por los usuarios. También se cuenta con un conjunto de tags o palabras clase cargadas por los usuarios para cada 
+item(película). Otro punto importante, es que todos los usuarios tienen al menos 20 interacciones, lo cual asegura
+que no habrá problemas de baja performance por falta de datos. 
+De esta forma, este dataset sera muy util para entrenar modelos de recomendación basados en filtros colaborativos
+y ademas cuenta con columnas extras como tags, que serán útiles a la hora de entrenar modelos basados en contenido.
 
 
-\subsection{TMDB Movie Dataset}
+\subsection{\href{https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv}{TMDB Movie Dataset}}
 
-Este dataset no tiene calificaciones personalizadas de los items como si sucede con el dataset anterior, pero tiene varios features de los items que pueden ser muy útiles para modelos basados, en contenido en inclusive modelos híbridos, los cuales buscamos explorar. Contamos con features de tipos variados:
 
-\begin{itemize}
-	\item Título.
-	\item Lenguaje nativo: Lenguaje original en el cual fue filmada la película.
-	\item Overview: Sinopsis de la película.
-	\item Géneros: Ambos dataset cuentan con una lista de géneros a los que adiete la película.
-	\item Enlaces al detalle de la película en imdb y the movie database. Estos enlaces permiten hace join con mas datos que se encuentren en la Descripción de estos sitios pero en este trabajo solo se utilizara la imagen pata de la película a modo de visualización.
-	\item  Fecha de lanzamiento.
-	\item Si es una película para adultos.
-	\item Presupuesto destinado para realizar el film.
-	\item Popularidad.
-	\item Cantidad de votos. 
-\end{itemize}
+Este dataset no tiene calificaciones personalizadas de los items como si sucede con el dataset anterior, 
+pero tiene varios features de los items que pueden ser muy útiles para modelos basados en contenido e inclusive
+modelos híbridos, los cuales buscamos explorar.
 
 
 \subsection{Preprocesamiento}
 
-Dada la necesitada de utilizar datos de ambos datasets se realizo un merge o join con ambas fuentes de datos. Ya que ambos datasets cuentan con la columna imdb\_id fue la elegida para realizar el merge. Particularmente se realiza un merge de los csv o tablas que representan a los items(películas). Finamente contamso con dos tablas principales. Una que contiene las interacciones usuario item:
+Como parte inicial se la etapa de pre-procesamiento de datos se utilizo una base de datos MongoDB. Se utilizo mongodb 
+y no pandas debido a que pandas requiere cargar todo el dataset en memoria. Si bien este problema se puede lidiar 
+aumentado el tamaño de la memoria swap(Linux) o la memoria virtual(windows) puede ocasionar caída de procesos y lentitudes 
+innecesarias. En este caso se selecciono una base de datos de tipo document, la cual no necesita cargar todos los datos 
+en memoria y por otro lado, existe la posibilidad de escalar la base de datos a mas nodos en caso de ser necesario.
+
+
+Ambos dataset contiene una varios archivos csv los cuales vamos a llamar tablas, de los cuales se utilizaron los siguientes:
 
 \begin{itemize}
-	\item user_id
-	\item movie_id
-	\item timestamp: Fecha en la que se realizó la calificación del item.
-	\item rating: Calificación. Es un valor discreto numérico: 
+	\item movie\_metadata: Pertenece al TMDB dataset. Es la fuente de verdad de donde tomamos columnas con datos de películas.
+	\item tags: Pertenece al dataset MovieLens. De esta tabla se tomaron los tags o palabras clase datas de alta por los usuarios para cada película.
+	\item ratings: Pertenece al dataset MovieLens. De esta tabla se tomaron las calificaciones de los usuario para las películas que fueron calificadas.
+\end{itemize}
+
+De esta forma primero se hizo un merge o join de las tabla ratings y tags por las columnas user\_id y movie\_id,
+ ya que tenemos dos columnas que representan interacciones de usuarios: 
+
+\begin{itemize}
+	\item rating: Pertenece a la tabla ratings.
+	\item tags: Pertenece a la tabla tags.
+\end{itemize}
+
+En segundo lugar se hizo merge entre las tablas ratings\_tags\_v1 y movie\_metadata utilizando la columnas imdb\_id, la cual es el único 
+identificador único de las películas en ambas tablas.
+
+Finalmente se termino con dos tablas como resultado:
+
+\begin{itemize}
+	\item movies\_v4.csv: Contente toda la información de las películas, incluidos todos los tags cargados por los usuarios que calificaron un película.
+	\item ratings\_tags\_v1.csv: Contiene tanto las calificaciones como las tags para cada usuario y película. 
+\end{itemize}
+
+\subsubsection*{Tabla de interacciones}
+
+La tabla ratings\_tags\_v1 tiene datos a nivel interacción usuario-item. De esta forma a nivel usuario-item se cuenta con la 
+calificación de la película realizada por el usuario, ademas de los tags que el usuario cargo o ingreso para 
+esa películas. Estos tags no son mas una lista de palabras que son representativas de la película en cuestión. 
+Por ejemplo, para la película Toy Store deberíamos tener palabras referente a la misma como: boss, woody, 
+animation, 3d, etc.. Finalmente contamos con la fecha en la cual se realizaron esta interacciones. Se entiende 
+que la calificación y los tags se ingresaron en el mismo momento.
+
+
+\begin{itemize}
+	\item user\_id:  Existen 13.281 usuarios.
+	\item movie\_id: Existen 33.444 películas.
+	\item timestamp: Fecha en la cual el usuario califico el item(movie\_id). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.
+	\item rating:    Calificación. Es un valor discreto numérico: 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5.
+	\item tags:      Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película.
+\end{itemize}
+
+
+\subsubsection*{Tablas de metadata de películas}
+
+La tabla movies\_v4 cuenta con información de cada película seleccionada de ambos datasets. 
+
+\begin{itemize}
+	\item title: 	Título de la película.
+	\item native\_languaje: Lenguaje original en el cual fue filmada la película.
+	\item genres:  	Ambos dataset cuentan con una lista de géneros a los que adiete la película.
+	\item overview:	Sinopsis de la película.
+	\item poster:	Enlaces al detalle de la película en imdb y the movie database. Estos enlaces
+					permiten hace join con mas datos que se encuentren en la Descripción de estos
+			 		sitios pero en este trabajo solo se utilizara la imagen pata de la película
+					a modo de visualización.
+	\item release: 		Fecha de lanzamiento.
+	\item budget: 		Presupuesto destinado para realizar el film.
+	\item popularity: 	Popularidad.
+	\item vote\_count: 	Cantidad de votos.
+	\item vote\_mean: 	Medio de votos por película.
+	\item tags:         Son los tags cargados por todos los usuario que interactuaron con la película. 
+						Es la mismos información que tenemos en la tabla de interacción pero ahora a nivel item.
+\end{itemize}
+
+
+\subsubsection*{Valores faltantes}
+
+Una ves generadas ambas tablas se procedió a buscar missing values. A continuación en la tabla \ref{table:tab} 
+se pueden ver as columnas con missing values:
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{lrrrrrr}
+\hline
+Columna &  Porcentaje de missing values \\
+\hline
+   	budget     &  70      \\
+   	poster     &  0.00085 \\
+   	release    &  0.0085  \\
+	popularity &  0.00085 \\
+	vote\_mean  &  4.8     \\
+	vote\_count &  4.6     \\
+\hline
+\end{tabular}
+\caption{Missing values en la tabla movies\_v4.}
+\label{table:tab}
+\end{table}
+
+Luego se removieron las filas de la tabla para aquellas columnas del reporte anterior que tuvieran hasta 0.06 \% de valores faltantes. A continuación se removió la columna budget por tener un porcentaje muy alto de valores faltantes lo que la volvió inutilizable. Por otro lado, la tabla ratings\_tags\_v1 no se modifico, ya que no tenia valides faltantes en ninguna de sus columnas.
 
 \section{Análisis exploratorio}
 
 \chapter{Métodos ($>$ 3 carillas)}
+
+
 Describir los métodos utilizados (a utilizar). 
 Es obligatorio agregar un párrafo especificando a que materias se relacionan.
 
@@ -193,29 +294,13 @@ Es obligatorio agregar un párrafo especificando a que materias se relacionan.
 \chapter{Experimentos (si los hay)}
 Pueden ser comparaciones entre los métodos utilizados, por ejemplo. 
 
-En la \ref{table:tab} se ve un ejemplo de tabla:
-\begin{table}[h!]
-\centering
-\footnotesize
-\begin{tabular}{lrrrrrr}
-\hline
-Phone &  Total & \% Errors &F1 &  EER \\
-\hline
-   EY &    441 &  13.83 & 0.80 & 0.12 \\
-   JH &    178 &  39.89 & 0.81 & 0.18 \\
-   AY &   1040 &   5.96 & 0.45 & 0.21 \\
-    R &   1298 &  18.34 & 0.53 & 0.27 \\
-\hline
-\end{tabular}
-\caption{Describir la tabla como para que alguien que agarra el trabajo no dependa del cuerpo del texto para entenderla}
-\label{table:tab}
-\end{table}
-
 \chapter{Resultados ($>$ 3 carillas)}
+
 Pueden ser preliminares. Es obligatorio tener algo hecho.
 
 
 \chapter{Conclusiones ( $>$ 1 carilla)} 
+
 Pueden ser preliminares. 
 Si no hay mucho hecho se pueden discutir las dificultades a futuro.
 
