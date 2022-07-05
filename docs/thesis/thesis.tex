@@ -253,11 +253,10 @@ La tabla movies\_v4 cuenta con información de cada película seleccionada de am
 						Es la mismos información que tenemos en la tabla de interacción pero ahora a nivel item.
 \end{itemize}
 
-
 \subsubsection*{Valores faltantes}
 
-Una ves generadas ambas tablas se procedió a buscar missing values. A continuación en la tabla \ref{table:tab} 
-se pueden ver as columnas con missing values:
+Una vez generadas ambas tablas se procedió a buscar missing values. A continuación en la tabla \ref{table:tab} 
+se pueden ver las columnas con missing values:
 \begin{table}[h!]
 \centering
 \footnotesize
@@ -278,6 +277,7 @@ Columna &  Porcentaje de missing values \\
 \end{table}
 
 Luego se removieron las filas de la tabla para aquellas columnas del reporte anterior que tuvieran hasta 0.06 \% de valores faltantes. A continuación se removió la columna budget por tener un porcentaje muy alto de valores faltantes lo que la volvió inutilizable. Por otro lado, la tabla ratings\_tags\_v1 no se modifico, ya que no tenia valides faltantes en ninguna de sus columnas.
+
 
 \section{Análisis exploratorio}
 
