@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1657850795 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1657850796
-  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1657850794 35349 3baf8c0916dcc683eb7de7417cb98ef0 ""
+["pdflatex"] 1657905538 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1657905539
+  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1657905537 35682 8e355b13ab73250f13c3e08bb5bd1616 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1650183167 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1650183167 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -104,13 +104,17 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1655844383 2927670 d69b18ff51b25d0b356f99cee209e205 ""
   "abs_esp.tex" 1655843602 434 eec2b2dcd06fbbc63829b9ba0d71db3f ""
   "caratula.tex" 1655843602 831 6d5392bea88a6b95cd5b34e5e8dd8dc2 ""
+  "images/Biased-GMF.png" 1657905143 171946 f35006cded388952a32a0bca9e14cc28 ""
+  "images/Embedding-Layer.png" 1657904906 148581 863584c4cbbfbf851233d7d66a53efc2 ""
+  "images/GMF.png" 1657904995 81063 a5747dcdbe793d3dc0a2d13662d303b1 ""
+  "images/NN-MF.png" 1657904928 114879 5ee11f31f0c3f35d44841582fc21a261 ""
   "images/logouba.png" 1655843602 52948 bcf01d58985233cae4d75267724136ba ""
   "images/reco-clasification.png" 1655843602 52719 4148dbfcc45914cc82962179b2a13c6e ""
-  "thesis.aux" 1657850796 6497 8ee23ea1d6c1659a23bf4d8ae9e2c7aa "pdflatex"
+  "thesis.aux" 1657905539 6497 3e3314e9d3c3a8e6b1c7303b7103c473 "pdflatex"
   "thesis.cls" 1655843602 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1657850796 7636 5712c5f79d3e0551249c0564489dd4c9 "pdflatex"
-  "thesis.tex" 1657850794 35349 3baf8c0916dcc683eb7de7417cb98ef0 ""
-  "thesis.toc" 1657850796 3575 c66563dc73f3be1c7808843d4a6af0d7 "pdflatex"
+  "thesis.out" 1657905539 7636 5712c5f79d3e0551249c0564489dd4c9 "pdflatex"
+  "thesis.tex" 1657905537 35682 8e355b13ab73250f13c3e08bb5bd1616 ""
+  "thesis.toc" 1657905539 3575 672f305ec3baff63865f6dd1324f38e4 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
