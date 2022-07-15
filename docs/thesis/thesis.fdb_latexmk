@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1657907548 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1657907549
-  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1657907547 37065 86659b1c6a456baefdc6a3d3cd351f92 ""
+["pdflatex"] 1657925254 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1657925256
+  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1657925254 41504 e4bf6b43dcff29226e6db6910b9948c5 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1650183167 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1650183167 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -10,7 +10,6 @@
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm" 1650183167 1300 63a6111ee6274895728663cf4b4e7e81 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1650183167 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1650183167 1528 abec98dbc43e172678c11b3b9031252a ""
-  "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1650183167 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1650183167 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1650183167 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1650183167 1524 d89e2d087a9828407a196f428428ef4a ""
@@ -30,7 +29,6 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb" 1650183167 32001 6aeea3afe875097b1eb0da29acd61e28 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1650183167 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1650183167 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
-  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1650183167 36741 fa121aac0049305630cf160b86157ee4 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1650183167 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1650183167 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1650183167 35752 024fb6c41858982481f6968b5fc26508 ""
@@ -124,11 +122,11 @@
   "images/metrics-NN-FM-mapk.png" 1657907158 32824 19f94853698598250f683e7ee96f249e ""
   "images/metrics-NN-FM-train-val-loss.png" 1657907117 16262 07ae2991e4043504f9bdaf5ace794c99 ""
   "images/reco-clasification.png" 1655843602 52719 4148dbfcc45914cc82962179b2a13c6e ""
-  "thesis.aux" 1657907549 6930 a5f5a90df17c6300dae2c61a7aa2ca0c "pdflatex"
+  "thesis.aux" 1657925256 7102 406dce733a50ad4513b11e53f5df3c8f "pdflatex"
   "thesis.cls" 1655843602 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1657907549 7990 df07200fefdc41ded6480c19c4a30168 "pdflatex"
-  "thesis.tex" 1657907547 37065 86659b1c6a456baefdc6a3d3cd351f92 ""
-  "thesis.toc" 1657907549 3844 58a0d941f96a9e117f091febab3d820a "pdflatex"
+  "thesis.out" 1657925256 7823 fbfce1bddefdd3110aae38497157b30c "pdflatex"
+  "thesis.tex" 1657925254 41504 e4bf6b43dcff29226e6db6910b9948c5 ""
+  "thesis.toc" 1657925256 3934 fad949681b27d04afadb0c38fb2726bf "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"

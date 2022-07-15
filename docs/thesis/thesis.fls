@@ -642,15 +642,11 @@ INPUT ./images/reco-clasification.png
 INPUT ./images/reco-clasification.png
 INPUT ./images/reco-clasification.png
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT ./images/Embedding-Layer.png
 INPUT ./images/Embedding-Layer.png
@@ -750,7 +746,6 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
