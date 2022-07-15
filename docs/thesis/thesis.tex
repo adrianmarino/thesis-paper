@@ -7,7 +7,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
-
+\usepackage{amsmath}
 \begin{document}
 
 %%%% CARATULA
@@ -281,14 +281,231 @@ Luego se removieron las filas de la tabla para aquellas columnas del reporte ant
 
 \section{Análisis exploratorio}
 
+
 \chapter{Métodos ($>$ 3 carillas)}
 
+En este capitulo se describirán los modelos utilizados para realiza la predicción de las clasificación de un usuario para una película
+que aun no ha visto. Para realizar esto, se utilizaron varios modelos basados en filtros colaborativos. Cada implementación tiene sus particularidades: 
+Cuanto puede escalar, sus tiempos de entrenamiento y predicción, su implementación, exactitud de las predicciones, tendencia al overfitting, etc..
+Para este trabajo se eligieron dos grandes grupos. Por un lado, una implementación sencilla basada en memoria como es el algoritmo de K vecinos cercanos y 
+por el otro, modelos basados en deep learning. Los modelos basados en deep learning utilizan embedding en todos los casos, como una forma de reducir la 
+dimensionalidad de las variables categóricas que se utilizan como entradas. Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras basadas 
+en modelos del estado del arte. Luego, la idea fue medir los resultados de todo los modelos utilizando distintas métricas comparables, entrenado con el mismo
+dataset en todos los casos. De esta forma podemos compara los resultados de cada modelo. K vecinos cercanos (KNN) fue tomado como baseline a partir del cual 
+poder comparar los demás modelos.
 
-Describir los métodos utilizados (a utilizar). 
-Es obligatorio agregar un párrafo especificando a que materias se relacionan.
+Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en cuenta que estos modelos son muy 
+demandantes en cuanto a recursos de hardware, se opto por usar el framework PyTorch, dado que permite hacer uso tanto de CPU como GPU. 
+De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento 
+e inferencia). Ya elegido el framework, se opto por implementar todos los modelos desde sus bases, ya que PyTorch no cuenta con mucho
+modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de CPU y GPU de forma granular
+y realizar un usu mas eficiente de los recursos disponible.
 
-\section{Método I }
-\section{Método II}
+\section{Enfoque basados en memoria}
+
+\subsection{KNN para predicción de la calificación de películas}
+
+Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado
+el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. 
+De esta forma, en la etapa de inferencia, el  modelo tomo como entrada un usuario(id) y un item(id) y retorna la predicción de la calificación. 
+Estas matrices se puede mantener en memoria o bien persistir en una base de datos (como puede ser Redis) o en un archivos indexado. 
+Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento 
+se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
+
+Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
+
+\begin{description}
+	\item[Lista de tuplas]
+\end{description}
+\begin{equation*}
+	Tuplas = [<u_1; i_1; r_{u_1, i_1}>,...,<u_n; i_m; r_{u_n, i_m}>]
+\end{equation*}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item $u$ es un identificador univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso se no usar matrices esparzas. 
+	\item $i$ es un identificador univoco y numérico de un item también secuencial. En nuestros caso los items son películas, pero podrían ser cualquier entidad identificable como productos, usuarios, comidas, etc.. 
+	\item $r_{u, i}$ es la calificación otorgada al item $i$ por parte del usuario $u$. 
+ 	\item $n$ es la cantidad total de usuarios en el dataset de entrenamiento. 
+  	\item $m$ es la cantidad total de items en el dataset de entrenamiento. 
+\end{itemize}
+
+Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila representa a un usuario y cada columna a un item o vise versa, y 
+las celdas o valores de la misma contienen las calificaciones.
+
+
+\begin{description}
+	\item[Matriz de calificaciones]
+\end{description}
+\begin{equation*}
+	Calificaciones_{u,i} =
+	\begin{pmatrix}
+	r_{1,1} & r_{1,2} & \cdots & r_{1,i} \\
+	r_{2,1} & r_{2,2} & \cdots & r_{2,i} \\
+	\vdots  & \vdots  & \ddots & \vdots  \\
+	r_{u,1} & r_{u,2} & \cdots & r_{u,i}
+	\end{pmatrix}
+\end{equation*}
+
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item $r_{u,i}$ es la calificación otorgada al item $i$ por parte del usuario $u$.
+	\item Cada vector fila $F_u$ contiene todas la calificaciones realizadas por el usuario $u$ para todos los items. Los items que aun no tiene calificación contiene el valor 0.
+	\item Cada vector columna $C_i$ contiene todas la calificaciones realizadas por todos los usuarios para el item $i$.
+\end{itemize}
+
+
+En el siguiente paso, se debe construir la matrix $Distancias_{u_a,u_b}$ que contiene las distancias entre todos los vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$.
+Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ representa a un usuario, ya que contiene todas las calificaciones realizadas por el mismo.
+
+
+\begin{description}
+	\item[Matriz de distancias]
+\end{description}
+\begin{equation*}
+	Distancias_{u_a,u_b} =
+	\begin{pmatrix}
+	d_{1,1} & d_{1,2} & \cdots & d_{1,u_b} \\
+	d_{2,1} & d_{2,2} & \cdots & d_{2,u_b} \\
+	\vdots  & \vdots  & \ddots & \vdots  \\
+	d_{u_a,1} & d_{u_a,2} & \cdots & d_{u_a,u_b} 
+	\end{pmatrix}
+\end{equation*}
+
+
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item $d_{u_a,u_b}$ es la distancia entre el vector fila $F{u_a}$ y $F{u_b}$ de la matriz de $Calificaciones_{u,i}$.
+\end{itemize}
+
+
+En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En trabajos anteriores donde se utilizo una muestra del 
+mismo dataset, se encontró que las distancias que mejor ajustan a este dominio son las siguientes:
+
+\begin{itemize}
+	\item Distancia Coseno Ajustado.
+	\item Distancia Coseno.
+	\item Distancia de Pearson (1 - Correlación de Pearson).
+\end{itemize}
+
+Luego, para este trabajo se eligió utilizar la distancia coseno, ya con esta se obtuvieron buenos resultado en trabajos anteriores (Referencia).
+
+\begin{description}
+	\item[Distancia Coseno]
+\end{description}
+
+La distancia coseno es una medida de similitud entre dos vectores en un espacio vectorial que posee un producto interno. La distancia coseno entre dos vectores se mide en grados. 
+De esta forma cuanto menos es el angulo entre dos vectores mas similares son entre si. De forma contraria, cuando mayor es el angulo entre dos vectores menos similares son entre si.
+
+\begin{equation*}
+	Distancia \mspace{3mu}Coseno_{ua, ub} = \frac{ \sum_{i \in I} r_{ua, i}.r_{ub, i}}{\sqrt{\sum_{i \in I} r_{ua, i}^2}.\sqrt{\sum_{i \in I} r_{ub, i}^2}  }, ua \neq ub
+\end{equation*}
+
+\begin{description}
+	\item[Observaciones:]
+\end{description}
+\begin{itemize}
+	\item $au$ y $ub$ son los indices de dos vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. Cada uno de estos vectores fila $F_u$ representan a un usuario.
+ 	\item $au \neq ub$, es decir que cada indice representa a un usuario distinto.
+	\item $I$ es la cantidad total de columnas de la matriz de $Calificaciones_{u,i}$.
+	\item $i$ el indice de una columna de la matriz de $Calificaciones_{u,i}$. Cada columna representa a un item y contiene todas las calificación realizaras por todos los usuarios sobre ese item.
+	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares seran los usuarios $u_a$ y $u_b$.
+\end{itemize}
+
+\begin{description}
+	\item[Similitud Coseno]
+\end{description}
+\begin{equation*}
+	Similitud \mspace{3mu}Coseno_{ua, ub} = 1- Distancia \mspace{3mu}Coseno_{ua, ub}
+\end{equation*}
+\begin{description}
+	\item[Observaciones:]
+\end{description}
+\begin{itemize}
+	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares seran los usuarios $u_a$ y $u_b$.
+\end{itemize}
+
+
+Volviendo a nuestro algoritmo, la idea es calcular la distancia de cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ contra todos 
+los demás vectores fila de la misma matriz, obteniendo asi la matriz de $Distancias_{u_a,u_b}$, donde cada fila y columnas representa a los 
+vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. 
+
+Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicción depende de la implementación que se elige para predecir 
+las calificaciones. En todos los casos se utilizan ambas matrices para realizar las predicciones. A continuación se explica el paso de inferencia o 
+predicción para cada implementación elegida.
+
+\subsection{KNN basado en usuarios}
+
+En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$.El calcula de esta 
+matrices es parte del proceso de entrenamiento del modelo KNN. En este apartado se explicará el proceso de inferencia de una 
+clasificación de un usuario para un item. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
+
+\begin{equation*}
+	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
+\end{equation*}
+
+\begin{description}
+	\item[Observaciones:]
+\end{description}
+\begin{itemize}
+	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
+	\item $u \neq o$, es decir que cada indice representa a un usuario distinto.
+	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuario menos el usuario $u$.
+	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. En nuestro casos se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
+	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$.
+ 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el item $i$ y el promedio de calificaciones del usuario $o$. 
+	 	Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al 
+		momento de calificar un item. Algunos usuario tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otro usuario son mas 
+		pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un item.
+\end{itemize}
+
+Finalmente a grandes rasgos, el calculo de la predicción no es mas que el promedio de calificaciones del usuario $u$ sumado a un promedio 
+pesado de las calificación de los demás usuarios para el item $i$, donde los pesos son las distancias del usuario $u$ con los demás usuarios.
+
+Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás usuarios, sino un conjunto de tamaño $K$ el cual contiene a los 
+usuario mas cercanos en términos de distancia. Es decir que, como paso previo a la predicción, es necesario encontrar los $K$ usuarios mas cercanos al usuario $u$.
+De esta forma, el parámetro $K$ se convierte en un hiper-parámetro del modelo. Luego a mayor $K$, mayor sera numero de vecinos a tener en cuenta para calcular
+la predicción, y mayor sera el tiempo de inferencia del modelo. Por otro lado, a mayor $K$ estaremos incluyendo mas vecinos que son menos similares en 
+términos de distancia. Debido a esto, siempre se busca encontrar el mejor valor posible para $K$. Este valor se buscado a traves de una optimización de hiper parámetros regida por una métricas que valida la exactitud del modelo al momento de predecir, obteniendo como resultado el $K$ para el cual el modelo tiene el resultado mas exactos posibles.
+
+\subsection{KNN Item Base Prediction}
+
+Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadase stas diferencias el calcula de la predicción de la calificaiones tambien difierene n su definición:
+
+
+\begin{equation*}
+	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i} = \frac{\sum_{o \in O} r_{u, o}. w_{i, o} }{\sum_{o \in O} w_{i, o} }, i \neq o
+\end{equation*}
+\begin{description}
+	\item[Observaciones:]
+\end{description}
+\begin{itemize}
+	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
+	\item $O$ es el conjunto de los vecinos cercanos o mas similares de $i$ previamente seleccionado. $o$ pertenece al conjunto $O$.
+	\item $i \neq o$: los indices item $i$ y $o$ representan a items distintos. 
+	\item $w_{i,o}$ es la similitud entre los items $i$ y $o$.
+\end{itemize}
+
+Finalmente la predicción, un promedio pesado de las calificaciones del usuario $u$ para los items vecinos al item $i$, pesadas por la similitud de cada item $o$ con $i$.
+
+\subsection{Ensample de modelos}
+
+Dado que contamos dos modelos basados en KNN se realizo un sample de ambos modelos el cual realiza un promedio de las salidas de ambos modelos.
+
+
+\section{Enfoque basado en modelos}
+
+\subsection{General Matrix Factorization}
+
+\subsection{Neural Network Matrix Factorization}
+
+\subsection{Deep Factorization Machine}
+
 \section{Métricas}
 
 \chapter{Experimentos (si los hay)}
