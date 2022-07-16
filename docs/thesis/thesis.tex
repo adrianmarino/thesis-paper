@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \begin{document}
 
 %%%% CARATULA
@@ -502,13 +503,13 @@ Dado que contamos dos modelos basados en KNN se realizo un sample de ambos model
 
 Hasta aquí realizamos una descripción del modelo KNN utilizados en este trabajo y las distintas implementaciones utilizadas. Estos modelos tiene varias falencias. Entre las mas importantes encontramos el problema de escala, ya que el tamaño de los datos a procesar depende casi linealmente de los recursos de memoria, CPU y/o GPU disponibles. De esta forma, cuando es necesario procesar una gran cantidad de datos para realizar predicciones, se opta por modelos que realicen algún tipo de reducción de dimensionalidad para construir su representación internal, la cual luego se utilizada para realizar las predicciones. A esta presentación interna muchas veces se la llama Modelo, ya que el modelo en si no es el algoritmo utilizado si no el estado internal al que se llega luego del entrenamiento. 
 
-\subsection{One-hot encoding vs. Embeddings}
+\subsection{One-Hot Encoding vs. Embeddings}
 
-Particularmente en el ámbito de recomendaciones, se cuenta con variables categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable con esta característica: los ids secuenciales de usuarios e items. Cuando trabajamos con modelos de Machine Learning, particularmente con redes neuronales, es necesario convertir las variable categóricas en una representación números. El enfoque mas simple o native es realizar un one-hot encoding de la variable categórica, el cual consta de codificar cada posible valor de la variable como un vector que contiene tantas posiciones como valores tenga la variable. De esta forma, cada vector tiene un 1 en la posición que concuerda con el valor representado y un cero en las demás posiciones. Por ejemplo, suponemos que tenemos la siguiente variable:
+Particularmente en el ámbito de recomendaciones, se cuenta con variables categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable con esta característica: los ids secuenciales de usuarios e items. Cuando trabajamos con modelos de Machine Learning, particularmente con redes neuronales, es necesario convertir las variable categóricas en una representación numérica. El enfoque mas simple o native es realizar un one-hot encoding de la variable categórica, el cual consta de codificar cada posible valor de la variable como un vector que contiene tantas posiciones como valores tenga la variable. De esta forma, cada vector tiene un 1 en la posición que concuerda con el valor representado y un cero en las demás posiciones. Por ejemplo, suponemos que tenemos la siguiente variable:
 
 \begin{itemize}
 	\item Variable Categórica: Estado del Tiempo.
-	\item Posible valores: Nublado, Despegado y Lluvioso.
+	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
 
 Si codificamos sus valores usando one-hot encoding obtenemos lo siguientes vectores:
@@ -525,30 +526,86 @@ La respuesta corta es si, en estos casos se utilizan Embeddings. ¿Pero que son 
 
 Un Embedding no es mas que una forma de codificar valores de una variable categórica usando vectores de menor tamaño. Es decir, si tenemos una variable categórica
 que tiene 10.000 posible valores, dependiendo del caso, podríamos elegir un tamaño de 100 posiciones. Este tamaño debe ser elegido de forma tal que no se produzca
-perdida de información. por esta cuestión el tamaño de estos vectores se transforma en un hiper-parámetro mas a ajustar al momento de entrenar los modelos que utilicen esta técnica de codificación.
+perdida de información. Por esta cuestión, el tamaño de estos vectores se transforma en un hiper-parámetro mas a ajustar al momento de entrenar los modelos que utilicen esta técnica de codificación.
 
 Otro punto importante que diferencia ambas codificaciones, reside en la distancia entre vectores. Si tomamos dos vectores con codificación \textbf{one-hot} y los gráficas en un espacio tridimensional o bidimensional, se aprecia que el angulo entre estos siempre es el mismo, 90 grados. Supongamos el caso anterior de la variable \textbf{Estado del Tiempo}, si representamos en el espacio todos sus valores, podemos ver que la distancia es las misma entre cualquier par de vectores.
-Con los embeddings esto cambia  ya que los vectores que representan a los valores \textbf{Nublado} y \textbf{Lluvioso} tiene un angulo menos a 90 grados. Por otro lado, ambos vectores están alejados del vector \textbf{Despejado}. De esta forma un Embedding permite captar mas información ya que realiza una clusterización de los valores que son mas cercanos en términos de significado. Los días nublados y lluviosos son muy parecido entre si y muy disantos a un un dia despejado y soleado.
+Si ahora codificamos la misma variable usando Embeddings esto cambia, ya que los vectores que representan a los valores \textbf{Nublado} y \textbf{Lluvioso} tiene un angulo menos a 90 grados. Por otro lado, ambos vectores están alejados del vector \textbf{Despejado}. De esta forma un Embedding permite captar mas información ya que realiza una clusterización de los valores que son mas cercanos en términos de significado. Los días nublados y lluviosos son muy parecido entre si y muy distintos a un dia despejado.
 
-De esta forma los embeddings tiene doble ganancia sobre la la codificación onr-hot, comprimen la información y ademas  captan información que util para la clusterización de sus valores. La parte interesante es que los modelos que entrenan embeddings capa esta información de forma automática en base a las observaciones usadas en el entrenamiento.
+De esta forma los embeddings tiene una doble ganancia sobre la codificación One-Hot: comprimen la información y ademas  captan información que util para la clusterización de sus valores. La parte interesante es que los modelos que entrenan Embeddings captan esta información de forma automática en base a las observaciones usadas en el entrenamiento, generan estos espacios latentes llamados Embeddings.
 
 
 \subsection{Embedding Layer}
 
+En el ámbito del Deep Learning o Machine Learning se cuenta con la abstracción de \textbf{Capas} (Keras/Tensorflow) o \textbf{Módulos}(PyTorch), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un embedding durante el entrenamiento son los bloques Embedding/EmbeddingBag en PyTorch o Embedding en Keras/Tensorflow. En ambos frameworks tienen el mismo comportamiento. 
+
+Por un lado, podemos elegir el tamaño de los vectores Embedding, el cual como ya adelantamos en un hiper-parámetro mas a optimizar. Por otro lado, debemos definir la cantidad de vectores embeding que debe contener la capa. Esta es siempre igual al número total de valores que puede tomar variable categórica.
+
+De esta forma, para crear una capa o modulo Embedding para la variable \textbf{Estado del Tiempo} podríamos crear una capa Embedding de tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que tenemos al usa la codificación one-hot, con la diferencia de que una capa Embedding capta la similitud entre los valores de la variable categórica un la codificación one-hot no.
+
+Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar como una tabla Hash donde las claves los posible valores de la variable categórica cosificados a números y los valores son los vectores embedding. Cave aclarar que en general estos vectores son inicializados con valores aleatorio. Luego el modelo ira ajustando sos valores durante el entrenamiento.
+
+En el froward pass, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textbf{Estado del Tiempo} podríamos codificar sus valores como sigue:
+
+\begin{itemize}
+	\item $Nublado    = 0$
+	\item $Despegado  = 1$
+	\item $Lluvioso   = 2$
+\end{itemize}
+
+
+Entonces si pasamos el valores \textbf{Nubaldo} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector embedding asociado a esa clave y lo devuelve a su salida.
 
 \begin{center}
 	\includegraphics[width=13cm]{./images/Embedding-Layer.png}
 \end{center}
 
+Finamente, tengamos en cuenta que el proceso de back-propagation sera encargado de ir ajustando los valores o también llamados pesos de los vectores embeddings de cuerdo a lo que requiera en la salida del modelos durante el proceso de optimización de descenso del gradiente. 
 
+
+\subsection{Arquitecturas Utilizadas}
+
+En el apartado anterior se explica uno de las componente básicos y mas usando en modelos de recomendación basados en modelo de Deep Learning. Des de qui se describirán las arquitecturas utilizadas en este trabajo.
 
 \subsection{General Matrix Factorization}
 
-COMPLETAR
+
+Esta arquitectura esta basada en el principio mas clásico usado en sistemas de recomendadores basados en filtros colaborativos. El algoritmo de factorización de matrices funciona desacoplando la matriz de interacciones usuarios-items en un producto escalar de dos matrices regulares de baja dimensionalidad. Este modelo o familia de modelos fue utilizado por primera por Simon Funk en la competencia Netflix prize en 2006, donde se se popularizo. De esta forma la odea principal del modelo de factorización de matrices es representar a los usuario e items en un espacio latente de baja dimensionalidad.
+
+Luego este modelo se puede construir fácilmente realizando el producto escalar de dos matrices de vectores de embeddings las cuales tiene una baja dimensionalidad debido al principio de funcionamiento de lso embeddings.
+
+A continuación se puede ver un esquema del modelo, el cual toma como entradas los identificadores de un usuario y un item, luego se resuelven los vectores embedding correspondiente a ambos ids, y finalmente se realiza el producto escalar de ambos vectores. Este producto escalar da como resultado la calificación de usuario para el item dado. Luego. el algoritmo del optimización de gradiente descendente, se ocupa de ajustar los pesos de ambas las matrices de vectores de embedding para que dado un id de usuario e item se obtenga la calificación correspondiente a la observación utilizada como ejemplo de entrenamiento.
 
 \begin{center}
-	\includegraphics[width=6.5cm]{./images/GMF.png}
+	\includegraphics[width=6.8cm]{./images/GMF.png}
 \end{center}
+
+En términos matemáticos este modelo realiza la siguiente operación, en cada paso hacia adelante (forward-pass):
+
+\begin{equation*}
+	r_{u, i} = V_u . (V_i)^{T}
+\end{equation*}
+\begin{description}
+	\item[Donde:]
+\end{description}
+\begin{itemize}
+	\item $V_u$ es el vector embedding correspondiente al usuario $u$.
+	\item $(V_i)^{T}$ el vector embedding correspondiente al item $i$.
+	\item $R_{u, i}$ es un escalar que representa a la calificación realizada por el usuario $u$ al item $i$.
+\end{itemize}
+
+En términos de matrices podemos verlo de la siguiente manera:
+
+\begin{equation*}
+	R = U.I
+\end{equation*}
+\begin{description}
+	\item[Donde:]
+\end{description}
+\begin{itemize}
+	\item $R \in \mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un item.
+	\item $U \in \mathbb{R}^{usuarios \times factor \mspace{3mu}latente}$ es la matriz de vectores embeddings de usuarios y la dimensión factor latente corresponde al tamaño seleccionado para los vectores embedding. 
+	\item $I \in \mathbb{R}^{factor \mspace{3mu}latente \times items}$ es la matriz de vectores embeddings de items.
+\end{itemize}
 
 
 \begin{center}
