@@ -9,6 +9,8 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
 \begin{document}
 
 %%%% CARATULA
@@ -44,6 +46,8 @@
 
 %%%% ACA VA EL CONTENIDO DE LA TESIS
 
+\setitemize{itemsep=0.5pt}
+
 \chapter{Introducción}
 
 Los sistemas de recomendación tienen por objetivo acercar a sus usuarios información productos, contenido (Textos,  audio, videos), etc..relevantes a sus preferencias o necesidades, permitiendo a estos encontrar con mayor facilidad aquello que buscan.Formalizando esta definición podemos decir que:  Los sistemas de recomendación apuntan a ayudar a un usuario o grupo de usuarios a seleccionar items de forma personalizada dado un de conjunto de items de gran extensión o un gran espacio de búsqueda.
@@ -56,6 +60,7 @@ Por otro lado, el objetivo de fondo siempre es el mismo, mejorar la conversión.
 Desde un punto de vista mas técnico, los sistemas de recomendación se utilizan para predecir el grado de preferencia de un usuario con respecto a un item. 
 En general, se puede lograr aplicando de un algoritmo de optimización, el cual minimiza la diferencia entre el grado de preferencia esperado versus real. Otros enfoques hace uso de medidas de distancia para establecer este grado de preferencia.
 
+\clearpage
 \section{Tipos de sistemas de recomendación}
 
 A continuación se puede ver un gráfico que describe las clasificaciones y subclasificaciones de los sistemas de recomendación:
@@ -99,7 +104,7 @@ Estos modelos aprende un espacio latente de soluciones sin necesidad de recolect
 
 \end{itemize}
 
-
+\clearpage
 \subsection{Híbridos}
 
 Son aquellos modelos que combinan mas de una técnica de recomendación, también llamados ensambles de modelos.
@@ -116,6 +121,7 @@ Dentro de los sistemas de recomendación basados en filtros colaborativos, tenem
  
 Algunos ejemplos de estos modelos son los clasificadores bayesianos, redes neuronales, algoritmos genéticos, sistemas difusos y la técnica de descomposición matricial (SVD) en memoria. Estos modelos en general buscan directa o indirectamente reducir la dimensionalidad de los datos. De esta forma, es posible utilizarlos en dominios con una gran cantidad de datos.
 
+\clearpage
 \section{Descripción del problema y motivación}
 
 Con este trabajo se busca contestar las siguientes preguntas:
@@ -141,8 +147,6 @@ COMPLETAR
 Como primer objetivos, se pretender comprender cuales son los fundamentos teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios puede ser con conveniente aplicarlas. Por otro lado, se intenta determinar cual es la diferencia en performance de cada técnica aplicada sobre el mismo set de datos, midiendo su performance utilizando las mismas métricas. ¿Obtenemos diferencias significativas?
 
 Como segundo objetivo se busca proponer nuevas técnicas y/o explorar técnicas existentes que permite lidiar o solucionar el problema de cold start que sufren los sistemas de recomendación basados en filtros colaborativos. Finalmente, se compararan esta técnicas mediante el benchmark propuesto para compara como se comporta cada modelos ante usuarios con escasas o ninguna interacción en el set de datos propuesto.
-
-COMPLETAR
 
 \chapter{Materiales y Métodos}
 
@@ -213,7 +217,7 @@ Finalmente se termino con dos tablas como resultado:
 	\item ratings\_tags\_v1.csv: Contiene tanto las calificaciones como las tags para cada usuario y película. 
 \end{itemize}
 
-\subsubsection*{Tabla de interacciones}
+\subsubsection{Tabla de interacciones}
 
 La tabla ratings\_tags\_v1 tiene datos a nivel interacción usuario-item. De esta forma a nivel usuario-item se cuenta con la 
 calificación de la película realizada por el usuario, ademas de los tags que el usuario cargo o ingreso para 
@@ -232,6 +236,7 @@ que la calificación y los tags se ingresaron en el mismo momento.
 \end{itemize}
 
 
+\clearpage
 \subsubsection*{Tablas de metadata de películas}
 
 La tabla movies\_v4 cuenta con información de cada película seleccionada de ambos datasets. 
@@ -280,6 +285,7 @@ Columna &  Porcentaje de missing values \\
 Luego se removieron las filas de la tabla para aquellas columnas del reporte anterior que tuvieran hasta 0.06 \% de valores faltantes. A continuación se removió la columna budget por tener un porcentaje muy alto de valores faltantes lo que la volvió inutilizable. Por otro lado, la tabla ratings\_tags\_v1 no se modifico, ya que no tenia valides faltantes en ninguna de sus columnas.
 
 
+\clearpage
 \section{Análisis exploratorio}
 
 COMPLETAR
@@ -314,6 +320,8 @@ Estas matrices se puede mantener en memoria o bien persistir en una base de dato
 Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento 
 se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
 
+
+\clearpage
 Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
 
 \begin{description}
@@ -323,7 +331,7 @@ Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas
 	Tuplas = [<u_1; i_1; r_{u_1, i_1}>,...,<u_n; i_m; r_{u_n, i_m}>]
 \end{equation*}
 \begin{description}
-	\item[Observaciones]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $u$ es un identificador univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso se no usar matrices esparzas. 
@@ -351,7 +359,7 @@ las celdas o valores de la misma contienen las calificaciones.
 \end{equation*}
 
 \begin{description}
-	\item[Observaciones]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $r_{u,i}$ es la calificación otorgada al item $i$ por parte del usuario $u$.
@@ -364,6 +372,7 @@ En el siguiente paso, se debe construir la matrix $Distancias_{u_a,u_b}$ que con
 Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ representa a un usuario, ya que contiene todas las calificaciones realizadas por el mismo.
 
 
+\clearpage
 \begin{description}
 	\item[Matriz de distancias]
 \end{description}
@@ -379,7 +388,7 @@ Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ r
 
 
 \begin{description}
-	\item[Observaciones]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $d_{u_a,u_b}$ es la distancia entre el vector fila $F{u_a}$ y $F{u_b}$ de la matriz de $Calificaciones_{u,i}$.
@@ -409,7 +418,7 @@ De esta forma cuanto menos es el angulo entre dos vectores mas similares son ent
 \end{equation*}
 
 \begin{description}
-	\item[Observaciones:]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $au$ y $ub$ son los indices de dos vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. Cada uno de estos vectores fila $F_u$ representan a un usuario.
@@ -419,6 +428,7 @@ De esta forma cuanto menos es el angulo entre dos vectores mas similares son ent
 	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares seran los usuarios $u_a$ y $u_b$.
 \end{itemize}
 
+\clearpage
 \begin{description}
 	\item[Similitud Coseno]
 \end{description}
@@ -426,7 +436,7 @@ De esta forma cuanto menos es el angulo entre dos vectores mas similares son ent
 	Similitud \mspace{3mu}Coseno_{ua, ub} = 1- Distancia \mspace{3mu}Coseno_{ua, ub}
 \end{equation*}
 \begin{description}
-	\item[Observaciones:]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares seran los usuarios $u_a$ y $u_b$.
@@ -452,7 +462,7 @@ clasificación de un usuario para un item. En enfoque de K usuarios cercanos par
 \end{equation*}
 
 \begin{description}
-	\item[Observaciones:]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
@@ -477,14 +487,14 @@ términos de distancia. Debido a esto, siempre se busca encontrar el mejor valor
 
 \subsection{KNN Item Base Prediction}
 
-Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadase stas diferencias el calcula de la predicción de la calificaiones tambien difierene n su definición:
+Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
 
 
 \begin{equation*}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i} = \frac{\sum_{o \in O} r_{u, o}. w_{i, o} }{\sum_{o \in O} w_{i, o} }, i \neq o
 \end{equation*}
 \begin{description}
-	\item[Observaciones:]
+	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
@@ -511,6 +521,7 @@ Particularmente en el ámbito de recomendaciones, se cuenta con variables categ�
 	\item Variable Categórica: Estado del Tiempo.
 	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
+
 
 Si codificamos sus valores usando one-hot encoding obtenemos lo siguientes vectores:
 
@@ -568,78 +579,160 @@ En el apartado anterior se explica uno de las componente básicos y mas usando e
 
 \subsection{General Matrix Factorization}
 
+Esta es una arquitectura clásica en sistemas de recomendación basados en filtros colaborativos. El \href{https://sifter.org/~simon/journal/20061211.html}{algoritmo de factorización de matrices} funciona desacoplando la matriz de interacciones usuario-item en un producto escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en la competencia \href{https://en.wikipedia.org/wiki/Netflix_Prize}{Netflix prize} en 2006. La idea principal del algoritmo es representar a usuario e items en un espacio latente de baja dimensionalidad.
+A partir del trabajo inicial realizado por  \textit{Funk} en 2006, se han propuesto multiples enfoque de factorización de matrices para sistemas de recomendación, siento este el modelo de mas simple y efectivo.
 
-Esta arquitectura esta basada en el principio mas clásico usado en sistemas de recomendadores basados en filtros colaborativos. El algoritmo de factorización de matrices funciona desacoplando la matriz de interacciones usuarios-items en un producto escalar de dos matrices regulares de baja dimensionalidad. Este modelo o familia de modelos fue utilizado por primera por Simon Funk en la competencia Netflix prize en 2006, donde se se popularizo. De esta forma la odea principal del modelo de factorización de matrices es representar a los usuario e items en un espacio latente de baja dimensionalidad.
-
-Luego este modelo se puede construir fácilmente realizando el producto escalar de dos matrices de vectores de embeddings las cuales tiene una baja dimensionalidad debido al principio de funcionamiento de lso embeddings.
-
-A continuación se puede ver un esquema del modelo, el cual toma como entradas los identificadores de un usuario y un item, luego se resuelven los vectores embedding correspondiente a ambos ids, y finalmente se realiza el producto escalar de ambos vectores. Este producto escalar da como resultado la calificación de usuario para el item dado. Luego. el algoritmo del optimización de gradiente descendente, se ocupa de ajustar los pesos de ambas las matrices de vectores de embedding para que dado un id de usuario e item se obtenga la calificación correspondiente a la observación utilizada como ejemplo de entrenamiento.
+Este modelo se puede construir fácilmente realizando el producto escalar de dos matrices de vectores de embeddings, las cuales tiene una baja dimensionalidad debido al principio de funcionamiento de los embeddings. A continuación se puede ver un esquema del modelo, el cual toma como entradas los identificadores de un usuario e item, luego resuelven los vectores embedding correspondiente a ambos ids, y finalmente se realiza el producto escalar de ambos vectores. Este producto escalar da como resultado la calificación del usuario para el item dado. Por otro lado, el algoritmo del optimización de gradiente descendente sera quien se ocupe de ajustar los pesos de ambas matrices para que dado un id de usuario y otro id de item se obtenga la calificación correspondiente a la observación utilizada como ejemplo de entrenamiento.
 
 \begin{center}
-	\includegraphics[width=6.8cm]{./images/GMF.png}
+	\includegraphics[width=6cm]{./images/GMF.png}
 \end{center}
 
 En términos matemáticos este modelo realiza la siguiente operación, en cada paso hacia adelante (forward-pass):
 
 \begin{equation*}
-	r_{u, i} = V_u . (V_i)^{T}
+	\tilde{r}_{u, i} = V_u . V_i^{T}
 \end{equation*}
 \begin{description}
 	\item[Donde:]
 \end{description}
 \begin{itemize}
 	\item $V_u$ es el vector embedding correspondiente al usuario $u$.
-	\item $(V_i)^{T}$ el vector embedding correspondiente al item $i$.
-	\item $R_{u, i}$ es un escalar que representa a la calificación realizada por el usuario $u$ al item $i$.
+	\item $V_i^{T}$ el vector embedding correspondiente al item $i$.
+	\item $ \tilde{r}_{u, i}$ es la predicción de la calificación realizada por el usuario $u$ al item $i$ (Valor escalar).
 \end{itemize}
 
-En términos de matrices podemos verlo de la siguiente manera:
+En términos matriciales podemos verlo de la siguiente manera:
 
 \begin{equation*}
-	R = U.I
+	\tilde{R} = U.I
 \end{equation*}
 \begin{description}
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $R \in \mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un item.
-	\item $U \in \mathbb{R}^{usuarios \times factor \mspace{3mu}latente}$ es la matriz de vectores embeddings de usuarios y la dimensión factor latente corresponde al tamaño seleccionado para los vectores embedding. 
-	\item $I \in \mathbb{R}^{factor \mspace{3mu}latente \times items}$ es la matriz de vectores embeddings de items.
+	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores embedding de usuarios, la cual tiene tantas filas $u$ como usuarios y el la dimensión del numero de columnas (también llamada factor latente) corresponde al tamaño seleccionado para los vectores embedding. 
+	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores embeddings de items, la cual tiene tantas filas como factores latente en los vectores embedding, y tantas columnas como items se tenga. 
+	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un item.
 \end{itemize}
 
 
+El tamaño de la dimensión de factores latentes como ya se vio anteriormente en el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a ajustar. \href{https://link.springer.com/chapter/10.1007/978-3-642-38844-6_3}{Se ha demostrado} que realizar factorización de matrices con un factor latente de tamaño 1 es equivalente a un modelo de recomendación por popularidad, es decir que recomienda los items mas populares sin tener en cuenta la personalización de las recomendaciones. Luego, a medida que vamos incrementando el tamaño del factor latente estar recomendaciones serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar(overfitting) y por ende la calidad de las recomendaciones comentara a empeorar. Para solucionar este se suelen agregar términos de regularización en la función de error a minimizar:
+
+\begin{equation*}
+\underset{H, W}{\operatorname{arg\,min}}\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
+\end{equation*}
+\begin{description}
+\item[Donde:]
+\end{description}
+\begin{itemize}
+\item $\|.\|_{\rm F}$ se define como [[norma matricial]] mientras que las otras normas pueden ser matricial u otro tipo de normal dependiendo del sistema de recomendación.
+\end{itemize}
+
+\subsection{Biased General Matrix Factorization}
+
+El modelo \textit{GMF} de \textit{Simon Funk} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
+
+A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama anterior:
+
 \begin{center}
-	\includegraphics[width=13cm]{./images/Biased-GMF.png}
+	\includegraphics[width=11cm]{./images/Biased-GMF.png}
 \end{center}
+
+En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales representa a los sesgos de usuarios e items respectivamente. El tamaño de los factores latentes o vectores embedding correspondiente a cada bias es 1, es decir son valores escalares. Finalmente, luego de calcular el producto escalar se suman los factores latentes resultado de ambas \textit{Embedding Layers} correspondiente a los biases.  
+
 
 \subsection{Neural Network Matrix Factorization}
 
+Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}) dada dos matrices de baja dimensionalidad se realiza un producto escalar y se suman sesgos dependiendo de caso para calcular o inferir la calificación del usuario para un item dado. Estos modelos como ya se conto aprender los pesos o parámetros de los vectores embeddings en el proceso se entrenamiento. 
+
+El enfoque de \href{https://arxiv.org/pdf/1511.06443.pdf}{Neural Network Matrix Factorization (NN MF)} es levemente distinto. En este caso se reemplaza el producto interno, el cual podemos pensarlo como conocimiento a priori del problema, por otra función desconocida que sera la que aprenderá el modelo a partir de las observaciones suministradas en su entrenamiento. En particular se remplaza el producto escalar mas los sesgos por una red neuronal multi capa de capas densas o fully connected. De esta forma, el modelo no solo aprender los parámetros de los vectores embedding, sino también los pesos de la red multi capa y en definitiva cual es la mejor función para predecir las calificaciones del usuario, como cualquier otro tipo de interacción.
+
+Utilizar rede neuronales abre el panorama, ya que ahora podemos usar mas variable que sea relevante a nuestro problema de predicción y no solo las variable categóricas y usuario e items; aquí es donde recibe el mayor potencial de este enfoque.
+
+a continuación podemos ver un esquema del modelo, muy similar a \textit{GFM} como ya se dijo, con la diferencia que tenemos una red multi capa en vez de un producto escalar.
 
 \begin{center}
-	\includegraphics[width=7cm]{./images/NN-MF.png}
+	\includegraphics[width=6cm]{./images/NN-MF.png}
 \end{center}
+
+
+Entonces, como entradas tenemos los identificadores de usuarios e items en entradas independientes (Escalares). Cone sto identificadores cada \textit{Embedding Layer} resuelve el vector embedding asociado. Acto siguiente el bloque \textit{Flatter} toma ambos vectores y devuelve un nuevo vector el cual es la concatenación de los do anteriores. En el siguiente paso este nuevo vector es al entrada de la red multi capa, es decir que la red multi capa tendrá tanta entradas como posiciones tenga este vector. La cantidad de capas y neuronas por capas de la red so hiper-parámetros vana  ir cambiando en el proceso de optimización de hiper-parámetros, pro esa cuestión no se especifican un numero de capas. Cada capa menos la ultima tiene una función de activación ReLU y la ultima capa por supuesto un activación \textit{Lineal} al igual que una regresión lineal, ya que queremos predecir las calificaciones que tienen un rango de valores reales entre 0.5 y 5. Cave aclarar que se esta pensando como segundo enfoque usar una activación \textit{Softmax} en vez de una \textit{Lineal} en la ultima capa. De esta manera, se podría abordar como un problema de clasificación ya que los valores de las calificaciones son números reales pero también son discretos.
+
+
+\subsection{Maquinas de Factorización}
+
+
+Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización}. 
+
+Las \href{https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf}{Maquinas de Factorización} propuestas por \textit{Steffen Rendle} en 2010,son algoritmos supervisados que se puede utilizar para tareas de clasificación, regresión y tareas de ranking como sucede en el ámbito de recomendaciones. Rápidamente se convivieron en un método popular para hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es una generalización de un modelo lineal y un model de factorización de matrices, mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que utiliza un kernel polinomial.
+
+
+Formalmente, si tenemos:
+
+\begin{itemize}
+	\item $x\in\mathbb{R}^{d}$ es un vector de features donde cada una de sus componentes representa a una variable del dataset, siendo $d$ la cantidad de variables de dataset (excluyendo la columna de labels). En nuestro caso $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e items.
+	\item $y\in\mathbb{R}$ es la variable target a predecir, en nuestro caso es la calificación del usuario. 
+\end{itemize}
+
+podemos definir el modelo para una \textit{máquina de factorización} de grado dos de ls siguiente forma:
+
+\begin{equation*}
+\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \sum_{i=1}^d\sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j
+\end{equation*}
+\begin{description}
+	\item[Donde:]
+\end{description}
+\begin{itemize}
+	\item $\mathbf{w}_0 \in \mathbb{R}$ es el bias global.
+	\item $\mathbf{w} \in \mathbb{R}^d$ es el peso asociado a la variable $i^\mathrm{th}$.
+	\item $\mathbf{V} \in \mathbb{R}^{d\times k}$ representa a un vector embeddings asociado al la variable $i^\mathrm{th}$.
+	\item $\mathbf{v}_i$ representa a la $i^\mathrm{th}$ fila de la matriz $\mathbf{V}$. 
+	\item $k$ es la dimensionalidad del factor latente o tamaño de lso vectores embedding.
+	\item $\langle\cdot, \cdot \rangle$ es el producto interno de dos vectores.
+	\item $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$ modelos la interacción entre $i^\mathrm{th}$ y $j^\mathrm{th}$ variable. 
+\end{itemize}
+
+De esta forma los dos primeros términos corresponden al modelo de regresión lineal y el último término es una extensión del modelo de factorización matricial. Si la variable $i$ representa un item y la variable $j$ a un usuario, el tercer término es el producto escalar entre los vectores embedding de usuario $u$ y item $i$. Por otro lado, vale la pena aclarar que este método también puede generalizar en órdenes superiores al grado 2, sin embargo, la estabilidad numérica podría disminuí la generalización del método.
+
+
+Al aplicar un método de optimización con las máquinas de factorización, como puede el método del gradiente descendente, se puede llegar fácilmente a una complejidad del orden $\mathcal{O}(kd^2)$, ya que se deben calcular todas las interacciones de a pares. Para resolver este problema de insuficiencia, podemos reorganizar el tercer término del método, lo que podría reducir en gran medida el costo de cálculo, lo que lleva a una complejidad de tiempo de orden lineal $\mathcal{O}(kd)$. A continuación se describe los pasas para bajar el nivel de complejidad del método:
+
+
+\begin{equation*}
+\begin{split}
+&=\sum_{i=1}^d \sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j \\
+&= \frac{1}{2} \sum_{i=1}^d \sum_{j=1}^d\langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j - \frac{1}{2}\sum_{i=1}^d \langle\mathbf{v}_i, \mathbf{v}_i\rangle x_i x_i \\
+&= \frac{1}{2} \big (\sum_{i=1}^d \sum_{j=1}^d \sum_{l=1}^k\mathbf{v}_{i, l} \mathbf{v}_{j, l} x_i x_j - \sum_{i=1}^d \sum_{l=1}^k \mathbf{v}_{i, l} \mathbf{v}_{i, l} x_i x_i \big)\\
+&=  \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i) (\sum_{j=1}^d \mathbf{v}_{j, l}x_j) - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2 \big ) \\
+&= \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i)^2 - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2)
+\end{split}
+\end{equation*}
+
+Con esta re-formulación de último termino, la complejidad del método se reduce considerablemente. Además, para las variables ralas, solo se deben computar los valores distintos de cero para que la complejidad general sea lineal. Finalmente la expresion del metodo aplicada esta re-formulación queda como sigue:
+
+\begin{equation*}
+	\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i)^2 - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2)
+\end{equation*}
 
 
 \subsection{Deep Factorization Machine}
 
-COMPLETAR
+Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el comportamiento de las interacciones o correlación usuario-items ya sean implícita o explicitas. A pesar de este gran progreso, los métodos expuestos anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto orden, requiriendo en algunos casos realizar ingeniería de features para disminuir estos sesgos. 
+
+El modelo \href{https://arxiv.org/pdf/1703.04247.pdf}{Deep Factorization Machine (DeepFM)} o Maquina de factorización basada en Deep Learning, mejora el aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por otro lado, es una evolución del modelo \href{https://arxiv.org/pdf/1606.07792.pdf}{Wide and Deep} de Google, el cual es un ensample de dos modelos: uno lineal, que captura las interacciones o correlaciones de alto orden y una MLP (Multi-Layer Perceptron) la cual captura correlación de mas bajo orden, o aquellas mas complejas.
+
+A continuación de puede visualizar un diagrama de bloques de alto nivel de modelos:
 
 \begin{center}
-	\includegraphics[width=10cm]{./images/DeepFM.png}
+	\includegraphics[width=6cm]{./images/Deep-MF.png}
 \end{center}
 
-
-\begin{center}
-	\includegraphics[width=8cm]{./images/DFM-FM-Component.png}
-\end{center}
-
-\begin{center}
-	\includegraphics[width=8cm]{./images/DFM-Deep-Component.png}
-\end{center}
+Donde se puede apreciar que las entradas del modelo son las variables categóricas correspondiente a usuarios e items, como en los modelos previamente visto.
+dado un id de usuario y item se resuelve sus correspondientes vectores embedding, los cuales se convierten en entradas para los siguientes dos bloques. Uno de los bloques no es mas que una red neuronal multi capa con capas densa o fully connected. Por el otro lado ambos vectores se toman como entrada a la \textit{machina de factorización}. las salida de ambos bloques son volares escalares los cuales se suman y se pasan por una activación ReLU ya que en nuestro caso las calificaciones son valores mayos a cero.
 
 
 \section{Métricas}
-
 
 \chapter{Experimentos}
 Pueden ser comparaciones entre los métodos utilizados, por ejemplo. 
