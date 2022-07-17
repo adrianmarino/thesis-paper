@@ -65,10 +65,7 @@ En general, se puede lograr aplicando de un algoritmo de optimización, el cual 
 
 A continuación se puede ver un gráfico que describe las clasificaciones y subclasificaciones de los sistemas de recomendación:
 
-\begin{center}
-\includegraphics[width=11cm]{./images/reco-clasification.png}
-\end{center}
-
+8
 \subsection{Basados en Popularidad} 
 
 Este tipo de recomendador toma algunas características de popularidad de los items en cuestión, como puede ser: cantidad de vistas, cantidad de compras, cantidad de reviews positivos, etc.. Luego resuelve el top K de  los items mas populares según estos criterios. Si bien este tipo de recomendaciones tiene buenos resultandos para usuarios nuevos, de los cuales no se conocen sus preferencias, al carecer de personalización, sus recomendaciones no tienen en cuenta las preferencias de cada usuario particular, debido a que se basan en estadísticas comunes a todos los usuarios. Por esta cuestión no son considerados sistemas de recomendación per se.
@@ -288,7 +285,52 @@ Luego se removieron las filas de la tabla para aquellas columnas del reporte ant
 \clearpage
 \section{Análisis exploratorio}
 
-COMPLETAR
+\subsection{Variable Rating}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/rating-barplot.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/rating-by-year.png}
+\end{center}
+
+
+\subsection{Variables de tipo texto}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/Cloud-tags.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/Cloud-Overview.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/Cloud-Title.png}
+\end{center}
+
+
+\subsection{Correlaciones}
+
+
+\begin{center}
+	\includegraphics[width=11cm]{./images/Correlations.png}
+\end{center}
+
+
+\subsection{Componente principales}
+
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/PCA-biplot.png}
+\end{center}
+
+
 
 \chapter{Métodos}
 
