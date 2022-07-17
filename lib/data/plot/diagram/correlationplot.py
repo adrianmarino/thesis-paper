@@ -5,10 +5,13 @@ import seaborn as sns
 import util as ut
 from sklearn.preprocessing import StandardScaler
 
-def plot_correlations(df):
-    for colums in ut.combinations(df.columns):
+def plot_correlations(df, combinations=[]):
+    if len(combinations) == 0:
+        combinations = ut.combinations(df.columns)
+
+    for colums in combinations:
         colums_ = list(colums)
-        correlation_plot(X, colums_[0], colums_[1])
+        correlation_plot(df, colums_[0], colums_[1])
 
 
 def correlation_plot(
@@ -31,6 +34,6 @@ def correlation_plot(
         data  = df
     )
     if title == '':
-        title = f'Correlación entre variable {column_a} y {column_b}'
+        title = f'Correlación entre {column_a} y {column_b}'
         plt.title(title, fontsize=title_fontsize)
 
