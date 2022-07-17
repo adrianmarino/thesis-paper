@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from joypy import joyplot
+from matplotlib import cm
 
 
 def ridgeplot(
