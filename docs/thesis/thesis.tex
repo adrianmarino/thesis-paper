@@ -285,43 +285,105 @@ Luego se removieron las filas de la tabla para aquellas columnas del reporte ant
 \clearpage
 \section{Análisis exploratorio}
 
+
 \subsection{Variable Rating}
+
+
+En este análisis exploratorio analizaremos datos relevantes al problema de predicción de calificaciones de items por parte de los usuarios. Dentro de este análisis, la variable ratings o calificación es una de las relevantes.
+
+A continuación se puede apreciar una diagrama de barras el cual describe la frecuencia con la que los usuarios califican un item segmentada por cada valor posible de calificación:
 
 \begin{center}
 	\includegraphics[width=15cm]{./images/rating-barplot.png}
 \end{center}
 
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 4.0 puntos es la calificación con la mayor frecuencia(moda), seguido de 5.0 puntos y luego 3.5 puntos.
+	\item por otro lado, se debe tener en cuenta que stas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar algunos tiene a calificar de forma optimista, puntuando con valore altos o mas alto que la media. Otros por el contrario son mas pesimistas y tienden a poner calificaciones bajas, inclusive a items donde la mayoría lleva a los 4 o 5 puntos. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Por esta cuestione s una métrica que debe segmentarse para encontrar información utils.
+	\item por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones mejores a 2 puntos.
+\end{itemize}
+
+
+Para analizar en mas detalle la variable rating veamos a continuación un histograma y y diagrama de caja y bigote respectivamente:
+
 \begin{center}
 	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
 \end{center}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item Se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en la gráfica. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma. contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica.
+	\item Nuevamente vemos algo parecido al diagrama de barras, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil).
+	\item La mediana(Cuantil Q2) esta claramente sobre los 4.0 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la mediana en esa dirección.
+	\item Por otro lado, tenemos valores atípicos en el extreme izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el cual encuentra entre el quiantis Q1 y Q3, donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia. No se encuentra valores atípicos por sobre el máximo.
+	\item Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre el Q1 y Q2 que entre Q2 y Q3, de esta forma ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
+\end{itemize}
+
+Teniendo en claro que rating es una variable categórica espesada en valores reales, debido a los picos en cada valor discreto, a continuación segmentemos este mismo histograma por año:
 
 \begin{center}
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
 \end{center}
-
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item Inicialmente vemos que en el año 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de calificar esa mas dispersa, es decir que no había una correlación clara por parte de lo usuario en que item era un 4 o un 5 por ejemplo. De esta forma no se ve un peril de puntuación claro por parte de lo usuario.
+	\item Entre 1999 y 2022 vemos que loas puntuaciones 3, 4 y 5 toman mayor importancia siendo esta las mas utilizadas, es decir que los usuario realiza en su mayoría puntuaciones en esos tres niveles.
+	\item La mayor frecuencia se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo los 3 y 5 puntos en line a años anteriores.
+	\item A partir del año 2005 las se nota un acertamiento cada ve mas demarcado en los niveles de puntuaciones entre los 3 y 5 puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5.
+	\item Debemos tener en cuneta que el aumento en los niveles de puntuación con el tiempo probablemente sea debido a un aumento año a año en la base de usuarios de Movie Lens y tal ves esta también sea el motivo por el cual en los primeros años no vemos mucho dispersion en en las pudriciones.
+\end{itemize}
 
 \subsection{Variables de tipo texto}
 
 \begin{center}
-	\includegraphics[width=15cm]{./images/Cloud-tags.png}
+	\includegraphics[width=10cm]{./images/Cloud-tags.png}
 \end{center}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
+
 
 \begin{center}
-	\includegraphics[width=15cm]{./images/Cloud-Overview.png}
+	\includegraphics[width=10cm]{./images/Cloud-Overview.png}
 \end{center}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
 
 \begin{center}
-	\includegraphics[width=15cm]{./images/Cloud-Title.png}
+	\includegraphics[width=10cm]{./images/Cloud-Title.png}
 \end{center}
-
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
 
 \subsection{Correlaciones}
 
 
 \begin{center}
-	\includegraphics[width=11cm]{./images/Correlations.png}
+	\includegraphics[width=8cm]{./images/Correlations.png}
 \end{center}
-
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
 
 \subsection{Componente principales}
 
@@ -329,7 +391,12 @@ Luego se removieron las filas de la tabla para aquellas columnas del reporte ant
 \begin{center}
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
 \end{center}
-
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
 
 
 \chapter{Métodos}
