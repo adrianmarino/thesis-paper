@@ -12,12 +12,12 @@
 %% original source thesis.dtx. For distribution of the 
 %% sources see the copyright notice in the file thesis.dtx. 
 %% 
-\def\filename{tesis}
+\def\filename{thesis}
 \def\fileversion{1.0g}
 \def\filedate{1996/25/01}
 \def\docdate{1995/25/01}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tesis}[\filedate\space\fileversion\space%
+\ProvidesClass{thesis}[\filedate\space\fileversion\space%
        LaTeX document class (wm).]
 \newcommand\@ptsize{}
 \newif\if@restonecol

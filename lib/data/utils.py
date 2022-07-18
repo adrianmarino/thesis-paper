@@ -56,7 +56,7 @@ def list_column_to_dummy_columns(df, column, prefix=None):
     data =  df.drop(column, 1).join(df[column].str.join('|').str.get_dummies())
 
     new_columns = list(set(data.columns) - set(df.columns))
-    
+
     if prefix:
         data = data.rename(columns={c: f'{prefix}_{c}' for c in new_columns})
 
@@ -67,3 +67,20 @@ exclude_cols = lambda df, columns: df.loc[:, ~df.columns.isin(columns)]
 
 
 subset = lambda ds, indexes, **kwargs: DataLoader(Subset(ds, indexes), **kwargs)
+
+
+def outliers_range(values):
+    q3  = np.quantile(values, 0.75)
+    q1  = np.quantile(values, 0.25)
+    iqr = q3 - q1
+
+    lower     = q1 - 1.5 * iqr
+    upper     = q3 + 1.5 * iqr
+
+    return lower, upper
+
+
+def mode(values):
+    vals, counts = np.unique(values, return_counts=True)
+    index = np.argmax(counts)
+    return vals[index]

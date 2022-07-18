@@ -29,7 +29,7 @@ class UserYPredYTrueSampler:
         indexes = ut.indexes_of(user_seq, user_idx)
 
         if indexes.size()[0] < self.__sample_size:
-            return None, None       
+            return None, None
 
         indexes_sample = ut.random_choice(indexes, self.__sample_size)
 
