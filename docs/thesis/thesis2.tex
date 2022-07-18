@@ -379,7 +379,7 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item Las palabra based (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuario para cada película.
+	\item Las palabra based (basada/o en..), \textit{{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Indepedent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuario para cada película.
 	\item Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
 \end{itemize}
 
@@ -414,11 +414,10 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 \end{description}
 \begin{itemize}
 	\item Enter las palabras con mayor frecuencia encontramos: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead}, \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House}, \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World}, \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y \textit{King}.
-	\item A simple vista,  una clusterización realizada con esta variable puede ser mas general que la lograda con la variable \textit{Overview}, pero en menor general que la variable \textit{Tags}. En trabajos posteriores se realizaran experimentos para ver resultado en este sentido.
 \end{itemize}
 
 
-\subsection{Análisis de componente principales}
+\subsection{Componente principales}
 
 
 \begin{center}
@@ -669,7 +668,7 @@ Si codificamos sus valores usando one-hot encoding obtenemos lo siguientes vecto
 	\item $Lluvioso   = [0, 0, 1]$
 \end{itemize}
 
-Entonces, el valor \textit{Nublado} se convierte en 3 entradas para una red neuronal a las cuales se le pasa los numero 1, 0 y 0 respectivamente. Ahora pensemos en la cantidad de usuario que tiene Google o Amazon ¿Que tamaño tendría el vector que representa a un solo usuario? ¿Por que usan un vector 99\% ralo para representar un valor? ¿No hay una forma mas compacta de realizar esta codificación? 
+Entonces, el valor \textbf{Nublado} se convierte en 3 entradas para una red neuronal a las cuales se le pasa los numero 1, 0 y 0 respectivamente. Ahora pensemos en la cantidad de usuario que tiene Google o Amazon ¿Que tamaño tendría el vector que representa a un solo usuario? ¿Por que usan un vector 99\% ralo para representar un valor? ¿No hay una forma mas compacta de realizar esta codificación? 
 
 La respuesta corta es si, en estos casos se utilizan Embeddings. ¿Pero que son los Embeddings y en que se diferencia de la codificación one-hot?
 
@@ -677,23 +676,23 @@ Un Embedding no es mas que una forma de codificar valores de una variable categ�
 que tiene 10.000 posible valores, dependiendo del caso, podríamos elegir un tamaño de 100 posiciones. Este tamaño debe ser elegido de forma tal que no se produzca
 perdida de información. Por esta cuestión, el tamaño de estos vectores se transforma en un hiper-parámetro mas a ajustar al momento de entrenar los modelos que utilicen esta técnica de codificación.
 
-Otro punto importante que diferencia ambas codificaciones, reside en la distancia entre vectores. Si tomamos dos vectores con codificación \textit{one-hot} y los gráficas en un espacio tridimensional o bidimensional, se aprecia que el angulo entre estos siempre es el mismo, 90 grados. Supongamos el caso anterior de la variable \textit{Estado del Tiempo}, si representamos en el espacio todos sus valores, podemos ver que la distancia es las misma entre cualquier par de vectores.
-Si ahora codificamos la misma variable usando Embeddings esto cambia, ya que los vectores que representan a los valores \textit{Nublado} y \textit{Lluvioso} tiene un angulo menos a 90 grados. Por otro lado, ambos vectores están alejados del vector \textit{Despejado}. De esta forma un Embedding permite captar mas información ya que realiza una clusterización de los valores que son mas cercanos en términos de significado. Los días nublados y lluviosos son muy parecido entre si y muy distintos a un dia despejado.
+Otro punto importante que diferencia ambas codificaciones, reside en la distancia entre vectores. Si tomamos dos vectores con codificación \textbf{one-hot} y los gráficas en un espacio tridimensional o bidimensional, se aprecia que el angulo entre estos siempre es el mismo, 90 grados. Supongamos el caso anterior de la variable \textbf{Estado del Tiempo}, si representamos en el espacio todos sus valores, podemos ver que la distancia es las misma entre cualquier par de vectores.
+Si ahora codificamos la misma variable usando Embeddings esto cambia, ya que los vectores que representan a los valores \textbf{Nublado} y \textbf{Lluvioso} tiene un angulo menos a 90 grados. Por otro lado, ambos vectores están alejados del vector \textbf{Despejado}. De esta forma un Embedding permite captar mas información ya que realiza una clusterización de los valores que son mas cercanos en términos de significado. Los días nublados y lluviosos son muy parecido entre si y muy distintos a un dia despejado.
 
 De esta forma los embeddings tiene una doble ganancia sobre la codificación One-Hot: comprimen la información y ademas  captan información que util para la clusterización de sus valores. La parte interesante es que los modelos que entrenan Embeddings captan esta información de forma automática en base a las observaciones usadas en el entrenamiento, generan estos espacios latentes llamados Embeddings.
 
 
 \subsection{Embedding Layer}
 
-En el ámbito del Deep Learning o Machine Learning se cuenta con la abstracción de \textit{Capas} (Keras/Tensorflow) o \textit{Módulos}(PyTorch), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un embedding durante el entrenamiento son los bloques Embedding/EmbeddingBag en PyTorch o Embedding en Keras/Tensorflow. En ambos frameworks tienen el mismo comportamiento. 
+En el ámbito del Deep Learning o Machine Learning se cuenta con la abstracción de \textbf{Capas} (Keras/Tensorflow) o \textbf{Módulos}(PyTorch), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un embedding durante el entrenamiento son los bloques Embedding/EmbeddingBag en PyTorch o Embedding en Keras/Tensorflow. En ambos frameworks tienen el mismo comportamiento. 
 
-Por un lado, podemos elegir el tamaño de los vectores Embedding, el cual como ya adelantamos en un hiper-parámetro mas a optimizar. Por otro lado, debemos definir la cantidad de vectores embedding que debe contener la capa. Esta es siempre igual al número total de valores que puede tomar variable categórica.
+Por un lado, podemos elegir el tamaño de los vectores Embedding, el cual como ya adelantamos en un hiper-parámetro mas a optimizar. Por otro lado, debemos definir la cantidad de vectores embeding que debe contener la capa. Esta es siempre igual al número total de valores que puede tomar variable categórica.
 
-De esta forma, para crear una capa o modulo Embedding para la variable \textit{Estado del Tiempo} podríamos crear una capa Embedding de tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que tenemos al usa la codificación one-hot, con la diferencia de que una capa Embedding capta la similitud entre los valores de la variable categórica un la codificación one-hot no.
+De esta forma, para crear una capa o modulo Embedding para la variable \textbf{Estado del Tiempo} podríamos crear una capa Embedding de tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que tenemos al usa la codificación one-hot, con la diferencia de que una capa Embedding capta la similitud entre los valores de la variable categórica un la codificación one-hot no.
 
 Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar como una tabla Hash donde las claves los posible valores de la variable categórica cosificados a números y los valores son los vectores embedding. Cave aclarar que en general estos vectores son inicializados con valores aleatorio. Luego el modelo ira ajustando sos valores durante el entrenamiento.
 
-En el froward pass, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textit{Estado del Tiempo} podríamos codificar sus valores como sigue:
+En el froward pass, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textbf{Estado del Tiempo} podríamos codificar sus valores como sigue:
 
 \begin{itemize}
 	\item $Nublado    = 0$
@@ -702,7 +701,7 @@ En el froward pass, como entrada se pasa un valor codificado a números de la va
 \end{itemize}
 
 
-Entonces si pasamos el valores \textit{Nublado} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector embedding asociado a esa clave y lo devuelve a su salida.
+Entonces si pasamos el valores \textbf{Nubaldo} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector embedding asociado a esa clave y lo devuelve a su salida.
 
 \begin{center}
 	\includegraphics[width=13cm]{./images/Embedding-Layer.png}
@@ -847,7 +846,7 @@ Al aplicar un método de optimización con las máquinas de factorización, como
 \end{split}
 \end{equation*}
 
-Con esta re-formulación de último termino, la complejidad del método se reduce considerablemente. Además, para las variables ralas, solo se deben computar los valores distintos de cero para que la complejidad general sea lineal. Finalmente la expresión del método aplicada esta re-formulación queda como sigue:
+Con esta re-formulación de último termino, la complejidad del método se reduce considerablemente. Además, para las variables ralas, solo se deben computar los valores distintos de cero para que la complejidad general sea lineal. Finalmente la expresion del metodo aplicada esta re-formulación queda como sigue:
 
 \begin{equation*}
 	\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i)^2 - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2)
