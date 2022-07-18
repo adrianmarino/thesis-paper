@@ -419,6 +419,31 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 
 \subsection{Componente principales}
 
+En esta session de describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
+
+\begin{description}
+	\item[Cargas o loading]
+\end{description}
+
+Las componentes principales son las variables resultado del algoritmo PCA. Estas nuevas variables tiene la particularidad de ser ortogonales entre si, lo cual indica que no tiene correlación alguna. Ademas de esto, desde la primera hasta a la ultimo variable la acumulación de varianza es decrecientes, es decir, de la primera componentes tiene major varianza y la ultima la menor posible. 
+
+Por otro lado las componentes principales son combinaciones lineales de las variable originales. Luego las carga o loading con los coeficientes utilizados para transformación las variables originales en las componentes principales mediante combinaciones lineales.
+
+De esta forms , los coeficientes define una media de correlación o grado de aporte de cada variable origina a componente principal.
+
+A continuación se pueden visualizar lo loading o cargas:
+
+\begin{center}
+	\includegraphics[width=15cm]{./images/PCA-Loadings.png}
+\end{center}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+
 
 \begin{center}
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
@@ -684,15 +709,15 @@ De esta forma los embeddings tiene una doble ganancia sobre la codificación One
 
 \subsection{Embedding Layer}
 
-En el ámbito del Deep Learning o Machine Learning se cuenta con la abstracción de \textbf{Capas} (Keras/Tensorflow) o \textbf{Módulos}(PyTorch), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un embedding durante el entrenamiento son los bloques Embedding/EmbeddingBag en PyTorch o Embedding en Keras/Tensorflow. En ambos frameworks tienen el mismo comportamiento. 
+En el ámbito del Deep Learning o Machine Learning se cuenta con la abstracción de \textbf{Capas} (Keras/Tensorflow) o \textit{Módulos}(PyTorch), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un embedding durante el entrenamiento son los bloques Embedding/EmbeddingBag en PyTorch o Embedding en Keras/Tensorflow. En ambos frameworks tienen el mismo comportamiento. 
 
-Por un lado, podemos elegir el tamaño de los vectores Embedding, el cual como ya adelantamos en un hiper-parámetro mas a optimizar. Por otro lado, debemos definir la cantidad de vectores embeding que debe contener la capa. Esta es siempre igual al número total de valores que puede tomar variable categórica.
+Por un lado, podemos elegir el tamaño de los vectores Embedding, el cual como ya adelantamos en un hiper-parámetro mas a optimizar. Por otro lado, debemos definir la cantidad de vectores embedding que debe contener la capa. Esta es siempre igual al número total de valores que puede tomar variable categórica.
 
-De esta forma, para crear una capa o modulo Embedding para la variable \textbf{Estado del Tiempo} podríamos crear una capa Embedding de tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que tenemos al usa la codificación one-hot, con la diferencia de que una capa Embedding capta la similitud entre los valores de la variable categórica un la codificación one-hot no.
+De esta forma, para crear una capa o modulo Embedding para la variable \textit{Estado del Tiempo} podríamos crear una capa Embedding de tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que tenemos al usa la codificación one-hot, con la diferencia de que una capa Embedding capta la similitud entre los valores de la variable categórica un la codificación one-hot no.
 
 Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar como una tabla Hash donde las claves los posible valores de la variable categórica cosificados a números y los valores son los vectores embedding. Cave aclarar que en general estos vectores son inicializados con valores aleatorio. Luego el modelo ira ajustando sos valores durante el entrenamiento.
 
-En el froward pass, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textbf{Estado del Tiempo} podríamos codificar sus valores como sigue:
+En el froward pass, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textit{Estado del Tiempo} podríamos codificar sus valores como sigue:
 
 \begin{itemize}
 	\item $Nublado    = 0$
@@ -701,7 +726,7 @@ En el froward pass, como entrada se pasa un valor codificado a números de la va
 \end{itemize}
 
 
-Entonces si pasamos el valores \textbf{Nubaldo} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector embedding asociado a esa clave y lo devuelve a su salida.
+Entonces si pasamos el valores \textbf{Nublado} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector embedding asociado a esa clave y lo devuelve a su salida.
 
 \begin{center}
 	\includegraphics[width=13cm]{./images/Embedding-Layer.png}

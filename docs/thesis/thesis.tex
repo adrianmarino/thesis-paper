@@ -11,6 +11,7 @@
 \usepackage{amssymb}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
+\usepackage{booktabs}
 \begin{document}
 
 %%%% CARATULA
@@ -293,9 +294,13 @@ En este análisis exploratorio analizaremos datos relevantes al problema de pred
 
 A continuación se puede apreciar una diagrama de barras el cual describe la frecuencia con la que los usuarios califican un item segmentada por cada valor posible de calificación:
 
-\begin{center}
+
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=15cm]{./images/rating-barplot.png}
-\end{center}
+	\caption{Este diagrama de carras expone la frecuencia o cantidad de observaciones para cada valor discreto de puntuación o rating.}
+\end{figure}
+
 
 \begin{description}
 	\item[Observaciones]
@@ -310,8 +315,14 @@ A continuación se puede apreciar una diagrama de barras el cual describe la fre
 Para analizar en mas detalle la variable rating veamos a continuación un histograma y y diagrama de caja y bigote respectivamente:
 
 \begin{center}
-	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
 \end{center}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
+	\caption{Diagrama Boxplot e Histograma de la variable ratting. Los rating con las calificaciones realizadas por los usuario para cada item o película.}
+\end{figure}
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -325,9 +336,12 @@ Para analizar en mas detalle la variable rating veamos a continuación un histog
 
 Teniendo en claro que rating es una variable categórica espesada en valores reales, debido a los picos en cada valor discreto, a continuación segmentemos este mismo histograma por año:
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
-\end{center}
+	\caption{histograma de calificaciones segmentado por año.}
+\end{figure}
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -341,11 +355,15 @@ Teniendo en claro que rating es una variable categórica espesada en valores rea
 
 \subsection{Correlaciones}
 
-Para realizar un analizar correlación para todas la variables, se realizo un merge o join de las tabla movies y interactions, incluyendo solamente las columna numéricas. A continuación modelo visualizar un diagrama de correlación (Pearson): 
+Para realizar un analizar correlación para todas la variables, se realizo un merge o join de las tabla movies y interactions, incluyendo solamente las columna numéricas. A continuación modelo visualizar un diagrama de correlación de Pearson:
 
-\begin{center}
-	\includegraphics[width=8cm]{./images/Correlations.png}
-\end{center}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=9cm]{./images/Correlations.png}
+	\caption{Diagrama de correlación de Person aplicado a todas las variables numéricas resultado del merge entre las tablas movies y interactions.}
+\end{figure}	
+
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -372,9 +390,13 @@ A continuación se pues visualizar en forma gráfica la frecuencia de aparición
 
 Cada usuario puede asociar tags o palabras clase a una película. Un tags es una palabra o frase corta que identifica o describe una película. Es una forma simple de clusterizar, ya que los usuarios en general describen categorías como animación 3d, cual es el director, una frase que describe algún tipo de categoría o algo relevante en el contenido de la misma. 
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=10cm]{./images/Cloud-tags.png}
-\end{center}
+	\caption{frecuencia de frases en contadas en la variable \textit{Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma.}
+\end{figure}	
+
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -390,9 +412,13 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 
 La variable overview es la sinopsis de la película. esta describe brevemente el contenido de la misma, sin revelar su desenlace.
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=10cm]{./images/Cloud-Overview.png}
-\end{center}
+	\caption{frecuencia de palabra en contadas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+\end{figure}	
+
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -406,9 +432,14 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 	\item[Title]
 \end{description}
 
-\begin{center}
+
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=10cm]{./images/Cloud-Title.png}
-\end{center}
+	\caption{frecuencia de palabra en contadas en la variable \textit{Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+\end{figure}	
+
+
 \begin{description}
 	\item[Observaciones]
 \end{description}
@@ -418,18 +449,123 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 \end{itemize}
 
 
+
+
+
+
 \subsection{Análisis de componente principales}
 
+En esta sección describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
 
-\begin{center}
-	\includegraphics[width=15cm]{./images/PCA-biplot.png}
-\end{center}
+\subsection{Componente principales}
+
+En esta session de describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
+
+
+\begin{description}
+	\item[Varianza explicada]
+\end{description}
+
+Las componentes principales son las variables resultado del algoritmo PCA. Estas nuevas variables tiene la particularidad de ser ortogonales entre si, lo cual indica que no tiene correlación alguna. Ademas de esto, desde la primera hasta a la ultimo variable la acumulación de varianza es decrecientes, es decir, de la primera componentes tiene major varianza y la ultima la menor posible. 
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=8cm]{./images/PCA-Variance.png}
+	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada por cada componente principal resultado del algoritmo PCA.}
+\end{figure}
+
+
+\begin{description}
+	\item[Varianza]
+\end{description}
+\begin{itemize}
+	\item pc1: $31$ \%
+	\item pc2: $28$\%
+	\item pc3: $16$ \%
+	\item pc4: $11$ \%
+	\item pc5: $7$ \%
+	\item pc6: $5$ \%
+\end{itemize}
+
+	
 \begin{description}
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item 
+	\item Inicialmente vemos que toda las componente tiene niveles de variabilidad o varianza explicada muy bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que el grado de correlación de las variables es muy bajo.
+	\item Usando el criterio del bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que acumulan mayor varianza.
+	\item Debemos en cuenta que el Análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación.
+	\item Las 3 primeras componentes acumulan un grado de variabilidad 85 \%.
 \end{itemize}
+
+
+
+
+
+
+\begin{description}
+	\item[Cargas o loading]
+\end{description}
+
+Por otro lado las componentes principales son combinaciones lineales de las variable originales. Luego las carga o loading con los coeficientes utilizados para transformación las variables originales en las componentes principales mediante combinaciones lineales.
+
+De esta forma, los coeficientes define una media de correlación o grado de aporte de cada variable origina a componente principal.
+
+A continuación se pueden visualizar lo loading o cargas:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{lrrrrrr}
+			\toprule Variable & PC1    &  PC2  & PC3    \\
+			\midrule Popularity  &0.79   & -0.09 & -0.003  \\
+					Vote Mean & 0.55   & -0.55 & -0.03      \\
+					Vote Count & 0.88   & -0.11 & -0.0002\\
+					Release Year & 0.33   &  0.8  &  0.045\\
+					User ID & -0.006 & -0.08 &  0.99    \\
+					Movie ID & 0.24   &  0.8  &  0.04 \\
+			\bottomrule
+	\end{tabular}
+
+	\caption{Coeficientes de componentes principales vs. variable originales. 
+	Cada uno de estos valores representan el grado de correlación o aporte de cada variable original en cada componente principal.}
+\end{table}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item \textit{Vote Count(88\%)} y \textit{Popularity(80\%)} tiene una correlación positiva muy alta sobre la componente $PC1$. Lo mismo sucede con la \textit{Vote Mean(55\%)} en menor medida. Entre dos observaciones con distintos valores de popularidad, la que tenga un valor mas alto aportara a esta componente($PC1$) que a las otra ($PC2$ y $PC3$).
+	\item Luego vemos que las variable \textit{Release Year(Año de estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\% respectivamente, sobre la componente $PC1$.
+	\item La variable \textit{User ID} no tiene aporte alguno sobre componente $PC1$.
+
+	\item Ñas variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente.
+	\item La variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del 80 \%.
+	\item Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \text{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación
+	\item De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}.
+	\item La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.
+	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
+\end{itemize}
+
+
+\clearpage
+\begin{description}
+	\item[Biplot]
+\end{description}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=15cm]{./images/PCA-biplot.png}
+	\caption{En este diagrama se pueden visualizar los valores de las variables originales coloreados en color roja, negro y gris correspondientes a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales.}
+\end{figure}
+\begin{description}
+	\item[Observaciones]
+\end{description}
+\begin{itemize}
+	\item sadasds
+\end{itemize}
+
+
+
+
 
 
 
@@ -563,7 +699,7 @@ De esta forma, cuanto menor es el angulo entre dos vectores mas similares son en
  	\item $ua \neq ub$, es decir que cada indice representa a un usuario distinto.
 	\item $I$ es la cantidad total de columnas de la matriz de $Calificaciones_{u,i}$.
 	\item $i$ el indice de una columna de la matriz de $Calificaciones_{u,i}$. Cada columna representa a un item y contiene todas las calificaciones realizaras por todos los usuarios sobre el item $i$.
-	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares seran los usuarios $u_a$ y $u_b$.
+	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares serán los usuarios $u_a$ y $u_b$.
 \end{itemize}
 
 \clearpage
@@ -577,7 +713,7 @@ De esta forma, cuanto menor es el angulo entre dos vectores mas similares son en
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares seran los usuarios $u_a$ y $u_b$.
+	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares serán los usuarios $u_a$ y $u_b$.
 \end{itemize}
 
 

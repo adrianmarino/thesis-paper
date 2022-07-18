@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1658153332 "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1658153334
-  "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" 1658153333 70157 7d03ff6b61bf51c6def5031de61049d1 ""
+["pdflatex"] 1658165882 "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1658165884
+  "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" 1658165880 76888 08b778e5b72407fa89d2b9f539035af3 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1650183167 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1650183167 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -84,6 +84,7 @@
   "/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty" 1650183167 2462 754d6b31b2ab5a09bb72c348ace2ec75 ""
   "/usr/share/texmf-dist/tex/latex/base/bk11.clo" 1650183167 8303 bbc3076c94b83a7d4b60440f72c69135 ""
   "/usr/share/texmf-dist/tex/latex/base/inputenc.sty" 1650183167 5049 969aec05d5f39c43f8005910498fcf90 ""
+  "/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty" 1650183167 6078 f1cb470c9199e7110a27851508ed7a5c ""
   "/usr/share/texmf-dist/tex/latex/enumitem/enumitem.sty" 1650181202 51697 f8f08183cd2080d9d18a41432d651dfb ""
   "/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1650183167 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texmf-dist/tex/latex/geometry/geometry.sty" 1650183167 41601 9cf6c5257b1bc7af01a58859749dd37a ""
@@ -126,6 +127,7 @@
   "images/Embedding-Layer.png" 1658071451 147628 2547bcdfb88c73c1857e8e68b77041b2 ""
   "images/GMF.png" 1658071451 64097 99b61786b1358aaf9cc9c0ea430f2667 ""
   "images/NN-MF.png" 1658071451 82007 920bbbc85b7bd0d4ecdeb46212fe1550 ""
+  "images/PCA-Variance.png" 1658157191 11334 1d2d85c28d2071fc125b9ecd83222710 ""
   "images/PCA-biplot.png" 1658102103 85300 2852068ceda8ebc58d6e63e740633571 ""
   "images/logouba.png" 1658071437 52948 bcf01d58985233cae4d75267724136ba ""
   "images/metrics-BGFM-RMSE.png" 1658071451 32069 f7ab19c3aeb49d75b585a475bf9d45c0 ""
@@ -142,11 +144,11 @@
   "images/rating-barplot.png" 1658102103 14941 8ca1260d85b8dbd2ebead4bafa3f7223 ""
   "images/rating-boxplot-histplot.png" 1658102103 35756 822b04fb5628990b4773f194c623cade ""
   "images/rating-by-year.png" 1658102212 188660 7e9d1ae5b4ef72447984df58c9e5b062 ""
-  "thesis.aux" 1658153334 8176 9a723906801edda06bb7617bd3a91609 "pdflatex"
+  "thesis.aux" 1658165884 10967 a1f6554b499af9d2c3c4ce08972e94fa "pdflatex"
   "thesis.cls" 1658071437 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1658153334 9154 3fe3703c77ac8df7e7e43b64fc8ee3f8 "pdflatex"
-  "thesis.tex" 1658153333 70157 7d03ff6b61bf51c6def5031de61049d1 ""
-  "thesis.toc" 1658153334 4680 e5e39c09c125484090ec5fb8239fcf58 "pdflatex"
+  "thesis.out" 1658165884 9329 4eecc37dfc307c4ec92887f3ce99f42f "pdflatex"
+  "thesis.tex" 1658165880 76888 08b778e5b72407fa89d2b9f539035af3 ""
+  "thesis.toc" 1658165884 4773 bf8dd9eaed249953c297e2a7897c3679 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
