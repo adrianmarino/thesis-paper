@@ -543,7 +543,7 @@ A continuación se pueden visualizar lo loading o cargas:
 	\item Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \text{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación
 	\item De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}.
 	\item La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.
-	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
+	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.2
 \end{itemize}
 
 
@@ -560,13 +560,16 @@ A continuación se pueden visualizar lo loading o cargas:
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item sadasds
+	\item A primera vista se puede ver que las variables \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta ya que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya que ambas son medidas de popularidad casi directas y intercambiables.
+	
+	\item \textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De esta forma se constata lo visto anteriormente en análisis de carga donde la componente $PC1$ representa el grado de popularidad de una película 
+
+	\item \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y \textit{Release Year} en forma positiva sobre la componente $PC2$. \textit{Popularity}, \textit{Vote Count} tiene casi aporte nulo a $PC2$. De esta forma se constata el análisis anterior.
+
+	\item Si visualizamos los puntos que representan a loas observaciones originales en el espacio latente generado por PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5 puntos) se encuentran nas a la derecha que aquellas coloreadas en rojo(>2 puntos). Esto indica que hay un crecimiento del nivel de popularidad cunado mas a derecha se encuentre un punto en la componente $PC1$ validando los análisis anteriores.
+
+	\item si visualizamos lo puntos correspondientes a las observaciones en las direcciones de la componente $PC2$ vemos que a major valor en la componente menor el grado de popularidad de las películas, ya que los puntos rojos tienden a esta en el extremo positivo de la componente validando la hipótesis de que la componente $PC2$ indica el grado de underground es un película.
 \end{itemize}
-
-
-
-
-
 
 
 
