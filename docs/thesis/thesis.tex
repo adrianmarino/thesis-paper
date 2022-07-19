@@ -288,7 +288,7 @@ Luego se removieron las filas de la tabla para aquellas columnas del reporte ant
 \subsection{Variable Rating}
 
 
-En este análisis exploratorio analizaremos datos relevantes al problema de predicción de calificaciones de items por parte de los usuarios. Dentro de este análisis, la variable ratings o calificación es una de las relevantes.
+En este análisis exploratorio analizaremos datos relevantes al problema de predicción de calificaciones de items por parte de los usuarios. Dentro de este análisis, la variable ratings o calificación es una de estas variables relevantes.
 
 A continuación se puede apreciar una diagrama de barras el cual describe la frecuencia con la que los usuarios califican un item segmentada por cada valor posible de calificación:
 
@@ -305,7 +305,7 @@ A continuación se puede apreciar una diagrama de barras el cual describe la fre
 \end{description}
 \begin{itemize}
 	\item 4 puntos es la calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5 puntos.
-	\item Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valore altos o mas alto que la media. Otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas, inclusive a items donde la mayoría llega a los 4 o 5 puntos. Este es un comportamiento conocido en el ámbito de sistemas de recomendación.
+	\item Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valores altos, y  otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Se debe tern en cuenta que un 3.5 para un usuario podría ser un 4.5 para otro.
 	\item Por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones menores a 2 puntos.
 \end{itemize}
 
@@ -319,7 +319,7 @@ Para analizar en mas detalle la variable rating veamos a continuación un histog
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
-	\caption{Diagrama Boxplot e Histograma de la variable ratting. Los ratings son las calificaciones realizadas por los usuario para cada item o película.}
+	\caption{Diagrama Boxplot e Histograma de la variable rating. Los ratings son las calificaciones realizadas por los usuario para cada item o película.}
 \end{figure}
 
 \begin{description}
@@ -328,9 +328,9 @@ Para analizar en mas detalle la variable rating veamos a continuación un histog
 \begin{itemize}
 	\item Se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en en el histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica.
 	\item Nuevamente vemos algo parecido al diagrama de barras, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil).
-	\item La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la mediana en esa dirección.
+	\item La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la media en esa dirección.
 	\item Por otro lado, tenemos valores atípicos en el extreme izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el cual encuentra entre el cuantiles Q1 y Q3, donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia. No se encuentran valores atípicos por sobre el máximo.
-	\item Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre el Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
+	\item Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
 \end{itemize}
 
 
@@ -340,25 +340,25 @@ A continuación segmentemos el anterior histograma por año:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
-	\caption{histograma de calificaciones segmentado por año.}
+	\caption{Histograma de calificaciones segmentado por año.}
 \end{figure}
 
 \begin{description}
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item Inicialmente vemos que en el año 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de calificar esa mas dispersa, es decir que no había una correlación clara por parte de lo usuario en que item era un 4 o un 5 por ejemplo. De esta forma no se ve un peril de puntuación claro por parte de lo usuario.
-	\item Entre 1999 y 2022 vemos que loas puntuaciones 3, 4 y 5 toman mayor importancia siendo esta las mas utilizadas, es decir que los usuario realiza en su mayoría puntuaciones en esos tres niveles.
-	\item La mayor frecuencia se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo los 3 y 5 puntos en line a años anteriores.
-	\item A partir del año 2005 las se nota un acertamiento cada ve mas demarcado en los niveles de puntuaciones entre los 3 y 5 puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5.
-	\item Debemos tener en cuneta que el aumento en los niveles de puntuación con el tiempo probablemente sea debido a un aumento año a año en la base de usuarios de Movie Lens y tal ves esta también sea el motivo por el cual en los primeros años no vemos mucho dispersion en en las pudriciones.
+	\item Inicialmente vemos que en los años 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación claro por parte de los usuarios, en que item es un 4 o un 5 por ejemplo.
+	\item Entre 1999 y 2022 vemos que las puntuaciones 3, 4 y 5 toman mayor importancia siendo estas las mas utilizadas. Es decir, los usuarios realizan en su mayoría puntuaciones en esos tres niveles.
+	\item La mayor frecuencia se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo los 3 y 5 puntos en linea a años anteriores.
+	\item A partir del año 2005 se nota un aumento cada ves mas demarcado en los niveles de puntuaciones entre los 3 y 5 puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5.
+	\item Debemos tener en cuenta que el aumento en los niveles de puntuación con el tiempo probablemente sea debido a un aumento año a año en la base de usuarios de \textit{Movie Lens} y tal vez también sea el motivo por el cual en los primeros años vemos mucho dispersion en las puntuaciones.
 \end{itemize}
 
 \clearpage
 
 \subsection{Correlaciones}
 
-Para realizar un analizar correlación para todas la variables, se realizo un merge o join de las tabla movies y interactions, incluyendo solamente las columna numéricas. A continuación modelo visualizar un diagrama de correlación de Pearson:
+Para realizar un analizar de correlación sobre todas la variables, se realizo un merge/join de las tabla movies y interactions, incluyendo solamente las columna numéricas. A continuación podemos visualizar un diagrama de correlación de Pearson de las mismas:
 
 \begin{figure}[h!]
 	\centering
@@ -372,20 +372,20 @@ Para realizar un analizar correlación para todas la variables, se realizo un me
 \end{description}
 \begin{itemize}
 	\item Cantidad/Media de votos y popularidad es de esperar que tengan alta correlación debido a que las películas mas votadas en general son las mas populares.
-	\item Cantidad y media de votos están altamente correlacionadas ya que la media se calcula en base a la variable cantidad de votos.
-	\item Por otro lado, también es de esperar que las calificaciones y la media de lo votos este correlacionadas, ya que a medida de aumenta la media de los votos aumentan la calificaciones altas.
-	\item Se encuentra una alta correlación entre la variable que identifica a una película y la fecha de estreno. Esto se debe a que al momento de estrenarse una película días después a mas tardar se da de alta la película en el sitio de Movie Lens. Esto también nos dice que los ids son secuenciales.
-	\item Las correlaciones en general son muy bajas llegando a 0.3 como máximo. Esto es una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las variables. Las variables con son combinaciones lineales de otras variables puede producir que los modelos de Machine Learning sobre ajusten a los datos de entrenamiento.
+	\item Cantidad y media de votos están altamente correlacionadas, ya que la media se calcula en base a la variable cantidad de votos.
+	\item Por otro lado, también es de esperar que las calificaciones y la media de los votos este correlacionadas, ya que a medida de aumenta la media de los votos tenemos calificaciones mas altas.
+	\item Se encuentra una alta correlación entre la variable que identifica a una película y la fecha de estreno. Esto se debe a que al momento de estrenarse una película, días después a mas tardar, se da de alta la película en el sitio de Movie Lens. Esto también nos dice que los ids son secuenciales.
+	\item Las correlaciones en general son muy bajas llegando a 0.3 como máximo. Esto es una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las variables. Las variables que son combinaciones lineales de otras variables puede producir que los modelos de Machine Learning sobre-ajusten a los datos de entrenamiento.
 	\item Las variables media de votos y id de película tiene un correlación negativa muy baja. En algún sentido nos dice que algunas películas mas nuevas tiende a tener una media de votos menor. Lo mismo sucede entre las variables rating y id de película en menor medida. Ambas con correlaciones negativas pero muy bajas.
 \end{itemize}
 
-Si bien en esta primera entrega no se están utilizando otras variables distintas a ids de usuarios y películas y ratings, es de interés analizar las variables correspondiente a features de películas, ya que en el siguiente entrega se planea implementar modelos de recomendación híbridos los cuales son ensamples de sistemas de recomendación basados en contenido y colaborativos.
+Si bien, en esta primera entrega no se están utilizando otras variables distintas a id de usuario, id de película y rating, es de interés analizar las variables correspondiente a features de películas, ya que en el siguiente entrega se planea implementar modelos de recomendación híbridos, los cuales son ensamples de sistemas de recomendación basados en contenido y colaborativos.
 
 \subsection{Variables de tipo texto}
 
-Las variables de tipo texto son muy útiles para genera embeddings, los cuales se puede sumar o promediar, generando representaciones compactas de items a recomendar. Luego es posible utilizar estas representaciones para agrupar items según su sinopsis, tags,título y otras variables como pueden ser popularidad, año de estreno, votos, ratings, etc...
+Las variables de tipo texto son muy útiles para genera embeddings, los cuales se puede sumar o promediar, generando representaciones compactas de items a recomendar. Luego es posible utilizar estas representaciones para agrupar items según su sinopsis, tags, título y otras variables como pueden ser popularidad, año de estreno, votos, ratings, etc...
 
-A continuación se pues visualizar en forma gráfica la frecuencia de aparición de cada palabra en cada uni de los campos de tipo texto. Cuanto mayor tamaño tenga la palabra mayor frecuencia de aparición.
+A continuación se puede visualizar la frecuencia de aparición de cada palabra en cada uno de los campos de tipo texto. Cuanto mayor tamaño tenga la palabra mayor frecuencia de aparición tendrá.
 
 \begin{description}
 	\item[Tags]
@@ -395,8 +395,8 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{./images/Cloud-tags.png}
-	\caption{frecuencia de frases en contadas en la variable \textit{Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma.}
+	\includegraphics[width=9cm]{./images/Cloud-tags.png}
+	\caption{Frecuencia de frases encontradas en la variable \textit{Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma.}
 \end{figure}	
 
 
@@ -404,21 +404,24 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item Las palabra based (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuario para cada película.
+	\item Las palabra \textit{based} (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuarios para cada película.
 	\item Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
 \end{itemize}
 
+
+
+\clearpage
 
 \begin{description}
 	\item[Overview]
 \end{description}
 
-La variable overview es la sinopsis de la película. esta describe brevemente el contenido de la misma, sin revelar su desenlace.
+La variable overview es la sinopsis de la película. Esta describe brevemente el contenido de la misma, sin revelar su desenlace.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{./images/Cloud-Overview.png}
-	\caption{frecuencia de palabra en contadas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+	\includegraphics[width=9cm]{./images/Cloud-Overview.png}
+	\caption{Frecuencia de palabras encontradas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
 \end{figure}	
 
 
@@ -427,19 +430,19 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 \end{description}
 \begin{itemize}
 	\item Entre las palabra con mayor frecuencia encontramos: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife}, \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family}, \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New}, \textit{Friend} y \textit{Story}.
-	\item Se aprecia una diferencia notoria entre las variables tags y overview. La variable tags parece categorizar las películas desde distintas perspectivas. Por otr lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma.
-	\item A simple vista, los clústeres encontraron utilizando esta variable podrían ser mas específicos que aquellos clusters generados a partir de la variable tags.
+	\item Se aprecia una diferencia notoria entre las variables tags y overview. La variable tags parece categorizar las películas desde distintas perspectivas. Por otro lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma.
+	\item A simple vista, los clústeres(Embeddings) que pudieran generarse utilizando esta variable, podrían ser mas específicos que aquellos clusters generados a partir de la variable tags.
 \end{itemize}
+
 
 \begin{description}
 	\item[Title]
 \end{description}
 
-
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{./images/Cloud-Title.png}
-	\caption{frecuencia de palabra en contadas en la variable \textit{Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+	\includegraphics[width=9cm]{./images/Cloud-Title.png}
+	\caption{Frecuencia de palabras encontradas en la variable \textit{Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
 \end{figure}	
 
 
@@ -447,29 +450,22 @@ La variable overview es la sinopsis de la película. esta describe brevemente el
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item Enter las palabras con mayor frecuencia encontramos: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead}, \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House}, \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World}, \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y \textit{King}.
-	\item A simple vista,  una clusterización realizada con esta variable puede ser mas general que la lograda con la variable \textit{Overview}, pero en menor general que la variable \textit{Tags}. En trabajos posteriores se realizaran experimentos para ver resultado en este sentido.
+	\item Entre las palabras con mayor frecuencia encontramos: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead}, \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House}, \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World}, \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y \textit{King}.
+	\item A simple vista, una clusterización realizada con esta variable puede ser mas general que la lograda con la variable \textit{Overview}, pero en menos general que la variable \textit{Tags}. En trabajos posteriores se realizaran experimentos para ver resultado en este sentido.
 \end{itemize}
 
 
+\clearpage
 
-
-
-
-\subsection{Análisis de componente principales}
+\subsection{Análisis de Componente Principales}
 
 En esta sección describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
 
-\subsection{Componente principales}
-
-En esta session de describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
-
-
 \begin{description}
-	\item[Varianza explicada]
+	\item[Varianza Explicada]
 \end{description}
 
-Las componentes principales son las variables resultado del algoritmo PCA. Estas nuevas variables tiene la particularidad de ser ortogonales entre si, lo cual indica que no tiene correlación alguna. Ademas de esto, desde la primera hasta a la ultimo variable la acumulación de varianza es decrecientes, es decir, de la primera componentes tiene major varianza y la ultima la menor posible. 
+Las componentes principales son las variables resultado del algoritmo PCA. Estas nuevas variables tiene la particularidad de ser ortogonales entre si, lo cual indica que no tienen correlación alguna. Ademas de esto, desde la primera hasta a la última variable la acumulación de varianza es decrecientes, es decir, que la primera componente tiene major varianza y la última la menor posible. 
 
 
 \begin{figure}[h!]
@@ -498,7 +494,7 @@ Las componentes principales son las variables resultado del algoritmo PCA. Estas
 \begin{itemize}
 	\item Inicialmente vemos que toda las componente tiene niveles de variabilidad o varianza explicada muy bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que el grado de correlación de las variables es muy bajo.
 	\item Usando el criterio del bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que acumulan mayor varianza.
-	\item Debemos en cuenta que el Análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación.
+	\item Tengamos en cuenta que el análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación.
 	\item Las 3 primeras componentes acumulan un grado de variabilidad 85 \%.
 \end{itemize}
 
@@ -508,14 +504,14 @@ Las componentes principales son las variables resultado del algoritmo PCA. Estas
 
 
 \begin{description}
-	\item[Cargas o loading]
+	\item[Cargas o Loadings]
 \end{description}
 
-Por otro lado las componentes principales son combinaciones lineales de las variable originales. Luego las carga o loading con los coeficientes utilizados para transformación las variables originales en las componentes principales mediante combinaciones lineales.
+Por otro lado las componentes principales son combinaciones lineales de las variable originales. Luego, las carga o loadings son los coeficientes utilizados para transformar las variables originales en las componentes principales mediante combinaciones lineales.
 
-De esta forma, los coeficientes define una media de correlación o grado de aporte de cada variable origina a componente principal.
+De esta forma, los coeficientes definen una medida de correlación o grado de aporte de cada variable original a una componente principal.
 
-A continuación se pueden visualizar lo loading o cargas:
+A continuación se pueden visualizar las cargas o loadings:
 
 \begin{table}[h!]
 	\centering
@@ -530,8 +526,7 @@ A continuación se pueden visualizar lo loading o cargas:
 			\bottomrule
 	\end{tabular}
 
-	\caption{Coeficientes de componentes principales vs. variable originales. 
-	Cada uno de estos valores representan el grado de correlación o aporte de cada variable original en cada componente principal.}
+	\caption{Coeficientes de componentes principales vs. variable originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
 \end{table}
 \begin{description}
 	\item[Observaciones]
@@ -541,12 +536,12 @@ A continuación se pueden visualizar lo loading o cargas:
 	\item Luego vemos que las variable \textit{Release Year(Año de estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\% respectivamente, sobre la componente $PC1$.
 	\item La variable \textit{User ID} no tiene aporte alguno sobre componente $PC1$.
 
-	\item Ñas variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente.
+	\item Las variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente.
 	\item La variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del 80 \%.
-	\item Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \text{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación
+	\item Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \textit{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación.
 	\item De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}.
 	\item La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.
-	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.2
+	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
 \end{itemize}
 
 
@@ -562,43 +557,34 @@ A continuación se pueden visualizar lo loading o cargas:
 	\item[Observaciones]
 \end{description}
 \begin{itemize}
-	\item A primera vista se puede ver que las variables \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta ya que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya que ambas son medidas de popularidad casi directas y intercambiables.
+	\item A primera vista se puede ver que las variables \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta, ya que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya que ambas son medidas de popularidad casi directas y intercambiables.
 	
-	\item \textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De esta forma se constata lo visto anteriormente en análisis de carga donde la componente $PC1$ representa el grado de popularidad de una película 
+	\item \textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De esta forma, se constata lo visto anteriormente en análisis de carga, donde la componente $PC1$ representa el grado de popularidad de una película. 
 
-	\item \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y \textit{Release Year} en forma positiva sobre la componente $PC2$. \textit{Popularity}, \textit{Vote Count} tiene casi aporte nulo a $PC2$. De esta forma se constata el análisis anterior.
+	\item \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y \textit{Release Year} en forma positiva sobre la componente $PC2$. \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De esta forma se constata el análisis anterior.
 
-	\item Si visualizamos los puntos que representan a loas observaciones originales en el espacio latente generado por PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5 puntos) se encuentran nas a la derecha que aquellas coloreadas en rojo(>2 puntos). Esto indica que hay un crecimiento del nivel de popularidad cunado mas a derecha se encuentre un punto en la componente $PC1$ validando los análisis anteriores.
+	\item Si visualizamos los puntos que representan a las observaciones originales en el espacio latente generado por PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5 puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo(>2 puntos). Esto indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se encuentre un punto en la componente $PC1$ validando los análisis anteriores.
 
-	\item si visualizamos lo puntos correspondientes a las observaciones en las direcciones de la componente $PC2$ vemos que a major valor en la componente menor el grado de popularidad de las películas, ya que los puntos rojos tienden a esta en el extremo positivo de la componente validando la hipótesis de que la componente $PC2$ indica el grado de underground es un película.
+	\item si visualizamos lo puntos correspondientes a las observaciones en las direcciones de la componente $PC2$ vemos que a major valor en la componente, menor el grado de popularidad de las películas, ya que los puntos rojos tienden a esta en el extremo positivo de la componente, validando la hipótesis de que la componente $PC2$ indica el grado de underground es un película.
 \end{itemize}
 
 
 
 \chapter{Métodos}
 
-En este capitulo se describirán los modelos utilizados para realiza la predicción de las clasificación de un usuario para una película
-que aun no ha visto. Para realizar esto, se utilizaron varios modelos basados en filtros colaborativos. Cada implementación tiene sus particularidades: 
-Cuanto puede escalar, sus tiempos de entrenamiento y predicción, su implementación, exactitud de las predicciones, tendencia al overfitting, etc..
-Para este trabajo se eligieron dos grandes grupos. Por un lado, una implementación sencilla basada en memoria como es el algoritmo de K vecinos cercanos y 
-por el otro, modelos basados en deep learning. Los modelos basados en deep learning utilizan embedding en todos los casos, como una forma de reducir la 
-dimensionalidad de las variables categóricas que se utilizan como entradas. Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras basadas 
-en modelos del estado del arte. Luego, la idea fue medir los resultados de todo los modelos utilizando distintas métricas comparables, entrenado con el mismo
-dataset en todos los casos. De esta forma podemos compara los resultados de cada modelo. K vecinos cercanos (KNN) fue tomado como baseline a partir del cual 
-poder comparar los demás modelos.
+En este capitulo se describirán los modelos utilizados para realiza la predicción de las clasificación de un usuario para una película que aun no ha visto. Para realizar esto, se utilizaron varios modelos basados en filtros colaborativos. 
+
+Cada implementación tiene sus particularidades:  Cuanto puede escalar, sus tiempos de entrenamiento y predicción, su implementación, exactitud de las predicciones, tendencia al overfitting, etc.. Para este trabajo se eligieron dos grandes grupos. Por un lado, una implementación sencilla basada en memoria como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en Deep Learning. Los modelos basados en Deep Learning utilizan Embeddings en todos los casos, como una forma de reducir la dimensionalidad de las variables categóricas que se utilizan como entradas. Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras basadas en modelos del estado del arte. Luego, la idea fue medir los resultados de todo los modelos utilizando distintas métricas comparables, entrenando con el mismo dataset en todos los casos. De esta forma podemos comparar los resultados de cada modelo. K vecinos cercanos (KNN) fue tomado como baseline, a partir del cual poder comparar los demás modelos.
 
 Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en cuenta que estos modelos son muy 
-demandantes en cuanto a recursos de hardware, se opto por usar el framework PyTorch, dado que permite hacer uso tanto de CPU como GPU. 
-De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento 
-e inferencia). Ya elegido el framework, se opto por implementar todos los modelos desde sus bases, ya que PyTorch no cuenta con mucho
-modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de CPU y GPU de forma granular
+demandantes en cuanto a recursos de hardware, se opto por usar el framework \href{https://pytorch.org/}{PyTorch}, dado que permite hacer uso tanto de CPU como GPU. De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e inferencia). Ya elegido el framework, se opto por implementar todos los modelos desde sus bases, ya que PyTorch no cuenta con mucho modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de CPU y GPU de forma granular
 y realizar un uso mas eficiente de los recursos disponible.
 
-\section{Enfoque basados en memoria}
+\section{Enfoque Basados en Memoria}
 
-\subsection{KNN para la predicción de calificaciones de películas}
+\subsection{K vecinos cercanos (KNN)}
 
-Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item.  De esta forma, en la etapa de inferencia, el  modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación.Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser Redis) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
+Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. De esta forma, en la etapa de inferencia, el modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación. Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser Redis) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
 
 \clearpage
 Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
@@ -620,8 +606,7 @@ Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas
   	\item $m$ es la cantidad total de items en el dataset de entrenamiento. 
 \end{itemize}
 
-Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila representa a un usuario y cada columna a un item o vise versa, y 
-las celdas o valores de la misma contienen las calificaciones.
+Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila representa a un usuario y cada columna a un item o vise versa, y las celdas o valores de la misma contienen las calificaciones.
 
 
 \begin{description}
@@ -642,8 +627,8 @@ las celdas o valores de la misma contienen las calificaciones.
 \end{description}
 \begin{itemize}
 	\item $r_{u,i}$ es la calificación otorgada al item $i$ por parte del usuario $u$.
-	\item Cada vector fila $F_u$ contiene todas la calificaciones realizadas por el usuario $u$ para todos los items. Los items que aun no tiene calificación contiene el valor 0.
-	\item Cada vector columna $C_i$ contiene todas la calificaciones realizadas por todos los usuarios para el item $i$.
+	\item Cada vector fila $F_u$ contiene todas la calificaciones realizadas por el usuario $u$ para todos los items. Los items que aun no tiene calificación contiene el valor $0$.
+	\item Cada vector columna $C_i$ contiene las calificaciones realizadas por todos los usuarios para el item $i$. Las posiciones correspondientes a los usuarios que aun no calificaron el item $i$ tendrán el valor $0$. 
 \end{itemize}
 
 
@@ -674,8 +659,7 @@ Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ r
 \end{itemize}
 
 
-En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En trabajos anteriores donde se utilizo una muestra del 
-mismo dataset, se encontró que las distancias que mejor ajustan a este dominio son las siguientes:
+En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En \href{https://github.com/adrianmarino/knn-cf-rec-sys/blob/master/notebooks/knn-cf-rec-sys.ipynb}{trabajos anteriores} donde se utilizo una muestra del mismo dataset, se encontró que las distancias que mejor ajustan a este dominio son las siguientes:
 
 \begin{itemize}
 	\item Distancia Coseno Ajustado.
@@ -683,7 +667,7 @@ mismo dataset, se encontró que las distancias que mejor ajustan a este dominio 
 	\item Distancia de Pearson (1 - Correlación de Pearson).
 \end{itemize}
 
-Luego, para este trabajo se eligió utilizar la distancia coseno, ya con esta se obtuvieron buenos resultado en trabajos anteriores (Referencia).
+Luego, para este trabajo se eligió utilizar la \textit{Distancia Coseno}, ya con esta se obtuvieron buenos resultado.
 
 \begin{description}
 	\item[Distancia Coseno]
