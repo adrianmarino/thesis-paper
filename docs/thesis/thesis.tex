@@ -582,7 +582,7 @@ y realizar un uso mas eficiente de los recursos disponible.
 
 \section{Enfoque Basados en Memoria}
 
-\subsection{K vecinos cercanos (KNN)}
+\subsection{KNN (K-Nearest-Neighbor)}
 
 Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. De esta forma, en la etapa de inferencia, el modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación. Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser Redis) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
 
@@ -714,11 +714,9 @@ Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicc
 las calificaciones. En todos los casos se utilizan ambas matrices para realizar las predicciones. A continuación se explica el paso de inferencia o 
 predicción para cada implementación elegida.
 
-\subsection{KNN basado en usuarios}
+\subsection{KNN User Based}
 
-En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$.El calcula de esta 
-matrices es parte del proceso de entrenamiento del modelo KNN. En este apartado se explicará el proceso de inferencia de una 
-clasificación de un usuario para un item. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
+En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$.El calcula de esta matrices es parte del proceso de entrenamiento del modelo KNN. En este apartado se explicará el proceso de inferencia de una clasificación de un usuario para un item. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
 \begin{equation*}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -748,7 +746,7 @@ De esta forma, el parámetro $K$ se convierte en un hiper-parámetro del modelo.
 la predicción, y mayor sera el tiempo de inferencia del modelo. Por otro lado, a mayor $K$ estaremos incluyendo mas vecinos que son menos similares en 
 términos de distancia. Debido a esto, siempre se busca encontrar el mejor valor posible para $K$. Este valor se buscado a traves de una optimización de hiper parámetros regida por una métricas que valida la exactitud del modelo al momento de predecir, obteniendo como resultado el $K$ para el cual el modelo tiene el resultado mas exactos posibles.
 
-\subsection{KNN Item Base Prediction}
+\subsection{KNN Item Based}
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
 
@@ -768,7 +766,7 @@ Este modelo es muy similar al anterior, la diferencia radica en que la matriz de
 
 Finalmente la predicción, un promedio pesado de las calificaciones del usuario $u$ para los items vecinos al item $i$, pesadas por la similitud de cada item $o$ con $i$.
 
-\subsection{Ensample de modelos}
+\subsection{Ensample KNN User Based y Item Based}
 
 Dado que contamos dos modelos basados en KNN se realizo un sample de ambos modelos el cual realiza un promedio de las salidas de ambos modelos.
 
@@ -840,7 +838,7 @@ Finamente, tengamos en cuenta que el proceso de back-propagation sera encargado 
 
 En el apartado anterior se explica uno de las componente básicos y mas usando en modelos de recomendación basados en modelo de Deep Learning. Des de qui se describirán las arquitecturas utilizadas en este trabajo.
 
-\subsection{General Matrix Factorization}
+\subsection{General Matrix Factorization (GMF)}
 
 Esta es una arquitectura clásica en sistemas de recomendación basados en filtros colaborativos. El \href{https://sifter.org/~simon/journal/20061211.html}{algoritmo de factorización de matrices} funciona desacoplando la matriz de interacciones usuario-item en un producto escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en la competencia \href{https://en.wikipedia.org/wiki/Netflix_Prize}{Netflix prize} en 2006. La idea principal del algoritmo es representar a usuario e items en un espacio latente de baja dimensionalidad.
 A partir del trabajo inicial realizado por  \textit{Funk} en 2006, se han propuesto multiples enfoque de factorización de matrices para sistemas de recomendación, siento este el modelo de mas simple y efectivo.
@@ -892,7 +890,7 @@ El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
 \item $\|.\|_{\rm F}$ se define como [[norma matricial]] mientras que las otras normas pueden ser matricial u otro tipo de normal dependiendo del sistema de recomendación.
 \end{itemize}
 
-\subsection{Biased General Matrix Factorization}
+\subsection{Biased General Matrix Factorization (B-GMF)}
 
 El modelo \textit{GMF} de \textit{Simon Funk} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
 
@@ -905,7 +903,7 @@ A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
 En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales representa a los sesgos de usuarios e items respectivamente. El tamaño de los factores latentes o vectores embedding correspondiente a cada bias es 1, es decir son valores escalares. Finalmente, luego de calcular el producto escalar se suman los factores latentes resultado de ambas \textit{Embedding Layers} correspondiente a los biases.  
 
 
-\subsection{Neural Network Matrix Factorization}
+\subsection{Neural Network Matrix Factorization (NN-MF)}
 
 Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}) dada dos matrices de baja dimensionalidad se realiza un producto escalar y se suman sesgos dependiendo de caso para calcular o inferir la calificación del usuario para un item dado. Estos modelos como ya se conto aprender los pesos o parámetros de los vectores embeddings en el proceso se entrenamiento. 
 
@@ -923,7 +921,7 @@ a continuación podemos ver un esquema del modelo, muy similar a \textit{GFM} co
 Entonces, como entradas tenemos los identificadores de usuarios e items en entradas independientes (Escalares). Cone sto identificadores cada \textit{Embedding Layer} resuelve el vector embedding asociado. Acto siguiente el bloque \textit{Flatter} toma ambos vectores y devuelve un nuevo vector el cual es la concatenación de los do anteriores. En el siguiente paso este nuevo vector es al entrada de la red multi capa, es decir que la red multi capa tendrá tanta entradas como posiciones tenga este vector. La cantidad de capas y neuronas por capas de la red so hiper-parámetros vana  ir cambiando en el proceso de optimización de hiper-parámetros, pro esa cuestión no se especifican un numero de capas. Cada capa menos la ultima tiene una función de activación ReLU y la ultima capa por supuesto un activación \textit{Lineal} al igual que una regresión lineal, ya que queremos predecir las calificaciones que tienen un rango de valores reales entre 0.5 y 5. Cave aclarar que se esta pensando como segundo enfoque usar una activación \textit{Softmax} en vez de una \textit{Lineal} en la ultima capa. De esta manera, se podría abordar como un problema de clasificación ya que los valores de las calificaciones son números reales pero también son discretos.
 
 
-\subsection{Maquinas de Factorización}
+\subsection{Factorization Machines (FM)}
 
 
 Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización}. 
@@ -979,7 +977,7 @@ Con esta re-formulación de último termino, la complejidad del método se reduc
 \end{equation*}
 
 
-\subsection{Deep Factorization Machine}
+\subsection{Deep Factorization Machine (DeepFM)}
 
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el comportamiento de las interacciones o correlación usuario-items ya sean implícita o explicitas. A pesar de este gran progreso, los métodos expuestos anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto orden, requiriendo en algunos casos realizar ingeniería de features para disminuir estos sesgos. 
 
@@ -1094,7 +1092,7 @@ Por otro lado, cabe aclarar que dada la tendencia de los modelos a la variabilid
 
 A continuación se describen los resultados de todos los modelos comparados mediando las métricas \textit{AP\makeatletter@k} y \textit{RMSE}.
 
-\section{KNN (K-Nearest-Neighbor)}
+\section{K-Nearest-Neighbor (KNN)}
 
 \subsection{KNN Item Based}
 
@@ -1132,7 +1130,7 @@ A continuación se describen los resultados de todos los modelos comparados medi
 
 \clearpage
 
-\subsection{Ensample de KNN User Based y Item Based}
+\subsection{Ensample KNN User Based y Item Based}
 
 \begin{figure}[!htb]
 	\centering
@@ -1148,7 +1146,7 @@ A continuación se describen los resultados de todos los modelos comparados medi
 
 
 \clearpage
-\section{GFM (General Matrix Factorization)}
+\section{General Matrix Factorization (GFM)}
 
 A continuación se puede apreciar las cursas de la $Loss$ (MSE) para el conjunto de validación y entrenamiento:
 
@@ -1180,7 +1178,7 @@ Dado la tendencia de los modelos a la variabilidad o varianza de sus prediccione
 
 
 \clearpage
-\section{B-GFM (Biased General Matrix Factorization)}
+\section{Biased General Matrix Factorization (B-GFM)}
 
 \begin{figure}[h!]
 	\centering
@@ -1206,7 +1204,7 @@ Dado la tendencia de los modelos a la variabilidad o varianza de sus prediccione
 
 
 
-\section{NN-FM (Neural Network Matrix Factorization)}
+\section{Neural Network Matrix Factorization (NN-FM)}
 
 \begin{figure}[h!]
 	\centering
@@ -1234,7 +1232,7 @@ Dado la tendencia de los modelos a la variabilidad o varianza de sus prediccione
 
 \clearpage
 
-\section{DeepFM (Deep Factorization Machine)}
+\section{Deep Factorization Machine (DeepFM)}
 
 \begin{figure}[h!]
 	\centering
@@ -1261,9 +1259,9 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 	\hline
 		Modelo                       & Mediana  & Media    & Desvio  \\
 	\hline
-		Biased-GMF                   & 0.408563 & 0.408787 & 0.012190 \\
+		B-GMF                        & 0.408563 & 0.408787 & 0.012190 \\
 		GMF                          & 0.406422 & 0.406646 & 0.012513 \\
-		Deep-FM                      & 0.398100 & 0.397895 & 0.011369 \\
+		DeepFM                       & 0.398100 & 0.397895 & 0.011369 \\
 		NN-MF                        & 0.393499 & 0.393447 & 0.011711 \\
 		Ensample KNN User-Item Based & 0.384570 & 0.384819 & 0.015066 \\
 		KNN User Based               & 0.381297 & 0.381943 & 0.014709 \\
@@ -1296,9 +1294,9 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 			Modelo                       & Mediana  & Media    & Desvio  \\
 		\hline
 			NN-MF                        & 0.941213 & 0.941493 & 0.007620 \\
-			Biased-GMF                   & 0.977914 & 0.977382 & 0.009387 \\
+			B-GMF                        & 0.977914 & 0.977382 & 0.009387 \\
 			GMF                          & 0.983141 & 0.982894 & 0.009419 \\
-			Deep-FM                      & 1.133796 & 1.133637 & 0.009183 \\
+			DeepFM                       & 1.133796 & 1.133637 & 0.009183 \\
 			Ensample KNN User-Item Based & 2.916418 & 2.917146 & 0.015642 \\
 			KNN User Based               & 2.952661 & 2.952305 & 0.016170 \\
 			KNN Item Based               & 3.104068 & 3.103917 & 0.014975 \\
@@ -1317,13 +1315,13 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 \begin{itemize}
 \item A simple vista NN-MF es el modelo mas estable en cuando al error de validación, ya que tiene el menor error y dispersion. aun asi no es el modelo pas preciso. eSpo podría indicar que tiene un grade de sobre ajuste major a modelos con mayor precision.
 \item Podemos apreciar que el modelo Biased-GMF con mayor precision aui tiene un error mayor a NN-MF. OIndicando que la teoría del sobre ajuste de NN-MF podría ser valida.
-\item Nuevamente la familia de modelos KNN tiene los errores mas alto y también altos desvíos. Aun asi estos modelos tiene una precisión muy similar al modelo mas preciso (Biased-GMF).
+\item Nuevamente la familia de modelos KNN tiene los errores mas alto y también altos desvíos. Aun asi estos modelos tiene una precisión muy similar al modelo mas preciso (B-GMF).
 \end{itemize}
 
 
 \chapter{Conclusiones}
 
-Como conclusiones, se puede decir que no se encuentra una gran diferencia en precisión entre todos modelos, siendo esta menor al 2 \%. Por otro lado, si tuviésemos que llevar alguno de esto modelos a producción e un e-commerce, claramente se elegiría un modelo basado en deep learning, como pueden ser Biased-GMF o GMF. Esto se debe a que estos modelos utilizan el algoritmo del gradiente descendente, pudiendo procesar las observaciones de entrenamiento en lotes. De esta forma, se puede seleccionar un tamaño de lote que se ajuste a la memoria RAM o VRAM disponible. Por lo contrario no seria posible selecciona modelos de la familia KNN debido a que necesitan alocar todas las observaciones den entrenamiento en memoria.
+Como conclusiones, se puede decir que no se encuentra una gran diferencia en precisión entre todos modelos, siendo esta menor al 2 \%. Por otro lado, si tuviésemos que llevar alguno de esto modelos a producción e un e-commerce, claramente se elegiría un modelo basado en deep learning, como pueden ser B-GMF o GMF. Esto se debe a que estos modelos utilizan el algoritmo del gradiente descendente, pudiendo procesar las observaciones de entrenamiento en lotes. De esta forma, se puede seleccionar un tamaño de lote que se ajuste a la memoria RAM o VRAM disponible. Por lo contrario no seria posible selecciona modelos de la familia KNN debido a que necesitan alocar todas las observaciones den entrenamiento en memoria.
 
 Por otro lado, podemos apreciar que un modelo en el estado de arte como DeepFM, no obtiene la precision mas alta, e inclusive su precisión es prácticamente igual a las precisiones obtenidas por la familia de modelo KNN.
 Finalmente podemos decir que en el caso de estas pruebas el dataset utilizado, los modelo de Deep Learning obtienen mejores resultado que modelos mas clásicos como KNN, pero estos resultados son muy similares.
