@@ -1,7 +1,7 @@
-PWD /home/adrian/development/maestria/thesis-paper/docs/thesis
+PWD /home/adrian/development/personal/maestria/thesis-paper/docs/thesis
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex
+INPUT /home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex
 OUTPUT thesis.log
 INPUT ./thesis.cls
 INPUT ./thesis.cls
@@ -628,10 +628,10 @@ OUTPUT thesis.pdf
 INPUT ./thesis.out
 INPUT ./thesis.out
 OUTPUT thesis.out
-INPUT ./caratula.tex
-INPUT caratula.tex
-INPUT ./caratula.tex
-INPUT caratula.tex
+INPUT ./cover.tex
+INPUT cover.tex
+INPUT ./cover.tex
+INPUT cover.tex
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -668,10 +668,10 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT ./abs_esp.tex
-INPUT abs_esp.tex
-INPUT ./abs_esp.tex
-INPUT abs_esp.tex
+INPUT ./abstract.tex
+INPUT abstract.tex
+INPUT ./abstract.tex
+INPUT abstract.tex
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
@@ -680,6 +680,7 @@ INPUT thesis.toc
 INPUT thesis.toc
 OUTPUT thesis.toc
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
@@ -715,7 +716,6 @@ INPUT ./images/Cloud-tags.png
 INPUT ./images/Cloud-tags.png
 INPUT ./images/Cloud-tags.png
 INPUT ./images/Cloud-tags.png
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./images/Cloud-Overview.png
 INPUT ./images/Cloud-Overview.png
