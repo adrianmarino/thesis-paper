@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1658188523 "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1658188526
+["pdflatex"] 1658191381 "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1658191384
   "/home/adrian/development/maestria/thesis-paper/docs/thesis/thesis.tex" 1658188519 95950 74e52a801c5602e74ff922a986fd70fc ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1650183167 1004 54797486969f23fa377b128694d548df ""
@@ -119,7 +119,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1655682263 4278762 af3ac1370db81a450c1118eabf1fe718 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1655682233 2927665 636de9df680089c200b16fda7e475f68 ""
   "abs_esp.tex" 1658188293 1253 9a42cf7eae26b0f19ea5bba0e716b920 ""
-  "caratula.tex" 1658188293 831 6d5392bea88a6b95cd5b34e5e8dd8dc2 ""
+  "caratula.tex" 1658191381 923 ca74cb91204ceafd2e9f67d620b5f911 ""
   "images/Biased-GMF.png" 1658188293 106174 42bed9c25640f529c9087469e36fcca8 ""
   "images/Cloud-Overview.png" 1658188293 358038 d5744f1b2b95e5f6001be63aff08c1de ""
   "images/Cloud-Title.png" 1658188293 380976 204a8b88af7ea96dced34db5427c3497 ""
@@ -151,11 +151,11 @@
   "images/rating-barplot.png" 1658188293 14941 8ca1260d85b8dbd2ebead4bafa3f7223 ""
   "images/rating-boxplot-histplot.png" 1658188293 35756 822b04fb5628990b4773f194c623cade ""
   "images/rating-by-year.png" 1658188293 188660 7e9d1ae5b4ef72447984df58c9e5b062 ""
-  "thesis.aux" 1658188526 18953 b931378c339c7475f189042bff0dfd6e "pdflatex"
+  "thesis.aux" 1658191384 18953 b931378c339c7475f189042bff0dfd6e "pdflatex"
   "thesis.cls" 1658188293 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1658188526 11119 47f6a372cb52d22ad80285e5e3b6c477 "pdflatex"
+  "thesis.out" 1658191384 11119 47f6a372cb52d22ad80285e5e3b6c477 "pdflatex"
   "thesis.tex" 1658188519 95950 74e52a801c5602e74ff922a986fd70fc ""
-  "thesis.toc" 1658188526 5398 0b9e9ca3951f1be78ec2fbfb078315ad "pdflatex"
+  "thesis.toc" 1658191384 5398 0b9e9ca3951f1be78ec2fbfb078315ad "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
