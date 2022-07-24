@@ -5,7 +5,7 @@ import torchmetrics
 
 class MeanUserFBetaScoreAtk(MeanUserAtkMetric):
     def __init__(self, user_index, k=10, decimals=4, discretizer=identity(), rating_decimals=0, num_classes=None, average='micro', beta=1):
-        name = f'MeanUserF{beta}Score@{k}'
+        name = f'MeanUserF{beta}Score'
         if average != 'micro':
             name += f'({average})'
 
