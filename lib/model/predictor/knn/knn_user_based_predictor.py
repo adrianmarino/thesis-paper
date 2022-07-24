@@ -1,19 +1,26 @@
-from model.predictor.predictor import AbstractPredictor
+from model.predictor.abstract_predictor import AbstractPredictor
 from model import NearestNeighbors
-from util import round_
+from util import round_, delete
 import logging
 import data as dt
+import torch
 
 
 class KNNUserBasedPredictor(AbstractPredictor):
     @staticmethod
     def from_data_frame(data, user_seq_col, movie_seq_col, rating_col, distance):
         rm = dt.RatingsMatrix.from_dataframe(data, user_seq_col, movie_seq_col, rating_col)
-        return KNNUserBasedPredictor(rm, distance)
+        nn = NearestNeighbors(rm[:, :], distance)
+        return KNNUserBasedPredictor(rm, nn)
 
-    def __init__(self, rm, distance):
-        self.rm = rm
-        self.nn = NearestNeighbors(self.rm[:, :], distance)
+    @staticmethod
+    def from_file(path, filename):
+        rm = torch.load(f'{path}/{filename}-rm.pt')
+        nn = torch.load(f'{path}/{filename}-nn.pt')
+        return KNNUserBasedPredictor(rm, nn)
+
+    def __init__(self, rm, nn):
+        self.rm, self.nn = rm, nn
 
     def predict(self, user_idx, item_idx, n_neighbors=10, debug=False):
         result = self.nn.neighbors(user_idx, n_neighbors)
@@ -30,7 +37,7 @@ class KNNUserBasedPredictor(AbstractPredictor):
             if r > 0:
                 sim = 1 - dist.item()
                 deviation = self.rm.row_deviation(row_idx, item_idx)
-            
+
                 numerator += deviation * sim
                 total_sim += sim
 
@@ -54,3 +61,13 @@ class KNNUserBasedPredictor(AbstractPredictor):
     def plot(self):
         self.rm.plot()
         self.nn.plot(prefix='User  ')
+
+    def save(self, path, filename='knn-user-predictor'):
+        torch.save(self.rm, f'{path}/{filename}-rm.pt')
+        torch.save(self.nn, f'{path}/{filename}-nn.pt')
+
+    def delete(self):
+        self.rm.delete()
+        self.nn.delete()
+        del self
+

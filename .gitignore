@@ -129,6 +129,7 @@ dmypy.json
 
 datasets/
 weights/*auto-encoder*.pt
+weights/*knn*.pt
 
 docs/thesis/*.gz
 docs/thesis/*.toc

@@ -2,7 +2,7 @@ from torch.utils.data import Dataset
 import torch
 
 class TfIdfDataset(Dataset):
-    def __init__(self, matrix): 
+    def __init__(self, matrix):
         self.data = torch.tensor(matrix.toarray(), dtype=torch.float)
 
     def __len__(self): return self.data.shape[0]

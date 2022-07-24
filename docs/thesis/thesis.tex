@@ -706,17 +706,13 @@ De esta forma, cuanto menor es el angulo entre dos vectores mas similares son en
 \end{itemize}
 
 
-Volviendo a nuestro algoritmo, la idea es calcular la distancia de cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ contra todos 
-los demás vectores fila de la misma matriz, obteniendo asi la matriz de $Distancias_{u_a,u_b}$, donde cada fila y columnas representa a los 
-vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. 
+Volviendo a nuestro algoritmo, la idea es calcular la distancia de cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ contra todos los demás vectores fila de la misma matriz, obteniendo asi la matriz de $Distancias_{u_a,u_b}$, donde cada fila y columnas representa a los vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. 
 
-Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicción depende de la implementación que se elige para predecir 
-las calificaciones. En todos los casos se utilizan ambas matrices para realizar las predicciones. A continuación se explica el paso de inferencia o 
-predicción para cada implementación elegida.
+Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicción depende de la implementación que se elige para predecir las calificaciones. En todos los casos se utilizan ambas matrices para realizar las predicciones. A continuación se explica el paso de inferencia o predicción para cada implementación elegida.
 
 \subsection{KNN User Based}
 
-En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$.El calcula de esta matrices es parte del proceso de entrenamiento del modelo KNN. En este apartado se explicará el proceso de inferencia de una clasificación de un usuario para un item. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
+En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo KNN. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
 \begin{equation*}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -727,24 +723,16 @@ En el apartado anterior se explico como calcular las matrices de $Calificaciones
 \end{description}
 \begin{itemize}
 	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
-	\item $u \neq o$, es decir que cada indice representa a un usuario distinto.
-	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuario menos el usuario $u$.
+	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. En nuestro casos se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
-	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$.
- 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el item $i$ y el promedio de calificaciones del usuario $o$. 
-	 	Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al 
-		momento de calificar un item. Algunos usuario tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otro usuario son mas 
-		pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un item.
+	\item $u \neq o$, es decir que cada indice representa a un usuario distinto.
+	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de items.
+ 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el item $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al momento de calificar un item. Algunos usuarios tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otros usuarios son mas pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un item.
 \end{itemize}
 
-Finalmente a grandes rasgos, el calculo de la predicción no es mas que el promedio de calificaciones del usuario $u$ sumado a un promedio 
-pesado de las calificación de los demás usuarios para el item $i$, donde los pesos son las distancias del usuario $u$ con los demás usuarios.
+Finalmente, a grandes rasgos, el calculo de la predicción no es mas que el promedio de calificaciones del usuario $u$ sumado al promedio pesado de las calificación de los demás usuarios para el item $i$, donde los pesos son las distancias del usuario $u$ con los demás usuarios.
 
-Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás usuarios, sino un conjunto de tamaño $K$ el cual contiene a los 
-usuario mas cercanos en términos de distancia. Es decir que, como paso previo a la predicción, es necesario encontrar los $K$ usuarios mas cercanos al usuario $u$.
-De esta forma, el parámetro $K$ se convierte en un hiper-parámetro del modelo. Luego a mayor $K$, mayor sera numero de vecinos a tener en cuenta para calcular
-la predicción, y mayor sera el tiempo de inferencia del modelo. Por otro lado, a mayor $K$ estaremos incluyendo mas vecinos que son menos similares en 
-términos de distancia. Debido a esto, siempre se busca encontrar el mejor valor posible para $K$. Este valor se buscado a traves de una optimización de hiper parámetros regida por una métricas que valida la exactitud del modelo al momento de predecir, obteniendo como resultado el $K$ para el cual el modelo tiene el resultado mas exactos posibles.
+Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás usuarios, sino un conjunto de tamaño $K$ el cual contiene a los usuario mas cercanos en términos de distancia. Es decir que, como paso previo a la predicción, es necesario encontrar a los $K$ usuarios mas cercanos al usuario $u$. De esta forma, el parámetro $K$ se convierte en un hiper-parámetro del modelo. Luego a mayor $K$, mayor sera número de vecinos a tener en cuenta para calcular la predicción, y mayor sera el tiempo de inferencia del modelo. Por otro lado, a mayor $K$ estaremos incluyendo mas vecinos que son menos similares en términos de distancia. Debido a esto, siempre se busca encontrar el mejor valor posible para $K$. Este valor se buscado a traves de una optimización de hiper parámetros regida por una métricas que valide la exactitud del modelo al momento de la predicción, obteniendo como resultado el $K$ para el cual el modelo tiene el resultado mas exactos posibles.
 
 \subsection{KNN Item Based}
 

@@ -15,4 +15,4 @@ from .text.tokenizer import TokenizerService
 from .pipes import  select, distinct, rename, drop, \
                     reset_index, tokenize, \
                     join_str_list, append_emb_vectors, \
-                    tf_idf, sum_cols
+                    tf_idf, sum_cols, concat_columns

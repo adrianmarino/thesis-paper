@@ -60,8 +60,8 @@ class MovieLensTMDBDatasetFactory:
         # Exclude columns...
         exclude_cols = lambda df, columns: df.loc[:, ~df.columns.isin(columns)]
         excluded = [
-            'movie_poster', 
-            'movie_popularity', 
+            'movie_poster',
+            'movie_popularity',
             'inter_movie_id',
             'movie_vote_mean',
             'movie_vote_count',
@@ -75,8 +75,8 @@ class MovieLensTMDBDatasetFactory:
         dataset = as_type(
             dataset,
             columns = [
-                'movie_title', 
-                'movie_original_language', 
+                'movie_title',
+                'movie_original_language',
                 'movie_overview'
             ],
             dtype = 'string'

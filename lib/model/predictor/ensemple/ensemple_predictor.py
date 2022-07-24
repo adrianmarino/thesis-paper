@@ -1,4 +1,4 @@
-from model.predictor.predictor import AbstractPredictor
+from model.predictor.abstract_predictor import AbstractPredictor
 import torch
 from .combine.ensemple_combine_strategy import EnsempleCombineStrategy
 from .combine.impl.mean_ensemble_combine_strategy import MeanEnsempleCombineStrategy
@@ -6,8 +6,8 @@ from .combine.impl.mean_ensemble_combine_strategy import MeanEnsempleCombineStra
 
 class EnsemplePredictor(AbstractPredictor):
     def __init__(
-        self, 
-        predictors: list[AbstractPredictor], 
+        self,
+        predictors: list[AbstractPredictor],
         combine_strategy: EnsempleCombineStrategy = MeanEnsempleCombineStrategy()
     ):
         self._predictors = predictors
@@ -24,3 +24,6 @@ class EnsemplePredictor(AbstractPredictor):
     def predict_batch(self, batch, n_neighbors=10, debug=False):
         y_preds = [p.predict_batch(batch, debug=debug) for p in self._predictors]
         return self._combine_strategy.combine(y_preds)
+
+    def delete(self):
+        [p.delete() for p in self._predictors]

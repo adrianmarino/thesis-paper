@@ -28,6 +28,6 @@ class EnsembleWeightedDistanceMatrixRecommender(Recommender):
 
         return SingleRecommenderResult(
             name = [r.column for r in self.__recommenders],
-            item = self.df.iloc[[ item_index]][['id', 'title']], 
+            item = self.df.iloc[[ item_index]][['id', 'title']],
             recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[:k]
         )

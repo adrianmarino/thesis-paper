@@ -40,3 +40,9 @@ def sum_cols(df, sources, target='sum', dtype=np.float64):
         total += df[col]
     df[target] = total
     return df
+
+def concat_columns(df, column_a, column_b, out_column=None, separator=' '):
+    if out_column == None:
+        out_column = column_a
+    df[out_column] = df[column_b].astype(str) + separator + df[column_a].astype(str)
+    return df

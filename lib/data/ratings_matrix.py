@@ -2,7 +2,7 @@ import data.plot as pl
 import torch
 import pytorch_common.util as pu
 import data as dt
-
+from util import delete
 
 class RatingsMatrix:
     @classmethod
@@ -23,7 +23,7 @@ class RatingsMatrix:
 
     def __init__(self, data, device=pu.get_device()): self.__data = data.to(device)
 
-    def plot(self, figsize = (10, 10)):        
+    def plot(self, figsize = (10, 10)):
         pl.headmap(self.__data.cpu(), title=f'Rating Matrix ({self.__data.shape[0]},{self.__data.shape[1]})', figsize=figsize)
 
     def __getitem__(self, index):  return self.__data[index[0], index[1]]
@@ -45,3 +45,7 @@ class RatingsMatrix:
     def mean_row(self, row_idx): return self.__data[row_idx, :].mean()
 
     def row_deviation(self, row_idx, col_idx): return self[row_idx, col_idx] - self.mean_row(row_idx)
+
+    def delete(self):
+        delete(self.__data)
+        del self

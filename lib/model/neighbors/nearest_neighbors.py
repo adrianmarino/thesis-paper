@@ -2,6 +2,7 @@ import torch
 import pytorch_common.util as pu
 import model as ml
 import data.plot as pl
+from util import delete
 
 
 class NearestNeighborsResult:
@@ -39,3 +40,8 @@ class NearestNeighbors:
             dist,
             title=f'{prefix}Distances Matrix ({dist.shape[0]},{dist.shape[1]})'
         )
+
+    def delete(self):
+        delete(self.matrix)
+        delete(self.row_distances)
+        del self

@@ -29,4 +29,8 @@ class DistanceMatrixRecommender(Recommender):
            recommendations.iloc[idx, recommendations.columns.get_loc('distance')] = similar_movies[idx]
         recommendations = recommendations.iloc[similar_indexes][['distance', 'id', 'title', self.column]]
 
-        return SingleRecommenderResult(self.column, self.df.iloc[[item_index]][['id', 'title']], recommendations)
+        return SingleRecommenderResult(
+            self.column,
+            self.df.iloc[[item_index]][['id', 'title']],
+            recommendations.reset_index()
+        )

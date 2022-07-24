@@ -18,6 +18,7 @@ from .module.multi_feature_embedding         import MultiFeatureEmbedding
 from .predictor.knn.knn_user_based_predictor import KNNUserBasedPredictor
 from .predictor.knn.knn_item_based_predictor import KNNItemBasedPredictor
 from .predictor.module_predictor             import ModulePredictor
+from .predictor.sample_cached_predictor      import SampleCachedPredictor
 from .predictor.cached_predictor             import CachedPredictor
 
 # Predictors Ensemple...
@@ -42,6 +43,6 @@ from .module.gmf                              import GMF
 from .module.gmf_bias                         import GMFBias
 
 # Content Based way...
-from .module.autoencoder.autoencoder          import AutoEncoder 
+from .module.autoencoder.autoencoder          import AutoEncoder
 from .module.autoencoder.autoencoder_trainer import AutoEncoderTrainer
 # -----------------------------------------------------------------------------

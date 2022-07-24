@@ -19,9 +19,20 @@ def apply(tensor, fn):
     return copy
 
 
-def is_int(tensor): 
+def is_int(tensor):
     return tensor.dtype == torch.uint8 \
         or tensor.dtype == torch.int8 \
         or tensor.dtype == torch.int16 \
         or tensor.dtype == torch.int32 \
         or tensor.dtype == torch.int64
+
+
+def delete(tensor):
+    tensor.detach()
+    del tensor
+    free_gpu_memory()
+
+
+def free_gpu_memory():
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
