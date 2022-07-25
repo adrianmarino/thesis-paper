@@ -73,24 +73,26 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
 * [Analisis exploratorio](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
-* Memory based CF
-  * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
-* Model based CF
-  * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
-  * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
-  * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
-  * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
-* Enfoque Híbrido
-   * **Any CF model + Sparse auto-encoder + mean distance**
-       * [Models: Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sparse_autoencoder.ipynb)
-       * [Models: Movie Overview Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sparse_autoencoder.ipynb)
-       * [Models: Movie Genres Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sparse_autoencoder.ipynb)
-       * [Ensemple CB recommender based on Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sparse_autoencoder.ipynb)
-   * Enfoque 2: **Pending**
-   * Enfoque 3: **Pending**
-   * Enfoque 4: **Pending**
-* [Model Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_comparatives.ipynb)
-* [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+
+* Models
+    * [Model Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_comparatives.ipynb)
+    * Memory based CF
+      * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
+    * Model based CF
+      * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
+      * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
+      * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
+      * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
+    * Enfoque Híbrido
+       * **Any CF model + Sparse auto-encoder + mean distance**
+           * [Models: Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sparse_autoencoder.ipynb)
+           * [Models: Movie Overview Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sparse_autoencoder.ipynb)
+           * [Models: Movie Genres Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sparse_autoencoder.ipynb)
+           * [Ensemple CB recommender based on Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sparse_autoencoder.ipynb)
+       * Enfoque 2: **Pending**
+       * Enfoque 3: **Pending**
+       * Enfoque 4: **Pending**
+    * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 
 ## Thesis docs

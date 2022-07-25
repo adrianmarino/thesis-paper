@@ -2,8 +2,6 @@ import pandas as pd
 import data.plot as pl
 import data as dt
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 class ValidatorSummary:
 
@@ -44,18 +42,24 @@ class ValidatorSummary:
 
         predictor_names = self.__predictor_names()
 
-        pl.xl_flat_size()
+        for metric in metric_names:
+            pl.xl_flat_size()
+            pl.comparative_boxplot(self.data, x=metric, y="predictor", title=f'Metric: {metric}')
 
         for metric_name in metric_names:
-                for pre_name in predictor_names:
-                    pl.describe_num_var(
-                        df         = self.data[self.data.predictor == pre_name],
-                        column     = metric_name,
-                        bins       = bins,
-                        title      = pre_name,
-                        show_table = show_table,
-                        show_range = show_range
-                    )
+            for pre_name in predictor_names:
+                pl.xl_flat_size()
+                pl.describe_num_var(
+                    df         = self.data[self.data.predictor == pre_name],
+                    column     = metric_name,
+                    bins       = bins,
+                    title      = f'Model: {pre_name} - Metric: {metric_name}',
+                    show_table = show_table,
+                    show_range = show_range
+                )
+
+    def to_latex(self):
+        return self.show().style.format(thousands = ".").to_latex()
 
     def show(
         self,

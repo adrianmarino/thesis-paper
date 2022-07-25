@@ -63,7 +63,7 @@ def histplot(
     ax_hist.set(xlabel=column)
 
 
-    title = f'{title} - {column}' if title else column
+    title = title if title else column
     if remove_outliers:
         title  += ' (Without Outliers)'
 
