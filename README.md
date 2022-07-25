@@ -89,6 +89,7 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
    * Enfoque 2: **Pending**
    * Enfoque 3: **Pending**
    * Enfoque 4: **Pending**
+* [Model Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_comparatives.ipynb)
 * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 

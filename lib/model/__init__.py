@@ -40,7 +40,7 @@ from .validate.validator                     import Validator, ValidatorSummary
 from .module.deep_fm                          import DeepFM
 from .module.nnmf                             import NNMF
 from .module.gmf                              import GMF
-from .module.gmf_bias                         import GMFBias
+from .module.biased_gmf                       import BiasedGMF
 
 # Content Based way...
 from .module.autoencoder.autoencoder          import AutoEncoder
