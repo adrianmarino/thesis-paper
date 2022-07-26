@@ -51,9 +51,7 @@ Otras métricas utilizadas:
 
 ## Hipótesis
 
-Intentó contestar las siguientes preguntas:
-
-* ¿Los modelos basados en deep learning obtienen mejores resultados que los modelos que no están basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
+* ¿Los modelos basados en deep learning obtienen mejores resultados que modelos no basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
 * ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
 
 ## Datos
