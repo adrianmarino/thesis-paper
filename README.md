@@ -101,7 +101,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
     * **Hibryd Models**
         * **CF + Sparce Auto-Encoder** (Pending)
         * **CF + Sentence Transformer** (Pending)
-    * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+* [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 
 ## Using or based on
