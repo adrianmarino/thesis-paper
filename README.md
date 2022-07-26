@@ -11,7 +11,7 @@ Este trabajo busca realizar una comparativa de distintos enfoques de recomendaci
 
 A continuacion se especifican los modelos a comparar.para moas detalle delos mismo serecomienda ver el documento de tesis del apartado anterior.
 
- *  **Memory based CF**: Bseline o modelo de referencia.
+ *  **Memory based CF**: Baseline o modelo de referencia.
     * **KNN (Distancia Coseno)**
       * User Based.
       * Item Based.
