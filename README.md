@@ -73,7 +73,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 ## Notebooks
 
-* [Data Pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
+* [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
 * [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/eda.ipynb)
 
 * Models    
