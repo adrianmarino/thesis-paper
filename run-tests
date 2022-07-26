@@ -1,0 +1,4 @@
+#!/bin/bash
+coverage run -m pytest
+rm -f coverage.svg
+coverage-badge -o coverage.svg
