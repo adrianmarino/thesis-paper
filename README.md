@@ -74,10 +74,6 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
 
 
-## Extras
-
-Dada la demanda de procesamiento que tienen estos modelos estoy implementado todo en [pytorch](https://pytorch.org) para poder usar GPU, ya que [scikit-learn](https://scikit-learn.org/stable/) no lo permite. También estuve trabajando en un modelo de capas para poder pasar como input las variables overview y tags de las películas ([Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)).
-
 ## Notebooks
 
 * [Preprocesamiento](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/data-preprocessing.ipynb)
