@@ -1,8 +1,8 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/adrianmarino/thesis-paper/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/adrianmarino/thesis-paper/tree/master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/adrianmarino/thesis-paper/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/adrianmarino/thesis-paper/tree/master)   ![Coverage](https://raw.githubusercontent.com/adrianmarino/thesis-paper/master/coverage.svg)
 
 # UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Híbridos 
 
-Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Es decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
+Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Ehttps://raw.githubusercontent.com/adrianmarino/thesis-paper/master/coverage.svgs decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
 ## Thesis
 
 [Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
