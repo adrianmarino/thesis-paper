@@ -100,7 +100,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
            * [Movie Tags Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sentence_transformer.ipynb)
            * [Ensemple CB recommender based on Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sentence_transformer.ipynb)
     * Enfoque Híbrido
-        * **Modelos Hibrido 1: Modelo CF + Sparce Autoencoder** (Pending)
+        * **Modelos Hibrido 1: Modelo CF + Sparce Auto-Encoder** (Pending)
         * **Modelos Hibrido 2: Modelo CF + Sentence Transformer** (Pending)
     * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
