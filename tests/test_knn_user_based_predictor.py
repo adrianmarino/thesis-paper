@@ -22,17 +22,15 @@ class TestKNNUserBasedPredictor:
         #   a-c: 3
         #   a-b or a-d: 5
 
-        predictor = ml.KNNUserBasedPredictor(
-            rm, 
-            distance=ml.CosineDistance()
-        )
+        predictor = ml.KNNUserBasedPredictor.from_rm(rm, ml.CosineDistance())
+
         user_idx = 0
         item_idx = 0
 
         # Perform
         predicted_rating = predictor.predict(
-            user_idx, 
-            item_idx, 
+            user_idx,
+            item_idx,
             n_neighbors=2,
             debug=True
         )

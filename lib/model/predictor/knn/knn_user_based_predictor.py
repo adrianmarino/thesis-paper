@@ -8,6 +8,11 @@ import torch
 
 class KNNUserBasedPredictor(AbstractPredictor):
     @staticmethod
+    def from_rm(rm, distance):
+        nn = NearestNeighbors(rm[:, :], distance)
+        return KNNUserBasedPredictor(rm, nn)
+
+    @staticmethod
     def from_data_frame(data, user_seq_col, movie_seq_col, rating_col, distance):
         rm = dt.RatingsMatrix.from_dataframe(data, user_seq_col, movie_seq_col, rating_col)
         nn = NearestNeighbors(rm[:, :], distance)
