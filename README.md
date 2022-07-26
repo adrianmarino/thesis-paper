@@ -1,44 +1,53 @@
 
 # UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Híbridos 
 
-La idea principal es comparar distintos enfoques para construir modelos de recomendación basados en filtros colaborativos e híbridos (es decir, una combinación entre filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura, funcionamiento de cada modelo y cada arquitectura propuesta.
+Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Es decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
+
+## Thesis
+
+[Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+
 
 ## Modelos
 
 A continuacion se especifican los modelos a comparar:
 
- *  **Memory based CF**: Sera el baseline o modelo de referencia, del cual queremos obtener mejores resultados.
-    * KNN usando distancia coseno.
-      * User Base Prediction.
-      * Item Base Prediction.
-      * Ensample de ambos enfoques.
+ *  **Memory based CF**: Bseline o modelo de referencia.
+    * **KNN (Distancia Coseno)**
+      * User Based.
+      * Item Based.
+      * Ensample User/Item Based.
+ 
  *  **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
-    *   **Generalized Matrix Factorization (GMF)**
-        * User/Item embeddings dot product.
-        * User/Item embeddings dot product + user/item biases.
+    *   **Generalized Matrix Factorization (GMF)**: User/Item embeddings dot product.
+    *   **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
     *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
-    *   **Deep Factorization Machine**.
- * **Enfoque Híbrido**: Combinando filtros colaborativos(CF) con el enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start que tiene CF.
-    * **Any CF model + Sparse auto-encoder + mean distance**: Se genera un embedding de items con los modelos de CF ya definidos y otro embedding de items con un auto-encoder. Finalmente se genera una lista de recomendaciones para un item promediando las distancias coseno de ambos modelos.
-    * **Any CF model + BERT + mean distance**: Item a Enfoque 1, pero se podria usar BERT para generar un embedding a partir del texto de overview y tags de un item/movie.
-    * **Any CF model + Sequence-to-sequence auto-encoder + mean distance**.
-    * **Any CF model + Any auto-encoder + weigthed mean distance**
-        * Promedio de las distancias coseno pesado por la cantidad de interacciones actuales del usuario.
-        * De esta forma, los usuarios con mas interaciones, tendran recomendaciones mas influenciada por CF que CB y vise versa.
-        * Los usuarios sin interacciones solo tendran recomendacionde del modelo CB ya que no hay aporte de similitudes del modelo CF. 
-        * Este enfoque es una variación de los enfoques anteriores.
- * **Ensample/Stacking de modelos**.
+    *   **Deep Factorization Machine**
+     
+ * **Enfoque Híbrido**: Combinacion de filtros colaborativos con enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start de CF.
+    * **Modelos Hibrido 1: Modelo CF + Sparce Autoencoder**
+        * Si el usaurio tiene menso de 20 inreracciones:
+            1. Se entrena un modelo de CF y generamos los embeddins de usuario e items.
+            2. Sparse auto-encoder: Se entrena un autoencoder para cada variable tipo texto(title, genery, tags y overview). Como resultado tenemos embedddinds para cada variable.
+            3. Finalmente se genera una lista de recomendaciones para un item promediando las distancias coseno con todos los embeddindgs: el embedding de items y todo los embeddins de variables tipo texto.
+            4. Se realiza un promedio pesado por cada veriable apra poder controlar cuando influye cada una en el rankeo final.
+        * Si el usaurio tiene mas de 20 interacciones
+            * Se usael modelo de CF. 
+            * Lo idea seria mezclar recomendaciones de ambos modelos ya que FC puede tener recomendaciones muy personalizadas o long tail. 
+    * **Modelos Hibrido 2: Modelo CF + Sentence Transformer**
+        * Es la misma idea que el modelo 1, pero se utiliza un modelo de lenguaje Sentence Transformer en vez de un Sparce autoencoder, el cual genera un embedding para cada frase de texto para variables tipo texto.     
+ * **Ensample/Stacking de modelos**
 
 ## Metricas
 
-Para comparar los modelos basados en filtros colaborativos estoy utilizando la métrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k ítems ordenados desc. por ratings predicho para el usuario; esta métrica, permite medir la frecuencia con que la que se encuentran X ratings en las primeras posiciones en una lista de ítems recomendados. Por ejemplo: ratings entre 4 y 5.
+Para comparar los modelos basados en filtros colaborativos se utiliza la métrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k ítems ordenados desc. por ratings predicho para el usuario; esta métrica, permite medir la frecuencia con que la que se encuentran X ratings en las primeras posiciones en una lista de ítems recomendados. Por ejemplo: ratings entre 4 y 5.
 
 Otras métricas utilizadas:
+
 * RMSE
-* FBetaScore
+* FBetaScore@K
 * Precision@K
 * Recall@K
-* FBetaScore@K
 
 ## Hipótesis
 
@@ -76,28 +85,32 @@ Dada la demanda de procesamiento que tienen estos modelos estoy implementado tod
 
 * Models
     * [Model Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_comparatives.ipynb)
-    * Memory based CF
-      * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
-    * Model based CF
-      * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
-      * [Generalized Matrix Factorization (GMF) biased](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
-      * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
-      * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
-    * Enfoque Híbrido
-       * **Any CF model + Sparse auto-encoder + mean distance**
-           * [Models: Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sparse_autoencoder.ipynb)
-           * [Models: Movie Overview Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sparse_autoencoder.ipynb)
-           * [Models: Movie Genres Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sparse_autoencoder.ipynb)
+    
+    * **Collaborative Filtering**
+        * **Memory based**
+          * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_knn.ipynb): Usando distancia coseno y distacia coseno ajustada.
+        * **Model based**
+          * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf.ipynb): Embedding's + dot product.
+          * [Biased Generalized Matrix Factorization (B-GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_gmf_bias.ipynb): Embedding's + dot product + user/item bias.
+          * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
+          * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_deep_fm.ipynb)
+    * **Content Based**
+       * **Sparse auto-encoder + promedio pesado**
+           * [Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sparse_autoencoder.ipynb)
+           * [Movie Overview Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sparse_autoencoder.ipynb)
+           * [Movie Genres Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sparse_autoencoder.ipynb)
            * [Ensemple CB recommender based on Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sparse_autoencoder.ipynb)
-       * Enfoque 2: **Pending**
-       * Enfoque 3: **Pending**
-       * Enfoque 4: **Pending**
+       * **Sentence Transformer + promedio pesado**
+           * [Movie Title Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_title_sentence_transformer.ipynb)
+           * [Movie Overview Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_overview_sentence_transformer.ipynb)
+           * [Movie Genres Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_genres_sentence_transformer.ipynb)
+           * [Movie Tags Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_tags_sentence_transformer.ipynb)
+           * [Ensemple CB recommender based on Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/models_movie_ensample_sentence_transformer.ipynb)
+    * Enfoque Híbrido
+        * **Modelos Hibrido 1: Modelo CF + Sparce Autoencoder** (Pending)
+        * **Modelos Hibrido 2: Modelo CF + Sentence Transformer** (Pending)
     * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
-
-## Thesis docs
-
-[Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
 
 ## Using or based on
 
