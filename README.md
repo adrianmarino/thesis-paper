@@ -56,7 +56,7 @@ Otras métricas utilizadas:
 
 ## Datos
 
-Para poder realizar las pruebas necesarias con ambios enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
+Para poder realizar las pruebas necesarias con ambos enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
 
 * Calificaciones de cada ítems(movies) por parte de los usuarios (CF).
 * Features propios de los ítems (CB).
@@ -64,7 +64,7 @@ Para poder realizar las pruebas necesarias con ambios enfoques (filtros colabora
 Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
-* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior pero tiene varios features para las películas que es lo que necesito.
+* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
 
 
 ## Referencias
