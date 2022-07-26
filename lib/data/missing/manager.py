@@ -12,11 +12,11 @@ class MissingsManager:
     def __init__(self, rules = ColumnMissingRules()):
         self._rules   = rules
 
-    def add_rule(self, column, rule): 
+    def add_rule(self, column, rule):
         self._rules.add_rule(column, rule)
         return self
-    
-    def add_rule_fn(self, column, fn): 
+
+    def add_rule_fn(self, column, fn):
         self._rules.add_rule_fn(column, fn)
         return self
 
@@ -26,12 +26,12 @@ class MissingsManager:
             col_type   = dtype(df[column])
             rule       = self._rules.by(column, col_type)
             col_values = df[column].values
-            
+
             indexes  = []
             for index, col_value in enumerate(col_values):
                 if rule.is_missing(col_value):
                     indexes.append(index)
-        
+
             total          = len(col_values)
             missings_count = len(indexes)
 
@@ -41,7 +41,7 @@ class MissingsManager:
                     row['rule'] = rule.__class__.__name__
                     row['indexes'] = indexes
                 data.append(row)
-        
+
         return pd.DataFrame(data if len(data) > 0 else [{'Column': 'Not found columns with missing values'}])
 
 
@@ -66,7 +66,7 @@ class MissingsManager:
             return df
 
         logging.info(f'Remove columns with missing >= {max_percent} %')
-        
+
         columns = report[report['Percent (%)'] >= max_percent]['Column']
 
         return df.drop(columns, axis=1)

@@ -1,6 +1,7 @@
 import data as dt
 import numpy as np
 import pandas as pd
+import torch
 
 
 select   = lambda df, columns: df[columns]
@@ -30,7 +31,7 @@ def join_str_list(df, column, join_str=' '):
 
 def append_emb_vectors(df, embedding, column):
     df['temp_seq'] = df.index
-    df[f'{column}_embedding'] = df['temp_seq'].apply(lambda it: embedding[it, :].cpu().detach().numpy())
+    df[f'{column}_embedding'] = df['temp_seq'].apply(lambda it: embedding[it, :].cpu().detach().numpy() if torch.is_tensor(embedding[it, :]) else embedding[it, :])
     return drop(df, ['temp_seq'])
 
 

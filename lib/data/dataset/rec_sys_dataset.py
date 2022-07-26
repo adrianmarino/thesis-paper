@@ -16,7 +16,7 @@ class RecSysDataset(Dataset):
         self._device           = device
 
     def __len__(self): return len(self.data)
-    
+
     def __getitem__(self, rows_idx):
         try:
             return self._to_feats_target(self.data.iloc[rows_idx, :])
