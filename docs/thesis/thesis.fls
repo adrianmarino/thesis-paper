@@ -679,6 +679,12 @@ INPUT ./thesis.toc
 INPUT thesis.toc
 INPUT thesis.toc
 OUTPUT thesis.toc
+INPUT ./images/clasificacion-sis-rec.png
+INPUT ./images/clasificacion-sis-rec.png
+INPUT ./images/clasificacion-sis-rec.png
+INPUT ./images/clasificacion-sis-rec.png
+INPUT ./images/clasificacion-sis-rec.png
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
@@ -690,7 +696,6 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT ./images/rating-barplot.png
 INPUT ./images/rating-barplot.png
 INPUT ./images/rating-barplot.png
