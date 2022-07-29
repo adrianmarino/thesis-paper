@@ -20,13 +20,17 @@ class EnsembleWeightedDistanceMatrixRecommender(Recommender):
         result = pd.DataFrame()
         for column, rec_df in rec_dfs.items():
             rec_df = rec_df.rename(columns={'distance': f'{column}_distance'})
-            result = rec_df if result.empty else pd.merge(result, rec_df, on='id')
+            if result.empty:
+                result = rec_df
+            else:
+                rec_df = rec_df.drop(columns=['index', 'title', 'imdb_id'])
+                result = pd.merge(result, rec_df, on='id')
 
         result['distance'] = weighted_mean(result, self.__weights)
         result = result[['distance', 'title', 'imdb_id']]
 
-        return SingleRecommenderResult(
-            name = [r.column for r in self.__recommenders],
-            item = self.df.iloc[[ item_index]][['id', 'title', 'imdb_id']],
-            recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[:k]
-        )
+        name = [r.column for r in self.__recommenders]
+        item = self.df.iloc[[ item_index]][['id', 'title', 'imdb_id']]
+        recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[:k]
+
+        return SingleRecommenderResult(name, item, recommendations)
