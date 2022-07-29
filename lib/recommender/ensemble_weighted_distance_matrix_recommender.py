@@ -15,6 +15,9 @@ class EnsembleWeightedDistanceMatrixRecommender(Recommender):
         self.df             = recommenders[0].df
 
     def recommend(self, item_index, user_id=None, k=5):
+        if k != None:
+            k +=1
+
         rec_dfs = {r.column: r.recommend(item_index, k=None).recommendations for r in self.__recommenders}
 
         result = pd.DataFrame()
@@ -31,6 +34,6 @@ class EnsembleWeightedDistanceMatrixRecommender(Recommender):
 
         name = [r.column for r in self.__recommenders]
         item = self.df.iloc[[ item_index]][['id', 'title', 'imdb_id']]
-        recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[:k]
+        recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[1:k]
 
         return SingleRecommenderResult(name, item, recommendations)

@@ -20,6 +20,9 @@ class DistanceMatrixRecommender(Recommender):
         self.column    = column.split("_embedding")[0]
 
     def recommend(self, item_index, user_index=None, k=5):
+        if k:
+            k +=1
+
         similar_movies = self.dist_matrix[item_index, :].cpu().numpy()
         similar_indexes = np.argsort(similar_movies)[:k]
 
@@ -32,5 +35,5 @@ class DistanceMatrixRecommender(Recommender):
         return SingleRecommenderResult(
             self.column,
             self.df.iloc[[item_index]][['id', 'title', 'imdb_id']],
-            recommendations.reset_index()
+            recommendations.reset_index()[1:k]
         )

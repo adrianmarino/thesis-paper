@@ -26,6 +26,7 @@ class SingleRecommenderResult(RecommenderResult):
         self.__show_table(self.item, drop=['imdb_id', 'id'])
 
         print(f'Recommendations')
+
         self.__show_table(self.recommendations)
 
     def __show_table(self, df, drop=['imdb_id']):
