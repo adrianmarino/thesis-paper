@@ -23,12 +23,12 @@ class SingleRecommenderResult(RecommenderResult):
     def show(self):
         print(f'\nRecommender: {self.name}')
         print(f'Item')
-        self.__show_table(self.item)
+        self.__show_table(self.item, drop=['imdb_id', 'id'])
 
         print(f'Recommendations')
         self.__show_table(self.recommendations)
 
-    def __show_table(self, df):
+    def __show_table(self, df, drop=['imdb_id']):
         df = df.copy()
         df['image'] = df['imdb_id'].apply(lambda id: render_image(self.__client, id))
-        display(HTML(df.to_html(escape=False)))
+        display(HTML(df.drop(columns=drop).to_html(escape=False)))
