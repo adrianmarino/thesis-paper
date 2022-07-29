@@ -21,6 +21,7 @@ dependencies:
     - tqdm
     - sentence-transformers
     - coverage-badge
+    - requests
     - pip
     - pip:
         - pytorch-common==0.0.19

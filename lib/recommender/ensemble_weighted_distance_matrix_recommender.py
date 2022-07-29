@@ -3,7 +3,6 @@ from .recommender import Recommender
 import data as dt
 from .result.impl.single_recommender_result import SingleRecommenderResult
 
-
 def weighted_mean(df, weights):
     total = [df[f'{column}_distance'] * weight for column, weight in weights.items()]
     return sum(total) / len(weights.items())
@@ -24,10 +23,10 @@ class EnsembleWeightedDistanceMatrixRecommender(Recommender):
             result = rec_df if result.empty else pd.merge(result, rec_df, on='id')
 
         result['distance'] = weighted_mean(result, self.__weights)
-        result = result[['distance', 'title'] + [r.column for r in self.__recommenders]]
+        result = result[['distance', 'title', 'imdb_id']]
 
         return SingleRecommenderResult(
             name = [r.column for r in self.__recommenders],
-            item = self.df.iloc[[ item_index]][['id', 'title']],
+            item = self.df.iloc[[ item_index]][['id', 'title', 'imdb_id']],
             recommendations = result.sort_values(by=['distance']).pipe(dt.reset_index)[:k]
         )

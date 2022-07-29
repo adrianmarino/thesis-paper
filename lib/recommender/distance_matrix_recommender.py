@@ -27,10 +27,10 @@ class DistanceMatrixRecommender(Recommender):
         recommendations['distance'] = 0
         for idx in similar_indexes:
            recommendations.iloc[idx, recommendations.columns.get_loc('distance')] = similar_movies[idx]
-        recommendations = recommendations.iloc[similar_indexes][['distance', 'id', 'title', self.column]]
+        recommendations = recommendations.iloc[similar_indexes][['distance', 'id', 'title', 'imdb_id']]
 
         return SingleRecommenderResult(
             self.column,
-            self.df.iloc[[item_index]][['id', 'title']],
+            self.df.iloc[[item_index]][['id', 'title', 'imdb_id']],
             recommendations.reset_index()
         )
