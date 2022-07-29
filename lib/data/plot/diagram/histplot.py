@@ -49,7 +49,7 @@ def histplot(
     if show_mean:
         ax_hist.axvline(mean,   color='r', linestyle='--', label=f'Mean ({round(mean, decimals)})')
     if show_median:
-        ax_hist.axvline(median, color='g', linestyle='-',  label=f'Mode ({round(median, decimals)})')
+        ax_hist.axvline(median, color='g', linestyle='-',  label=f'Median ({round(median, decimals)})')
     if show_mode:
         ax_hist.axvline(mode_value,   color='b', linestyle='-',  label=f'Mode ({round(mode_value, decimals)})')
     if show_outliers_leyend and not remove_outliers:
