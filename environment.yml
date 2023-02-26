@@ -22,6 +22,9 @@ dependencies:
     - sentence-transformers
     - coverage-badge
     - requests
+    - pymongo
+    - torchdata
+    - torchtext
     - pip
     - pip:
         - pytorch-common==0.0.19

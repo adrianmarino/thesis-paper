@@ -18,3 +18,10 @@ from .pipes import  select, distinct, rename, drop, \
                     tf_idf, sum_cols, concat_columns
 
 from .pca   import  PCASummary, PCAAnalisys
+
+from .aggregations import AggFn
+
+
+from .outliers import n_iqr_range
+
+from .data_sequence import sequences_to_feats_target

@@ -1,16 +1,22 @@
 import os
 import subprocess
 import logging
+from pymongo import MongoClient
+
 
 
 class Mongo:
+    @staticmethod
+    def connect(host = "127.0.0.1", port = 27017):
+        return MongoClient(host = host, port = port)
+
     @staticmethod
     def import_csv(database, file_paths):
         processes = []
         for file_path in file_paths:
             collection = os.path.basename(file_path).split('.csv')[0]
 
-            processes.append(subprocess.Popen(
+            """ processes.append(subprocess.Popen(
                 [
                     'mongoimport', 
                     '-d', 
@@ -25,7 +31,7 @@ class Mongo:
                 ], 
                 stdout=subprocess.PIPE, 
                 stderr=subprocess.STDOUT
-            ))
+            ))"""
 
         for p in processes:
             p.wait()

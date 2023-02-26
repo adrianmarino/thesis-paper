@@ -1,11 +1,13 @@
 from ..rec_sys_dataset import RecSysDataset
 import pandas as pd
 import logging
+from .movie_embedding_generator import MovieEmbeddingGenerator
 
 
 class MovieLensTMDbDataset(RecSysDataset):
     def __init__(self, dataset, transform, target_transform, device):
         super().__init__(dataset, transform, target_transform, device)
+
 
     def split_train_eval(self, split_year=2018):
         # ----------
@@ -64,6 +66,7 @@ class MovieLensTMDbDataset(RecSysDataset):
         logging.info(f'Train: {(train_data.shape[0]/len(self))*100:.2f} % - Test: {(test_data.shape[0]/len(self))*100:.2f} %')
 
         return train_data, test_data
+
 
     def __subset(self, data):
         return MovieLensTMDbDataset(
