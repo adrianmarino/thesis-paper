@@ -10,7 +10,7 @@ Este trabajo busca realizar una comparativa de distintos enfoques de recomendaci
 
 ## Modelos
 
-A continuacion se especifican los modelos a comparar.para moas detalle delos mismo serecomienda ver el documento de tesis del apartado anterior.
+A continuación se especifican los modelos a comparar.para moas detalle de los mismo se recomienda ver el documento de tesis del apartado anterior.
 
  *  **Memory based CF**: Baseline o modelo de referencia.
     * **KNN (Distancia Coseno)**
@@ -24,21 +24,21 @@ A continuacion se especifican los modelos a comparar.para moas detalle delos mis
     *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
     *   **Deep Factorization Machine**
      
- * **Enfoque Híbrido**: Combinacion de filtros colaborativos(CF) con enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start de CF.
-    * **Modelos Hibrido 1: Modelo de CF + Sparse Auto-Encoder (CB)**
-        * Si el usaurio tiene menos de 20 interacciones:
+ * **Enfoque Híbrido**: Combinación de filtros colaborativos(CF) con enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start de CF.
+    * **Modelos Híbrido 1: Modelo de CF + Sparse Auto-Encoder (CB)**
+        * Si el usuario tiene menos de 20 interacciones:
             1. Se entrena un modelo de CF y generamos los embedding de usuarios e items.
             2. Sparse Auto-Encoder: Se entrena un Auto-Encoder para cada variable tipo texto (title, genres, tags y overview). Como resultado tenemos embeddings para cada variable.
             3. Finalmente, se genera una lista de recomendaciones para un item promediando las distancias coseno con todos los embeddings: el embedding de items y todo los embeddings de variables tipo texto generados con los Auto-Encoders.
-            4. Se realiza un promedio pesado por cada veriable para poder controlar cuanto influye cada una en el ranking final.
+            4. Se realiza un promedio pesado por cada variable para poder controlar cuanto influye cada una en el ranking final.
         * Cuando el usuario tiene mas de 20 interacciones:
             * Se usa el modelo de CF. 
             * Lo idea seria mezclar recomendaciones de ambos modelos, ya que CF puede tener recomendaciones muy personalizadas o long tail. 
-    * **Modelos Hibrido 2: Modelo CF + Sentence Transformer**
+    * **Modelos Híbrido 2: Modelo CF + Sentence Transformer**
         * Es la misma idea que el modelo 1, pero se utiliza un modelo de lenguaje Sentence Transformer en vez de un Sparse Auto-Encoder, el cual genera un embedding para cada frase de texto para variables tipo texto.     
  * **Ensample/Stacking de modelos**
 
-## Metricas
+## Métricas
 
 Para comparar los modelos basados en filtros colaborativos se utiliza la métrica **Mean Average Precision at k (mAP@k)**. Dada una lista de k ítems ordenados desc. por ratings predicho para el usuario; esta métrica, permite medir la frecuencia con que la que se encuentran X ratings en las primeras posiciones en una lista de ítems recomendados. Por ejemplo: ratings entre 4 y 5.
 
@@ -64,7 +64,7 @@ Para poder realizar las pruebas necesarias con ambos enfoques (filtros colaborat
 Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
-* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el dataset anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
+* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el \textit{dataset} anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
 
 
 ## Referencias
