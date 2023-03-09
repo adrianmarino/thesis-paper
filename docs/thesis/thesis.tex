@@ -186,53 +186,95 @@ item(Película). Otro punto importante, es que todos los usuarios tienen al meno
 no tener problemas de baja performance por falta de interacciones. 
 De esta forma, este \textit{dataset} sera muy util para entrenar modelos de recomendación basados en filtros colaborativos
 y ademas cuenta con columnas extras como \textit{tags}, que serán útiles a la hora de entrenar modelos basados en contenido.
-Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 tags y 62.423 películas. Estos datos fueron registrados por 162.541 usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Las columnas que se utilizaron son las siguientes:
+Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 tags y 62.423 películas. Estos datos fueron registrados por 162.541 usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Las columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
-\begin{itemize}
-	\item userId 
-	\item movieId
-	\item timestamp: Fecha en la cual el usuario califico el item(movieId). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.
-	\item rating:    Calificación. Es un valor discreto numérico: 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5.
-	\item tags:      Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película.
-	\item timestamp
-\end{itemize}
+
+
+
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.8\linewidth}}
+	\hline
+		Columna         & Descripción \\
+	\hline
+	\textit{userId}     & Identificador univoco de un usuario.\\
+	\textit{movieId}    & Identificador univoco de una película.\\
+	\textit{timestamp}  & Fecha en la cual el usuario califico el item(movieId). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
+	\textit{rating}     & Calificación. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
+	\textit{tags}       & Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película. \\
+	\hline
+	\end{tabular}
+	\caption{
+		Columnas del \textit{dataset} \textit{Movie Lens} relevantes para este trabajo practico.
+	}
+	\label{table:movieLensColumns}
+\end{table}
 
 
 \subsection{\href{https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv}{TMDB Movie Dataset}}
 
 Este \textit{dataset} no tiene calificaciones personalizadas de los items como sucede con el \textit{dataset} anterior, 
 pero tiene varios features referentes a películas que pueden ser muy útiles para modelos basados en contenido e inclusive
-modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene datos de 5.000 películas con los siguientes campos:
+modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene datos de 5.000 películas y sus columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
-\begin{itemize}
-	\item imdb\_id: identificador univoco en la base de datos de imdb.
-	\item title y original\_title
-	\item release\_date: Fecha de estreno.
-	\item status: Define si la película fue estrenada o esta en desarrollo.
-	\item overview:	Sinopsis de la película.
-	\item poster\_path: Url de imagen de portada.
-	\item languages: Lenguaje original y doblaje.
-	\item genres: Géneros.
-	\item adult: Es para adultos?
-	\item popularity: Indice de popularidad.
-	\item vote average/count: Cantidad y media de votos.
-	\item keywords/tagline: \textit{tags}.
-	\item budget/revenue: Presupuesto.
-	\item production companies/countries: Países y compañía que produjeron la película. 
-	\item homepage: Sitio.
-\end{itemize}
+
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.6\linewidth}}
+	\hline
+		Columna                      & Descripción \\
+	\hline
+	\textit{imdb\_id}                & identificador univoco en la base de datos de imdb. \\
+	\textit{title y original\_title} & Título y título original. \\
+	\textit{release\_date}           & Fecha de estreno. \\
+	\textit{status}                  & Define si la película fue estrenada o esta en desarrollo. \\
+	\textit{overview}                & Sinopsis de la película. \\
+	\textit{poster\_path}            & URL de imagen de portada de la película. \\ 
+	\textit{languages}               & Lenguaje original y doblaje. \\
+	\textit{genres}                  & Géneros. \\
+	\textit{adult}                   & ¿Solo es apta para adultos? \\
+	\textit{popularity}              & Indice de popularidad. \\
+	\textit{vote average/count}      & Cantidad y media de votos. \\
+	\textit{keywords/tagline} y \textit{tags} & tags o palabras clase ingresadas por lo usuarios para definir una película. \\
+	\textit{budget/revenue}                   & Presupuesto destinado a la realización de la película. \\
+	\textit{production companies/countries}   & Países y compañía que produjeron la película. \\ 
+	\textit{homepage}                         & Sitio web oficial. \\
+
+	\hline
+	\end{tabular}
+	\caption{
+		Columnas del \textit{dataset} \textit{TMDB} relevantes para este trabajo practico.
+	}
+	\label{table:tmdbColumns}
+\end{table}
+
 
 
 \subsection{Preprocesamiento}
 
 Como parte inicial de la etapa de pre-procesamiento de datos se utilizo una base de datos \textit{MongoDB}. Se utilizo \textit{MongoDB} y no \textit{Pandas} debido a que pandas requiere cargar todo el \textit{dataset} en memoria. Si bien este problema se puede lidiar aumentado el tamaño de la memoria \textit{Swap}(Linux) o la memoria virtual(Windows), puede ocasionar caídas de procesos y lentitudes innecesarias. En este caso, se selecciono una base de datos de tipo documento, la cual no necesita cargar todos los datos en memoria y por otro lado, existe la posibilidad de escalar la base de datos a mas nodos en caso de ser necesario.
-Ambos \textit{datasets} contienen varios archivos \textit{csv} los cuales vamos a llamar \textit{tablas}, de los cuales se utilizaron los siguientes:
+Ambos \textit{datasets} contienen varios archivos \textit{csv} los cuales vamos a llamar \textit{tablas}. En la tabla ~\ref{table:tableRatings} a continuación se especifican las columna utilizadas:
 
-\begin{itemize}
-	\item movie\_metadata: Pertenece al \textit{dataset} \textit{TMDB}. Es la fuente de verdad de las cual se toman columnas con datos referentes a películas.
-	\item tags: Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron los tags o palabras clave dadas de alta por los usuarios por cada película.
-	\item ratings: Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron las calificaciones de los usuario para las películas que fueron calificadas.
-\end{itemize}
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.8\linewidth}}
+	\hline
+		Columna              & Descripción \\
+	\hline
+	\textit{movie\_metadata} & Pertenece al \textit{dataset} \textit{TMDB}. Es la fuente de verdad de las cual se toman columnas con datos referentes a películas. \\
+	\textit{tags}            & Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron los tags o palabras clave dadas de alta por los usuarios por cada película. \\
+	\textit{ratings}         & Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron las calificaciones de los usuario para las películas que fueron calificadas. \\
+	\hline
+	\end{tabular}
+	\caption{
+		Columnas del \textit{dataset} \textit{Movie Lens} utilizadas en este trabajo practico.
+	}
+	\label{table:tableRatings}
+\end{table}
+
 
 De esta forma, primero se realizo un merge o join de las tabla ratings y tags por las columnas user\_id y movie\_id,
  ya que tenemos dos columnas que representan interacciones de usuarios: 
@@ -246,52 +288,92 @@ En segundo lugar se hizo merge entre las tablas ratings\_tags\_v1 y movie\_metad
 
 Finalmente se termino con dos tablas como resultado:
 
-\begin{itemize}
-	\item movies\_v4.csv: Contente toda la información de las películas, incluidos todos los tags cargados por los usuarios que calificaron un película.
-	\item ratings\_tags\_v1.csv: Contiene tanto las calificaciones como los tags para cada usuario y película. 
-\end{itemize}
+
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.8\linewidth}}
+	\hline
+		Filename            & Descripción \\
+	\hline
+	\textit{movies\_v4.csv} & Contente toda la información de las películas, incluidos todos los tags cargados por los usuarios que calificaron un película. \\
+	\textit{ratings\_tags\_v1.csv} & Contiene tanto las calificaciones como los tags para cada usuario y película. \\
+	\hline
+	\end{tabular}
+	\caption{
+		Archivos resultado del pre procesamiento. Estos forman parte del \textit{dataset} de entrenamiento y evaluación en este trabajo practico.
+	}
+	\label{table:tableRatings}
+\end{table}
 
 \subsubsection{Tabla de interacciones}
 
-La tabla ratings\_tags\_v1 tiene datos a nivel interacción usuario-item. De esta forma a nivel usuario-item se cuenta con la calificación de la película realizada por el usuario, ademas de los tags que el usuario cargo para esa películas. Estos tags no son mas que una lista de palabras que son representativas de la película en cuestión. 
+La tabla \textit{ratings\_tags\_v1}(\ref{table:interactionsTableDef}) tiene datos a nivel interacción usuario-item. De esta forma a nivel usuario-item se cuenta con la calificación de la película realizada por el usuario, ademas de los \textit{tags} que el usuario cargo para esa películas. Estos \textit{tags} no son mas que una lista de palabras que son representativas de la película en cuestión. 
 Por ejemplo, para la película \textit{Toy Story} deberíamos tener palabras referente a la misma como: boss, woody, 
 animation, 3d, etc.. Finalmente, contamos con la fecha en la cual se realizaron esta interacciones. Se entiende 
-que la calificación y los tags se ingresaron en el mismo momento.
+que la calificación y los \textit{tags} se ingresaron en el mismo momento.
 
 
-La definición de la tabla es la siguiente:
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.8\linewidth}}
+	\hline
+		Columna        & Descripción \\
+	\hline
 
-\begin{itemize}
-	\item user\_id:  Existen 13.281 usuarios.
-	\item movie\_id: Existen 33.444 películas.
-	\item timestamp: Fecha en la cual el usuario califico el item(movie\_id). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.
-	\item rating:    Calificación. Es un valor discreto numérico: 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5.
-	\item tags:      Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película.
-\end{itemize}
-
+	\textit{user\_id}  & Existen 13.281 usuarios. \\
+	\textit{movie\_id} & Existen 33.444 películas. \\
+	\textit{timestamp} & Fecha en la cual el usuario califico el item(movie\_id). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
+	\textit{rating}    & Calificación. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
+	\textit{tags}      & Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película. \\
+	\hline
+	\end{tabular}
+	\caption{
+		Definición de tabla \textit{ratings\_tags\_v1} o tabla de interacciones.
+	}
+	\label{table:interactionsTableDef}
+\end{table}
 
 \clearpage
 \subsubsection*{Tablas de metadata de películas}
 
-La tabla movies\_v4 cuenta con información de cada película seleccionada de ambos \textit{datasets}. 
+La tabla \textit{movies\_v4} (\ref{table:moviesTableDef}) cuenta con información de cada película seleccionada de ambos \textit{datasets}. 
 
-\begin{itemize}
-	\item title: 	Título de la película.
-	\item native\_languaje: Lenguaje original en el cual fue filmada la película.
-	\item genres:  	Ambos \textit{dataset} cuentan con una lista de géneros a los adiare la película.
-	\item overview:	Sinopsis de la película.
-	\item poster:	Enlaces al detalle de la película en imdb y TMDB. Estos enlaces
-					permiten hace join con mas datos que se encuentren en la descripción de estos
-			 		sitios. En este trabajo solo se utilizara la imagen de la tapa de las película
-					a modo de visualización.
-	\item release: 		Fecha de lanzamiento.
-	\item budget: 		Presupuesto destinado para la realización el film.
-	\item popularity: 	Popularidad.
-	\item vote\_count: 	Cantidad de votos por película.
-	\item vote\_mean: 	Cantidad media de votos por película.
-	\item tags:         Son los tags cargados por todos los usuarios que interactuaron con la película. 
-						Es la mismas información que tenemos en la tabla de interacción pero ahora a nivel item.
-\end{itemize}
+
+\begin{table}[!htb]
+	\centering
+	\footnotesize
+	\begin{tabular}{l | p{0.8\linewidth}}
+	\hline
+		Columna       & Descripción \\
+	\hline
+
+	\textit{title}             	& Título de la película. \\
+	\textit{native\_languaje} 	& Lenguaje original en el cual fue filmada la película. \\
+	\textit{genres}				& Ambos \textit{dataset} cuentan con una lista de géneros a los que adiare la película. \\
+	\textit{overview}			& Sinopsis de la película. \\
+	\textit{poster} 			& Enlaces al detalle de la película en \textit{imdb} y \textit{TMDB}. Estos enlaces
+									permiten hace join con mas datos que se encuentren en la descripción de estos
+			 						sitios. En este trabajo solo se utilizara la imagen de la tapa de las película
+									a modo de visualización. \\
+	\textit{release}  			& Fecha de lanzamiento. \\
+	\textit{budget}  			& Presupuesto destinado para la realización el film. \\
+	\textit{popularity}  		& Popularidad. \\
+	\textit{vote\_count}  		& Cantidad de votos por película. \\
+	\textit{vote\_mean}  		& Cantidad media de votos por película. \\
+	\textit{tags}  				& Son los tags cargados por todos los usuarios que interactuaron con la película. 
+									Es la mismas información que tenemos en la tabla de interacción pero ahora a nivel item. \\
+
+	\hline
+	\end{tabular}
+	\caption{
+		Definición de tabla \textit{movies\_v4} o tabla de películas.
+	}
+	\label{table:moviesTableDef}
+\end{table}
+
+
 
 \subsubsection*{Valores faltantes}
 
@@ -558,9 +640,9 @@ Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas
 \begin{description}
 	\item[Lista de tuplas]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	Tuplas = [<u_1; i_1; r_{u_1, i_1}>,...,<u_n; i_m; r_{u_n, i_m}>]
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -578,7 +660,7 @@ Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila 
 \begin{description}
 	\item[Matriz de calificaciones]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	Calificaciones_{u,i} =
 	\begin{pmatrix}
 	r_{1,1} & r_{1,2} & \cdots & r_{1,i} \\
@@ -586,7 +668,7 @@ Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila 
 	\vdots  & \vdots  & \ddots & \vdots  \\
 	r_{u,1} & r_{u,2} & \cdots & r_{u,i}
 	\end{pmatrix}
-\end{equation*}
+\end{equation}
 
 \begin{description}
 	\item[Donde:]
@@ -606,7 +688,7 @@ Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ r
 \begin{description}
 	\item[Matriz de distancias]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	Distancias_{u_a,u_b} =
 	\begin{pmatrix}
 	d_{1,1} & d_{1,2} & \cdots & d_{1,u_b} \\
@@ -614,7 +696,7 @@ Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ r
 	\vdots  & \vdots  & \ddots & \vdots  \\
 	d_{u_a,1} & d_{u_a,2} & \cdots & d_{u_a,u_b} 
 	\end{pmatrix}
-\end{equation*}
+\end{equation}
 
 
 \begin{description}
@@ -625,7 +707,7 @@ Cabe aclarar que cada vector fila $F_u$ de la matriz de $Calificaciones_{u,i}$ r
 \end{itemize}
 
 
-En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En \href{https://github.com/adrianmarino/knn-cf-rec-sys/blob/master/notebooks/knn-cf-rec-sys.ipynb}{trabajos anteriores} donde se utilizo una muestra del mismo \textit{dataset}, se encontró que las distancias que mejor ajustan a este dominio son las siguientes:
+En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En  \href{https://github.com/adrianmarino/knn-cf-rec-sys/blob/master/notebooks/knn-cf-rec-sys.ipynb}{trabajos anteriores} donde se utilizo una muestra del mismo \textit{dataset}, se encontró que las distancias que mejor ajustan a este dominio son las siguientes:
 
 \begin{itemize}
 	\item Distancia Coseno Ajustado.
@@ -642,9 +724,9 @@ Luego, para este trabajo se eligió utilizar la \textit{Distancia Coseno}, ya co
 La distancia coseno es una medida de similitud entre dos vectores en un espacio vectorial que posee un producto interno. La distancia coseno entre dos vectores se mide en grados. 
 De esta forma, cuanto menor es el angulo entre dos vectores mas similares son entre si. De forma contraria, cuando mayor es el angulo entre dos vectores menos similares son entre si.
 
-\begin{equation*}
+\begin{equation}
 	Distancia \mspace{3mu}Coseno_{ua, ub} = \frac{ \sum_{i \in I} r_{ua, i}.r_{ub, i}}{\sqrt{\sum_{i \in I} r_{ua, i}^2}.\sqrt{\sum_{i \in I} r_{ub, i}^2}  }, ua \neq ub
-\end{equation*}
+\end{equation}
 
 \begin{description}
 	\item[Donde:]
@@ -661,9 +743,9 @@ De esta forma, cuanto menor es el angulo entre dos vectores mas similares son en
 \begin{description}
 	\item[Similitud Coseno]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	Similitud \mspace{3mu}Coseno_{ua, ub} = 1- Distancia \mspace{3mu}Coseno_{ua, ub}
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -680,9 +762,9 @@ Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicc
 
 En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
-\begin{equation*}
+\begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
-\end{equation*}
+\end{equation}
 
 \begin{description}
 	\item[Donde:]
@@ -705,9 +787,9 @@ Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás us
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
 
 
-\begin{equation*}
+\begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i} = \frac{\sum_{o \in O} r_{u, o}. w_{i, o} }{\sum_{o \in O} w_{i, o} }, i \neq o
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -805,9 +887,9 @@ Este modelo se puede construir fácilmente realizando el producto escalar de dos
 
 En términos matemáticos este modelo realiza la siguiente operación, en cada paso hacia adelante (\textit{forward-pass}):
 
-\begin{equation*}
+\begin{equation}
 	\tilde{r}_{u, i} = V_u . V_i^{T}
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -819,9 +901,9 @@ En términos matemáticos este modelo realiza la siguiente operación, en cada p
 
 En términos matriciales podemos verlo de la siguiente manera:
 
-\begin{equation*}
+\begin{equation}
 	\tilde{R} = U.I
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -834,9 +916,9 @@ En términos matriciales podemos verlo de la siguiente manera:
 
 El tamaño de la dimensión de factores latentes como ya se vio anteriormente en el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a ajustar. \href{https://link.springer.com/chapter/10.1007/978-3-642-38844-6_3}{Se ha demostrado} que realizar factorización de matrices con un factor latente de tamaño 1 es equivalente a un modelo de recomendación por popularidad, es decir que recomienda los items mas populares sin tener en cuenta la personalización de las recomendaciones. Luego, a medida que vamos incrementando el tamaño del factor latente estar recomendaciones serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar(overfitting) y por ende la calidad de las recomendaciones comentara a empeorar. Para solucionar este se suelen agregar términos de regularización en la función de error a minimizar:
 
-\begin{equation*}
+\begin{equation}
 \underset{H, W}{\operatorname{arg\,min}}\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
-\end{equation*}
+\end{equation}
 \begin{description}
 \item[Donde:]
 \end{description}
@@ -892,9 +974,9 @@ Formalmente, si tenemos:
 
 podemos definir el modelo para una \textit{máquina de factorización} de grado dos de ls siguiente forma:
 
-\begin{equation*}
+\begin{equation}
 \hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \sum_{i=1}^d\sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -914,7 +996,7 @@ De esta forma los dos primeros términos corresponden al modelo de regresión li
 Al aplicar un método de optimización con las máquinas de factorización, como puede el método del gradiente descendente, se puede llegar fácilmente a una complejidad del orden $\mathcal{O}(kd^2)$, ya que se deben calcular todas las interacciones de a pares. Para resolver este problema de insuficiencia, podemos reorganizar el tercer término del método, lo que podría reducir en gran medida el costo de cálculo, lo que lleva a una complejidad de tiempo de orden lineal $\mathcal{O}(kd)$. A continuación se describe los pasas para bajar el nivel de complejidad del método:
 
 
-\begin{equation*}
+\begin{equation}
 \begin{split}
 &=\sum_{i=1}^d \sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j \\
 &= \frac{1}{2} \sum_{i=1}^d \sum_{j=1}^d\langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j - \frac{1}{2}\sum_{i=1}^d \langle\mathbf{v}_i, \mathbf{v}_i\rangle x_i x_i \\
@@ -922,13 +1004,13 @@ Al aplicar un método de optimización con las máquinas de factorización, como
 &=  \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i) (\sum_{j=1}^d \mathbf{v}_{j, l}x_j) - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2 \big ) \\
 &= \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i)^2 - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2)
 \end{split}
-\end{equation*}
+\end{equation}
 
 Con esta re-formulación de último termino, la complejidad del método se reduce considerablemente. Además, para las variables ralas, solo se deben computar los valores distintos de cero para que la complejidad general sea lineal. Finalmente la expresión del método aplicada esta re-formulación queda como sigue:
 
-\begin{equation*}
+\begin{equation}
 	\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \frac{1}{2} \sum_{l=1}^k \big ((\sum_{i=1}^d \mathbf{v}_{i, l} x_i)^2 - \sum_{i=1}^d \mathbf{v}_{i, l}^2 x_i^2)
-\end{equation*}
+\end{equation}
 
 
 \subsection{\textit{Deep Factorization Machine (DeepFM)}}
@@ -966,9 +1048,9 @@ Si bien esta métrica no es la métrica por excelencia a usar en el ámbito de s
 \begin{description}
 	\item[Definición:]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	\operatorname{RMSE}=\sqrt{  \frac{1}{N} \sum_{i=1}^N (y_i - \hat y_i)^2}
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -1006,13 +1088,13 @@ Esta métricas es utilizada en problema de clasificación pero también se puede
 \begin{description}
 	\item[Promedio de la precisión sobre una lista de K elementos \textit{AP\makeatletter@k}):]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	\begin{split}
 	& \operatorname{AP\makeatletter@k}=\frac{1}{N(k)} \sum_{i=1}^k \frac{ TP(i)}{i}, \\
 	& \\
 	& \operatorname{N(k)} = min(k, TP_{total}) \\
 	\end{split}
-\end{equation*}
+\end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -1030,9 +1112,9 @@ A continuación se calcula resta calicular \textit{AP\makeatletter@k} para cada 
 \begin{description}
 	\item[Media del promedio de la precisión sobre una lista de K elementos \textit{mAP\makeatletter@k}):]
 \end{description}
-\begin{equation*}
+\begin{equation}
 	\operatorname{mAP\makeatletter@k}=\frac{1}{N} \sum_{i=1}^N AP\makeatletter@k_i
-\end{equation*}
+\end{equation}
 
 De esta forma, la métricas \textit{AP\makeatletter@k} nos da una noción del grado de precisión en que aparecen items con mayor puntuación en las primeras posiciones de una lista de tamaño $k$.
 
