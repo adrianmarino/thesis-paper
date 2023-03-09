@@ -212,6 +212,8 @@ Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 
 \end{table}
 
 
+\clearpage
+
 \subsection{\href{https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv}{TMDB Movie Dataset}}
 
 Este \textit{dataset} no tiene calificaciones personalizadas de los items como sucede con el \textit{dataset} anterior, 
@@ -251,6 +253,8 @@ modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene
 \end{table}
 
 
+
+\clearpage
 
 \subsection{Preprocesamiento}
 
@@ -303,7 +307,7 @@ Finalmente se termino con dos tablas como resultado:
 	\caption{
 		Archivos resultado del pre procesamiento. Estos forman parte del \textit{dataset} de entrenamiento y evaluación en este trabajo practico.
 	}
-	\label{table:tableRatings}
+	\label{table:tableFiles}
 \end{table}
 
 \subsubsection{Tabla de interacciones}
@@ -335,7 +339,6 @@ que la calificación y los \textit{tags} se ingresaron en el mismo momento.
 	\label{table:interactionsTableDef}
 \end{table}
 
-\clearpage
 \subsubsection*{Tablas de metadata de películas}
 
 La tabla \textit{movies\_v4} (\ref{table:moviesTableDef}) cuenta con información de cada película seleccionada de ambos \textit{datasets}. 
@@ -511,7 +514,7 @@ La variable \textit{overview} es la sinopsis de la película. Esta describe brev
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-Overview.png}
 	\caption{Frecuencia de palabras encontradas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
-	\label{fig:tagsCloud}
+	\label{fig:overviewCloud}
 \end{figure}	
 
 
@@ -758,6 +761,8 @@ Volviendo a nuestro algoritmo, la idea es calcular la distancia de cada vector f
 
 Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicción depende de la implementación que se elige para predecir las calificaciones. En todos los casos se utilizan ambas matrices para realizar las predicciones. A continuación una explicación del paso de inferencia o predicción para cada implementación elegida.
 
+\clearpage
+
 \subsection{KNN User Based}
 
 En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
@@ -841,7 +846,6 @@ Si ahora codificamos la misma variable usando \textit{Embeddings} esto cambia, y
 
 De esta forma los \textit{embeddings} tiene una doble ganancia sobre la codificación \textit{One-Hot}: comprimen la información y ademas  captan información que util para la clusterización de sus valores. La parte interesante es que los modelos que entrenan \textit{Embeddings} captan esta información de forma automática en base a las observaciones usadas en el entrenamiento, generan estos espacios latentes llamados \textit{Embeddings}.
 
-
 \subsection{\textit{Embedding Layer}}
 
 En el ámbito del \textit{Deep Learning} o \textit{Machine Learning} se cuenta con la abstracción de \textit{Capas} (\textit{Keras/Tensorflow}) o \textit{Módulos}(\textit{PyTorch}), las cuales encapsulan el comportamiento esencial en un conjunto de bloque básicos utilizados para construir cualquier modelo. Los bloque que permiten que un modelos infiera o construya un \textit{embedding} durante el entrenamiento son los bloques \textit{Embedding/EmbeddingBag} en \textit{PyTorch} o \textit{Embedding} en \textit{Keras/Tensorflow}. En ambos \textit{frameworks} tienen el mismo comportamiento. 
@@ -852,23 +856,21 @@ De esta forma, para crear una capa o modulo \textit{Embedding} para la variable 
 
 Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar como una tabla Hash donde las claves los posible valores de la variable categórica codificados a números y los valores son los vectores \textit{embedding}. Cave aclarar que en general estos vectores son inicializados con valores aleatorio. Luego el modelo ira ajustando sus valores durante el entrenamiento.
 
-En el \textit{froward pass}, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textit{Estado del Tiempo} podríamos codificar sus valores como sigue:
-
-\begin{itemize}
-	\item $Nublado    = 0$
-	\item $Despegado  = 1$
-	\item $Lluvioso   = 2$
-\end{itemize}
-
+En el \textit{froward pass}, como entrada se pasa un valor codificado a números de la variable categórica. Para nuestra variable \textit{Estado del Tiempo} podríamos codificar sus valores como sigue: \textit{Nublado = 0}, \textit{Despegado = 1}, \textit{Lluvioso = 2}.
 
 Entonces si pasamos el valores \textit{Nublado} como entrada a la capa, en realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector \textit{embedding} asociado a esa clave y lo devuelve a su salida.
 
-\begin{center}
-	\includegraphics[width=13cm]{./images/Embedding-Layer.png}
-\end{center}
-
 Finamente, tengamos en cuenta que el proceso de back-propagation sera encargado de ir ajustando los valores o también llamados pesos de los vectores \textit{embedding} de cuerdo a lo que requiera en la salida del modelos durante el proceso de optimización de descenso del gradiente. 
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=13cm]{./images/Embedding-Layer.png}
+	\caption{Esquema de una capa o modulo \textit{Embedding}.}
+	\label{fig:embeddingLayer}
+\end{figure}
+
+
+\clearpage
 
 \subsection{Arquitecturas Utilizadas}
 
@@ -881,9 +883,17 @@ A partir del trabajo inicial realizado por  \textit{Funk} en 2006, se han propue
 
 Este modelo se puede construir fácilmente realizando el producto escalar de dos matrices de vectores de \textit{embeddings}, las cuales tiene una baja dimensionalidad debido al principio de funcionamiento de los \textit{embeddings}. A continuación se puede ver un esquema del modelo, el cual toma como entradas los identificadores de un usuario e item, luego resuelven los vectores \textit{embedding} correspondiente a ambos ids, y finalmente se realiza el producto escalar de ambos vectores. Este producto escalar da como resultado la calificación del usuario para el item dado. Por otro lado, el algoritmo del optimización de gradiente descendente sera quien se ocupe de ajustar los pesos de ambas matrices para que dado un id de usuario y otro id de item se obtenga la calificación correspondiente a la observación utilizada como ejemplo de entrenamiento.
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=6cm]{./images/GMF.png}
-\end{center}
+	\caption{
+		Esquema de un modelo \textit{General Matrix Factorization (GMF)}.
+	}
+	\label{fig:GMFModel}
+\end{figure}
+
+\clearpage
+
 
 En términos matemáticos este modelo realiza la siguiente operación, en cada paso hacia adelante (\textit{forward-pass}):
 
@@ -932,12 +942,20 @@ El modelo \textit{GMF} de \textit{Simon Funk} realiza recomendaciones de muy bue
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama anterior:
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=11cm]{./images/Biased-GMF.png}
-\end{center}
+	\caption{
+		Esquema de un modelo \textit{Biased General Matrix Factorization (B-GMF)}. A diferencia del modelo \textit{GMF}, este suma a la salida un \textit{bias} por cada variable de entrada.
+	}
+	\label{fig:BiasedGMFModel}
+\end{figure}
+
 
 En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales representa a los sesgos de usuarios e items respectivamente. El tamaño de los factores latentes o vectores \textit{embedding} correspondiente a cada \textit{bias} es 1, es decir son valores escalares. Finalmente, luego de calcular el producto escalar se suman los factores latentes resultado de ambas \textit{Embedding Layers} correspondiente a los biases.  
 
+
+\clearpage
 
 \subsection{\textit{Neural Network Matrix Factorization (NN-MF)}}
 
@@ -949,13 +967,22 @@ Utilizar rede neuronales abre el panorama, ya que ahora podemos usar mas variabl
 
 a continuación podemos ver un esquema del modelo, muy similar a \textit{GFM} como ya se dijo, con la diferencia que tenemos una red multi capa en vez de un producto escalar.
 
-\begin{center}
+
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=6cm]{./images/NN-MF.png}
-\end{center}
+
+	\caption{
+		Esquema de un modelo \textit{Neural Network Matrix Factorization (NN-MF)}.
+	}
+	\label{fig:NNMFModel}
+\end{figure}
 
 
 Entonces, como entradas tenemos los identificadores de usuarios e items en entradas independientes (Escalares). Cone sto identificadores cada \textit{Embedding Layer} resuelve el vector \textit{embedding} asociado. Acto siguiente el bloque \textit{Flatter} toma ambos vectores y devuelve un nuevo vector el cual es la concatenación de los do anteriores. En el siguiente paso este nuevo vector es al entrada de la red multi capa, es decir que la red multi capa tendrá tanta entradas como posiciones tenga este vector. La cantidad de capas y neuronas por capas de la red so hiper-parámetros vana  ir cambiando en el proceso de optimización de hiper-parámetros, pro esa cuestión no se especifican un numero de capas. Cada capa menos la ultima tiene una función de activación ReLU y la ultima capa por supuesto un activación \textit{Lineal} al igual que una regresión lineal, ya que queremos predecir las calificaciones que tienen un rango de valores reales entre 0.5 y 5. Cave aclarar que se esta pensando como segundo enfoque usar una activación \textit{Softmax} en vez de una \textit{Lineal} en la ultima capa. De esta manera, se podría abordar como un problema de clasificación ya que los valores de las calificaciones son números reales pero también son discretos.
 
+
+\clearpage
 
 \subsection{Factorization Machines (FM)}
 
@@ -1013,6 +1040,9 @@ Con esta re-formulación de último termino, la complejidad del método se reduc
 \end{equation}
 
 
+\clearpage
+
+
 \subsection{\textit{Deep Factorization Machine (DeepFM)}}
 
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el comportamiento de las interacciones o correlación usuario-items ya sean implícita o explicitas. A pesar de este gran progreso, los métodos expuestos anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto orden, requiriendo en algunos casos realizar ingeniería de features para disminuir estos sesgos. 
@@ -1021,9 +1051,14 @@ El modelo \href{https://arxiv.org/pdf/1703.04247.pdf}{\textit{Deep Factorization
 
 A continuación de puede visualizar un diagrama de bloques de alto nivel de modelos:
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[width=6cm]{./images/Deep-MF.png}
-\end{center}
+	\caption{
+		Esquema de un modelo \textit{Deep Factorization Machine (DeepFM)} o maquina de factorización basada en \textit{Deep Learning}.
+	}
+	\label{fig:DeepMFModel}
+\end{figure}
 
 Donde se puede apreciar que las entradas del modelo son las variables categóricas correspondiente a usuarios e items, como en los modelos previamente visto.
 dado un id de usuario y item se resuelve sus correspondientes vectores \textit{embedding}, los cuales se convierten en entradas para los siguientes dos bloques. Uno de los bloques no es mas que una red neuronal multi capa con capas densa o fully connected. Por el otro lado ambos vectores se toman como entrada a la \textit{maquina de factorización}. las salida de ambos bloques son volares escalares los cuales se suman y se pasan por una activación \textit{ReLU} ya que en nuestro caso las calificaciones son valores mayos a cero.
