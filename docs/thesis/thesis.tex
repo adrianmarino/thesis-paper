@@ -335,17 +335,10 @@ A continuación se puede apreciar una diagrama de barras el cual describe la fre
 	\centering
 	\includegraphics[width=15cm]{./images/rating-barplot.png}
 	\caption{Este diagrama de barras expone la frecuencia o cantidad de observaciones para cada valor discreto de puntuación o rating.}
+	\label{fig:ratingsBarPlot}
 \end{figure}
 
-
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item 4 puntos es la calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5 puntos.
-	\item Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valores altos, y otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Se debe tener en cuenta que un 3.5 para un usuario podría ser un 4.5 para otro.
-	\item Por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones menores a 2 puntos.
-\end{itemize}
+En la figura ~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos es la calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5 puntos. Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valores altos, y otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Se debe tener en cuenta que un 3.5 para un usuario podría ser un 4.5 para otro. Por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones menores a 2 puntos.
 
 \clearpage
 
@@ -358,18 +351,12 @@ Para analizar en mas detalle la variable rating, veamos a continuación histogra
 	\centering
 	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
 	\caption{Histograma y Boxplot de la variable rating. Los ratings son las calificaciones realizadas por los usuario para cada item o película.}
+	\label{fig:ratingsHistPlot}
 \end{figure}
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en en el histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica.
-	\item Nuevamente vemos algo parecido en diagrama de barras, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil).
-	\item La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la media en esa dirección.
-	\item Por otro lado, tenemos valores atípicos en el extreme izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el cual encuentra entre el cuantiles Q1 y Q3, donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia. No se encuentran valores atípicos por sobre el máximo.
-	\item Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
-\end{itemize}
+En la figura ~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en en el histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica. Nuevamente vemos algo parecido en diagrama de barras, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil). La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la media en esa dirección.
+Por otro lado, tenemos valores atípicos en el extreme izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el cual encuentra entre el cuantiles Q1 y Q3, donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia. No se encuentran valores atípicos por sobre el máximo.
+Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
 
 
 \clearpage
@@ -379,18 +366,11 @@ A continuación segmentemos el anterior histograma por año:
 	\centering
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
 	\caption{Histograma de calificaciones segmentado por año.}
+	\label{fig:ratingsYearHistPlot}
 \end{figure}
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Inicialmente vemos que en los años 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación claro por parte de los usuarios, en que item es un 4 o un 5 por ejemplo.
-	\item Entre 1999 y 2022 vemos que las puntuaciones 3, 4 y 5 toman mayor importancia siendo estas las mas utilizadas. Es decir, los usuarios realizan en su mayoría puntuaciones en esos tres niveles.
-	\item La mayor frecuencia se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo los 3 y 5 puntos en linea a años anteriores.
-	\item A partir del año 2005 se nota un aumento cada ves mas demarcado en los niveles de puntuaciones entre los 3 y 5 puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5.
-	\item Debemos tener en cuenta que el aumento en los niveles de puntuación con el tiempo probablemente sea debido a un aumento año a año en la base de usuarios de \textit{Movie Lens} y tal vez también sea el motivo por el cual en los primeros años vemos mucho dispersion en las puntuaciones.
-\end{itemize}
+
+En la figura ~\ref{fig:ratingsYearHistPlot} inicialmente vemos que en los años 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación claro por parte de los usuarios, en que item es un 4 o un 5 por ejemplo. Entre 1999 y 2022 vemos que las puntuaciones 3, 4 y 5 toman mayor importancia siendo estas las mas utilizadas. Es decir, los usuarios realizan en su mayoría puntuaciones en esos tres niveles. La mayor frecuencia se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo los 3 y 5 puntos en linea a años anteriores. A partir del año 2005 se nota un aumento cada ves mas demarcado en los niveles de puntuaciones entre los 3 y 5 puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5. Debemos tener en cuenta que el aumento en los niveles de puntuación con el tiempo probablemente sea debido a un aumento año a año en la base de usuarios de \textit{Movie Lens} y tal vez también sea el motivo por el cual en los primeros años vemos mucho dispersion en las puntuaciones.
 
 \clearpage
 
@@ -402,26 +382,21 @@ Para realizar un analizar de correlación sobre todas la variables, se realizo u
 	\centering
 	\includegraphics[width=9cm]{./images/Correlations.png}
 	\caption{Diagrama de correlación de Person aplicado a todas las variables numéricas resultado del merge entre las tablas movies y interactions.}
+	\label{fig:correlationPlot}
 \end{figure}	
 
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Cantidad/Media de votos y popularidad es de esperar que tengan alta correlación debido a que las películas mas votadas en general son las mas populares.
-	\item Cantidad y media de votos están altamente correlacionadas, ya que la media se calcula en base a la variable cantidad de votos.
-	\item Por otro lado, también es de esperar que las calificaciones y la media de los votos este correlacionadas, ya que a medida de aumenta la media de los votos tenemos calificaciones mas altas.
-	\item Se encuentra una alta correlación entre la variable que identifica a una película y la fecha de estreno. Esto se debe a que al momento de estrenarse una película, días después a mas tardar, se da de alta la película en el sitio de Movie Lens. Esto también nos dice que los ids son secuenciales.
-	\item Las correlaciones en general son muy bajas llegando a 0.3 como máximo. Esto es una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las variables. Las variables que son combinaciones lineales de otras variables puede producir que los modelos de Machine Learning sobre-ajusten a los datos de entrenamiento.
-	\item Las variables media de votos y id de película tiene un correlación negativa muy baja. En algún sentido nos dice que algunas películas mas nuevas tiende a tener una media de votos menor. Lo mismo sucede entre las variables rating y id de película en menor medida. Ambas con correlaciones negativas pero muy bajas.
-\end{itemize}
+En la figura ~\ref{fig:correlationPlot} se aprecia de las variables \textit{Cantidad/Media de votos} y \textit{Popularidad} tiene alta correlación debido a que las películas mas votadas en general son las mas populares. 
+las variables \textit{Cantidad} y \textit{media de votos} están altamente correlacionadas, ya que la media se calcula en base a la variable \textit{Cantidad de votos}. Por otro lado, también es de esperar que las \textit{calificaciones} y la \textit{media de los votos} este correlacionadas, ya que a medida de aumenta la \textit{media de los votos} tenemos calificaciones mas altas. Se encuentra una alta correlación entre la variable que identifica a una película y la \textit{Fecha de estreno}. Esto se debe a que al momento de estrenarse una película, días después a mas tardar, se da de alta la película en el sitio de \textit{Movie Lens}. Esto también nos dice que los ids son secuenciales.
+Las correlaciones en general son muy bajas llegando a 0.3 como máximo. Esto es una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las variables. Las variables que son combinaciones lineales de otras variables puede producir que los modelos de \textit{Machine Learning} sobre-ajusten a los datos de entrenamiento. 
+Las variables \textit{media de votos} y \textit{id de película} tienen una correlación negativa muy baja. En algún sentido nos dice que algunas películas mas nuevas tiende a tener una media de votos menor. Lo mismo sucede entre las variables \textit{rating} y \textit{id de película} en menor medida. Ambas con correlaciones negativas pero muy bajas.
 
-Si bien, en esta primera entrega no se están utilizando otras variables distintas a id de usuario, id de película y rating, es de interés analizar las variables correspondiente a features de películas, ya que en el siguiente entrega se planea implementar modelos de recomendación híbridos, los cuales son ensambles de sistemas de recomendación basados en contenido y colaborativos.
+
+Si bien, en esta primera entrega no se están utilizando otras variables distintas a \textit{id de usuario}, \textit{id de película} y \textit{rating}, es de interés analizar las variables correspondiente a features de películas, ya que en el siguiente entrega (tesis) se planea implementar modelos de recomendación híbridos, los cuales son ensambles de sistemas de recomendación basados en contenido y colaborativos.
 
 \subsection{Variables de tipo texto}
 
-Las variables de tipo texto son muy útiles para genera \textit{embeddings}, los cuales se puede sumar o promediar, generando representaciones compactas de items a recomendar. Luego es posible utilizar estas representaciones para agrupar items según su sinopsis, tags, título y otras variables como pueden ser popularidad, año de estreno, votos, ratings, etc...
+Las variables de tipo texto son muy útiles para genera \textit{embeddings}, los cuales se puede sumar o promediar, generando representaciones compactas de items a recomendar. Luego es posible utilizar estas representaciones para agrupar items según su sinopsis, \textit{tags}, título y otras variables como pueden ser popularidad, año de estreno, votos, \textit{ratings}, etc...
 
 A continuación se puede visualizar la frecuencia de aparición de cada palabra en cada uno de los campos de tipo texto. Cuanto mayor tamaño tenga la palabra mayor frecuencia de aparición tendrá.
 
@@ -435,17 +410,11 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-tags.png}
 	\caption{Frecuencia de frases encontradas en la variable \textit{Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma.}
+	\label{fig:tagsCloud}
 \end{figure}	
 
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Las palabra \textit{based} (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuarios para cada película.
-	\item Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
-\end{itemize}
-
+En la figura ~\ref{fig:tagsCloud} las palabra \textit{based} (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuarios para cada película. Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
 
 
 \clearpage
@@ -454,23 +423,17 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 	\item[Overview]
 \end{description}
 
-La variable overview es la sinopsis de la película. Esta describe brevemente el contenido de la misma, sin revelar su desenlace.
+La variable \textit{overview} es la sinopsis de la película. Esta describe brevemente el contenido de la misma, sin revelar su desenlace.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-Overview.png}
 	\caption{Frecuencia de palabras encontradas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+	\label{fig:tagsCloud}
 \end{figure}	
 
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Entre las palabra con mayor frecuencia encontramos: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife}, \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family}, \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New}, \textit{Friend} y \textit{Story}.
-	\item Se aprecia una diferencia notoria entre las variables tags y overview. La variable tags parece categorizar las películas desde distintas perspectivas. Por otro lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma.
-	\item A simple vista, los clústeres(\textit{Embeddings}) que pudieran generarse utilizando esta variable, podrían ser mas específicos que aquellos clusters generados a partir de la variable tags.
-\end{itemize}
+En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabra con mayor frecuencia: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife}, \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family}, \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New}, \textit{Friend} y \textit{Story}. Se aprecia una diferencia notoria entre las variables tags y overview. La variable tags parece categorizar las películas desde distintas perspectivas. Por otro lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma. A simple vista, los clústeres(\textit{Embeddings}) que pudieran generarse utilizando esta variable, podrían ser mas específicos que aquellos clusters generados a partir de la variable tags.
 
 
 \begin{description}
@@ -481,16 +444,11 @@ La variable overview es la sinopsis de la película. Esta describe brevemente el
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-Title.png}
 	\caption{Frecuencia de palabras encontradas en la variable \textit{Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+	\label{fig:titleCloud}
 \end{figure}	
 
 
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Entre las palabras con mayor frecuencia encontramos: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead}, \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House}, \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World}, \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y \textit{King}.
-	\item A simple vista, una clusterización realizada con esta variable puede ser mas general que la lograda con la variable \textit{Overview}, pero en menos general que la variable \textit{Tags}. En trabajos posteriores se realizaran experimentos para ver resultado en este sentido.
-\end{itemize}
+En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras con mayor frecuencia: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead}, \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House}, \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World}, \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y \textit{King}. A simple vista, una clusterización realizada con esta variable puede ser mas general que la lograda con la variable \textit{Overview}, pero en menos general que la variable \textit{Tags}. En trabajos posteriores se realizaran experimentos para ver resultado en este sentido.
 
 
 \clearpage
@@ -510,6 +468,7 @@ Las componentes principales son las variables resultado del algoritmo PCA. Estas
 	\centering
 	\includegraphics[width=8cm]{./images/PCA-Variance.png}
 	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada por cada componente principal resultado del algoritmo PCA.}
+	\label{fig:explainedVariancePlot}
 \end{figure}
 
 
@@ -525,20 +484,7 @@ Las componentes principales son las variables resultado del algoritmo PCA. Estas
 	\item pc6: $5$ \%
 \end{itemize}
 
-	
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item Inicialmente vemos que toda las componente tiene niveles de variabilidad o varianza explicada muy bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que el grado de correlación de las variables es muy bajo.
-	\item Usando el criterio del bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que acumulan mayor varianza.
-	\item Tengamos en cuenta que el análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación.
-	\item Las 3 primeras componentes acumulan un grado de variabilidad 85 \%.
-\end{itemize}
-
-
-
-
+Inicialmente podemos apreciar en la figura ~\ref{fig:explainedVariancePlot} que toda las componente tiene niveles de variabilidad o varianza explicada muy bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que el grado de correlación de las variables es muy bajo. Usando el criterio del bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que acumulan mayor varianza. Tengamos en cuenta que el análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación. Las 3 primeras componentes acumulan un grado de variabilidad 85 \%.
 
 
 \begin{description}
@@ -565,22 +511,12 @@ A continuación se pueden visualizar las cargas o loadings:
 	\end{tabular}
 
 	\caption{Coeficientes de componentes principales vs. variable originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
-\end{table}
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item \textit{Vote Count(88\%)} y \textit{Popularity(80\%)} tiene una correlación positiva muy alta sobre la componente $PC1$. Lo mismo sucede con la \textit{Vote Mean(55\%)} en menor medida. Entre dos observaciones con distintos valores de popularidad, la que tenga un valor mas alto aportara a esta componente($PC1$) que a las otra ($PC2$ y $PC3$).
-	\item Luego vemos que las variable \textit{Release Year(Año de estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\% respectivamente, sobre la componente $PC1$.
-	\item La variable \textit{User ID} no tiene aporte alguno sobre componente $PC1$.
 
-	\item Las variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente.
-	\item La variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del 80 \%.
-	\item Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \textit{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación.
-	\item De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}.
-	\item La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.
-	\item La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
-\end{itemize}
+	\label{fig:loadingsTable}
+\end{table}
+
+
+En la tabla ~\ref{fig:loadingsTable} vemos que \textit{Vote Count(88\%)} y \textit{Popularity(80\%)} tiene una correlación positiva muy alta sobre la componente $PC1$. Lo mismo sucede con la \textit{Vote Mean(55\%)} en menor medida. Entre dos observaciones con distintos valores de popularidad, la que tenga un valor mas alto aportara a esta componente($PC1$) que a las otra ($PC2$ y $PC3$). También vemos que las variable \textit{Release Year(Año de estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\% respectivamente, sobre la componente $PC1$. La variable \textit{User ID} no tiene aporte alguno sobre componente $PC1$. Las variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente. La variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del 80 \%. Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \textit{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación. De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}. La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.  La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
 
 
 \begin{description}
@@ -590,21 +526,11 @@ A continuación se pueden visualizar las cargas o loadings:
 	\centering
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
 	\caption{En este diagrama se pueden visualizar los valores de las variables originales coloreados en color roja, negro y gris correspondientes a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales.}
+	\label{fig:biplot}
 \end{figure}
-\begin{description}
-	\item[Observaciones]
-\end{description}
-\begin{itemize}
-	\item A primera vista se puede ver que las variables \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta, ya que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya que ambas son medidas de popularidad casi directas y intercambiables.
-	
-	\item \textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De esta forma, se constata lo visto anteriormente en análisis de carga, donde la componente $PC1$ representa el grado de popularidad de una película. 
 
-	\item \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y \textit{Release Year} en forma positiva sobre la componente $PC2$. \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De esta forma se constata el análisis anterior.
 
-	\item Si visualizamos los puntos que representan a las observaciones originales en el espacio latente generado por PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5 puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo(>2 puntos). Esto indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se encuentre un punto en la componente $PC1$ validando los análisis anteriores.
-
-	\item si visualizamos lo puntos correspondientes a las observaciones en las direcciones de la componente $PC2$ vemos que a major valor en la componente, menor el grado de popularidad de las películas, ya que los puntos rojos tienden a esta en el extremo positivo de la componente, validando la hipótesis de que la componente $PC2$ indica el grado de underground es un película.
-\end{itemize}
+En la figura ~\ref{fig:biplot} a primera vista observamos que las variables \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta, ya que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya que ambas son medidas de popularidad casi directas y intercambiables. \textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De esta forma, se constata lo visto anteriormente en análisis de carga, donde la componente $PC1$ representa el grado de popularidad de una película. \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y \textit{Release Year} en forma positiva sobre la componente $PC2$. \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De esta forma se constata el análisis anterior. Si visualizamos los puntos que representan a las observaciones originales en el espacio latente generado por PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5 puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo(>2 puntos). Esto indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se encuentre un punto en la componente $PC1$ validando los análisis anteriores. Si visualizamos lo puntos correspondientes a las observaciones en las direcciones de la componente $PC2$ vemos que a major valor en la componente, menor el grado de popularidad de las películas, ya que los puntos rojos tienden a esta en el extremo positivo de la componente, validando la hipótesis de que la componente $PC2$ indica el grado de underground es un película.
 
 
 
