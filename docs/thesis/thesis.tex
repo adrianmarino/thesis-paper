@@ -1209,10 +1209,10 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 	\footnotesize
 	\begin{tabular}{lrrr}
 	\hline
-		Modelo                       & Mediana  & Media    & Desvio  \\
+		Modelo                            & Mediana  & Media    & Desvío  \\
 	\hline
 	\textit{B-GMF}                        & 0.408563 & 0.408787 & 0.012190 \\
-	\textit{GMF¨}                          & 0.406422 & 0.406646 & 0.012513 \\
+	\textit{GMF}                          & 0.406422 & 0.406646 & 0.012513 \\
 	\textit{DeepFM}                       & 0.398100 & 0.397895 & 0.011369 \\
 	\textit{NN-MF}                        & 0.393499 & 0.393447 & 0.011711 \\
 	\textit{KNN User-Item Based Ensemble} & 0.384570 & 0.384819 & 0.015066 \\
@@ -1224,18 +1224,10 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 		Mediana, Media y Desvío correspondientes a las distribución de 
 		\textit{AP\makeatletter@5(4,5)} sampleada para cada modelo. Las filas se encuentran ordenadas descendentemente por la Media.
 	}
-	\label{table:tab}
+	\label{table:ap_at_k}
 \end{table}
 
-
-\begin{description}
-	\item[Observaciones:]
-\end{description}
-\begin{itemize}
-\item A primera vista se aprecia Biased-GMF es el modelo con mejores resultados con la métricas de evaluación \textit{AP\makeatletter@5(4,5)}.
-\item Por otro lado, podemos ver que los modelos \textit{NN-MF} y \textit{Deep-FM} tiene el menor sesgo, pero aun asi tiene precisiones menores al modelo \textit{Biased-GMF}. Esto podría indicar un grado mayor de sobre ajuste. por ende, se debería re-entrenar los modelos \textit{NN-MF} y \textit{Deep-FM} aumentando el dropout para mejorar la regularización y volver a compara contra \textit{Biased-GMF} para validar si las precisiones mejoran.
-\item La familia de modelos \textit{KNN} son lo que presentan mayor sesgo en la precision. A pesar de esto podemos ver que la diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
-\end{itemize}
+En la tabla ~\ref{table:ap_at_k} a primera vista se aprecia \textit{Biased-GMF} es el modelo con mejores resultados con la métricas de evaluación \textit{AP\makeatletter@5(4,5)}.  Por otro lado, podemos ver que los modelos \textit{NN-MF} y \textit{Deep-FM} tiene el menor sesgo, pero aun asi tiene precisiones menores al modelo \textit{Biased-GMF}. Esto podría indicar un grado mayor de sobre ajuste. por ende, se debería re-entrenar los modelos \textit{NN-MF} y \textit{Deep-FM} aumentando el dropout para mejorar la regularización y volver a compara contra \textit{Biased-GMF} para validar si las precisiones mejoran. La familia de modelos \textit{KNN} son lo que presentan mayor sesgo en la precision. A pesar de esto podemos ver que la diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
 
 
 \begin{table}[!htb]
@@ -1243,7 +1235,7 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 	\footnotesize
 	\begin{tabular}{lrrr}
 		\hline
-			Modelo                       & Mediana  & Media    & Desvio  \\
+			Modelo                            & Mediana  & Media    & Desvío  \\
 		\hline
 		\textit{NN-MF}                        & 0.941213 & 0.941493 & 0.007620 \\
 		\textit{B-GMF}                        & 0.977914 & 0.977382 & 0.009387 \\
@@ -1258,17 +1250,10 @@ A continuación se muestra una tabla comparativa con las métricas utilizadas pa
 		Mediana, Media y Desvío correspondientes a las distribución de 
 		\textit{RMSE} sampleada para cada modelo. Las filas se encuentran ordenadas  descendentemente por la Media.
 	}
-	\label{table:tab}
+	\label{table:rmse}
 \end{table}
 
-\begin{description}
-	\item[Observaciones:]
-\end{description}
-\begin{itemize}
-\item A simple vista \textit{NN-MF} es el modelo mas estable en cuando al error de validación, ya que tiene el menor error y dispersion. aun asi no es el modelo pas preciso. Esto podría indicar que tiene un grade de sobre ajuste major a modelos con mayor precision.
-\item Podemos apreciar que el modelo \textit{Biased-GMF} con mayor precision aui tiene un error mayor a \textit{NN-MF}. OIndicando que la teoría del sobre ajuste de \textit{NN-MF} podría ser valida.
-\item Nuevamente la familia de modelos \textit{KNN} tiene los errores mas alto y también altos desvíos. Aun asi estos modelos tiene una precisión muy similar al modelo mas preciso (\textit{B-GMF}).
-\end{itemize}
+En la tabla ~\ref{table:rmse} a simple vista \textit{NN-MF} es el modelo mas estable en cuando al error de validación, ya que tiene el menor error y dispersion. aun asi no es el modelo pas preciso. Esto podría indicar que tiene un grade de sobre ajuste major a modelos con mayor precision. Podemos apreciar que el modelo \textit{Biased-GMF} con mayor precision aui tiene un error mayor a \textit{NN-MF}. OIndicando que la teoría del sobre ajuste de \textit{NN-MF} podría ser valida. Nuevamente la familia de modelos \textit{KNN} tiene los errores mas alto y también altos desvíos. Aun asi estos modelos tiene una precisión muy similar al modelo mas preciso (\textit{B-GMF}).
 
 
 \chapter{Conclusiones}

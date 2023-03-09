@@ -1,9 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1678363001 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1678363003
-  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1678363000 99920 639d32ae73a355dbbf7279c1e78ee8ad ""
+["pdflatex"] 1678363682 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1678363683
+  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1678363681 99789 cf407c542a29c3135fef2527f356e184 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1650183167 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
-  "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcti0900.tfm" 1650183167 2048 c39c5154886a5521006765320aa4d25e ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcti1095.tfm" 1650183167 2048 0d8d19633d1f5858141c8047aa877208 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1650183167 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1650183167 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -59,7 +58,6 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1650183167 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb" 1650183167 36310 f5ddc6715cc60deb16d9db5ded6a9391 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1650183167 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
-  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb" 1650183167 183673 6df73819bb3e1246a6315a4913a2d331 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb" 1650183167 196446 8fbbe4b97b83e5182def6d29a44e57fb ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1650183167 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1650183167 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -161,11 +159,11 @@
   "images/rating-barplot.png" 1658247241 14941 8ca1260d85b8dbd2ebead4bafa3f7223 ""
   "images/rating-boxplot-histplot.png" 1658247241 35756 822b04fb5628990b4773f194c623cade ""
   "images/rating-by-year.png" 1658247241 188660 7e9d1ae5b4ef72447984df58c9e5b062 ""
-  "thesis.aux" 1678363003 21404 6e48c1522932531658fabbf69ca85db7 "pdflatex"
+  "thesis.aux" 1678363683 21409 9586a13ccee962c0a58d886e1e1aa430 "pdflatex"
   "thesis.cls" 1658247241 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1678363003 11087 5c831d2170bc46ce48adbecfe08f63dc "pdflatex"
-  "thesis.tex" 1678363000 99920 639d32ae73a355dbbf7279c1e78ee8ad ""
-  "thesis.toc" 1678363003 5515 562e4cd53f3f470d7ca6e0f2205df76a "pdflatex"
+  "thesis.out" 1678363683 11087 5c831d2170bc46ce48adbecfe08f63dc "pdflatex"
+  "thesis.tex" 1678363681 99789 cf407c542a29c3135fef2527f356e184 ""
+  "thesis.toc" 1678363683 5515 562e4cd53f3f470d7ca6e0f2205df76a "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
