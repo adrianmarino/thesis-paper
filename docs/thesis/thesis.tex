@@ -515,13 +515,16 @@ A continuación se pueden visualizar las cargas o loadings:
 	\label{fig:loadingsTable}
 \end{table}
 
-
 En la tabla ~\ref{fig:loadingsTable} vemos que \textit{Vote Count(88\%)} y \textit{Popularity(80\%)} tiene una correlación positiva muy alta sobre la componente $PC1$. Lo mismo sucede con la \textit{Vote Mean(55\%)} en menor medida. Entre dos observaciones con distintos valores de popularidad, la que tenga un valor mas alto aportara a esta componente($PC1$) que a las otra ($PC2$ y $PC3$). También vemos que las variable \textit{Release Year(Año de estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\% respectivamente, sobre la componente $PC1$. La variable \textit{User ID} no tiene aporte alguno sobre componente $PC1$. Las variables que mas aportan a la componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%} respectivamente. Este aporte es negativo, esto quiere decir que un aumento en los niveles de esta variable significa una disposición en esta componente. La variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del 80 \%. Para la componente $PC3$ vemos que las variables que mas aportan a un campo en la misma son \textit{User ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos. Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en relación. De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general de una película}. La componente $PC2$ en algún sentida mide lo contrario a la popularidad. Es un indicador del \textit{Nivel Underground para nuevos estrenos} de un film.  La componente $PC3$ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un usuario}.
 
 
+\clearpage
+
+
 \begin{description}
-	\item[Biplot]
+	\item[\textit{Biplot}]
 \end{description}
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
@@ -541,12 +544,11 @@ En este capitulo se describirán los modelos utilizados para realiza la predicci
 Cada implementación tiene sus particularidades:  Cuanto puede escalar, sus tiempos de entrenamiento y predicción, su implementación, exactitud de las predicciones, tendencia al overfitting, etc.. Para este trabajo se eligieron dos grandes grupos. Por un lado, una implementación sencilla basada en memoria como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en Deep Learning. Los modelos basados en Deep Learning utilizan \textit{Embeddings} en todos los casos, como una forma de reducir la dimensionalidad de las variables categóricas que se utilizan como entradas. Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras basadas en modelos del estado del arte. Luego, la idea fue medir los resultados de todo los modelos utilizando distintas métricas comparables, entrenando con el mismo \textit{dataset} en todos los casos. De esta forma podemos comparar los resultados de cada modelo. K vecinos cercanos (\textit{KNN}) fue tomado como baseline, a partir del cual poder comparar los demás modelos.
 
 Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en cuenta que estos modelos son muy 
-demandantes en cuanto a recursos de hardware, se opto por usar el framework \href{https://pytorch.org/}{PyTorch}, dado que permite hacer uso tanto de CPU como GPU. De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e inferencia). Ya elegido el framework, se opto por implementar todos los modelos desde sus bases, ya que PyTorch no cuenta con mucho modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de CPU y GPU de forma granular
-y realizar un uso mas eficiente de los recursos disponible.
+demandantes en cuanto a recursos de \textit{hardware}, se opto por usar el framework \href{https://pytorch.org/}{\textit{PyTorch}}, dado que permite hacer uso tanto de \textit{CPU} como \textit{GPU}. De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e inferencia). Ya elegido el \textit{framework}, se opto por implementar todos los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de \textit{CPU} y \textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos disponible.
 
 \section{Enfoque Basados en Memoria}
 
-\subsection{KNN (K-Nearest-Neighbor)}
+\subsection{\textit{KNN (K-Nearest-Neighbor)}}
 
 Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. De esta forma, en la etapa de inferencia, el modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación. Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser Redis) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
 
