@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper,twoside]{thesis}
+
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -12,17 +13,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
 \usepackage{booktabs}
+
+
 \begin{document}
 
 %%%% CARATULA
 
 \def\autor{Adrian Norberto Marino}
-\def\tituloTesis{Sistemas de recomendación colaborativos}
+\def\tituloTesis{Sistemas de Recomendación Colaborativos}
 \def\runtitulo{Resumen}
-\def\runtitle{Sistemas de recomendación colaborativos}
+\def\runtitle{Sistemas de Recomendación Colaborativos}
+
 
 %\def\director{Obi-Wan Kenobi}
-
 %\def\codirector{Master Yoda}
 
 \def\lugar{Buenos Aires, 2022}
@@ -39,8 +42,8 @@
 %\cleardoublepage
 %\input{thanks.tex} % OPCIONAL: comentar si no se quiere
 %
-%\cleardoublepage
-%\input{dedication.tex}  % OPCIONAL: comentar si no se quiere
+\cleardoublepage
+\input{dedication.tex}  % OPCIONAL: comentar si no se quiere
 % -----------------------------------------------------------------------------
 %
 %
@@ -65,60 +68,65 @@
 
 Los sistemas de recomendación tienen por objetivo acercar a sus usuarios: productos, promociones, contenidos (Textos,  audio, videos, etc..) relevantes a sus preferencias o necesidades, permitiendo a estos encontrar con mayor facilidad aquello que buscan. Formalizando esta definición podemos decir que: Los sistemas de recomendación apuntan a ayudar a un usuario o grupo de usuarios a encontrar items de forma personalizada, dado un de conjunto de items de gran extensión o un gran espacio de búsqueda.
 
-Este objetivo puede cambiar según el contexto de cada negocio. Para un e-commerce de delivery de comidas, el objetivo es acercar a los usuarios el tipo de comida que quieran probar en ese mismo momento, a un precio que puedan pagar, con un tiempo de entrega aceptable. Para un e-commerce, el objetivo es acercar al usuario aquellos productos que este necesitando en ese mismo momento, los cuales tengan un precio que puede pagar. Por otro lado, se busca asegurar una experiencia satisfactoria con el vendedor. En el negocio de visualización de contenido (Ya sea audio, video, texto, etc..), el objetivo es acercar al usuario contenido a fin a sus preferencias para mejorar su experiencia en la plataforma y así aumentar el \textit{engagement} de los usuarios.
+Este objetivo puede cambiar según el contexto de cada negocio: Dado un e-commerce de delivery gastronómico, su objetivo es acercar a sus usuarios un plato relevante, con un precio que puedan pagar y un tiempo de entrega aceptable. 
 
+Dado un e-commerce de productos, su objetivo es acercar a sus usuarios aquellos productos que estén necesitando, con un precio que estén dispuestos a pagar. Por otro lado, se busca asegurar una experiencia satisfactoria con el vendedor.
 
-Por otro lado, el objetivo de fondo siempre es el mismo, mejorar la conversión. Con esto nos referimos a aumentar el volumen de ventas en e-commerce, la cantidad de deliveries mensuales, la cantidad de impresiones de publicidad en aplicaciones de visualización de contenido, aumentar el tiempo de permanecía en las plataformas de streaming de audio o video, etc.. Podemos encontrar muchos ejemplos distintos en loa cuales el objetivo común es mejorar la conversión de vistas en ventas y el \textit{engagement} de los usuarios.
+En el negocio de visualización de contenido (Ya sea audio, video, texto, etc..), el objetivo es acercar a sus usuarios contenido a fin a sus preferencias para mejorar su experiencia en la plataforma y así aumentar el \textit{engagement} de los usuarios.
 
-Desde un punto de vista mas técnico, los sistemas de recomendación se utilizan para predecir el grado de preferencia de un usuario con respecto a un item. En general, esto se puede lograr aplicando un algoritmo de optimización, el cual minimiza la diferencia entre el grado de preferencia esperado versus el real. Otros enfoques hacen uso de medidas de distancia para establecer este grado de preferencia.
+El objetivo de fondo siempre es el mismo, mejorar la conversión. Con esto nos referimos a aumentar el volumen de ventas en para e-commerce de productos, la cantidad de deliveries mensuales para un e-commerce gastronómico, la cantidad de impresiones de publicidad para aplicaciones de visualización de contenido, aumentar el tiempo de permanecía en las plataformas de streaming de audio o video, etc.. Podemos encontrar muchos ejemplos distintos en los cuales el objetivo común es mejorar la conversión y el \textit{engagement} de los usuarios.
+
+Desde un punto de vista mas técnico, los sistemas de recomendación se utilizan para predecir el grado de preferencia de un usuario con respecto a un item. En general, esto se puede lograr aplicando un algoritmo de optimización, el cual minimiza la diferencia entre el grado de preferencia esperado versus el real. Otros enfoques hacen uso de medidas de distancia para establecer este grado de preferencia. Mas adelante veremos estos conceptos en mas detalle.
 
 \clearpage
 \section{Tipos de sistemas de recomendación}
 
-A continuación se puede ver un gráfico que describe las clasificaciones y subclasificaciones de los sistemas de recomendación:
-
+A continuación en la figura ~\ref{fig:clasification} se pueden visualizar las clasificaciones y subclasificaciones de los sistemas de recomendación:
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=12cm]{./images/clasificacion-sis-rec.png}
 	\caption{Clasificación de tipos de sistemas de recomendaciones.}
+	\label{fig:clasification}
 \end{figure}
 
 \subsection{Basados en Popularidad} 
 
-Este tipo de recomendadores toman alguna característica de popularidad de los items en cuestión, como puede ser: cantidad de vistas, cantidad de compras, cantidad de reviews positivos, o una conjunción de estos. Luego busca el top K de los items mas populares. Si bien este tipo de recomendaciones tiene buenos resultandos para usuarios nuevos, sus recomendaciones no tienen en cuenta las preferencias de cada usuario particular, debido a que se basan en estadísticas comunes a todos los usuarios. Por esta cuestión, muchas veces no son considerados sistemas de recomendación perse.
+Este tipo de recomendadores toman alguna característica de popularidad de los items en cuestión, como puede ser: cantidad de vistas, cantidad de compras, cantidad de reviews positivos, o una conjunción de estos. Luego buscan el top K de los items mas populares. Si bien este tipo de recomendadores tiene buenos resultandos para nuevos usuarios, sus recomendaciones no tienen en cuenta sus preferencias, debido a que esta basado en estadísticas comunes a todos los usuarios. Por esta cuestión, muchas veces no son considerados sistemas de recomendación perse. Aun asi son muy utilizados, ya que generan una alta conversión, mas allá su falta de personalización.
 
 \subsection{Basados en Contenido}
 
-Este tipo de recomendador necesita un trabajo previo de ingeniería de features sobre los items, donde se busca definir que features son los mas significativos para la tarea en cuestión, y cual es el grado de adecuación de cada items a los features definidos. Por otro lado, es necesario registrar las interacciones de los usuarios. Dadas estas interacciones, se puede definir el grado de preferencia de los usuarios a cada feature definido para los items. Con esta información es posible encontrar tanto items como usuarios similares y realizar recomendaciones del tipo:
+Este tipo de recomendador necesita un trabajo previo de ingeniería de features sobre los items, donde se busca definir que features son mas significativos para la tarea en cuestión, y cual es el grado de adecuación de cada items a los features definidos. Por otro lado, es necesario registrar las interacciones de los usuarios. Dadas estas interacciones, se puede definir el grado de preferencia de los usuarios a cada feature definido para los items. Con esta información es posible encontrar tanto items como usuarios similares y realizar recomendaciones del tipo:
 
 \begin{itemize}
-\item Dado el usuario A, el cual tiene preferencia por el item X, también podría tener preferencia por el item Y, por ser muy cercano o similar al item X.
-\item Dos usuarios A y B cercanos o similares tendrán preferencias similares. De esta forma es posible recomendar item consumidos por el usuario A al usuario B y vise versa. 
+\item Dado el \textit{Usuario A}, el cual tiene preferencia por el \textit{Item X}, también podría tener preferencia por el \textit{Item Y}, por ser muy cercano o similar al \textit{Item X}.
+\item Dos \textit{Usuarios A y B} cercanos o similares, tendrán preferencias similares. De esta forma es posible recomendar item consumidos por el \textit{Usuario A} al \textit{Usuario B} y vise versa. 
 \end{itemize}
 	
-La principal desventaja de este enfoque reside en que, es necesario realizar ingeniería de features para encontrar los features que produzcan las mejores recomendaciones. El modelo no encuentra estos features automáticamente, sino que deben ser definidos de antemano manualmente. Como ventaja, si se encuentra los features correctos se pueden lograr muy buenas recomendaciones.
-		
+La principal desventaja de este enfoque, es la necesidad de realizar ingeniería de features para encontrar los features que produzcan recomendaciones relevantes al usuario. El modelo no encuentra estos features automáticamente, sino que deben ser definidos de antemano manualmente. Se puede apreciar que esto introduce un sesgo al momento de seleccionar los features o construirlos en base a datos referentes a los items. Como ventaja, si se encuentran los features correctos se pueden lograr muy buenos resultados.
+
+
 \subsection{Basados en Filtrado Colaborativos} 
 
-Estos modelos, a diferencia de los modelos basados en contenido, no requiriere ingeniería de features, lo que los hace mas simples de implementar, ya que únicamente es necesario registrar las interacciones de los usuarios para con los items. Ejemplos interacciones podrían ser:
+Estos modelos, a diferencia de los modelos basados en contenido, no requirieren ingeniería de features, lo que hace muy simple su implementación, ya que únicamente es necesario registrar las interacciones de los usuarios para con los items. Luego el propio modelo encuentra automáticamente los features mas relevantes dependiendo de la cantidad de columnas que se especifiquen (Dimensiones de un \textit{Embeddings vector}). Ejemplos de interacciones podrían ser:
 
 \begin{itemize}
-	\item El usuario A visualizo el item X el dia 2 de marzo de 2022.
-	\item El usuario A compro el item X el dia 10 de marzo de 2022.
-	\item El usuario A califico al item X con 5 puntos el dia 25 de marzo de 2022.
+	\item El \textit{Usuario A} visualizo el \textit{Item X} el dia 2 de marzo de 2022.
+	\item El \textit{Usuario A} compro el \textit{Item X} el dia 10 de marzo de 2022.
+	\item El \textit{Usuario A} califico al \textit{Item X} con 5 puntos el dia 25 de marzo de 2022.
 \end{itemize}
 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos, personalizan sus recomendaciones. 
 Es decir, ajustan las recomendaciones a cada usuario particular, en base a sus preferencias. Ademas, ambos permiten encontrar usuarios e items similares y recomendar items entre usuarios similares.
 
-Por otro lado, un ventaja del modelo de filtros colaborativos es que descubre un espacio latente de soluciones sin necesidad de recolectar datos y definir features en forma manual. Esto podría llevar a una solución sesgada ya que la selección de features no esta basada en datos, sino en el juicio experto del científico de datos. 
+Finalmente, los modelos basados en filtros colaborativos descubren un espacio latente de soluciones sin necesidad de recolectar datos y definir features en forma manual. Esto podría llevar a una solución sesgada ya que la selección de features no esta basada en datos, sino en el juicio experto del científico de datos. 
+
 No todo son rosas con estos modelos, ya que sufren un problema llamado \textit{Cold start} o arranque en frio. Si pensamos en una solución donde alimentamos al modelo con una ventana de interacciones usuario-item filtrando los últimos N meses, tendremos las siguiente situaciones:
 
 \begin{itemize}
-	\item Usuarios nuevos: Los usuarios nuevos no tendrán interacciones. Por lo tanto, este modelo no podrá realizar ninguna recomendación. En general, se establece un mínimo de interacciones para que el modelo pueda realizar recomendaciones acertadas, ya que con pocas interacciones no podrá realizar buenas recomendaciones.
-	\item Usuarios con pocas interacciones: Por otro lado, tenemos a los usuarios que tienen una baja \textit{velocity} en cuando a interacciones con el sistema o aplicación. Si pensamos en un \textit{e-commerce}, hay usuario que compran con mucha frecuencia y otros que compran muy de vez en cuando. Estos últimos, en general tendrán pocas interacciones pudiendo caer por debajo del umbral mínimo que requiere el modelo. De esta forma, tendremos usuarios que quedaran fuera del modelo actual.
-	\item Usuarios con muchas interacciones: Este es el caso ideal, donde el usuario tiene una gran cantidad de interacciones con item. Para estos usuarios, el modelo podrá ofrecer mejores recomendaciones, ya que cuanto mas interacciones se tengan, el modelo se ajusta con mas facilidad a sus preferencia.
+	\item Usuarios nuevos: Los usuarios nuevos no tendrán interacciones. Por lo tanto, este modelo no podrá realizar ninguna recomendación. En general, se establece un mínimo de interacciones para que el modelo pueda realizar recomendaciones acertadas.
+	\item Usuarios con pocas interacciones: Por otro lado, tenemos a los usuarios que tienen una baja \textit{velocity} en cuando a interacciones con el sistema o aplicación. Si pensamos en un \textit{e-commerce}, hay usuarios que compran con mucha frecuencia y otros muy de vez en cuando. Estos últimos, en general tendrán pocas interacciones pudiendo caer por debajo del umbral mínimo que requiere el modelo. De esta forma, tendremos usuarios que quedaran fuera del modelo actual.
+	\item Usuarios con muchas interacciones: En este caso, el usuario tiene una gran cantidad de interacciones con items. Para estos usuarios, el modelo podrá ofrecer recomendaciones relevantes, ya que cuanto mas interacciones se tenga, el modelo se ajusta con mas facilidad a sus preferencia. Por otro lado, esto puede ser una gran desventaja, ya que se produce un efecto de túnel. Es decir, el usuario tiene recomendación muy ajustadas a sus preferencias, perdiendo la capacidad de descubrir nuevos items que podrían ser relevantes. Por esta cuestión, en general se suelen realizar tanto recomendaciones personalizadas como no-personalizadas.
 
 
 \end{itemize}
@@ -126,16 +134,17 @@ No todo son rosas con estos modelos, ya que sufren un problema llamado \textit{C
 \clearpage
 \subsection{Modelos Híbridos}
 
-Son aquellos modelos que combinan mas de una técnica de recomendación, también llamados ensambles de modelos. En general, lo mas común es combinar modelos de recomendación por popularidad, basados en contenido y filtros colaborativos. De esta forma, cuando los usuarios caen por debajo del umbral de interacciones necesarias por el modelo de filtro colaborativos, se utiliza un modelo basado en contenido, popularidad, o alguno otro modelo que no requiere de interacciones del usuario para realizar sus recomendaciones.
+Son aquellos modelos que combinan mas de una técnica de recomendación, también llamados ensambles de modelos. En general, lo mas común es combinar modelos de recomendación por popularidad, basados en contenido y filtros colaborativos. De esta forma, cuando los usuarios caen por debajo del umbral de interacciones necesarias por el modelo de filtro colaborativos, se utiliza un modelos basado en contenido, popularidad, o algún otro modelo que no requiere de interacciones del usuario para realizar sus recomendaciones.
 
 \subsection{Categorías dentro de los modelos basados en filtros colaborativos} 
 
-Dentro de los sistemas de recomendación basados en filtros colaborativos, tenemos dos sub-clasificaciones referidas a la forma en la que se realizan las predicciones:
+Dentro de los sistemas de recomendación basados en filtros colaborativos, tenemos dos sub-clasificaciones referidas a la forma en la que se realizan las predicciones.
 
  \subsubsection{Basados en Memoria} 
  
- Este tipo de modelos mantiene sus datos en memoria. Se recorren todos los datos (\textit{full scan}) cada vez que se necesita realizar un inferencia o predicción (fijando un número de vecinos a comparar). Un ejemplo de estos modelos es el algoritmo de k vecinos cercanos (\textit{KNN}), el cual mantiene una matriz rala de distancias en memoria, la cual se recorre completamente para comparar las distancias entre filas o columnas, usando alguna medida de distancia como puede ser la distancia coseno, coseno ajustada, \textit{manhattan}, etc..
- Para mitigar el problema de búsqueda exhaustiva, se puede utilizar una cache para realizar estas búsquedas una única vez. Otro problema es su limitación al tamaño máximo de la memoria con la que se cuenta, es decir, que el tamaño de la matriz depende de la memoria máxima disponible. Esto puede mitigarse utilizando implementaciones de matrices esparzas, las cuales comprimen los datos en memoria guardando unicamente las celdas que tiene datos. Ademas, es posible utilizar un cache que mantenga en memoria las búsqueda mas frecuentes y baje a almacenamiento secundario las menos frecuentes. Todos estos problemas de \textit{performance} y uso de recursos se deben a que \textit{KNN} no reduce la dimensionalidad de los datos, como si lo hacen varias implementaciones basadas en \textit{embeddings}, auto-encoder, redes neuronales etc.., donde lo que se buscan es encontrar una representación mas compacta de los items y usuarios sin perder información. Mas allá de tener que lidiar con estos problemas de escalabilidad, los resultados obtenidos por estos modelos no están muy alejados de aquellos que se encuentran en el estado del arte. Puede recomendarse su uso cuando tenemos un dominio reducido, dada su simplicidad. 
+ Este tipo de modelos mantiene sus datos en memoria. Se recorren todos los datos (\textit{full scan}) cada vez que se necesita realizar un inferencia o predicción (fijando un número de vecinos a comparar). Un ejemplo de estos modelos es el algoritmo de k vecinos cercanos (\textit{KNN}), el cual mantiene una matriz rala de distancias en memoria, la cual se recorre completamente para comparar las distancias entre filas o columnas, usando alguna medida de distancia como puede ser la \textit{distancia coseno}, \textit{coseno ajustada}, \textit{manhattan}, etc..
+ Para mitigar el problema de búsqueda exhaustiva(\textit{full scan}), se puede utilizar una cache y asi realizar estas búsquedas una única vez. Otro problema es su limitación al tamaño máximo de la memoria con la que se cuenta, es decir, que el tamaño de la matriz depende de la memoria máxima disponible. Esto puede mitigarse utilizando implementaciones de matrices esparzas, las cuales comprimen los datos en memoria guardando unicamente las celdas que tienen datos. Ademas, es posible utilizar un cache que mantenga en memoria las búsqueda mas frecuentes y baje a almacenamiento secundario las menos frecuentes. Todos estos problemas de \textit{performance} y uso de recursos se deben a que \textit{KNN} no reduce la dimensionalidad de los datos, como si lo hacen varias implementaciones basadas en \textit{embeddings}, \textit{auto-encoder}, redes neuronales etc.., donde lo que se buscan es encontrar una representación mas compacta de los items y usuarios sin perder información. Mas allá de estos problemas, los resultados obtenidos por estos modelos no están muy alejados de aquellos que se encuentran en el estado del arte. Puede recomendarse su uso cuando tenemos un dominio reducido, dada su simplicidad. 
+
 
  \subsubsection{Basados en Modelos}
  
@@ -146,9 +155,9 @@ Algunos ejemplos de estos modelos son los clasificadores bayesianos, redes neuro
 
 Con este trabajo se busca contestar las siguientes preguntas:
 
-\subsection{¿Los modelos basado en filtro colaborativos que utilizan técnicos de Deep Learning, obtienen mejores resultados?}
+\subsection{¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit{Deep Learning}, obtienen mejores resultados?}
 
-La idea detrás de esta pregunta es realizar benchmarks sobre distintos modelos del estado de arte basados en Deep Learning o no, utilizando el mismo set de datos y las mismas métricas. De esta forma, se busca comprender cual es la diferencia en \textit{performance} entre los modelos seleccionados. Por otro lado, se busca comprender cuando es mas adecuado utilizar cada enfoque. Como ya se comentó en el apartado de introducción, hay modelos que están mas limitados que otros según el número de recursos de \textit{hardware} o interacciones con los que se cuenta.
+La idea detrás de esta pregunta es realizar \textit{benchmarks} sobre distintos modelos del estado de arte basados en \textit{Deep Learning} o no, utilizando el mismo set de datos y las mismas métricas. De esta forma, se busca comprender cual es la diferencia en \textit{performance} entre los modelos seleccionados. Por otro lado, se busca comprender cuando es mas adecuado utilizar cada enfoque. Como ya se comentó en el apartado de introducción, hay modelos que están mas limitados que otros según el número de recursos de \textit{hardware} o interacciones con los que se cuenta.
 
 \subsection{¿Cuáles son las ventajas y desventajas de cada enfoque a la hora de aplicar estas técnicas?}
 
@@ -156,39 +165,34 @@ Esta pregunta se refiere a comprender cuando es conveniente aplicar una técnica
 
 \subsection{¿Cómo se puede solucionar el problema de \textit{cold-start} que sufre el enfoque de recomendación basado en filtros colaborativos?} (Tesis)
 
-Como ya se comentó en la introducción, los modelos de filtro colaborativos necesitan un número mínimo de interacciones usuario-item para poder operar y producir recomendaciones aceptables. La propuesta es explorar enfoques que permiten lidiar con este problema. Uno de los enfoques más comunes es utilizar ensambles de modelos basados en filtros colaborativos con otros modelo basados en contenidos. Estos ensambles puede diferir en sus técnicas dependiendo del dominio de los datos.
+Como ya se comentó en la introducción, los modelos de filtro colaborativos necesitan un número mínimo de interacciones usuario-item para poder operar y producir recomendaciones aceptables. La propuesta es explorar enfoques que permiten lidiar con este problema. Uno de los enfoques más comunes es utilizar ensambles de modelos basados en filtros colaborativos con otros modelo basados en contenidos o popularidad. Estos ensambles puede diferir en sus técnicas dependiendo del dominio de los datos.
 
 \section{Objetivos}
 
-Como primer objetivos, se pretender comprender cuales son los fundamentos teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios puede ser conveniente aplicarlas. Por otro lado, se intenta determinar cual es la diferencia en performance de cada técnica aplicada sobre el mismo set de datos, midiendo su performance utilizando las mismas métricas. ¿Obtenemos diferencias significativas?
+Como primer objetivos, se pretender comprender cuales son los fundamentos teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios puede ser conveniente aplicarlas. Por otro lado, se intenta determinar cual es la diferencia en \textit{performance} de cada técnica aplicada sobre el mismo set de datos, midiendo su \textit{performance} utilizando las mismas métricas. ¿Obtenemos diferencias significativas?
 
 Como segundo objetivo se busca proponer nuevas técnicas y/o explorar técnicas existentes que permite lidiar o solucionar el problema de cold start que sufren los sistemas de recomendación basados en filtros colaborativos (Tesis).
 
-Finalmente, se compararan esta técnicas mediante el \textit{benchmark} propuesto para compara como se comporta cada modelos ante usuarios con escasas o ninguna interacción en el set de datos propuesto.
+Finalmente, se compararan esta técnicas mediante un \textit{benchmark} propuesto para compara como se comporta cada modelos ante usuarios con escasas o ninguna interacción en el set de datos propuesto.
 
 \chapter{Materiales y Métodos}
 
 \section{Datos} 
 
 Para realizar este trabajo se selecciono el dominio del cine, ya que existen conjuntos de datos bien definidor y actualizados. 
-Estos \textit{datasets} en general están pensados para probar modelos de recomendación. Por otro lado, es el dominio clásico en papers y literatura de sistemas de recomendación en general.
+Estos \textit{datasets} en general están pensados para probar modelos de recomendación. Por otro lado, es el dominio clásico en \textit{papers} y literatura de sistemas de recomendación en general.
 
-Dada la propuesta de este trabajo, es necesario contar con datos de interacciones de usuarios con items(Películas en este caso). Ademas, dado que se busca solucionar el problema de \textit{cold start} para el enfoque de filtros colaborativos, se necesitara contar con otro enfoque de recomendación, el cual posiblemente pueda ser basado en contenido. Por esta cuestión, necesitamos contar con features completos y consistentes para los items(Películas).
+Dada la propuesta de este trabajo, es necesario contar con datos de interacciones de usuarios con items(Películas en este caso). Ademas, dado que se busca solucionar el problema de \textit{cold start} para el enfoque de filtros colaborativos, se necesitara contar con otro enfoque de recomendación, el cual posiblemente pueda ser basado en contenido. Por esta cuestión, necesitamos contar con \textit{features} completos y consistentes para los items(Películas).
 
-Dadas estas necesidades se decidió utilizar los siguientes \textit{datasets}:
+Dadas estas necesidades, se decidió utilizar los \textit{datasets} expuestos a continuación.
 
+\subsection{MovieLens 25M Dataset}
 
-\subsection{\href{https://grouplens.org/datasets/movielens/25m/}{MovieLens 25M Dataset}}
-
-Este \textit{dataset} prácticamente no tiene features para los items(Películas), pero si tiene las calificaciones realizadas 
-por los usuarios. También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por los usuarios para cada 
-item(Película). Otro punto importante, es que todos los usuarios tienen al menos 20 interacciones, lo cual asegura
-no tener problemas de baja performance por falta de interacciones. 
+Este \textit{dataset} \cite{movielens} prácticamente no tiene features para los items(Películas), pero si tiene la calificaciones realizadas por los usuarios. También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por los usuarios para cada item(Película). Otro punto importante, todos los usuarios tienen al menos 20 interacciones, lo cual asegura no tener problemas de baja performance por falta de interacciones. 
 De esta forma, este \textit{dataset} sera muy util para entrenar modelos de recomendación basados en filtros colaborativos
 y ademas cuenta con columnas extras como \textit{tags}, que serán útiles a la hora de entrenar modelos basados en contenido.
-Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 tags y 62.423 películas. Estos datos fueron registrados por 162.541 usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Las columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
-
+Por ultimo, este \textit{dataset} contiene 25 millones calificaciones, 1 millón de \textit{tags} y 62.423 películas. Estos datos fueron registrados por 162.541 usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Sus columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
 
 \begin{table}[!htb]
@@ -200,13 +204,13 @@ Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 
 	\hline
 	\textit{userId}     & Identificador univoco de un usuario.\\
 	\textit{movieId}    & Identificador univoco de una película.\\
-	\textit{timestamp}  & Fecha en la cual el usuario califico el item(movieId). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
-	\textit{rating}     & Calificación. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
-	\textit{tags}       & Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película. \\
+	\textit{timestamp}  & Fecha en la cual el usuario califico el item(\textit{movieId}). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
+	\textit{rating}     & Calificación del usuario. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
+	\textit{tags}       & Lista de palabras definidas por cada usuario para una película. Se cuenta con \textit{tags} a nivel usuario-película. \\
 	\hline
 	\end{tabular}
 	\caption{
-		Columnas extraídas del \textit{dataset} \textit{Movie Lens}, relevantes para este trabajo practico.
+		Columnas del \textit{dataset} \textit{Movie Lens}, relevantes para este trabajo.
 	}
 	\label{table:movieLensColumns}
 \end{table}
@@ -214,11 +218,9 @@ Por ultimo, este \textit{dataset} contiene 25.000.095 calificaciones, 1.093.360 
 
 \clearpage
 
-\subsection{\href{https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv}{TMDB Movie Dataset}}
+\subsection{TMDB Movie Dataset}
 
-Este \textit{dataset} no tiene calificaciones personalizadas de los items como sucede con el \textit{dataset} anterior, 
-pero tiene varios features referentes a películas que pueden ser muy útiles para modelos basados en contenido e inclusive
-modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene datos de 5.000 películas y sus columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
+Este \textit{dataset} \cite{tmdb} no tiene calificaciones personalizadas de los items como sucede con el \textit{dataset MovieLens} anterior, pero si tiene varios \textit{features} referentes a películas, que pueden ser muy útiles para modelos basados en contenido e inclusive modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene datos de 5.000 películas y sus columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
 
 \begin{table}[!htb]
@@ -228,7 +230,7 @@ modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene
 	\hline
 		Columna                      & Descripción \\
 	\hline
-	\textit{imdb\_id}                & identificador univoco en la base de datos de imdb. \\
+	\textit{imdb\_id}                & Identificador univoco de una película en la base de datos de \textit{IMDB}. \\
 	\textit{title y original\_title} & Título y título original. \\
 	\textit{release\_date}           & Fecha de estreno. \\
 	\textit{status}                  & Define si la película fue estrenada o esta en desarrollo. \\
@@ -238,16 +240,19 @@ modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene
 	\textit{genres}                  & Géneros. \\
 	\textit{adult}                   & ¿Solo es apta para adultos? \\
 	\textit{popularity}              & Indice de popularidad. \\
-	\textit{vote average/count}      & Cantidad y media de votos. \\
-	\textit{keywords/tagline} y \textit{tags} & tags o palabras clase ingresadas por lo usuarios para definir una película. \\
-	\textit{budget/revenue}                   & Presupuesto destinado a la realización de la película. \\
-	\textit{production companies/countries}   & Países y compañía que produjeron la película. \\ 
-	\textit{homepage}                         & Sitio web oficial. \\
+	\textit{vote\_count}      		 & Cantidad de votos. \\
+	\textit{vote\_average}      		 & Promedio de votos. \\
+	\textit{keywords/tagline} y \textit{tags} & \textit{tags} o palabras clase ingresadas por los usuarios para definir una película. \\
+	\textit{budget}                  & Presupuesto destinado a la realización de la película. \\
+	\textit{revenue}          	     & Retorno de inversión o ganancias. \\
+	\textit{production\_companies}    & Compañías que produjeron la película. \\ 
+	\textit{production\_countries}    & Países donde produjo la película. \\ 
+	\textit{homepage}                & Sitio web oficial. \\
 
 	\hline
 	\end{tabular}
 	\caption{
-		Columnas extraídas del \textit{dataset} \textit{TMDB}, relevantes para este trabajo practico.
+		Columnas del \textit{dataset} \textit{TMDB}, relevantes para este trabajo.
 	}
 	\label{table:tmdbColumns}
 \end{table}
@@ -256,67 +261,61 @@ modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene
 
 \clearpage
 
-\subsection{Preprocesamiento}
+\subsection{Pre-Procesamiento}
 
-Como parte inicial de la etapa de pre-procesamiento de datos se utilizo una base de datos \textit{MongoDB}. Se utilizo \textit{MongoDB} y no \textit{Pandas} debido a que pandas requiere cargar todo el \textit{dataset} en memoria. Si bien este problema se puede lidiar aumentado el tamaño de la memoria \textit{Swap}(Linux) o la memoria virtual(Windows), puede ocasionar caídas de procesos y lentitudes innecesarias. En este caso, se selecciono una base de datos de tipo documento, la cual no necesita cargar todos los datos en memoria y por otro lado, existe la posibilidad de escalar la base de datos a mas nodos en caso de ser necesario.
-Ambos \textit{datasets} contienen varios archivos \textit{csv} los cuales vamos a llamar \textit{tablas}. En la tabla ~\ref{table:tableRatings} a continuación se especifican las columna utilizadas:
+Como parte inicial de la etapa de pre-procesamiento de datos, se utilizo una base de datos \textit{MongoDB}. Se utilizo \textit{MongoDB} y no \textit{Pandas} debido a que \textit{Pandas} requiere cargar todo el \textit{dataset} en memoria. Si bien este problema se puede lidiar aumentado el tamaño de la memoria \textit{Swap}(Linux) o la memoria virtual(\textit{Windows}), puede ocasionar caída de procesos y lentitudes innecesarias. En este caso, se selecciono una base de datos de tipo documento, la cual no necesita cargar todos los datos en memoria y por otro lado, existe la posibilidad de escalar la base de datos a mas nodos en caso de ser necesario.
+Ambos \textit{datasets} contienen varios archivos \textit{csv}, los cuales vamos a llamar \textit{tablas}. En la tabla ~\ref{table:tableRatings} se especifican las columnas utilizadas:
 
 \begin{table}[!htb]
 	\centering
 	\footnotesize
-	\begin{tabular}{l | p{0.8\linewidth}}
+	\begin{tabular}{l | p{0.75\linewidth}}
 	\hline
-		Columna              & Descripción \\
+		File              & Descripción \\
 	\hline
-	\textit{movie\_metadata} & Pertenece al \textit{dataset} \textit{TMDB}. Es la fuente de verdad de las cual se toman columnas con datos referentes a películas. \\
+	\textit{movie\_metadata} & Pertenece al \textit{dataset} \textit{TMDB}. Es la fuente de verdad de la cual se toman columnas referentes a \textit{features} de una película. \\
 	\textit{tags}            & Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron los tags o palabras clave dadas de alta por los usuarios por cada película. \\
 	\textit{ratings}         & Pertenece al \textit{dataset} \textit{Movie Lens}. De esta tabla se tomaron las calificaciones de los usuario para las películas que fueron calificadas. \\
 	\hline
 	\end{tabular}
 	\caption{
-		Columnas del \textit{dataset} \textit{Movie Lens} utilizadas en este trabajo practico.
+		\textit{files} o tablas utilizadas en este trabajo, para construir un \textit{dataset} unificado, el cual sirve como base para entrenamiento y evaluación de modelos.
 	}
 	\label{table:tableRatings}
 \end{table}
 
 
-De esta forma, primero se realizo un merge o join de las tabla ratings y tags por las columnas user\_id y movie\_id,
- ya que tenemos dos columnas que representan interacciones de usuarios: 
+Para iniciar se realizo un \textit{merge} o \textit{join} de las tabla \textit{ratings} y \textit{tags} por las columnas \textit{user\_id} y \textit{movie\_id}, ya que tenemos dos columnas que representan interacciones de usuarios: 
 
 \begin{itemize}
-	\item rating: Pertenece a la tabla ratings.
-	\item tags: Pertenece a la tabla tags.
+	\item \textit{rating}: Pertenece a la tabla \textit{ratings}.
+	\item \textit{tags}: Pertenece a la tabla \textit{tags}.
 \end{itemize}
 
-En segundo lugar se hizo merge entre las tablas ratings\_tags\_v1 y movie\_metadata utilizando la columnas imdb\_id, la cual es identificador único de las películas en ambas tablas.
+En segundo lugar, se realizo un \textit{merge} entre las tablas \textit{ratings\_tags\_v1} y \textit{movie\_metadata} utilizando la columna \textit{imdb\_id}, la cual es identificador único de una película en ambas tablas.
 
-Finalmente se termino con dos tablas como resultado:
-
+Finalmente se termino con dos tablas/\textit{files} como resultado:
 
 \begin{table}[!htb]
 	\centering
 	\footnotesize
-	\begin{tabular}{l | p{0.8\linewidth}}
+	\begin{tabular}{l | p{0.75\linewidth}}
 	\hline
 		Filename            & Descripción \\
 	\hline
-	\textit{movies\_v4.csv} & Contente toda la información de las películas, incluidos todos los tags cargados por los usuarios que calificaron un película. \\
-	\textit{ratings\_tags\_v1.csv} & Contiene tanto las calificaciones como los tags para cada usuario y película. \\
+	\textit{movies\_v4.csv} & Contente toda la información de las películas, incluidos todos los \textit{tags} cargados por los usuarios que calificaron un película. \\
+	\textit{ratings\_tags\_v1.csv} & Contiene tanto las calificaciones como los \textit{tags} para cada usuario y película. \\
 	\hline
 	\end{tabular}
 	\caption{
-		Archivos resultado del pre procesamiento. Estos forman parte del \textit{dataset} de entrenamiento y evaluación en este trabajo practico.
+		\textit{files} resultado del pre-procesamiento. Estos forman parte del \textit{dataset} de entrenamiento y evaluación en este trabajo practico.
 	}
 	\label{table:tableFiles}
 \end{table}
 
 \subsubsection{Tabla de interacciones}
 
-La tabla \textit{ratings\_tags\_v1}(\ref{table:interactionsTableDef}) tiene datos a nivel interacción usuario-item. De esta forma a nivel usuario-item se cuenta con la calificación de la película realizada por el usuario, ademas de los \textit{tags} que el usuario cargo para esa películas. Estos \textit{tags} no son mas que una lista de palabras que son representativas de la película en cuestión. 
-Por ejemplo, para la película \textit{Toy Story} deberíamos tener palabras referente a la misma como: boss, woody, 
-animation, 3d, etc.. Finalmente, contamos con la fecha en la cual se realizaron esta interacciones. Se entiende 
-que la calificación y los \textit{tags} se ingresaron en el mismo momento.
-
+La tabla \textit{ratings\_tags\_v1}(\ref{table:interactionsTableDef}) tiene datos a nivel interacción usuario-item. De esta forma, a nivel usuario-item se cuenta con la calificación de la película realizada por el usuario, ademas de los \textit{tags} que el usuario cargo para esa películas. Estos \textit{tags} no son mas que una lista de palabras representativas de la película en cuestión. Por ejemplo, para la película \textit{Toy Story} deberíamos tener palabras referente a la misma como: boss, woody, animation, 3d, etc.. Finalmente, contamos con la fecha en la cual se realizaron esta interacciones. Se entiende que la calificación y los \textit{tags} se ingresaron en el mismo momento.
 
 \begin{table}[!htb]
 	\centering
@@ -328,9 +327,9 @@ que la calificación y los \textit{tags} se ingresaron en el mismo momento.
 
 	\textit{user\_id}  & Existen 13.281 usuarios. \\
 	\textit{movie\_id} & Existen 33.444 películas. \\
-	\textit{timestamp} & Fecha en la cual el usuario califico el item(movie\_id). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
+	\textit{timestamp} & Fecha en la cual el usuario califico el item(\textit{movie\_id}). Es un \textit{string} de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive. \\
 	\textit{rating}    & Calificación. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
-	\textit{tags}      & Lista de palabras definidas por cada usuario para una película. Se cuenta con los tags a nivel usuario-película. \\
+	\textit{tags}      & Lista de palabras definidas por cada usuario para una película. Se cuenta con los \textit{tags} a nivel usuario-película. \\
 	\hline
 	\end{tabular}
 	\caption{
@@ -365,7 +364,7 @@ La tabla \textit{movies\_v4} (\ref{table:moviesTableDef}) cuenta con informació
 	\textit{popularity}  		& Popularidad. \\
 	\textit{vote\_count}  		& Cantidad de votos por película. \\
 	\textit{vote\_mean}  		& Cantidad media de votos por película. \\
-	\textit{tags}  				& Son los tags cargados por todos los usuarios que interactuaron con la película. 
+	\textit{tags}  				& Son los \textit{tags} cargados por todos los usuarios que interactuaron con la película. 
 									Es la mismas información que tenemos en la tabla de interacción pero ahora a nivel item. \\
 
 	\hline
@@ -380,14 +379,15 @@ La tabla \textit{movies\_v4} (\ref{table:moviesTableDef}) cuenta con informació
 
 \subsubsection*{Valores faltantes}
 
-Una vez generadas ambas tablas se procedió a buscar missing values. A continuación en la tabla \ref{table:tab} 
-se pueden ver las columnas con missing values:
+Una vez generadas ambas tablas se procedió a buscar \textit{missing values}. A continuación, en la tabla \ref{table:tab} 
+se pueden ver las columnas con \textit{missing values}:
+
 \begin{table}[h!]
 \centering
 \footnotesize
 \begin{tabular}{lrrrrrr}
 \hline
-Columna &  Porcentaje de missing values \\
+Columna &  Porcentaje de \textit{missing values} \\
 \hline
    	budget     &  70      \\
    	poster     &  0.00085 \\
@@ -397,37 +397,39 @@ Columna &  Porcentaje de missing values \\
 	vote\_count &  4.6     \\
 \hline
 \end{tabular}
-\caption{Missing values en la tabla movies\_v4.}
+\caption{\textit{Missing values} en la \textit{tabla movies\_v4}.}
 \label{table:tab}
 \end{table}
 
-Luego se removieron las filas de la tabla para aquellas columnas del reporte anterior que tuvieran hasta 6 \% de valores faltantes. A continuación se removió la columna budget por tener un porcentaje muy alto de valores faltantes lo que la volvió inutilizable. Por otro lado, la tabla ratings\_tags\_v1 no se modifico, ya que no tenia valores faltantes en ninguna de sus columnas.
+Luego se removieron las filas de la tabla para aquellas columnas del reporte anterior que tuvieran hasta \textit{6 \%} de valores faltantes. A continuación se removió la columna \textit{budget} por tener un porcentaje muy alto de valores faltantes, lo que la volvió inutilizable. Por otro lado, la tabla \textit{ratings\_tags\_v1} no se modifico, ya que no tenia valores faltantes en ninguna de sus columnas.
 
 
 \clearpage
+
+
 \section{Análisis exploratorio}
 
 
-\subsection{Variable Rating}
+\subsection{Variable \textit{Rating}}
 
 
-En este análisis exploratorio analizaremos datos relevantes al problema de predicción de calificaciones de items por parte de los usuarios. Dentro de este análisis, la variable ratings o calificación es una de estas variables relevantes.
+En este análisis exploratorio analizaremos datos relevantes al problema de predicción de calificaciones de items por parte de los usuarios. Dentro de este análisis, la variable \textit{ratings} o calificación es una de estas variables relevantes.
 
-A continuación se puede apreciar una diagrama de barras el cual describe la frecuencia con la que los usuarios califican un item segmentada por cada valor posible de calificación:
+A continuación se puede apreciar una diagrama de barras el cual describe la frecuencia con la que los usuarios califican un item, segmentada por cada valor posible de calificación:
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-barplot.png}
-	\caption{Este diagrama de barras expone la frecuencia o cantidad de observaciones para cada valor discreto de puntuación o rating.}
+	\caption{Este diagrama de barras expone la frecuencia o cantidad de observaciones para cada valor discreto de puntuación o \textit{rating}.}
 	\label{fig:ratingsBarPlot}
 \end{figure}
 
-En la figura ~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos es la calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5 puntos. Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valores altos, y otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Se debe tener en cuenta que un 3.5 para un usuario podría ser un 4.5 para otro. Por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones menores a 2 puntos.
+En la figura ~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos, es la calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5 puntos. Por otro lado, se debe tener en cuenta que estas calificaciones provienen de todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos tienden a calificar de forma optimista, puntuando con valores altos, y otros por el contrario, son mas pesimistas y tienden a puntuar con calificaciones bajas. Este es un comportamiento conocido en el ámbito de sistemas de recomendación. Se debe tener en cuenta que un 3.5 para un usuario podría ser un 4.5 para otro. Por otro lado, se aprecia que en general se tiende a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas observaciones para puntuaciones menores a 2 puntos.
 
 \clearpage
 
-Para analizar en mas detalle la variable rating, veamos a continuación histograma y boxplot respectivamente:
+Para analizar en mas detalle la variable \textit{rating}, veamos a continuación un histograma y \textit{boxplot} respectivamente:
 
 \begin{center}
 \end{center}
@@ -435,11 +437,11 @@ Para analizar en mas detalle la variable rating, veamos a continuación histogra
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
-	\caption{Histograma y Boxplot de la variable rating. Los ratings son las calificaciones realizadas por los usuario para cada item o película.}
+	\caption{Histograma y \textit{Boxplot} de la variable \textit{rating}. Los \textit{ratings} son las calificaciones realizadas por los usuario para cada item o película.}
 	\label{fig:ratingsHistPlot}
 \end{figure}
 
-En la figura ~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en en el histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica. Nuevamente vemos algo parecido en diagrama de barras, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil). La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la media en esa dirección.
+En la figura ~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable es categórica y no numérica, debido a los picos con distintos niveles en el histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo claramente una variable categórica. Nuevamente vemos algo parecido al diagrama de barras ~\ref{fig:ratingsBarPlot}, el 50\% de las observaciones se encuentran entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil). La mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido a que tenemos puntos con frecuencia considerables a izquierda que mueven a la media en esa dirección.
 Por otro lado, tenemos valores atípicos en el extreme izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el cual encuentra entre el cuantiles Q1 y Q3, donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia. No se encuentran valores atípicos por sobre el máximo.
 Se puede apreciar un sesgo a izquierda, ya que existe mayor separación o dispersión de las observaciones entre Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
 
@@ -489,7 +491,7 @@ A continuación se puede visualizar la frecuencia de aparición de cada palabra 
 	\item[Tags]
 \end{description}
 
-Cada usuario puede asociar tags o palabras clase a una película. Un tags es una palabra o frase corta que identifica o describe una película. Es una forma simple de clusterizar, ya que los usuarios en general describen categorías como animación 3d, cual es el director, una frase que describe algún tipo de categoría o algo relevante en el contenido de la misma. 
+Cada usuario puede asociar \textit{tags} o palabras clase a una película. Un \textit{tags} es una palabra o frase corta que identifica o describe una película. Es una forma simple de clusterizar, ya que los usuarios en general describen categorías como animación 3d, cual es el director, una frase que describe algún tipo de categoría o algo relevante en el contenido de la misma. 
 
 \begin{figure}[h!]
 	\centering
@@ -499,7 +501,7 @@ Cada usuario puede asociar tags o palabras clase a una película. Un tags es una
 \end{figure}	
 
 
-En la figura ~\ref{fig:tagsCloud} las palabra \textit{based} (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los tags que cargan los usuarios para cada película. Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
+En la figura ~\ref{fig:tagsCloud} las palabra \textit{based} (basada/o en...), \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity}, \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas utilizadas en los \textit{tags} que cargan los usuarios para cada película. Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder}, \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent}, \textit{World war}, \textit{True story}.
 
 
 \clearpage
@@ -518,7 +520,7 @@ La variable \textit{overview} es la sinopsis de la película. Esta describe brev
 \end{figure}	
 
 
-En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabra con mayor frecuencia: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife}, \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family}, \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New}, \textit{Friend} y \textit{Story}. Se aprecia una diferencia notoria entre las variables tags y overview. La variable tags parece categorizar las películas desde distintas perspectivas. Por otro lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma. A simple vista, los clústeres(\textit{Embeddings}) que pudieran generarse utilizando esta variable, podrían ser mas específicos que aquellos clusters generados a partir de la variable tags.
+En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabra con mayor frecuencia: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife}, \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family}, \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New}, \textit{Friend} y \textit{Story}. Se aprecia una diferencia notoria entre las variables \textit{tags} y overview. La variable \textit{tags} parece categorizar las películas desde distintas perspectivas. Por otro lado, la variable overview contiene palabras que son mas utilizadas en la descripción de la misma. A simple vista, los clústeres(\textit{Embeddings}) que pudieran generarse utilizando esta variable, podrían ser mas específicos que aquellos clusters generados a partir de la variable \textit{tags}.
 
 
 \begin{description}
@@ -562,11 +564,11 @@ Las componentes principales son las variables resultado del algoritmo PCA. Estas
 \end{description}
 \begin{itemize}
 	\item pc1: $31$ \%
-	\item pc2: $28$\%
+	\item pc2: $28$ \%
 	\item pc3: $16$ \%
 	\item pc4: $11$ \%
-	\item pc5: $7$ \%
-	\item pc6: $5$ \%
+	\item pc5: $7$  \%
+	\item pc6: $5$  \%
 \end{itemize}
 
 Inicialmente podemos apreciar en la figura ~\ref{fig:explainedVariancePlot} que toda las componente tiene niveles de variabilidad o varianza explicada muy bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que el grado de correlación de las variables es muy bajo. Usando el criterio del bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que acumulan mayor varianza. Tengamos en cuenta que el análisis por componentes principales es un análisis lineal. Es decir que, tiene encuentra unicamente correlaciones lineales. De esta forma este método puede estar perdiendo de vista correlaciones no lineales mas complejas donde podríamos encontrar un mayor grado de correlación. Las 3 primeras componentes acumulan un grado de variabilidad 85 \%.
@@ -718,7 +720,7 @@ En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En
 	\item Distancia de Pearson (1 - Correlación de Pearson).
 \end{itemize}
 
-Luego, para este trabajo se eligió utilizar la \textit{Distancia Coseno}, ya con esta se obtuvieron buenos resultado.
+Luego, para este trabajo se eligió utilizar la \textit{Distancia Coseno}.
 
 \begin{description}
 	\item[Distancia Coseno]
@@ -765,7 +767,7 @@ Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicc
 
 \subsection{KNN User Based}
 
-En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
+En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario \cite{useritembasedinference}. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -789,7 +791,9 @@ Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás us
 
 \subsection{\textit{KNN Item Based}}
 
-Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$ original. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
+Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ 
+tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de 
+$Calificaciones_{u, i}$ original \cite{useritembasedinference}. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
 
 
 \begin{equation}
@@ -878,7 +882,7 @@ En el apartado anterior se explicó uno de las componente básicos y mas usando 
 
 \subsection{General Matrix Factorization (GMF)}
 
-Esta es una arquitectura clásica en sistemas de recomendación basados en filtros colaborativos. El \href{https://sifter.org/~simon/journal/20061211.html}{algoritmo de factorización de matrices} funciona desacoplando la matriz de interacciones usuario-item en un producto escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en la competencia \href{https://en.wikipedia.org/wiki/Netflix_Prize}{\textit{Netflix prize}} en 2006. La idea principal del algoritmo es representar a usuario e items en un espacio latente de baja dimensionalidad.
+Esta es una arquitectura clásica en sistemas de recomendación basados en filtros colaborativos. El lgoritmo de factorización de matrices \cite{afm} funciona desacoplando la matriz de interacciones usuario-item en un producto escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en la competencia \cite{netflixprize} en 2006. La idea principal del algoritmo es representar a usuario e items en un espacio latente de baja dimensionalidad.
 A partir del trabajo inicial realizado por  \textit{Funk} en 2006, se han propuesto multiples enfoque de factorización de matrices para sistemas de recomendación, siento este el modelo de mas simple y efectivo.
 
 Este modelo se puede construir fácilmente realizando el producto escalar de dos matrices de vectores de \textit{embeddings}, las cuales tiene una baja dimensionalidad debido al principio de funcionamiento de los \textit{embeddings}. A continuación se puede ver un esquema del modelo, el cual toma como entradas los identificadores de un usuario e item, luego resuelven los vectores \textit{embedding} correspondiente a ambos ids, y finalmente se realiza el producto escalar de ambos vectores. Este producto escalar da como resultado la calificación del usuario para el item dado. Por otro lado, el algoritmo del optimización de gradiente descendente sera quien se ocupe de ajustar los pesos de ambas matrices para que dado un id de usuario y otro id de item se obtenga la calificación correspondiente a la observación utilizada como ejemplo de entrenamiento.
@@ -924,7 +928,7 @@ En términos matriciales podemos verlo de la siguiente manera:
 \end{itemize}
 
 
-El tamaño de la dimensión de factores latentes como ya se vio anteriormente en el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a ajustar. \href{https://link.springer.com/chapter/10.1007/978-3-642-38844-6_3}{Se ha demostrado} que realizar factorización de matrices con un factor latente de tamaño 1 es equivalente a un modelo de recomendación por popularidad, es decir que recomienda los items mas populares sin tener en cuenta la personalización de las recomendaciones. Luego, a medida que vamos incrementando el tamaño del factor latente estar recomendaciones serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar(overfitting) y por ende la calidad de las recomendaciones comentara a empeorar. Para solucionar este se suelen agregar términos de regularización en la función de error a minimizar:
+El tamaño de la dimensión de factores latentes como ya se vio anteriormente en el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a ajustar. Se ha demostrado \cite{embeddingsizedem} que realizar factorización de matrices con un factor latente de tamaño 1 es equivalente a un modelo de recomendación por popularidad, es decir que recomienda los items mas populares sin tener en cuenta la personalización de las recomendaciones. Luego, a medida que vamos incrementando el tamaño del factor latente estar recomendaciones serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar(\textit{overfitting}) y por ende la calidad de las recomendaciones comentara a empeorar. Para solucionar este se suelen agregar términos de regularización en la función de error a minimizar:
 
 \begin{equation}
 \underset{H, W}{\operatorname{arg\,min}}\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
@@ -938,7 +942,7 @@ El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
 
 \subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
 
-El modelo \textit{GMF} de \textit{Simon Funk} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
+El modelo \textit{GMF} de \textit{Simon Funk} \cite{afm} \cite{dlwkrs} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama anterior:
 
@@ -961,7 +965,7 @@ En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales represe
 
 Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}) dada dos matrices de baja dimensionalidad se realiza un producto escalar y se suman sesgos dependiendo de caso para calcular o inferir la calificación del usuario para un item dado. Estos modelos como ya se conto aprender los pesos o parámetros de los vectores \textit{embeddings} en el proceso se entrenamiento. 
 
-El enfoque de \href{https://arxiv.org/pdf/1511.06443.pdf}{\textit{Neural Network Matrix Factorization (NN MF)}} es levemente distinto. En este caso se reemplaza el producto interno, el cual podemos pensarlo como conocimiento a priori del problema, por otra función desconocida que sera la que aprenderá el modelo a partir de las observaciones suministradas en su entrenamiento. En particular se remplaza el producto escalar mas los sesgos por una red neuronal multi capa de capas densas o fully connected. De esta forma, el modelo no solo aprender los parámetros de los vectores \textit{embedding}, sino también los pesos de la red multi capa y en definitiva cual es la mejor función para predecir las calificaciones del usuario, como cualquier otro tipo de interacción.
+El enfoque de {\textit{NN-MF}} \cite{nnfm} \cite{ncf} es levemente distinto. En este caso se reemplaza el producto interno, el cual podemos pensarlo como conocimiento a priori del problema, por otra función desconocida que sera la que aprenderá el modelo a partir de las observaciones suministradas en su entrenamiento. En particular se remplaza el producto escalar mas los sesgos por una red neuronal multi capa de capas densas o fully connected. De esta forma, el modelo no solo aprender los parámetros de los vectores \textit{embedding}, sino también los pesos de la red multi capa y en definitiva cual es la mejor función para predecir las calificaciones del usuario, como cualquier otro tipo de interacción.
 
 Utilizar rede neuronales abre el panorama, ya que ahora podemos usar mas variable que sea relevante a nuestro problema de predicción y no solo las variable categóricas y usuario e items; aquí es donde recibe el mayor potencial de este enfoque.
 
@@ -987,9 +991,9 @@ Entonces, como entradas tenemos los identificadores de usuarios e items en entra
 \subsection{Factorization Machines (FM)}
 
 
-Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización}. 
+Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización} \cite{didlfm} \cite{zhangdive}. 
 
-Las \href{https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf}{Maquinas de Factorización} propuestas por \textit{Steffen Rendle} en 2010,son algoritmos supervisados que se puede utilizar para tareas de clasificación, regresión y tareas de ranking como sucede en el ámbito de recomendaciones. Rápidamente se convivieron en un método popular para hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es una generalización de un modelo lineal y un model de factorización de matrices, mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que utiliza un kernel polinomial.
+Las Maquinas de Factorización propuestas por \textit{Steffen Rendle} en 2010 \cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de clasificación, regresión y tareas de ranking como sucede en el ámbito de recomendaciones. Rápidamente se convivieron en un método popular para hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es una generalización de un modelo lineal y un model de factorización de matrices, mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que utiliza un kernel polinomial.
 
 F
 Formalmente, si tenemos:
@@ -1047,7 +1051,7 @@ Con esta re-formulación de último termino, la complejidad del método se reduc
 
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el comportamiento de las interacciones o correlación usuario-items ya sean implícita o explicitas. A pesar de este gran progreso, los métodos expuestos anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto orden, requiriendo en algunos casos realizar ingeniería de features para disminuir estos sesgos. 
 
-El modelo \href{https://arxiv.org/pdf/1703.04247.pdf}{\textit{Deep Factorization Machine (DeepFM)}} o Maquina de factorización basada en \textit{Deep Learning}, mejora el aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por otro lado, es una evolución del modelo \href{https://arxiv.org/pdf/1606.07792.pdf}{Wide and Deep} de Google, el cual es un ensample de dos modelos: uno lineal, que captura las interacciones o correlaciones de alto orden y una MLP (Multi-Layer Perceptron) la cual captura correlación de mas bajo orden, o aquellas mas complejas.
+El modelo {\textit{Deep Factorization Machine (DeepFM)} \cite{dfmpaper} \cite{didldfm} o Maquina de factorización basada en \textit{Deep Learning}, mejora el aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por otro lado, es una evolución del modelo \textit{Wide and Deep} \cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos modelos: uno lineal, que captura las interacciones o correlaciones de alto orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación de mas bajo orden, o aquellas mas complejas.
 
 A continuación de puede visualizar un diagrama de bloques de alto nivel de modelos:
 
@@ -1066,7 +1070,7 @@ dado un id de usuario y item se resuelve sus correspondientes vectores \textit{e
 
 \section{Métricas}
 
-Pra medir y comparar el grado de exactitude de los modelos seleccionados tanto en el conjunto de validación como en truncamiento se seleccionado dos métricas:
+Para medir y comparar el grado de exactitude de los modelos seleccionados tanto en el conjunto de validación como en truncamiento se seleccionado dos métricas:
 
 \begin{itemize}
 	\item \textit{Root Mean Square Error (RMSE)}: ES la raíz cuadrada del error cuadrático medio.
@@ -1097,7 +1101,7 @@ Si bien esta métrica no es la métrica por excelencia a usar en el ámbito de s
 
 \subsection{\textit{Mean Average Precision at k (mAP@k)}}
 
-\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación.
+\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación \cite{map_at_k_1}, \cite{map_at_k_2}, \cite{map_at_k_3}.
 
 Si pensamos a nivel de aplicación de un sistemas de recomendación pedimos ver entras y salidas donde:
 
@@ -1384,7 +1388,14 @@ Finalmente podemos decir que en el caso de estas pruebas el \textit{dataset} uti
 
 
 %%%% BIBLIOGRAFÍA
-\backmatter
-%\bibliography{tesis}
+
+
+% Establece el estilo de las referencias bibliográficas
+% otago, plain, apa, ieee, IEEEtran, etc...
+\bibliographystyle{IEEEtran}
+\renewcommand{\bibname}{Referencias}
+\bibliography{cites} % Especifica el nombre del archivo .bib sin la extensión .bib
+
+
 
 \end{document}
