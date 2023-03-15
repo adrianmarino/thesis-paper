@@ -186,7 +186,7 @@ Dada la propuesta de este trabajo, es necesario contar con datos de interaccione
 
 Dadas estas necesidades, se decidió utilizar los \textit{datasets} expuestos a continuación.
 
-\subsection{MovieLens 25M Dataset}
+\subsection{\textit{MovieLens 25M Dataset}}
 
 Este \textit{dataset} \cite{movielens} prácticamente no tiene features para los items(Películas), pero si tiene la calificaciones realizadas por los usuarios. También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por los usuarios para cada item(Película). Otro punto importante, todos los usuarios tienen al menos 20 interacciones, lo cual asegura no tener problemas de baja performance por falta de interacciones. 
 De esta forma, este \textit{dataset} sera muy util para entrenar modelos de recomendación basados en filtros colaborativos
@@ -218,7 +218,7 @@ Por ultimo, este \textit{dataset} contiene 25 millones calificaciones, 1 millón
 
 \clearpage
 
-\subsection{TMDB Movie Dataset}
+\subsection{\textit{TMDB Movie Dataset}}
 
 Este \textit{dataset} \cite{tmdb} no tiene calificaciones personalizadas de los items como sucede con el \textit{dataset MovieLens} anterior, pero si tiene varios \textit{features} referentes a películas, que pueden ser muy útiles para modelos basados en contenido e inclusive modelos híbridos, los cuales se busca explorar en el trabajo de tesis. Contiene datos de 5.000 películas y sus columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 
@@ -540,7 +540,7 @@ En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras con
 
 \clearpage
 
-\subsection{Análisis de Componente Principales}
+\subsection{Análisis de Componentes Principales}
 
 En esta sección describe el análisis de componentes principales realizado sobre las variable numéricas resultado del merge de las tablas movies y interactions.
 
@@ -764,7 +764,7 @@ Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicc
 
 \clearpage
 
-\subsection{KNN User Based}
+\subsection{\textit{KNN User Based}}
 
 En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario \cite{useritembasedinference}. El enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
@@ -879,7 +879,7 @@ Finamente, tengamos en cuenta que el proceso de back-propagation sera encargado 
 
 En el apartado anterior se explicó uno de las componente básicos y mas usando en modelos de recomendación basados en modelo de Deep Learning. Des de qui se describirán las arquitecturas utilizadas en este trabajo.
 
-\subsection{General Matrix Factorization (GMF)}
+\subsection{\textit{General Matrix Factorization (GMF)}}
 
 Esta es una arquitectura clásica en sistemas de recomendación basados en filtros colaborativos. El lgoritmo de factorización de matrices \cite{afm} funciona desacoplando la matriz de interacciones usuario-item en un producto escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en la competencia \cite{netflixprize} en 2006. La idea principal del algoritmo es representar a usuario e items en un espacio latente de baja dimensionalidad.
 A partir del trabajo inicial realizado por  \textit{Funk} en 2006, se han propuesto multiples enfoque de factorización de matrices para sistemas de recomendación, siento este el modelo de mas simple y efectivo.
@@ -941,7 +941,7 @@ El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
 
 \subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
 
-El modelo \textit{GMF} de \textit{Simon Funk} \cite{afm} \cite{dlwkrs} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
+El modelo \textit{GMF} de \textit{Simon Funk} \cite{afm, dlwkrs} realiza recomendaciones de muy buena calidad, pero tiene como limitación que solo utilizar interacciones usuario-item que tiene que ver con valores numéricos referidos a interacciones explicitas como calificaciones. Los sistemas de recomendación modernos deben explotar todas las interacciones posibles, tanto explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras, Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es necesario usar cualquier tipo de interacción usuario item explicita o implícita se agrega un Bias o sesgo para los usuarios y otro para los items.
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama anterior:
 
@@ -987,10 +987,10 @@ Entonces, como entradas tenemos los identificadores de usuarios e items en entra
 
 \clearpage
 
-\subsection{Factorization Machines (FM)}
+\subsection{\textit{Factorization Machines (FM)}}
 
 
-Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización} \cite{didlfm} \cite{zhangdive}. 
+Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a comenzar explicando un de lso componente principales de este: Las \textit{Máquinas de factorización} \cite{didlfm, zhangdive}. 
 
 Las Maquinas de Factorización propuestas por \textit{Steffen Rendle} en 2010 \cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de clasificación, regresión y tareas de ranking como sucede en el ámbito de recomendaciones. Rápidamente se convivieron en un método popular para hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es una generalización de un modelo lineal y un model de factorización de matrices, mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que utiliza un kernel polinomial.
 
@@ -1050,7 +1050,7 @@ Con esta re-formulación de último termino, la complejidad del método se reduc
 
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el comportamiento de las interacciones o correlación usuario-items ya sean implícita o explicitas. A pesar de este gran progreso, los métodos expuestos anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto orden, requiriendo en algunos casos realizar ingeniería de features para disminuir estos sesgos. 
 
-El modelo {\textit{Deep Factorization Machine (DeepFM)} \cite{dfmpaper} \cite{didldfm} o Maquina de factorización basada en \textit{Deep Learning}, mejora el aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por otro lado, es una evolución del modelo \textit{Wide and Deep} \cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos modelos: uno lineal, que captura las interacciones o correlaciones de alto orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación de mas bajo orden, o aquellas mas complejas.
+El modelo {\textit{Deep Factorization Machine (DeepFM)} \cite{dfmpaper, didldfm} o Maquina de factorización basada en \textit{Deep Learning}, mejora el aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por otro lado, es una evolución del modelo \textit{Wide and Deep} \cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos modelos: uno lineal, que captura las interacciones o correlaciones de alto orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación de mas bajo orden, o aquellas mas complejas.
 
 A continuación de puede visualizar un diagrama de bloques de alto nivel de modelos:
 
@@ -1100,7 +1100,7 @@ Si bien esta métrica no es la métrica por excelencia a usar en el ámbito de s
 
 \subsection{\textit{Mean Average Precision at k (mAP@k)}}
 
-\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación \cite{map_at_k_1}, \cite{map_at_k_2}, \cite{map_at_k_3}.
+\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación \cite{map_at_k_1, map_at_k_2, map_at_k_3}.
 
 Si pensamos a nivel de aplicación de un sistemas de recomendación pedimos ver entras y salidas donde:
 
@@ -1204,7 +1204,7 @@ A continuación se describen los resultados de todos los modelos comparados medi
 
 \clearpage
 
-\subsection{\textit{Ensample KNN User Based} y \textit{Item Based}}
+\subsection{\textit{KNN User Based Ensemble} y \textit{Item Based}}
 
 \begin{figure}[!htb]
 	\centering
