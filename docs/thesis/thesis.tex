@@ -119,9 +119,9 @@ Estos modelos, a diferencia de los modelos basados en contenido, no requirieren 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos, personalizan sus recomendaciones. 
 Es decir, ajustan las recomendaciones a cada usuario particular, en base a sus preferencias. Ademas, ambos permiten encontrar usuarios e items similares y recomendar items entre usuarios similares.
 
-Finalmente, los modelos basados en filtros colaborativos descubren un espacio latente de soluciones sin necesidad de recolectar datos y definir features en forma manual. Esto podría llevar a una solución sesgada ya que la selección de features no esta basada en datos, sino en el juicio experto del científico de datos. 
+Por otro lado, los modelos basados en filtros colaborativos descubren un espacio latente de soluciones sin necesidad de recolectar datos y definir features en forma manual, a diferencia de los modelos basados en contenido. La selección o construcción manual de features puede llevar a una solución sesgada, ya que no esta basada en datos sino en el juicio experto del científico de datos. 
 
-No todo son rosas con estos modelos, ya que sufren un problema llamado \textit{Cold start} o arranque en frio. Si pensamos en una solución donde alimentamos al modelo con una ventana de interacciones usuario-item filtrando los últimos N meses, tendremos las siguiente situaciones:
+No todo son rosas con estos modelos, ya que sufren un problema llamado \textit{Cold start} o arranque en frio. Si pensamos en una solución donde alimentamos al modelo con una ventana de interacciones para los últimos N meses, tendremos las siguiente situaciones:
 
 \begin{itemize}
 	\item Usuarios nuevos: Los usuarios nuevos no tendrán interacciones. Por lo tanto, este modelo no podrá realizar ninguna recomendación. En general, se establece un mínimo de interacciones para que el modelo pueda realizar recomendaciones acertadas.
@@ -630,14 +630,13 @@ En este capitulo se describirán los modelos utilizados para realiza la predicci
 
 Cada implementación tiene sus particularidades:  Cuanto puede escalar, sus tiempos de entrenamiento y predicción, su implementación, exactitud de las predicciones, tendencia al overfitting, etc.. Para este trabajo se eligieron dos grandes grupos. Por un lado, una implementación sencilla basada en memoria como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en Deep Learning. Los modelos basados en Deep Learning utilizan \textit{Embeddings} en todos los casos, como una forma de reducir la dimensionalidad de las variables categóricas que se utilizan como entradas. Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras basadas en modelos del estado del arte. Luego, la idea fue medir los resultados de todo los modelos utilizando distintas métricas comparables, entrenando con el mismo \textit{dataset} en todos los casos. De esta forma podemos comparar los resultados de cada modelo. K vecinos cercanos (\textit{KNN}) fue tomado como baseline, a partir del cual poder comparar los demás modelos.
 
-Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en cuenta que estos modelos son muy 
-demandantes en cuanto a recursos de \textit{hardware}, se opto por usar el framework \href{https://pytorch.org/}{\textit{PyTorch}}, dado que permite hacer uso tanto de \textit{CPU} como \textit{GPU}. De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e inferencia). Ya elegido el \textit{framework}, se opto por implementar todos los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho modelos del estado del arte ya desarrollados de forma oficial. De esta forma implementamos cada modelo desde cero para poder hacer uso de \textit{CPU} y \textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos disponible.
+Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en cuenta que estos modelos son muy demandantes en cuanto a recursos de \textit{hardware}, se opto por usar el framework \href{https://pytorch.org/}{\textit{PyTorch}}, dado que permite hacer uso tanto de \textit{CPU} como \textit{GPU}. De esta forma, se puede elegir cuando usar cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e inferencia). Ya elegido el \textit{framework}, se opto por implementar todos los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho modelos del estado del arte ya desarrollados de forma oficial. De esta forma se implemento cada modelo desde cero para poder hacer uso de \textit{CPU} y \textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos disponible.
 
 \section{Enfoque Basados en Memoria}
 
 \subsection{\textit{KNN (K-Nearest-Neighbor)}}
 
-Esta es la implementación clásica y mas intuitiva para realizar la recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. De esta forma, en la etapa de inferencia, el modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación. Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser Redis) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
+Esta es la implementación clásica y mas intuitiva para realizar recomendación de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias que pueden ser distancias entre usuario o items, y otra matriz de calificaciones usuario-item. De esta forma, en la etapa de inferencia, el modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la predicción de la calificación. Estas matrices se puede mantener en memoria, persistir en una base de datos (como puede ser \textit{Redis}) o en un archivos indexado. Por esta cuestión, la categoría en memoria no tiene por que ser estricta, pero si se entiende que los mejores tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la totalidad de estas matrices en memoria. 
 
 \clearpage
 Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
@@ -767,7 +766,7 @@ Aquí es donde finaliza la etapa de entrenamiento. Luego la inferencia o predicc
 
 \subsection{KNN User Based}
 
-En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario \cite{useritembasedinference}. En enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
+En el apartado anterior se explico como calcular las matrices de $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se explicará el proceso de inferencia de la clasificación de un item por parte de un usuario \cite{useritembasedinference}. El enfoque de K usuarios cercanos para calcular la calificación de un item se basa en la siguiente definición:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -792,7 +791,7 @@ Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás us
 \subsection{\textit{KNN Item Based}}
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz de $Calificaciones_{i, u}$ 
-tiene items como filas y usuarios como columnas, decir que es la matriz transpuesta de la matriz de 
+tiene items como filas y usuarios como columnas. Es decir, es la matriz transpuesta de la matriz de 
 $Calificaciones_{u, i}$ original \cite{useritembasedinference}. De forma la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales representan a items. Dadas estas diferencias el calcula de la predicción de las calificaciones también difiere en su definición:
 
 
