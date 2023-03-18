@@ -26,10 +26,10 @@ class MovieLensTMDbDataset(RecSysDataset):
             left_on=['user_seq'],
             right_on=['user_seq']
         )
-    
+
         # Users rating std deviation.......
         train_user_rating_std = df_train['user_movie_rating'].std()
-        
+
         # Create normalized rattings column...
         df_train['user_movie_rating_norm'] = df_train \
             .apply(lambda row: abs(row['user_movie_rating']-row['user_movie_rating_mean'])/train_user_rating_std, axis=1) 

@@ -3,5 +3,22 @@
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "cSpell.words": [
+        "clusterizar",
+        "cuantil",
+        "Cuantil",
+        "cuantiles",
+        "Etran",
+        "ieee",
+        "Keras",
+        "otago",
+        "Prediccion",
+        "Rendle",
+        "Softmax",
+        "Steffen",
+        "Tensorflow",
+        "TMDB",
+        "VRAM"
+    ]
 }

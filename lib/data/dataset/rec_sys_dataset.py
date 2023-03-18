@@ -62,16 +62,16 @@ class RecSysDataset(Dataset):
     @property
     def features(self): return self._to_feats(self.data)
 
-        
+
     @property
     def targets(self): return self._to_target(self.data)
 
 
     @property
-    def features_uniques(self):         
+    def features_uniques(self):
         return [c[0] for c in self.features_value_counts]
 
-    
+
     @property
     def target_uniques(self): return self.targets_value_counts[0]
 
@@ -83,8 +83,9 @@ class RecSysDataset(Dataset):
 
 
     @property
-    def targets_value_counts(self): 
+    def targets_value_counts(self):
         return np.unique(self.targets.numpy(), return_counts=True)
+
 
     def _to_feats_target(self, observations):
         features    = self._to_feats(observations)

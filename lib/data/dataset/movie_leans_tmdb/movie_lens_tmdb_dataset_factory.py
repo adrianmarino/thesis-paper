@@ -36,6 +36,23 @@ class MovieLensTMDBDatasetFactory:
             device           = device
         )
 
+    @classmethod
+    def df_from_path(
+        clazz,
+        path      = '../datasets',
+        filter_fn = lambda df: df
+    ):
+        movies       = pd.read_json(f'{path}/movies.json')
+        interactions = pd.read_json(f'{path}/interactions.json')
+
+        dataset = clazz.preprocessing(path, movies, interactions, filter_fn)
+
+        del movies
+        del interactions
+
+        return dataset
+
+
     def preprocessing(path, movies, interactions, filter_fn):
         # Renaming...
         m = movies.rename(columns={c:f'movie_{c}' for c in  movies.columns})
