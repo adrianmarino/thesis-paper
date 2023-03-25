@@ -43,7 +43,7 @@ def data_preprocessing(df):
 
 
 
-class CAEDataset(Dataset):
+class CollaborativeAutoEncoderDataset(Dataset):
     def __init__(self, df)         : self.data = data_preprocessing(df)
 
 

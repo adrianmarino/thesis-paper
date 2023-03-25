@@ -8,3 +8,4 @@ from .words_cloud         import words_clous_plot
 from .ridgeplot           import ridgeplot
 from .correlationplot     import correlation_plot
 from .comparative_boxplot import comparative_boxplot
+from .dendrogram          import plot_dendrogram
