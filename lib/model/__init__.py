@@ -42,7 +42,16 @@ from .module.nnmf                             import NNMF
 from .module.gmf                              import GMF
 from .module.biased_gmf                       import BiasedGMF
 
+from .module.collaborative_auto_encoder.collaborative_auto_encoder  import (
+    CollaborativeAutoEncoder,
+    CollaborativeDecoder,
+    CollaborativeEncoder,
+    LatentSpaceEncoder
+)
+
 # Content Based way...
-from .module.autoencoder.autoencoder          import AutoEncoder
-from .module.autoencoder.autoencoder_trainer import AutoEncoderTrainer
+from .module.autoencoder.autoencoder            import AutoEncoder
+from .module.autoencoder.autoencoder_trainer    import AutoEncoderTrainer
 # -----------------------------------------------------------------------------
+
+from .clustering.k_medoids      import KMedoisClustering

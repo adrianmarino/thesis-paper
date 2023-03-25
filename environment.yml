@@ -3,6 +3,7 @@ channels:
     - defaults
     - pytorch
     - conda-forge
+    - districtdatalabs
 dependencies:
     - seaborn
     - matplotlib
@@ -10,6 +11,7 @@ dependencies:
     - joypy
     - numpy
     - pytorch=1.11.0
+    - pytorch-lightning
     - torchtext
     - spacy
     - ignite
@@ -22,8 +24,10 @@ dependencies:
     - sentence-transformers
     - coverage-badge
     - requests
+    - yellowbrick
+    - scikit-learn-extra
     - pip
     - pip:
-        - pytorch-common==0.0.19
+        - pytorch-common==0.0.23
         - graphviz
         - torchviz

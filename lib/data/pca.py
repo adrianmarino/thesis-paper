@@ -21,49 +21,52 @@ class PCASummary:
 
     def explained_variance(self):
         return self.pca.explained_variance_ratio_
-    
+
+
     def plot_explained_variance(self):
         pl.barplot(
             data       = pd.DataFrame({
                 'Variance': self.pca.explained_variance_ratio_,
                 'Principal Components': self.pc_columns
             }),
-            x          = 'Principal Components', 
+            x          = 'Principal Components',
             y          = 'Variance',
             x_rotation = 0
         )
+        return self
 
     def plot_clusters(
-        self, 
-        pc_x       = 'pc1', 
+        self,
+        pc_x       = 'pc1',
         pc_y       = 'pc2',
-        fit_reg    = False, 
+        fit_reg    = False,
         legend     = True,
         point_size = 40
     ):
         sns.lmplot(
-            x           = pc_x, 
+            x           = pc_x,
             y           = pc_y,
-            data        = self.__observations, 
-            fit_reg     = fit_reg, 
+            data        = self.__observations,
+            fit_reg     = fit_reg,
             hue         = 'y',
             legend      = legend,
             scatter_kws = { "s": point_size}
         )
         plt.show()
-        
+        return self
+
     def components(self, indexes=[0, 1]):
         return np.transpose(self.pca.components_[indexes, :])
 
     def observations(self, indexes=[1, 2]):
         return self.__observations[[f'pc{i}' for i in indexes]].values
-    
+
     def biplot(
         self,
         comps      = [1, 2],
         labels     = None,
         s          = 300,
-        alpha      = 0.2, 
+        alpha      = 0.2,
         edgecolors = 'none'
     ):
         plt.style.use('ggplot')
@@ -71,7 +74,7 @@ class PCASummary:
         coeff  = self.components()
         y      = self.__observations['y'].values
         labels = self.__columns
-    
+
         xs = score[:,0]
         ys = score[:,1]
 
@@ -83,7 +86,7 @@ class PCASummary:
         fig, ax = plt.subplots()
         ax.scatter(
             xs * scalex,
-            ys * scaley, 
+            ys * scaley,
             c          = pd.factorize(y)[0],
             s          = s,
             alpha      = alpha,
@@ -105,14 +108,21 @@ class PCASummary:
         plt.ylabel("PC{}".format(2))
 
         plt.show()
+        return self
+
+    def plot(self):
+        return self.plot_clusters() \
+        .biplot() \
+        .plot_explained_variance() \
+        .explained_variance()
 
 
 class PCAAnalisys:
     @staticmethod
-    def make_on(X, y, n_components=4):
+    def make_on(X: pd.DataFrame, y: np.array, n_components=4):
         pca = decomposition.PCA(n_components=n_components)
 
-        num_X = X.select_dtypes(include=np.number)        
+        num_X = X.select_dtypes(include=np.number)
         pc = pca.fit_transform(num_X.values)
 
         return PCASummary(pc, pca, y, n_components, X.columns)

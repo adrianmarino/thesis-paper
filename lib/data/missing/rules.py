@@ -20,15 +20,15 @@ class ColumnMissingListRule(ColumnMissingRule):
 class CustomMissingFnRule(ColumnMissingRule):
     def __init__(self, fn):
         self._fn = fn
-    
-    
+
+
     def is_missing(self, value):
         return self._fn(value)
 
-    
-class ColumnMissingRules: 
+
+class ColumnMissingRules:
     def __init__(
-        self, 
+        self,
         list_null  = ColumnMissingListRule(),
         value_null = ColumnMissingValueRule()
     ):

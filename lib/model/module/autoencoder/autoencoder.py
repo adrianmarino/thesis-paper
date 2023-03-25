@@ -4,11 +4,11 @@ from .encoder import Encoder
 from .decoder import Decoder
 from pytorch_common.callbacks import CallbackManager
 from pytorch_common.callbacks import CallbackManager
-from pytorch_common.modules.common_mixin import CommonMixin
+from pytorch_common.modules import CommonMixin, PredictMixin, PersistentMixin
 from torch.utils.data import DataLoader
 
 
-class AutoEncoder(Module, CommonMixin):
+class AutoEncoder(Module, CommonMixin, PredictMixin, PersistentMixin):
     def __init__(self, data_size, intermediate_size=1000, encoded_size=100, dropout=0.2):
         super().__init__()
         self.encoder = Encoder(data_size, intermediate_size, encoded_size, dropout)

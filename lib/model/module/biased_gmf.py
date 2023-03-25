@@ -1,10 +1,10 @@
 import torch
-from pytorch_common.modules import FitMixin
+from pytorch_common.modules import FitMixin, PredictMixin, PersistentMixin
 import model as ml
 import logging
 
 
-class BiasedGMF(torch.nn.Module, FitMixin):
+class BiasedGMF(torch.nn.Module, FitMixin, PredictMixin, PersistentMixin):
     def __init__(self,
             n_users: int,
             n_items: int,

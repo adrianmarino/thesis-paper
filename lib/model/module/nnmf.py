@@ -1,15 +1,15 @@
-from pytorch_common.modules import FitMixin
+from pytorch_common.modules import FitMixin, PredictMixin, PersistentMixin
 from torch.nn import Module, ReLU
 from .mlp import MultiLayerPerceptron
 from .multi_feature_embedding import MultiFeatureEmbedding
 
 
-class NNMF(Module, FitMixin):
+class NNMF(Module, FitMixin, PredictMixin, PersistentMixin):
     def __init__(
         self,
-        features_n_values: list[int], 
-        embedding_size: int, 
-        units_per_layer: list[int], 
+        features_n_values: list[int],
+        embedding_size: int,
+        units_per_layer: list[int],
         dropout: float,
         sparse: bool = False
     ):

@@ -1,9 +1,9 @@
 import torch
-from pytorch_common.modules import FitMixin
+from pytorch_common.modules import FitMixin, PredictMixin, PersistentMixin
 import model as ml
 
 
-class GMF(torch.nn.Module, FitMixin):
+class GMF(torch.nn.Module, FitMixin, PredictMixin, PersistentMixin):
     def __init__(self,
             n_users: int,
             n_items: int,
@@ -12,7 +12,7 @@ class GMF(torch.nn.Module, FitMixin):
     ):
         super().__init__()
         self.embedding = ml.MultiFeatureEmbedding(
-            features_n_values = [n_users, n_items], 
+            features_n_values = [n_users, n_items],
             embedding_size    = embedding_size,
             sparse            = sparse
         )
@@ -22,7 +22,7 @@ class GMF(torch.nn.Module, FitMixin):
         # Lookup embedding vectors by users and items index...
         x_emb_batch = self.embedding(x_batch)
 
-        # Get users and items embedding vectors... 
+        # Get users and items embedding vectors...
         users = x_emb_batch[:, 0].unsqueeze(1)
         items = x_emb_batch[:, 1].unsqueeze(1)
 

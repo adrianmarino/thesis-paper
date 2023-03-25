@@ -2,7 +2,7 @@ class Fn:
     @staticmethod
     def train(
         model,
-        data_loader, 
+        data_loader,
         loss_fn,
         optimizers,
         device

@@ -8,7 +8,7 @@ class AutoEncoderTrainer:
         self.model = model
 
     def fit(
-        self, 
+        self,
         data_loader,
         loss_fn,
         epochs,
@@ -29,12 +29,12 @@ class AutoEncoderTrainer:
         :param verbose: show/hide logs.
         """
         callback_manager = CallbackManager(
-            epochs, 
-            encoder_optimizer, 
-            loss_fn, 
-            self.model, 
-            callbacks, 
-            verbose, 
+            epochs,
+            encoder_optimizer,
+            loss_fn,
+            self.model,
+            callbacks,
+            verbose,
             extra_ctx
         )
 

@@ -1,4 +1,4 @@
-from pytorch_common.modules import FitMixin
+from pytorch_common.modules import FitMixin, PredictMixin, PersistentMixin
 from torch.nn import Module, ReLU
 from .categorical_features_lineal import CategoricalFeaturesLineal
 from .embedding_factorization_machine import EmbeddingFactorizationMachine
@@ -6,12 +6,12 @@ from .mlp import MultiLayerPerceptron
 from .multi_feature_embedding import MultiFeatureEmbedding
 
 
-class DeepFM(Module, FitMixin):
+class DeepFM(Module, FitMixin, PredictMixin, PersistentMixin):
     def __init__(
         self,
-        features_n_values: list[int], 
-        embedding_size: int, 
-        units_per_layer: list[int], 
+        features_n_values: list[int],
+        embedding_size: int,
+        units_per_layer: list[int],
         dropout: float,
         sparse: bool = False
     ):

@@ -27,7 +27,7 @@ class RatingsMatrix:
         pl.headmap(self.__data.cpu(), title=f'Rating Matrix ({self.__data.shape[0]},{self.__data.shape[1]})', figsize=figsize)
 
     def __getitem__(self, index):  return self.__data[index[0], index[1]]
-  
+
     def __setitem__(self, index, value):  self.__data[index[0], index[1]] = value
 
     @property
