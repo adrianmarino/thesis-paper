@@ -87,7 +87,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
           * [Biased Generalized Matrix Factorization (B-GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/3_biased_gmf.ipynb): Embedding's + dot product + user/item bias.
           * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/4_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
           * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/5_deep_fm.ipynb)          
-          * [Collaborative Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cae.ipynb)
+          * [Collaborative Denoising Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cdae.ipynb)
     * **Content Based**
        * **Sparse Auto-Encoder + Distance Weighted Mean**
            * [Movie Title Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/1_title_sparse_autoencoder.ipynb)

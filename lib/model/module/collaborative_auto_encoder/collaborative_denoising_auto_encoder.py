@@ -4,34 +4,31 @@ import logging
 from torch.nn               import Module, Linear, ReLU
 from pytorch_common.modules import CommonMixin, FitMixin, PersistentMixin
 
-from .collaborative_encoder         import CollaborativeEncoder
-from .collaborative_decoder         import CollaborativeDecoder
-from .latent_space_encoder          import LatentSpaceEncoder
+from .collaborative_denoising_encoder   import CollaborativeDenoisingEncoder
+from .collaborative_decoder             import CollaborativeDecoder
+from .latent_space_encoder              import LatentSpaceEncoder
 
 
-class CollaborativeAutoEncoder(Module, FitMixin, PersistentMixin):
+class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
     def __init__(
         self,
         n_users,
         n_item_ratings,
+        encoder_dropout            = 0.2,
         encoder_activation         = ReLU(),
-        decoder_activation         = ReLU(),
         latent_space_dim    : int  = 256
     ):
-        super(CollaborativeAutoEncoder, self).__init__()
-        self.type = 'CollaborativeAutoEncoder'
+        super(CollaborativeDenoisingAutoEncoder, self).__init__()
+        self.type = 'CollaborativeDenoisingAutoEncoder'
 
-        self.encoder = CollaborativeEncoder(
+        self.encoder = CollaborativeDenoisingEncoder(
             n_users,
             n_item_ratings,
             encoder_activation,
+            encoder_dropout,
             latent_space_dim
         )
-        self.decoder = CollaborativeDecoder(
-            n_item_ratings,
-            decoder_activation,
-            latent_space_dim
-        )
+        self.decoder = CollaborativeDecoder(n_item_ratings, latent_space_dim)
 
 
     def forward(self, input_data, verbose=False):

@@ -37,21 +37,15 @@ from .validate.validator                     import Validator, ValidatorSummary
 # Models...
 # -----------------------------------------------------------------------------
 # Collavorative Filtering based way...
-from .module.deep_fm                          import DeepFM
-from .module.nnmf                             import NNMF
-from .module.gmf                              import GMF
-from .module.biased_gmf                       import BiasedGMF
-
-from .module.collaborative_auto_encoder.collaborative_auto_encoder  import (
-    CollaborativeAutoEncoder,
-    CollaborativeDecoder,
-    CollaborativeEncoder,
-    LatentSpaceEncoder
-)
-
+from .module.deep_fm                    import DeepFM
+from .module.nnmf                       import NNMF
+from .module.gmf                        import GMF
+from .module.biased_gmf                 import BiasedGMF
+from .module.collaborative_auto_encoder import *
+#
 # Content Based way...
-from .module.autoencoder.autoencoder            import AutoEncoder
-from .module.autoencoder.autoencoder_trainer    import AutoEncoderTrainer
+from .module.autoencoder                import *
 # -----------------------------------------------------------------------------
+
 
 from .clustering.k_medoids      import KMedoisClustering

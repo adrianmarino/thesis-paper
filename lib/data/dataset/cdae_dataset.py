@@ -42,8 +42,7 @@ def data_preprocessing(df):
     return result
 
 
-
-class CollaborativeAutoEncoderDataset(Dataset):
+class CollaborativeDenoiseAutoEncoderDataset(Dataset):
     def __init__(self, df)         : self.data = data_preprocessing(df)
 
 
