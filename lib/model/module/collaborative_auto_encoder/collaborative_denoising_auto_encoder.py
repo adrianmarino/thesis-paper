@@ -35,9 +35,9 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
         """
         input_data = (
             [batch_size, user_ids],
-            [batch_size, [n_item_ratings]]
+            [batch_size, n_item_ratings]
         )
-        return [batch_size, [n_item_ratings]]
+        return [batch_size, n_item_ratings]
         """
         latent_space = self.encoder(input_data, verbose)
         return self.decoder(latent_space, verbose)

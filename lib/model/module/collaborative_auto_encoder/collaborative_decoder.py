@@ -19,8 +19,8 @@ class CollaborativeDecoder(Module, CommonMixin):
 
     def forward(self, input_data, verbose=False):
         """
-        input  = [batch_size, [latent_space_dim]]
-        output = [batch_size, [n_item_ratings]]
+        input  = [batch_size, latent_space_dim]
+        output = [batch_size, n_item_ratings]
         """
 
         if verbose:

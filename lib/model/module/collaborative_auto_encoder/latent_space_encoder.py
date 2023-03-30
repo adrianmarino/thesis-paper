@@ -16,9 +16,9 @@ class LatentSpaceEncoder:
         self.pin_memory  = pin_memory
 
 
-    def __call__(self, train_ds):
+    def __call__(self, data):
         dl = DataLoader(
-            train_ds,
+            data,
             self.batch_size,
             num_workers = self.num_workers,
             pin_memory  = self.pin_memory

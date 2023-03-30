@@ -27,9 +27,9 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         """
         input  = (
             [batch_size, user_ids],
-            [batch_size, [n_item_ratings]]
+            [batch_size, n_item_ratings]
         )
-        output = [batch_size, [latent_space_dim]]
+        output = [batch_size, latent_space_dim]
         """
 
         # Get inputs...

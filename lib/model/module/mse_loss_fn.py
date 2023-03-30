@@ -6,14 +6,14 @@ import logging
 class MSELossFn(torch.nn.Module):
     """
         torch Mean Square Error wrapper module. It adapts shape and data types
-        to calculate mse into both training and validation phases. 
+        to calculate mse into both training and validation phases.
 
     :param float_result: Select when module return a tensor of float number.
             - When is false(default) it return a tensor. Used in training
               phase because it support automatic differentiation.
             - When is true return a float number. Used in evaluation phase.
     """
-    def __init__(self, reduction='mean', float_result: bool=False): 
+    def __init__(self, reduction='mean', float_result: bool=False):
         super().__init__()
         self.__fn = MSELoss()
         self.__float_result = float_result
