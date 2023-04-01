@@ -1,5 +1,5 @@
 import torch
-from torch.nn import Module, Linear
+from torch.nn import Module, Linear, ReLU
 from pytorch_common.modules import CommonMixin
 import logging
 
@@ -8,6 +8,7 @@ class CollaborativeDecoder(Module, CommonMixin):
     def __init__(
         self,
         n_item_ratings,
+        activation = ReLU(),
         latent_space_dim: int  = 256
     ):
         super(CollaborativeDecoder, self).__init__()
@@ -15,6 +16,7 @@ class CollaborativeDecoder(Module, CommonMixin):
 
         # Encoder...
         self.linear = Linear(latent_space_dim, n_item_ratings)
+        self.activation = activation
 
 
     def forward(self, input_data, verbose=False):
@@ -26,8 +28,8 @@ class CollaborativeDecoder(Module, CommonMixin):
         if verbose:
             logging.info(f'{self.type} - Input: {input_data.shape}')
 
-        # Note: Don't user an activation. Is equivalent to use a linear activation.
         item_ratings = self.linear(input_data.to(self.device))
+        item_ratings = self.activation(item_ratings)
 
         if verbose:
             logging.info(f'{self.type} - Output: {item_ratings.shape}')

@@ -16,6 +16,7 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
         n_item_ratings,
         encoder_dropout            = 0.2,
         encoder_activation         = ReLU(),
+        decoder_activation         = ReLU(),
         latent_space_dim    : int  = 256
     ):
         super(CollaborativeDenoisingAutoEncoder, self).__init__()
@@ -28,7 +29,11 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
             encoder_dropout,
             latent_space_dim
         )
-        self.decoder = CollaborativeDecoder(n_item_ratings, latent_space_dim)
+        self.decoder = CollaborativeDecoder(
+            n_item_ratings,
+            decoder_activation,
+            latent_space_dim
+        )
 
 
     def forward(self, input_data, verbose=False):

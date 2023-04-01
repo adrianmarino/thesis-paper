@@ -9,7 +9,7 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         self,
         n_users,
         n_item_ratings,
-        activation        = None,
+        activation        = ReLU(),
         dropout           = 0.2,
         latent_space_dim  : int  = 256
     ):
@@ -51,7 +51,8 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         if self.items_ratings_activation:
             item_ratings_embed = self.items_ratings_activation(item_ratings_embed)
 
-        output = users_embed + item_ratings_embed
+        output = torch.add(users_embed, item_ratings_embed)
+
         if verbose:
             logging.info(f'{self.type} - Output: {output.shape}')
         return output
