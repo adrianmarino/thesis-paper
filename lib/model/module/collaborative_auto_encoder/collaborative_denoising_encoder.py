@@ -11,9 +11,10 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         n_users,
         n_item_ratings,
         ratings_hidden_units = [],
-        activation           = ReLU(),
-        batch_norm           = True,
-        dropout              = 0.2,
+        noise_dropout        = 0.2,
+        mpl_activation       = ReLU(),
+        mpl_batch_norm       = True,
+        mpl_dropout          = 0.2,
         latent_space_dim     = 256
     ):
         super().__init__()
@@ -21,16 +22,16 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
 
         # Encoder...
         self.users_embedding          = Embedding(n_users, latent_space_dim)
-        self.noise_layer              =  Dropout(dropout)
+        self.noise_layer              =  Dropout(noise_dropout)
 
-        self.items_ratings_mlp          = Linear(n_item_ratings, latent_space_dim, bias=True)
+        self.items_ratings_mlp        = Linear(n_item_ratings, latent_space_dim, bias=True)
 
         units_per_layer = [n_item_ratings] + ratings_hidden_units + [latent_space_dim]
         self.mlp = MultiLayerPerceptron(
             units_per_layer = units_per_layer,
-            activation      = [activation]  * (len(units_per_layer)-1),
-            batch_norm      = [True]        * (len(units_per_layer)-1),
-            dropout         = [dropout]     * (len(units_per_layer)-1)
+            activation      = [mpl_activation]  * (len(units_per_layer)-1),
+            batch_norm      = [mpl_batch_norm]  * (len(units_per_layer)-1),
+            dropout         = [mpl_dropout]     * (len(units_per_layer)-1)
         )
 
     def forward(self, input_data, verbose=False):

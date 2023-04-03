@@ -15,7 +15,8 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
         n_users,
         n_item_ratings,
         encoder_hidden_units = [],
-        encoder_dropout              = 0.2,
+        encoder_noise_dropout        = 0.2,
+        encoder_mpl_dropout          = 0.2,
         encoder_batch_norm           = True,
         encoder_activation           = ReLU(),
         decoder_hidden_units         = [],
@@ -28,21 +29,22 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
         self.type = 'CollaborativeDenoisingAutoEncoder'
 
         self.encoder = CollaborativeDenoisingEncoder(
-            n_users,
-            n_item_ratings,
-            encoder_hidden_units,
-            encoder_activation,
-            encoder_dropout,
-            encoder_batch_norm,
-            latent_space_dim
+            n_users = n_users,
+            n_item_ratings = n_item_ratings,
+            ratings_hidden_units = encoder_hidden_units,
+            noise_dropout        = encoder_noise_dropout,
+            mpl_activation       = encoder_activation,
+            mpl_batch_norm       = encoder_batch_norm,
+            mpl_dropout          = encoder_mpl_dropout,
+            latent_space_dim     = latent_space_dim
         )
         self.decoder = CollaborativeDecoder(
-            n_item_ratings,
-            latent_space_dim,
-            decoder_activation,
-            decoder_dropout,
-            decoder_batch_norm,
-            decoder_hidden_units
+            n_item_ratings = n_item_ratings,
+            latent_space_dim = latent_space_dim,
+            activation       = decoder_activation,
+            dropout          = decoder_dropout,
+            batch_norm       = decoder_batch_norm,
+            hidden_units     = decoder_hidden_units
         )
 
 
