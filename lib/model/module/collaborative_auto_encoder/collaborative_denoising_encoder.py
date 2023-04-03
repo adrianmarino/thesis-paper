@@ -2,6 +2,7 @@ import torch
 from torch.nn import Module, ReLU, Embedding, Linear, Dropout
 from pytorch_common.modules import CommonMixin, PredictMixin
 import logging
+from ..mlp import MultiLayerPerceptron
 
 
 class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
@@ -9,19 +10,28 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         self,
         n_users,
         n_item_ratings,
-        activation        = ReLU(),
-        dropout           = 0.2,
-        latent_space_dim  : int  = 256
+        ratings_hidden_units = [],
+        activation           = ReLU(),
+        batch_norm           = True,
+        dropout              = 0.2,
+        latent_space_dim     = 256
     ):
-        super(CollaborativeDenoisingEncoder, self).__init__()
+        super().__init__()
         self.type = 'CollaborativeDenoisingEncoder'
 
         # Encoder...
         self.users_embedding          = Embedding(n_users, latent_space_dim)
-        self.items_ratings_linear     = Linear(n_item_ratings, latent_space_dim, bias=True)
         self.noise_layer              =  Dropout(dropout)
-        self.items_ratings_activation = activation
 
+        self.items_ratings_mlp          = Linear(n_item_ratings, latent_space_dim, bias=True)
+
+        units_per_layer = [n_item_ratings] + ratings_hidden_units + [latent_space_dim]
+        self.mlp = MultiLayerPerceptron(
+            units_per_layer = units_per_layer,
+            activation      = [activation]  * (len(units_per_layer)-1),
+            batch_norm      = [True]        * (len(units_per_layer)-1),
+            dropout         = [dropout]     * (len(units_per_layer)-1)
+        )
 
     def forward(self, input_data, verbose=False):
         """
@@ -44,12 +54,8 @@ class CollaborativeDenoisingEncoder(Module, CommonMixin, PredictMixin):
         # Apply noise to item_ratings...
         noisy_item_ratings = self.noise_layer(item_ratings)
 
-        # Reduce item_ratins dimensionality...
-        item_ratings_embed = self.items_ratings_linear(noisy_item_ratings)
-
-        # Aplli
-        if self.items_ratings_activation:
-            item_ratings_embed = self.items_ratings_activation(item_ratings_embed)
+        # Reduce item_ratings dimensionality...
+        item_ratings_embed = self.mlp(noisy_item_ratings)
 
         output = torch.add(users_embed, item_ratings_embed)
 

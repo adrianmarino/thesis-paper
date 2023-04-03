@@ -14,25 +14,35 @@ class CollaborativeDenoisingAutoEncoder(Module, FitMixin, PersistentMixin):
         self,
         n_users,
         n_item_ratings,
-        encoder_dropout            = 0.2,
-        encoder_activation         = ReLU(),
-        decoder_activation         = ReLU(),
-        latent_space_dim    : int  = 256
+        encoder_hidden_units = [],
+        encoder_dropout              = 0.2,
+        encoder_batch_norm           = True,
+        encoder_activation           = ReLU(),
+        decoder_hidden_units         = [],
+        decoder_dropout              = 0.2,
+        decoder_batch_norm           = True,
+        decoder_activation           = ReLU(),
+        latent_space_dim             = 256
     ):
-        super(CollaborativeDenoisingAutoEncoder, self).__init__()
+        super().__init__()
         self.type = 'CollaborativeDenoisingAutoEncoder'
 
         self.encoder = CollaborativeDenoisingEncoder(
             n_users,
             n_item_ratings,
+            encoder_hidden_units,
             encoder_activation,
             encoder_dropout,
+            encoder_batch_norm,
             latent_space_dim
         )
         self.decoder = CollaborativeDecoder(
             n_item_ratings,
+            latent_space_dim,
             decoder_activation,
-            latent_space_dim
+            decoder_dropout,
+            decoder_batch_norm,
+            decoder_hidden_units
         )
 
 

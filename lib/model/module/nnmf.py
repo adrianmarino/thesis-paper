@@ -21,7 +21,12 @@ class NNMF(Module, FitMixin, PredictMixin, PersistentMixin):
     def __init_mlp(self, features_n_values, embedding_size, units_per_layer, dropout):
         # Embedding output must be flattened to pass through mlp...
         self.mlp_input_dim = len(features_n_values) * embedding_size
-        self.mlp = MultiLayerPerceptron(self.mlp_input_dim, units_per_layer, dropout)
+        self.mlp = MultiLayerPerceptron(
+            units_per_layer = [self.mlp_input_dim] + units_per_layer,
+            activation      = [ReLU()]  * (len(units_per_layer)-1),
+            batch_norm      = [True]    * (len(units_per_layer)-1),
+            dropout         = [dropout] * (len(units_per_layer)-1)
+        )
 
     def __flatten_emb(self, emb): return emb.view(-1, self.mlp_input_dim)
 

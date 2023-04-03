@@ -48,4 +48,5 @@ from .module.autoencoder                import *
 # -----------------------------------------------------------------------------
 
 
-from .clustering.k_medoids      import KMedoisClustering
+from .clustering.k_medoids  import KMedoisClustering
+from .module.mlp            import MultiLayerPerceptron
