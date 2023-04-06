@@ -1,5 +1,6 @@
 from torch.utils.data import Dataset
 import numpy as np
+from sklearn import preprocessing
 
 
 def build_user_rating_emb(movie_seqs, user_ratings, emb_size):
@@ -9,42 +10,62 @@ def build_user_rating_emb(movie_seqs, user_ratings, emb_size):
     return emb
 
 
-def build_user_rating_emb_fn(emb_size):
+def build_user_rating_emb_fn(emb_size, column):
     return lambda row: build_user_rating_emb(
         row['movie_seq'],
-        row['user_movie_rating'],
+        row[column],
         emb_size + 1
     )
 
 
-def data_preprocessing(df):
-    user_rating_emb_size = df.movie_seq.max()
-    user_rating_emb_size
+def standard_scale(values):
+    standardizer = preprocessing.StandardScaler()
+    values = standardizer.fit_transform(values.reshape(-1, 1))
+    return values, standardizer
 
+
+def standard_scale_col(df, source, target):
+    values, standardizer = standard_scale(df[source].values)
+    df[target] = values
+    return standardizer
+
+
+def data_preprocessing(df):
+    standardizer = standard_scale_col(
+        df,
+        'user_movie_rating',
+        'rating_scaled'
+    )
+
+    # Aggregate movie seq y ratings by user...
     user_movies = df \
         .sort_values(['user_seq', 'user_movie_rating_timestamp']) \
         .groupby(by=['user_seq']) \
         .agg({
             'movie_seq':lambda x: list(x),
-            'user_movie_rating':lambda x: list(x)
+            'rating_scaled':lambda x: list(x)
         }) \
         .reset_index()
 
     user_movies['movie_rating_emb'] = user_movies \
-        .apply(build_user_rating_emb_fn(user_rating_emb_size), axis=1)
+        .apply(
+            build_user_rating_emb_fn(
+                emb_size = df.movie_seq.max(),
+                column   = 'rating_scaled'
+            ),
+            axis=1
+        )
 
-    result = user_movies \
-        .drop(columns=['movie_seq', 'user_movie_rating'])
+    user_movies['user_seq'] = user_movies['user_seq'].astype('int32')
+    user_movies['movie_rating_emb'] = user_movies['movie_rating_emb'].apply(lambda x: np.float16(x))
 
-    result['user_seq'] = result['user_seq'].astype('int32')
-    result['movie_rating_emb'] = result['movie_rating_emb'].apply(lambda x: np.float16(x))
-
-    return result
+    return user_movies, standardizer
 
 
 class CollaborativeDenoiseAutoEncoderDataset(Dataset):
-    def __init__(self, df)         : self.data = data_preprocessing(df)
-
+    def __init__(self, df):
+        self.data, self.standardizer = data_preprocessing(df)
+        self.raw_data = df
 
     def __len__(self)              : return self.data.shape[0]
 
