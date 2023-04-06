@@ -10,7 +10,7 @@ def APK(y_true, k):
 
 
 class MeanAveragePrecisionAtk(MeanUserAtkMetric):
-    def __init__(self, user_index, k=10, decimals=4, discretizer=identity(), rating_decimals=0):
+    def __init__(self, user_index=0, k=10, decimals=4, discretizer=identity(), rating_decimals=0):
         super().__init__('mAP' , user_index, k, decimals, discretizer, rating_decimals)
 
     def _score(self, y_pred, y_true):

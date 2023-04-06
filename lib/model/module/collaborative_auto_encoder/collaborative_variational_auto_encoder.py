@@ -20,7 +20,7 @@ class CollaborativeVariationalAutoEncoder(Module, FitMixin, PersistentMixin):
     ):
         super().__init__()
         self.type = 'CollaborativeVariationalAutoEncoder'
-\
+
         self.encoder = CollaborativeVariationalEncoder(
             n_item_ratings,
             encoder_dropout,

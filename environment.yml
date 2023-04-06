@@ -28,6 +28,6 @@ dependencies:
     - scikit-learn-extra
     - pip
     - pip:
-        - pytorch-common==0.0.23
+        - pytorch-common==0.1.0
         - graphviz
         - torchviz
