@@ -10,15 +10,14 @@ class MeanUserFBetaScoreAtk(MeanUserAtkMetric):
             name += f'({average})'
 
         super().__init__(name, user_index, k, decimals, discretizer, rating_decimals)
-        
-        print()
+
         self.__metric = torchmetrics.FBetaScore(
             task        = 'multiclass',
             num_classes = n_classes,
             average     = average,
             beta        = beta
         )
-        
+
 
     def _score(self, y_pred, y_true):
         return self.__metric(y_pred, y_true)

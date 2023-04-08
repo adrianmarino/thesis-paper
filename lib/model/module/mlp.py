@@ -12,6 +12,10 @@ class MultiLayerPerceptron(Module, CommonMixin):
         batch_norm      : list[bool]  = [True]
     ):
         super().__init__()
+        activation = [] if activation == None else activation
+        dropout    = [] if dropout == None    else dropout
+        batch_norm = [] if batch_norm == None else batch_norm
+
 
         layers = []
         for i in range(len(units_per_layer)-1):

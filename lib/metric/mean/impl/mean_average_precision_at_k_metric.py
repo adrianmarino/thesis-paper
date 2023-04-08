@@ -3,10 +3,12 @@ from metric.discretizer import identity
 import torch
 
 
-def APK(y_true, k):
-    tp_total = torch.sum(y_true)
-    if tp_total == 0: return torch.tensor(0.0)
-    return sum([v / (i+1) for i, v in enumerate(y_true)]) / min(k, tp_total)
+def average_precision(y_pred, y_true):
+    tps       = (y_pred == y_true).int()
+    tps_count = torch.sum(tps)
+    k         = y_true.shape[0]
+
+    return sum([tp / (i+1) for i, tp in enumerate(tps)]) / min(k, tps_count) if tps_count > 0 else torch.tensor(0.0)
 
 
 class MeanAveragePrecisionAtk(MeanUserAtkMetric):
@@ -14,4 +16,4 @@ class MeanAveragePrecisionAtk(MeanUserAtkMetric):
         super().__init__('mAP' , user_index, k, decimals, discretizer, rating_decimals)
 
     def _score(self, y_pred, y_true):
-        return APK(y_true, self._k)
+        return average_precision(y_pred, y_true)

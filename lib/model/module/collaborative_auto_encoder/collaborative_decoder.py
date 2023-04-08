@@ -10,7 +10,7 @@ class CollaborativeDecoder(Module, CommonMixin):
         self,
         n_item_ratings,
         latent_space_dim = 256,
-        activation       = ReLU(),
+        activation       = None,
         dropout          = 0.2,
         batch_norm       = True,
         hidden_units     = []
@@ -19,11 +19,13 @@ class CollaborativeDecoder(Module, CommonMixin):
         self.type = 'CollaborativeDecoder'
 
         units_per_layer = [latent_space_dim] + hidden_units + [n_item_ratings]
+
+
         self.mlp = MultiLayerPerceptron(
             units_per_layer = units_per_layer,
-            activation      = [activation]  * (len(units_per_layer)-1),
-            batch_norm      = [True]        * (len(units_per_layer)-1),
-            dropout         = [dropout]     * (len(units_per_layer)-1)
+            activation      = ([activation] if activation else [])  * (len(units_per_layer)-1),
+            batch_norm      = ([batch_norm] if batch_norm else [])  * (len(units_per_layer)-1),
+            dropout         = ([batch_norm] if batch_norm else [])  * (len(units_per_layer)-1)
         )
 
 

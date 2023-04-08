@@ -39,10 +39,13 @@ class CollaborativeVariationalEncoder(Module, CommonMixin, PredictMixin):
         if verbose:
             logging.info(f'{self.type} - Input: {input_data.shape}')
 
-        x     = self.lineal(input_data)
+        x = self.lineal(input_data)
+
         if self.dropout:
             x = self.dropout(x)
-        x     = self.activation(x)
+
+        if self.activation:
+            x = self.activation(x)
 
         # Tenemos un valor de medio(mu) y varianza(sigma) para cada dimensión del espacio latente.
         mu    = self.mu_linea(x)

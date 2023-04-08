@@ -14,7 +14,7 @@ class CollaborativeVariationalAutoEncoder(Module, FitMixin, PersistentMixin):
         self,
         n_item_ratings,
         encoder_dropout     = 0.2,
-        encoder_activation  = ReLU(),
+        encoder_activation  = None,
         mu_simgma_dim       : int = 512,
         latent_space_dim    : int  = 256
     ):
