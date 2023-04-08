@@ -63,8 +63,8 @@ class ValidatorSummary:
 
     def show(
         self,
-        include_found_metrics = False,
         sort_columns          = ['mAP@5(4,5)'],
+        include_found_metrics = False,
         ascending             = False
     ):
         columns = self.data.columns
@@ -72,6 +72,7 @@ class ValidatorSummary:
         if not include_found_metrics:
             columns = [c for c in columns if not 'found' in c]
 
+        print(f'Ordered by {", ".join(sort_columns)}:')
         return self \
                 .data[columns] \
                 .groupby('predictor') \
