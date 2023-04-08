@@ -1111,17 +1111,15 @@ Si pensamos a nivel de aplicación de un sistemas de recomendación pedimos ver 
 \end{itemize}
 
 
-De esta forma, al encontrar en las primeras posiciones de la lista, aquellos items que tiene la calificación predicha mas alta, es un indicado de que el modelo es preciso al momento de recomendar. En palabras mas simples, se desea que los primeros items de la lista de recomendaciones sean de mayor agrado para el usuario.
+De esta forma, encontrar en las primeras posiciones de la lista, aquellos items con mayor calificación predicha, es un indicador de que el modelo es preciso al momento de recomendar. En palabras mas simples, se desea que los primeros items de la lista de recomendaciones sean de mayor agrado para el usuario.\newline
 
-¿Finalmente, como funciona esta métricas?
+¿Finalmente, como funciona esta métricas? La métrica \textit{mAP\makeatletter@k} funciona de la siguiente forma: \newline
 
-La métrica \textit{mAP\makeatletter@k} funciona de la siguiente forma:
+Supongamos que tenemos un usuario y una lista K de items a recomendar. En base a estas entradas el modelo de recomendación predice las calificaciones de cada item para el usuario dado. Luego, podemos ordenar la lista de items descendentemente de acuerdo a las calificaciones predichas por el modelo.
 
-Supongamos que tenemos un usuario y una lista K de item a recomendar. En base a estas entadas el modelo de recomendación predice las calificaciones de cada item para el usuario dado. Luego. podemos ordenar la lista de item descendentemente de acuerdo a las calificaciones predicha por el modelo.
+Teniendo esta lista, se puede calcular el promedio de la predicción \textit{mAP\makeatletter@k} sobre los K items de la lista.
 
-Teniendo esta lista se puede calcular el promedio de la perdición \textit{mAP\makeatletter@k} sobre los K items de la lista.
-
-Esta métricas es utilizada en problema de clasificación pero también se puede utilizar en problemas donde el modelo produce una salida numérica com en este caso. Los niveles o clases a utilizar dependen mucho de que se quiera evaluar. Supongamos, en este caso particular, que queremos medir con que precisión las puntuaciones entre 4 y 5 aparecen en las primera posiciones de la lista, para esto usaremos la métricas \textit{mAP\makeatletter@k}.
+Esta métrica es utilizada en problemas de clasificación pero también se puede utilizar en problemas donde el modelo produce una salida numérica como en este caso. Los niveles o clases a utilizar dependen mucho de que se quiera evaluar. Supongamos, en este caso particular, que queremos medir con que precisión las puntuaciones entre 4 y 5 aparecen en las primera posiciones de la lista, para esto usaremos la métricas \textit{mAP\makeatletter@k}.
 
 \begin{description}
 	\item[Promedio de la precisión sobre una lista de K elementos \textit{AP\makeatletter@k}):]
