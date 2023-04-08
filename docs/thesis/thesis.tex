@@ -1119,10 +1119,10 @@ Supongamos que tenemos un usuario y una lista K de items a recomendar. En base a
 
 Teniendo esta lista, se puede calcular el promedio de la predicción \textit{mAP\makeatletter@k} sobre los K items de la lista.
 
-Esta métrica es utilizada en problemas de clasificación pero también se puede utilizar en problemas donde el modelo produce una salida numérica como en este caso. Los niveles o clases a utilizar dependen mucho de que se quiera evaluar. Supongamos, en este caso particular, que queremos medir con que precisión las puntuaciones entre 4 y 5 aparecen en las primera posiciones de la lista, para esto usaremos la métricas \textit{mAP\makeatletter@k}.
+Esta métrica es utilizada en problemas de clasificación pero también se puede utilizar en problemas donde el modelo produce una salida numérica como en este caso. Los niveles o clases a utilizar dependen mucho de que se quiera evaluar. Supongamos, en este caso particular, que queremos medir con que precisión aparecen las puntuaciones entre 4 y 5 en las primera posiciones de la lista. Para este fin se utilizara la métricas \textit{mAP\makeatletter@k}.
 
 \begin{description}
-	\item[Promedio de la precisión sobre una lista de K elementos \textit{AP\makeatletter@k}):]
+	\item[Promedio de la precisión sobre una lista de K elementos \textit{AP\makeatletter@k}:]
 \end{description}
 \begin{equation}
 	\begin{split}
@@ -1135,24 +1135,31 @@ Esta métrica es utilizada en problemas de clasificación pero también se puede
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $TP_i$ es 1 si la precision y el valor verdadero concuerdan.
 	\item $i$ es la posición del item $i^\mathrm{th}$ en la lista de $k$ elementos.
+	\item $TP_i$ es 1 si la precision y el valor verdadero concuerdan.
 	\item $N(k)$ es el mínimo entre el tamaño de la lista y la cantidad de $TP_{total}$ encontrados en esa lista.
 \end{itemize}
 
-Por ejemplo si queremos saber con que precision aparecen en las primeras posiciones de la lista de $k$ elementos items con calificaciones entre 4 y 5 puntos, podemos pensar que un $TP_i == 1$ o verdadero, si la calificación en la posición $i^\mathrm{th}$ se encuentra entre los 4 y 5 punto, caso contrario $TP_i == 0$. De esta forma transformar la salida del modelo en clase binarias para utilizar métrica.
+Por ejemplo, si se quiere saber con que precisión aparecen items con calificaciones entre 4 y 5 puntos en las primeras posiciones de la lista:
 
-A continuación se calcula resta calicular \textit{AP\makeatletter@k} para cada usuario  del \textit{dataset} de validación y finalmente se calcula media: 
+\begin{itemize}
+	\item Si $TP_i$ es igual a $1$, entonces la calificación en la posición $i^\mathrm{th}$ se encuentra entre los 4 y 5 punto.
+	\item Si $TP_i$ es igual a $0$, entonces la calificación en la posición $i^\mathrm{th}$ NO se encuentra entre los 4 y 5 punto.
+\end{itemize}
+
+De esta forma, se esta transformando la salida del modelo en una lista de valores binarios. Donde la clase 1 indica que se cumple con la condición esperada y la clase 0 lo contrario.
+
+Luego se realiza el calculo de \textit{AP\makeatletter@k} para cada usuario del \textit{dataset} de validación y finalmente se calcula la media: 
 
 
 \begin{description}
-	\item[Media del promedio de la precisión sobre una lista de K elementos \textit{mAP\makeatletter@k}):]
+	\item[Media del promedio de la precisión sobre una lista de K elementos \textit{mAP\makeatletter@k}:]
 \end{description}
 \begin{equation}
 	\operatorname{mAP\makeatletter@k}=\frac{1}{N} \sum_{i=1}^N AP\makeatletter@k_i
 \end{equation}
 
-De esta forma, la métricas \textit{AP\makeatletter@k} nos da una noción del grado de precisión en que aparecen items con mayor puntuación en las primeras posiciones de una lista de tamaño $k$.
+De esta forma, la métrica \textit{mAP\makeatletter@k} da una noción del grado de precisión en que aparecen items con mayor puntuación en las primeras posiciones de una lista de tamaño $k$. Cabe aclarar, que la condición \textit{items con mayor puntuación} es arbitraria, ua que al ser una condición, podríamos intercambiarla por cualquier otro criterio. Por ejemplo, item con las peores puntuaciones (entre 1 y 2 puntos), item con puntuaciones medias, items con mas de 3 puntos, menos de 3 puntos, etc... 
 
 
 \chapter{Experimentos}
