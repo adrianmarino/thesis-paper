@@ -11,12 +11,11 @@ dependencies:
     - joypy
     - numpy
     - pytorch=1.11.0
-    - pytorch-lightning
     - torchtext
     - spacy
     - ignite
     - torchmetrics
-    - cudatoolkit=11.3
+    - cudatoolkit
     - jupyterlab
     - ipywidgets
     - pytest
@@ -29,5 +28,4 @@ dependencies:
     - pip
     - pip:
         - pytorch-common==0.1.0
-        - graphviz
-        - torchviz
+        - wrapt

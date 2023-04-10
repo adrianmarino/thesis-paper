@@ -1,7 +1,6 @@
-import data.plot as pl
 import torch
 import pytorch_common.util as pu
-import data as dt        
+from data.plot import headmap
 
 
 def rows_distance_matrix(matrix, distance_fn, device=pu.get_device()):
@@ -17,8 +16,8 @@ def rows_distance_matrix(matrix, distance_fn, device=pu.get_device()):
 
 
 def plot_rows_distance_matrix(dm, figsize = (10, 10), prefix=''):
-    pl.headmap(
-        dm.cpu(), 
-        title=f'{prefix}Distances Matrix ({dm.shape[0]},{dm.shape[1]})', 
+    dt.plot.headmap(
+        dm.cpu(),
+        title=f'{prefix}Distances Matrix ({dm.shape[0]},{dm.shape[1]})',
         figsize=figsize
     )

@@ -1,7 +1,6 @@
 from ..abstract_metric import AbstractMetric
 from metric.discretizer import identity
-from .user_pred_true_sampler import UserYPredYTrueSampler
-import logging
+from ..user_pred_true_sampler import UserYPredYTrueSampler
 import torch
 
 
@@ -20,9 +19,7 @@ class MeanUserAtkMetric(AbstractMetric):
 
             scores.append(self._score(y_pred_sample, y_true_sample).item())
 
-        n_users_found = len(scores)
-        logging.debug(f'n_users_found: {len(scores)}')
-        return torch.mean(torch.tensor(scores)), n_users_found
+        return torch.mean(torch.tensor(scores)), len(scores)
 
     def _score(self, y_pred, y_true):
         pass
