@@ -79,7 +79,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * **Models**    
     * **Collaborative Filtering**
-      * [Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/8_comparatives.ipynb)
+      * [Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/9_comparatives.ipynb)
       * **Memory based**
           * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/1_knn.ipynb)
       * **Model based**
@@ -87,8 +87,8 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
           * [Biased Generalized Matrix Factorization (B-GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/3_biased_gmf.ipynb): Embedding's + dot product + user/item bias.
           * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/4_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
           * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/5_deep_fm.ipynb)          
-          * [Collaborative Denoising Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cdae.ipynb)
-          * [Collaborative Variational Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/7_cvae.ipynb)
+          * [Collaborative Denoising Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cf-denoising-ae.ipynb)
+          * [Collaborative Variational Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/8_cf-variational-ae.ipynb)
     * **Content Based**
        * **Sparse Auto-Encoder + Distance Weighted Mean**
            * [Movie Title Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/1_title_sparse_autoencoder.ipynb)

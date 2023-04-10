@@ -29,8 +29,8 @@ class NearestNeighbors:
         k_nearest_row_distances, k_nearest_row_indexes = self._k_nearest_row_indexes(row_idx, k)
 
         return NearestNeighborsResult(
-            rows      = self.matrix[k_nearest_row_indexes, :], 
-            distances = k_nearest_row_distances, 
+            rows      = self.matrix[k_nearest_row_indexes, :],
+            distances = k_nearest_row_distances,
             indexes   = k_nearest_row_indexes
         )
 

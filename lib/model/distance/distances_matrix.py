@@ -1,6 +1,7 @@
 import torch
 import pytorch_common.util as pu
 from data.plot import headmap
+import data as dt
 
 
 def rows_distance_matrix(matrix, distance_fn, device=pu.get_device()):
