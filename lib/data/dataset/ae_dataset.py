@@ -62,7 +62,7 @@ def data_preprocessing(df):
     return user_movies, standardizer
 
 
-class CollaborativeVariationalAutoEncoderDataset(Dataset):
+class AutoEncoderDataset(Dataset):
     def __init__(self, df):
         self.data, self.standardizer = data_preprocessing(df)
         self.raw_data = df

@@ -25,7 +25,8 @@ dependencies:
     - requests
     - yellowbrick
     - scikit-learn-extra
+    - statsmodels
     - pip
     - pip:
         - pytorch-common==0.1.0
-        - wrapt
+        - wrapt # Required to fix a dependency error. Remove when error being fixed.
