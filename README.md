@@ -44,7 +44,6 @@ Para comparar los modelos basados en filtros colaborativos se utilizan las métr
 
 Otras métricas utilizadas:
 
-* NDCG@k
 * FBetaScore@K
 * Precision@K
 * Recall@K
