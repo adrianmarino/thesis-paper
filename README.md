@@ -40,7 +40,7 @@ A continuación se especifican los modelos a comparar.para moas detalle de los m
 
 ## Métricas
 
-Para comparar los modelos basados en filtros colaborativos se utilizan las métricas **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)**. Se evaluan item entre 4 y 5 como clase positiva y restro en la clase negativa.
+Para comparar los modelos basados en filtros colaborativos se utilizan las métricas **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)**. Ratings entre 4 y 5 puntos pertenecen a la clase positiva y restro en la clase negativa.
 
 Otras métricas utilizadas:
 
