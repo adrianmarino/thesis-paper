@@ -44,10 +44,11 @@ Para comparar los modelos basados en filtros colaborativos se utiliza la métric
 
 Otras métricas utilizadas:
 
-* RMSE
+* NDCG@k
 * FBetaScore@K
 * Precision@K
 * Recall@K
+* RMSE
 
 ## Hipótesis
 
