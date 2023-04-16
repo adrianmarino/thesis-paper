@@ -1,17 +1,19 @@
 from torch.nn import Module, Linear, BatchNorm1d, ReLU, Dropout, Sequential
-from pytorch_common.modules import CommonMixin
+from pytorch_common.modules import FitMixin, PersistentMixin, PredictMixin
 
 
-
-class MultiLayerPerceptron(Module, CommonMixin):
+class MultiLayerPerceptron(Module, FitMixin, PersistentMixin, PredictMixin):
     def __init__(
         self,
         units_per_layer : list[int]   = [10, 2],
         activation      : list        = [ReLU(), ReLU()],
         dropout         : list[float] = [0.2],
-        batch_norm      : list[bool]  = [True]
+        batch_norm      : list[bool]  = [True],
+        name            : str = 'MultiLayerPerceptron'
     ):
         super().__init__()
+        self.type = name
+
         activation = [] if activation == None else activation
         dropout    = [] if dropout == None    else dropout
         batch_norm = [] if batch_norm == None else batch_norm

@@ -18,3 +18,5 @@ from .pipes import  select, distinct, rename, drop, \
                     tf_idf, sum_cols, concat_columns
 
 from .pca   import  PCASummary, PCAAnalisys
+
+from .normalizer import Normalizer

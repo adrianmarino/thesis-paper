@@ -16,7 +16,8 @@ class MeanNdcgAtk(MeanUserAtkMetric):
         y_true_ordered_index = torch.argsort(y_true, descending=True)
         y_pred_ordered_index = torch.argsort(y_pred, descending=True)
 
-        y_true_ordered = y_true[y_true_ordered_index]
         y_true_ordered_by_pred = y_true[y_pred_ordered_index]
+        y_true_ordered         = y_true[y_true_ordered_index]
+
 
         return discount_cumulative_gain(y_true_ordered_by_pred) / discount_cumulative_gain(y_true_ordered)

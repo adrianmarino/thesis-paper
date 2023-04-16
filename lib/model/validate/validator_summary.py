@@ -64,12 +64,15 @@ class ValidatorSummary:
     def show(
         self,
         sort_columns          = ['mAP@5(4,5)'],
+        select_columns        = [],
         include_found_metrics = False,
         ascending             = False
     ):
         columns = self.data.columns
 
-        if not include_found_metrics:
+        if select_columns:
+            columns = ['predictor'] + select_columns
+        elif not include_found_metrics:
             columns = [c for c in columns if not 'found' in c]
 
         print(f'Ordered by {", ".join(sort_columns)}:')

@@ -2,3 +2,4 @@ from .movie_leans_tmdb.movie_lens_tmdb_dataset_factory  import MovieLensTMDBData
 from .tf_idf_dataset                                    import TfIdfDataset
 from .cdae_dataset                                      import CollaborativeDenoiseAutoEncoderDataset
 from .ae_dataset                                        import AutoEncoderDataset
+from .basic_dataset                                     import BasicDataset

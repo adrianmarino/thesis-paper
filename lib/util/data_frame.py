@@ -14,3 +14,7 @@ def id_by_seq(df, entity=None, column_id=None, column_seq=None):
 def to_dict(df, key, value):
     #                  entry.value                  entry.key
     return pd.Series(df[value].values, index=df[key]).to_dict()
+
+
+def save_df(df, path): return df.to_json  (path, orient='records')
+def load_df(path):     return pd.read_json(path, orient='records')
