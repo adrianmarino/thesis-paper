@@ -1,26 +1,25 @@
 name: thesis
+
 channels:
     - defaults
     - pytorch
     - conda-forge
     - districtdatalabs
+
 dependencies:
     - seaborn
     - matplotlib
     - wordcloud
     - joypy
     - numpy
-    - pytorch=1.11.0
+    - pytorch=1.11.0=py3.10_cuda11.5_cudnn8.3.2_0 
     - torchtext
+    - torchmetrics
     - spacy
     - ignite
-    - torchmetrics
-    - cudatoolkit
     - jupyterlab
     - ipywidgets
-    - pytest
     - tqdm
-    - sentence-transformers
     - coverage-badge
     - requests
     - yellowbrick
@@ -29,11 +28,10 @@ dependencies:
     - pip
     - pip:
         - pytorch-common==0.1.2
+        - singleton-decorator
+        - chromadb
+        - sentence-transformers
 
-         # Required to fix a dependency error. Remove when error being fixed.
-        - wrapt
-
-         # Required to fix next tqdm issue: 
-         # Failed to load model class 'HBoxModel' from module '@jupyter-widgets/controls.
-        - jupyterlab-widgets==1.1.1
-        - ipywidgets==7.7.2
+        # Required to fix next tqdm issue: 
+        # Failed to load model class 'HBoxModel' from module '@jupyter-widgets/controls.
+        - ipywidgets

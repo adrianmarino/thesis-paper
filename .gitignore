@@ -74,6 +74,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
+**/.ipynb_checkpoints/*
 .ipynb_checkpoints
 
 # IPython
@@ -137,3 +138,7 @@ docs/thesis/*.log
 docs/thesis/*.aux
 
 **/*.pt
+
+**/.chroma
+
+.idea

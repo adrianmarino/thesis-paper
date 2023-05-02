@@ -5,3 +5,7 @@ class RecommenderResult(ABC):
     @abstractmethod
     def show(self):
         pass
+
+    @property
+    def data(self):
+        pass

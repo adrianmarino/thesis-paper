@@ -1,4 +1,4 @@
-from ..recommender_result import RecommenderResult
+from recommender.recommender_result import RecommenderResult
 from rest import IMDBApiClient
 from IPython.core.display import HTML
 

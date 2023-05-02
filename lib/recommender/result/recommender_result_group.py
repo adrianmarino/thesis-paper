@@ -1,4 +1,4 @@
-from ..recommender_result import RecommenderResult
+from recommender.recommender_result import RecommenderResult
 
 
 class RecommenderResultGroup(RecommenderResult):
