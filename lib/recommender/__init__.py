@@ -9,6 +9,7 @@ from .item_recommender import ItemRecommender
 from .emb_db.item_emb_db.result import ItemEmbDBRecommenderResult
 from .emb_db.item_emb_db.recommender import ItemEmbDBRecommender
 
+from .emb_db.item_recommender_builder import ItemRecommenderBuilder, item_rec_sys_cfg
 
 
 from .emb_db.personalized_item_emb_db.result import PersonalizedItemEmbDBRecommenderResult
