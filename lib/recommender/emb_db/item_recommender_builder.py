@@ -3,15 +3,23 @@ from singleton_decorator import singleton
 from data.dataset import MovieLensTMDBDataLoader
 from database.chromadb import RepositoryFactory
 from bunch import Bunch
+import logging
 
 
 def item_rec_sys_cfg(dataset_path, field, model):
-    return Bunch({
+    metadata_cols = [field, 'release_year', 'imdb_id', f'{field}_tokens']
+    if field != 'title':
+        metadata_cols.append('title')
+
+    cfg = Bunch({
         'name'          : f'{field}-{model}',
         'file_path'     : f'{dataset_path}/{field}-{model}.json',
-        'metadata_cols' : [field, 'title', 'release_year', 'imdb_id', f'{field}_tokens'],
+        'metadata_cols' : metadata_cols,
         'embedding_col' : f'{field}_embedding'
     })
+    logging.info(f'Cfg:\n\n{cfg}')
+    return cfg
+
 
 
 @singleton

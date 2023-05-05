@@ -1,4 +1,5 @@
 from pytorch_common.callbacks import CallbackManager
+from pytorch_common.modules import  FitContextFactory
 from pytorch_common.callbacks.output import Logger
 from ..fn import Fn
 
@@ -19,7 +20,7 @@ class AutoEncoderTrainer:
         extra_ctx={}
     ):
         """
-        Train a autoencoder.
+        Train a auto-encoder.
         :param data_loader: data_loader with train set.
         :param loss_fn: function to minimize.
         :param epochs: number of epochs to train model.
@@ -29,13 +30,15 @@ class AutoEncoderTrainer:
         :param verbose: show/hide logs.
         """
         callback_manager = CallbackManager(
-            epochs,
-            encoder_optimizer,
-            loss_fn,
-            self.model,
-            callbacks,
-            verbose,
-            extra_ctx
+            ctx       = FitContextFactory.create(
+                self.model,
+                loss_fn,
+                epochs,
+                encoder_optimizer,
+                extra_ctx,
+                verbose
+            ),
+            callbacks = callbacks
         )
 
         for epoch in range(epochs):

@@ -31,6 +31,13 @@ class PersonalizedItemEmbDBRecommender(PersonalizedItemRecommender, SimItemsMixi
 
         recommendations = self._similar_items(item_ids=top_user_items.index.unique())
 
-        sorted_recommendations = recommendations.sort_values(by=['rating'], ascending=False)
+        return PersonalizedItemEmbDBRecommenderResult(
+            self.name,
+            recommendations,
+            k
+        )
 
-        return PersonalizedItemEmbDBRecommenderResult(sorted_recommendations.head(k))
+
+    @property
+    def name(self):
+        return self._collection_repository.collection.name

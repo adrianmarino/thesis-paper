@@ -42,7 +42,9 @@ class PersonalizedItemEmbDBEnsembleRecommender(PersonalizedItemRecommender):
             .mean() \
             .reset_index()
 
-        recommendations = recommendations.sort_values(by=['sim_rating'], ascending=False)
-        top_recommendations = recommendations.head(k)
+        return PersonalizedItemEmbDBEnsembleRecommenderResult(self.name, recommendations, k)
 
-        return PersonalizedItemEmbDBEnsembleRecommenderResult(top_recommendations)
+
+    @property
+    def name(self):
+        return f'Ensemble of {", ".join([r.name for r in self.recommenders])}.'

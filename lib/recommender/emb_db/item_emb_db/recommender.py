@@ -29,8 +29,12 @@ class ItemEmbDBRecommender(ItemRecommender, SimItemsMixin):
 
 
     def recommend(self, item_id: int, k: int = 5):
-        recommendations = self._similar_items([item_id])
+        return ItemEmbDBRecommenderResult(
+            self.name,
+            self._similar_items([item_id]),
+            k
+        )
 
-        sorted_recommendations = recommendations.sort_values(by=['rating'], ascending=False)
-
-        return ItemEmbDBRecommenderResult(sorted_recommendations.head(k))
+    @property
+    def name(self):
+        return self._collection_repository.collection.name

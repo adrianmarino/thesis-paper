@@ -16,15 +16,23 @@ def render_image(client, id, width=360):
 
 
 class PersonalizedItemEmbDBRecommenderResult(RecommenderResult):
-    def __init__(self, data):
+    def __init__(self, recommender_name, data, k):
         self.__client = IMDBApiClient()
-        self.__data = data
+        self.__recommender_name = recommender_name
+        self.__data = data.sort_values(by=['rating'], ascending=False).head(k) if data.shape[0] > 0 else None
+
 
     @property
     def data(self):
         return self.__data
 
     def show(self, image_width=300):
+        print(f'\nItem Recommender: {self.__recommender_name}\n')
+
+        if self.__data is None:
+            print('Not Found recommendations!')
+            return
+ 
         df = self.__data.copy()
 
         df['image'] = df['imdb_id'].apply(lambda id: render_image(self.__client, id, width=image_width))
