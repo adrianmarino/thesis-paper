@@ -109,7 +109,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * **Hybrid Models**
    * La idea inicial es crear un marco modular para construir ensamples. Es decir, que permita combinar facilmentes distintos modelos de recomendación de ambas familias CF y CB.
-   * Estos ensambles aplicaran cada modelo según el número de calificaciones realizadas por usuario, ya que CF no se puede aplicar, si no exite un minimo de interacciones.
+   * Estos ensambles aplicaran cada modelo según el número de calificaciones realizadas por usuario, ya que CF no se puede aplicar si no exite un minimo de interacciones.
    * Se calcularan las metricas propuesta luego de cada nueva interacción del usuario, generando una serie de tiempo por usuario y meticas.
    * En este modo, se busca maximizar las metricas en cada instance de tiempo.
 
