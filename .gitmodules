@@ -1,0 +1,6 @@
+[submodule "rec-sys-client-side"]
+	path = rec-sys-client-side
+	url = https://github.com/magistery-tps/rec-sys-client-side.git
+[submodule "rec-sys-client-side-lib"]
+	path = rec-sys-client-side-lib
+	url = https://github.com/magistery-tps/rec-sys-client-side-lib.git
