@@ -2,7 +2,7 @@ import sys
 sys.path.append('./lib')
 
 import pytest
-import model as ml
+import models as ml
 import torch
 from pytorch_common.util import tensor_eq
 from torch import FloatTensor, Tensor

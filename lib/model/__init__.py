@@ -15,11 +15,14 @@ from .module.multi_feature_embedding         import MultiFeatureEmbedding
 # -----------------------------------------------------------------------------
 # Predictors...
 # -----------------------------------------------------------------------------
-from .predictor.knn.knn_user_based_predictor import KNNUserBasedPredictor
-from .predictor.knn.knn_item_based_predictor import KNNItemBasedPredictor
-from .predictor.module_predictor             import ModulePredictor
-from .predictor.sample_cached_predictor      import SampleCachedPredictor
-from .predictor.cached_predictor             import CachedPredictor
+from .predictor.abstract_predictor            import AbstractPredictor
+from .predictor.knn.knn_user_based_predictor  import KNNUserBasedPredictor
+from .predictor.knn.knn_item_based_predictor  import KNNItemBasedPredictor
+from .predictor.knn.knn_predictor_factory     import KNNPredictorFactory, KNNType
+from .predictor.module_predictor              import ModulePredictor
+from .predictor.sample_cached_predictor       import SampleCachedPredictor
+from .predictor.cached_predictor              import CachedPredictor
+
 
 # Predictors Ensemple...
 from .predictor.ensemple.combine.ensemple_combine_strategy           import EnsempleCombineStrategy

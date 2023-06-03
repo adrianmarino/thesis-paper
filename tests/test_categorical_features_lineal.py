@@ -2,7 +2,7 @@ import sys
 sys.path.append('./lib')
 
 import pytest
-import model as ml
+import models as ml
 from torch import LongTensor, Size
 
 

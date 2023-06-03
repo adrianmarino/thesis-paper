@@ -1,0 +1,1 @@
+from .knn_prediction_service import KNNPredictionService

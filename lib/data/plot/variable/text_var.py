@@ -1,5 +1,5 @@
 from ..diagram import words_clous_plot
-from ...utils import outliers_range
+from data import outliers_range
 
 
 def describe_text_var(df, column, flatten=False):

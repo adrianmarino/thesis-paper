@@ -1,9 +1,9 @@
 import torch
 from torch.utils.data import Dataset
 import pandas as pd
-import data as dtypes
+import recsys.data as dtypes
 import pytorch_common.util as pu
-import data as dt
+import recsys.data as dt
 import numpy as np
 import logging
 

@@ -1,7 +1,7 @@
 import pandas as pd
 import data.plot as pl
-import data as dt
 import numpy as np
+
 
 class ValidatorSummary:
 

@@ -20,3 +20,6 @@ from .pipes import  select, distinct, rename, drop, \
 from .pca   import  PCASummary, PCAAnalisys
 
 from .normalizer import Normalizer
+
+from .interaction_change_detector import InteractionsChangeDetector
+

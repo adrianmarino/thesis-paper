@@ -3,7 +3,7 @@ sys.path.append('./lib')
 
 import pytest
 import model as ml
-import data as dt
+from data import RatingsMatrix
 import torch
 from utils import *
 

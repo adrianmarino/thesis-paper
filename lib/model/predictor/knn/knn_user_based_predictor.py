@@ -2,7 +2,7 @@ from model.predictor.abstract_predictor import AbstractPredictor
 from model import NearestNeighbors
 from util import round_, delete
 import logging
-import data as dt
+from data import RatingsMatrix
 import torch
 
 
@@ -13,8 +13,8 @@ class KNNUserBasedPredictor(AbstractPredictor):
         return KNNUserBasedPredictor(rm, nn)
 
     @staticmethod
-    def from_data_frame(data, user_seq_col, movie_seq_col, rating_col, distance):
-        rm = dt.RatingsMatrix.from_dataframe(data, user_seq_col, movie_seq_col, rating_col)
+    def from_data_frame(data, user_seq_col, item_seq_col, rating_col, distance):
+        rm = RatingsMatrix.from_dataframe(data, user_seq_col, item_seq_col, rating_col)
         nn = NearestNeighbors(rm[:, :], distance)
         return KNNUserBasedPredictor(rm, nn)
 
