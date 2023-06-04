@@ -23,6 +23,7 @@ dependencies:
     - yellowbrick
     - scikit-learn-extra
     - statsmodels
+    - pytest
     - pip
     - pip:
         - torch
