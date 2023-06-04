@@ -1,4 +1,4 @@
 #!/bin/bash
-coverage run --omit=dag -m pytest 
+coverage run --omit=dag,lib/dag -m pytest 
 rm -f coverage.svg
 coverage-badge -o coverage.svg
