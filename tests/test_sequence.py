@@ -1,6 +1,9 @@
 import sys
 sys.path.append('./lib')
 
+import warnings
+warnings.filterwarnings('ignore')
+
 import pytest
 from data import Sequencer, check_sequence
 import pandas as pd

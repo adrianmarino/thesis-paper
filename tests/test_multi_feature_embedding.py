@@ -1,8 +1,11 @@
 import sys
 sys.path.append('./lib')
 
+import warnings
+warnings.filterwarnings('ignore')
+
 import pytest
-import models as ml
+import model as ml
 from utils import *
 from torch import LongTensor, Size
 from pytorch_common.util import tensor_eq

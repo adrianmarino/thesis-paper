@@ -1,6 +1,9 @@
 import sys
 sys.path.append('./lib')
 
+import warnings
+warnings.filterwarnings('ignore')
+
 import numpy as np
 import pytest
 import metric.discretizer as dr

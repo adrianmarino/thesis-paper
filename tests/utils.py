@@ -1,5 +1,5 @@
 import torch
-import models as ml
+import model as ml
 
 
 def vector_cos_dist(a, b): return ml.CosineDistance(dim=0)(a, b)

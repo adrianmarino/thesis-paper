@@ -1,10 +1,14 @@
 import sys
-sys.path.append('./lib')
+sys.path.append('./src')
+
+import warnings
+warnings.filterwarnings('ignore')
 
 import pytest
 import model as ml
 import torch
 from utils import *
+import pytorch_common.util as pu
 
 
 class TestNearestNeighbors:
@@ -15,7 +19,7 @@ class TestNearestNeighbors:
             [4., 4., 3.], # b
             [1., 2., 2.], # c
             [3., 1., 1.]  # d
-        ])
+        ]).to(pu.get_device())
         # a-a: 0
         # Nearest:
         #   a-c: 3
