@@ -1,6 +1,6 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
-from ...utils import outliers_range, mode
+from data import outliers_range, mode
 import numpy as np
 
 

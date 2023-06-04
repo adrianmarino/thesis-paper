@@ -1,6 +1,6 @@
 import pandas as pd
 
-import data as dt
+from data import Sequencer
 
 
 def as_type(df, columns, dtype):

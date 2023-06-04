@@ -1,4 +1,4 @@
-import data as dt
+from data import progress_bar
 import data.dataset as ds
 from .validator_summary import ValidatorSummary
 import torch

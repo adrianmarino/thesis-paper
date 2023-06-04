@@ -42,6 +42,7 @@ class CachedPredictor(AbstractPredictor):
 
     def delete(self):
         self._predictor.delete()
-        del self._result
-        del self._sample
 
+
+    def save(self, path, filename='knn-user-predictor'):
+        self._predictor.save(path, filename)

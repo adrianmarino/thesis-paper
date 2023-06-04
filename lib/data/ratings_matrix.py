@@ -1,7 +1,8 @@
 import data.plot as pl
 import torch
 import pytorch_common.util as pu
-import data as dt
+from .progress_bar import progress_bar
+
 from util import delete
 
 class RatingsMatrix:
@@ -11,7 +12,7 @@ class RatingsMatrix:
         n_items = df[item_seq_column].max() + 1
         tensor = torch.zeros([n_users, n_items], dtype=torch.float).to(device)
 
-        with dt.progress_bar(len(df), 'Building Ratting Matrix') as bar:
+        with progress_bar(len(df), 'Building Ratting Matrix') as bar:
             for index, row in df.iterrows():
                 tensor[int(row[user_seq_column]), int(row[item_seq_column])] = row[rating_column]
                 bar.update()

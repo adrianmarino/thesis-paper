@@ -1,9 +1,12 @@
 import sys
 sys.path.append('./lib')
 
+import warnings
+warnings.filterwarnings('ignore')
+
 import pytest
-import model as ml
-import data as dt
+from model import KNNUserBasedPredictor, CosineDistance
+from data import RatingsMatrix
 import torch
 from utils import *
 
@@ -11,7 +14,7 @@ from utils import *
 class TestKNNUserBasedPredictor:
     def test_when_predict_rating_made_buy_a_user_for_a_given_item_it_returns_a_valid_value(self):
         # Prepare
-        rm = dt.RatingsMatrix.from_tensor(torch.tensor([
+        rm = RatingsMatrix.from_tensor(torch.tensor([
             [2., 2., 4.], # a
             [4., 4., 3.], # b
             [1., 2., 2.], # c
@@ -22,7 +25,7 @@ class TestKNNUserBasedPredictor:
         #   a-c: 3
         #   a-b or a-d: 5
 
-        predictor = ml.KNNUserBasedPredictor.from_rm(rm, ml.CosineDistance())
+        predictor = KNNUserBasedPredictor.from_rm(rm, CosineDistance())
 
         user_idx = 0
         item_idx = 0

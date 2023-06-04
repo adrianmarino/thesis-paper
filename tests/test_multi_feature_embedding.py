@@ -1,6 +1,9 @@
 import sys
 sys.path.append('./lib')
 
+import warnings
+warnings.filterwarnings('ignore')
+
 import pytest
 import model as ml
 from utils import *
