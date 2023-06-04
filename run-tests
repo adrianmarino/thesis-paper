@@ -1,4 +1,4 @@
 #!/bin/bash
-coverage run -m pytest --ignore=dag
+coverage run --omit=dag -m pytest 
 rm -f coverage.svg
 coverage-badge -o coverage.svg
