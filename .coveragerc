@@ -1,4 +1,4 @@
 [run]
 omit =
-    */dag/*
-    */lib/dag/*
+    **/dag/*
+    **/lib/dag/*
