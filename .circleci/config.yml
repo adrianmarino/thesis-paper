@@ -38,6 +38,10 @@ jobs:
           command: |
             conda install -c conda-forge mamba
       - run:
+          name: Install gcc
+          command: |
+            apt-get install python3-dev
+      - run:
           name: install dependencies
           command: |
             mamba env create -f environment.yml
