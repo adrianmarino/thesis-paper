@@ -33,3 +33,4 @@ dependencies:
         - chromadb
         - sentence-transformers
         - scikit-surprise
+        - gcc
