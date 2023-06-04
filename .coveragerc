@@ -1,0 +1,4 @@
+[run]
+omit =
+    */dag/*
+    */lib/dag/*
