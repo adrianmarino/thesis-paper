@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Install gcc
           command: |
-            apt-get install build-essential -y
+            apt-get install python3-dev
       - run:
           name: install dependencies
           command: |
