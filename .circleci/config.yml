@@ -34,15 +34,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install mamba
+          name: Install Mamba
           command: |
             conda install -c conda-forge mamba
       - run:
-          name: install dependencies
+          name: Install Dependencies
           command: |
             mamba env create -f environment.yml
       - run:
-          name: Run tests
+          name: Run Tests
           # This assumes pytest is installed via the install-package step above
           command: |
             conda init bash
