@@ -40,7 +40,8 @@ jobs:
       - run:
           name: Install gcc
           command: |
-            apt-get install python3-dev
+            yum install gcc-c++
+            update gcc
       - run:
           name: install dependencies
           command: |
