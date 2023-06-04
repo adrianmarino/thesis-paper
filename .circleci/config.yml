@@ -24,7 +24,7 @@ jobs:
       - image: continuumio/miniconda3
     environment:
       PYTHONPATH: ~/thesis/lib
-    parallelism: 50
+    parallelism: 10
     working_directory: ~/thesis
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
