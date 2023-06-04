@@ -6,6 +6,7 @@ channels:
     - districtdatalabs
 
 dependencies:
+    - cxx-compiler
     - seaborn
     - matplotlib
     - wordcloud

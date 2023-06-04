@@ -24,7 +24,7 @@ jobs:
       - image: continuumio/miniconda3
     environment:
       PYTHONPATH: ~/thesis/lib
-    parallelism: 3
+    parallelism: 50
     working_directory: ~/thesis
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
@@ -37,11 +37,6 @@ jobs:
           name: Install mamba
           command: |
             conda install -c conda-forge mamba
-      - run:
-          name: Install gcc
-          command: |
-            yum install gcc-c++
-            update gcc
       - run:
           name: install dependencies
           command: |
