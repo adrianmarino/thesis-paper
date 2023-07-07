@@ -3,6 +3,8 @@
 # UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Híbridos 
 
 Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Es decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
+
+
 ## Thesis
 
 [Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
@@ -10,7 +12,7 @@ Este trabajo busca realizar una comparativa de distintos enfoques de recomendaci
 
 ## Modelos
 
-A continuación se especifican los modelos a comparar.para moas detalle de los mismo se recomienda ver el documento de tesis del apartado anterior.
+A continuación se especifican los modelos a comparar. Para mas detalle se recomienda ver el documento de tesis del apartado anterior.
 
  *  **Memory based CF**: Baseline o modelo de referencia.
     * **KNN (Distancia Coseno)**
