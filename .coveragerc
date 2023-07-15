@@ -1,5 +1,6 @@
 [run]
 omit =
     **/dags/*
-    **/dag/*
     **/lib/dag/*
+    **/rec-sys-client-lib/dags/*
+    **/rec-sys-client-lib/src/recsys/dag/*
