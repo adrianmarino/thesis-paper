@@ -6,6 +6,7 @@ channels:
     - districtdatalabs
 
 dependencies:
+    - python=3.11.3
     - cxx-compiler
     - seaborn
     - matplotlib
