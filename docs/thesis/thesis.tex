@@ -64,49 +64,52 @@
 
 \chapter{Introducción}
 
-Los sistemas de recomendación tienen por objetivo acercar a sus usuarios:
-productos, promociones, contenidos (Textos, audio, videos, etc..) relevantes a
-sus preferencias o necesidades, permitiendo a estos encontrar con mayor
-facilidad aquello que buscan. Formalizando esta definición podemos decir que:
-Los sistemas de recomendación apuntan a ayudar a un usuario o grupo de usuarios
-a encontrar items de forma personalizada, dado un de conjunto de items de gran
-extensión o un gran espacio de búsqueda.
+Los sistemas de recomendación tienen como objetivo principal proporcionar a los
+usuarios productos, promociones y contenidos relevantes a sus preferencias o
+necesidades. Estos sistemas permiten a los usuarios encontrar de manera más
+fácil y eficiente lo que están buscando. Formalizando esta definición, podemos
+decir que los sistemas de recomendación buscan ayudar a un usuario o grupo de
+usuarios a descubrir items que se ajusten a sus preferencias, dado un conjunto
+de items que puede ser extenso o en un amplio espacio de búsqueda.
 
-Este objetivo puede cambiar según el contexto de cada negocio: Dado un
-e-commerce de delivery gastronómico, su objetivo es acercar a sus usuarios un
-plato relevante, con un precio que puedan pagar y un tiempo de entrega
-aceptable.
+Este objetivo puede variar dependiendo de cada negocio: Si consideramos un
+\textit{e-commerce} de \textit{delivery} gastronómico, su propósito sería
+ofrecer a los clientes platos relevantes a un precio asequible y con un tiempo
+de entrega aceptable.
 
-Dado un e-commerce de productos, su objetivo es acercar a sus usuarios aquellos
-productos que estén necesitando, con un precio que estén dispuestos a pagar.
-Por otro lado, se busca asegurar una experiencia satisfactoria con el vendedor.
+Si hablamos de un \textit{e-commerce} de productos, su objetivo consiste en
+proporcionar a los usuarios aquellos productos que satisfacen sus necesidades,
+a un precio que estén dispuestos a pagar. Además, se busca garantizar una
+experiencia satisfactoria con los vendedores.
 
 En el negocio de visualización de contenido (audio, video, texto, etc..), el
 objetivo es acercar a sus usuarios contenido a fin a sus preferencias para
-mejorar su experiencia en la plataforma y así aumentar el \textit{engagement}
-de los usuarios.
+mejorar su experiencia en la plataforma.
 
-El objetivo de fondo siempre es el mismo, mejorar la conversión. Con esto nos
-referimos a aumentar el volumen de ventas en un e-commerce de productos, la
-cantidad de deliveries mensuales para un e-commerce gastronómico, la cantidad
-de impresiones de publicidad para aplicaciones de visualización de contenido,
-aumentar el tiempo de permanecía en las plataformas de streaming de audio o
-video, etc.. Podemos encontrar muchos ejemplos distintos en los cuales el
-objetivo común es mejorar la conversión y el \textit{engagement} de los
-usuarios.
+El objetivo principal en todos los casos es mejorar la conversión. En el campo
+del \textit{Marketing}, se define la conversión como las acciones realizadas
+por los usuarios que están alineadas con los objetivos de la empresa. Por
+ejemplo, aumentar el volumen de compras en un \textit{e-commerce} de productos,
+incrementar la cantidad de entregas mensuales en un \textit{e-commerce} de
+\textit{delivery} gastronómico, aumentar las impresiones de publicidad en
+aplicaciones de visualización de contenido, prolongar el tiempo de permanencia
+en plataformas de \textit{streaming} de audio o video, entre otros. Existen
+numerosos ejemplos en los que el objetivo común es mejorar la conversión y el
+compromiso del usuario con la marca, es decir, el \textit{engagement}.
 
-Desde un punto de vista mas técnico, los sistemas de recomendación se utilizan
-para predecir el grado de preferencia de un usuario con respecto a un item. En
-general, esto se puede lograr aplicando un algoritmo de optimización, el cual
-minimiza la diferencia entre el grado de preferencia esperado versus el real.
-Otros enfoques hacen uso de medidas de distancia para establecer este grado de
-preferencia. Mas adelante veremos estos conceptos en mas detalle.
+Desde un enfoque técnico, los sistemas de recomendación se utilizan para
+predecir el grado de preferencia de un usuario con un artículo específico. Esto
+se logra aplicando algoritmos de optimización que minimizan la diferencia entre
+el grado de preferencia esperado y el grado de preferencia real del usuario.
+También existen otros enfoques que utilizan medidas de distancia para
+determinar este grado de preferencia. En secciones posteriores, exploraremos
+estos conceptos con mayor detalle.
 
 \clearpage
-\section{TiposO de sistemas de recomendación}
+\section{Tipos de sistemas de recomendación}
 
-A continuación en la figura ~\ref{fig:clasification} se pueden visualizar las
-clasificaciones y subclasificaciones de los sistemas de recomendación:
+A continuación, en la figura ~\ref{fig:clasification}, se pueden observar las
+diferentes categorías y subcategorías de los sistemas de recomendación:
 
 \begin{figure}[!htb]
 	\centering
@@ -117,26 +120,29 @@ clasificaciones y subclasificaciones de los sistemas de recomendación:
 
 \subsection{Basados en Popularidad}
 
-Este tipo de recomendadores toman alguna característica de popularidad de los
-items en cuestión, como puede ser: cantidad de vistas, cantidad de compras,
-cantidad de reviews positivos, o una conjunción de estos. Luego buscan el top K
-de los items mas populares. Si bien este tipo de recomendadores tiene buenos
-resultandos para nuevos usuarios, sus recomendaciones no tienen en cuenta sus
-preferencias, debido a que esta basado en estadísticas comunes a todos los
-usuarios. Por esta cuestión, muchas veces no son considerados sistemas de
-recomendación perse. Aun asi son muy utilizados, ya que generan una alta
-conversión, mas allá su falta de personalización.
+Este tipo de sistema de recomendación utiliza alguna característica de
+popularidad de los items en cuestión. Algunos ejemplos de estas características
+podrían ser la cantidad de vistas, la cantidad de compras o la cantidad de
+comentarios positivos, o una combinación de ellas. Luego, estos sistemas buscan
+los K elementos más populares. Si bien este tipo de enfoque proporciona buenos
+resultados para nuevos usuarios, sus recomendaciones no tienen en cuenta las
+preferencias individuales de cada usuario, ya que se basan en estadísticas
+comunes a todos los usuarios. Por esta razón, a menudo no se consideran
+sistemas de recomendación en sentido estricto. No obstante, siguen siendo
+ampliamente utilizados debido a su capacidad para generar una alta tasa de
+conversión, a pesar de la falta de personalización.
 
 \subsection{Basados en Contenido}
 
-Este tipo de recomendador necesita un trabajo previo de ingeniería de features
-sobre los items, donde se busca definir que features son mas significativos
-para la tarea en cuestión, y cual es el grado de adecuación de cada items a los
-features definidos. Por otro lado, es necesario registrar las interacciones de
-los usuarios. Dadas estas interacciones, se puede definir el grado de
-preferencia de los usuarios a cada feature definido para los items. Con esta
-información es posible encontrar tanto items como usuarios similares y realizar
-recomendaciones del tipo:
+Este tipo de sistema de recomendación necesita un trabajo previo de ingeniería
+de \textit{features} sobre los items. Se busca definir que \textit{features}
+son mas significativos para la tarea en cuestión, y cual es el grado de
+adecuación de cada items a los \textit{features} definidos. Por otro lado, es
+necesario registrar las interacciones de los usuarios. Dadas estas
+interacciones, se puede definir el grado de preferencia de los usuarios a cada
+\textit{feature} definido para los items. Con esta informaciónm, es posible
+encontrar tanto items como usuarios similares y realizar recomendaciones del
+tipo:
 
 \begin{itemize}
 	\item Dado el \textit{Usuario A}, el cual tiene preferencia por el \textit{Item X},
@@ -158,12 +164,12 @@ features correctos se pueden lograr muy buenos resultados.
 \subsection{Basados en Filtrado Colaborativos}
 
 Estos modelos, a diferencia de los modelos basados en contenido, no requirieren
-ingeniería de features, lo que hace muy simple su implementación, ya que
-únicamente es necesario registrar las interacciones de los usuarios para con
-los items. Luego el propio modelo encuentra automáticamente los features mas
-relevantes dependiendo de la cantidad de columnas que se especifiquen
-(Dimensiones de un \textit{Embeddings vector}). Ejemplos de interacciones
-podrían ser:
+ingeniería de \textit{features}, lo que hace muy simple su implementación, ya
+que únicamente es necesario registrar las interacciones de los usuarios para
+con los items. Luego, el propio modelo encuentra automáticamente los
+\textit{features} mas relevantes dependiendo de la cantidad de columnas que se
+especifiquen (Dimensiones de un \textit{Embeddings vector}). Ejemplos de
+interacciones podrían ser:
 
 \begin{itemize}
 	\item El \textit{Usuario A} visualizo el \textit{Item X} el dia 2 de marzo de 2022.
@@ -174,34 +180,41 @@ podrían ser:
 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos,
 personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a cada
-usuario particular, en base a sus preferencias. Ademas, ambos permiten
-encontrar usuarios e items similares y recomendar items entre usuarios
-similares.
+a las preferencias de cada usuario particular. Ademas, ambos permiten encontrar
+usuarios e items similares y recomendar items entre usuarios similares.
 
 Por otro lado, los modelos basados en filtros colaborativos descubren un
 espacio latente de soluciones sin necesidad de recolectar datos y definir
-features en forma manual, a diferencia de los modelos basados en contenido. La
-selección o construcción manual de features puede llevar a una solución
-sesgada, ya que no esta basada en datos sino en el juicio experto del
-científico de datos.
+\textit{features} en forma manual, a diferencia de los modelos basados en
+contenido. La selección o construcción manual de \textit{features} puede llevar
+a una solución sesgada, ya que no esta basada en datos sino en el juicio
+experto del científico de datos. Esto puede llevar a una seleción subjetiva de
+los \textit{features} que se aleje de la realidad, introduciendo un sesgo en la
+predicción.
 
-No todo son rosas con estos modelos, ya que sufren un problema llamado
-\textit{Cold start} o arranque en frio. Si pensamos en una solución donde
-alimentamos al modelo con una ventana de interacciones para los últimos N
-meses, tendremos las siguiente situaciones:
+No todo son rosas con estos modelos, dado que sufren un problema llamado
+\textit{Cold start} o arranque en frio. Los usuarios nuevos son aquellos que
+aun no han realizado ninguna interacción con el sistema. Estos modelos no
+podrán realizar recomendaciones a estos usuarios, dado que requieren un mínimo
+de interacciones para comenzar a ofrecer recomendaciones con cierta precisión.
+
+Ademas, existen otros problemas referidos al cambiar la cantidad de
+interacciones de los usuarios. Si pensamos en una solución donde alimentamos al
+modelo con una ventana de interacciones para los últimos N meses, tendremos las
+siguiente situaciones:
 
 \begin{itemize}
 	\item Usuarios nuevos: Los usuarios nuevos no tendrán interacciones. Por lo tanto,
 	      este modelo no podrá realizar ninguna recomendación. En general, se establece
-	      un mínimo de interacciones para que el modelo pueda realizar recomendaciones
-	      acertadas.
+	      un mínimo de interacciones para que el modelo pueda realizar recomendaciones de
+	      forma acertada.
 	\item Usuarios con pocas interacciones: Por otro lado, tenemos a los usuarios que
-	      tienen una baja \textit{velocity} en cuando a interacciones con el sistema o
-	      aplicación. Si pensamos en un \textit{e-commerce}, hay usuarios que compran con
+	      tienen una baja taza de interacciones con el sistema o aplicación. Por ejemplo,
+	      en un \textit{e-commerce} de venta de productos, hay usuarios que compran con
 	      mucha frecuencia y otros muy de vez en cuando. Estos últimos, en general
-	      tendrán pocas interacciones pudiendo caer por debajo del umbral mínimo que
-	      requiere el modelo. De esta forma, tendremos usuarios que quedaran fuera del
-	      modelo actual.
+	      tendrán una baja taza de interacción pudiendo caer por debajo del umbral mínimo
+	      que requiere el modelo. De esta forma, tendremos usuarios que quedarán fuera
+	      del modelo actual.
 	\item Usuarios con muchas interacciones: En este caso, el usuario tiene una gran
 	      cantidad de interacciones con items. Para estos usuarios, el modelo podrá
 	      ofrecer recomendaciones relevantes, ya que cuanto mas interacciones se tenga,
@@ -209,10 +222,13 @@ meses, tendremos las siguiente situaciones:
 	      puede ser una gran desventaja, ya que se produce un efecto de túnel. Es decir,
 	      el usuario tiene recomendación muy ajustadas a sus preferencias, perdiendo la
 	      capacidad de descubrir nuevos items que podrían ser relevantes. Por esta
-	      cuestión, en general se suelen realizar tanto recomendaciones personalizadas
-	      como no-personalizadas.
+	      cuestión se suelen mezclar tanto recomendaciones personalizadas como
+	      no-personalizadas, para favorecer el descubrimiento de nuevos items.
 
 \end{itemize}
+
+
+NOTA: Las Correcciones  llegan hasta aquí!
 
 \clearpage
 \subsection{Modelos Híbridos}
