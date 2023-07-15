@@ -60,14 +60,18 @@ with DAG(
         dag,
         task_id           = 'compute_knn_user_based_rating_matrix',
         interactions_path = 'fetch_interactions.json',
-        model             = 'knn_user_based'
+        model             = 'knn_user_based',
+        min_n_interactions = 20,
+        rating_scale       = np.arange(0, 6, 0.5)
     )
 
     knn_item_based_rating_matrix = tss.compute_knn_rating_matrix_task(
         dag,
         task_id           = 'compute_knn_item_based_rating_matrix',
         interactions_path = 'fetch_interactions.json',
-        model             = 'knn_item_based'
+        model             = 'knn_item_based',
+        min_n_interactions = 20,
+        rating_scale       = np.arange(0, 6, 0.5)
     )
 
     svd_rating_matrix = ts.compute_surprise_rating_matrix_task(
@@ -90,67 +94,75 @@ with DAG(
 
     knn_user_based_sim = ts.compute_similarities_task(
         dag,
-        task_id            = 'compute_knn_user_based_similarities',
-        rating_matrix_path = 'compute_knn_user_based_rating_matrix.npz',
+        task_id                  = 'compute_knn_user_based_similarities',
+        future_interactions_path = 'compute_knn_user_based_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_knn_user_based_rating_matrix_train_interactions.json'
     )
 
     knn_item_based_sim = ts.compute_similarities_task(
         dag,
-        task_id            = 'compute_knn_item_based_similarities',
-        rating_matrix_path = 'compute_knn_item_based_rating_matrix.npz',
+        task_id                  = 'compute_knn_item_based_similarities',
+        future_interactions_path = 'compute_knn_item_based_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_knn_item_based_rating_matrix_train_interactions.json'
     )
 
     svd_sim = ts.compute_similarities_task(
         dag,
-        task_id            = 'compute_svd_similarities',
-        rating_matrix_path = 'compute_svd_rating_matrix.npz'
+        task_id                  = 'compute_svd_similarities',
+        future_interactions_path = 'compute_svd_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_svd_rating_matrix_train_interactions.json'
     )
 
     nmf_sim = ts.compute_similarities_task(
         dag,
-        task_id            = 'compute_nmf_similarities',
-        rating_matrix_path = 'compute_nmf_rating_matrix.npz'
+        task_id                  = 'compute_nmf_similarities',
+        future_interactions_path = 'compute_nmf_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_nmf_rating_matrix_train_interactions.json'
     )
 
     upgrade_svd_rec = ts.update_recommender_task(
         dag,
-        task_id                = 'update_svd_recommender',
-        recommender_name       = 'SVD',
-        interactions_path      = 'fetch_interactions.json',
-        user_similarities_path = 'compute_svd_similarities_user_similarities.json',
-        item_similarities_path = 'compute_svd_similarities_item_similarities.json',
-        n_most_similars_users  = 50,
-        n_most_similars_items  = 10
+        task_id                 = 'update_svd_recommender',
+        recommender_name        = 'SVD',
+        interactions_path       = 'compute_svd_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_svd_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_svd_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
     )
 
     upgrade_nmf_rec = ts.update_recommender_task(
         dag,
-        task_id                = 'update_nmf_recommender',
-        recommender_name       = 'NMF',
-        interactions_path      = 'fetch_interactions.json',
-        user_similarities_path = 'compute_nmf_similarities_user_similarities.json',
-        item_similarities_path = 'compute_nmf_similarities_item_similarities.json',
-        n_most_similars_users  = 50,
-        n_most_similars_items  = 10
+        task_id                 = 'update_nmf_recommender',
+        recommender_name        = 'NMF',
+        interactions_path       = 'compute_nmf_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_nmf_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_nmf_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
     )
 
 
     upgrade_knn_user_based_rec = ts.update_recommender_task(
         dag,
-        task_id                = 'update_knn_user_based_recommender',
-        recommender_name       = 'knn_user_based',
-        interactions_path      = 'fetch_interactions.json',
-        user_similarities_path = 'compute_knn_user_based_similarities_user_similarities.json',
-        item_similarities_path = 'compute_knn_user_based_similarities_item_similarities.json'
+        task_id                 = 'update_knn_user_based_recommender',
+        recommender_name        = 'knn_user_based',
+        interactions_path       = 'compute_knn_user_based_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_knn_user_based_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_knn_user_based_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
     )
 
     upgrade_knn_item_based_rec = ts.update_recommender_task(
         dag,
-        task_id                = 'update_knn_item_based_recommender',
-        recommender_name       = 'knn_item_based',
-        interactions_path      = 'fetch_interactions.json',
-        user_similarities_path = 'compute_knn_item_based_similarities_user_similarities.json',
-        item_similarities_path = 'compute_knn_item_based_similarities_item_similarities.json'
+        task_id                 = 'update_knn_item_based_recommender',
+        recommender_name        = 'knn_item_based',
+        interactions_path       = 'compute_knn_item_based_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_knn_item_based_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_knn_item_based_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
     )
 
     fetch >> check_count >> check_branch

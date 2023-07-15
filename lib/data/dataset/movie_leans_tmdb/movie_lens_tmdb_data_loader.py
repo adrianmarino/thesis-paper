@@ -1,7 +1,7 @@
 import pandas as pd
 
 from data import Sequencer
-
+import data as dt
 
 def as_type(df, columns, dtype):
     for col in columns:
