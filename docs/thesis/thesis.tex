@@ -69,8 +69,8 @@ usuarios productos, promociones y contenidos relevantes a sus preferencias o
 necesidades. Estos sistemas permiten a los usuarios encontrar de manera más
 fácil y eficiente lo que están buscando. Formalizando esta definición, podemos
 decir que los sistemas de recomendación buscan ayudar a un usuario o grupo de
-usuarios a descubrir items que se ajusten a sus preferencias, dado un conjunto
-de items que puede ser extenso o en un amplio espacio de búsqueda.
+usuarios a descubrir ítems que se ajusten a sus preferencias, dado un conjunto
+de ítems que puede ser extenso o en un amplio espacio de búsqueda.
 
 Este objetivo puede variar dependiendo de cada negocio: Si consideramos un
 \textit{e-commerce} de \textit{delivery} gastronómico, su propósito sería
@@ -121,7 +121,7 @@ diferentes categorías y sub-categorías de los sistemas de recomendación:
 \subsection{Basados en Popularidad}
 
 Este tipo de sistema de recomendación utiliza alguna característica de
-popularidad de los items en cuestión. Algunos ejemplos de estas características
+popularidad de los ítems en cuestión. Algunos ejemplos de estas características
 podrían ser la cantidad de vistas, la cantidad de compras o la cantidad de
 comentarios positivos, o una combinación de ellas. Luego, estos sistemas buscan
 los K elementos más populares. Si bien este tipo de enfoque proporciona buenos
@@ -135,13 +135,13 @@ conversión, a pesar de la falta de personalización.
 \subsection{Basados en Contenido}
 
 Este tipo de sistema de recomendación necesita un trabajo previo de ingeniería
-de \textit{features} sobre los items. Se busca definir que \textit{features}
+de \textit{features} sobre los ítems. Se busca definir que \textit{features}
 son mas significativos para la tarea en cuestión, y cual es el grado de
-adecuación de cada items a los \textit{features} definidos. Por otro lado, es
+adecuación de cada ítems a los \textit{features} definidos. Por otro lado, es
 necesario registrar las interacciones de los usuarios. Dadas estas
 interacciones, se puede definir el grado de preferencia de los usuarios a cada
-\textit{feature} definido para los items. Con esta información, es posible
-encontrar tanto items como usuarios similares y realizar recomendaciones del
+\textit{feature} definido para los ítems. Con esta información, es posible
+encontrar tanto ítems como usuarios similares y realizar recomendaciones del
 tipo:
 
 \begin{itemize}
@@ -149,7 +149,7 @@ tipo:
 	      también podría tener preferencia por el \textit{Item Y}, por ser muy cercano o
 	      similar al \textit{Item X}.
 	\item Dos \textit{Usuarios A y B} cercanos o similares, tendrán preferencias
-	      similares. De esta forma es posible recomendar item consumidos por el
+	      similares. De esta forma es posible recomendar ítem consumidos por el
 	      \textit{Usuario A} al \textit{Usuario B} y vise versa.
 \end{itemize}
 
@@ -158,7 +158,7 @@ de features para encontrar los features que produzcan recomendaciones
 relevantes al usuario. El modelo no encuentra estos features automáticamente,
 sino que deben ser definidos de antemano manualmente. Se puede apreciar que
 esto introduce un sesgo al momento de seleccionar los features o construirlos
-en base a datos referentes a los items. Como ventaja, si se encuentran los
+en base a datos referentes a los ítems. Como ventaja, si se encuentran los
 features correctos se pueden lograr muy buenos resultados.
 
 \subsection{Basados en Filtrado Colaborativos}
@@ -166,7 +166,7 @@ features correctos se pueden lograr muy buenos resultados.
 Estos modelos, a diferencia de los modelos basados en contenido, no requirieren
 ingeniería de \textit{features}, lo que hace muy simple su implementación, ya
 que únicamente es necesario registrar las interacciones de los usuarios para
-con los items. Luego, el propio modelo encuentra automáticamente los
+con los ítems. Luego, el propio modelo encuentra automáticamente los
 \textit{features} mas relevantes dependiendo de la cantidad de columnas que se
 especifiquen (Dimensiones de un \textit{Embeddings vector}). Ejemplos de
 interacciones podrían ser:
@@ -181,7 +181,7 @@ interacciones podrían ser:
 Ambos tipo de modelos, basados en contenido y filtros colaborativos,
 personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a cada
 a las preferencias de cada usuario particular. Además, ambos permiten encontrar
-usuarios e items similares y recomendar items entre usuarios similares.
+usuarios e ítems similares y recomendar ítems entre usuarios similares.
 
 Por otro lado, los modelos basados en filtros colaborativos descubren un
 espacio latente de soluciones sin necesidad de recolectar datos y definir
@@ -216,18 +216,16 @@ siguiente situaciones:
 	      que requiere el modelo. De esta forma, tendremos usuarios que quedarán fuera
 	      del modelo actual.
 	\item Usuarios con muchas interacciones: En este caso, el usuario tiene una gran
-	      cantidad de interacciones con items. Para estos usuarios, el modelo podrá
+	      cantidad de interacciones con ítems. Para estos usuarios, el modelo podrá
 	      ofrecer recomendaciones relevantes, ya que cuanto mas interacciones se tenga,
 	      el modelo se ajusta con mas facilidad a sus preferencia. Por otro lado, esto
 	      puede ser una gran desventaja, ya que se produce un efecto de túnel. Es decir,
 	      el usuario tiene recomendación muy ajustadas a sus preferencias, perdiendo la
-	      capacidad de descubrir nuevos items que podrían ser relevantes. Por esta
+	      capacidad de descubrir nuevos ítems que podrían ser relevantes. Por esta
 	      cuestión se suelen mezclar tanto recomendaciones personalizadas como
-	      no-personalizadas, para favorecer el descubrimiento de nuevos items.
+	      no-personalizadas, para favorecer el descubrimiento de nuevos ítems.
 
 \end{itemize}
-
-NOTA: Las Correcciones llegan hasta aquí!
 
 \clearpage
 \subsection{Modelos Híbridos}
@@ -260,14 +258,14 @@ exhaustiva (\textit{full scan}), se puede utilizar una cache y asi realizar
 estas búsquedas una única vez. Otro problema es su limitación al tamaño máximo
 de la memoria con la que se cuenta, es decir, que el tamaño de la matriz
 depende de la memoria máxima disponible. Esto puede mitigarse utilizando
-implementaciones de matrices esparzas, las cuales comprimen los datos en
+implementaciones de matrices rala, las cuales comprimen los datos en
 memoria guardando unicamente las celdas que tienen datos. Además, es posible
 utilizar un cache que mantenga en memoria las búsqueda mas frecuentes y baje a
 almacenamiento secundario las menos frecuentes. Todos estos problemas de
 \textit{performance} y uso de recursos se deben a que \textit{KNN} no reduce la
 dimensionalidad de los datos, como si lo hacen varias implementaciones basadas
 en \textit{embeddings}, \textit{auto-encoder}, redes neuronales etc.., donde lo
-que se buscan es encontrar una representación mas compacta de los items y
+que se buscan es encontrar una representación mas compacta de los ítems y
 usuarios sin perder información. Mas allá de estos problemas, los resultados
 obtenidos por estos modelos no están muy alejados de aquellos que se encuentran
 en el estado del arte. Puede recomendarse su uso cuando tenemos un dominio
@@ -305,7 +303,7 @@ u otra teniendo en cuenta las ventajas y desventajas de cada enfoque y modelo.
 \subsection{¿Cómo se puede solucionar el problema de \textit{cold-start} que sufre el enfoque de recomendación basado en filtros colaborativos?} (Tesis)
 
 Como ya se comentó en la introducción, los modelos de filtro colaborativos
-necesitan un número mínimo de interacciones usuario-item para poder operar y
+necesitan un número mínimo de interacciones usuario-ítem para poder operar y
 producir recomendaciones aceptables. La propuesta es explorar enfoques que
 permiten lidiar con este problema. Uno de los enfoques más comunes es utilizar
 ensambles de modelos basados en filtros colaborativos con otros modelo basados
@@ -340,12 +338,12 @@ el dominio clásico en \textit{papers} y literatura de sistemas de recomendació
 en general.
 
 Dada la propuesta de este trabajo, es necesario contar con datos de
-interacciones de usuarios con items (Películas en este caso). Además, dado que
+interacciones de usuarios con ítems (Películas en este caso). Además, dado que
 se busca solucionar el problema de \textit{cold start} para el enfoque de
 filtros colaborativos, se necesitara contar con otro enfoque de recomendación,
 el cual posiblemente pueda ser basado en contenido. Por esta cuestión,
 necesitamos contar con \textit{features} completos y consistentes para los
-items (Películas).
+ítems (Películas).
 
 Dadas estas necesidades, se decidió utilizar los \textit{datasets} expuestos a
 continuación.
@@ -353,9 +351,9 @@ continuación.
 \subsection{\textit{MovieLens 25M Dataset}}
 
 Este \textit{dataset}~\cite{movielens} prácticamente no tiene features para los
-items (Películas), pero si tiene la calificaciones realizadas por los usuarios.
+ítems (Películas), pero si tiene la calificaciones realizadas por los usuarios.
 También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por
-los usuarios para cada item (Película). Otro punto importante, todos los
+los usuarios para cada ítem (Película). Otro punto importante, todos los
 usuarios tienen al menos 20 interacciones, lo cual asegura no tener problemas
 de baja performance por falta de interacciones. De esta forma, este
 \textit{dataset} sera muy util para entrenar modelos de recomendación basados
@@ -377,7 +375,7 @@ se especifican en la tabla~\ref{table:tmdbColumns} a continuación:
 		\hline
 		\textit{userId}    & Identificador univoco de un usuario.                                                                                                                                                        \\
 		\textit{movieId}   & Identificador univoco de una película.                                                                                                                                                      \\
-		\textit{timestamp} & Fecha en la cual el usuario califico el item(\textit{movieId}). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.                                         \\
+		\textit{timestamp} & Fecha en la cual el usuario califico el ítem(\textit{movieId}). Es un string de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.                                         \\
 		\textit{rating}    & Calificación del usuario. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
 		\textit{tags}      & Lista de palabras definidas por cada usuario para una película. Se cuenta con \textit{tags} a nivel usuario-película.                                                                       \\
 		\hline
@@ -393,7 +391,7 @@ se especifican en la tabla~\ref{table:tmdbColumns} a continuación:
 \subsection{\textit{TMDB Movie Dataset}}
 
 Este \textit{dataset} \cite{tmdb} no tiene calificaciones personalizadas de los
-items como sucede con el \textit{dataset MovieLens} anterior, pero si tiene
+ítems como sucede con el \textit{dataset MovieLens} anterior, pero si tiene
 varios \textit{features} referentes a películas, que pueden ser muy útiles para
 modelos basados en contenido e inclusive modelos híbridos, los cuales se busca
 explorar en el trabajo de tesis. Contiene datos de 5.000 películas y sus
@@ -505,7 +503,7 @@ Finalmente se termino con dos tablas/\textit{files} como resultado:
 \subsubsection{Tabla de interacciones}
 
 La tabla \textit{ratings\_tags\_v1} (\ref{table:interactionsTableDef}) tiene
-datos a nivel interacción usuario-item. De esta forma, a nivel usuario-item se
+datos a nivel interacción usuario-ítem. De esta forma, a nivel usuario-ítem se
 cuenta con la calificación de la película realizada por el usuario, ademas de
 los \textit{tags} que el usuario cargo para esa películas. Estos \textit{tags}
 no son mas que una lista de palabras representativas de la película en
@@ -525,7 +523,7 @@ momento.
 
 		\textit{user\_id}  & Existen 13.281 usuarios.                                                                                                                                                        \\
 		\textit{movie\_id} & Existen 33.444 películas.                                                                                                                                                       \\
-		\textit{timestamp} & Fecha en la cual el usuario califico el item(\textit{movie\_id}). Es un \textit{string} de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.                  \\
+		\textit{timestamp} & Fecha en la cual el usuario califico el ítem(\textit{movie\_id}). Es un \textit{string} de formato año-mes. Existen valores entre 1997-09 y 2019-11 inclusive.                  \\
 		\textit{rating}    & Calificación. Es un valor discreto numérico: \textit{0.5}, \textit{1}, \textit{1.5}, \textit{2}, \textit{2.5}, \textit{3}, \textit{3.5}, \textit{4}, \textit{4.5} y \textit{5}. \\
 		\textit{tags}      & Lista de palabras definidas por cada usuario para una película. Se cuenta con los \textit{tags} a nivel usuario-película.                                                       \\
 		\hline
@@ -563,7 +561,7 @@ información de cada película seleccionada de ambos \textit{datasets}.
 		\textit{vote\_count}      & Cantidad de votos por película.                                                          \\
 		\textit{vote\_mean}       & Cantidad media de votos por película.                                                    \\
 		\textit{tags}             & Son los \textit{tags} cargados por todos los usuarios que interactuaron con la película.
-		Es la mismas información que tenemos en la tabla de interacción pero ahora a nivel item.                             \\
+		Es la mismas información que tenemos en la tabla de interacción pero ahora a nivel ítem.                             \\
 
 		\hline
 	\end{tabular}
@@ -612,12 +610,12 @@ ninguna de sus columnas.
 \subsection{Variable \textit{Rating}}
 
 En este análisis exploratorio analizaremos datos relevantes al problema de
-predicción de calificaciones de items por parte de los usuarios. Dentro de este
+predicción de calificaciones de ítems por parte de los usuarios. Dentro de este
 análisis, la variable \textit{ratings} o calificación es una de estas variables
 relevantes.
 
 A continuación se puede apreciar una diagrama de barras el cual describe la
-frecuencia con la que los usuarios califican un item, segmentada por cada valor
+frecuencia con la que los usuarios califican un ítem, segmentada por cada valor
 posible de calificación:
 
 \begin{figure}[h!]
@@ -650,7 +648,7 @@ un histograma y \textit{boxplot} respectivamente:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-boxplot-histplot.png}
-	\caption{Histograma y \textit{Boxplot} de la variable \textit{rating}. Los \textit{ratings} son las calificaciones realizadas por los usuario para cada item o película.}
+	\caption{Histograma y \textit{Boxplot} de la variable \textit{rating}. Los \textit{ratings} son las calificaciones realizadas por los usuario para cada ítem o película.}
 	\label{fig:ratingsHistPlot}
 \end{figure}
 
@@ -686,7 +684,7 @@ A continuación segmentemos el anterior histograma por año:
 En la figura~\ref{fig:ratingsYearHistPlot} inicialmente vemos que en los años
 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de
 calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación
-claro por parte de los usuarios, en que item es un 4 o un 5 por ejemplo. Entre
+claro por parte de los usuarios, en que ítem es un 4 o un 5 por ejemplo. Entre
 1999 y 2022 vemos que las puntuaciones 3, 4 y 5 toman mayor importancia siendo
 estas las mas utilizadas. Es decir, los usuarios realizan en su mayoría
 puntuaciones en esos tres niveles. La mayor frecuencia se puede ver claramente
@@ -749,8 +747,8 @@ basados en contenido y colaborativos.
 
 Las variables de tipo texto son muy útiles para genera \textit{embeddings}, los
 cuales se puede sumar o promediar, generando representaciones compactas de
-items a recomendar. Luego es posible utilizar estas representaciones para
-agrupar items según su sinopsis, \textit{tags}, título y otras variables como
+ítems a recomendar. Luego es posible utilizar estas representaciones para
+agrupar ítems según su sinopsis, \textit{tags}, título y otras variables como
 pueden ser popularidad, año de estreno, votos, \textit{ratings}, etc...
 
 A continuación se puede visualizar la frecuencia de aparición de cada palabra
@@ -821,8 +819,8 @@ clusters generados a partir de la variable \textit{tags}.
 	\label{fig:titleCloud}
 \end{figure}
 
-En la figura~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras
-con mayor frecuencia: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead},
+En la figura~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras con
+mayor frecuencia: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead},
 \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House},
 \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World},
 \textit{War}, \textit{Black}, \textit{Boy}, \textit{Blue}, \textit{One} y
@@ -885,9 +883,9 @@ variabilidad 85 \%.
 \end{description}
 
 Por otro lado, las componentes principales son combinaciones lineales de las
-variables originales. Luego, las cargas o \textit{loadings} son los coeficientes
-utilizados para transformar las variables originales en las componentes
-principales mediante combinaciones lineales.
+variables originales. Luego, las cargas o \textit{loadings} son los
+coeficientes utilizados para transformar las variables originales en las
+componentes principales mediante combinaciones lineales.
 
 De esta forma, los coeficientes definen una medida de correlación o grado de
 aporte de cada variable original a una componente principal.
@@ -916,26 +914,26 @@ En la tabla~\ref{fig:loadingsTable} vemos que \textit{Vote Count (88\%)} y
 \textit{Popularity (80\%)} tiene una correlación positiva muy alta sobre la
 componente $PC1$. Lo mismo sucede con la \textit{Vote Mean (55\%)} en menor
 medida. Entre dos observaciones con distintos valores de popularidad, la que
-tenga un valor mas alto aportara a esta componente ($PC1$) que a las otra ($PC2$
-y $PC3$). También vemos que las variable \textit{Release Year (Año de estreno)}
-y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\%
-respectivamente, sobre la componente $PC1$. La variable \textit{User ID} no
-tiene aporte alguno sobre componente $PC1$. Las variables que mas aportan a la
-componente $PC2$ son \textit{Vote Mean (55\%)} y \textit{Vote Count (11\%)}
-respectivamente. Este aporte es negativo, esto quiere decir que un aumento en
-los niveles de esta variable significa una disposición en esta componente. La
-variable \textit{Release Year (Año de estreno)} tiene el aporte positivo mas
-alto sobre la componente $PC2$ siendo del 80 \%. Para la componente $PC3$ vemos
-que las variables que mas aportan a un campo en la misma son \textit{User ID 
-(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos.
-Vemos que un aumento en la variable \text{User ID} produce un aumento casi en
-una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en
-relación. De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel
-	de popularidad o conocimiento general de una película}. La componente $PC2$ en
-algún sentida mide lo contrario a la popularidad. Es un indicador del
-\textit{Nivel Underground para nuevos estrenos} de un film. La componente $PC3$
-es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un
-	usuario}.
+tenga un valor mas alto aportara a esta componente ($PC1$) que a las otra
+($PC2$ y $PC3$). También vemos que las variable \textit{Release Year (Año de
+	estreno)} y \textit{Movie ID} tienen un aporte considerable pero mas bajo del
+33\% y 24\% respectivamente, sobre la componente $PC1$. La variable
+\textit{User ID} no tiene aporte alguno sobre componente $PC1$. Las variables
+que mas aportan a la componente $PC2$ son \textit{Vote Mean (55\%)} y
+\textit{Vote Count (11\%)} respectivamente. Este aporte es negativo, esto
+quiere decir que un aumento en los niveles de esta variable significa una
+disposición en esta componente. La variable \textit{Release Year (Año de
+	estreno)} tiene el aporte positivo mas alto sobre la componente $PC2$ siendo
+del 80 \%. Para la componente $PC3$ vemos que las variables que mas aportan a
+un campo en la misma son \textit{User ID (99\%)} y \textit{Release Year (45\%)}
+respectivamente, ambos positivos. Vemos que un aumento en la variable
+\text{User ID} produce un aumento casi en una unidad sobre el coeficiente, pero
+\textit{Release Year} es la mitad en relación. De este forma, la componente
+$PC1$ podríamos nombrarla \textit{Nivel de popularidad o conocimiento general
+	de una película}. La componente $PC2$ en algún sentida mide lo contrario a la
+popularidad. Es un indicador del \textit{Nivel Underground para nuevos
+	estrenos} de un film. La componente $PC3$ es mas difícil de nombrar pero podría
+llamarse: \textit{Grado newbie de un usuario}.
 
 \clearpage
 
@@ -965,15 +963,15 @@ componente $PC1$ representa el grado de popularidad de una película.
 \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De
 esta forma se constata el análisis anterior. Si visualizamos los puntos que
 representan a las observaciones originales en el espacio latente generado por
-PCA, vemos que las observaciones de color negro ($>$4 puntos) y gris (de 2 a 3.5
-puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo ($>$2
-puntos). Esto indica que hay un crecimiento del nivel de popularidad cuanto mas
-a derecha se encuentre un punto en la componente $PC1$ validando los análisis
-anteriores. Si visualizamos lo puntos correspondientes a las observaciones en
-las direcciones de la componente $PC2$ vemos que a major valor en la
-componente, menor el grado de popularidad de las películas, ya que los puntos
-rojos tienden a esta en el extremo positivo de la componente, validando la
-hipótesis de que la componente $PC2$ indica el grado de underground es un
+PCA, vemos que las observaciones de color negro ($>$4 puntos) y gris (de 2 a
+3.5 puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo
+($>$2 puntos). Esto indica que hay un crecimiento del nivel de popularidad
+cuanto mas a derecha se encuentre un punto en la componente $PC1$ validando los
+análisis anteriores. Si visualizamos lo puntos correspondientes a las
+observaciones en las direcciones de la componente $PC2$ vemos que a major valor
+en la componente, menor el grado de popularidad de las películas, ya que los
+puntos rojos tienden a esta en el extremo positivo de la componente, validando
+la hipótesis de que la componente $PC2$ indica el grado de underground es un
 película.
 
 \chapter{Métodos}
@@ -1016,16 +1014,16 @@ disponible.
 \subsection{\textit{KNN (K-Nearest-Neighbor)}}
 
 Esta es la implementación clásica y mas intuitiva para realizar recomendación
-de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias
-que pueden ser distancias entre usuario o items, y otra matriz de
-calificaciones usuario-item. De esta forma, en la etapa de inferencia, el
-modelo tomo como entrada un usuario (\textit{user\_id}) y un item (\textit{item\_id}) y retorna la
-predicción de la calificación. Estas matrices se puede mantener en memoria,
-persistir en una base de datos (como puede ser \textit{Redis}) o en un archivos
-indexado. Por esta cuestión, la categoría en memoria no tiene por que ser
-estricta, pero si se entiende que los mejores tiempos de inferencia y
-entrenamiento se lograran cuando se tenga parte o la totalidad de estas
-matrices en memoria.
+de ítems. Una vez entrenado el modelo, se cuenta con una matriz de distancias
+que pueden ser distancias entre usuario o ítems, y otra matriz de
+calificaciones usuario-ítem. De esta forma, en la etapa de inferencia, el
+modelo tomo como entrada un usuario (\textit{user\_id}) y un ítem
+(\textit{item\_id}) y retorna la predicción de la calificación. Estas matrices
+se puede mantener en memoria, persistir en una base de datos (como puede ser
+\textit{Redis}) o en un archivos indexado. Por esta cuestión, la categoría en
+memoria no tiene por que ser estricta, pero si se entiende que los mejores
+tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la
+totalidad de estas matrices en memoria.
 
 \clearpage
 Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
@@ -1040,15 +1038,15 @@ Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $u$ es un identificador univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso se no usar matrices esparzas.
-	\item $i$ es el identificador secuencial, univoco y numérico de un item. En nuestros caso los items son películas, pero podrían ser cualquier entidad identificable como productos, usuarios, comidas, etc..
-	\item $r_{u, i}$ es la calificación otorgada al item $i$ por parte del usuario $u$.
+	\item $u$ es un identificador univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso se no usar matrices ralas.
+	\item $i$ es el identificador secuencial, univoco y numérico de un ítem. En este caso los ítems son películas, pero podrían ser cualquier entidad identificable como productos, usuarios, comidas, etc..
+	\item $r_{u, i}$ es la calificación otorgada al ítem $i$ por parte del usuario $u$.
 	\item $n$ es la cantidad total de usuarios en el \textit{dataset} de entrenamiento.
-	\item $m$ es la cantidad total de items en el \textit{dataset} de entrenamiento.
+	\item $m$ es la cantidad total de ítems en el \textit{dataset} de entrenamiento.
 \end{itemize}
 
 Dada esta lista de tuplas, podemos construir una matriz esparza donde cada fila
-representa a un usuario y cada columna a un item o vise versa, y las celdas o
+representa a un usuario y cada columna a un ítem o vise versa, y las celdas o
 valores de la misma contienen las calificaciones.
 
 \begin{description}
@@ -1068,13 +1066,13 @@ valores de la misma contienen las calificaciones.
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $r_{u,i}$ es la calificación otorgada al item $i$ por parte del usuario $u$.
+	\item $r_{u,i}$ es la calificación otorgada al ítem $i$ por parte del usuario $u$.
 	\item Cada vector fila $F_u$ contiene todas la calificaciones realizadas por el
-	      usuario $u$ para todos los items. Los items que aun no tiene calificación
+	      usuario $u$ para todos los ítems. Los ítems que aun no tiene calificación
 	      contiene el valor $0$.
 	\item Cada vector columna $C_i$ contiene las calificaciones realizadas por todos los
-	      usuarios para el item $i$. Las posiciones correspondientes a los usuarios que
-	      aun no calificaron el item $i$ tendrán el valor $0$.
+	      usuarios para el ítem $i$. Las posiciones correspondientes a los usuarios que
+	      aun no calificaron el ítem $i$ tendrán el valor $0$.
 \end{itemize}
 
 En el siguiente paso, se debe construir la matriz $Distancias_{u_a,u_b}$ que
@@ -1136,7 +1134,7 @@ dos vectores menos similares son entre si.
 	\item $ua$ y $ub$ son los indices de dos vectores fila $F_u$ de la matriz de $Calificaciones_{u,i}$. Cada uno de estos vectores fila $F_u$ representan a un usuario.
 	\item $ua \neq ub$, es decir que cada indice representa a un usuario distinto.
 	\item $I$ es la cantidad total de columnas de la matriz de $Calificaciones_{u,i}$.
-	\item $i$ el indice de una columna de la matriz de $Calificaciones_{u,i}$. Cada columna representa a un item y contiene todas las calificaciones realizaras por todos los usuarios sobre el item $i$.
+	\item $i$ el indice de una columna de la matriz de $Calificaciones_{u,i}$. Cada columna representa a un ítem y contiene todas las calificaciones realizaras por todos los usuarios sobre el ítem $i$.
 	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares serán los usuarios $u_a$ y $u_b$.
 \end{itemize}
 
@@ -1173,9 +1171,9 @@ predicción para cada implementación elegida.
 En el apartado anterior se explico como calcular las matrices de
 $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es
 parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se
-explicará el proceso de inferencia de la clasificación de un item por parte de
+explicará el proceso de inferencia de la clasificación de un ítem por parte de
 un usuario~\cite{useritembasedinference}. El enfoque de K usuarios cercanos
-para calcular la calificación de un item se basa en la siguiente definición:
+para calcular la calificación de un ítem se basa en la siguiente definición:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -1185,17 +1183,17 @@ para calcular la calificación de un item se basa en la siguiente definición:
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
+	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el ítem $i$.
 	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. En nuestro casos se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada indice representa a un usuario distinto.
-	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de items.
-	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el item $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al momento de calificar un item. Algunos usuarios tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otros usuarios son mas pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un item.
+	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
+	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al momento de calificar un ítem. Algunos usuarios tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otros usuarios son mas pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un ítem.
 \end{itemize}
 
 Finalmente, a grandes rasgos, el calculo de la predicción no es mas que el
 promedio de calificaciones del usuario $u$ sumado al promedio pesado de las
-calificación de los demás usuarios para el item $i$, donde los pesos son las
+calificación de los demás usuarios para el ítem $i$, donde los pesos son las
 distancias del usuario $u$ con los demás usuarios.
 
 Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás
@@ -1215,11 +1213,11 @@ modelo tiene el resultado mas exactos posibles.
 \subsection{\textit{KNN Item Based}}
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz
-de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas. Es
+de $Calificaciones_{i, u}$ tiene ítems como filas y usuarios como columnas. Es
 decir, es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$
 original~\cite{useritembasedinference}. De forma la matriz de
 $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales
-representan a items. Dadas estas diferencias el calcula de la predicción de las
+representan a ítems. Dadas estas diferencias el calcula de la predicción de las
 calificaciones también difiere en su definición:
 
 \begin{equation}
@@ -1229,14 +1227,14 @@ calificaciones también difiere en su definición:
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el item $i$.
+	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el ítem $i$.
 	\item $O$ es el conjunto de los vecinos cercanos o mas similares de $i$ previamente seleccionado. $o$ pertenece al conjunto $O$.
-	\item $i \neq o$: los indices item $i$ y $o$ representan a items distintos.
-	\item $w_{i,o}$ es la similitud entre los items $i$ y $o$.
+	\item $i \neq o$: los indices ítem $i$ y $o$ representan a ítems distintos.
+	\item $w_{i,o}$ es la similitud entre los ítems $i$ y $o$.
 \end{itemize}
 
 Finalmente la predicción, un promedio pesado de las calificaciones del usuario
-$u$ para los items vecinos al item $i$, pesadas por la similitud de cada item
+$u$ para los ítems vecinos al ítem $i$, pesadas por la similitud de cada ítem
 $o$ con $i$.
 
 \subsection{\textit{KNN User Based Ensemble} y \textit{Item Based}}
@@ -1262,7 +1260,7 @@ si no el estado internal al que se llega luego del entrenamiento.
 
 Particularmente en el ámbito de recomendaciones, se cuenta con variables
 categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable
-con esta característica: los ids secuenciales de usuarios e items. Cuando
+con esta característica: los ids secuenciales de usuarios e ítems. Cuando
 trabajamos con modelos de Machine Learning, particularmente con redes
 neuronales, es necesario convertir las variable categóricas en una
 representación numérica. El enfoque mas simple o native es realizar un one-hot
@@ -1393,11 +1391,11 @@ describirán las arquitecturas utilizadas en este trabajo.
 
 Esta es una arquitectura clásica en sistemas de recomendación basados en
 filtros colaborativos. El algoritmo de factorización de matrices~\cite{afm}
-funciona desacoplando la matriz de interacciones usuario-item en un producto
+funciona desacoplando la matriz de interacciones usuario-ítem en un producto
 escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o
 familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en
 la competencia~\cite{netflixprize} en 2006. La idea principal del algoritmo es
-representar a usuario e items en un espacio latente de baja dimensionalidad. A
+representar a usuario e ítems en un espacio latente de baja dimensionalidad. A
 partir del trabajo inicial realizado por \textit{Funk} en 2006, se han
 propuesto multiples enfoque de factorización de matrices para sistemas de
 recomendación, siento este el modelo de mas simple y efectivo.
@@ -1406,13 +1404,13 @@ Este modelo se puede construir fácilmente realizando el producto escalar de dos
 matrices de vectores de \textit{embeddings}, las cuales tiene una baja
 dimensionalidad debido al principio de funcionamiento de los
 \textit{embeddings}. A continuación se puede ver un esquema del modelo, el cual
-toma como entradas los identificadores de un usuario e item, luego resuelven
+toma como entradas los identificadores de un usuario e ítem, luego resuelven
 los vectores \textit{embedding} correspondiente a ambos ids, y finalmente se
 realiza el producto escalar de ambos vectores. Este producto escalar da como
-resultado la calificación del usuario para el item dado. Por otro lado, el
+resultado la calificación del usuario para el ítem dado. Por otro lado, el
 algoritmo del optimización de gradiente descendente sera quien se ocupe de
 ajustar los pesos de ambas matrices para que dado un id de usuario y otro id de
-item se obtenga la calificación correspondiente a la observación utilizada como
+ítem se obtenga la calificación correspondiente a la observación utilizada como
 ejemplo de entrenamiento.
 
 \begin{figure}[h!]
@@ -1437,8 +1435,8 @@ paso hacia adelante (\textit{forward-pass}):
 \end{description}
 \begin{itemize}
 	\item $V_u$ es el vector \textit{embedding} correspondiente al usuario $u$.
-	\item $V_i^{T}$ el vector \textit{embedding} correspondiente al item $i$.
-	\item $ \tilde{r}_{u, i}$ es la predicción de la calificación realizada por el usuario $u$ al item $i$ (Valor escalar).
+	\item $V_i^{T}$ el vector \textit{embedding} correspondiente al ítem $i$.
+	\item $ \tilde{r}_{u, i}$ es la predicción de la calificación realizada por el usuario $u$ al ítem $i$ (Valor escalar).
 \end{itemize}
 
 En términos matriciales podemos verlo de la siguiente manera:
@@ -1451,15 +1449,15 @@ En términos matriciales podemos verlo de la siguiente manera:
 \end{description}
 \begin{itemize}
 	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores \textit{embedding} de usuarios, la cual tiene tantas filas $u$ como usuarios y el la dimensión del numero de columnas (también llamada factor latente) corresponde al tamaño seleccionado para los vectores \textit{embedding}.
-	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{embeddings} de items, la cual tiene tantas filas como factores latente en los vectores \textit{embedding}, y tantas columnas como items se tenga.
-	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un item.
+	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{embeddings} de ítems, la cual tiene tantas filas como factores latente en los vectores \textit{embedding}, y tantas columnas como ítems se tenga.
+	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un ítem.
 \end{itemize}
 
 El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
 el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a
 ajustar. Se ha demostrado~\cite{embeddingsizedem} que realizar factorización de
 matrices con un factor latente de tamaño 1 es equivalente a un modelo de
-recomendación por popularidad, es decir que recomienda los items mas populares
+recomendación por popularidad, es decir que recomienda los ítems mas populares
 sin tener en cuenta la personalización de las recomendaciones. Luego, a medida
 que vamos incrementando el tamaño del factor latente estar recomendaciones
 serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando
@@ -1482,13 +1480,13 @@ la función de error a minimizar:
 
 El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs} realiza
 recomendaciones de muy buena calidad, pero tiene como limitación que solo
-utilizar interacciones usuario-item que tiene que ver con valores numéricos
+utilizar interacciones usuario-ítem que tiene que ver con valores numéricos
 referidos a interacciones explicitas como calificaciones. Los sistemas de
 recomendación modernos deben explotar todas las interacciones posibles, tanto
 explícitas (Calificaciones numéricas) como implícitas (Me gusta, Compras,
 Vistas, Favoritos, etc..). Para solucionar este nuevo problema donde es
-necesario usar cualquier tipo de interacción usuario item explicita o implícita
-se agrega un Bias o sesgo para los usuarios y otro para los items.
+necesario usar cualquier tipo de interacción usuario ítem explicita o implícita
+se agrega un Bias o sesgo para los usuarios y otro para los ítems.
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
 anterior:
@@ -1503,7 +1501,7 @@ anterior:
 \end{figure}
 
 En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales
-representa a los sesgos de usuarios e items respectivamente. El tamaño de los
+representa a los sesgos de usuarios e ítems respectivamente. El tamaño de los
 factores latentes o vectores \textit{embedding} correspondiente a cada
 \textit{bias} es 1, es decir son valores escalares. Finalmente, luego de
 calcular el producto escalar se suman los factores latentes resultado de ambas
@@ -1516,7 +1514,7 @@ calcular el producto escalar se suman los factores latentes resultado de ambas
 Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}) dada
 dos matrices de baja dimensionalidad se realiza un producto escalar y se suman
 sesgos dependiendo de caso para calcular o inferir la calificación del usuario
-para un item dado. Estos modelos como ya se conto aprender los pesos o
+para un ítem dado. Estos modelos como ya se conto aprender los pesos o
 parámetros de los vectores \textit{embeddings} en el proceso se entrenamiento.
 
 El enfoque de {\textit{NN-MF}}~\cite{nnfm}~\cite{ncf} es levemente distinto. En
@@ -1532,7 +1530,7 @@ de interacción.
 
 Utilizar rede neuronales abre el panorama, ya que ahora podemos usar mas
 variable que sea relevante a nuestro problema de predicción y no solo las
-variable categóricas y usuario e items; aquí es donde recibe el mayor potencial
+variable categóricas y usuario e ítems; aquí es donde recibe el mayor potencial
 de este enfoque.
 
 a continuación podemos ver un esquema del modelo, muy similar a \textit{GFM}
@@ -1549,7 +1547,7 @@ producto escalar.
 	\label{fig:NNMFModel}
 \end{figure}
 
-Entonces, como entradas tenemos los identificadores de los usuarios e items en
+Entonces, como entradas tenemos los identificadores de los usuarios e ítems en
 entradas independientes (Escalares). Con estos identificadores cada
 \textit{Embedding Layer} resuelve el vector \textit{embedding} asociado. Acto
 siguiente el bloque \textit{Flatter} toma ambos vectores y devuelve un nuevo
@@ -1587,7 +1585,7 @@ utiliza un kernel polinomial.
 F Formalmente, si tenemos:
 
 \begin{itemize}
-	\item $x\in\mathbb{R}^{d}$ es un vector de features donde cada una de sus componentes representa a una variable del \textit{dataset}, siendo $d$ la cantidad de variables de \textit{dataset¨} (excluyendo la columna de labels). En nuestro caso $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e items.
+	\item $x\in\mathbb{R}^{d}$ es un vector de features donde cada una de sus componentes representa a una variable del \textit{dataset}, siendo $d$ la cantidad de variables de \textit{dataset¨} (excluyendo la columna de labels). En nuestro caso $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e ítems.
 	\item $y\in\mathbb{R}$ es la variable target a predecir, en nuestro caso es la calificación del usuario.
 \end{itemize}
 
@@ -1612,9 +1610,9 @@ dos de ls siguiente forma:
 
 De esta forma los dos primeros términos corresponden al modelo de regresión
 lineal y el último término es una extensión del modelo de factorización
-matricial. Si la variable $i$ representa un item y la variable $j$ a un
+matricial. Si la variable $i$ representa un ítem y la variable $j$ a un
 usuario, el tercer término es el producto escalar entre los vectores
-\textit{embedding} de usuario $u$ y item $i$. Por otro lado, vale la pena
+\textit{embedding} de usuario $u$ y ítem $i$. Por otro lado, vale la pena
 aclarar que este método también puede generalizar en órdenes superiores al
 grado 2, sin embargo, la estabilidad numérica podría disminuí la generalización
 del método.
@@ -1653,19 +1651,20 @@ sigue:
 \subsection{\textit{Deep Factorization Machine (DeepFM)}}
 
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el
-comportamiento de las interacciones o correlación usuario-items ya sean
+comportamiento de las interacciones o correlación usuario-ítems ya sean
 implícita o explicitas. A pesar de este gran progreso, los métodos expuestos
-anteriormente (exceptuando las \textit{Máquinas de Factorización}) parecen tener
-un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto
-orden, requiriendo en algunos casos realizar ingeniería de features para
+anteriormente (exceptuando las \textit{Máquinas de Factorización}) parecen
+tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y
+alto orden, requiriendo en algunos casos realizar ingeniería de features para
 disminuir estos sesgos.
 
-El modelo \textit{Deep Factorization Machine (DeepFM)}~\cite{dfmpaper,
-	didldfm} o Maquina de factorización basada en \textit{Deep Learning}, mejora el
+El modelo \textit{Deep Factorization Machine (DeepFM)}~\cite{dfmpaper, didldfm}
+o Maquina de factorización basada en \textit{Deep Learning}, mejora el
 aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este
 modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en
 una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por
-otro lado, es una evolución del modelo \textit{Wide and Deep}~\cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos
+otro lado, es una evolución del modelo \textit{Wide and
+	Deep}~\cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos
 modelos: uno lineal, que captura las interacciones o correlaciones de alto
 orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación
 de mas bajo orden, o aquellas mas complejas.
@@ -1683,8 +1682,8 @@ modelos:
 \end{figure}
 
 Donde se puede apreciar que las entradas del modelo son las variables
-categóricas correspondiente a usuarios e items, como en los modelos previamente
-visto. Dado un id de usuario y item se resuelve sus correspondientes vectores
+categóricas correspondiente a usuarios e ítems, como en los modelos previamente
+visto. Dado un id de usuario y ítem se resuelve sus correspondientes vectores
 \textit{embedding}, los cuales se convierten en entradas para los siguientes
 dos bloques. Uno de los bloques no es mas que una red neuronal multi capa con
 capas densa o fully connected. Por el otro lado ambos vectores se toman como
@@ -1706,7 +1705,7 @@ en el conjunto de validación como en truncamiento se seleccionado dos métricas
 \subsection{\textit{Root Mean Square Error (RMSE)}}
 
 Dado que todos los modelo se evaluaron en este trabajo tiene como salida una
-variable real (Calificación de los usuarios para un item), es posible utilizar
+variable real (Calificación de los usuarios para un ítem), es posible utilizar
 \textit{RMSE}, la cual es utilizada en problemas de regresión donde la salida
 del modelo es una variable numérica real.
 
@@ -1740,33 +1739,33 @@ entras y salidas donde:
 \begin{itemize}
 	\item Entradas: Como entradas tenemos el identificador del usuario al cual queremos
 	      presentarle recomendaciones y otro parámetro opcional que podría ser el
-	      identificador de un item. ¿Por que opcional? Bueno, en general si no
-	      especificamos un id de item, es posible encontrar cuales son los items de mayor
-	      preferencia para el usuario y luego recomendar nuevos items en base a este item
-	      inicial. Por otro lado, si ya se cuenta con un id de item, se puede recomendar
-	      items similares en este. Este ultimo caso es muy común cuando un usuario navega
+	      identificador de un ítem. ¿Por que opcional? Bueno, en general si no
+	      especificamos un id de ítem, es posible encontrar cuales son los ítems de mayor
+	      preferencia para el usuario y luego recomendar nuevos ítems en base a este ítem
+	      inicial. Por otro lado, si ya se cuenta con un id de ítem, se puede recomendar
+	      ítems similares en este. Este ultimo caso es muy común cuando un usuario navega
 	      al detalle de un producto en un e-commerce. En esta instancia, ya se conoce el
-	      id del usuario y id de item. Finalmente se recomiendan items similares al item
+	      id del usuario y id de ítem. Finalmente se recomiendan ítems similares al ítem
 	      visualizado.
-	\item Salidas: Es una lista de items recomendados similares a otro item (Entrada del
+	\item Salidas: Es una lista de ítems recomendados similares a otro ítem (Entrada del
 	      modelo) ordenados descendente-mente por la calificación predicha por el modelo
 	      para el usuario en cuestión (Entrada del modelo).
 \end{itemize}
 
-De esta forma, encontrar en las primeras posiciones de la lista, aquellos items
+De esta forma, encontrar en las primeras posiciones de la lista, aquellos ítems
 con mayor calificación predicha, es un indicador de que el modelo es preciso al
-momento de recomendar. En palabras mas simples, se desea que los primeros items
+momento de recomendar. En palabras mas simples, se desea que los primeros ítems
 de la lista de recomendaciones sean de mayor agrado para el usuario.\newline
 
 ¿Finalmente, como funciona esta métricas? La métrica \textit{mAP\makeatletter@k} funciona de la siguiente forma: \newline
 
-Supongamos que tenemos un usuario y una lista K de items a recomendar. En base
+Supongamos que tenemos un usuario y una lista K de ítems a recomendar. En base
 a estas entradas el modelo de recomendación predice las calificaciones de cada
-item para el usuario dado. Luego, podemos ordenar la lista de items
+ítem para el usuario dado. Luego, podemos ordenar la lista de ítems
 descendente-mente de acuerdo a las calificaciones predichas por el modelo.
 
 Teniendo esta lista, se puede calcular el promedio de la predicción
-\textit{mAP\makeatletter@k} sobre los K items de la lista.
+\textit{mAP\makeatletter@k} sobre los K ítems de la lista.
 
 Esta métrica es utilizada en problemas de clasificación pero también se puede
 utilizar en problemas donde el modelo produce una salida numérica como en este
@@ -1790,12 +1789,12 @@ Para este fin se utilizara la métricas \textit{mAP\makeatletter@k}.
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $i$ es la posición del item $i^\mathrm{th}$ en la lista de $k$ elementos. $i$  toma valores entre $1$ y $k$.
+	\item $i$ es la posición del ítem $i^\mathrm{th}$ en la lista de $k$ elementos. $i$  toma valores entre $1$ y $k$.
 	\item $TP_i$ es 1 si la precision y el valor verdadero concuerdan.
 	\item $N(k)$ es el mínimo entre el tamaño de la lista y la cantidad de $TP_{total}$ encontrados en esa lista.
 \end{itemize}
 
-Por ejemplo, si se quiere saber con que precisión aparecen items con
+Por ejemplo, si se quiere saber con que precisión aparecen ítems con
 calificaciones entre 4 y 5 puntos en las primeras posiciones de la lista:
 
 \begin{itemize}
@@ -1821,20 +1820,20 @@ Luego se realiza el calculo de \textit{AP\makeatletter@k} para cada usuario del
 \end{equation}
 
 De esta forma, la métrica \textit{mAP\makeatletter@k} da una noción del grado
-de precisión en que aparecen items con mayor puntuación en las primeras
+de precisión en que aparecen ítems con mayor puntuación en las primeras
 posiciones de una lista de tamaño $k$. Cabe aclarar, que la condición
-\textit{items con mayor puntuación} es arbitraria, ua que al ser una condición,
-podríamos intercambiarla por cualquier otro criterio. Por ejemplo, item con las
-peores puntuaciones (entre 1 y 2 puntos), item con puntuaciones medias, items
+\textit{ítems con mayor puntuación} es arbitraria, ua que al ser una condición,
+podríamos intercambiarla por cualquier otro criterio. Por ejemplo, ítem con las
+peores puntuaciones (entre 1 y 2 puntos), ítem con puntuaciones medias, ítems
 con mas de 3 puntos, menos de 3 puntos, etc...
 
 \chapter{Experimentos}
 
 Para compara todos modelos implementados, se utilizo el mismo \textit{dataset},
 tomando una muestra con el tamaño suficiente para obtener buenos resultado,
-evitando el sobre ajuste(\textit{overfitting}) para aquellos modelos que tienden a sobre
-ajustar mas. Por otro lado, se realizaron optimización en el modelo
-\textit{KNN} para poder cachear resaltados y de esta forma no repetir
+evitando el sobre ajuste(\textit{overfitting}) para aquellos modelos que
+tienden a sobre ajustar mas. Por otro lado, se realizaron optimización en el
+modelo \textit{KNN} para poder cachear resaltados y de esta forma no repetir
 predicciones al momento de samplear muestra del conjuntos de validación.
 
 Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
