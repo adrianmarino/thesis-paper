@@ -108,7 +108,7 @@ estos conceptos con mayor detalle.
 \clearpage
 \section{Tipos de sistemas de recomendación}
 
-A continuación, en la figura ~\ref{fig:clasification}, se pueden observar las
+A continuación, en la figura~\ref{fig:clasification}, se pueden observar las
 diferentes categorías y sub-categorías de los sistemas de recomendación:
 
 \begin{figure}[!htb]
@@ -180,7 +180,7 @@ interacciones podrían ser:
 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos,
 personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a cada
-a las preferencias de cada usuario particular. Ademas, ambos permiten encontrar
+a las preferencias de cada usuario particular. Además, ambos permiten encontrar
 usuarios e items similares y recomendar items entre usuarios similares.
 
 Por otro lado, los modelos basados en filtros colaborativos descubren un
@@ -198,7 +198,7 @@ aun no han realizado ninguna interacción con el sistema. Estos modelos no
 podrán realizar recomendaciones a estos usuarios, dado que requieren un mínimo
 de interacciones para comenzar a ofrecer recomendaciones con cierta precisión.
 
-Ademas, existen otros problemas referidos al cambiar la cantidad de
+Además, existen otros problemas referidos al cambiar la cantidad de
 interacciones de los usuarios. Si pensamos en una solución donde alimentamos al
 modelo con una ventana de interacciones para los últimos N meses, tendremos las
 siguiente situaciones:
@@ -227,14 +227,13 @@ siguiente situaciones:
 
 \end{itemize}
 
-
-NOTA: Las Correcciones  llegan hasta aquí!
+NOTA: Las Correcciones llegan hasta aquí!
 
 \clearpage
 \subsection{Modelos Híbridos}
 
 Son aquellos modelos que combinan mas de una técnica de recomendación, también
-llamados ensambles de modelos. En general, lo mas común es combinar modelos de
+llamados ensambles de modelos. Comúnmente están compuestos por modelos de
 recomendación por popularidad, basados en contenido y filtros colaborativos. De
 esta forma, cuando los usuarios caen por debajo del umbral de interacciones
 necesarias por el modelo de filtro colaborativos, se utiliza un modelos basado
@@ -257,12 +256,12 @@ una matriz rala de distancias en memoria, la cual se recorre completamente para
 comparar las distancias entre filas o columnas, usando alguna medida de
 distancia como puede ser la \textit{distancia coseno}, \textit{coseno
 	ajustada}, \textit{manhattan}, etc.. Para mitigar el problema de búsqueda
-exhaustiva(\textit{full scan}), se puede utilizar una cache y asi realizar
+exhaustiva (\textit{full scan}), se puede utilizar una cache y asi realizar
 estas búsquedas una única vez. Otro problema es su limitación al tamaño máximo
 de la memoria con la que se cuenta, es decir, que el tamaño de la matriz
 depende de la memoria máxima disponible. Esto puede mitigarse utilizando
 implementaciones de matrices esparzas, las cuales comprimen los datos en
-memoria guardando unicamente las celdas que tienen datos. Ademas, es posible
+memoria guardando unicamente las celdas que tienen datos. Además, es posible
 utilizar un cache que mantenga en memoria las búsqueda mas frecuentes y baje a
 almacenamiento secundario las menos frecuentes. Todos estos problemas de
 \textit{performance} y uso de recursos se deben a que \textit{KNN} no reduce la
@@ -315,7 +314,7 @@ dependiendo del dominio de los datos.
 
 \section{Objetivos}
 
-Como primer objetivos, se pretender comprender cuales son los fundamentos
+Como primer objetivo, se pretender comprender cuales son los fundamentos
 teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios
 puede ser conveniente aplicarlas. Por otro lado, se intenta determinar cual es
 la diferencia en \textit{performance} de cada técnica aplicada sobre el mismo
@@ -335,39 +334,39 @@ o ninguna interacción en el set de datos propuesto.
 \section{Datos}
 
 Para realizar este trabajo se selecciono el dominio del cine, ya que existen
-conjuntos de datos bien definidor y actualizados. Estos \textit{datasets} en
+conjuntos de datos bien definidos y actualizados. Estos \textit{datasets} en
 general están pensados para probar modelos de recomendación. Por otro lado, es
 el dominio clásico en \textit{papers} y literatura de sistemas de recomendación
 en general.
 
 Dada la propuesta de este trabajo, es necesario contar con datos de
-interacciones de usuarios con items(Películas en este caso). Ademas, dado que
+interacciones de usuarios con items (Películas en este caso). Además, dado que
 se busca solucionar el problema de \textit{cold start} para el enfoque de
 filtros colaborativos, se necesitara contar con otro enfoque de recomendación,
 el cual posiblemente pueda ser basado en contenido. Por esta cuestión,
 necesitamos contar con \textit{features} completos y consistentes para los
-items(Películas).
+items (Películas).
 
 Dadas estas necesidades, se decidió utilizar los \textit{datasets} expuestos a
 continuación.
 
 \subsection{\textit{MovieLens 25M Dataset}}
 
-Este \textit{dataset} \cite{movielens} prácticamente no tiene features para los
-items(Películas), pero si tiene la calificaciones realizadas por los usuarios.
+Este \textit{dataset}~\cite{movielens} prácticamente no tiene features para los
+items (Películas), pero si tiene la calificaciones realizadas por los usuarios.
 También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por
-los usuarios para cada item(Película). Otro punto importante, todos los
+los usuarios para cada item (Película). Otro punto importante, todos los
 usuarios tienen al menos 20 interacciones, lo cual asegura no tener problemas
 de baja performance por falta de interacciones. De esta forma, este
 \textit{dataset} sera muy util para entrenar modelos de recomendación basados
-en filtros colaborativos y ademas cuenta con columnas extras como
+en filtros colaborativos y además cuenta con columnas extras como
 \textit{tags}, que serán útiles a la hora de entrenar modelos basados en
 contenido.
 
 Por ultimo, este \textit{dataset} contiene 25 millones calificaciones, 1 millón
 de \textit{tags} y 62.423 películas. Estos datos fueron registrados por 162.541
 usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Sus columnas
-se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
+se especifican en la tabla~\ref{table:tmdbColumns} a continuación:
 
 \begin{table}[!htb]
 	\centering
@@ -423,7 +422,7 @@ columnas se especifican en la tabla ~\ref{table:tmdbColumns} a continuación:
 		\textit{budget}                           & Presupuesto destinado a la realización de la película.                                \\
 		\textit{revenue}                          & Retorno de inversión o ganancias.                                                     \\
 		\textit{production\_companies}            & Compañías que produjeron la película.                                                 \\
-		\textit{production\_countries}            & Países donde produjo la película.                                                     \\
+		\textit{production\_countries}            & Países donde se produjo la película.                                                  \\
 		\textit{homepage}                         & Sitio web oficial.                                                                    \\
 
 		\hline
@@ -442,13 +441,13 @@ Como parte inicial de la etapa de pre-procesamiento de datos, se utilizo una
 base de datos \textit{MongoDB}. Se utilizo \textit{MongoDB} y no
 \textit{Pandas} debido a que \textit{Pandas} requiere cargar todo el
 \textit{dataset} en memoria. Si bien este problema se puede lidiar aumentado el
-tamaño de la memoria \textit{Swap}(Linux) o la memoria
+tamaño de la memoria \textit{Swap} (Linux) o la memoria
 virtual(\textit{Windows}), puede ocasionar caída de procesos y lentitudes
 innecesarias. En este caso, se selecciono una base de datos de tipo documento,
 la cual no necesita cargar todos los datos en memoria y por otro lado, existe
 la posibilidad de escalar la base de datos a mas nodos en caso de ser
 necesario. Ambos \textit{datasets} contienen varios archivos \textit{csv}, los
-cuales vamos a llamar \textit{tablas}. En la tabla ~\ref{table:tableRatings} se
+cuales vamos a llamar \textit{tablas}. En la tabla~\ref{table:tableRatings} se
 especifican las columnas utilizadas:
 
 \begin{table}[!htb]
@@ -505,7 +504,7 @@ Finalmente se termino con dos tablas/\textit{files} como resultado:
 
 \subsubsection{Tabla de interacciones}
 
-La tabla \textit{ratings\_tags\_v1}(\ref{table:interactionsTableDef}) tiene
+La tabla \textit{ratings\_tags\_v1} (\ref{table:interactionsTableDef}) tiene
 datos a nivel interacción usuario-item. De esta forma, a nivel usuario-item se
 cuenta con la calificación de la película realizada por el usuario, ademas de
 los \textit{tags} que el usuario cargo para esa películas. Estos \textit{tags}
@@ -577,7 +576,7 @@ información de cada película seleccionada de ambos \textit{datasets}.
 \subsubsection*{Valores faltantes}
 
 Una vez generadas ambas tablas se procedió a buscar \textit{missing values}. A
-continuación, en la tabla \ref{table:tab} se pueden ver las columnas con
+continuación, en la tabla~\ref{table:tab} se pueden ver las columnas con
 \textit{missing values}:
 
 \begin{table}[h!]
@@ -628,8 +627,8 @@ posible de calificación:
 	\label{fig:ratingsBarPlot}
 \end{figure}
 
-En la figura ~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos, es la
-calificación con la mayor frecuencia(moda), seguido de 5 puntos y luego 3.5
+En la figura~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos, es la
+calificación con la mayor frecuencia (moda), seguido de 5 puntos y luego 3.5
 puntos. Por otro lado, se debe tener en cuenta que estas calificaciones
 provienen de todo los usuarios. Cada usuario tiene una forma propia de
 calificar, algunos tienden a calificar de forma optimista, puntuando con
@@ -655,14 +654,14 @@ un histograma y \textit{boxplot} respectivamente:
 	\label{fig:ratingsHistPlot}
 \end{figure}
 
-En la figura ~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable
+En la figura~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable
 es categórica y no numérica, debido a los picos con distintos niveles en el
 histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de
 0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo
 claramente una variable categórica. Nuevamente vemos algo parecido al diagrama
-de barras ~\ref{fig:ratingsBarPlot}, el 50\% de las observaciones se encuentran
+de barras~\ref{fig:ratingsBarPlot}, el 50\% de las observaciones se encuentran
 entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil). La
-mediana(Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la
+mediana (Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la
 moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido
 a que tenemos puntos con frecuencia considerables a izquierda que mueven a la
 media en esa dirección. Por otro lado, tenemos valores atípicos en el extreme
@@ -684,7 +683,7 @@ A continuación segmentemos el anterior histograma por año:
 	\label{fig:ratingsYearHistPlot}
 \end{figure}
 
-En la figura ~\ref{fig:ratingsYearHistPlot} inicialmente vemos que en los años
+En la figura~\ref{fig:ratingsYearHistPlot} inicialmente vemos que en los años
 1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de
 calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación
 claro por parte de los usuarios, en que item es un 4 o un 5 por ejemplo. Entre
@@ -716,9 +715,9 @@ de Pearson de las mismas:
 	\label{fig:correlationPlot}
 \end{figure}
 
-En la figura ~\ref{fig:correlationPlot} se aprecia de las variables
+En la figura~\ref{fig:correlationPlot} se aprecia de las variables
 \textit{Cantidad/Media de votos} y \textit{Popularidad} tiene alta correlación
-debido a que las películas mas votadas en general son las mas populares. las
+debido a que las películas mas votadas en general son las mas populares. Las
 variables \textit{Cantidad} y \textit{media de votos} están altamente
 correlacionadas, ya que la media se calcula en base a la variable
 \textit{Cantidad de votos}. Por otro lado, también es de esperar que las
@@ -775,11 +774,11 @@ describe algún tipo de categoría o algo relevante en el contenido de la misma.
 	\label{fig:tagsCloud}
 \end{figure}
 
-En la figura ~\ref{fig:tagsCloud} las palabra \textit{based} (basada/o en...),
+En la figura~\ref{fig:tagsCloud} las palabra \textit{based} (basada/o en...),
 \textit{Book}, \textit{Bd}, \textit{Director}, \textit{Nudity},
 \textit{Topless}, \textit{Independent}, \textit{Film}, son aquella palabras mas
 utilizadas en los \textit{tags} que cargan los usuarios para cada película.
-Otras palabras de menor frecuencia: \textit{Movie}, \textit{Morder},
+Otras palabras de menor frecuencia: \textit{Movie}, \textit{Murder},
 \textit{Novel}, \textit{Funny}, \textit{Oscar nominee}, \textit{Violent},
 \textit{World war}, \textit{True story}.
 
@@ -799,7 +798,7 @@ brevemente el contenido de la misma, sin revelar su desenlace.
 	\label{fig:overviewCloud}
 \end{figure}
 
-En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabra con
+En la figura~\ref{fig:tagsCloud} podemos visualizar las siguientes palabra con
 mayor frecuencia: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife},
 \textit{One}, \textit{Man}, \textit{Film}, \textit{Become}, \textit{Family},
 \textit{Story}, \textit{World}, \textit{Work}, \textit{Father}, \textit{New},
@@ -822,7 +821,7 @@ clusters generados a partir de la variable \textit{tags}.
 	\label{fig:titleCloud}
 \end{figure}
 
-En la figura ~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras
+En la figura~\ref{fig:tagsCloud} podemos visualizar las siguientes palabras
 con mayor frecuencia: \textit{Girl}, \textit{Man}, \textit{Day}, \textit{Dead},
 \textit{Movie}, \textit{Time}, \textit{Night}, \textit{Life}, \textit{House},
 \textit{Dark}, \textit{II}, \textit{Blood}, \textit{Christmas}, \textit{World},
@@ -844,11 +843,11 @@ las variable numéricas resultado del merge de las tablas movies y interactions.
 \end{description}
 
 Las componentes principales son las variables resultado del algoritmo PCA.
-Estas nuevas variables tiene la particularidad de ser ortogonales entre si, lo
-cual indica que no tienen correlación alguna. Ademas de esto, desde la primera
-hasta a la última variable la acumulación de varianza es decrecientes, es
-decir, que la primera componente tiene major varianza y la última la menor
-posible.
+Estas nuevas variables presentan la particularidad de ser ortogonales entre si,
+lo que implica que no poseen ninguna correlación. Además, a lo largo de todas
+las variables, la acumulación de varianza disminuye, lo cual indica que la
+primera componente tiene una varianza mayor y la última, la menor posible, en
+orden descendente.
 
 \begin{figure}[h!]
 	\centering
@@ -869,8 +868,8 @@ posible.
 	\item pc6: $5$ \%
 \end{itemize}
 
-Inicialmente podemos apreciar en la figura ~\ref{fig:explainedVariancePlot} que
-toda las componente tiene niveles de variabilidad o varianza explicada muy
+Inicialmente podemos apreciar en la figura~\ref{fig:explainedVariancePlot} que
+toda las componentes tiene niveles de variabilidad o varianza explicada muy
 bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que
 el grado de correlación de las variables es muy bajo. Usando el criterio del
 bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que
@@ -885,8 +884,8 @@ variabilidad 85 \%.
 	\item[Cargas o Loadings]
 \end{description}
 
-Por otro lado las componentes principales son combinaciones lineales de las
-variable originales. Luego, las carga o loadings son los coeficientes
+Por otro lado, las componentes principales son combinaciones lineales de las
+variables originales. Luego, las cargas o \textit{loadings} son los coeficientes
 utilizados para transformar las variables originales en las componentes
 principales mediante combinaciones lineales.
 
@@ -908,28 +907,28 @@ A continuación se pueden visualizar las cargas o loadings:
 		\bottomrule
 	\end{tabular}
 
-	\caption{Coeficientes de componentes principales vs. variable originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
+	\caption{Coeficientes de componentes principales vs variable originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
 
 	\label{fig:loadingsTable}
 \end{table}
 
-En la tabla ~\ref{fig:loadingsTable} vemos que \textit{Vote Count(88\%)} y
-\textit{Popularity(80\%)} tiene una correlación positiva muy alta sobre la
-componente $PC1$. Lo mismo sucede con la \textit{Vote Mean(55\%)} en menor
+En la tabla~\ref{fig:loadingsTable} vemos que \textit{Vote Count (88\%)} y
+\textit{Popularity (80\%)} tiene una correlación positiva muy alta sobre la
+componente $PC1$. Lo mismo sucede con la \textit{Vote Mean (55\%)} en menor
 medida. Entre dos observaciones con distintos valores de popularidad, la que
-tenga un valor mas alto aportara a esta componente($PC1$) que a las otra ($PC2$
-y $PC3$). También vemos que las variable \textit{Release Year(Año de estreno)}
+tenga un valor mas alto aportara a esta componente ($PC1$) que a las otra ($PC2$
+y $PC3$). También vemos que las variable \textit{Release Year (Año de estreno)}
 y \textit{Movie ID} tienen un aporte considerable pero mas bajo del 33\% y 24\%
 respectivamente, sobre la componente $PC1$. La variable \textit{User ID} no
 tiene aporte alguno sobre componente $PC1$. Las variables que mas aportan a la
-componente $PC2$ son \textit{Vote Mean(55\%)} y \textit{Vote Count(11\%}
+componente $PC2$ son \textit{Vote Mean (55\%)} y \textit{Vote Count (11\%)}
 respectivamente. Este aporte es negativo, esto quiere decir que un aumento en
 los niveles de esta variable significa una disposición en esta componente. La
-variable \textit{Release Year(Año de estreno)} tiene el aporte positivo mas
+variable \textit{Release Year (Año de estreno)} tiene el aporte positivo mas
 alto sobre la componente $PC2$ siendo del 80 \%. Para la componente $PC3$ vemos
-que las variables que mas aportan a un campo en la misma son \textit{User
-	ID(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos.
-Veamos que un aumento en la variable \text{User ID)} produce un aumento casi en
+que las variables que mas aportan a un campo en la misma son \textit{User ID 
+(99\%)} y \textit{Release Year (45\%)} respectivamente, ambos positivos.
+Vemos que un aumento en la variable \text{User ID} produce un aumento casi en
 una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en
 relación. De este forma, la componente $PC1$ podríamos nombrarla \textit{Nivel
 	de popularidad o conocimiento general de una película}. La componente $PC2$ en
@@ -951,11 +950,11 @@ es mas difícil de nombrar pero podría llamarse: \textit{Grado newbie de un
 	\label{fig:biplot}
 \end{figure}
 
-En la figura ~\ref{fig:biplot} a primera vista observamos que las variables
+En la figura~\ref{fig:biplot} a primera vista observamos que las variables
 \textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta, ya
 que el angulo entre sus vectores es fácticamente cero. Esto tiene sentido ya
 que ambas son medidas de popularidad casi directas y intercambiables.
-\textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean}(En menor media)
+\textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean} (En menor media)
 tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los
 coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y
 \textit{Release Year} aportan en menor medida sobre la componente $PC1$. De
@@ -966,8 +965,8 @@ componente $PC1$ representa el grado de popularidad de una película.
 \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De
 esta forma se constata el análisis anterior. Si visualizamos los puntos que
 representan a las observaciones originales en el espacio latente generado por
-PCA, vemos que las observaciones de color negro(>4 puntos) y gris(de 2 a 3.5
-puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo(>2
+PCA, vemos que las observaciones de color negro ($>$4 puntos) y gris (de 2 a 3.5
+puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo ($>$2
 puntos). Esto indica que hay un crecimiento del nivel de popularidad cuanto mas
 a derecha se encuentre un punto en la componente $PC1$ validando los análisis
 anteriores. Si visualizamos lo puntos correspondientes a las observaciones en
@@ -992,7 +991,7 @@ como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en
 Deep Learning. Los modelos basados en Deep Learning utilizan
 \textit{Embeddings} en todos los casos, como una forma de reducir la
 dimensionalidad de las variables categóricas que se utilizan como entradas.
-Ademas, cada modelo tiene su propia arquitectura, algunas clásicas y otras
+Además, cada modelo tiene su propia arquitectura, algunas clásicas y otras
 basadas en modelos del estado del arte. Luego, la idea fue medir los resultados
 de todo los modelos utilizando distintas métricas comparables, entrenando con
 el mismo \textit{dataset} en todos los casos. De esta forma podemos comparar
@@ -1020,7 +1019,7 @@ Esta es la implementación clásica y mas intuitiva para realizar recomendación
 de items. Una vez entrenado el modelo, se cuenta con una matriz de distancias
 que pueden ser distancias entre usuario o items, y otra matriz de
 calificaciones usuario-item. De esta forma, en la etapa de inferencia, el
-modelo tomo como entrada un usuario(user\_id) y un item(item\_id) y retorna la
+modelo tomo como entrada un usuario (\textit{user\_id}) y un item (\textit{item\_id}) y retorna la
 predicción de la calificación. Estas matrices se puede mantener en memoria,
 persistir en una base de datos (como puede ser \textit{Redis}) o en un archivos
 indexado. Por esta cuestión, la categoría en memoria no tiene por que ser
@@ -1175,7 +1174,7 @@ En el apartado anterior se explico como calcular las matrices de
 $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es
 parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se
 explicará el proceso de inferencia de la clasificación de un item por parte de
-un usuario \cite{useritembasedinference}. El enfoque de K usuarios cercanos
+un usuario~\cite{useritembasedinference}. El enfoque de K usuarios cercanos
 para calcular la calificación de un item se basa en la siguiente definición:
 
 \begin{equation}
@@ -1218,7 +1217,7 @@ modelo tiene el resultado mas exactos posibles.
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz
 de $Calificaciones_{i, u}$ tiene items como filas y usuarios como columnas. Es
 decir, es la matriz transpuesta de la matriz de $Calificaciones_{u, i}$
-original \cite{useritembasedinference}. De forma la matriz de
+original~\cite{useritembasedinference}. De forma la matriz de
 $Distancias_{i_a,i_b}$ mide las distancia entre vectores fila $F_i$ los cuales
 representan a items. Dadas estas diferencias el calcula de la predicción de las
 calificaciones también difiere en su definición:
@@ -1322,7 +1321,7 @@ significado. Los días nublados y lluviosos son muy parecido entre si y muy
 distintos a un dia despejado.
 
 De esta forma los \textit{embeddings} tiene una doble ganancia sobre la
-codificación \textit{One-Hot}: comprimen la información y ademas captan
+codificación \textit{One-Hot}: comprimen la información y además captan
 información que util para la clusterización de sus valores. La parte
 interesante es que los modelos que entrenan \textit{Embeddings} captan esta
 información de forma automática en base a las observaciones usadas en el
@@ -1393,11 +1392,11 @@ describirán las arquitecturas utilizadas en este trabajo.
 \subsection{\textit{General Matrix Factorization (GMF)}}
 
 Esta es una arquitectura clásica en sistemas de recomendación basados en
-filtros colaborativos. El lgoritmo de factorización de matrices \cite{afm}
+filtros colaborativos. El algoritmo de factorización de matrices~\cite{afm}
 funciona desacoplando la matriz de interacciones usuario-item en un producto
 escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o
 familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en
-la competencia \cite{netflixprize} en 2006. La idea principal del algoritmo es
+la competencia~\cite{netflixprize} en 2006. La idea principal del algoritmo es
 representar a usuario e items en un espacio latente de baja dimensionalidad. A
 partir del trabajo inicial realizado por \textit{Funk} en 2006, se han
 propuesto multiples enfoque de factorización de matrices para sistemas de
@@ -1458,19 +1457,19 @@ En términos matriciales podemos verlo de la siguiente manera:
 
 El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
 el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a
-ajustar. Se ha demostrado \cite{embeddingsizedem} que realizar factorización de
+ajustar. Se ha demostrado~\cite{embeddingsizedem} que realizar factorización de
 matrices con un factor latente de tamaño 1 es equivalente a un modelo de
 recomendación por popularidad, es decir que recomienda los items mas populares
 sin tener en cuenta la personalización de las recomendaciones. Luego, a medida
 que vamos incrementando el tamaño del factor latente estar recomendaciones
 serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando
-el tamaño del factor latente es muy grande, el modelos comienza a sobre
-ajustar(\textit{overfitting}) y por ende la calidad de las recomendaciones
-comentara a empeorar. Para solucionar este se suelen agregar términos de
-regularización en la función de error a minimizar:
+el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar
+(\textit{overfitting}) y por ende la calidad de las recomendaciones comentara a
+empeorar. Para solucionar este se suelen agregar términos de regularización en
+la función de error a minimizar:
 
 \begin{equation}
-	\underset{H, W}{\operatorname{arg\,min}}\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
+	\underset{H, W}{\operatorname{arg\,min } }\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
 \end{equation}
 \begin{description}
 	\item[Donde:]
@@ -1481,7 +1480,7 @@ regularización en la función de error a minimizar:
 
 \subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
 
-El modelo \textit{GMF} de \textit{Simon Funk} \cite{afm, dlwkrs} realiza
+El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs} realiza
 recomendaciones de muy buena calidad, pero tiene como limitación que solo
 utilizar interacciones usuario-item que tiene que ver con valores numéricos
 referidos a interacciones explicitas como calificaciones. Los sistemas de
@@ -1520,7 +1519,7 @@ sesgos dependiendo de caso para calcular o inferir la calificación del usuario
 para un item dado. Estos modelos como ya se conto aprender los pesos o
 parámetros de los vectores \textit{embeddings} en el proceso se entrenamiento.
 
-El enfoque de {\textit{NN-MF}} \cite{nnfm} \cite{ncf} es levemente distinto. En
+El enfoque de {\textit{NN-MF}}~\cite{nnfm}~\cite{ncf} es levemente distinto. En
 este caso se reemplaza el producto interno, el cual podemos pensarlo como
 conocimiento a priori del problema, por otra función desconocida que sera la
 que aprenderá el modelo a partir de las observaciones suministradas en su
@@ -1573,11 +1572,11 @@ números reales pero también son discretos.
 \subsection{\textit{Factorization Machines (FM)}}
 
 Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a
-comenzar explicando un de lso componente principales de este: Las
-\textit{Máquinas de factorización} \cite{didlfm, zhangdive}.
+comenzar explicando un de sus componentes mas importantes: Las \textit{Máquinas
+	de factorización}~\cite{didlfm, zhangdive}.
 
 Las Maquinas de Factorización propuestas por \textit{Steffen Rendle} en 2010
-\cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de
+~\cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de
 clasificación, regresión y tareas de ranking como sucede en el ámbito de
 recomendaciones. Rápidamente se convivieron en un método popular para hacer
 predicciones y recomendaciones. La \textit{Máquina de factorización} es una
@@ -1656,18 +1655,17 @@ sigue:
 Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el
 comportamiento de las interacciones o correlación usuario-items ya sean
 implícita o explicitas. A pesar de este gran progreso, los métodos expuestos
-anteriormente(exceptuando las \textit{Máquinas de Factorización}) parecen tener
+anteriormente (exceptuando las \textit{Máquinas de Factorización}) parecen tener
 un fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto
 orden, requiriendo en algunos casos realizar ingeniería de features para
 disminuir estos sesgos.
 
-El modelo {\textit{Deep Factorization Machine (DeepFM)} \cite{dfmpaper,
+El modelo \textit{Deep Factorization Machine (DeepFM)}~\cite{dfmpaper,
 	didldfm} o Maquina de factorización basada en \textit{Deep Learning}, mejora el
 aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este
 modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en
 una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por
-otro lado, es una evolución del modelo \textit{Wide and Deep}
-\cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos
+otro lado, es una evolución del modelo \textit{Wide and Deep}~\cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos
 modelos: uno lineal, que captura las interacciones o correlaciones de alto
 orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación
 de mas bajo orden, o aquellas mas complejas.
@@ -1686,11 +1684,11 @@ modelos:
 
 Donde se puede apreciar que las entradas del modelo son las variables
 categóricas correspondiente a usuarios e items, como en los modelos previamente
-visto. dado un id de usuario y item se resuelve sus correspondientes vectores
+visto. Dado un id de usuario y item se resuelve sus correspondientes vectores
 \textit{embedding}, los cuales se convierten en entradas para los siguientes
 dos bloques. Uno de los bloques no es mas que una red neuronal multi capa con
 capas densa o fully connected. Por el otro lado ambos vectores se toman como
-entrada a la \textit{maquina de factorización}. las salida de ambos bloques son
+entrada a la \textit{maquina de factorización}. Las salida de ambos bloques son
 volares escalares los cuales se suman y se pasan por una activación
 \textit{ReLU} ya que en nuestro caso las calificaciones son valores mayos a
 cero.
@@ -1734,7 +1732,7 @@ mismos.
 
 \subsection{\textit{Mean Average Precision at k (mAP@k)}}
 
-\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación \cite{map_at_k_1, map_at_k_2, map_at_k_3}.
+\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación~\cite{map_at_k_1, map_at_k_2, map_at_k_3}.
 
 Si pensamos a nivel de aplicación de un sistemas de recomendación pedimos ver
 entras y salidas donde:
@@ -1834,7 +1832,7 @@ con mas de 3 puntos, menos de 3 puntos, etc...
 
 Para compara todos modelos implementados, se utilizo el mismo \textit{dataset},
 tomando una muestra con el tamaño suficiente para obtener buenos resultado,
-evitando el sobre ajuste(overfitting) para aquellos modelos que tienden a sobre
+evitando el sobre ajuste(\textit{overfitting}) para aquellos modelos que tienden a sobre
 ajustar mas. Por otro lado, se realizaron optimización en el modelo
 \textit{KNN} para poder cachear resaltados y de esta forma no repetir
 predicciones al momento de samplear muestra del conjuntos de validación.
@@ -1924,8 +1922,8 @@ errores.
 \end{figure}
 
 Dado la tendencia de los modelos a la variabilidad o varianza de sus
-predicciones se realizo un \textit{sampling} de cada métrica sobre el conjunto de
-validación N veces para comprender cual es su valor medio y dispersión.
+predicciones se realizo un \textit{sampling} de cada métrica sobre el conjunto
+de validación N veces para comprender cual es su valor medio y dispersión.
 
 \begin{figure}[h!]
 	\centering
@@ -2022,12 +2020,12 @@ para todos los modelos:
 	\label{table:ap_at_k}
 \end{table}
 
-En la tabla ~\ref{table:ap_at_k} a primera vista se aprecia \textit{Biased-GMF}
+En la tabla~\ref{table:ap_at_k} a primera vista se aprecia \textit{Biased-GMF}
 es el modelo con mejores resultados con la métricas de evaluación
 \textit{AP\makeatletter@5(4,5)}. Por otro lado, podemos ver que los modelos
 \textit{NN-MF} y \textit{Deep-FM} tiene el menor sesgo, pero aun asi tiene
 precisiones menores al modelo \textit{Biased-GMF}. Esto podría indicar un grado
-mayor de sobre ajuste. por ende, se debería re-entrenar los modelos
+mayor de sobre ajuste. Por ende, se debería re-entrenar los modelos
 \textit{NN-MF} y \textit{Deep-FM} aumentando el dropout para mejorar la
 regularización y volver a compara contra \textit{Biased-GMF} para validar si
 las precisiones mejoran. La familia de modelos \textit{KNN} son lo que
@@ -2057,9 +2055,9 @@ diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
 	\label{table:rmse}
 \end{table}
 
-En la tabla ~\ref{table:rmse} a simple vista \textit{NN-MF} es el modelo mas
+En la tabla~\ref{table:rmse} a simple vista \textit{NN-MF} es el modelo mas
 estable en cuando al error de validación, ya que tiene el menor error y
-dispersion. aun asi no es el modelo pas preciso. Esto podría indicar que tiene
+dispersion. Aun asi no es el modelo pas preciso. Esto podría indicar que tiene
 un grade de sobre ajuste major a modelos con mayor precision. Podemos apreciar
 que el modelo \textit{Biased-GMF} con mayor precision aui tiene un error mayor
 a \textit{NN-MF}. OIndicando que la teoría del sobre ajuste de \textit{NN-MF}
