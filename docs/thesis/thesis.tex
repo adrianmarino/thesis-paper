@@ -109,7 +109,7 @@ estos conceptos con mayor detalle.
 \section{Tipos de sistemas de recomendación}
 
 A continuación, en la figura ~\ref{fig:clasification}, se pueden observar las
-diferentes categorías y subcategorías de los sistemas de recomendación:
+diferentes categorías y sub-categorías de los sistemas de recomendación:
 
 \begin{figure}[!htb]
 	\centering
@@ -140,7 +140,7 @@ son mas significativos para la tarea en cuestión, y cual es el grado de
 adecuación de cada items a los \textit{features} definidos. Por otro lado, es
 necesario registrar las interacciones de los usuarios. Dadas estas
 interacciones, se puede definir el grado de preferencia de los usuarios a cada
-\textit{feature} definido para los items. Con esta informaciónm, es posible
+\textit{feature} definido para los items. Con esta información, es posible
 encontrar tanto items como usuarios similares y realizar recomendaciones del
 tipo:
 
@@ -188,7 +188,7 @@ espacio latente de soluciones sin necesidad de recolectar datos y definir
 \textit{features} en forma manual, a diferencia de los modelos basados en
 contenido. La selección o construcción manual de \textit{features} puede llevar
 a una solución sesgada, ya que no esta basada en datos sino en el juicio
-experto del científico de datos. Esto puede llevar a una seleción subjetiva de
+experto del científico de datos. Esto puede llevar a una selección subjetiva de
 los \textit{features} que se aleje de la realidad, introduciendo un sesgo en la
 predicción.
 
@@ -986,7 +986,7 @@ colaborativos.
 
 Cada implementación tiene sus particularidades: Cuanto puede escalar, sus
 tiempos de entrenamiento y predicción, su implementación, exactitud de las
-predicciones, tendencia al overfitting, etc.. Para este trabajo se eligieron
+predicciones, tendencia al sobre ajuste, etc.. Para este trabajo se eligieron
 dos grandes grupos. Por un lado, una implementación sencilla basada en memoria
 como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en
 Deep Learning. Los modelos basados en Deep Learning utilizan
@@ -1751,7 +1751,7 @@ entras y salidas donde:
 	      id del usuario y id de item. Finalmente se recomiendan items similares al item
 	      visualizado.
 	\item Salidas: Es una lista de items recomendados similares a otro item (Entrada del
-	      modelo) ordenado descendentemente por la calificación predicha por el modelo
+	      modelo) ordenados descendente-mente por la calificación predicha por el modelo
 	      para el usuario en cuestión (Entrada del modelo).
 \end{itemize}
 
@@ -1765,7 +1765,7 @@ de la lista de recomendaciones sean de mayor agrado para el usuario.\newline
 Supongamos que tenemos un usuario y una lista K de items a recomendar. En base
 a estas entradas el modelo de recomendación predice las calificaciones de cada
 item para el usuario dado. Luego, podemos ordenar la lista de items
-descendentemente de acuerdo a las calificaciones predichas por el modelo.
+descendente-mente de acuerdo a las calificaciones predichas por el modelo.
 
 Teniendo esta lista, se puede calcular el promedio de la predicción
 \textit{mAP\makeatletter@k} sobre los K items de la lista.
@@ -1924,7 +1924,7 @@ errores.
 \end{figure}
 
 Dado la tendencia de los modelos a la variabilidad o varianza de sus
-predicciones se realizo un sampleo de cada métrica sobre el conjunto de
+predicciones se realizo un \textit{sampling} de cada métrica sobre el conjunto de
 validación N veces para comprender cual es su valor medio y dispersión.
 
 \begin{figure}[h!]
@@ -2016,8 +2016,8 @@ para todos los modelos:
 		\hline
 	\end{tabular}
 	\caption{
-		Mediana, Media y Desvío correspondientes a las distribución de
-		\textit{AP\makeatletter@5(4,5)} sampleada para cada modelo. Las filas se encuentran ordenadas descendentemente por la Media.
+		Mediana, media y desvío correspondientes a la distribución de
+		\textit{AP\makeatletter@5(4,5)} sampleada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media.
 	}
 	\label{table:ap_at_k}
 \end{table}
@@ -2051,8 +2051,8 @@ diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
 		\hline
 	\end{tabular}
 	\caption{
-		Mediana, Media y Desvío correspondientes a las distribución de
-		\textit{RMSE} sampleada para cada modelo. Las filas se encuentran ordenadas  descendentemente por la Media.
+		Mediana, media y desvío correspondientes a la distribución de
+		\textit{RMSE} sampleada para cada modelo. Las filas se encuentran ordenadas  descendente-mente por la media.
 	}
 	\label{table:rmse}
 \end{table}
