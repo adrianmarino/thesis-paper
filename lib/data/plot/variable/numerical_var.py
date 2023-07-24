@@ -18,7 +18,8 @@ def describe_num_var(
     show_mode            = True,
     show_outliers_leyend = True,
     remove_outliers      = False,
-    decimals             = 3
+    decimals             = 3,
+    density              = True
 ):
     if show_range or show_table:
         df_column = df[[column]]
@@ -39,7 +40,8 @@ def describe_num_var(
         show_mode,
         show_outliers_leyend,
         remove_outliers,
-        decimals
+        decimals,
+        density = density
     )
 
     if show_table:

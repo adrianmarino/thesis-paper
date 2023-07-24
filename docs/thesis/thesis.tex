@@ -615,8 +615,8 @@ análisis, la variable \textit{ratings} o calificación es una de estas variable
 relevantes.
 
 A continuación se puede apreciar una diagrama de barras el cual describe la
-frecuencia con la que los usuarios califican un ítem, segmentada por cada valor
-posible de calificación:
+frecuencia con la que los usuarios califican un ítem, segmentada por cada
+posible valor de calificación:
 
 \begin{figure}[h!]
 	\centering
@@ -625,17 +625,17 @@ posible de calificación:
 	\label{fig:ratingsBarPlot}
 \end{figure}
 
-En la figura~\ref{fig:ratingsBarPlot} se puede visualizar que 4 puntos, es la
-calificación con la mayor frecuencia (moda), seguido de 5 puntos y luego 3.5
-puntos. Por otro lado, se debe tener en cuenta que estas calificaciones
-provienen de todo los usuarios. Cada usuario tiene una forma propia de
-calificar, algunos tienden a calificar de forma optimista, puntuando con
-valores altos, y otros por el contrario, son mas pesimistas y tienden a puntuar
-con calificaciones bajas. Este es un comportamiento conocido en el ámbito de
-sistemas de recomendación. Se debe tener en cuenta que un 3.5 para un usuario
-podría ser un 4.5 para otro. Por otro lado, se aprecia que en general se tiende
-a puntuar valores a partir de 3 punto en adelante, habiendo muy pocas
-observaciones para puntuaciones menores a 2 puntos.
+En la figura~\ref{fig:ratingsBarPlot} se puede visualizar que el valor $4.0$
+tiene la mayor frecuencia (moda), seguido de $5.0$ puntos y luego $3.5$ puntos.
+Por otro lado, se debe tener en cuenta que estas calificaciones provienen de
+todo los usuarios. Cada usuario tiene una forma propia de calificar, algunos
+tienden a calificar de forma optimista, puntuando con valores altos, y otros
+por el contrario, son mas pesimistas y tienden a puntuar con calificaciones
+bajas. Este es un comportamiento conocido en el ámbito de sistemas de
+recomendación. Se debe tener en cuenta que el valor $3.5$ para un usuario
+podría ser un valor $4.5$ para otro. Por otro lado, se aprecia que en general
+se tiende a puntuar valores a partir de $3.0$ punto en adelante, habiendo muy
+pocas observaciones para puntuaciones menores a los $2.0$ puntos.
 
 \clearpage
 
@@ -652,24 +652,24 @@ un histograma y \textit{boxplot} respectivamente:
 	\label{fig:ratingsHistPlot}
 \end{figure}
 
-En la figura~\ref{fig:ratingsHistPlot} se aprecia claramente que esta variable
-es categórica y no numérica, debido a los picos con distintos niveles en el
-histograma. Esta variable tiene valores discretos entre 0.5 y 5 con un paso de
-0.5. De esta forma, contamos con 10 valores discreto de tipo real, siendo
+En la figura~\ref{fig:ratingsHistPlot} se aprecia que la variable
+\textit{rating} tiene valores discretos entre $0.5$ y $5.0$ con un paso de
+$0.5$. De esta forma, contamos con 10 valores discretos de tipo real, siendo
 claramente una variable categórica. Nuevamente vemos algo parecido al diagrama
-de barras~\ref{fig:ratingsBarPlot}, el 50\% de las observaciones se encuentran
-entre los cuantiles Q1 y Q3 con 3 y 4.5 puntos (Rango inter-cuantil). La
-mediana (Cuantil Q2) esta claramente sobre los 4 puntos, coincidiendo con la
-moda. La media se encuentra en los 3.5 puntos a izquierda de la mediana, debido
-a que tenemos puntos con frecuencia considerables a izquierda que mueven a la
-media en esa dirección. Por otro lado, tenemos valores atípicos en el extreme
-izquierdo en los 0.5 puntos. Esto se debe a que esta puntuación esta muy
-alejada del centro de los datos, el cual encuentra entre el cuantiles Q1 y Q3,
-donde tenemos el 50\% las calificaciones con major probabilidad de ocurrencia.
-No se encuentran valores atípicos por sobre el máximo. Se puede apreciar un
-sesgo a izquierda, ya que existe mayor separación o dispersión de las
-observaciones entre Q1 y Q2 que entre Q2 y Q3. De esta forma, ambos intervalos
-conservan su 25\% de las observaciones pero hay menor dispersión entre Q2 y Q3.
+de barras~\ref{fig:ratingsBarPlot}, el $50\%$ de las observaciones se
+encuentran entre los cuantiles $Q1$ y $Q3$ con $3.0$ y $4.5$ puntos (Rango
+inter-cuantil). La mediana (Cuantil $Q2$) esta claramente sobre los $4.0$
+puntos, coincidiendo con la moda. La media se encuentra en los $3.5$ puntos a
+izquierda de la mediana, debido a que tenemos puntos con frecuencia
+considerables a izquierda que mueven a la media en esa dirección. Por otro
+lado, tenemos valores atípicos en el extreme izquierdo en los $0.5$ puntos.
+Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el
+cual encuentra entre el cuantiles $Q1$ y $Q3$, donde tenemos el $50\%$ las
+calificaciones con major probabilidad de ocurrencia. No se encuentran valores
+atípicos por sobre el máximo. Se puede apreciar un sesgo a izquierda, ya que
+existe mayor separación o dispersión de las observaciones entre $Q1$ y $Q2$ que
+entre $Q2$ y $Q3$. De esta forma, ambos intervalos conservan su $25\%$ de las
+observaciones pero hay menor dispersión entre $Q2$ y $Q3$.
 
 \clearpage
 A continuación segmentemos el anterior histograma por año:
@@ -677,25 +677,32 @@ A continuación segmentemos el anterior histograma por año:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
-	\caption{Histograma de calificaciones segmentado por año.}
+	\caption{
+		Histograma de calificaciones segmentado por año.
+		Como aclaración, en esta gráfica se describen los histogramas
+		como funciones densidad, a pesar de que la variable \textit{rating}
+		es categóricas. De esta forma se puede apreciar con mas claridad
+		la diferencia en observaciones y el grado de dispersión de cada
+		niveles por año.
+	}
 	\label{fig:ratingsYearHistPlot}
 \end{figure}
 
 En la figura~\ref{fig:ratingsYearHistPlot} inicialmente vemos que en los años
-1997, 1998 y 2003 la curva tiende a ser mas lineal. Esto indica que la forma de
-calificar es mas dispersa, es decir, no se encuentra un perfil de puntuación
-claro por parte de los usuarios, en que ítem es un 4 o un 5 por ejemplo. Entre
-1999 y 2022 vemos que las puntuaciones 3, 4 y 5 toman mayor importancia siendo
-estas las mas utilizadas. Es decir, los usuarios realizan en su mayoría
-puntuaciones en esos tres niveles. La mayor frecuencia se puede ver claramente
-en 4 puntos en el año 2004, donde fue prácticamente la mas utilidades decayendo
-los 3 y 5 puntos en linea a años anteriores. A partir del año 2005 se nota un
-aumento cada ves mas demarcado en los niveles de puntuaciones entre los 3 y 5
-puntos donde los usuarios cada ves usan mas lo niveles 3.5 y 4.5. Debemos tener
-en cuenta que el aumento en los niveles de puntuación con el tiempo
-probablemente sea debido a un aumento año a año en la base de usuarios de
-\textit{Movie Lens} y tal vez también sea el motivo por el cual en los primeros
-años vemos mucho dispersion en las puntuaciones.
+$1997$, $1998$ y $2003$ la curva tiende a ser mas lineal. Esto indica que la
+forma de calificar es mas dispersa, es decir, no se encuentra un perfil de
+puntuación claro por parte de los usuarios, en que ítem es un $4$ o un $5$ por
+ejemplo. Entre 1999 y 2022 vemos que las puntuaciones $3$, $4$ y $5$ toman
+mayor importancia siendo estas las mas utilizadas. Es decir, los usuarios
+realizan en su mayoría puntuaciones en esos tres niveles. La mayor frecuencia
+se puede ver claramente en 4 puntos en el año 2004, donde fue prácticamente la
+mas utilidades decayendo los 3 y 5 puntos en linea a años anteriores. A partir
+del año $2005$ se nota un aumento cada ves mas demarcado en los niveles de
+puntuaciones entre los $3$ y $5$ puntos donde los usuarios cada ves usan mas lo
+niveles $3.5$ y $4.5$. Debemos tener en cuenta que el aumento en los niveles de
+puntuación con el tiempo probablemente sea debido a un aumento año a año en la
+base de usuarios de \textit{Movie Lens} y tal vez también sea el motivo por el
+cual en los primeros años vemos mucho dispersion en las puntuaciones.
 
 \clearpage
 
@@ -840,17 +847,17 @@ las variable numéricas resultado del merge de las tablas movies y interactions.
 	\item[Varianza Explicada]
 \end{description}
 
-Las componentes principales son las variables resultado del algoritmo PCA.
-Estas nuevas variables presentan la particularidad de ser ortogonales entre sí,
-lo que implica que no poseen ninguna correlación. Además, a lo largo de todas
-las variables, la acumulación de varianza disminuye, lo cual indica que la
-primera componente tiene una varianza mayor y la última, la menor posible, en
-orden descendente.
+Las componentes principales son las variables resultado del
+algoritmo~\cite{pca}\textit{PCA}. Estas nuevas variables presentan la
+particularidad de ser ortogonales entre sí, lo que implica que no poseen
+ninguna correlación. Además, a lo largo de todas las variables, la acumulación
+de varianza disminuye, lo cual indica que la primera componente tiene una
+varianza mayor y la última, la menor posible, en orden descendente.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=8cm]{./images/PCA-Variance.png}
-	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada por cada componente principal resultado del algoritmo PCA.}
+	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada por cada componente principal resultado del algoritmo~\cite{pca}\textit{PCA}.}
 	\label{fig:explainedVariancePlot}
 \end{figure}
 
@@ -944,35 +951,42 @@ llamarse: \textit{Grado newbie de un usuario}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
-	\caption{En este diagrama se pueden visualizar los valores de las variables originales coloreados en color roja, negro y gris correspondientes a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales.}
+	\caption{Diagrama~\cite{biplot}\textit{Biplot} que representa los valores de
+		las variables originales coloreados en color roja, negro y gris
+		correspondientes a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales.}
 	\label{fig:biplot}
 \end{figure}
 
-En la figura~\ref{fig:biplot} a primera vista observamos que las variables
-\textit{Popularity} y \textit{Vote Count} tiene una correlación muy alta, ya
-que el ángulo entre sus vectores es fácticamente cero. Esto tiene sentido ya
-que ambas son medidas de popularidad casi directas y intercambiables.
-\textit{Popularity}, \textit{Vote Count} y \textit{Vote Mean} (En menor media)
-tiene un aporte positivo sobre la componente $PC1$. Esto se corresponde con los
-coeficientes de las cargas analizados anteriormente. \textit{Movie ID } y
-\textit{Release Year} aportan en menor medida sobre la componente $PC1$. De
-esta forma, se constata lo visto anteriormente en análisis de carga, donde la
-componente $PC1$ representa el grado de popularidad de una película.
-\textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y
+En la figura~\ref{fig:biplot} se expone un
+diagrama~\cite{biplot}\textit{Biplot}. Este representa los valores de las
+variables originales coloreados en color roja, negro y gris correspondientes a
+tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se
+representan los vectores correspondientes a las variables originales.
+
+A primera vista observamos que las variables \textit{Popularity} y \textit{Vote
+	Count} tienen una correlación muy alta, ya que el ángulo entre sus vectores es
+prácticamente cero. Esto tiene sentido, ya que ambas son medidas de popularidad
+de alta colinealidad. \textit{Popularity}, \textit{Vote Count} y \textit{Vote
+	Mean} (En menor media) tiene un aporte positivo sobre la componente $PC1$. Esto
+se corresponde con los coeficientes de las cargas analizados anteriormente.
+\textit{Movie ID } y \textit{Release Year} aportan en menor medida sobre la
+componente $PC1$. De esta forma, se constata lo visto anteriormente en análisis
+de carga, donde la componente $PC1$ representa el grado de popularidad de una
+película. \textit{Vote Mean} aporta en forma negativa y \textit{Movie ID } y
 \textit{Release Year} en forma positiva sobre la componente $PC2$.
 \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a $PC2$. De
 esta forma se constata el análisis anterior. Si visualizamos los puntos que
-representan a las observaciones originales en el espacio latente generado por
-PCA, vemos que las observaciones de color negro ($>$4 puntos) y gris (de 2 a
-3.5 puntos) se encuentran mas a la derecha que aquellas coloreadas en rojo
-($>$2 puntos). Esto indica que hay un crecimiento del nivel de popularidad
-cuanto mas a derecha se encuentre un punto en la componente $PC1$ validando los
-análisis anteriores. Si visualizamos lo puntos correspondientes a las
-observaciones en las direcciones de la componente $PC2$ vemos que a major valor
-en la componente, menor el grado de popularidad de las películas, ya que los
-puntos rojos tienden a esta en el extremo positivo de la componente, validando
-la hipótesis de que la componente $PC2$ indica el grado de underground es un
-película.
+representan a las observaciones originales en el espacio latente generado
+por~\cite{pca}\textit{PCA}, vemos que las observaciones de color negro ($>$4
+puntos) y gris (de 2 a 3.5 puntos) se encuentran mas a la derecha que aquellas
+coloreadas en rojo ($>$2 puntos). Esto indica que hay un crecimiento del nivel
+de popularidad cuanto mas a derecha se encuentre un punto en la componente
+$PC1$ validando los análisis anteriores. Si visualizamos lo puntos
+correspondientes a las observaciones en las direcciones de la componente $PC2$
+vemos que a major valor en la componente, menor el grado de popularidad de las
+películas, ya que los puntos rojos tienden a esta en el extremo positivo de la
+componente, validando la hipótesis de que la componente $PC2$ indica el grado
+de underground es un película.
 
 \chapter{Métodos}
 
@@ -1169,11 +1183,13 @@ predicción para cada implementación elegida.
 \subsection{\textit{KNN User Based}}
 
 En el apartado anterior se explico cómo calcular las matrices de
-$Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de esta matrices es
-parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado se
-explicará el proceso de inferencia de la clasificación de un ítem por parte de
-un usuario~\cite{useritembasedinference}. El enfoque de K usuarios cercanos
-para calcular la calificación de un ítem se basa en la siguiente definición:
+$Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de estas matrices
+es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado
+se explicará el proceso para la predicción de la calificación de un ítem por
+parte de un usuario~\cite{useritembasedinference}.
+
+Entonces, el enfoque de K usuarios cercanos para predecir la calificación de un
+ítem, se basa en la siguiente definición:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -1185,7 +1201,7 @@ para calcular la calificación de un ítem se basa en la siguiente definición:
 \begin{itemize}
 	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el ítem $i$.
 	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
-	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. En nuestro casos se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
+	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. Se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada índice representa a un usuario distinto.
 	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al momento de calificar un ítem. Algunos usuarios tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otros usuarios son mas pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un ítem.
@@ -1214,13 +1230,12 @@ modelo tiene el resultado mas exactos posibles.
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz
 de $Calificaciones_{i, u}$ tiene ítems como filas en vez de usuarios, y
-usuarios como filas en vez de ítems. Es decir, es la matriz transpuesta de la
-matriz de $Calificaciones_{u, i}$ original~\cite{useritembasedinference}. De
+usuarios como columnas en vez de ítems. Es decir, es la matriz transpuesta de
+la matriz de $Calificaciones_{u, i}$ original~\cite{useritembasedinference}. De
 esta forma, la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre
 vectores fila $F_i$ los cuales representan ítems. Por otro lado, también
-existen diferencias al calcular las predicciones.
-
-A continuación la definición del calculo de las predicciones:
+existen diferencias con el modelo anterior, al momento de calcular las
+predicciones. A continuación la definición del calculo de las predicciones:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i} = \frac{\sum_{o \in O} r_{u, o}. w_{i, o} }{\sum_{o \in O} w_{i, o} }, i \neq o
@@ -1354,12 +1369,13 @@ capa \textit{Embedding} capta la similitud entre los valores de la variable
 categórica un la codificación \textit{one-hot} no.
 
 Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar
-como una tabla \textit{Hash} donde las claves son posibles valores de la
+como una tabla \textit{Hash}. donde cada clave es un valor de la variable
+categórica. Es decir, que tendremos tantas claves como valores pueda tomar la
 variable categórica. Estas claves son codificados a números y los valores
-asociados a cada clave son los vectores \textit{embedding}. Cave aclarar que en
-general estos vectores son inicializados con valores aleatorio. Luego el modelo
-irá ajustando sus valores de los vectores \textit{embedding} durante el
-entrenamiento.
+asociados a cada clave son vectores \textit{embedding}. Cave aclarar que en
+general, estos vectores son inicializados con valores aleatorio. Luego, el
+modelo irá ajustando los valores de cada vector \textit{embedding} durante el
+proceso de entrenamiento.
 
 En el \textit{froward pass}, como entrada se pasa un valor codificado a números
 de la variable categórica. Para nuestra variable \textit{Estado del Tiempo}
@@ -1370,10 +1386,10 @@ Entonces si pasamos el valores \textit{Nublado} como entrada a la capa, en
 realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector
 \textit{embedding} asociado a esa clave y lo devuelve a su salida.
 
-Finamente, tengamos en cuenta que el proceso de \textit{back-propagation} sera
-el encargado de ir ajustando los valores, también llamados pesos de los
-vectores \textit{embedding}, de acuerdo a lo que requiera en la salida del
-modelo durante el proceso de optimización de descenso del gradiente.
+Finamente, debemos tener en cuenta que el proceso de \textit{back-propagation}
+sera el encargado de ir ajustando los valores, también llamados pesos de los
+vectores \textit{embedding}, de acuerdo a lo que se requiera en la salida del
+modelo, durante el proceso de optimización de descenso del gradiente.
 
 \begin{figure}[ht!]
 	\centering
@@ -1483,18 +1499,17 @@ la función de error a minimizar:
 \subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
 
 El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs} realiza
-recomendaciones de muy buena calidad, pero tiene como limitación que sólo
-utilizar interacciones usuario-ítem que tengan que ver con valores numéricos
-referidos a interacciones explicitas, como calificaciones. Los sistemas de
-recomendación modernos deben explotar todas las interacciones posibles, tanto
-explícitas (calificaciones numéricas) como implícitas (me gusta, compras,
-vistas, favoritos, etc..). Para solucionar este nuevo problema, donde es
-necesario usar cualquier tipo de interacción usuario-ítem (explicita o
-implícita), se agrega un \textit{bias} o sesgo para los usuarios y otro para
-los ítems.
+recomendaciones de muy buena calidad, pero tiene una limitación: sólo utilizar
+interacciones usuario-ítem que tengan que ver con valores numéricos referidos a
+interacciones explicitas, como calificaciones. Los sistemas de recomendación
+modernos deben explotar todas las interacciones posibles, tanto explícitas
+(calificaciones numéricas) como implícitas (me gusta, compras, vistas,
+favoritos, etc..). Para solucionar este nuevo problema, donde es necesario usar
+cualquier tipo de interacción usuario-ítem (explicita o implícita), se agrega
+un \textit{bias} o sesgo para los usuarios, y otro para los ítems.
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
-anterior:
+~\ref{fig:GMFModel}:
 
 \begin{figure}[h!]
 	\centering
@@ -1516,29 +1531,32 @@ calcular el producto escalar se suman los factores latentes resultado de ambas
 
 \subsection{\textit{Neural Network Matrix Factorization (NN-MF)}}
 
-Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}) dada
-dos matrices de baja dimensionalidad se realiza un producto escalar y se suman
-sesgos dependiendo de caso para calcular o inferir la calificación del usuario
-para un ítem dado. Estos modelos como ya se conto aprender los pesos o
-parámetros de los vectores \textit{embeddings} en el proceso se entrenamiento.
+Con los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}),
+dada dos matrices de baja dimensionalidad se realiza un producto escalar y se
+suman sesgos dependiendo de caso para calcular o inferir la calificación del
+usuario para un ítem dado. Estos modelos, como ya se explico anteriormente,
+aprender los pesos o parámetros de los vectores \textit{embeddings} en el
+proceso se entrenamiento.
 
 El enfoque de {\textit{NN-MF}}~\cite{nnfm}~\cite{ncf} es levemente distinto. En
 este caso se reemplaza el producto interno, el cual podemos pensarlo como
-conocimiento a priori del problema, por otra función desconocida que sera la
-que aprenderá el modelo a partir de las observaciones suministradas en su
-entrenamiento. En particular se remplaza el producto escalar mas los sesgos por
-una red neuronal multi capa de capas densas o fully connected. De esta forma,
-el modelo no solo aprender los parámetros de los vectores \textit{embedding},
-sino también los pesos de la red multi capa y en definitiva cual es la mejor
-función para predecir las calificaciones del usuario, como cualquier otro tipo
-de interacción.
+conocimiento a priori del problema, por otra función desconocida, que sera la
+que aprenderá el modelo a partir de las observaciones suministradas en el
+entrenamiento. En particular, se remplaza el producto escalar sumado a los
+sesgos, por una red neuronal multi capa de capas densas o \textit{fully
+	connected}. De esta forma, el modelo no solo aprender los parámetros de los
+vectores \textit{embedding}, sino también los pesos de la red multi capa. En
+definitiva el modelo aprende cual es la mejor función para predecir las
+calificaciones del usuario.
 
-Utilizar rede neuronales abre el panorama, ya que ahora podemos usar mas
-variable que sea relevante a nuestro problema de predicción y no solo las
-variable categóricas y usuario e ítems; aquí es donde recibe el mayor potencial
-de este enfoque.
+El uso de redes neuronales presenta una ventaja significativa: la posibilidad
+de utilizar múltiples variables como entrada, no limitándose únicamente a las
+variables categóricas usuario e ítem. Es precisamente en esta característica
+donde radica su mayor potencial. No obstante, es importante mencionar que este
+modelo muestra una ligera disminución en la precisión de sus predicciones en
+comparación con modelos anteriores.
 
-a continuación podemos ver un esquema del modelo, muy similar a \textit{GFM}
+A continuación podemos ver un esquema del modelo, muy similar a \textit{GFM}
 como ya se dijo, con la diferencia que tenemos una red multi capa en vez de un
 producto escalar.
 
@@ -1552,49 +1570,50 @@ producto escalar.
 	\label{fig:NNMFModel}
 \end{figure}
 
-Entonces, como entradas tenemos los identificadores de los usuarios e ítems en
-entradas independientes (Escalares). Con estos identificadores cada
-\textit{Embedding Layer} resuelve el vector \textit{embedding} asociado. Acto
-siguiente el bloque \textit{Flatter} toma ambos vectores y devuelve un nuevo
-vector el cual es la concatenación de los do anteriores. En el siguiente paso
-este nuevo vector es al entrada de la red multi capa, es decir que la red multi
-capa tendrá tanta entradas como posiciones tenga este vector. La cantidad de
-capas y neuronas por capas de la red so hiper-parámetros vana ir cambiando en
-el proceso de optimización de hiper-parámetros, pro esa cuestión no se
-especifican un numero de capas. Cada capa menos la ultima tiene una función de
-activación ReLU y la ultima capa por supuesto un activación \textit{Lineal} al
-igual que una regresión lineal, ya que queremos predecir las calificaciones que
-tienen un rango de valores reales entre 0.5 y 5. Cave aclarar que se esta
-pensando como segundo enfoque usar una activación \textit{Softmax} en vez de
-una \textit{Lineal} en la ultima capa. De esta manera, se podría abordar como
-un problema de clasificación ya que los valores de las calificaciones son
-números reales pero también son discretos.
+Para comenzar, el modelo tiene como entradas independientes los identificadores
+de usuarios e ítems. Cada capa (\textit{Embedding Layer}) genera el
+correspondiente vector \textit{embedding} asociado a estos identificadores. A
+continuación, el bloque \textit{Flatter} toma ambos vectores y produce uno
+nuevo mediante su concatenación. Este vector resultante se convierte en la
+entrada de una red multi-capa.
+
+Es importante destacar que la red multi-capa tendrá tantas entradas como
+dimensiones posea este nuevo vector combinado. La cantidad de capas y el número
+de neuronas por capa son hiper-parámetros que se ajustarán durante el proceso
+de optimización. Por esta razón, no se especifica un número fijo de capas.
+
+Cada capa, excepto la última, utiliza la función de activación \textit{ReLU},
+mientras que la capa final emplea una activación \textit{Lineal}, similar a una
+regresión lineal. Esto se debe a que el objetivo es predecir las
+calificaciones, las cuales tienen un rango de valores reales entre $0.5$ y $5$.
+Es importante señalar que se está considerando utilizar una activación
+\textit{Softmax} en lugar de una activación \textit{Lineal} en la última capa,
+lo que permitiría abordar el problema como uno de clasificación.
 
 \clearpage
-
 
 NOTA: La corrección de ortografía y semánticas llego hasta Aquí.
 
 \subsection{\textit{Factorization Machines (FM)}}
 
-Antes de introducir el modelo \textit{Deep Factorization Machine} vamos a
-comenzar explicando un de sus componentes mas importantes: las máquinas de
+Antes de introducir el modelo \textit{Deep Factorization Machine} se comenzara
+explicando uno de sus componentes mas importantes: las máquinas de
 factorización~\cite{didlfm, zhangdive}.
 
 Las Maquinas de Factorización propuestas por \textit{Steffen Rendle} en 2010
 ~\cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de
-clasificación, regresión y tareas de ranking como sucede en el ámbito de
-recomendaciones. Rápidamente se convivieron en un método popular para hacer
-predicciones y recomendaciones. La \textit{Máquina de factorización} es una
-generalización de un modelo lineal y un model de factorización de matrices, mas
-aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que
+clasificación, regresión y tareas de ranking como sucede en el ámbito de los
+sistemas de recomendación. Rápidamente se convivieron en un método popular para
+hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es
+una generalización de un modelo lineal y un model de factorización de matrices,
+mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que
 utiliza un kernel polinomial.
 
 F Formalmente, si tenemos:
 
 \begin{itemize}
 	\item $x\in\mathbb{R}^{d}$ es un vector de features donde cada una de sus componentes representa a una variable del \textit{dataset}, siendo $d$ la cantidad de variables de \textit{dataset¨} (excluyendo la columna de labels). En nuestro caso $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e ítems.
-	\item $y\in\mathbb{R}$ es la variable target a predecir, en nuestro caso es la calificación del usuario.
+	\item $y\in\mathbb{R}$ es la variable target a predecir. Dado el dominio del \textit{dataset} seleccionado, seria la calificación del usuario.
 \end{itemize}
 
 podemos definir el modelo para una \textit{máquina de factorización} de grado
@@ -1658,9 +1677,9 @@ sigue:
 
 \subsection{\textit{Deep Factorization Machine (DeepFM)}}
 
-Hasta aquí, a grandes rasgos, todo los modelos vistos tratan de captar el
-comportamiento de las interacciones o correlación usuario-ítems ya sean
-implícita o explicitas. A pesar de este gran progreso, los métodos expuestos
+Hasta aquí, a grandes rasgos, todos los modelos expuestos tratan de captar el
+comportamiento de las interacciones o correlación usuario-ítems, ya sean
+implícitas o explicitas. A pesar de este gran progreso, los métodos expuestos
 anteriormente (exceptuando las \textit{Máquinas de Factorización}) parecen
 tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y
 alto orden, requiriendo en algunos casos realizar ingeniería de features para
@@ -1837,18 +1856,21 @@ con mas de 3 puntos, menos de 3 puntos, etc...
 
 \chapter{Experimentos}
 
-Para compara todos modelos implementados, se utilizo el mismo \textit{dataset},
-tomando una muestra con el tamaño suficiente para obtener buenos resultado,
-evitando el sobre ajuste(\textit{overfitting}) para aquellos modelos que
-tienden a sobre ajustar mas. Por otro lado, se realizaron optimización en el
-modelo \textit{KNN} para poder cachear resaltados y de esta forma no repetir
-predicciones al momento de samplear muestra del conjuntos de validación.
+Para comparar todos los modelos implementados, se utilizo el mismo
+\textit{dataset}, tomando una muestra con el tamaño suficiente para obtener
+buenos resultados, evitando el sobre ajuste(\textit{overfitting}) con aquellos
+modelos que tienden a sobre ajustar mas. Por otro lado, se realizo una
+modificación al modelo \textit{KNN} para poder guardar sus resultados en una
+memoria \textit{Cache}. De esta forma, no se repite la inferencia de las
+predicciones al momento de seleccionar muestras del conjuntos de validación, 
+disminuyendo notablemente el tiempo de inferencia.
 
 Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
-variabilidad o varianza de sus predicciones, se realizo un sampleo de cada
-métrica sobre el conjunto de validación N veces. Luego, se gráfico un
-histograma de la distribución de la métricas y un boxplot para tener una mejor
-idea de cual es su valor medio de la misma y que dispersion se puede esperar.
+variabilidad o varianza de sus predicciones, se realizo N veces un muestreo
+sobre el conjunto de validación para cada métrica utilizada. Luego, se gráfico
+un histograma de la distribución de la métricas, y un boxplot para tener una
+mejor idea de cual es su valor medio y la dispersion se puede
+esperar.
 
 A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{AP\makeatletter@k} y \textit{RMSE}.
