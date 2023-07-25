@@ -1862,15 +1862,14 @@ buenos resultados, evitando el sobre ajuste(\textit{overfitting}) con aquellos
 modelos que tienden a sobre ajustar mas. Por otro lado, se realizo una
 modificación al modelo \textit{KNN} para poder guardar sus resultados en una
 memoria \textit{Cache}. De esta forma, no se repite la inferencia de las
-predicciones al momento de seleccionar muestras del conjuntos de validación, 
+predicciones al momento de seleccionar muestras del conjuntos de validación,
 disminuyendo notablemente el tiempo de inferencia.
 
 Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
 variabilidad o varianza de sus predicciones, se realizo N veces un muestreo
 sobre el conjunto de validación para cada métrica utilizada. Luego, se gráfico
 un histograma de la distribución de la métricas, y un boxplot para tener una
-mejor idea de cual es su valor medio y la dispersion se puede
-esperar.
+mejor idea de cual es su valor medio y la dispersion se puede esperar.
 
 A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{AP\makeatletter@k} y \textit{RMSE}.
@@ -2023,8 +2022,39 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 
 \chapter{Resultados}
 
-A continuación se muestra una tabla comparativa con las métricas utilizadas
-para todos los modelos:
+En esta sección se llevará a cabo una comparación de todos los modelos
+previamente expuestos. Para realizar esta comparación, se emplearán las
+métricas presentadas en secciones anteriores. A modo de resumen, las métricas
+consideradas fueron las siguientes:
+
+\begin{itemize}
+	\item \textit{Mean Average Precision at k (mAP@k)}: Esta métrica representa el promedio de la precisión al calificar
+	      los primeros K ítems de una lista de recomendaciones para un usuario específico.
+	      Para obtener más detalles, se puede consultar la sección de referencia sobre \textit{mAP@k} (consultar la \autoref{sec:map_ref}).
+	\item \textit{Root Mean Square Error (RMSE)}: Esta métrica corresponde a la raíz cuadrada del error cuadrático
+	      medio entre la calificación real de un ítem, proporcionada por un usuario, y la calificación predicha. Para obtener más información,
+	      se puede consultar la sección de referencia sobre \textit{RMSE} (consultar la \autoref{sec:rmse_ref}).
+\end{itemize}
+
+Para calcular estas métricas, se realizo un muestreo para determinar su
+distribución y, de esta forma, definir cada métrica en términos de su mediana,
+media y desvío.
+
+El uso de la media y el desvío estándar permite obtener el valor promedio de
+las métricas y evaluar su grado de dispersión en los datos obtenidos. La media
+nos proporciona una idea del valor típico de las métricas en el conjunto de
+prueba, mientras que el desvío estándar nos indica qué tan dispersos están los
+valores las metricas en relación con la media.
+
+Además, se presenta la mediana como otra medida estadística relevante. A
+diferencia de la media, la mediana no se ve afectada por valores atípicos o
+extremos en el conjunto de datos, lo que la convierte en una medida más robusta
+para describir la ubicación central de las métricas.
+
+A continuación, se presenta la comparación de todos los modelos expuestos
+utilizando el promedio de la precisión para el rango de calificaciones entre 4
+y 5 puntos, considerando una lista de 5 items recomendados, que se denota como
+\textit{AP@5(4,5)}:
 
 \begin{table}[!htb]
 	\centering
@@ -2044,22 +2074,37 @@ para todos los modelos:
 	\end{tabular}
 	\caption{
 		Mediana, media y desvío correspondientes a la distribución de
-		\textit{AP\makeatletter@5(4,5)} sampleada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media.
+		\textit{AP\makeatletter@5(4,5)} muestreada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media.
 	}
 	\label{table:ap_at_k}
 \end{table}
 
-En la tabla~\ref{table:ap_at_k} a primera vista se aprecia \textit{Biased-GMF}
-es el modelo con mejores resultados con la métricas de evaluación
-\textit{AP\makeatletter@5(4,5)}. Por otro lado, podemos ver que los modelos
-\textit{NN-MF} y \textit{Deep-FM} tiene el menor sesgo, pero aun asi tiene
-precisiones menores al modelo \textit{Biased-GMF}. Esto podría indicar un grado
-mayor de sobre ajuste. Por ende, se debería re-entrenar los modelos
-\textit{NN-MF} y \textit{Deep-FM} aumentando el dropout para mejorar la
-regularización y volver a compara contra \textit{Biased-GMF} para validar si
-las precisiones mejoran. La familia de modelos \textit{KNN} son lo que
-presentan mayor sesgo en la precision. A pesar de esto podemos ver que la
-diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
+En la tabla~\ref{table:ap_at_k}, se puede observar inicialmente que el modelo
+\textit{Biased-GMF} muestra los mejores resultados en términos de la métrica de
+evaluación \textit{AP@5(4,5)}. Por otro lado, los modelos \textit{NN-MF} y
+\textit{Deep-FM} exhiben el menor sesgo, pero aún así, tienen una precisión
+inferior al modelo \textit{Biased-GMF}. Esto podría indicar un mayor grado de
+sobreajuste en estos modelos. Por lo tanto, sería recomendable reentrenar ambos
+modelos con un aumento en el valor del parámetro \textit{dropout} para mejorar
+la regularización y, posteriormente, comparar nuevamente sus resultados con el
+modelo \textit{Biased-GMF} para validar si su precisión mejora.
+
+En cuanto a la familia de modelos \textit{KNN}, se observa que presenta el
+mayor sesgo. Sin embargo, a pesar de esto, se puede notar que la diferencia en
+la precisión, en comparación con los demás modelos, es bastante baja, siendo
+menos del 2%.
+
+En resumen, los resultados muestran que el modelo \textit{Biased-GMF} sobresale
+en precisión según la métrica \textit{AP@5(4,5)}. Los modelos \textit{NN-MF} y
+\textit{Deep-FM}, aunque tienen menos sesgo, deben ser reentrenados con un
+mayor valor de \textit{dropout} para potencialmente mejorar su precisión. Por
+otro lado, la familia de modelos \textit{KNN}, a pesar de presentar un sesgo
+más alto, aún logra una precisión cercana a los demás modelos en comparación.
+\clearpage
+
+A continuación, se presenta la comparación de todos los modelos expuestos
+utilizando utilizando la raíz cuadrada del error cuadrático medio
+(\textit{RMSE}):
 
 \begin{table}[!htb]
 	\centering
@@ -2079,41 +2124,51 @@ diferencia de precision con los demás de modelos es muy baja, mejor al 2 \%.
 	\end{tabular}
 	\caption{
 		Mediana, media y desvío correspondientes a la distribución de
-		\textit{RMSE} sampleada para cada modelo. Las filas se encuentran ordenadas  descendente-mente por la media.
+		\textit{RMSE} muestreada para cada modelo. Las filas se encuentran ordenadas  descendente-mente por la media.
 	}
 	\label{table:rmse}
 \end{table}
 
-En la tabla~\ref{table:rmse} a simple vista \textit{NN-MF} es el modelo mas
-estable en cuando al error de validación, ya que tiene el menor error y
-dispersion. Aun asi no es el modelo pas preciso. Esto podría indicar que tiene
-un grade de sobre ajuste major a modelos con mayor precision. Podemos apreciar
-que el modelo \textit{Biased-GMF} con mayor precision aui tiene un error mayor
-a \textit{NN-MF}. OIndicando que la teoría del sobre ajuste de \textit{NN-MF}
-podría ser valida. Nuevamente la familia de modelos \textit{KNN} tiene los
-errores mas alto y también altos desvíos. Aun asi estos modelos tiene una
-precisión muy similar al modelo mas preciso (\textit{B-GMF}).
+En la tabla~\ref{table:rmse}, se puede observar que el modelo \textit{NN-MF}
+parece ser el más estable en términos del error de validación, ya que presenta
+el menor error y dispersión. Sin embargo, a pesar de su estabilidad, como se
+puede apreciar en la tabla~\ref{table:ap_at_k} (anteior) no es el modelo más
+preciso. Este hecho podría sugerir que \textit{NN-MF} estaría experimentando un
+grado significativo de sobreajuste en comparación con otros modelos que logran
+una mayor precisión.
+
+Un ejemplo de esto es el modelo \textit{Biased-GMF}, el cual muestra una mayor
+precisión en comparación con \textit{NN-MF}, pero también presenta un error
+mayor. Esto indica que la teoría del sobreajuste aplicada a \textit{NN-MF}
+podría ser válida y explicar su menor precisión en comparación con
+\textit{Biased-GMF}.
+
+Además, se nota que la familia de modelos \textit{KNN} muestra los errores más
+altos junto con desvíos elevados. Sin embargo, es interesante destacar que, a
+pesar de estos altos errores, estos modelos presentan una precisión muy similar
+al modelo más preciso, \textit{B-GMF}.
 
 \chapter{Conclusiones}
 
-Como conclusiones, se puede decir que no se encuentra una gran diferencia en
-precisión entre todos modelos, siendo esta menor al 2 \%. Por otro lado, si
-tuviésemos que llevar alguno de esto modelos a producción e un e-commerce,
-claramente se elegiría un modelo basado en \textit{deep learning}, como pueden
-ser \textit{B-GMF} o \textit{GMF}. Esto se debe a que estos modelos utilizan el
-algoritmo del gradiente descendente, pudiendo procesar las observaciones de
-entrenamiento en lotes. De esta forma, se puede seleccionar un tamaño de lote
-que se ajuste a la memoria \textit{RAM} o \textit{VRAM} disponible. Por lo
-contrario no seria posible selecciona modelos de la familia \textit{KNN} debido
-a que necesitan alocar todas las observaciones den entrenamiento en memoria.
+En resumen, al analizar los modelos expuesto en este trabajo practico, se
+encontró que todos tienen una precisión similar, con una diferencia de menos
+del $2\%$. Sin embargo, al considerar la implementación en un
+\textit{e-commerce}, se recomendaría elegir un modelo basado en \textit{deep
+	learning}, como \textit{B-GMF} o \textit{GMF}, ya que utilizan el algoritmo del
+gradiente descendente y pueden procesar las observaciones de entrenamiento en
+lotes, lo que permite ajustar el tamaño del lote según la memoria \textit{RAM}
+o \textit{VRAM} disponible. Por el contrario, no seria posible seleccionar
+modelos de la familia \textit{KNN} debido a que necesitan alocar todas las
+observaciones en entrenamiento en memoria, impidiendo escalar el conjunto de
+entrenamiento, limitando la ventana de datos a considerar para el entrenamiento
+del modelo.
 
-Por otro lado, podemos apreciar que un modelo en el estado de arte como
-\textit{DeepFM}, no obtiene la precision mas alta, e inclusive su precisión es
-prácticamente igual a las precisiones obtenidas por la familia de modelo
-\textit{KNN}. Finalmente podemos decir que en el caso de estas pruebas el
-\textit{dataset} utilizado, los modelo de \textit{deep learning} obtienen
-mejores resultado que modelos mas clásicos como \textit{KNN}, pero estos
-resultados son muy similares.
+Por otro lado, se observó que el modelo de estado del arte, \textit{DeepFM}, no
+obtiene la precisión más alta y su rendimiento es prácticamente igual al de los
+modelos de la familiacpara el conjunto de datos estudiado. En general, los
+modelos de \textit{deep learning} presentaron mejores resultados en este
+conjunto de pruebas en comparación con los modelos clásicos como \textit{KNN},
+aunque las diferencias fueron son muy pequeñas.
 
 %%%% BIBLIOGRAFÍA
 
