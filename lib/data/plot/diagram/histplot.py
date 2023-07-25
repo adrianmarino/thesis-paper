@@ -16,7 +16,8 @@ def histplot(
     show_mode            = True,
     show_outliers_leyend = True,
     remove_outliers      = False,
-    decimals             = 3
+    decimals             = 3,
+    density               = True
 ):
     f, (ax_box, ax_hist) = plt.subplots(
         2,
@@ -44,7 +45,9 @@ def histplot(
     ax_box.set_title(f'Boxplot')
     ax_box.set(xlabel='')
 
-    sns.histplot(x=values, ax=ax_hist, kde=True, bins=bins, stat=stat)
+
+    sns.histplot(x=values, ax=ax_hist, bins=bins, kde=density)
+
 
     if show_mean:
         ax_hist.axvline(mean,   color='r', linestyle='--', label=f'Mean ({round(mean, decimals)})')
@@ -55,6 +58,7 @@ def histplot(
     if show_outliers_leyend and not remove_outliers:
         ax_hist.axvline(outyliers_lower,  color='black', linestyle='-', label=f'Outliers lower ({round(outyliers_lower, decimals)})')
         ax_hist.axvline(outliers_upper,   color='black', linestyle='-', label=f'Outliers Upper ({round(outliers_upper, decimals)})')
+
 
     ax_hist.legend()
 
@@ -68,5 +72,6 @@ def histplot(
         title  += ' (Without Outliers)'
 
     f.suptitle(title, fontsize=title_fontsize)
+
 
     plt.show()
