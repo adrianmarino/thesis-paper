@@ -87,7 +87,7 @@ objetivo es acercar a sus usuarios contenido a fin a sus preferencias para
 mejorar su experiencia en la plataforma.
 
 El objetivo principal en todos los casos es mejorar la conversión. En el campo
-del \textit{Marketing}, se define la conversión como las acciones realizadas
+del \textit{marketing}, se define la conversión como las acciones realizadas
 por los usuarios que están alineadas con los objetivos de la empresa. Por
 ejemplo, aumentar el volumen de compras en un \textit{e-commerce} de productos,
 incrementar la cantidad de entregas mensuales en un \textit{e-commerce} de
@@ -122,7 +122,7 @@ diferentes categorías y sub-categorías de los sistemas de recomendación:
 
 Este tipo de sistema de recomendación utiliza alguna característica de
 popularidad de los ítems en cuestión. Algunos ejemplos de estas características
-podrían ser la cantidad de vistas, la cantidad de compras o la cantidad de
+podría ser la cantidad de vistas, la cantidad de compras o la cantidad de
 comentarios positivos, o una combinación de ellas. Luego, estos sistemas buscan
 los K elementos más populares. Si bien este tipo de enfoque proporciona buenos
 resultados para nuevos usuarios, sus recomendaciones no tienen en cuenta las
@@ -135,12 +135,12 @@ conversión, a pesar de la falta de personalización.
 \subsection{Basados en Contenido}
 
 Este tipo de sistema de recomendación necesita un trabajo previo de ingeniería
-de \textit{features} sobre los ítems. Se busca definir que \textit{features}
-son mas significativos para la tarea en cuestión, y cual es el grado de
-adecuación de cada ítems a los \textit{features} definidos. Por otro lado, es
-necesario registrar las interacciones de los usuarios. Dadas estas
-interacciones, se puede definir el grado de preferencia de los usuarios a cada
-\textit{feature} definido para los ítems. Con esta información, es posible
+de \textit{features} sobre los ítems. Se busca definir cuales son los
+\textit{features} mas significativos para la tarea en cuestión, y cual es el
+grado de adecuación de cada ítems a los \textit{features} seleccionados. Por
+otro lado, es necesario registrar las interacciones de los usuarios. Dadas
+estas interacciones, se puede definir el grado de preferencia de los usuarios a
+cada \textit{feature} definido para los ítems. Con esta información, es posible
 encontrar tanto ítems como usuarios similares y realizar recomendaciones del
 tipo:
 
@@ -154,12 +154,13 @@ tipo:
 \end{itemize}
 
 La principal desventaja de este enfoque, es la necesidad de realizar ingeniería
-de features para encontrar los features que produzcan recomendaciones
-relevantes al usuario. El modelo no encuentra estos features automáticamente,
-sino que deben ser definidos de antemano manualmente. Se puede apreciar que
-esto introduce un sesgo al momento de seleccionar los features o construirlos
-en base a datos referentes a los ítems. Como ventaja, si se encuentran los
-features correctos se pueden lograr muy buenos resultados.
+de \textit{features} para encontrar los \textit{features} que produzcan
+recomendaciones relevantes al usuario. El modelo no encuentra estos
+\textit{features} automáticamente, sino que deben ser definidos de antemano
+manualmente. Se puede apreciar que esto introduce un sesgo al momento de
+seleccionar los \textit{features} o construirlos en base a datos referentes a
+los ítems. Como ventaja, si se encuentran los \textit{features} correctos se
+pueden lograr muy buenos resultados.
 
 \subsection{Basados en Filtrado Colaborativos}
 
@@ -168,7 +169,7 @@ ingeniería de \textit{features}, lo que hace muy simple su implementación, ya
 que únicamente es necesario registrar las interacciones de los usuarios para
 con los ítems. Luego, el propio modelo encuentra automáticamente los
 \textit{features} mas relevantes dependiendo de la cantidad de columnas que se
-especifiquen (Dimensiones de un \textit{Embeddings vector}). Ejemplos de
+especifiquen (Dimensiones de un vector \textit{Embedding}). Ejemplos de
 interacciones podrían ser:
 
 \begin{itemize}
@@ -179,11 +180,11 @@ interacciones podrían ser:
 \end{itemize}
 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos,
-personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a cada
-a las preferencias de cada usuario particular. Además, ambos permiten encontrar
+personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a las
+preferencias de cada usuario particular. Además, ambos permiten encontrar
 usuarios e ítems similares y recomendar ítems entre usuarios similares.
 
-Por otro lado, los modelos basados en filtros colaborativos descubren un
+Por otro lado, los modelos basados en filtros colaborativos, descubren un
 espacio latente de soluciones sin necesidad de recolectar datos y definir
 \textit{features} en forma manual, a diferencia de los modelos basados en
 contenido. La selección o construcción manual de \textit{features} puede llevar
@@ -218,10 +219,10 @@ siguiente situaciones:
 	\item Usuarios con muchas interacciones: En este caso, el usuario tiene una gran
 	      cantidad de interacciones con ítems. Para estos usuarios, el modelo podrá
 	      ofrecer recomendaciones relevantes, ya que cuanto mas interacciones se tenga,
-	      el modelo se ajusta con mas facilidad a sus preferencia. Por otro lado, esto
+	      el modelo se ajusta con mas facilidad a sus preferencias. Por otro lado, esto
 	      puede ser una gran desventaja, ya que se produce un efecto de túnel. Es decir,
-	      el usuario tiene recomendación muy ajustadas a sus preferencias, perdiendo la
-	      capacidad de descubrir nuevos ítems que podrían ser relevantes. Por esta
+	      el usuario obtiene recomendaciones muy ajustadas a sus preferencias, perdiendo
+	      la capacidad de descubrir nuevos ítems que podrían ser relevantes. Por esta
 	      cuestión se suelen mezclar tanto recomendaciones personalizadas como
 	      no-personalizadas, para favorecer el descubrimiento de nuevos ítems.
 
@@ -246,30 +247,30 @@ predicciones.
 
 \subsubsection{Basados en Memoria}
 
-Este tipo de modelos mantiene sus datos en memoria. Se recorren todos los datos
-(\textit{full scan}) cada vez que se necesita realizar un inferencia o
-predicción (fijando un número de vecinos a comparar). Un ejemplo de estos
-modelos es el algoritmo de k vecinos cercanos (\textit{KNN}), el cual mantiene
-una matriz rala de distancias en memoria, la cual se recorre completamente para
-comparar las distancias entre filas o columnas, usando alguna medida de
-distancia como puede ser la \textit{distancia coseno}, \textit{coseno
-	ajustada}, \textit{manhattan}, etc.. Para mitigar el problema de búsqueda
-exhaustiva (\textit{full scan}), se puede utilizar una cache y asi realizar
-estas búsquedas una única vez. Otro problema es su limitación al tamaño máximo
-de la memoria con la que se cuenta, es decir, que el tamaño de la matriz
-depende de la memoria máxima disponible. Esto puede mitigarse utilizando
-implementaciones de matrices rala, las cuales comprimen los datos en memoria
-guardando unicamente las celdas que tienen datos. Además, es posible utilizar
-un cache que mantenga en memoria las búsqueda mas frecuentes y baje a
-almacenamiento secundario las menos frecuentes. Todos estos problemas de
-\textit{performance} y uso de recursos se deben a que \textit{KNN} no reduce la
-dimensionalidad de los datos, como si lo hacen varias implementaciones basadas
-en \textit{embeddings}, \textit{auto-encoder}, redes neuronales etc.., donde lo
-que se buscan es encontrar una representación mas compacta de los ítems y
-usuarios sin perder información. Mas allá de estos problemas, los resultados
-obtenidos por estos modelos no están muy alejados de aquellos que se encuentran
-en el estado del arte. Puede recomendarse su uso cuando tenemos un dominio
-reducido, dada su simplicidad.
+Este tipo de modelos, como su nombre lo indica, mantiene sus datos en memoria.
+Se recorren todos los datos (\textit{full scan}) cada vez que se necesita
+realizar un inferencia o predicción (fijando un número de vecinos a comparar).
+Un ejemplo de estos modelos es el algoritmo de k vecinos cercanos
+(\textit{KNN}), el cual mantiene una matriz rala de distancias en memoria, la
+cual se recorre completamente para comparar las distancias entre filas o
+columnas, usando alguna medida de distancia como puede ser la \textit{distancia
+	coseno}, \textit{coseno ajustada}, \textit{manhattan}, etc.. Para mitigar el
+problema de búsqueda exhaustiva (\textit{full scan}), se puede utilizar una
+memoria \textit{cache} y asi realizar estas búsquedas una única vez. Otro
+problema es su limitación al tamaño máximo de la memoria con la que se cuenta,
+es decir, que el tamaño de la matriz depende de la memoria máxima disponible.
+Esto puede mitigarse utilizando implementaciones de matrices rala, las cuales
+comprimen los datos en memoria guardando unicamente las celdas que tienen
+datos. Además, es posible utilizar un memoria \textit{cache} que mantenga en
+memoria las búsqueda mas frecuentes y baje a almacenamiento secundario las
+menos frecuentes. Todos estos problemas de \textit{performance} y uso de
+recursos se deben a que \textit{KNN} no reduce la dimensionalidad de los datos,
+como si lo hacen varias implementaciones basadas en \textit{embeddings},
+\textit{auto-encoder}, redes neuronales etc.., donde lo que se busca una
+representación mas compacta de los ítems y usuarios sin perder información. Mas
+allá de estos problemas, los resultados obtenidos por estos modelos no están
+muy alejados de aquellos que se encuentran en el estado del arte. Puede
+recomendarse su uso cuando tenemos un dominio reducido, dada su simplicidad.
 
 \subsubsection{Basados en Modelos}
 
@@ -284,7 +285,7 @@ forma, es posible utilizarlos en dominios con una gran cantidad de datos.
 
 Con este trabajo se busca contestar las siguientes preguntas:
 
-\subsection{¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit{Deep Learning}, obtienen mejores resultados?}
+\subsection{¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit{Deep Learning}, obtienen mejores resultados que aquellas que no las utilizan?}
 
 La idea detrás de esta pregunta es realizar \textit{benchmarks} sobre distintos
 modelos del estado de arte basados en \textit{Deep Learning} o no, utilizando
@@ -300,7 +301,7 @@ o interacciones con los que se cuenta.
 Esta pregunta se refiere a comprender cuando es conveniente aplicar una técnica
 u otra teniendo en cuenta las ventajas y desventajas de cada enfoque y modelo.
 
-\subsection{¿Cómo se puede solucionar el problema de \textit{cold-start} que sufre el enfoque de recomendación basado en filtros colaborativos?} (Tesis)
+\subsection{¿Cómo se puede solucionar el problema de \textit{Cold start} que sufre el enfoque de recomendación basado en filtros colaborativos?} (Tesis)
 
 Como ya se comentó en la introducción, los modelos de filtro colaborativos
 necesitan un número mínimo de interacciones usuario-ítem para poder operar y
@@ -319,13 +320,12 @@ la diferencia en \textit{performance} de cada técnica aplicada sobre el mismo
 set de datos, midiendo su \textit{performance} utilizando las mismas métricas.
 ¿Obtenemos diferencias significativas?
 
-Como segundo objetivo se busca proponer nuevas técnicas y/o explorar técnicas
-existentes que permite lidiar o solucionar el problema de cold start que sufren
-los sistemas de recomendación basados en filtros colaborativos (Tesis).
-
-Finalmente, se compararan esta técnicas mediante un \textit{benchmark}
-propuesto para compara como se comporta cada modelos ante usuarios con escasas
-o ninguna interacción en el set de datos propuesto.
+Como segundo objetivo (Tesis), se busca proponer nuevas técnicas y/o explorar
+técnicas existentes que permite lidiar o solucionar el problema de \textit{Cold
+	start} que sufren los sistemas de recomendación basados en filtros
+colaborativos. Ademas, se compararan esta técnicas mediante un
+\textit{benchmark} propuesto, para compara como se comporta cada modelos ante
+usuarios con escasas o ninguna interacción en el set de datos propuesto.
 
 \chapter{Materiales y Métodos}
 
@@ -339,7 +339,7 @@ en general.
 
 Dada la propuesta de este trabajo, es necesario contar con datos de
 interacciones de usuarios con ítems (Películas en este caso). Además, dado que
-se busca solucionar el problema de \textit{cold start} para el enfoque de
+se busca solucionar el problema de \textit{Cold start} para el enfoque de
 filtros colaborativos, se necesitara contar con otro enfoque de recomendación,
 el cual posiblemente pueda ser basado en contenido. Por esta cuestión,
 necesitamos contar con \textit{features} completos y consistentes para los
@@ -350,21 +350,22 @@ continuación.
 
 \subsection{\textit{MovieLens 25M Dataset}}
 
-Este \textit{dataset}~\cite{movielens} prácticamente no tiene features para los
-ítems (Películas), pero si tiene la calificaciones realizadas por los usuarios.
-También cuenta con un conjunto de \textit{tags} o palabras clave cargadas por
-los usuarios para cada ítem (Película). Otro punto importante, todos los
-usuarios tienen al menos 20 interacciones, lo cual asegura no tener problemas
-de baja performance por falta de interacciones. De esta forma, este
-\textit{dataset} sera muy util para entrenar modelos de recomendación basados
-en filtros colaborativos y además cuenta con columnas extras como
+Este \textit{dataset}~\cite{movielens} prácticamente no tiene \textit{features}
+para los ítems (Películas), pero si tiene la calificaciones realizadas por los
+usuarios. También cuenta con un conjunto de \textit{tags} o palabras clave
+cargadas por los usuarios para cada ítem (Película). Otro punto importante, es
+que todos los usuarios tienen al menos $20$ interacciones, lo cual asegura no
+tener problemas de baja \textit{performance} por falta de estas. De esta forma,
+este \textit{dataset} sera muy util para entrenar modelos de recomendación
+basados en filtros colaborativos. Además, cuenta con columnas extras como
 \textit{tags}, que serán útiles a la hora de entrenar modelos basados en
 contenido.
 
-Por ultimo, este \textit{dataset} contiene 25 millones calificaciones, 1 millón
-de \textit{tags} y 62.423 películas. Estos datos fueron registrados por 162.541
-usuarios entre el 9 de enero de 1995 y el 21 de noviembre de 2019. Sus columnas
-se especifican en la tabla~\ref{table:tmdbColumns} a continuación:
+Por ultimo, este \textit{dataset} contiene $25$ millones calificaciones, $1$
+millón de \textit{tags} y $62.423$ películas. Estos datos fueron registrados
+por $162.541$ usuarios entre el $9$ de enero de $1995$ y el $21$ de noviembre
+de $2019$. Sus columnas se especifican en la tabla~\ref{table:tmdbColumns} a
+continuación:
 
 \begin{table}[!htb]
 	\centering
