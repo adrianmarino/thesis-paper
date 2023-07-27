@@ -844,24 +844,24 @@ realizaran experimentos para ver resultado en este sentido.
 \subsection{Análisis de Componentes Principales}
 
 En esta sección se describe el análisis de componentes principales realizado
-sobre las variable numéricas, resultado del \textit{merge} de las tablas
-\textit{movies} y \textit{interactions}.
+sobre las variable numéricas, resultado de fusionar las tablas \textit{movies}
+y \textit{interactions}.
 
 \begin{description}
 	\item[Varianza Explicada]
 \end{description}
 
-Las componentes principales son las variables resultado del
-algoritmo~\cite{pca}\textit{PCA}. Estas nuevas variables presentan la
-particularidad de ser ortogonales entre sí, lo que implica que no poseen
-ninguna correlación. Además, a lo largo de todas las variables, la acumulación
-de varianza disminuye, lo cual indica que la primera componente tiene una
-varianza mayor y la última, la menor posible, en orden descendente.
+Las componentes principales son las variables resultado al aplicar el algoritmo
+\textit{PCA}~\cite{pca}. Estas nuevas variables tienen la particularidad de ser
+ortogonales entre sí, lo que implica que no poseen ninguna correlación. Además,
+a lo largo de todas las variables, la acumulación de varianza disminuye. Esto
+indica que la primera componente tiene la mayor varianza y la última la menor
+posible (en orden descendente).
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=8cm]{./images/PCA-Variance.png}
-	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada por cada componente principal resultado del algoritmo~\cite{pca}\textit{PCA}.}
+	\caption{Este diagrama de barras describe el grado de variabilidad o varianza explicada para cada componente principal resultado de aplicar el algoritmo\textit{PCA}~\cite{pca} sobre el conjunto de variables numericas originales.}
 	\label{fig:explainedVariancePlot}
 \end{figure}
 
@@ -877,26 +877,28 @@ varianza mayor y la última, la menor posible, en orden descendente.
 	\item pc6: $5$ \%
 \end{itemize}
 
-Inicialmente podemos apreciar en la figura~\ref{fig:explainedVariancePlot} que
+En la figura~\ref{fig:explainedVariancePlot}, inicialmente podemos apreciar que
 toda las componentes tiene niveles de variabilidad o varianza explicada muy
 bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que
-el grado de correlación de las variables es muy bajo. Usando el criterio del
-bastón roto podríamos seleccionar las 3 primeras variables, ya que son las que
-acumulan mayor varianza. Tengamos en cuenta que el análisis por componentes
-principales es un análisis lineal. Es decir que, tiene encuentra unicamente
-relacioens lineales entre la variables. De esta forma, este método puede estar
-perdiendo de vista correlaciones no lineales mas complejas donde podríamos
-encontrar un mayor grado de correlación. Las 3 primeras componentes acumulan un
-grado de variabilidad del 85 \%.
+el grado de correlación de las variables originales es muy bajo. Utilizando el
+citerio del bastón roto podríamos seleccionar las 3 primeras componentes
+principales, ya que son las que acumulan mayor varianza.
+
+Por otro lado, debemos tener en cuenta que el análisis por componentes
+principales es un análisis lineal. Es decir, tiene encuentra unicamente
+correlaciones lineales entre las variables originales. De esta forma, el método
+puede estar perdiendo de vista correlaciones no lineales mas complejas, donde
+podríamos encontrar un mayor grado de correlación. Las 3 primeras componentes
+acumulan un grado de variabilidad del $85$ \%.
 
 \begin{description}
 	\item[Cargas o Loadings]
 \end{description}
 
-Por otro lado, las componentes principales son combinaciones lineales de las
-variables originales. Luego, las cargas o \textit{loadings} son los
-coeficientes utilizados para transformar las variables originales en las
-componentes principales mediante combinaciones lineales.
+Las componentes principales son combinaciones lineales de las variables
+originales. Luego, las cargas o \textit{loadings} son los coeficientes
+utilizados para transformar las variables originales en las componentes
+principales mediante combinaciones lineales.
 
 De esta forma, los coeficientes definen una medida de correlación o grado de
 aporte de cada variable original a una componente principal.
@@ -916,35 +918,35 @@ A continuación se pueden visualizar las cargas o \textit{loadings}:
 		\bottomrule
 	\end{tabular}
 
-	\caption{Coeficientes de componentes principales vs. variable originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
+	\caption{Coeficientes de componentes principales vs. variables originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
 
 	\label{fig:loadingsTable}
 \end{table}
 
-En la tabla~\ref{fig:loadingsTable} vemos que \textit{Vote Count (88\%)} y
-\textit{Popularity (80\%)} tiene una correlación positiva muy alta sobre la
-componente $PC1$. Lo mismo sucede con la \textit{Vote Mean (55\%)} en menor
-medida. Entre dos observaciones con distintos valores de popularidad, la que
-tenga un valor mas alto, aportara mas a la componente $PC1$ que a las otra dos
-($PC2$ y $PC3$). También vemos que las variable \textit{Release Year} (Año de
-estreno) y \textit{Movie ID} tienen un aporte, considerable, pero mas bajo del
-33\% y 24\% respectivamente, sobre la componente $PC1$. La variable
-\textit{User ID} no tiene aporte alguno sobre la componente $PC1$. Las
-variables que mas aportan a la componente $PC2$ son \textit{Vote Mean (55\%)} y
-\textit{Vote Count (11\%)} respectivamente. Este aporte es negativo, esto
-quiere decir que un aumento en los niveles de esta variable significa una
-disposición en la componente $PC2$. La variable \textit{Release Year} (Año de
-estreno) tiene el aporte positivo mas alto sobre la componente $PC2$ siendo del
-80 \%. Para la componente $PC3$, las variables que mas aportan son \textit{User
-	ID (99\%)} y \textit{Release Year (45\%)} respectivamente, ambas positivas.
-Vemos que un aumento en la variable \text{User ID} produce un aumento casi en
-una unidad sobre el coeficiente, pero \textit{Release Year} es la mitad en
-relación. De este forma, la componente $PC1$ podríamos nombrarla como Nivel de
-popularidad o conocimiento general de una película. La componente $PC2$, en
-algún sentido mide lo contrario a la popularidad, es un indicador de cuan
-\textit{underground} es un nuevo estrenos. La componente $PC3$ es mas difícil
-de nombrar, pero podría llamarse: Grado \textit{newbie} de un usuario,
-indicando cuan nuevo es un usuario.
+En la tabla~\ref{fig:loadingsTable} vemos que \textit{Vote Count (88\%)}
+(Cantidad de votos) y \textit{Popularity (80\%)} (Popularidad) tiene una
+correlación positiva muy alta sobre la componente $PC1$. Lo mismo sucede con
+\textit{Vote Mean (55\%)} (Media de la cantidad de votos) en menor medida.
+Entre dos observaciones con distintos valores de popularidad, la que tenga un
+valor mas alto, aportara mas a la componente $PC1$ que a las otra dos ($PC2$ y
+$PC3$). También vemos que las variable \textit{Release Year} (Año de estreno) y
+\textit{Movie ID} tienen un aporte, considerable, pero mas bajo del 33\% y 24\%
+respectivamente, sobre la componente $PC1$. La variable \textit{User ID} no
+tiene aporte alguno sobre la componente $PC1$. Las variables que mas aportan a
+la componente $PC2$ son \textit{Vote Mean (55\%)} y \textit{Vote Count (11\%)}
+respectivamente. Este aporte es negativo, esto indica que un aumento en los
+niveles de esta variable significa una disminución en la componente $PC2$. La
+variable \textit{Release Year} (Año de estreno) tiene el aporte positivo mas
+alto sobre la componente $PC2$ siendo del 80 \%. Para la componente $PC3$, las
+variables que mas aportan son \textit{User ID (99\%)} y \textit{Release Year
+	(45\%)} respectivamente, ambas positivas. Vemos que un aumento en la variable
+\text{User ID} produce un aumento casi en una unidad sobre el coeficiente, pero
+\textit{Release Year} es la mitad en relación. De este forma, la componente
+$PC1$ podríamos nombrarla como Nivel de popularidad o conocimiento general de
+una película. La componente $PC2$, en algún sentido mide lo contrario a la
+popularidad, es un indicador de cuan \textit{underground} es un nuevo estrenos.
+La componente $PC3$ es mas difícil de nombrar, pero podría llamarse: Grado
+\textit{newbie} de un usuario, indicando cuan nuevo es un usuario.
 
 \clearpage
 
@@ -961,37 +963,38 @@ indicando cuan nuevo es un usuario.
 	\label{fig:biplot}
 \end{figure}
 
-En la figura~\ref{fig:biplot} se expone un
-diagrama~\cite{biplot}\textit{Biplot}. Este representa los valores de las
-variables originales coloreados en color rojo, negro y gris correspondientes a
-tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se
+En la figura~\ref{fig:biplot} se expone un diagrama
+\textit{Biplot}~\cite{biplot}. Este representa los valores de las variables
+originales coloreados en color rojo, negro y gris correspondientes a tres
+segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se
 representan los vectores correspondientes a las variables originales. A primera
-vista observamos que las variables \textit{Popularity} y \textit{Vote Count}
-tienen una correlación muy alta, ya que el ángulo entre sus vectores es
-prácticamente cero. Esto tiene sentido, ya que ambas son medidas de popularidad
-de alta colinealidad. Las variables \textit{Popularity}, \textit{Vote Count} y
-\textit{Vote Mean} (En menor media) tiene un aporte positivo sobre la
-componente $PC1$. Esto se corresponde con los coeficientes de las cargas
+vista observamos que las variables \textit{Popularity} (Popularidad) y
+\textit{Vote Count} (Cantidad de votos) tienen una correlación muy alta, ya que
+el ángulo entre sus vectores es prácticamente cero. Esto tiene sentido, ya que
+ambas son medidas de popularidad de alta colinealidad. Las variables
+\textit{Popularity} (Popularidad), \textit{Vote Count} (Cantidad de votos) y
+\textit{Vote Mean}  (Media de la cantidad de votos) tiene un aporte positivo sobre la
+componente $PC1$ (En menor media). Esto último se corresponde con los coeficientes de las cargas
 analizados anteriormente. Las variables \textit{Movie ID} y \textit{Release
-	Year} aportan en menor medida sobre la componente $PC1$. De esta forma, se
-constata lo visto anteriormente en análisis de carga, donde la componente $PC1$
-representa el grado de popularidad de una película. La variable \textit{Vote
-	Mean} aporta en forma negativa y las variables \textit{Movie ID } y
-\textit{Release Year} en forma positiva sobre la componente $PC2$. Las
-varaibles \textit{Popularity}, \textit{Vote Count} tienen casi aporte nulo a la
-componente $PC2$ en correspondencia con el analisis de cargas anteriormente
-expuesto. Si visualizamos los puntos que representan a las observaciones
-originales en el espacio latente generado por~\cite{pca}\textit{PCA}, vemos que
-las observaciones de color negro ($>4$ puntos) y gris (de $2$ a $3.5$ puntos)
-se encuentran mas a la derecha que aquellas coloreadas en rojo ($>2$ puntos).
-Esto indica que hay un crecimiento del nivel de popularidad, cuanto mas a
-derecha se encuentre un punto en la componente $PC1$, validando los análisis
-anteriores. Si visualizamos lo puntos correspondientes a las observaciones en
-las direcciones de la componente $PC2$, vemos que a major valor en la
-componente, menor el grado de popularidad de las películas, ya que los puntos
-rojos tienden a estar en el extremo positivo de la componente. Esto valida la
-hipótesis de que la componente $PC2$ indica cuan \textit{underground} es un
-película.
+	Year} (Año de estreno) aportan en menor medida sobre la componente $PC1$. De
+esta forma, se constata lo visto anteriormente en análisis de carga, donde la
+componente $PC1$ representa el grado de popularidad de una película. La
+variable \textit{Vote Mean} (Media de la cantidad de votos) aporta en forma negativa y las variables
+\textit{Movie ID } y \textit{Release Year} (Año de estreno), en forma positiva
+sobre la componente $PC2$. Las varaibles \textit{Popularity} (Popularidad),
+\textit{Vote Count} (Cantidad de votos) tienen casi aporte nulo a la componente
+$PC2$ en correspondencia con el analisis de cargas anteriormente expuesto. Si
+visualizamos los puntos que representan a las observaciones originales en el
+espacio latente generado por \textit{PCA}~\cite{pca}, vemos que las
+observaciones de color negro ($>4$ puntos) y gris (entre $2$ y $3.5$ puntos) se
+encuentran mas a la derecha que aquellas coloreadas en rojo ($>2$ puntos). Esto
+indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se
+encuentre un punto en la componente $PC1$, validando los análisis anteriores.
+Si visualizamos lo puntos correspondientes a las observaciones en las
+direcciones de la componente $PC2$, vemos que a major valor en la componente,
+menor es el grado de popularidad de las películas, ya que los puntos rojos tienden
+a estar en el extremo positivo de la componente. Esto valida la hipótesis de
+que la componente $PC2$ indica cuan \textit{underground} es un película.
 
 \chapter{Métodos}
 
