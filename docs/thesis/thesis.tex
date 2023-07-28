@@ -973,17 +973,18 @@ vista observamos que las variables \textit{Popularity} (Popularidad) y
 el ángulo entre sus vectores es prácticamente cero. Esto tiene sentido, ya que
 ambas son medidas de popularidad de alta colinealidad. Las variables
 \textit{Popularity} (Popularidad), \textit{Vote Count} (Cantidad de votos) y
-\textit{Vote Mean}  (Media de la cantidad de votos) tiene un aporte positivo sobre la
-componente $PC1$ (En menor media). Esto último se corresponde con los coeficientes de las cargas
-analizados anteriormente. Las variables \textit{Movie ID} y \textit{Release
-	Year} (Año de estreno) aportan en menor medida sobre la componente $PC1$. De
-esta forma, se constata lo visto anteriormente en análisis de carga, donde la
-componente $PC1$ representa el grado de popularidad de una película. La
-variable \textit{Vote Mean} (Media de la cantidad de votos) aporta en forma negativa y las variables
-\textit{Movie ID } y \textit{Release Year} (Año de estreno), en forma positiva
-sobre la componente $PC2$. Las varaibles \textit{Popularity} (Popularidad),
-\textit{Vote Count} (Cantidad de votos) tienen casi aporte nulo a la componente
-$PC2$ en correspondencia con el analisis de cargas anteriormente expuesto. Si
+\textit{Vote Mean} (Media de la cantidad de votos) tiene un aporte positivo
+sobre la componente $PC1$ (En menor media). Esto último se corresponde con los
+coeficientes de las cargas analizados anteriormente. Las variables
+\textit{Movie ID} y \textit{Release Year} (Año de estreno) aportan en menor
+medida sobre la componente $PC1$. De esta forma, se constata lo visto
+anteriormente en análisis de carga, donde la componente $PC1$ representa el
+grado de popularidad de una película. La variable \textit{Vote Mean} (Media de
+la cantidad de votos) aporta en forma negativa y las variables \textit{Movie ID
+} y \textit{Release Year} (Año de estreno), en forma positiva sobre la
+componente $PC2$. Las varaibles \textit{Popularity} (Popularidad), \textit{Vote
+	Count} (Cantidad de votos) tienen casi aporte nulo a la componente $PC2$ en
+correspondencia con el analisis de cargas anteriormente expuesto. Si
 visualizamos los puntos que representan a las observaciones originales en el
 espacio latente generado por \textit{PCA}~\cite{pca}, vemos que las
 observaciones de color negro ($>4$ puntos) y gris (entre $2$ y $3.5$ puntos) se
@@ -992,54 +993,58 @@ indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se
 encuentre un punto en la componente $PC1$, validando los análisis anteriores.
 Si visualizamos lo puntos correspondientes a las observaciones en las
 direcciones de la componente $PC2$, vemos que a major valor en la componente,
-menor es el grado de popularidad de las películas, ya que los puntos rojos tienden
-a estar en el extremo positivo de la componente. Esto valida la hipótesis de
-que la componente $PC2$ indica cuan \textit{underground} es un película.
+menor es el grado de popularidad de las películas, ya que los puntos rojos
+tienden a estar en el extremo positivo de la componente. Esto valida la
+hipótesis de que la componente $PC2$ indica cuan \textit{underground} es un
+película.
 
 \chapter{Métodos}
 
 En este capitulo se describirán los modelos utilizados para realiza la
-predicción de las clasificación de un usuario para una película que aun no ha
+predicción de la clasificación de un usuario para una película que aun no ha
 visto. Para realizar esto, se utilizaron varios modelos basados en filtros
 colaborativos.
 
-Cada implementación tiene sus particularidades: Cuanto puede escalar, sus
-tiempos de entrenamiento y predicción, su implementación, exactitud de las
-predicciones, tendencia al sobre ajuste, etc.. Para este trabajo se eligieron
-dos grandes grupos. Por un lado, una implementación sencilla basada en memoria
-como es el algoritmo de K vecinos cercanos y por el otro, modelos basados en
-Deep Learning. Los modelos basados en Deep Learning utilizan
-\textit{Embeddings} en todos los casos, como una forma de reducir la
-dimensionalidad de las variables categóricas que se utilizan como entradas.
-Además, cada modelo tiene su propia arquitectura, algunas clásicas y otras
-basadas en modelos del estado del arte. Luego, la idea fue medir los resultados
-de todo los modelos utilizando distintas métricas comparables, entrenando con
-el mismo \textit{dataset} en todos los casos. De esta forma podemos comparar
-los resultados de cada modelo. K vecinos cercanos (\textit{KNN}) fue tomado
-como baseline, a partir del cual poder comparar los demás modelos.
+Cada implementación tiene sus particularidades: Su nivel de escalabilidad, sus
+tiempos de entrenamiento y predicción, su implementación, la exactitud de las
+predicciones, su tendencia al sobre ajuste, etc.. Para este trabajo se
+eligieron dos grandes grupos. Por un lado, una implementación sencilla basada
+en memoria, como es el algoritmo de K vecinos cercanos. Por otro lado, modelos
+basados en \textit{Deep Learning}. Los modelos basados en \textit{Deep
+	Learning} utilizan \textit{Embeddings} en todos los casos, como una forma de
+reducir la dimensionalidad de las variables categóricas que se utilizan como
+entradas al modelo. Además, cada modelo tiene su propia arquitectura, algunas
+clásicas y otras basadas en modelos del estado del arte. Luego, la idea fue
+medir los resultados de todo los modelos, utilizando distintas métricas
+comparables, entrenando con el mismo \textit{dataset} en todos los casos. De
+esta forma podemos comparar los resultados de todos los modelos. Como
+\textit{baseline} se tomo el modelo de K vecinos cercanos (\textit{KNN}), dado
+que es el modelo mas simple. Este servira como punto partida para comparar
+resulados con otros modelos mas complejos.
 
 Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en
 cuenta que estos modelos son muy demandantes en cuanto a recursos de
 \textit{hardware}, se opto por usar el framework
-\href{https://pytorch.org/}{\textit{PyTorch}}, dado que permite hacer uso tanto
+\href{https://pytorch.org/}{\textit{PyTorch}}. Dado que permite hacer uso tanto
 de \textit{CPU} como \textit{GPU}. De esta forma, se puede elegir cuando usar
 cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e
 inferencia). Ya elegido el \textit{framework}, se opto por implementar todos
 los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho
-modelos del estado del arte ya desarrollados de forma oficial. De esta forma se
+modelos del estado del arte desarrollados de forma oficial. De esta forma se
 implemento cada modelo desde cero para poder hacer uso de \textit{CPU} y
 \textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos
-disponible.
+disponible. Mas adelante veremos que esto puede inpactar fuertemente en los
+tiempos de entrenamiento e inferencia.
 
 \section{Enfoque Basados en Memoria}
 
-\subsection{\textit{KNN (K-Nearest-Neighbor)}}
+\subsection{Algoritmo de los K vencinos cercanos (\textit{K-Nearest-Neighbor} o \textit{KNN})}
 
 Esta es la implementación clásica y mas intuitiva para realizar recomendación
 de ítems. Una vez entrenado el modelo, se cuenta con una matriz de distancias
-que pueden ser distancias entre usuario o ítems, y otra matriz de
+que pueden ser: distancias entre usuarios o ítems, y otra matriz de
 calificaciones usuario-ítem. De esta forma, en la etapa de inferencia, el
-modelo tomo como entrada un usuario (\textit{user\_id}) y un ítem
+modelo toma como entrada un usuario (\textit{user\_id}) y un ítem
 (\textit{item\_id}) y retorna la predicción de la calificación. Estas matrices
 se puede mantener en memoria, persistir en una base de datos (como puede ser
 \textit{Redis}) o en un archivos indexado. Por esta cuestión, la categoría en
@@ -1048,7 +1053,9 @@ tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la
 totalidad de estas matrices en memoria.
 
 \clearpage
-Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas, donde cada tupla contiene:
+
+Luego, para realizar el entrenamiento del modelo se necesita una lista de
+tuplas, donde cada tupla contiene:
 
 \begin{description}
 	\item[Lista de tuplas]
@@ -1060,8 +1067,8 @@ Luego, para realizar el entrenamiento del modelo se necesita una lista de tuplas
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $u$ es un identificador univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso se no usar matrices ralas.
-	\item $i$ es el identificador secuencial, univoco y numérico de un ítem. En este caso los ítems son películas, pero podrían ser cualquier entidad identificable como productos, usuarios, comidas, etc..
+	\item $u$ es un identificador secuencial, univoco y numérico de un usuario. Estos identificadores se generan a partir de una secuencia numérica, es decir que no debemos tener huecos para minimizar el uso de memoria en caso de no usar matrices ralas.
+	\item $i$ es un identificador secuencial, univoco y numérico de un ítem. En este caso los ítems son películas, pero podrían ser cualquier entidad identificable como productos, usuarios, comidas, etc..
 	\item $r_{u, i}$ es la calificación otorgada al ítem $i$ por parte del usuario $u$.
 	\item $n$ es la cantidad total de usuarios en el \textit{dataset} de entrenamiento.
 	\item $m$ es la cantidad total de ítems en el \textit{dataset} de entrenamiento.
@@ -1124,16 +1131,16 @@ calificaciones realizadas por el mismo.
 	\item $d_{u_a,u_b}$ es la distancia entre el vector fila $F{u_a}$ y $F{u_b}$ de la matriz de $Calificaciones_{u,i}$.
 \end{itemize}
 
-En cuanto a las distancias, no hay una restricción acerca que cual utilizar. En
-general las distancias que mejor ajustan a este dominio son las siguientes:
+En cuanto a las distancias, no hay una restricción acerca de cual utilizar. En
+general las distancias que mejor ajustan apra este dominio son las siguientes:
 
 \begin{itemize}
 	\item Distancia Coseno Ajustado.
 	\item Distancia Coseno.
-	\item Distancia de Pearson (1 - Correlación de Pearson).
+	\item Distancia de \textit{Pearson} (1 - Correlación de \textit{Pearson}).
 \end{itemize}
 
-Luego, para este trabajo se eligió utilizar la \textit{Distancia Coseno}.
+Luego, para este trabajo se eligió utilizar la distancia coseno.
 
 \begin{description}
 	\item[Distancia Coseno]
@@ -1143,7 +1150,8 @@ La distancia coseno es una medida de similitud entre dos vectores en un espacio
 vectorial que posee un producto interno. La distancia coseno entre dos vectores
 se mide en grados. De esta forma, cuanto menor es el ángulo entre dos vectores
 mas similares son entre sí. De forma contraria, cuando mayor es el ángulo entre
-dos vectores menos similares son entre sí.
+dos vectores menos similares seran. A contunaicon se define la distancia coseno
+como:
 
 \begin{equation}
 	Distancia \mspace{3mu}Coseno_{ua, ub} = \frac{ \sum_{i \in I} r_{ua, i}.r_{ub, i}}{\sqrt{\sum_{i \in I} r_{ua, i}^2}.\sqrt{\sum_{i \in I} r_{ub, i}^2}  }, ua \neq ub
@@ -1157,7 +1165,7 @@ dos vectores menos similares son entre sí.
 	\item $ua \neq ub$, es decir que cada índice representa a un usuario distinto.
 	\item $I$ es la cantidad total de columnas de la matriz de $Calificaciones_{u,i}$.
 	\item $i$ el índice de una columna de la matriz de $Calificaciones_{u,i}$. Cada columna representa a un ítem y contiene todas las calificaciones realizadas por todos los usuarios sobre el ítem $i$.
-	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares serán los usuarios $u_a$ y $u_b$.
+	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares serán los usuarios con los indices $u_a$ y $u_b$.
 \end{itemize}
 
 \clearpage
@@ -1171,7 +1179,7 @@ dos vectores menos similares son entre sí.
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares serán los usuarios $u_a$ y $u_b$.
+	\item $0 <= Similitud \mspace{3mu}Coseno_{ua, ub} <= 1$. Cuanto mayor sea el valor de $Similitud \mspace{3mu}Coseno_{ua, ub}$ mas similares serán los usuarios con los indices $u_a$ y $u_b$.
 \end{itemize}
 
 Volviendo a nuestro algoritmo, la idea es calcular la distancia de cada vector
@@ -1188,15 +1196,15 @@ predicción para cada implementación elegida.
 
 \clearpage
 
-\subsection{\textit{KNN User Based}}
+\subsection{Algoritmo de los K vencinos cercanos basado en usuarios (\textit{KNN User Based})}
 
 En el apartado anterior se explico cómo calcular las matrices de
-$Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El calcula de estas matrices
+$Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El cálculo de estas matrices
 es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado
-se explicará el proceso para la predicción de la calificación de un ítem por
-parte de un usuario~\cite{useritembasedinference}.
+se explicará el proceso para realizar la predicción o inferencias de la
+calificación de un ítem por parte de un usuario~\cite{useritembasedinference}.
 
-Entonces, el enfoque de K usuarios cercanos para predecir la calificación de un
+Entonces, el enfoque de K vecinos cercanos para predecir la calificación de un
 ítem, se basa en la siguiente definición:
 
 \begin{equation}
@@ -1208,7 +1216,7 @@ Entonces, el enfoque de K usuarios cercanos para predecir la calificación de un
 \end{description}
 \begin{itemize}
 	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el ítem $i$.
-	\item $o$ pertenece al conjunto $O$ de otros de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
+	\item $o$ (Minúscula) pertenece al conjunto $O$ (Mayúscula) de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. Se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada índice representa a un usuario distinto.
 	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
