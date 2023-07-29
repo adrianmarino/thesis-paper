@@ -1202,10 +1202,11 @@ En el apartado anterior se explico cómo calcular las matrices de
 $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El cálculo de estas matrices
 es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado
 se explicará el proceso para realizar la predicción o inferencias de la
-calificación de un ítem por parte de un usuario~\cite{useritembasedinference}.
+calificación de un ítem por parte de un usuario~\cite{useritembasedinference}
+utilizando la variante basada en usaurios.
 
-Entonces, el enfoque de K vecinos cercanos para predecir la calificación de un
-ítem, se basa en la siguiente definición:
+Entonces, el enfoque de K vecinos cercanos basado en usuarios para predecir la
+calificación de un ítem, se define a continuación:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}usuarios\mspace{3mu}_{u, i} = \overline{r}_{u} + \frac{\sum_{o \in O} (r_{o, i} - \overline{r}_o) . w_{u, o} }{ \sum_{o \in K} w_{u, o}}, u \neq o
@@ -1220,17 +1221,29 @@ Entonces, el enfoque de K vecinos cercanos para predecir la calificación de un
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. Se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada índice representa a un usuario distinto.
 	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
-	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la subjetividad que tiene cada usuario al momento de calificar un ítem. Algunos usuarios tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas; otros usuarios son mas pesimistas y tienden a poner calificaciones bajas. Al restar por la medio de calificación de cada usuario, estamos normalizando las calificaciones, haciéndolas mas o menos comparables, siendo esta una forma de disminuir este fenómeno de subjetividad al momento de calificar un ítem.
+	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para
+	      el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza
+	      para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la
+	      subjetividad que tiene cada usuario al momento de calificar un ítem. Algunos usuarios
+	      tienden a calificar todo de forma optimista, otorgando calificaciones mas bien altas;
+	      otros usuarios son mas pesimistas y tienden a otorgar  calificaciones bajas. Al restar
+	      por la media de calificaciones de cada usuario $o$, estamos normalizando
+	      las calificaciones, haciéndolas mas o menos comparables. Aplicando esta transformación,
+	      las calificaciones se definen en terminos de cuanto se alejan de la media de
+	      calificaciones del usuario $o$.
+	      Por supuesto que cada usuario tendra una media sesgada por su comportamiento al calificar. Mas allá
+	      de esto, sigue siendo una forma de disminuir este fenómeno de subjetividad al
+	      momento de calificar un ítem.
 \end{itemize}
 
-Finalmente, a grandes rasgos, el calculo de la predicción no es mas que el
-promedio de calificaciones del usuario $u$ sumado al promedio pesado de las
-calificación de los demás usuarios para el ítem $i$, donde los pesos son las
-distancias del usuario $u$ con los demás usuarios.
+Finalmente, el calculo de la predicción no es mas que el promedio de
+calificaciones del usuario $u$ sumado al promedio pesado de las calificación de
+los demás usuarios para el ítem $i$, donde los pesos son las distancias del
+usuario $u$ con los demás usuarios.
 
-Ahora, por un tema performance el conjunto $O$ no contiene a todos los demás
-usuarios, sino un conjunto de tamaño $K$ el cual contiene a los usuario mas
-cercanos en términos de distancia. Es decir que, como paso previo a la
+Ahora, por un tema de performance, el conjunto $O$ no contiene a todos los
+demás usuarios, sino un conjunto de tamaño $K$ el cual contiene a los usuario
+mas cercanos en términos de distancia. Es decir que, como paso previo a la
 predicción, es necesario encontrar a los $K$ usuarios mas cercanos al usuario
 $u$. De esta forma, el parámetro $K$ se convierte en un hiper-parámetro del
 modelo. Luego a mayor $K$, mayor sera número de vecinos a tener en cuenta para
@@ -1242,16 +1255,16 @@ hiper parámetros regida por una métricas que valide la exactitud del modelo al
 momento de la predicción, obteniendo como resultado el $K$ para el cual el
 modelo tiene el resultado mas exactos posibles.
 
-\subsection{\textit{KNN Item Based}}
+\subsection{Algoritmo de los K vencinos cercanos basado en ítems (\textit{KNN Item Based})}
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz
 de $Calificaciones_{i, u}$ tiene ítems como filas en vez de usuarios, y
 usuarios como columnas en vez de ítems. Es decir, es la matriz transpuesta de
 la matriz de $Calificaciones_{u, i}$ original~\cite{useritembasedinference}. De
-esta forma, la matriz de $Distancias_{i_a,i_b}$ mide las distancia entre
+esta forma, la matriz de $Distancias_{i_a,i_b}$ mide las distancias entre
 vectores fila $F_i$ los cuales representan ítems. Por otro lado, también
 existen diferencias con el modelo anterior, al momento de calcular las
-predicciones. A continuación la definición del calculo de las predicciones:
+predicciones. A continuación la definición del cálculo de las predicciones:
 
 \begin{equation}
 	Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i} = \frac{\sum_{o \in O} r_{u, o}. w_{i, o} }{\sum_{o \in O} w_{i, o} }, i \neq o
@@ -1260,56 +1273,61 @@ predicciones. A continuación la definición del calculo de las predicciones:
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$ es la predicción de la calificación del usuario $u$ para el ítem $i$.
-	\item $O$ es el conjunto de los vecinos cercanos o mas similares de $i$ previamente seleccionado. $o$ pertenece al conjunto $O$.
-	\item $i \neq o$: los indices ítem $i$ y $o$ representan a ítems distintos.
+	\item $Prediccion \mspace{3mu}basada \mspace{3mu}en \mspace{3mu}items\mspace{3mu}_{u, i}$
+	      es la predicción de la calificación del usuario $u$ para el ítem $i$.
+	\item $O$ (Mayúscula) es el conjunto de los $K$ ítems mas cercanos o similares
+	      al ítem $i$. El ítem $o$ (Minúscula) pertenece al conjunto $O$ de todos
+	      los ítems menos el ítem $i$.
+	\item $i \neq o$: Son los indices de los ítems $i$ y $o$, representando a ítems distintos.
 	\item $w_{i,o}$ es la similitud entre los ítems $i$ y $o$.
 \end{itemize}
 
-Finalmente la predicción, un promedio pesado de las calificaciones del usuario
-$u$ para los ítems vecinos al ítem $i$, pesadas por la similitud de cada ítem
-$o$ con $i$.
+Finalmente, la predicción es un promedio pesado de las calificaciones del
+usuario $u$ para los ítems cercanos o similares al ítem $i$, pesadas por la el
+grado de similitud de cada ítem $o$ con el ítem $i$.
 
-\subsection{\textit{KNN User Based Ensemble} y \textit{Item Based}}
+\subsection{Modelo ensamble de los algoritmos de los K vecinos cercanos basados
+	en usuarios e ítems (\textit{KNN User-Item Based Ensemble})}
 
-Dado que contamos dos modelos basados en \textit{KNN} se realizo un sample de
-ambos modelos el cual realiza un promedio de las salidas de ambos modelos.
+Dado que contamos dos modelos basados en \textit{KNN} se realizo un samble de
+ambos modelos, el cual realiza un promedio de las salidas de ambos modelos.
 
 \section{Enfoque basado en modelos}
 
-Hasta aquí realizamos una descripción del modelo \textit{KNN} utilizados en
-este trabajo y las distintas implementaciones utilizadas. Estos modelos tiene
-varias falencias. Entre las mas importantes encontramos el problema de escala,
-ya que el tamaño de los datos a procesar depende casi linealmente de los
-recursos de memoria, \textit{CPU} y/o \textit{GPU} disponibles. De esta forma,
-cuando es necesario procesar una gran cantidad de datos para realizar
-predicciones, se opta por modelos que realicen algún tipo de reducción de
-dimensionalidad para construir su representación internal, la cual luego se
-utilizada para realizar las predicciones. A esta presentación interna muchas
-veces se la llama modelo, ya que el modelo en si no es el algoritmo utilizado
-si no el estado internal al que se llega luego del entrenamiento.
+Hasta aquí realizamos una descripción de los modelos \textit{KNN} utilizados en
+este trabajo y sus distintas implementaciones. Estos modelos tiene varias
+falencias. Entre las mas importantes encontramos el problema de escala, ya que
+el tamaño de los datos a procesar depende casi linealmente de los recursos de
+memoria, \textit{CPU} y/o \textit{GPU} disponibles. De esta forma, cuando es
+necesario procesar una gran cantidad de datos para realizar predicciones, se
+opta por modelos que realicen algún tipo de reducción de dimensionalidad para
+construir su representación internal, la cual luego se utilizada para realizar
+las predicciones. A esta presentación interna muchas veces se la llama modelo,
+ya que el modelo en si no es el algoritmo utilizado si no el estado internal al
+que se llega luego del entrenamiento.
 
 \subsection{\textit{One-Hot Encoding vs. Embeddings}}
 
 Particularmente en el ámbito de recomendaciones, se cuenta con variables
 categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable
 con esta característica: los ids secuenciales de usuarios e ítems. Cuando
-trabajamos con modelos de Machine Learning, particularmente con redes
+trabajamos con modelos de \textit{Machine Learning}, particularmente con redes
 neuronales, es necesario convertir las variable categóricas en una
-representación numérica. El enfoque mas simple o native es realizar un one-hot
-encoding de la variable categórica, el cual consta de codificar cada posible
-valor de la variable como un vector que contiene tantas posiciones como valores
-tenga la variable. De esta forma, cada vector tiene un 1 en la posición que
-concuerda con el valor representado y un cero en las demás posiciones. Por
-ejemplo, suponemos que tenemos la siguiente variable:
+representación numérica. El enfoque mas simple o \textit{naive} consiste en
+realizar una codificación \textit{one-hot} de la variable categórica, la cual
+consta de codificar cada posible valor de la variable como un vector que
+contiene tantas posiciones como valores tenga la variable. De esta forma, cada
+vector tiene un valor $1$ en la posición que concuerde con el valor
+representado y un valor $0$ (cero) en las demás posiciones. Por ejemplo,
+suponemos que tenemos la siguiente variable:
 
 \begin{itemize}
 	\item Variable Categórica: Estado del Tiempo.
 	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
 
-Si codificamos sus valores usando \textit{one-hot encoding} obtenemos lo
-siguientes vectores:
+Si codificamos sus valores usando una codificación \textit{one-hot}, obtendremos
+los siguientes vectores:
 
 \begin{itemize}
 	\item $Nublado    = [1, 0, 0]$
@@ -1340,23 +1358,23 @@ Otro punto importante que diferencia ambas codificaciones, reside en la
 distancia entre vectores. Si tomamos dos vectores con codificación
 \textit{one-hot} y los gráficas en un espacio tridimensional o bidimensional,
 se aprecia que el ángulo entre estos siempre es el mismo, 90 grados. Supongamos
-el caso anterior de la variable \textit{Estado del Tiempo}, si representamos en
+el caso anterior de la variable Estado del Tiempo, si representamos en
 el espacio todos sus valores, podemos ver que la distancia es las misma entre
 cualquier par de vectores. Si ahora codificamos la misma variable usando
 \textit{Embeddings} esto cambia, ya que los vectores que representan a los
-valores \textit{Nublado} y \textit{Lluvioso} tiene un ángulo menor a 90 grados.
-Por otro lado, ambos vectores están alejados del vector \textit{Despejado}. De
-esta forma un \textit{Embedding} permite captar mas información ya que realiza
-una clusterización de los valores que son mas cercanos en términos de
+valores Nublado y Lluvioso tiene un ángulo menor a 90 grados.
+Por otro lado, ambos vectores están alejados del vector Despejado. De
+esta forma, un \textit{Embedding} permite captar mas información, ya que realiza
+una clusterización o agrupación de los valores que son mas cercanos en términos de
 significado. Los días nublados y lluviosos son muy parecido entre sí y muy
 distintos a un dia despejado.
 
-De esta forma los \textit{embeddings} tiene una doble ganancia sobre la
+De esta forma los \textit{Embeddings} tiene una doble ganancia sobre la
 codificación \textit{One-Hot}: comprimen la información y además captan
-información útil para la clusterización de sus valores. Algo interesante a
-destacar es que los modelos que entrenan \textit{Embeddings} captan esta
+información útil para la clusterización o agrupación de sus valores. Algo interesante a
+destacar, es que los modelos que entrenan \textit{Embeddings} captan esta
 información de forma automática en base a las observaciones usadas en el
-entrenamiento, generando estos espacios latentes llamados \textit{Embeddings}.
+entrenamiento, generando estos espacios latentes llamados \textit{Embeddings}. 
 
 \subsection{\textit{Embedding Layer}}
 
