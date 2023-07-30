@@ -1803,8 +1803,9 @@ frente a una lineal.
 
 \section{Métricas}
 
-Para medir y comparar el grado de exactitude de los modelos seleccionados tanto
-en el conjunto de validación como en truncamiento se seleccionado dos métricas:
+Para medir y comparar el grado de exactitude de los modelos seleccionados,
+tanto en el conjunto de validación como entrenamiento, se han seleccionado dos
+métricas:
 
 \begin{itemize}
 	\item \textit{Root Mean Square Error (RMSE)}: Es la raíz cuadrada del error
@@ -1815,15 +1816,15 @@ en el conjunto de validación como en truncamiento se seleccionado dos métricas
 
 \subsection{\textit{Root Mean Square Error (RMSE)}}
 
-Dado que todos los modelo se evaluaron en este trabajo tiene como salida una
-variable real (Calificación de los usuarios para un ítem), es posible utilizar
-\textit{RMSE}, la cual es utilizada en problemas de regresión donde la salida
-del modelo es una variable numérica real.
+Dado que todos los modelos que se evaluaron en este trabajo tiene como salida
+una variable real (Calificación de los usuarios para un ítem), es posible
+utilizar \textit{RMSE}. Esta métrica es utilizada en problemas de regresión
+donde la salida del modelo es una variable numérica real.
 
 Si bien esta métrica no es la métrica por excelencia a usar en el ámbito de
 sistemas de recomendación, ayuda a comprender cuales el grado de ajuste de los
-modelos y pue servir como una métrica complementara al momento de evaluar los
-mismos.
+modelos y puede servir como una métrica complementaria al momento de evaluar
+los mismos.
 
 \begin{description}
 	\item[Definición:]
@@ -1842,35 +1843,38 @@ mismos.
 
 \subsection{\textit{Mean Average Precision at k (mAP@k)}}
 
-\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la precision para K observaciones, es una de las métricas mas usada para evaluar sistemas de recomendación~\cite{map_at_k_1, map_at_k_2, map_at_k_3}.
+\textit{Mean Average Precision at k (mAP@k)} o media del promedió de la
+precision para K observaciones, es una de las métricas mas usada
+para evaluar sistemas de recomendación~\cite{map_at_k_1, map_at_k_2, map_at_k_3}.
 
-Si pensamos a nivel de aplicación de un sistemas de recomendación pedimos ver
-entras y salidas donde:
+Antes de comenzar, definamos a los sistemas de recomendación en terminos de sus
+entradas y salida, donde:
 
 \begin{itemize}
 	\item Entradas: Como entradas tenemos el identificador del usuario al cual queremos
 	      presentarle recomendaciones y otro parámetro opcional que podría ser el
-	      identificador de un ítem. ¿Por que opcional? Bueno, en general si no
-	      especificamos un id de ítem, es posible encontrar cuales son los ítems de mayor
-	      preferencia para el usuario y luego recomendar nuevos ítems en base a este ítem
-	      inicial. Por otro lado, si ya se cuenta con un id de ítem, se puede recomendar
-	      ítems similares en este. Este ultimo caso es muy común cuando un usuario navega
-	      al detalle de un producto en un e-commerce. En esta instancia, ya se conoce el
-	      id del usuario y id de ítem. Finalmente se recomiendan ítems similares al ítem
-	      visualizado.
-	\item Salidas: Es una lista de ítems recomendados similares a otro ítem (Entrada del
+	      identificador de un ítem. ¿Por que opcional? Bueno, en general si no se
+	      especifica un identificador de ítem, igualmente es posible encontrar cuales son
+	      los ítems de mayor preferencia para el usuario y luego recomendar nuevos ítems
+	      en base a este ítem inicial. Por otro lado, si ya se cuenta con un
+	      identificador de ítem, se puede recomendar ítems similares a este. Este último
+	      caso es muy común cuando un usuario navega al detalle de un producto en un
+	      \textit{e-commerce}. En esta instancia, ya se conoce el identificador del
+	      usuario e ítem. Finalmente, se recomiendan ítems similares al ítem visualizado.
+	\item Salidas: Es una lista de ítems recomendados similares a otro ítem (entrada del
 	      modelo) ordenados descendente-mente por la calificación predicha por el modelo
-	      para el usuario en cuestión (Entrada del modelo).
+	      para el usuario en cuestión (entrada del modelo).
 \end{itemize}
 
-De esta forma, encontrar en las primeras posiciones de la lista, aquellos ítems
-con mayor calificación predicha, es un indicador de que el modelo es preciso al
+Entonces, se podria decir que dada la salida de un sistema de recomendación, si
+encontramos en las primeras posiciones de la lista aquellos ítems con mayor
+calificación predicha, seria un buen indicador de que el modelo es preciso al
 momento de recomendar. En palabras mas simples, se desea que los primeros ítems
-de la lista de recomendaciones sean de mayor agrado para el usuario.\newline
+de la lista de recomendaciones sean de mayor agrado para el usuario.
 
-¿Finalmente, como funciona esta métricas? La métrica \textit{mAP\makeatletter@k} funciona de la siguiente forma: \newline
-
-Supongamos que tenemos un usuario y una lista K de ítems a recomendar. En base
+¿Finalmente, como funciona esta métricas? La métrica
+\textit{mAP\makeatletter@k} funciona de la siguiente forma: Supongamos que tenemos
+un usuario y una lista K de ítems a recomendar. En base
 a estas entradas el modelo de recomendación predice las calificaciones de cada
 ítem para el usuario dado. Luego, podemos ordenar la lista de ítems
 descendente-mente de acuerdo a las calificaciones predichas por el modelo.
@@ -1933,9 +1937,9 @@ Luego se realiza el calculo de \textit{AP\makeatletter@k} para cada usuario del
 De esta forma, la métrica \textit{mAP\makeatletter@k} da una noción del grado
 de precisión en que aparecen ítems con mayor puntuación en las primeras
 posiciones de una lista de tamaño $k$. Cabe aclarar, que la condición
-\textit{ítems con mayor puntuación} es arbitraria, ua que al ser una condición,
-podríamos intercambiarla por cualquier otro criterio. Por ejemplo, ítem con las
-peores puntuaciones (entre 1 y 2 puntos), ítem con puntuaciones medias, ítems
+\textit{ítems con mayor puntuación} es arbitraria, aun que al ser una condición,
+podríamos intercambiarla por cualquier otro criterio. Por ejemplo, ítems con las
+peores puntuaciones (entre 1 y 2 puntos), ítems con puntuaciones medias, ítems
 con mas de 3 puntos, menos de 3 puntos, etc...
 
 \chapter{Experimentos}
