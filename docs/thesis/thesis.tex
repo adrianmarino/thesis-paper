@@ -1622,7 +1622,7 @@ producto escalar.
 \end{figure}
 
 Para comenzar, el modelo tiene como entradas independientes los identificadores
-de usuarios e ítems. Cada capa (\textit{Embedding Layer}) genera el
+de usuarios e ítems. Cada capa \textit{Embedding} retorna el
 correspondiente vector \textit{embedding} asociado a estos identificadores. A
 continuación, el bloque \textit{Flatter} toma ambos vectores y produce uno
 nuevo mediante su concatenación. Este vector resultante se convierte en la
@@ -1631,7 +1631,8 @@ entrada de una red multi-capa.
 Es importante destacar que la red multi-capa tendrá tantas entradas como
 dimensiones posea este nuevo vector combinado. La cantidad de capas y el número
 de neuronas por capa son hiper-parámetros que se ajustarán durante el proceso
-de optimización. Por esta razón, no se especifica un número fijo de capas.
+de optimización. Por esta razón, no se especifica un número fijo de capas 
+o neuronas por capa.
 
 Cada capa, excepto la última, utiliza la función de activación \textit{ReLU},
 mientras que la capa final emplea una activación \textit{Lineal}, similar a una
@@ -1642,8 +1643,6 @@ Es importante señalar que se está considerando utilizar una activación
 lo que permitiría abordar el problema como uno de clasificación.
 
 \clearpage
-
-NOTA: La corrección de ortografía y semánticas llego hasta Aquí.
 
 \subsection{\textit{Factorization Machines (FM)}}
 
