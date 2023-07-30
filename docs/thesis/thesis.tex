@@ -1326,8 +1326,8 @@ suponemos que tenemos la siguiente variable:
 	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
 
-Si codificamos sus valores usando una codificación \textit{one-hot}, obtendremos
-los siguientes vectores:
+Si codificamos sus valores usando una codificación \textit{one-hot},
+obtendremos los siguientes vectores:
 
 \begin{itemize}
 	\item $Nublado    = [1, 0, 0]$
@@ -1358,72 +1358,78 @@ Otro punto importante que diferencia ambas codificaciones, reside en la
 distancia entre vectores. Si tomamos dos vectores con codificación
 \textit{one-hot} y los gráficas en un espacio tridimensional o bidimensional,
 se aprecia que el ángulo entre estos siempre es el mismo, 90 grados. Supongamos
-el caso anterior de la variable Estado del Tiempo, si representamos en
-el espacio todos sus valores, podemos ver que la distancia es las misma entre
+el caso anterior de la variable Estado del Tiempo, si representamos en el
+espacio todos sus valores, podemos ver que la distancia es las misma entre
 cualquier par de vectores. Si ahora codificamos la misma variable usando
 \textit{Embeddings} esto cambia, ya que los vectores que representan a los
-valores Nublado y Lluvioso tiene un ángulo menor a 90 grados.
-Por otro lado, ambos vectores están alejados del vector Despejado. De
-esta forma, un \textit{Embedding} permite captar mas información, ya que realiza
-una clusterización o agrupación de los valores que son mas cercanos en términos de
+valores Nublado y Lluvioso tiene un ángulo menor a 90 grados. Por otro lado,
+ambos vectores están alejados del vector Despejado. De esta forma, un
+\textit{Embedding} permite captar mas información, ya que realiza una
+clusterización o agrupación de los valores que son mas cercanos en términos de
 significado. Los días nublados y lluviosos son muy parecido entre sí y muy
 distintos a un dia despejado.
 
 De esta forma los \textit{Embeddings} tiene una doble ganancia sobre la
 codificación \textit{One-Hot}: comprimen la información y además captan
-información útil para la clusterización o agrupación de sus valores. Algo interesante a
-destacar, es que los modelos que entrenan \textit{Embeddings} captan esta
-información de forma automática en base a las observaciones usadas en el
-entrenamiento, generando estos espacios latentes llamados \textit{Embeddings}. 
+información útil para la clusterización o agrupación de sus valores. Algo
+interesante a destacar, es que los modelos que entrenan \textit{Embeddings}
+captan esta información de forma automática en base a las observaciones usadas
+en el entrenamiento, generando estos espacios latentes llamados
+\textit{Embeddings}.
 
 \subsection{\textit{Embedding Layer}}
 
 En el ámbito del \textit{Deep Learning} o \textit{Machine Learning} se cuenta
-con la abstracción de \textit{Capas} (\textit{Keras/Tensorflow}) o
-\textit{Módulos} (\textit{PyTorch}), las cuales encapsulan el comportamiento
-esencial en un conjunto de bloque básicos utilizados para construir cualquier
-modelo. Los bloques que permiten que un modelo infiera o construya un
-\textit{embedding} durante el entrenamiento son los bloques
-\textit{Embedding/EmbeddingBag} en \textit{PyTorch} o \textit{Embedding} en
-\textit{Keras/Tensorflow}. En ambos \textit{frameworks} el comportamiento del
-estos bloques es el mismo.
+con la abstracción de capas (en \textit{frameworks} como \textit{Keras}) o
+módulos (en \textit{PyTorch}), las cuales encapsulan el comportamiento esencial
+en un conjunto de bloques básicos utilizados para construir cualquier modelo.
+Los bloques que permiten que un modelo infiera o construya un
+\textit{embedding} durante el entrenamiento, son los bloques \textit{Embedding}
+y \textit{EmbeddingBag} en \textit{PyTorch} o simplemente \textit{Embedding} en
+\textit{Keras}.
 
 Por un lado, podemos elegir el tamaño de los vectores \textit{embedding}, el
 cuál, como ya adelantamos, es un hiper-parámetro mas a optimizar. Por otro
 lado, debemos definir la cantidad de vectores \textit{embedding} que debe
 contener la capa. Ésta es siempre igual al número total de valores que puede
-tomar variable categórica.
+tomar la variable categórica a codificar.
 
-De esta forma, para crear una capa o módulo \textit{Embedding} para la variable
-\textit{Estado del Tiempo} podríamos crear una capa \textit{Embedding} de
-tamaño 3, ya que cuenta con 3 posible valores, con un tamaño de vector siempre
-menos a 3, ya que de lo contrario tendríamos la misma dimensionalidad que
-tenemos al usa la codificación \textit{one-hot}, con la diferencia de que una
-capa \textit{Embedding} capta la similitud entre los valores de la variable
-categórica un la codificación \textit{one-hot} no.
+De esta forma, si deseamos crear una capa o módulo \textit{Embedding} para la
+variable categorica Estado del Tiempo, deberiamos crear una capa de tamaño 3,
+ya que cuenta con 3 posible valores, con un tamaño de vector menos a 3, ya que
+de lo contrario, tendríamos la misma dimensionalidad que tenemos al usa la
+codificación \textit{one-hot}, con la diferencia de que una capa
+\textit{Embedding} capta la similitud entre los valores de la variable
+categórica a diferencia de la codificación \textit{one-hot}.
 
-Luego el modo de funcionamiento de la capa es muy simple. Esta se puede pensar
-como una tabla \textit{Hash}. donde cada clave es un valor de la variable
+El modo de funcionamiento de la capa es muy simple. Esta se puede pensar como
+una tabla \textit{Hash}, donde cada clave es un valor de la variable
 categórica. Es decir, que tendremos tantas claves como valores pueda tomar la
 variable categórica. Estas claves son codificados a números y los valores
 asociados a cada clave son vectores \textit{embedding}. Cave aclarar que en
-general, estos vectores son inicializados con valores aleatorio. Luego, el
-modelo irá ajustando los valores de cada vector \textit{embedding} durante el
-proceso de entrenamiento.
+general, estos vectores son inicializados con valores aleatorios. Finalmente,
+en la etapa de entranamiento, el modelo irá ajustando los valores de cada
+vector \textit{embedding}.
 
-En el \textit{froward pass}, como entrada se pasa un valor codificado a números
-de la variable categórica. Para nuestra variable \textit{Estado del Tiempo}
-podríamos codificar sus valores como sigue: \textit{Nublado = 0},
-\textit{Despegado = 1}, \textit{Lluvioso = 2}.
+En la etapa de \textit{froward pass}, se pasa como entrada un valor de la
+variable categórica codificado como númerico. Para nuestra variable Estado del
+Tiempo podríamos codificar sus valores como sigue:
 
-Entonces si pasamos el valores \textit{Nublado} como entrada a la capa, en
-realidad estamos pasando la clave 0. Luego, de esto la capa resuelve el vector
-\textit{embedding} asociado a esa clave y lo devuelve a su salida.
+\begin{itemize}
+	\item Nublado $=> 0$
+	\item Despegado $=> 1$
+	\item Lluvioso $=> 2$
+\end{itemize}
+
+Entonces, si pasamos el valor Nublado como entrada a la capa, en realidad
+estamos pasando la número o clave \textit{hash} $0$. Luego de esto, la capa
+resuelve el vector \textit{embedding} asociado a esa clave y lo devuelve a su
+salida.
 
 Finamente, debemos tener en cuenta que el proceso de \textit{back-propagation}
 sera el encargado de ir ajustando los valores, también llamados pesos de los
 vectores \textit{embedding}, de acuerdo a lo que se requiera en la salida del
-modelo, durante el proceso de optimización de descenso del gradiente.
+modelo durante el proceso de optimización.
 
 \begin{figure}[ht!]
 	\centering
@@ -1448,24 +1454,25 @@ filtros colaborativos. El algoritmo de factorización de matrices~\cite{afm}
 funciona desacoplando la matriz de interacciones usuario-ítem en un producto
 escalar de dos matrices regulares de baja dimensionalidad. Este algoritmo o
 familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en
-la competencia~\cite{netflixprize} en 2006. La idea principal del algoritmo es
-representar a usuario e ítems en un espacio latente de baja dimensionalidad. A
-partir del trabajo inicial realizado por \textit{Funk} en 2006, se han
-propuesto multiples enfoque de factorización de matrices para sistemas de
-recomendación, siento este el modelo de mas simple y efectivo.
+la competencia \textit{Netflix prize}~\cite{netflixprize} en $2006$. La idea
+principal del algoritmo es representar a usuarios e ítems en un espacio latente
+de baja dimensionalidad. A partir del trabajo inicial realizado por
+\textit{Funk} en $2006$, se han propuesto multiples enfoques de factorización
+de matrices para sistemas de recomendación, siento este el modelo mas simple y
+efectivo.
 
 Este modelo se puede construir fácilmente realizando el producto escalar de dos
-matrices de vectores de \textit{embeddings}, las cuales tiene una baja
-dimensionalidad debido al principio de funcionamiento de los
-\textit{embeddings}. A continuación se puede ver un esquema del modelo, el cual
+matrices de vectores \textit{Embedding}, las cuales tiene una baja
+dimensionalidad debido al principio de funcionamiento de los vectores
+\textit{Embedding}. A continuación se puede ver un esquema del modelo, el cual
 toma como entradas los identificadores de un usuario e ítem, luego resuelven
-los vectores \textit{embedding} correspondiente a ambos ids, y finalmente se
-realiza el producto escalar de ambos vectores. Este producto escalar da como
-resultado la calificación del usuario para el ítem dado. Por otro lado, el
-algoritmo del optimización de gradiente descendente sera quien se ocupe de
-ajustar los pesos de ambas matrices para que dado un id de usuario y otro id de
-ítem se obtenga la calificación correspondiente a la observación utilizada como
-ejemplo de entrenamiento.
+los vectores \textit{Embedding} correspondientes a ambos identificadores, y
+finalmente se realiza el producto escalar de ambos vectores. Este producto
+escalar tiene como resultado la calificación del usuario para el ítem dado. Por
+otro lado, el algoritmo del optimización de gradiente descendente sera quien se
+ocupe de ajustar los pesos de ambas matrices para que, dados los
+identificadores de un usuario e ítem, se obtenga la calificación
+correspondiente a la observación utilizada como ejemplo de entrenamiento.
 
 \begin{figure}[h!]
 	\centering
@@ -1478,7 +1485,7 @@ ejemplo de entrenamiento.
 
 \clearpage
 
-En términos matemáticos este modelo realiza la siguiente operación, en cada
+En términos matemáticos, este modelo realiza la siguiente operación en cada
 paso hacia adelante (\textit{forward-pass}):
 
 \begin{equation}
@@ -1502,23 +1509,29 @@ En términos matriciales podemos verlo de la siguiente manera:
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores \textit{embedding} de usuarios, la cuál tiene tantas filas $u$ como usuarios y es la dimensión del número de columnas (también llamada factor latente) corresponde al tamaño seleccionado para los vectores \textit{embedding}.
-	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{embeddings} de ítems, la cual tiene tantas filas como factores latente en los vectores \textit{embedding}, y tantas columnas como ítems se tenga.
-	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones, donde cada fila corresponde a un usuario y columna a un ítem.
+	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores \textit{Embedding} de usuarios,
+	      la cuál tiene tantas filas $u$ como usuarios. $f$ es la dimensión del número de columnas
+	      (también llamada factor latente) corresponde al tamaño seleccionado para los vectores \textit{Embedding}
+	      (Como ya se aclaro anteriormente, este es un hiper-parametro a ajustar).
+	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{Embedding} de ítems,
+	      la cual tiene tantas filas como factores latentes(posiciones) en los vectores \textit{Embedding}, y
+	      tantas columnas como ítems se tenga.
+	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones,
+	      donde cada fila corresponde a un usuario y cada columna a un ítem.
 \end{itemize}
 
-El tamaño de la dimensión de factores latentes como ya se vio anteriormente en
-el apartado \textit{One-Hot vs. Embeddings} es un hiper-parámetro mas a
+El tamaño de la dimensión de factores latentes, como ya se vio anteriormente en
+el apartado \textit{One-Hot vs. Embeddings}, es un hiper-parámetro mas a
 ajustar. Se ha demostrado~\cite{embeddingsizedem} que realizar factorización de
 matrices con un factor latente de tamaño 1 es equivalente a un modelo de
-recomendación por popularidad, es decir que recomienda los ítems mas populares
-sin tener en cuenta la personalización de las recomendaciones. Luego, a medida
-que vamos incrementando el tamaño del factor latente estar recomendaciones
-serán cada ves mas personalizadas aumentando la calidad de las mismas. Cuando
-el tamaño del factor latente es muy grande, el modelos comienza a sobre ajustar
-(\textit{overfitting}) y por ende la calidad de las recomendaciones comentara a
-empeorar. Para solucionar este se suelen agregar términos de regularización en
-la función de error a minimizar:
+recomendación por popularidad, es decir que se recomiendan los ítems mas
+populares sin tener en cuenta la personalización de las recomendaciones. Luego,
+a medida que vamos incrementando el tamaño del factor latente, estas
+recomendaciones serán cada vez más personalizadas, aumentando la calidad de las
+mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza
+a sobre ajustar (\textit{overfitting}) y por ende la calidad de las
+recomendaciones comenzara a empeorar. Para solucionar este problema, se suelen
+agregar términos de regularización en la función de error a minimizar:
 
 \begin{equation}
 	\underset{H, W}{\operatorname{arg\,min } }\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
@@ -1527,20 +1540,22 @@ la función de error a minimizar:
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $\|.\|_{\rm F}$ se define como [[norma matricial]] mientras que las otras normas pueden ser matricial u otro tipo de normal dependiendo del sistema de recomendación.
+	\item $\|.\|_{\rm F}$ se define como [[norma matricial]]
+	\item $\|H\|$ y $\|W\|$ pueden ser normas matriciales u otro tipo de norma dependiendo del sistema de recomendación.
 \end{itemize}
 
 \subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
 
-El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs} realiza
-recomendaciones de muy buena calidad, pero tiene una limitación: sólo utilizar
-interacciones usuario-ítem que tengan que ver con valores numéricos referidos a
-interacciones explicitas, como calificaciones. Los sistemas de recomendación
-modernos deben explotar todas las interacciones posibles, tanto explícitas
-(calificaciones numéricas) como implícitas (me gusta, compras, vistas,
-favoritos, etc..). Para solucionar este nuevo problema, donde es necesario usar
-cualquier tipo de interacción usuario-ítem (explicita o implícita), se agrega
-un \textit{bias} o sesgo para los usuarios, y otro para los ítems.
+El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs}, visto en el
+apartado anterior, realiza recomendaciones de muy buena calidad, pero tiene una
+limitación: sólo utilizar interacciones usuario-ítem que tengan que ver con
+valores numéricos referidos a interacciones explicitas, como calificaciones.
+Los sistemas de recomendación modernos deben explotar todas las interacciones
+posibles, tanto explícitas (calificaciones numéricas) como implícitas (compras,
+vistas, favoritos, etc..). Para solucionar este nuevo problema, donde es
+necesario usar cualquier tipo de interacción usuario-ítem (explicita o
+implícita), se agrega un \textit{bias} o sesgo para los usuarios, y otro para
+los ítems.
 
 A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
 ~\ref{fig:GMFModel}:
@@ -1549,17 +1564,19 @@ A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
 	\centering
 	\includegraphics[width=11cm]{./images/Biased-GMF.png}
 	\caption{
-		Esquema de un modelo \textit{Biased General Matrix Factorization (B-GMF)}. A diferencia del modelo \textit{GMF}, este suma a la salida un \textit{bias} por cada variable de entrada.
+		Esquema de un modelo \textit{Biased General Matrix Factorization (B-GMF)}.
+		A diferencia del modelo \textit{GMF}, este suma a la salida un \textit{bias}
+		o sesgo por cada variable de entrada.
 	}
 	\label{fig:BiasedGMFModel}
 \end{figure}
 
-En este caso se agregan dos nuevas \textit{Embedding Layers}, las cuales
+En este caso se agregan dos nuevas capas \textit{Embedding}, las cuales
 representa a los sesgos de usuarios e ítems respectivamente. El tamaño de los
-factores latentes o vectores \textit{embedding} correspondiente a cada
-\textit{bias} es 1, es decir son valores escalares. Finalmente, luego de
-calcular el producto escalar se suman los factores latentes resultado de ambas
-\textit{Embedding Layers} correspondiente a los biases.
+factores latentes o vectores \textit{Embedding} correspondiente a cada
+\textit{bias} o sesgo es $1$, dado que son valores escalares. Finalmente, luego de
+calcular el producto escalar, se suman los factores latentes resultado de ambas capas
+\textit{Embedding} correspondiente a los \textit{bias} o sesgos.
 
 \clearpage
 
