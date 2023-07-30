@@ -734,7 +734,7 @@ calificaciones mas altas. Se encuentra una alta correlación entre la variable
 que identifica a una película y la variable \textit{relese\_year} (Fecha de
 estreno). Esto se debe a que al momento de estrenarse una película, días
 después a mas tardar, se da de alta la película en el sitio de \textit{Movie
-	Lens}. Esto también nos dice que los \textit{ids} son secuenciales. Las
+	Lens}. Esto también nos dice que los identificadores son secuenciales. Las
 correlaciones en general son muy bajas llegando a $0.3$ como máximo. Esto es
 una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las
 variables. Las variables que son combinaciones lineales de otras variables
@@ -1310,9 +1310,9 @@ que se llega luego del entrenamiento.
 
 Particularmente en el ámbito de recomendaciones, se cuenta con variables
 categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable
-con esta característica: los ids secuenciales de usuarios e ítems. Cuando
-trabajamos con modelos de \textit{Machine Learning}, particularmente con redes
-neuronales, es necesario convertir las variable categóricas en una
+con esta característica: los identificadores secuenciales de usuarios e ítems.
+Cuando trabajamos con modelos de \textit{Machine Learning}, particularmente con
+redes neuronales, es necesario convertir las variable categóricas en una
 representación numérica. El enfoque mas simple o \textit{naive} consiste en
 realizar una codificación \textit{one-hot} de la variable categórica, la cual
 consta de codificar cada posible valor de la variable como un vector que
@@ -2024,9 +2024,9 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-knn-ensemple-RMSE.png}
 	\caption{Esta gráfica describe un histograma del valor de la métrica
-	 \textit{RMSE} evaluado en el conjunto de observaciones de validación,
-	  luego de N procesos de entrenamiento del modelo \textit{KNN}
-	   sobre las observaciones de entrenamiento.}
+		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
+		luego de N procesos de entrenamiento del modelo \textit{KNN}
+		sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
@@ -2039,10 +2039,10 @@ conjunto de validación y entrenamiento:
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-GFM-train-val-loss.png}
 	\caption{Esta gráfica describe el nivel de error sobre los conjuntos
-	de observaciones de entrenamiento y validación durante el 
-	entrenamiento del modelo \textit{GFM}. Cada epoch o época indica 
-	una iteración de entrenamiento del modelo sobre el conjunto completo 
-	de entrenamiento.}
+		de observaciones de entrenamiento y validación durante el
+		entrenamiento del modelo \textit{GFM}. Cada epoch o época indica
+		una iteración de entrenamiento del modelo sobre el conjunto completo
+		de entrenamiento.}
 \end{figure}
 
 Se puede apreciar que inicialmente el modelo tiene un error de valoración menor
@@ -2057,10 +2057,10 @@ errores.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{mAP@5(4,5)} evaluado en el conjunto de observaciones
-	 de validación, luego de N procesos de entrenamiento del modelo 
-	 \textit{GFM} sobre las observaciones de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de observaciones
+		de validación, luego de N procesos de entrenamiento del modelo
+		\textit{GFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
 Dado la tendencia de los modelos a la variabilidad o varianza de sus
@@ -2071,9 +2071,9 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-RMSE.png}
 	\caption{Esta gráfica describe un histograma del valor de la métrica
-	 \textit{RMSE} evaluado en el conjunto de observaciones de validación,
-	  luego de N procesos de entrenamiento del modelo \textit{GFM} sobre
-	   las observaciones de entrenamiento.}
+		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
+		luego de N procesos de entrenamiento del modelo \textit{GFM} sobre
+		las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
@@ -2082,19 +2082,19 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-BGFM-train-val-loss.png}
-	\caption{Esta gráfica describe el nivel de error sobre los conjuntos 
-	de observaciones de entrenamiento y validación durante el entrenamiento 
-	del modelo \textit{B-GFM}. Cada epoch o época indica una iteración de 
-	entrenamiento del modelo sobre el conjunto completo de entrenamiento.}
+	\caption{Esta gráfica describe el nivel de error sobre los conjuntos
+		de observaciones de entrenamiento y validación durante el entrenamiento
+		del modelo \textit{B-GFM}. Cada epoch o época indica una iteración de
+		entrenamiento del modelo sobre el conjunto completo de entrenamiento.}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica 
-	\textit{mAP@5(4,5)} evaluado en el conjunto de observaciones de 
-	validación, luego de N procesos de entrenamiento del modelo 
-	\textit{B-GFM} sobre las observaciones de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la métrica
+		\textit{mAP@5(4,5)} evaluado en el conjunto de observaciones de
+		validación, luego de N procesos de entrenamiento del modelo
+		\textit{B-GFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
@@ -2102,10 +2102,10 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{RMSE} evaluado en el conjunto de observaciones 
-	de validación, luego de N procesos de entrenamiento del 
-	modelo \textit{B-GFM} sobre las observaciones de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{RMSE} evaluado en el conjunto de observaciones
+		de validación, luego de N procesos de entrenamiento del
+		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \section{\textit{Neural Network Matrix Factorization (NN-FM)}}
@@ -2113,11 +2113,11 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-NN-FM-train-val-loss.png}
-	\caption{Esta gráfica describe el nivel de error sobre los 
-	conjuntos de observaciones de entrenamiento y validación durante 
-	el entrenamiento del modelo \textit{NN-FM}. Cada epoch o época 
-	indica una iteración de entrenamiento del modelo sobre el conjunto 
-	completo de entrenamiento.}
+	\caption{Esta gráfica describe el nivel de error sobre los
+		conjuntos de observaciones de entrenamiento y validación durante
+		el entrenamiento del modelo \textit{NN-FM}. Cada epoch o época
+		indica una iteración de entrenamiento del modelo sobre el conjunto
+		completo de entrenamiento.}
 \end{figure}
 
 \clearpage
@@ -2125,20 +2125,20 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{mAP@5(4,5)} evaluado en el conjunto de 
-	observaciones de validación, luego de N procesos de 
-	entrenamiento del modelo \textit{NN-FM} sobre las observaciones 
-	de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
+		observaciones de validación, luego de N procesos de
+		entrenamiento del modelo \textit{NN-FM} sobre las observaciones
+		de entrenamiento.}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{RMSE} evaluado en el conjunto de observaciones 
-	de validación, luego de N procesos de entrenamiento del 
-	modelo \textit{NN-FM} sobre las observaciones de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{RMSE} evaluado en el conjunto de observaciones
+		de validación, luego de N procesos de entrenamiento del
+		modelo \textit{NN-FM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
@@ -2148,20 +2148,20 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{mAP@5(4,5)} evaluado en el conjunto de 
-	observaciones de validación, luego de N procesos de 
-	entrenamiento del modelo \textit{DeepFM} sobre las observaciones 
-	de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
+		observaciones de validación, luego de N procesos de
+		entrenamiento del modelo \textit{DeepFM} sobre las observaciones
+		de entrenamiento.}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la 
-	métrica \textit{RMSE} evaluado en el conjunto de observaciones 
-	de validación, luego de N procesos de entrenamiento del modelo 
-	\textit{DeepFM} sobre las observaciones de entrenamiento.}
+	\caption{Esta gráfica describe un histograma del valor de la
+		métrica \textit{RMSE} evaluado en el conjunto de observaciones
+		de validación, luego de N procesos de entrenamiento del modelo
+		\textit{DeepFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \chapter{Resultados}
@@ -2172,17 +2172,17 @@ métricas presentadas en secciones anteriores. A modo de resumen, las métricas
 consideradas fueron las siguientes:
 
 \begin{itemize}
-	\item \textit{Mean Average Precision at k (mAP@k)}: Esta métrica 
-	representa el promedio de la precisión al calificar los primeros 
-	K ítems de una lista de recomendaciones para un usuario específico. 
-	Para obtener más detalles, se puede consultar la sección de 
-	referencia sobre \textit{mAP@k} (consultar la \autoref{sec:map_ref}).
-	\item \textit{Root Mean Square Error (RMSE)}: Esta métrica 
-	corresponde a la raíz cuadrada del error cuadrático medio entre 
-	la calificación real de un ítem, proporcionada por un usuario, 
-	y la calificación predicha. Para obtener más información, se 
-	puede consultar la sección de referencia sobre \textit{RMSE} 
-	(consultar la \autoref{sec:rmse_ref}).
+	\item \textit{Mean Average Precision at k (mAP@k)}: Esta métrica
+	      representa el promedio de la precisión al calificar los primeros
+	      K ítems de una lista de recomendaciones para un usuario específico.
+	      Para obtener más detalles, se puede consultar la sección de
+	      referencia sobre \textit{mAP@k} (consultar la \autoref{sec:map_ref}).
+	\item \textit{Root Mean Square Error (RMSE)}: Esta métrica
+	      corresponde a la raíz cuadrada del error cuadrático medio entre
+	      la calificación real de un ítem, proporcionada por un usuario,
+	      y la calificación predicha. Para obtener más información, se
+	      puede consultar la sección de referencia sobre \textit{RMSE}
+	      (consultar la \autoref{sec:rmse_ref}).
 \end{itemize}
 
 Para calcular estas métricas, se realizo un muestreo para determinar su
@@ -2223,7 +2223,7 @@ y 5 puntos, considerando una lista de 5 items recomendados, que se denota como
 	\end{tabular}
 	\caption{
 		Mediana, media y desvío correspondientes a la distribución de
-		\textit{AP\makeatletter@5(4,5)} muestreada para cada modelo. 
+		\textit{AP\makeatletter@5(4,5)} muestreada para cada modelo.
 		Las filas se encuentran ordenadas descendente-mente por la media.}
 	\label{table:ap_at_k}
 \end{table}
@@ -2273,7 +2273,7 @@ utilizando utilizando la raíz cuadrada del error cuadrático medio
 	\end{tabular}
 	\caption{
 		Mediana, media y desvío correspondientes a la distribución de
-		\textit{RMSE} muestreada para cada modelo. Las filas se 
+		\textit{RMSE} muestreada para cada modelo. Las filas se
 		encuentran ordenadas  descendente-mente por la media.}
 	\label{table:rmse}
 \end{table}
