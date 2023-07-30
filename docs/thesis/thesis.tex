@@ -1574,9 +1574,9 @@ A Continuación se puede aprecia el diagrama del modelo, muy similar al diagrama
 En este caso se agregan dos nuevas capas \textit{Embedding}, las cuales
 representa a los sesgos de usuarios e ítems respectivamente. El tamaño de los
 factores latentes o vectores \textit{Embedding} correspondiente a cada
-\textit{bias} o sesgo es $1$, dado que son valores escalares. Finalmente, luego de
-calcular el producto escalar, se suman los factores latentes resultado de ambas capas
-\textit{Embedding} correspondiente a los \textit{bias} o sesgos.
+\textit{bias} o sesgo es $1$, dado que son valores escalares. Finalmente, luego
+de calcular el producto escalar, se suman los factores latentes resultado de
+ambas capas \textit{Embedding} correspondiente a los \textit{bias} o sesgos.
 
 \clearpage
 
@@ -1622,17 +1622,17 @@ producto escalar.
 \end{figure}
 
 Para comenzar, el modelo tiene como entradas independientes los identificadores
-de usuarios e ítems. Cada capa \textit{Embedding} retorna el
-correspondiente vector \textit{embedding} asociado a estos identificadores. A
-continuación, el bloque \textit{Flatter} toma ambos vectores y produce uno
-nuevo mediante su concatenación. Este vector resultante se convierte en la
-entrada de una red multi-capa.
+de usuarios e ítems. Cada capa \textit{Embedding} retorna el correspondiente
+vector \textit{embedding} asociado a estos identificadores. A continuación, el
+bloque \textit{Flatter} toma ambos vectores y produce uno nuevo mediante su
+concatenación. Este vector resultante se convierte en la entrada de una red
+multi-capa.
 
 Es importante destacar que la red multi-capa tendrá tantas entradas como
 dimensiones posea este nuevo vector combinado. La cantidad de capas y el número
 de neuronas por capa son hiper-parámetros que se ajustarán durante el proceso
-de optimización. Por esta razón, no se especifica un número fijo de capas 
-o neuronas por capa.
+de optimización. Por esta razón, no se especifica un número fijo de capas o
+neuronas por capa.
 
 Cada capa, excepto la última, utiliza la función de activación \textit{ReLU},
 mientras que la capa final emplea una activación \textit{Lineal}, similar a una
@@ -1644,46 +1644,74 @@ lo que permitiría abordar el problema como uno de clasificación.
 
 \clearpage
 
-\subsection{\textit{Factorization Machines (FM)}}
+\subsection{Máquinas de factorización (\textit{FM})}
 
-Antes de introducir el modelo \textit{Deep Factorization Machine} se comenzara
-explicando uno de sus componentes mas importantes: las máquinas de
-factorización~\cite{didlfm, zhangdive}.
+Antes de introducir el modelo de máquinas de factorización profundas
+(\textit{DeepFM}) se comenzara explicando uno de sus componentes mas
+importantes: las máquinas de factorización~\cite{didlfm, zhangdive}.
 
-Las Maquinas de Factorización propuestas por \textit{Steffen Rendle} en 2010
-~\cite{fm}, son algoritmos supervisados que se puede utilizar para tareas de
+Las máquina de factorización propuestas por \textit{Steffen Rendle} en 2010
+~\cite{fm}, son algoritmos supervisados que puede ser utilizados para tareas de
 clasificación, regresión y tareas de ranking como sucede en el ámbito de los
-sistemas de recomendación. Rápidamente se convivieron en un método popular para
-hacer predicciones y recomendaciones. La \textit{Máquina de factorización} es
-una generalización de un modelo lineal y un model de factorización de matrices,
-mas aun, recuerdan mucho a un \textit{Maquina de soporte vectorial(SVM)} que
+sistemas de recomendación. Rápidamente se convirtieron en un método popular
+para hacer predicciones y recomendaciones. La máquina de factorización es una
+generalización de un modelo lineal y un model de factorización de matrices, mas
+aun, recuerdan mucho a un máquina de soporte vectorial \textit{(SVM)} que
 utiliza un kernel polinomial.
 
-F Formalmente, si tenemos:
+A continacion, se define el modelo formalmente:
 
 \begin{itemize}
-	\item $x\in\mathbb{R}^{d}$ es un vector de features donde cada una de sus componentes representa a una variable del \textit{dataset}, siendo $d$ la cantidad de variables de \textit{dataset¨} (excluyendo la columna de labels). En nuestro caso $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e ítems.
-	\item $y\in\mathbb{R}$ es la variable target a predecir. Dado el dominio del \textit{dataset} seleccionado, seria la calificación del usuario.
+	\item $x\in\mathbb{R}^{d}$ es un vector de \textit{features} donde cada una de
+	      sus componentes representa a una variable del \textit{dataset}, siendo $d$
+	      la cantidad de variables. En nuestro caso,
+	      $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e ítems.
+	\item $y\in\mathbb{R}$ es la variable \textit{target} o resultado a predecir.
+	      Dado el dominio del \textit{dataset} seleccionado, seria la
+	      calificación del usuario.
 \end{itemize}
 
-podemos definir el modelo para una \textit{máquina de factorización} de grado
-dos de ls siguiente forma:
+Luego, podemos definir el modelo para una máquina de factorización de grado $2$
+de la siguiente forma:
 
 \begin{equation}
-	\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \sum_{i=1}^d\sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j
+	\hat{y}(x) = \mathbf{w}_0 + \sum_{i=1}^d \mathbf{w}_i x_i + \sum_{i=1}^d\sum_{j=i+1}^d
+	\langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j
 \end{equation}
 \begin{description}
 	\item[Donde:]
 \end{description}
 \begin{itemize}
-	\item $\mathbf{w}_0 \in \mathbb{R}$ es el bias global.
-	\item $\mathbf{w} \in \mathbb{R}^d$ es el peso asociado a la variable $i^\mathrm{th}$.
-	\item $\mathbf{V} \in \mathbb{R}^{d\times k}$ representa a un vector \textit{embedding} asociado al la variable $i^\mathrm{th}$.
-	\item $\mathbf{v}_i$ representa a la $i^\mathrm{th}$ fila de la matriz $\mathbf{V}$.
-	\item $k$ es la dimensionalidad del factor latente o tamaño de lso vectores \textit{embedding}.
-	\item $\langle\cdot, \cdot \rangle$ es el producto interno de dos vectores.
-	\item $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$ modelos la interacción entre $i^\mathrm{th}$ y $j^\mathrm{th}$ variable.
+	\item $d$ es la cantidad de \textit{features} o variables a utilizar.
+	      Para el caso de estudio en este trabajo $d=2$ (usuarios e ítems).
+	\item $\mathbf{w}_0 \in \mathbb{R}$ es el \text{bias} o intercepto del modelo.
+	\item $\sum_{i=1}^d \mathbf{w}_i x_i$: Esta es la parte lineal del modelo. Aquí,
+	      $x_i$ representa el valor del \textit{feature} $i$-ésimo. $\mathbf{w}_i$ es
+	      el peso asociado al \textit{feature} $i$-ésimo, que determina la influencia
+	      de ese \textit{feature} en la predicción. Multiplicamos el valor de cada
+	      \textit{feature} $x_i$ por su peso correspondiente $\mathbf{w}_i$ y sumamos
+	      todas estas contribuciones para obtener la parte lineal de la predicción.
+	\item $\sum_{i=1}^d\sum_{j=i+1}^d \langle\mathbf{v}_i, \mathbf{v}_j\rangle x_i x_j$:
+	      Esta es la parte de factorización del modelo. Donde, $\langle\mathbf{v}_i,
+		      \mathbf{v}_j\rangle$ es el producto interno (o producto escalar) entre
+	      los vectores $\mathbf{v}_i$ y $\mathbf{v}_j$. Cada vector $\mathbf{v}_i$
+	      representa una factor latente o \textit{Embedding} del \textit{feature}
+	      $i$-ésimo. Estos vectores capturan interacciones no lineales entre
+	      características y se utilizan para modelar relaciones más complejas
+	      entre ellas. Similar a la parte lineal, multiplicamos los valores
+	      de las características $x_i$ y $x_j$ por el producto interno
+	      $\langle\mathbf{v}_i, \mathbf{v}_j\rangle$ y sumamos todas las contribuciones
+	      para obtener la parte de factorización de la predicción.
+
 \end{itemize}
+
+En resumen, la expresión completa $\hat{y}(x)$ representa la estimación de la
+variable dependiente $\hat{y}$ basada en la entrada $x$, utilizando una
+combinación lineal de los pesos de las características y una suma de productos
+internos entre los vectores de características latentes para capturar
+interacciones no lineales entre las características. Este modelo es comúnmente
+utilizado en el campo del aprendizaje automático para problemas de regresión y
+clasificación.
 
 De esta forma los dos primeros términos corresponden al modelo de regresión
 lineal y el último término es una extensión del modelo de factorización
@@ -1695,12 +1723,12 @@ grado 2, sin embargo, la estabilidad numérica podría disminuí la generalizaci
 del método.
 
 Al aplicar un método de optimización con las máquinas de factorización, como
-puede el método del gradiente descendente, se puede llegar fácilmente a una
+puede ser el método del gradiente descendente, se puede llegar fácilmente a una
 complejidad del orden $\mathcal{O}(kd^2)$, ya que se deben calcular todas las
-interacciones de a pares. Para resolver este problema de insuficiencia, podemos
-reorganizar el tercer término del método, lo que podría reducir en gran medida
-el costo de cálculo, lo que lleva a una complejidad de tiempo de orden lineal
-$\mathcal{O}(kd)$. A continuación se describe los pasas para bajar el nivel de
+interacciones de a pares. Para resolver este problema de \textit{performance},
+podemos reorganizar el tercer término del método, Esto reduce en gran medida el
+costo de cálculo, llevandolo a una complejidad de tiempo de orden lineal
+$\mathcal{O}(kd)$. A continuación se describen los pasos para bajar el nivel de
 complejidad del método:
 
 \begin{equation}
@@ -1713,10 +1741,10 @@ complejidad del método:
 	\end{split}
 \end{equation}
 
-Con esta re-formulación de último termino, la complejidad del método se reduce
+Con esta re-formulación del último termino, la complejidad del método se reduce
 considerablemente. Además, para las variables ralas, solo se deben computar los
-valores distintos de cero para que la complejidad general sea lineal.
-Finalmente la expresión del método aplicada esta re-formulación queda como
+valores distintos de cero, para que la complejidad general sea lineal.
+Finalmente, la expresión del método aplicando esta re-formulación queda como
 sigue:
 
 \begin{equation}
@@ -1725,49 +1753,53 @@ sigue:
 
 \clearpage
 
-\subsection{\textit{Deep Factorization Machine (DeepFM)}}
+\subsection{Máquinas de factorización profundas (\textit{DeepFM})}
 
 Hasta aquí, a grandes rasgos, todos los modelos expuestos tratan de captar el
 comportamiento de las interacciones o correlación usuario-ítems, ya sean
 implícitas o explicitas. A pesar de este gran progreso, los métodos expuestos
-anteriormente (exceptuando las \textit{Máquinas de Factorización}) parecen
-tener un fuerte sesgo al predecir las interacciones o correlaciones de bajo y
-alto orden, requiriendo en algunos casos realizar ingeniería de features para
-disminuir estos sesgos.
+anteriormente (exceptuando las máquinas de factorización) parecen tener un
+fuerte sesgo al predecir las interacciones o correlaciones de bajo y alto
+orden, requiriendo en algunos casos realizar ingeniería de \textit{features}
+para disminuir estos sesgos.
 
-El modelo \textit{Deep Factorization Machine (DeepFM)}~\cite{dfmpaper, didldfm}
-o Maquina de factorización basada en \textit{Deep Learning}, mejora el
-aprendizaje de las interacciones o correlaciones de bajo y alto orden. Este
-modelo combina \textit{Máquinas de Factorización} y \textit{Deep Learning} en
-una nueva arquitectura de red neuronal la cual captura estas correlaciones. Por
-otro lado, es una evolución del modelo \textit{Wide and
-	Deep}~\cite{wideanddeeppaper} de \textit{Google}, el cual es un ensample de dos
-modelos: uno lineal, que captura las interacciones o correlaciones de alto
-orden y una MLP (\textit{Multi-Layer Perceptron}) la cual captura correlación
-de mas bajo orden, o aquellas mas complejas.
+El modelo de máquinas de factorización profundas
+(\textit{DeepFM})~\cite{dfmpaper, didldfm} o maquina de factorización basada en
+\textit{Deep Learning}, mejora el aprendizaje de las interacciones o
+correlaciones de bajo y alto orden. Este modelo combina máquinas de
+factorización y \textit{Deep Learning} en una nueva arquitectura de red
+neuronal, la cual captura estas correlaciones. Por otro lado, es una evolución
+del modelo \textit{Wide and Deep}~\cite{wideanddeeppaper} de \textit{Google},
+el cual es un ensamble de dos modelos: uno lineal, que captura las
+interacciones o correlaciones de alto orden y una red neuronal perceptron
+multicapa o \textit{Multi-Layer Perceptron (MLP)}, la cual captura correlación
+de mas bajo orden (aquellas mas complejas).
 
-A continuación de puede visualizar un diagrama de bloques de alto nivel de
-modelos:
+A continuación de puede visualizar un diagrama de bloques de alto nivel del
+modelo:
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=6cm]{./images/Deep-MF.png}
 	\caption{
-		Esquema de un modelo \textit{Deep Factorization Machine (DeepFM)} o maquina de factorización basada en \textit{Deep Learning}.
+		Esquema de un modelo \textit{Deep Factorization Machine (DeepFM)} o maquina
+		de factorización basada en \textit{Deep Learning}.
 	}
 	\label{fig:DeepMFModel}
 \end{figure}
 
 Donde se puede apreciar que las entradas del modelo son las variables
 categóricas correspondiente a usuarios e ítems, como en los modelos previamente
-visto. Dado un id de usuario y ítem se resuelve sus correspondientes vectores
-\textit{embedding}, los cuales se convierten en entradas para los siguientes
-dos bloques. Uno de los bloques no es mas que una red neuronal multi capa con
-capas densa o fully connected. Por el otro lado ambos vectores se toman como
-entrada a la \textit{maquina de factorización}. Las salida de ambos bloques son
-volares escalares los cuales se suman y se pasan por una activación
-\textit{ReLU} ya que en nuestro caso las calificaciones son valores mayos a
-cero.
+visto. Dado un identificador de usuario e ítem, se resuelve sus
+correspondientes vectores \textit{Embedding}, los cuales se convierten en
+entradas para los siguientes dos bloques. Uno de los bloques intermedios, no es
+mas que una red neuronal multi capa con capas densas o \textit{fully
+	connected}. Por el otro lado, ambos vectores se toman como entrada a la máquina
+de factorización. Las salidas de ambos bloques intermedios, de valores
+escalares, se suman y se pasan por una activación \textit{ReLU}. Para el caso
+de estudio de este trabajo, las salidas o calificaciones toman valores mayores
+a cero, por esta cuestión es mas adecuado usar una activación \textit{ReLU}
+frente a una lineal.
 
 \section{Métricas}
 
@@ -1775,8 +1807,10 @@ Para medir y comparar el grado de exactitude de los modelos seleccionados tanto
 en el conjunto de validación como en truncamiento se seleccionado dos métricas:
 
 \begin{itemize}
-	\item \textit{Root Mean Square Error (RMSE)}: ES la raíz cuadrada del error cuadrático medio.
-	\item \textit{Mean Average Precision at k (mAP@k)}: Es la media del promedio de la precision  para un tamaño K de observaciones.
+	\item \textit{Root Mean Square Error (RMSE)}: Es la raíz cuadrada del error
+	      cuadrático medio.
+	\item \textit{Mean Average Precision at k (mAP@k)}: Es la media del
+	      promedio de la precision  para un tamaño K de observaciones.
 \end{itemize}
 
 \subsection{\textit{Root Mean Square Error (RMSE)}}
