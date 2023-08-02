@@ -729,8 +729,8 @@ En la figura~\ref{fig:correlationPlot} se aprecia de las variables
 películas mas votadas en general son las mas populares. Las variables
 \textit{vote\_count} y \textit{vote\_mean} están altamente correlacionadas
 entre si, ya que la media se calcula en base a la variable
-\textit{vote\_count}. Por otro lado, también es de esperar que las
-variables \textit{rating} (Calificaciones) y la \textit{vote\_mean} esten
+\textit{vote\_count}. Por otro lado, también es de esperar que las variables
+\textit{rating} (Calificaciones) y la \textit{vote\_mean} esten
 correlacionadas, ya que a medida de aumenta la \textit{vote\_mean} tenemos
 calificaciones mas altas. Se encuentra una alta correlación entre la variable
 que identifica a una película y la variable \textit{relese\_year} (Fecha de
@@ -1549,8 +1549,8 @@ agregar términos de regularización en la función de error a minimizar:
 	\item $\|H\|$ y $\|W\|$ pueden ser normas matriciales u otro tipo de norma dependiendo del sistema de recomendación.
 \end{itemize}
 
-\subsection{Factorización Matricial General con Sesgo 
-(\textit{Biased General Matrix Factorization o B-GFM})}
+\subsection{Factorización Matricial General con Sesgo
+	(\textit{Biased General Matrix Factorization o B-GFM})}
 
 El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs}, visto en el
 apartado anterior, realiza recomendaciones de muy buena calidad, pero tiene una
@@ -1586,8 +1586,8 @@ ambas capas \textit{Embedding} correspondiente a los \textit{bias} o sesgos.
 
 \clearpage
 
-\subsection{Factorización Matricial mediante Redes Neuronales 
-(\textit{Neural Network Matrix Factorization o NN-FM})}
+\subsection{Factorización Matricial mediante Redes Neuronales
+	(\textit{Neural Network Matrix Factorization o NN-FM})}
 
 En los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}),
 dadas dos matrices de baja dimensionalidad se realiza un producto escalar y se
@@ -1809,6 +1809,7 @@ a cero, por esta cuestión es mas adecuado usar una activación \textit{ReLU}
 frente a una lineal.
 
 \section{Métricas}
+\label{sec:metrics}
 
 Para medir y comparar el grado de exactitude de los modelos seleccionados,
 tanto en el conjunto de validación como entrenamiento, se han seleccionado dos
@@ -1973,7 +1974,6 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 \section{Algoritmo de los K vencinos cercanos (\textit{K-Nearest-Neighbor} o \textit{KNN})}
 
-
 \subsection{Algoritmo de los K vencinos cercanos basado en usuarios (\textit{KNN User Based})}
 
 \begin{figure}[!htb]
@@ -2019,8 +2019,8 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 		\textit{KNN Item Based} sobre las observaciones de entrenamiento.}
 \end{figure}
 
-\subsection{Modelo ensamble de los algoritmos de los K 
-	vecinos cercanos basados en usuarios e ítems 
+\subsection{Modelo ensamble de los algoritmos de los K
+	vecinos cercanos basados en usuarios e ítems
 	(\textit{KNN User-Item Based Ensemble})
 }
 
@@ -2044,7 +2044,6 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 \clearpage
 \section{Factorización Matricial General (\textit{General Matrix Factorization o GMF})}
-
 
 A continuación se puede apreciar las curvas de error (\textit{MSE}) para el
 conjunto de validación y entrenamiento:
@@ -2092,8 +2091,8 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 
 \clearpage
 
-\section{Factorización Matricial General con Sesgo 
-(\textit{Biased General Matrix Factorization o B-GFM})}
+\section{Factorización Matricial General con Sesgo
+  (\textit{Biased General Matrix Factorization o B-GFM})}
 
 \begin{figure}[h!]
 	\centering
@@ -2124,9 +2123,8 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
-\section{Factorización Matricial mediante Redes Neuronales 
-(\textit{Neural Network Matrix Factorization o NN-FM})}
-
+\section{Factorización Matricial mediante Redes Neuronales
+  (\textit{Neural Network Matrix Factorization o NN-FM})}
 
 \begin{figure}[h!]
 	\centering
@@ -2163,7 +2161,6 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 
 \section{Máquinas de factorización profundas (\textit{DeepFM})}
 
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-mapk.png}
@@ -2187,8 +2184,8 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 
 En esta sección se llevará a cabo una comparación de todos los modelos
 previamente expuestos. Para realizar esta comparación, se emplearán las
-métricas presentadas en secciones anteriores. A modo de resumen, las métricas
-consideradas fueron las siguientes:
+métricas presentadas en secciones anteriores~\autoref{sec:metrics}. A modo de
+resumen, las métricas consideradas fueron las siguientes:
 
 \begin{itemize}
 	\item \textit{Mean Average Precision at k (mAP@k)}: Esta métrica
