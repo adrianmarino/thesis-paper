@@ -1311,7 +1311,7 @@ las predicciones. A esta presentación interna muchas veces se la llama modelo,
 ya que el modelo en si no es el algoritmo utilizado si no el estado internal al
 que se llega luego del entrenamiento.
 
-\subsection{\textit{One-Hot Encoding vs. Embeddings}}
+\subsection{Codificación \textit{One-Hot} vs \textit{Embeddings}}
 
 Particularmente en el ámbito de recomendaciones, se cuenta con variables
 categóricas de alta dimensionalidad. Para este trabajo, tenemos dos variable
@@ -1382,7 +1382,7 @@ captan esta información de forma automática en base a las observaciones usadas
 en el entrenamiento, generando estos espacios latentes llamados
 \textit{Embeddings}.
 
-\subsection{\textit{Embedding Layer}}
+\subsection{Capa o módulo \textit{Embedding}}
 
 En el ámbito del \textit{Deep Learning} o \textit{Machine Learning} se cuenta
 con la abstracción de capas (en \textit{frameworks} como \textit{Keras}) o
@@ -1452,7 +1452,7 @@ utilizados en los modelos de recomendación basados en \textit{Deep Learning}. A
 partir de este punto, se procederá a describir las arquitecturas utilizadas en
 este trabajo.
 
-\subsection{\textit{General Matrix Factorization (GMF)}}
+\subsection{Factorización Matricial General (\textit{General Matrix Factorization o GMF})}
 
 Esta es una arquitectura clásica en sistemas de recomendación basados en
 filtros colaborativos. El algoritmo de factorización de matrices~\cite{afm}
@@ -1549,7 +1549,8 @@ agregar términos de regularización en la función de error a minimizar:
 	\item $\|H\|$ y $\|W\|$ pueden ser normas matriciales u otro tipo de norma dependiendo del sistema de recomendación.
 \end{itemize}
 
-\subsection{\textit{Biased General Matrix Factorization (B-GMF)}}
+\subsection{Factorización Matricial General con Sesgo 
+(\textit{Biased General Matrix Factorization o B-GFM})}
 
 El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs}, visto en el
 apartado anterior, realiza recomendaciones de muy buena calidad, pero tiene una
@@ -1585,7 +1586,8 @@ ambas capas \textit{Embedding} correspondiente a los \textit{bias} o sesgos.
 
 \clearpage
 
-\subsection{\textit{Neural Network Matrix Factorization (NN-MF)}}
+\subsection{Factorización Matricial mediante Redes Neuronales 
+(\textit{Neural Network Matrix Factorization o NN-FM})}
 
 En los enfoques anteriormente vistos (\textit{GFM} y \textit{Biased GFM}),
 dadas dos matrices de baja dimensionalidad se realiza un producto escalar y se
@@ -1649,7 +1651,7 @@ lo que permitiría abordar el problema como uno de clasificación.
 
 \clearpage
 
-\subsection{Máquinas de factorización (\textit{FM})}
+\subsection{Máquinas de Factorización (\textit{FM})}
 
 Antes de introducir el modelo de máquinas de factorización profundas
 (\textit{DeepFM}) se comenzara explicando uno de sus componentes mas
@@ -1820,6 +1822,7 @@ métricas:
 \end{itemize}
 
 \subsection{\textit{Root Mean Square Error (RMSE)}}
+\label{sec:rmse_ref}
 
 Dado que todos los modelos que se evaluaron en este trabajo tiene como salida
 una variable real (Calificación de los usuarios para un ítem), es posible
@@ -1847,6 +1850,7 @@ los mismos.
 \end{itemize}
 
 \subsection{\textit{Mean Average Precision at k (mAP@k)}}
+\label{sec:map_ref}
 
 \textit{Mean Average Precision at k (mAP@k)} o media del promedió de la
 precision para K observaciones, es una de las métricas mas usada
@@ -1962,21 +1966,44 @@ Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
 variabilidad o varianza de sus predicciones, se realizo N veces un muestreo
 sobre el conjunto de validación para cada métrica utilizada. Luego, se gráfico
 un histograma de la distribución de la métricas, y un boxplot para tener una
-mejor idea de cual es su valor medio y la dispersion se puede esperar.
+mejor idea de cual es su valor medio y la dispersion que se puede esperar.
 
 A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
-\section{\textit{K-Nearest-Neighbor (KNN)}}
+\section{Algoritmo de los K vencinos cercanos (\textit{K-Nearest-Neighbor} o \textit{KNN})}
 
-\subsection{\textit{KNN Item Based}}
+
+\subsection{Algoritmo de los K vencinos cercanos basado en usuarios (\textit{KNN User Based})}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15cm]{./images/metrics-knn-user-based-mapk.png}
+	\caption{Esta gráfica describe la distribución de valores de la métrica
+		\textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
+		validación, luego de N procesos de entrenamiento del modelo
+		\textit{KNN User Based} sobre las observaciones de entrenamiento.}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15cm]{./images/metrics-knn-user-based-RMSE.png}
+	\caption{Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de validación,
+		luego de N procesos de entrenamiento del modelo
+		\textit{KNN User Based} sobre las observaciones de entrenamiento.}
+\end{figure}
+
+\clearpage
+
+\subsection{Algoritmo de los K vencinos cercanos basado en ítems (\textit{KNN Item Based})}
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-knn-item-based-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la
-		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
-		observaciones de validación, luego de N procesos de entrenamiento
+	\caption{Esta gráfica describe la distribución de valores de la
+		métrica \textit{mAP@5(4,5)} evaluada en el conjunto de
+		observaciones de validación , luego de N procesos de entrenamiento
 		del modelo \textit{KNN Item Based} sobre las observaciones de
 		entrenamiento.}
 \end{figure}
@@ -1986,41 +2013,22 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-knn-item-based-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la
-		métrica \textit{RMSE} evaluado en el conjunto de observaciones
+	\caption{Esta gráfica describe la distribución de valores de la
+		métrica \textit{RMSE} evaluada en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del modelo
 		\textit{KNN Item Based} sobre las observaciones de entrenamiento.}
 \end{figure}
 
-\subsection{\textit{KNN User Based}}
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=15cm]{./images/metrics-knn-user-based-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
-		\textit{mAP@5(4,5)} evaluado en el conjunto de observaciones de
-		validación, luego de N procesos de entrenamiento del modelo
-		\textit{KNN User Based} sobre las observaciones de entrenamiento.}
-\end{figure}
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=15cm]{./images/metrics-knn-user-based-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
-		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
-		luego de N procesos de entrenamiento del modelo
-		\textit{KNN User Based} sobre las observaciones de entrenamiento.}
-\end{figure}
-
-\clearpage
-
-\subsection{\textit{KNN User Based Ensemble} y \textit{Item Based}}
+\subsection{Modelo ensamble de los algoritmos de los K 
+	vecinos cercanos basados en usuarios e ítems 
+	(\textit{KNN User-Item Based Ensemble})
+}
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-knn-ensemple-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
-		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
+	\caption{Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de validación,
 		luego de N procesos de entrenamiento del modelo \textit{KNN}
 		sobre las observaciones de entrenamiento.}
 \end{figure}
@@ -2028,16 +2036,17 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-knn-ensemple-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
-		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
+	\caption{Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de validación,
 		luego de N procesos de entrenamiento del modelo \textit{KNN}
 		sobre las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
-\section{\textit{General Matrix Factorization (GFM)}}
+\section{Factorización Matricial General (\textit{General Matrix Factorization o GMF})}
 
-A continuación se puede apreciar las cursas de la $Loss$ (\textit{MSE}) para el
+
+A continuación se puede apreciar las curvas de error (\textit{MSE}) para el
 conjunto de validación y entrenamiento:
 
 \begin{figure}[ht]
@@ -2062,7 +2071,7 @@ errores.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del modelo
 		\textit{GFM} sobre las observaciones de entrenamiento.}
@@ -2075,14 +2084,16 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
+	\caption{Esta gráfica describe la distribución de valores de la métrica
 		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
 		luego de N procesos de entrenamiento del modelo \textit{GFM} sobre
 		las observaciones de entrenamiento.}
 \end{figure}
 
 \clearpage
-\section{\textit{Biased General Matrix Factorization (B-GFM)}}
+
+\section{Factorización Matricial General con Sesgo 
+(\textit{Biased General Matrix Factorization o B-GFM})}
 
 \begin{figure}[h!]
 	\centering
@@ -2096,7 +2107,7 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la métrica
+	\caption{Esta gráfica describe la distribución de valores de la métrica
 		\textit{mAP@5(4,5)} evaluado en el conjunto de observaciones de
 		validación, luego de N procesos de entrenamiento del modelo
 		\textit{B-GFM} sobre las observaciones de entrenamiento.}
@@ -2107,13 +2118,15 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{RMSE} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del
 		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.}
 \end{figure}
 
-\section{\textit{Neural Network Matrix Factorization (NN-FM)}}
+\section{Factorización Matricial mediante Redes Neuronales 
+(\textit{Neural Network Matrix Factorization o NN-FM})}
+
 
 \begin{figure}[h!]
 	\centering
@@ -2130,7 +2143,7 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
 		observaciones de validación, luego de N procesos de
 		entrenamiento del modelo \textit{NN-FM} sobre las observaciones
@@ -2140,7 +2153,7 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{RMSE} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del
 		modelo \textit{NN-FM} sobre las observaciones de entrenamiento.}
@@ -2148,12 +2161,13 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 
 \clearpage
 
-\section{\textit{Deep Factorization Machine (DeepFM)}}
+\section{Máquinas de factorización profundas (\textit{DeepFM})}
+
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-mapk.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
 		observaciones de validación, luego de N procesos de
 		entrenamiento del modelo \textit{DeepFM} sobre las observaciones
@@ -2163,7 +2177,7 @@ de validación N veces para comprender cual es su valor medio y dispersión.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-RMSE.png}
-	\caption{Esta gráfica describe un histograma del valor de la
+	\caption{Esta gráfica describe la distribución de valores de la
 		métrica \textit{RMSE} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del modelo
 		\textit{DeepFM} sobre las observaciones de entrenamiento.}
