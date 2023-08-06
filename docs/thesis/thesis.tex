@@ -807,8 +807,8 @@ brevemente el contenido de la misma, sin revelar su desenlace.
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-Overview.png}
 	\caption{
-		Frecuencia de palabras encontradas en la variable 
-		\textit{Overview}. El tamaño de cada palabra representan 
+		Frecuencia de palabras encontradas en la variable
+		\textit{Overview}. El tamaño de cada palabra representan
 		la cantidad de apariciones de la misma.
 	}
 	\label{fig:overviewCloud}
@@ -822,10 +822,10 @@ mayor frecuencia: \textit{Find}, \textit{Live}, \textit{Love}, \textit{Wife},
 variables \textit{tags} y \textit{overview}(Sinopsis). La variable
 \textit{tags} parece categorizar las películas desde distintas perspectivas.
 Por otro lado, la variable \textit{overview} contiene palabras que son mas
-utilizadas en la descripción de la misma. A simple vista, los
-clusters (\textit{Embeddings}) que pudieran generarse utilizando esta variable,
-podrían ser mas específicos que aquellos \textit{clusters} generados a partir
-de la variable \textit{tags}.
+utilizadas en la descripción de la misma. A simple vista, los clusters
+(\textit{Embeddings}) que pudieran generarse utilizando esta variable, podrían
+ser mas específicos que aquellos \textit{clusters} generados a partir de la
+variable \textit{tags}.
 
 \begin{description}
 	\item[Title]
@@ -931,8 +931,8 @@ A continuación se pueden visualizar las cargas o \textit{loadings}:
 
 	\caption{
 		Coeficientes de componentes principales vs variables
-		originales. Cada uno de estos valores representan el grado 
-		de correlación o aporte de cada variable original a 
+		originales. Cada uno de estos valores representan el grado
+		de correlación o aporte de cada variable original a
 		cada componente principal.
 	}
 	\label{fig:loadingsTable}
@@ -973,11 +973,11 @@ La componente $PC3$ es mas difícil de nombrar, pero podría llamarse: Grado
 	\centering
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
 	\caption{
-		Diagrama~\cite{biplot}\textit{Biplot}. Este diagrama representa 
-		los valores de las variables originales coloreados en color rojo, 
-		negro y gris. Estos colores corresponden a tres segmentos de 
+		Diagrama~\cite{biplot}\textit{Biplot}. Este diagrama representa
+		los valores de las variables originales coloreados en color rojo,
+		negro y gris. Estos colores corresponden a tres segmentos de
 		calificaciones: $>2$, entre $2$ y $3.5$ y $>4$.
-		También se pueden apreciar los vectores correspondientes a 
+		También se pueden apreciar los vectores correspondientes a
 		las variables originales.
 	}
 	\label{fig:biplot}
@@ -1059,9 +1059,8 @@ tiempos de entrenamiento e inferencia.
 \section{Enfoque Basados en Memoria}
 
 \subsection{
-	Algoritmo de los K vecinos cercanos (\textit{K-Nearest-Neighbor} 
-	o \textit{KNN})
-}
+	Algoritmo de los K vecinos cercanos (\textit{K-Nearest-Neighbor}
+	o \textit{KNN}) }
 
 Esta es la implementación clásica y mas intuitiva para realizar recomendación
 de ítems. Una vez entrenado el modelo, se cuenta con una matriz de distancias
@@ -1220,7 +1219,7 @@ predicción para cada implementación elegida.
 \clearpage
 
 \subsection{
-	Algoritmo de los K vecinos cercanos basado en usuarios 
+	Algoritmo de los K vecinos cercanos basado en usuarios
 	(\textit{KNN User Based})
 }
 
@@ -1246,8 +1245,8 @@ calificación de un ítem, se define a continuación:
 	\item $o$ (Minúscula) pertenece al conjunto $O$ (Mayúscula) de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. Se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada índice representa a un usuario distinto.
-	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas 
-		por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
+	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas
+	      por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para
 	      el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza
 	      para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la
@@ -1283,7 +1282,7 @@ momento de la predicción, obteniendo como resultado el $K$ para el cual el
 modelo tiene el resultado mas exactos posibles.
 
 \subsection{
-	Algoritmo de los K vecinos cercanos basado en ítems 
+	Algoritmo de los K vecinos cercanos basado en ítems
 	(\textit{KNN Item Based})
 }
 
@@ -1836,8 +1835,8 @@ frente a una lineal.
 \section{Métricas}
 \label{sec:metrics}
 
-Para medir y comparar el grado de exactitud de los modelos seleccionados,
-tanto en el conjunto de validación como entrenamiento, se han seleccionado dos
+Para medir y comparar el grado de exactitud de los modelos seleccionados, tanto
+en el conjunto de validación como entrenamiento, se han seleccionado dos
 métricas:
 
 \begin{itemize}
@@ -1998,12 +1997,11 @@ A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 \section{
-	Algoritmo de los K vecinos cercanos 
-	(\textit{K-Nearest-Neighbor} o \textit{KNN})
-}
+  Algoritmo de los K vecinos cercanos
+  (\textit{K-Nearest-Neighbor} o \textit{KNN}) }
 
 \subsection{
-	Algoritmo de los K vecinos cercanos basado 
+	Algoritmo de los K vecinos cercanos basado
 	en usuarios (\textit{KNN User Based})
 }
 
@@ -2029,7 +2027,7 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 \subsection{
 	Algoritmo de los K vecinos cercanos basado
-	 en ítems (\textit{KNN Item Based})
+	en ítems (\textit{KNN Item Based})
 }
 
 \begin{figure}[!htb]
@@ -2225,14 +2223,14 @@ resumen, las métricas consideradas fueron las siguientes:
 	\item \textit{Mean Average Precision at k (mAP@k)}: Esta métrica
 	      representa el promedio de la precisión al calificar los primeros
 	      K ítems de una lista de recomendaciones para un usuario específico.
-	      Para obtener más detalles, se puede consultar la sección de
-	      referencia sobre \textit{mAP@k} (consultar la \autoref{sec:map_ref}).
+	      Para obtener más detalles, se puede consultar la
+	      \autoref{sec:map_ref} de referencia sobre \textit{mAP@k}.
 	\item \textit{Root Mean Square Error (RMSE)}: Esta métrica
 	      corresponde a la raíz cuadrada del error cuadrático medio entre
 	      la calificación real de un ítem, proporcionada por un usuario,
 	      y la calificación predicha. Para obtener más información, se
-	      puede consultar la sección de referencia sobre \textit{RMSE}
-	      (consultar la \autoref{sec:rmse_ref}).
+	      puede consultar la \autoref{sec:rmse_ref} de referencia
+	      sobre \textit{RMSE}.
 \end{itemize}
 
 Para calcular estas métricas, se realizo un muestreo para determinar su
@@ -2283,27 +2281,28 @@ En la tabla~\ref{table:ap_at_k}, se puede observar inicialmente que el modelo
 evaluación \textit{AP@5(4,5)}. Por otro lado, los modelos \textit{NN-MF} y
 \textit{Deep-FM} exhiben el menor sesgo, pero aún así, tienen una precisión
 inferior al modelo \textit{Biased-GMF}. Esto podría indicar un mayor grado de
-sobre ajuste en estos modelos. Por lo tanto, sería recomendable re-entrenar ambos
-modelos con un aumento en el valor del parámetro \textit{dropout} para mejorar
-la regularización y, posteriormente, comparar nuevamente sus resultados con el
-modelo \textit{Biased-GMF} para validar si su precisión mejora.
+sobre ajuste en estos modelos. Por lo tanto, sería recomendable re-entrenar
+ambos modelos con un aumento en el valor del parámetro \textit{dropout} para
+mejorar la regularización y, posteriormente, comparar nuevamente sus resultados
+con el modelo \textit{Biased-GMF} para validar si su precisión mejora.
 
 En cuanto a la familia de modelos \textit{KNN}, se observa que presenta el
 mayor sesgo. Sin embargo, a pesar de esto, se puede notar que la diferencia en
 la precisión, en comparación con los demás modelos, es bastante baja, siendo
-menos del 2%.
+menos del 2\%.
 
 En resumen, los resultados muestran que el modelo \textit{Biased-GMF} sobresale
-en precisión según la métrica \textit{AP@5(4,5)}. Los modelos \textit{NN-MF} y
-\textit{Deep-FM}, aunque tienen menos sesgo, deben ser re-entrenados con un
-mayor valor de \textit{dropout} para potencialmente mejorar su precisión. Por
-otro lado, la familia de modelos \textit{KNN}, a pesar de presentar un sesgo
-más alto, aún logra una precisión cercana a los demás modelos en comparación.
+en cuanto a precisión, según la métrica \textit{AP@5(4,5)}. Los modelos
+\textit{NN-MF} y \textit{Deep-FM}, aunque tienen menos sesgo, deben ser
+re-entrenados con un mayor valor de \textit{dropout} para potencialmente
+mejorar su precisión. Por otro lado, la familia de modelos \textit{KNN}, a
+pesar de presentar un sesgo más alto, logra una precisión cercana a los demás
+modelos en comparación.
+
 \clearpage
 
 A continuación, se presenta la comparación de todos los modelos expuestos
-utilizando utilizando la raíz cuadrada del error cuadrático medio
-(\textit{RMSE}):
+utilizando la raíz cuadrada del error cuadrático medio (\textit{RMSE}):
 
 \begin{table}[!htb]
 	\centering
@@ -2323,15 +2322,17 @@ utilizando utilizando la raíz cuadrada del error cuadrático medio
 	\end{tabular}
 	\caption{
 		Mediana, media y desvío correspondientes a la distribución de
-		\textit{RMSE} muestreada para cada modelo. Las filas se
-		encuentran ordenadas  descendente-mente por la media.}
+		la raíz cuadrada del error cuadrático medio (\textit{RMSE}),
+		muestreada para cada modelo. Las filas se encuentran ordenadas
+		descendente-mente por la media.
+	}
 	\label{table:rmse}
 \end{table}
 
 En la tabla~\ref{table:rmse}, se puede observar que el modelo \textit{NN-MF}
 parece ser el más estable en términos del error de validación, ya que presenta
 el menor error y dispersión. Sin embargo, a pesar de su estabilidad, como se
-puede apreciar en la tabla~\ref{table:ap_at_k} (anteior) no es el modelo más
+puede apreciar en la tabla~\ref{table:ap_at_k} (anterior) no es el modelo más
 preciso. Este hecho podría sugerir que \textit{NN-MF} estaría experimentando un
 grado significativo de sobre ajuste en comparación con otros modelos que logran
 una mayor precisión.
@@ -2342,16 +2343,16 @@ mayor. Esto indica que la teoría del sobre ajuste aplicada a \textit{NN-MF}
 podría ser válida y explicar su menor precisión en comparación con
 \textit{Biased-GMF}.
 
-Además, se nota que la familia de modelos \textit{KNN} muestra los errores más
-altos junto con desvíos elevados. Sin embargo, es interesante destacar que, a
-pesar de estos altos errores, estos modelos presentan una precisión muy similar
-al modelo más preciso, \textit{B-GMF}.
+Además, se puede notar que la familia de modelos \textit{KNN} muestra los
+errores más altos junto con desvíos elevados. Sin embargo, es interesante
+destacar que, a pesar de estos altos errores, estos modelos presentan una
+precisión muy similar al modelo más preciso, \textit{B-GMF}.
 
 \chapter{Conclusiones}
 
-En resumen, al analizar los modelos expuesto en este trabajo practico, se
-encontró que todos tienen una precisión similar, con una diferencia de menos
-del $2\%$. Sin embargo, al considerar la implementación en un
+En resumen, al analizar los modelos expuesto en este trabajo, se encontró que
+todos tienen una precisión (\textit{AP@5(4,5)}) similar, con una diferencia de
+menos del $2\%$. Sin embargo, al considerar la implementación en un
 \textit{e-commerce}, se recomendaría elegir un modelo basado en \textit{deep
 	learning}, como \textit{B-GMF} o \textit{GMF}, ya que utilizan el algoritmo del
 gradiente descendente y pueden procesar las observaciones de entrenamiento en
@@ -2364,14 +2365,14 @@ del modelo.
 
 Por otro lado, se encontró que el modelo \textit{DeepFM} (estado del arte) no
 obtiene la precisión más alta, y su rendimiento es prácticamente igual a los
-modelos de la familia \textit{KNN} para el conjunto de datos estudiado. 
-Esto se puede apreciar en la tabla~\ref{table:ap_at_k}, donde la diferecia 
-en precisión entre \textit{DeepFM} y \textit{KNN} es del orden del $2\%$ 
+modelos de la familia \textit{KNN} para el conjunto de datos estudiado. Esto se
+puede apreciar en la tabla~\ref{table:ap_at_k}, donde la diferencia en
+precisión entre \textit{DeepFM} y \textit{KNN} es del orden del $2\%$
 aproximadamente.
 
-En general, los modelos de \textit{deep learning} presentaron mejores 
-resultados en este conjunto de pruebas en comparación con los modelos
-clásicos como \textit{KNN}, aunque las diferencias fueron son muy pequeñas.
+En general, los modelos de \textit{deep learning} presentaron mejores
+resultados en este conjunto de pruebas en comparación con los modelos clásicos
+como \textit{KNN}, aunque las diferencias fueron son muy pequeñas.
 
 %%%% BIBLIOGRAFÍA
 
