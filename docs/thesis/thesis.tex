@@ -72,10 +72,12 @@ decir que los sistemas de recomendación buscan ayudar a un usuario o grupo de
 usuarios a descubrir ítems que se ajusten a sus preferencias, dado un conjunto
 de ítems que puede ser extenso o en un amplio espacio de búsqueda.
 
-Este objetivo puede variar dependiendo de cada negocio: Si consideramos un
-\textit{e-commerce} de \textit{delivery} gastronómico, su propósito sería
-ofrecer a los clientes platos relevantes a un precio asequible y con un tiempo
-de entrega aceptable.
+\begin{sloppypar}
+	Este objetivo puede variar dependiendo de cada negocio: Si consideramos un
+	\textit{e-commerce} de \textit{delivery} gastronómico, su propósito sería
+	ofrecer a los clientes platos relevantes a un precio asequible y con un tiempo
+	de entrega aceptable.
+\end{sloppypar}
 
 Si hablamos de un \textit{e-commerce} de productos, su objetivo consiste en
 proporcionar a los usuarios aquellos productos que satisfacen sus necesidades,
@@ -301,7 +303,8 @@ o interacciones con los que se cuenta.
 Esta pregunta se refiere a comprender cuando es conveniente aplicar una técnica
 u otra teniendo en cuenta las ventajas y desventajas de cada enfoque y modelo.
 
-\subsection{¿Cómo se puede solucionar el problema de \textit{Cold start} que sufre el enfoque de recomendación basado en filtros colaborativos?} (Tesis)
+\subsection{¿Cómo se puede solucionar el problema de \textit{Cold start}
+	que sufre el enfoque de recomendación basado en filtros colaborativos? (Tesis)}
 
 Como ya se comentó en la introducción, los modelos de filtro colaborativos
 necesitan un número mínimo de interacciones usuario-ítem para poder operar y
@@ -480,7 +483,7 @@ de usuarios:
 
 En segundo lugar, se realizo un \textit{merge} entre las tablas
 \textit{ratings\_tags\_v1} y \textit{movie\_metadata} utilizando la columna
-\textit{imdb\_id}, la cual es identificador únivoco de una película en ambas
+\textit{imdb\_id}, la cual es identificador unívoco de una película en ambas
 tablas.
 
 Finalmente, se obtienen dos tablas/\textit{files} como resultado:
@@ -664,7 +667,7 @@ considerables a izquierda que mueven a la media en esa dirección. Por otro
 lado, tenemos valores atípicos en el extreme izquierdo en los $0.5$ puntos.
 Esto se debe a que esta puntuación esta muy alejada del centro de los datos, el
 cual se encuentra entre el cuantiles $Q1$ y $Q3$, donde tenemos el $50\%$ las
-calificaciones con major probabilidad de ocurrencia. No se encuentran valores
+calificaciones con mayor probabilidad de ocurrencia. No se encuentran valores
 atípicos por sobre el máximo. Se puede apreciar un sesgo a izquierda, ya que
 existe mayor separación o dispersión de las observaciones entre $Q1$ y $Q2$ que
 entre $Q2$ y $Q3$. De esta forma, ambos intervalos conservan su $25\%$ de las
@@ -702,7 +705,7 @@ usuarios cada vez más usan lo niveles $3.5$ y $4.5$. Debemos tener en cuenta
 que el aumento en los niveles de puntuación con el tiempo, probablemente sean
 debidos a un aumento año a año en la base de usuarios de \textit{Movie Lens} y
 tal vez también sea el motivo por el cual en los primeros años vemos mucha
-dispersion en las puntuaciones.
+dispersión en las puntuaciones.
 
 \clearpage
 
@@ -730,10 +733,10 @@ películas mas votadas en general son las mas populares. Las variables
 \textit{vote\_count} y \textit{vote\_mean} están altamente correlacionadas
 entre si, ya que la media se calcula en base a la variable
 \textit{vote\_count}. Por otro lado, también es de esperar que las variables
-\textit{rating} (Calificaciones) y la \textit{vote\_mean} esten
+\textit{rating} (Calificaciones) y la \textit{vote\_mean} estén
 correlacionadas, ya que a medida de aumenta la \textit{vote\_mean} tenemos
 calificaciones mas altas. Se encuentra una alta correlación entre la variable
-que identifica a una película y la variable \textit{relese\_year} (Fecha de
+que identifica a una película y la variable \textit{release\_year} (Fecha de
 estreno). Esto se debe a que al momento de estrenarse una película, días
 después a mas tardar, se da de alta la película en el sitio de \textit{Movie
 	Lens}. Esto también nos dice que los identificadores son secuenciales. Las
@@ -742,7 +745,7 @@ una buena señal, ya que ayuda a diminuir el fenómeno de colinealidad de las
 variables. Las variables que son combinaciones lineales de otras variables
 puede producir que los modelos de \textit{Machine Learning} sobre-ajusten a los
 datos de entrenamiento. Las variables \textit{vote\_mean} y \textit{movie\_id}
-(Identificador de pelicula) tienen una correlación negativa muy baja. En algún
+(Identificador de película) tienen una correlación negativa muy baja. En algún
 sentido nos dice que algunas películas mas nuevas tiende a tener una media de
 votos menor. Lo mismo sucede entre las variables \textit{rating} y
 \textit{movie\_id} en menor medida. Ambas con correlaciones negativas muy
@@ -803,7 +806,11 @@ brevemente el contenido de la misma, sin revelar su desenlace.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=9cm]{./images/Cloud-Overview.png}
-	\caption{Frecuencia de palabras encontradas en la variable \textit{Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}
+	\caption{
+		Frecuencia de palabras encontradas en la variable 
+		\textit{Overview}. El tamaño de cada palabra representan 
+		la cantidad de apariciones de la misma.
+	}
 	\label{fig:overviewCloud}
 \end{figure}
 
@@ -816,7 +823,7 @@ variables \textit{tags} y \textit{overview}(Sinopsis). La variable
 \textit{tags} parece categorizar las películas desde distintas perspectivas.
 Por otro lado, la variable \textit{overview} contiene palabras que son mas
 utilizadas en la descripción de la misma. A simple vista, los
-clústers(\textit{Embeddings}) que pudieran generarse utilizando esta variable,
+clusters (\textit{Embeddings}) que pudieran generarse utilizando esta variable,
 podrían ser mas específicos que aquellos \textit{clusters} generados a partir
 de la variable \textit{tags}.
 
@@ -885,7 +892,7 @@ En la figura~\ref{fig:explainedVariancePlot}, inicialmente podemos apreciar que
 toda las componentes tiene niveles de variabilidad o varianza explicada muy
 bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que
 el grado de correlación de las variables originales es muy bajo. Utilizando el
-citerio del bastón roto podríamos seleccionar las 3 primeras componentes
+criterio del bastón roto podríamos seleccionar las 3 primeras componentes
 principales, ya que son las que acumulan mayor varianza.
 
 Por otro lado, debemos tener en cuenta que el análisis por componentes
@@ -922,8 +929,12 @@ A continuación se pueden visualizar las cargas o \textit{loadings}:
 		\bottomrule
 	\end{tabular}
 
-	\caption{Coeficientes de componentes principales vs. variables originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal.}
-
+	\caption{
+		Coeficientes de componentes principales vs variables
+		originales. Cada uno de estos valores representan el grado 
+		de correlación o aporte de cada variable original a 
+		cada componente principal.
+	}
 	\label{fig:loadingsTable}
 \end{table}
 
@@ -961,10 +972,14 @@ La componente $PC3$ es mas difícil de nombrar, pero podría llamarse: Grado
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/PCA-biplot.png}
-	\caption{Diagrama~\cite{biplot}\textit{Biplot}. Este diagrama representa los valores de
-		las variables originales coloreados en color rojo, negro y gris.
-		Estos colores corresponden a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$.
-		También se pueden apreciar los vectores correspondientes a las variables originales.}
+	\caption{
+		Diagrama~\cite{biplot}\textit{Biplot}. Este diagrama representa 
+		los valores de las variables originales coloreados en color rojo, 
+		negro y gris. Estos colores corresponden a tres segmentos de 
+		calificaciones: $>2$, entre $2$ y $3.5$ y $>4$.
+		También se pueden apreciar los vectores correspondientes a 
+		las variables originales.
+	}
 	\label{fig:biplot}
 \end{figure}
 
@@ -987,9 +1002,9 @@ anteriormente en análisis de carga, donde la componente $PC1$ representa el
 grado de popularidad de una película. La variable \textit{Vote Mean} (Media de
 la cantidad de votos) aporta en forma negativa y las variables \textit{Movie ID
 } y \textit{Release Year} (Año de estreno), en forma positiva sobre la
-componente $PC2$. Las varaibles \textit{Popularity} (Popularidad), \textit{Vote
+componente $PC2$. Las variables \textit{Popularity} (Popularidad), \textit{Vote
 	Count} (Cantidad de votos) tienen casi aporte nulo a la componente $PC2$ en
-correspondencia con el analisis de cargas anteriormente expuesto. Si
+correspondencia con el análisis de cargas anteriormente expuesto. Si
 visualizamos los puntos que representan a las observaciones originales en el
 espacio latente generado por \textit{PCA}~\cite{pca}, vemos que las
 observaciones de color negro ($>4$ puntos) y gris (entre $2$ y $3.5$ puntos) se
@@ -997,7 +1012,7 @@ encuentran mas a la derecha que aquellas coloreadas en rojo ($>2$ puntos). Esto
 indica que hay un crecimiento del nivel de popularidad cuanto mas a derecha se
 encuentre un punto en la componente $PC1$, validando los análisis anteriores.
 Si visualizamos lo puntos correspondientes a las observaciones en las
-direcciones de la componente $PC2$, vemos que a major valor en la componente,
+direcciones de la componente $PC2$, vemos que a mayor valor en la componente,
 menor es el grado de popularidad de las películas, ya que los puntos rojos
 tienden a estar en el extremo positivo de la componente. Esto valida la
 hipótesis de que la componente $PC2$ indica cuan \textit{underground} es un
@@ -1024,8 +1039,8 @@ medir los resultados de todo los modelos, utilizando distintas métricas
 comparables, entrenando con el mismo \textit{dataset} en todos los casos. De
 esta forma podemos comparar los resultados de todos los modelos. Como
 \textit{baseline} se tomo el modelo de K vecinos cercanos (\textit{KNN}), dado
-que es el modelo mas simple. Este servira como punto partida para comparar
-resulados con otros modelos mas complejos.
+que es el modelo mas simple. Este servirá como punto partida para comparar
+resultados con otros modelos mas complejos.
 
 Por otro lado, dada la cantidad de datos con la que se cuenta y teniendo en
 cuenta que estos modelos son muy demandantes en cuanto a recursos de
@@ -1038,12 +1053,15 @@ los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho
 modelos del estado del arte desarrollados de forma oficial. De esta forma se
 implemento cada modelo desde cero para poder hacer uso de \textit{CPU} y
 \textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos
-disponible. Mas adelante veremos que esto puede inpactar fuertemente en los
+disponible. Mas adelante veremos que esto puede impactar fuertemente en los
 tiempos de entrenamiento e inferencia.
 
 \section{Enfoque Basados en Memoria}
 
-\subsection{Algoritmo de los K vencinos cercanos (\textit{K-Nearest-Neighbor} o \textit{KNN})}
+\subsection{
+	Algoritmo de los K vecinos cercanos (\textit{K-Nearest-Neighbor} 
+	o \textit{KNN})
+}
 
 Esta es la implementación clásica y mas intuitiva para realizar recomendación
 de ítems. Una vez entrenado el modelo, se cuenta con una matriz de distancias
@@ -1201,14 +1219,17 @@ predicción para cada implementación elegida.
 
 \clearpage
 
-\subsection{Algoritmo de los K vencinos cercanos basado en usuarios (\textit{KNN User Based})}
+\subsection{
+	Algoritmo de los K vecinos cercanos basado en usuarios 
+	(\textit{KNN User Based})
+}
 
 En el apartado anterior se explico cómo calcular las matrices de
 $Calificaciones_{u,i}$ y $Distancias_{u_a,u_b}$. El cálculo de estas matrices
 es parte del proceso de entrenamiento del modelo \textit{KNN}. En este apartado
 se explicará el proceso para realizar la predicción o inferencias de la
 calificación de un ítem por parte de un usuario~\cite{useritembasedinference}
-utilizando la variante basada en usaurios.
+utilizando la variante basada en usuarios.
 
 Entonces, el enfoque de K vecinos cercanos basado en usuarios para predecir la
 calificación de un ítem, se define a continuación:
@@ -1225,7 +1246,8 @@ calificación de un ítem, se define a continuación:
 	\item $o$ (Minúscula) pertenece al conjunto $O$ (Mayúscula) de usuarios. $O$ es el conjunto de todos los usuarios menos el usuario $u$.
 	\item $w_{u,o}$ es la similitud entre los usuarios $u$ y $o$. Se calcula mediante $Similitud \mspace{3mu}Coseno_{u, o}$
 	\item $u \neq o$, es decir que cada índice representa a un usuario distinto.
-	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
+	\item $\overline{r}_{u}$ es el promedio de todas las calificaciones realizadas 
+		por el usuario $u$. Se pueda calcular como $\overline{r}_{u} = \frac{1}{N} \sum_{i=1}^N Calificaciones_{u,i}$, siendo $N$ el la cantidad de total de ítems.
 	\item $r_{o,i} - \overline{r}_{o}$ es la diferencia entre la calificación del usuario $o$ para
 	      el ítem $i$ y el promedio de calificaciones del usuario $o$. Esta diferencia se utiliza
 	      para ajustar el sesgo de calificación de cada usuario. Este sesgo se da debido a la
@@ -1234,9 +1256,9 @@ calificación de un ítem, se define a continuación:
 	      otros usuarios son mas pesimistas y tienden a otorgar  calificaciones bajas. Al restar
 	      por la media de calificaciones de cada usuario $o$, estamos normalizando
 	      las calificaciones, haciéndolas mas o menos comparables. Aplicando esta transformación,
-	      las calificaciones se definen en terminos de cuanto se alejan de la media de
+	      las calificaciones se definen en términos de cuanto se alejan de la media de
 	      calificaciones del usuario $o$.
-	      Por supuesto que cada usuario tendra una media sesgada por su comportamiento al calificar. Mas allá
+	      Por supuesto que cada usuario tendrá una media sesgada por su comportamiento al calificar. Mas allá
 	      de esto, sigue siendo una forma de disminuir este fenómeno de subjetividad al
 	      momento de calificar un ítem.
 \end{itemize}
@@ -1260,7 +1282,10 @@ hiper parámetros regida por una métricas que valide la exactitud del modelo al
 momento de la predicción, obteniendo como resultado el $K$ para el cual el
 modelo tiene el resultado mas exactos posibles.
 
-\subsection{Algoritmo de los K vencinos cercanos basado en ítems (\textit{KNN Item Based})}
+\subsection{
+	Algoritmo de los K vecinos cercanos basado en ítems 
+	(\textit{KNN Item Based})
+}
 
 Este modelo es muy similar al anterior, la diferencia radica en que la matriz
 de $Calificaciones_{i, u}$ tiene ítems como filas en vez de usuarios, y
@@ -1294,7 +1319,7 @@ grado de similitud de cada ítem $o$ con el ítem $i$.
 \subsection{Modelo ensamble de los algoritmos de los K vecinos cercanos basados
 	en usuarios e ítems (\textit{KNN User-Item Based Ensemble})}
 
-Dado que contamos dos modelos basados en \textit{KNN} se realizo un samble de
+Dado que contamos dos modelos basados en \textit{KNN} se realizo un ensamble de
 ambos modelos, el cual realiza un promedio de las salidas de ambos modelos.
 
 \section{Enfoque basado en modelos}
@@ -1306,9 +1331,9 @@ el tamaño de los datos a procesar depende casi linealmente de los recursos de
 memoria, \textit{CPU} y/o \textit{GPU} disponibles. De esta forma, cuando es
 necesario procesar una gran cantidad de datos para realizar predicciones, se
 opta por modelos que realicen algún tipo de reducción de dimensionalidad para
-construir su representación internal, la cual luego se utilizada para realizar
+construir su representación interna, la cual luego se utilizada para realizar
 las predicciones. A esta presentación interna muchas veces se la llama modelo,
-ya que el modelo en si no es el algoritmo utilizado si no el estado internal al
+ya que el modelo en si no es el algoritmo utilizado si no el estado interno al
 que se llega luego del entrenamiento.
 
 \subsection{Codificación \textit{One-Hot} vs \textit{Embeddings}}
@@ -1400,7 +1425,7 @@ contener la capa. Ésta es siempre igual al número total de valores que puede
 tomar la variable categórica a codificar.
 
 De esta forma, si deseamos crear una capa o módulo \textit{Embedding} para la
-variable categorica Estado del Tiempo, deberiamos crear una capa de tamaño 3,
+variable categórica Estado del Tiempo, deberíamos crear una capa de tamaño 3,
 ya que cuenta con 3 posible valores, con un tamaño de vector menos a 3, ya que
 de lo contrario, tendríamos la misma dimensionalidad que tenemos al usa la
 codificación \textit{one-hot}, con la diferencia de que una capa
@@ -1413,11 +1438,11 @@ categórica. Es decir, que tendremos tantas claves como valores pueda tomar la
 variable categórica. Estas claves son codificados a números y los valores
 asociados a cada clave son vectores \textit{embedding}. Cave aclarar que en
 general, estos vectores son inicializados con valores aleatorios. Finalmente,
-en la etapa de entranamiento, el modelo irá ajustando los valores de cada
+en la etapa de entrenamiento, el modelo irá ajustando los valores de cada
 vector \textit{embedding}.
 
-En la etapa de \textit{froward pass}, se pasa como entrada un valor de la
-variable categórica codificado como númerico. Para nuestra variable Estado del
+En la etapa de \textit{forward pass}, se pasa como entrada un valor de la
+variable categórica codificado como numérico. Para nuestra variable Estado del
 Tiempo podríamos codificar sus valores como sigue:
 
 \begin{itemize}
@@ -1462,7 +1487,7 @@ familia de algoritmos fue popularizado por primera por \textit{Simon Funk} en
 la competencia \textit{Netflix prize}~\cite{netflixprize} en $2006$. La idea
 principal del algoritmo es representar a usuarios e ítems en un espacio latente
 de baja dimensionalidad. A partir del trabajo inicial realizado por
-\textit{Funk} en $2006$, se han propuesto multiples enfoques de factorización
+\textit{Funk} en $2006$, se han propuesto múltiples enfoques de factorización
 de matrices para sistemas de recomendación, siento este el modelo mas simple y
 efectivo.
 
@@ -1517,7 +1542,7 @@ En términos matriciales podemos verlo de la siguiente manera:
 	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores \textit{Embedding} de usuarios,
 	      la cuál tiene tantas filas $u$ como usuarios. $f$ es la dimensión del número de columnas
 	      (también llamada factor latente) corresponde al tamaño seleccionado para los vectores \textit{Embedding}
-	      (Como ya se aclaro anteriormente, este es un hiper-parametro a ajustar).
+	      (Como ya se aclaro anteriormente, este es un hiper-parámetro a ajustar).
 	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{Embedding} de ítems,
 	      la cual tiene tantas filas como factores latentes(posiciones) en los vectores \textit{Embedding}, y
 	      tantas columnas como ítems se tenga.
@@ -1601,9 +1626,9 @@ este caso se reemplaza el producto interno, el cual podemos pensarlo como
 conocimiento a priori del problema, por otra función desconocida, que sera la
 que aprenderá el modelo a partir de las observaciones suministradas en el
 entrenamiento. En particular, se remplaza el producto escalar sumado a los
-sesgos, por una red neuronal multi capa de capas densas o \textit{fully
+sesgos, por una red neuronal multi-capa de capas densas o \textit{fully
 	connected}. De esta forma, el modelo no solo aprender los parámetros de los
-vectores \textit{embedding}, sino también los pesos de la red multi capa. En
+vectores \textit{embedding}, sino también los pesos de la red multi-capa. En
 definitiva el modelo aprende cual es la mejor función para predecir las
 calificaciones del usuario.
 
@@ -1631,7 +1656,7 @@ producto escalar.
 Para comenzar, el modelo tiene como entradas independientes los identificadores
 de usuarios e ítems. Cada capa \textit{Embedding} retorna el correspondiente
 vector \textit{embedding} asociado a estos identificadores. A continuación, el
-bloque \textit{Flatter} toma ambos vectores y produce uno nuevo mediante su
+bloque \textit{Flatten} toma ambos vectores y produce uno nuevo mediante su
 concatenación. Este vector resultante se convierte en la entrada de una red
 multi-capa.
 
@@ -1666,7 +1691,7 @@ generalización de un modelo lineal y un model de factorización de matrices, ma
 aun, recuerdan mucho a un máquina de soporte vectorial \textit{(SVM)} que
 utiliza un kernel polinomial.
 
-A continacion, se define el modelo formalmente:
+A continuación, se define el modelo formalmente:
 
 \begin{itemize}
 	\item $x\in\mathbb{R}^{d}$ es un vector de \textit{features} donde cada una de
@@ -1734,7 +1759,7 @@ puede ser el método del gradiente descendente, se puede llegar fácilmente a un
 complejidad del orden $\mathcal{O}(kd^2)$, ya que se deben calcular todas las
 interacciones de a pares. Para resolver este problema de \textit{performance},
 podemos reorganizar el tercer término del método, Esto reduce en gran medida el
-costo de cálculo, llevandolo a una complejidad de tiempo de orden lineal
+costo de cálculo, llevándolo a una complejidad de tiempo de orden lineal
 $\mathcal{O}(kd)$. A continuación se describen los pasos para bajar el nivel de
 complejidad del método:
 
@@ -1779,7 +1804,7 @@ neuronal, la cual captura estas correlaciones. Por otro lado, es una evolución
 del modelo \textit{Wide and Deep}~\cite{wideanddeeppaper} de \textit{Google},
 el cual es un ensamble de dos modelos: uno lineal, que captura las
 interacciones o correlaciones de alto orden y una red neuronal perceptron
-multicapa o \textit{Multi-Layer Perceptron (MLP)}, la cual captura correlación
+multi-capa o \textit{Multi-Layer Perceptron (MLP)}, la cual captura correlación
 de mas bajo orden (aquellas mas complejas).
 
 A continuación de puede visualizar un diagrama de bloques de alto nivel del
@@ -1811,7 +1836,7 @@ frente a una lineal.
 \section{Métricas}
 \label{sec:metrics}
 
-Para medir y comparar el grado de exactitude de los modelos seleccionados,
+Para medir y comparar el grado de exactitud de los modelos seleccionados,
 tanto en el conjunto de validación como entrenamiento, se han seleccionado dos
 métricas:
 
@@ -1819,7 +1844,7 @@ métricas:
 	\item \textit{Root Mean Square Error (RMSE)}: Es la raíz cuadrada del error
 	      cuadrático medio.
 	\item \textit{Mean Average Precision at k (mAP@k)}: Es la media del
-	      promedio de la precision  para un tamaño K de observaciones.
+	      promedio de la precisión  para un tamaño K de observaciones.
 \end{itemize}
 
 \subsection{\textit{Root Mean Square Error (RMSE)}}
@@ -1854,10 +1879,10 @@ los mismos.
 \label{sec:map_ref}
 
 \textit{Mean Average Precision at k (mAP@k)} o media del promedió de la
-precision para K observaciones, es una de las métricas mas usada
+precisión para K observaciones, es una de las métricas mas usada
 para evaluar sistemas de recomendación~\cite{map_at_k_1, map_at_k_2, map_at_k_3}.
 
-Antes de comenzar, definamos a los sistemas de recomendación en terminos de sus
+Antes de comenzar, definamos a los sistemas de recomendación en términos de sus
 entradas y salida, donde:
 
 \begin{itemize}
@@ -1876,7 +1901,7 @@ entradas y salida, donde:
 	      para el usuario en cuestión (entrada del modelo).
 \end{itemize}
 
-Entonces, se podria decir que dada la salida de un sistema de recomendación, si
+Entonces, se podría decir que dada la salida de un sistema de recomendación, si
 encontramos en las primeras posiciones de la lista aquellos ítems con mayor
 calificación predicha, seria un buen indicador de que el modelo es preciso al
 momento de recomendar. En palabras mas simples, se desea que los primeros ítems
@@ -1915,7 +1940,7 @@ Para este fin se utilizara la métricas \textit{mAP\makeatletter@k}.
 \end{description}
 \begin{itemize}
 	\item $i$ es la posición del ítem $i^\mathrm{th}$ en la lista de $k$ elementos. $i$  toma valores entre $1$ y $k$.
-	\item $TP_i$ es 1 si la precision y el valor verdadero concuerdan.
+	\item $TP_i$ es 1 si la precisión y el valor verdadero concuerdan.
 	\item $N(k)$ es el mínimo entre el tamaño de la lista y la cantidad de $TP_{total}$ encontrados en esa lista.
 \end{itemize}
 
@@ -1967,14 +1992,20 @@ Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
 variabilidad o varianza de sus predicciones, se realizo N veces un muestreo
 sobre el conjunto de validación para cada métrica utilizada. Luego, se gráfico
 un histograma de la distribución de la métricas, y un boxplot para tener una
-mejor idea de cual es su valor medio y la dispersion que se puede esperar.
+mejor idea de cual es su valor medio y la dispersión que se puede esperar.
 
 A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
-\section{Algoritmo de los K vencinos cercanos (\textit{K-Nearest-Neighbor} o \textit{KNN})}
+\section{
+	Algoritmo de los K vecinos cercanos 
+	(\textit{K-Nearest-Neighbor} o \textit{KNN})
+}
 
-\subsection{Algoritmo de los K vencinos cercanos basado en usuarios (\textit{KNN User Based})}
+\subsection{
+	Algoritmo de los K vecinos cercanos basado 
+	en usuarios (\textit{KNN User Based})
+}
 
 \begin{figure}[!htb]
 	\centering
@@ -1996,7 +2027,10 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 \clearpage
 
-\subsection{Algoritmo de los K vencinos cercanos basado en ítems (\textit{KNN Item Based})}
+\subsection{
+	Algoritmo de los K vecinos cercanos basado
+	 en ítems (\textit{KNN Item Based})
+}
 
 \begin{figure}[!htb]
 	\centering
@@ -2053,7 +2087,7 @@ conjunto de validación y entrenamiento:
 	\includegraphics[width=13cm]{./images/metrics-GFM-train-val-loss.png}
 	\caption{Esta gráfica describe el nivel de error sobre los conjuntos
 		de observaciones de entrenamiento y validación durante el
-		entrenamiento del modelo \textit{GFM}. Cada epoch o época indica
+		entrenamiento del modelo \textit{GFM}. Cada \textit{epoch} o época indica
 		una iteración de entrenamiento del modelo sobre el conjunto completo
 		de entrenamiento.}
 \end{figure}
@@ -2209,7 +2243,7 @@ El uso de la media y el desvío estándar permite obtener el valor promedio de
 las métricas y evaluar su grado de dispersión en los datos obtenidos. La media
 nos proporciona una idea del valor típico de las métricas en el conjunto de
 prueba, mientras que el desvío estándar nos indica qué tan dispersos están los
-valores las metricas en relación con la media.
+valores las métricas en relación con la media.
 
 Además, se presenta la mediana como otra medida estadística relevante. A
 diferencia de la media, la mediana no se ve afectada por valores atípicos o
@@ -2249,7 +2283,7 @@ En la tabla~\ref{table:ap_at_k}, se puede observar inicialmente que el modelo
 evaluación \textit{AP@5(4,5)}. Por otro lado, los modelos \textit{NN-MF} y
 \textit{Deep-FM} exhiben el menor sesgo, pero aún así, tienen una precisión
 inferior al modelo \textit{Biased-GMF}. Esto podría indicar un mayor grado de
-sobreajuste en estos modelos. Por lo tanto, sería recomendable reentrenar ambos
+sobre ajuste en estos modelos. Por lo tanto, sería recomendable re-entrenar ambos
 modelos con un aumento en el valor del parámetro \textit{dropout} para mejorar
 la regularización y, posteriormente, comparar nuevamente sus resultados con el
 modelo \textit{Biased-GMF} para validar si su precisión mejora.
@@ -2261,7 +2295,7 @@ menos del 2%.
 
 En resumen, los resultados muestran que el modelo \textit{Biased-GMF} sobresale
 en precisión según la métrica \textit{AP@5(4,5)}. Los modelos \textit{NN-MF} y
-\textit{Deep-FM}, aunque tienen menos sesgo, deben ser reentrenados con un
+\textit{Deep-FM}, aunque tienen menos sesgo, deben ser re-entrenados con un
 mayor valor de \textit{dropout} para potencialmente mejorar su precisión. Por
 otro lado, la familia de modelos \textit{KNN}, a pesar de presentar un sesgo
 más alto, aún logra una precisión cercana a los demás modelos en comparación.
@@ -2299,12 +2333,12 @@ parece ser el más estable en términos del error de validación, ya que present
 el menor error y dispersión. Sin embargo, a pesar de su estabilidad, como se
 puede apreciar en la tabla~\ref{table:ap_at_k} (anteior) no es el modelo más
 preciso. Este hecho podría sugerir que \textit{NN-MF} estaría experimentando un
-grado significativo de sobreajuste en comparación con otros modelos que logran
+grado significativo de sobre ajuste en comparación con otros modelos que logran
 una mayor precisión.
 
 Un ejemplo de esto es el modelo \textit{Biased-GMF}, el cual muestra una mayor
 precisión en comparación con \textit{NN-MF}, pero también presenta un error
-mayor. Esto indica que la teoría del sobreajuste aplicada a \textit{NN-MF}
+mayor. Esto indica que la teoría del sobre ajuste aplicada a \textit{NN-MF}
 podría ser válida y explicar su menor precisión en comparación con
 \textit{Biased-GMF}.
 
@@ -2328,12 +2362,16 @@ observaciones en entrenamiento en memoria, impidiendo escalar el conjunto de
 entrenamiento, limitando la ventana de datos a considerar para el entrenamiento
 del modelo.
 
-Por otro lado, se observó que el modelo de estado del arte, \textit{DeepFM}, no
-obtiene la precisión más alta y su rendimiento es prácticamente igual al de los
-modelos de la familiacpara el conjunto de datos estudiado. En general, los
-modelos de \textit{deep learning} presentaron mejores resultados en este
-conjunto de pruebas en comparación con los modelos clásicos como \textit{KNN},
-aunque las diferencias fueron son muy pequeñas.
+Por otro lado, se encontró que el modelo \textit{DeepFM} (estado del arte) no
+obtiene la precisión más alta, y su rendimiento es prácticamente igual a los
+modelos de la familia \textit{KNN} para el conjunto de datos estudiado. 
+Esto se puede apreciar en la tabla~\ref{table:ap_at_k}, donde la diferecia 
+en precisión entre \textit{DeepFM} y \textit{KNN} es del orden del $2\%$ 
+aproximadamente.
+
+En general, los modelos de \textit{deep learning} presentaron mejores 
+resultados en este conjunto de pruebas en comparación con los modelos
+clásicos como \textit{KNN}, aunque las diferencias fueron son muy pequeñas.
 
 %%%% BIBLIOGRAFÍA
 
