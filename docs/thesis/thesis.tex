@@ -1977,21 +1977,24 @@ medias, ítems con mas de 3 puntos, menos de 3 puntos, etc...
 
 \chapter{Experimentos}
 
-Para comparar todos los modelos implementados, se utilizo el mismo
-\textit{dataset}, tomando una muestra con el tamaño suficiente para obtener
-buenos resultados, evitando el sobre ajuste(\textit{overfitting}) con aquellos
-modelos que tienden a sobre ajustar mas. Por otro lado, se realizo una
-modificación al modelo \textit{KNN} para poder guardarsus resultados en una
-memoria \textit{Cache}. De esta forma, no se repite la inferencia de las
-predicciones al momento de seleccionar muestras del conjuntos de validación,
-disminuyendo notablemente el tiempo de inferencia.
+Con el propósito de comparar todos los modelos implementados, se empleó el
+mismo conjunto de datos (\textit{dataset}). Se tomó una muestra con un tamaño
+adecuado para garantizar resultados sólidos, al mismo tiempo que se evitó el
+sobreajuste (\textit{overfitting}) en aquellos modelos propensos a esta
+problematica. Adicionalmente, se realizó una modificación en el modelo
+\textit{KNN} para almacenar sus resultados en una memoria \textit{cache}.
+Mediante este enfoque, al momento de seleccionar muestras del conjunto de
+validación, se realiza una única inferencia del rating para cada
+par usuario-ítem, lo que conlleva una reducción significativa en el tiempo
+total de predicción del modelo.
 
-Por otro lado, cabe aclarar que dada la tendencia de los modelos a la
-variabilidad o varianza desus predicciones, se realizo un muestreo $5.000$
-inferencias para cada modelo sobre el conjunto de validación para cada métrica
-utilizada. Luego, se gráfico un histograma de la distribución de la métricas, y
-un boxplot para tener una mejor idea de cual es su valor medio y la dispersión
-que se puede esperar.
+Por otra lado, es importante señalar que debido a la propensión de los modelos
+hacia la variabilidad o varianza en sus predicciones, se llevó a cabo un
+muestreo de $5.000$ inferencias para cada modelo en el conjunto de validación,
+considerando cada métrica utilizada. Posteriormente, se generó un histograma
+que representa la distribución de estas métricas, así como un diagrama de caja
+(\textit{boxplot}) para obtener una comprensión precisa del valor promedio y la
+dispersión.
 
 A continuación se describen los resultados de todos los modelos comparados
 mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
@@ -2002,7 +2005,7 @@ mediando las métricas \textit{mAP\makeatletter@k} y \textit{RMSE}.
 
 A continuación se describen los resultados de las métricas de evaluación sobre
 la familia de modelos \textit{KNN}: \textit{KNN User Based}, \textit{KNN Item
-	Based} y un ensamble de ambos modelos.
+	Based} y el ensamble de ambos modelos.
 
 \subsection{
 	Algoritmo de los K vecinos cercanos basado
