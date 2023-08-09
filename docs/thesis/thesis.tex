@@ -1984,9 +1984,9 @@ sobreajuste (\textit{overfitting}) en aquellos modelos propensos a esta
 problematica. Adicionalmente, se realizó una modificación en el modelo
 \textit{KNN} para almacenar sus resultados en una memoria \textit{cache}.
 Mediante este enfoque, al momento de seleccionar muestras del conjunto de
-validación, se realiza una única inferencia del rating para cada
-par usuario-ítem, lo que conlleva una reducción significativa en el tiempo
-total de predicción del modelo.
+validación, se realiza una única inferencia del rating para cada par
+usuario-ítem, lo que conlleva una reducción significativa en el tiempo total de
+predicción del modelo.
 
 Por otra lado, es importante señalar que debido a la propensión de los modelos
 hacia la variabilidad o varianza en sus predicciones, se llevó a cabo un
@@ -2146,10 +2146,10 @@ comparación.
 	\label{fig:knnEnsempleMAP}
 \end{figure}
 
-En la figura~\ref{fig:knnEnsempleMAP} se describe la distribución de valores de
-la métrica \textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
-validación. Se pueden apreciar por valores atípicos a ambos extremos y un leve
-sesgo a izquierda, debido al aporte del modelos basado en items.
+c se describe la distribución de valores de la métrica \textit{mAP@5(4,5)}
+evaluada en el conjunto de observaciones de validación. Se pueden apreciar por
+valores atípicos a ambos extremos y un leve sesgo a izquierda, debido al aporte
+del modelos basado en items.
 
 Por otro lado, la distribución tiene colas mas pesadas en esta version de
 ensamble de ambos modelos (basado en usuarios e items).
@@ -2191,49 +2191,92 @@ porcentaje de error en sus predicciones.
 \clearpage
 \section{Factorización Matricial General (\textit{General Matrix Factorization o GMF})}
 
-A continuación se puede apreciar las curvas de error (\textit{MSE}) para el
-conjunto de validación y entrenamiento:
+A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
+\textit{GMF} al ser evaluado en los conjuntos de validación y entrenamiento:
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-GFM-train-val-loss.png}
-	\caption{Esta gráfica describe el nivel de error sobre los conjuntos
+	\caption{
+		Esta gráfica describe el nivel de error sobre los conjuntos
 		de observaciones de entrenamiento y validación durante el
-		entrenamiento del modelo \textit{GFM}. Cada \textit{epoch} o época indica
-		una iteración de entrenamiento del modelo sobre el conjunto completo
-		de entrenamiento.}
+		entrenamiento del modelo \textit{GFM}. Cada \textit{epoch} o época
+		indica una iteración de entrenamiento del modelo sobre el conjunto
+		completo de entrenamiento.
+	}
+	\label{fig:gmfLoss}
 \end{figure}
 
-Se puede apreciar que inicialmente el modelo tiene un error de valoración menor
-al error de entrenamiento. Es posible que se deba a que una pocas primeras
-observaciones de entrenamiento fueron suficientes para predecir con un error
-menor el conjunto de validación. A media que se incrementa el numero de épocas
-ya no es subiente y el modelo comienza a sobre ajusta hasta estabilizarse ambos
-errores.
+En la figura~\ref{fig:gmfLoss} se puede observar que desde la iteración
+(\textit{epoch}) 1 hasta la 5 inclusive, el modelo está aprendiendo a
+generalizar a partir de los datos de entrenamiento. En esta etapa inicial, el
+modelo no tuvo suficiente tiempo para ajustarse completamente a las
+observaciones de entrenamiento. Por lo tanto, puede haber menos sobre ajuste y,
+en algunos casos, el modelo podría generalizar mejor a los datos de validación
+que a los datos de entrenamiento.
+
+A medida que el modelo sigue entrenando, tiene la capacidad de capturar más
+detalles y patrones específicos de las observaciones de entrenamiento. Esto
+puede llevar a un ajuste excesivo a esos detalles, lo que hace que el error en
+los datos de entrenamiento disminuya. Sin embargo, estos detalles pueden no ser
+generalizables y pueden causar que el modelo se desempeñe peor con
+observaciones nuevas (validación). En consecuencia, el error en el conjunto de
+validación puede comenzar a aumentar a medida que el modelo se sobreajusta a
+los datos de entrenamiento. Finalmente, se poede observar que el modelo
+sobreajusta con una diferencia sostenida entre validación y entrenamiento. Mas
+alla del sobreajuste, la curva de validación dejar de descender luego de las
+$20$ iteraciones. En este caso se opta por frenar el entrenamiento en la
+iteracion 4, donde el modelo todavía no llega al sobreajuste y donde puede
+generalizar mejor.
 
 \clearpage
+
+A continuación, se describe la distribución de la métrica \textit{mAP@5(4,5)}
+del modelo evaluado sobre el conjunto de validación:
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-mapk.png}
-	\caption{Esta gráfica describe la distribución de valores de la
+	\caption{
+		Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del modelo
-		\textit{GFM} sobre las observaciones de entrenamiento.}
+		\textit{GFM} sobre las observaciones de entrenamiento.
+	}
+	\label{fig:gmfMAP}
 \end{figure}
 
-Dado la tendencia de los modelos a la variabilidad o varianza desus
-predicciones se realizo un \textit{sampling} de cada métrica sobre el conjunto
-de validación N veces para comprender cual es su valor medio y dispersión.
+En la figura~\ref{fig:gmfMAP} se pueden apreciar al menos $1$ valor atípicos en
+el extremo derecho. Fuera de esto la distribución tiene una forma gaussiana
+casi perfecta, indicando la ausencia de sesgos a derecha o izquierda. El valor
+medio de la predicción es de $0.406646$ con una dispersión de $0.012513$. La
+media es muy cercana a la mediana, con una diferencia de $0.000224$. La
+distribución presenta una forma mesocúrtica.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-GFM-RMSE.png}
-	\caption{Esta gráfica describe la distribución de valores de la métrica
+	\caption{
+		Esta gráfica describe la distribución de valores de la métrica
 		\textit{RMSE} evaluado en el conjunto de observaciones de validación,
 		luego de N procesos de entrenamiento del modelo \textit{GFM} sobre
-		las observaciones de entrenamiento.}
+		las observaciones de entrenamiento.
+	}
+	\label{fig:gmfRMSE}
 \end{figure}
+
+En la figura~\ref{fig:gmfRMSE} se describe la distribución de valores de la
+métrica \textit{RMSE} evaluada en el conjunto de observaciones de validación.
+Se aprecia por lo menos $1$ valor atípicos en el extremo izquierda. No se
+aprecia sesgo a simple vista. El valor medio del error es de $ 0.982894$ con
+una dispersión de $0.009419$.
+
+En resumen, al comparar las métricas entre la familia de modelos \textit{KNN} y
+el modelo \textit{GMF}, se observa un incremento en la precisión de
+aproximadamente entre un $1.5\%$ y un $2\%$. Además, la dispersión de la
+precisión también disminuye en $0.002$ puntos. Estos resultados sugieren que el
+modelo \textit{GMF} es una opción más prometedora que \textit{KNN}, ya que
+demuestra una mayor precisión y un menor error en las predicciones.
 
 \clearpage
 
