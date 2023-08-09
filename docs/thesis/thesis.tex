@@ -2283,22 +2283,81 @@ demuestra una mayor precisión y un menor error en las predicciones.
 \section{Factorización Matricial General con Sesgo
   (\textit{Biased General Matrix Factorization o B-GFM})}
 
+A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
+\textit{B-GMF} al ser evaluado en los conjuntos de validación y entrenamiento:
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-BGFM-train-val-loss.png}
-	\caption{Esta gráfica describe el nivel de error sobre los conjuntos
+	\caption{
+		Esta gráfica describe el nivel de error sobre los conjuntos
 		de observaciones de entrenamiento y validación durante el entrenamiento
 		del modelo \textit{B-GFM}. Cada epoch o época indica una iteración de
-		entrenamiento del modelo sobre el conjunto completo de entrenamiento.}
+		entrenamiento del modelo sobre el conjunto completo de entrenamiento.
+	}
+	\label{fig:bGMFLoss}
 \end{figure}
+
+En la figura~\ref{fig:bGMFLoss} se aprecia un comportamiento muy similar al
+modelo \textit{GMF}. La principal diferencia radica en el punto de cruce entre
+las curvas. El modelo \textit{B-GMF} parece generalizar con un error menor que
+el modelo \textit{GMF}. Aqui en donde se aprecia que la leve modificación al
+sumar un sesgos para usuarios y otro para ítems.
+
+Esto ocurre porque al incorporar estos sesgos, el modelo captura efectos c que
+influyen en las predicciones y que no son explicados completamente por la
+descomposición de matrices.
+
+La descomposición de matrices realizada por el modelo \textit{GMF}, intenta
+capturar las interacciones entre usuarios e ítems basándose en las
+calificaciones históricas de los usuarios para los ítems. Pero hay factores
+adicionales que pueden influir en las preferencias de los usuarios y en cómo
+califican los ítems. Estos factores pueden no estar directamente relacionados
+con las interacciones pasadas, pero aún así afectan las decisiones al
+calificar. Algunos ejemplos de estos efectos adicionales podrían ser:
+
+\begin{itemize}
+	\item Popularidad general: Algunos ítems como las películas pueden ser populares
+	      simplemente debido a su fama o publicidad. Los usuarios podrían tener más
+	      probabilidades de calificar positivamente películas populares,
+	      independientemente de sus preferencias personales.
+
+	\item Sesgo del usuario: Algunos usuarios pueden tener una tendencia a calificar
+	      todas los ítems con valores más altos o más bajos en comparación con otros.
+	      Esto podría deberse a diferencias en la interpretación de las calificaciones o
+	      al estilo personal de calificación.
+
+	\item Sesgo del ítem: Algunos ítems pueden tener ciertos atributos (como género,
+	      director, elenco, etc.) que atraen a ciertos grupos de usuarios. Estos
+	      atributos podrían afectar las calificaciones de manera consistente.
+\end{itemize}
+
+De esta forma, sumar los sesgos de usuario e ítem produce que el modelo cature
+efecto adiacioneles que influyen la calificaciones del usuario y no estan
+devidos unicamente en la hsitoria de las calificaciones. El modelo
+\textit{B-GMF} parece estar captando estos efecto, mejorando la predicciones y
+generalización del modelo \textit{B-GMF}.
+
+En las figuras siguientes~\ref{fig:bGmfMap} y~\ref{fig:bGmfRMSE} apreciar el
+comportamiento explicado anteriormente, donde la precisión aumenta de
+$0.406646$ (\textit{B-GMF}) a $0.408787$ (\textit{B-GMF}) y disminuje el desvio
+levemente, de $0.012513$ (\textit{GMF}) a $0.012190$ (\textit{B-GMF}).
+
+La precisión~\ref{fig:bGmfMap} a simplebisca no parece tern sesgos,
+presentando una forma mesocúrtica a diferencia del error~\ref{fig:bGmfRMSE},
+donde se aprecia un sesgo muy leve a izquierda, con una moda a izquierda de la
+media y mediada.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-mapk.png}
-	\caption{Esta gráfica describe la distribución de valores de la métrica
+	\caption{
+		Esta gráfica describe la distribución de valores de la métrica
 		\textit{mAP@5(4,5)} evaluado en el conjunto de observaciones de
 		validación, luego de N procesos de entrenamiento del modelo
-		\textit{B-GFM} sobre las observaciones de entrenamiento.}
+		\textit{B-GFM} sobre las observaciones de entrenamiento.
+	}
+	\label{fig:bGmfMap}
 \end{figure}
 
 \clearpage
@@ -2306,10 +2365,13 @@ demuestra una mayor precisión y un menor error en las predicciones.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-RMSE.png}
-	\caption{Esta gráfica describe la distribución de valores de la
+	\caption{
+		Esta gráfica describe la distribución de valores de la
 		métrica \textit{RMSE} evaluado en el conjunto de observaciones
 		de validación, luego de N procesos de entrenamiento del
-		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.}
+		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.
+	}
+	\label{fig:bGmfRMSE}
 \end{figure}
 
 \section{Factorización Matricial mediante Redes Neuronales
