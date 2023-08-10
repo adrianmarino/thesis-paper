@@ -1861,12 +1861,15 @@ los mismos.
 \begin{description}
 	\item[Definición:]
 \end{description}
+
 \begin{equation}
-	\operatorname{RMSE}=\sqrt{  \frac{1}{N} \sum_{i=1}^N (y_i - \hat y_i)^2}
+	\operatorname{RMSE}=\sqrt{\frac{1}{N} \sum_{i=1}^N (y_i - \hat y_i)^2}
 \end{equation}
+
 \begin{description}
 	\item[Donde:]
 \end{description}
+
 \begin{itemize}
 	\item $y_i$ es el true value o verdad de campo de la observación.
 	\item $\hat y_i$ es la predicción realizada por el modelo predictor.
@@ -2340,13 +2343,13 @@ generalización del modelo \textit{B-GMF}.
 
 En las figuras siguientes~\ref{fig:bGmfMap} y~\ref{fig:bGmfRMSE} apreciar el
 comportamiento explicado anteriormente, donde la precisión aumenta de
-$0.406646$ (\textit{B-GMF}) a $0.408787$ (\textit{B-GMF}) (diff: $0.002141$) y disminuje el desvio
-levemente, de c (\textit{B-GMF}) (diff: $0.000323$).
+$0.406646$ (\textit{B-GMF}) a $0.408787$ (\textit{B-GMF}) (diff: $0.002141$) y
+disminuje el desvio levemente, de c (\textit{B-GMF}) (diff: $0.000323$).
 
-La precisión~\ref{fig:bGmfMap} a simplebisca no parece tern sesgos,
-presentando una forma mesocúrtica a diferencia del error~\ref{fig:bGmfRMSE},
-donde se aprecia un sesgo muy leve a izquierda, con una moda a izquierda de la
-media y mediada.
+La precisión~\ref{fig:bGmfMap} a simplebisca no parece tern sesgos, presentando
+una forma mesocúrtica a diferencia del error~\ref{fig:bGmfRMSE}, donde se
+aprecia un sesgo muy leve a izquierda, con una moda a izquierda de la media y
+mediana.
 
 \begin{figure}[h!]
 	\centering
@@ -2366,10 +2369,11 @@ media y mediada.
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-BGFM-RMSE.png}
 	\caption{
-		Esta gráfica describe la distribución de valores de la
-		métrica \textit{RMSE} evaluado en el conjunto de observaciones
-		de validación, luego de N procesos de entrenamiento del
-		modelo \textit{B-GFM} sobre las observaciones de entrenamiento.
+		Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de
+		validación. Se realizo un muestreo de N inferencias del modelo
+		\textit{B-GMF} sobre las observaciones
+		de validación.
 	}
 	\label{fig:bGmfRMSE}
 \end{figure}
@@ -2380,32 +2384,59 @@ media y mediada.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-NN-FM-train-val-loss.png}
-	\caption{Esta gráfica describe el nivel de error sobre los
+	\caption{
+		Esta gráfica describe el nivel de error sobre los
 		conjuntos de observaciones de entrenamiento y validación durante
-		el entrenamiento del modelo \textit{NN-FM}. Cada epoch o época
+		el entrenamiento del modelo \textit{NN-FM}. Cada \textit{epoch} o época
 		indica una iteración de entrenamiento del modelo sobre el conjunto
-		completo de entrenamiento.}
+		completo de entrenamiento.
+	}
+	\label{fig:nnFmLoss}
 \end{figure}
+
+En la figura~\ref{fig:nnFmLoss}, se observa un desvío en el punto de
+intersección entre las curvas de validación y entrenamiento en comparación con
+las representaciones en las figuras~\ref{fig:gmfLoss} (\textit{GMF})
+y~\ref{fig:bGMFLoss} (\textit{B-GMF}). A primera vista, el modelo
+(\textit{NN-MF}) requiere de más iteraciones de entrenamiento para alcanzar
+niveles similares de error tanto en el conjunto de entrenamiento como en el de
+validación. Sin embargo, a su favor, logra alcanzar un punto de generalización
+con un error inferior al de los modelos \textit{GMF} y \textit{B-GMF},
+respectivamente.
+
+Por otro lado, se puede apreciar que la discrepancia entre los errores se
+mantiene constante y disminuye de manera significativa a partir de la iteración
+$12$. A pesar de que estos resultados parecen indicar un mejor desempeño en
+términos de error (\textit{RMSE}), esto no necesariamente garantiza que el
+modelo obtenga predicciones superiores al evaluarlo mediante la métrica
+\textit{mAP@5(4,5)}.
 
 \clearpage
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-mapk.png}
-	\caption{Esta gráfica describe la distribución de valores de la
+	\caption{
+		Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
 		observaciones de validación, luego de N procesos de
 		entrenamiento del modelo \textit{NN-FM} sobre las observaciones
-		de entrenamiento.}
+		de entrenamiento
+	}
+	\label{fig:nnFmMAP}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-NN-FM-RMSE.png}
-	\caption{Esta gráfica describe la distribución de valores de la
-		métrica \textit{RMSE} evaluado en el conjunto de observaciones
-		de validación, luego de N procesos de entrenamiento del
-		modelo \textit{NN-FM} sobre las observaciones de entrenamiento.}
+	\caption{
+		Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de
+		validación. Se realizo un muestreo de N inferencias del modelo
+		\textit{NN-FM} sobre las observaciones
+		de validación.
+	}
+	\label{fig:nnFmRMSE}
 \end{figure}
 
 \clearpage
@@ -2415,20 +2446,27 @@ media y mediada.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-mapk.png}
-	\caption{Esta gráfica describe la distribución de valores de la
+	\caption{
+		Esta gráfica describe la distribución de valores de la
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
 		observaciones de validación, luego de N procesos de
 		entrenamiento del modelo \textit{DeepFM} sobre las observaciones
-		de entrenamiento.}
+		de entrenamiento.
+	}
+	\label{fig:deepFmMAP}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./images/metrics-DeepFM-RMSE.png}
-	\caption{Esta gráfica describe la distribución de valores de la
-		métrica \textit{RMSE} evaluado en el conjunto de observaciones
-		de validación, luego de N procesos de entrenamiento del modelo
-		\textit{DeepFM} sobre las observaciones de entrenamiento.}
+	\caption{
+		Esta gráfica describe la distribución de valores de la métrica
+		\textit{RMSE} evaluada en el conjunto de observaciones de
+		validación. Se realizo un muestreo de N inferencias del modelo
+		\textit{DeepFM} sobre las observaciones
+		de validación.
+	}
+	\label{fig:deepFmRMSE}
 \end{figure}
 
 \chapter{Resultados}
