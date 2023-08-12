@@ -1931,7 +1931,7 @@ Para este fin se utilizara la métricas \textit{mAP\makeatletter@k}.
 \end{description}
 \begin{equation}
 	\begin{split}
-		& \operatorname{AP\makeatletter@k}=\frac{1}{N(k)} \sum_{i=1}^k \frac{ TP(i)}{i}, \\
+		& \operatorname{AP\makeatletter@k}=\frac{1}{N(k)} \sum_{i=1}c \frac{ TP(i)}{i}, \\
 		& \\
 		& \operatorname{N(k)} = min(k, TP_{total}) \\
 	\end{split}
@@ -2341,7 +2341,7 @@ devidos unicamente en la hsitoria de las calificaciones. El modelo
 \textit{B-GMF} parece estar captando estos efecto, mejorando la predicciones y
 generalización del modelo \textit{B-GMF}.
 
-En las figuras siguientes~\ref{fig:bGmfMap} y~\ref{fig:bGmfRMSE} apreciar el
+En las figuras siguientes~\ref{fig:bGmfMap} y~\ref{fig:bGmfRMSE} se observa el
 comportamiento explicado anteriormente, donde la precisión aumenta de
 $0.406646$ (\textit{B-GMF}) a $0.408787$ (\textit{B-GMF}) (diff: $0.002141$) y
 disminuje el desvio levemente, de c (\textit{B-GMF}) (diff: $0.000323$).
@@ -2401,7 +2401,7 @@ y~\ref{fig:bGMFLoss} (\textit{B-GMF}). A primera vista, el modelo
 (\textit{NN-MF}) requiere de más iteraciones de entrenamiento para alcanzar
 niveles similares de error tanto en el conjunto de entrenamiento como en el de
 validación. Sin embargo, a su favor, logra alcanzar un punto de generalización
-con un error inferior al de los modelos \textit{GMF} y \textit{B-GMF},
+con un error inferior a los modelos \textit{GMF} y \textit{B-GMF},
 respectivamente.
 
 Por otro lado, se puede apreciar que la discrepancia entre los errores se
@@ -2421,10 +2421,17 @@ modelo obtenga predicciones superiores al evaluarlo mediante la métrica
 		métrica \textit{mAP@5(4,5)} evaluado en el conjunto de
 		observaciones de validación, luego de N procesos de
 		entrenamiento del modelo \textit{NN-FM} sobre las observaciones
-		de entrenamiento
+		de entrenamiento.
 	}
 	\label{fig:nnFmMAP}
 \end{figure}
+
+En la figura~\ref{fig:nnFmMAP} se pueden observar valores atípicos en ambos
+extremos. Fuera de esto la distribución tiene no presenta sesgos a simple
+vista. Por otro lado, pretans dos modas en la aprte central y el valir medio
+aprece tener un valor similar a una de las dos modas. El valor medio de la
+precisión es de $0.393447$ con una dispersión de $0.011711$. La media es muy
+cercana a la mediana, con una diferencia de $5*10^{-5}$.
 
 \begin{figure}[h!]
 	\centering
@@ -2439,9 +2446,40 @@ modelo obtenga predicciones superiores al evaluarlo mediante la métrica
 	\label{fig:nnFmRMSE}
 \end{figure}
 
+En la figura~\ref{fig:nnFmRMSE} se observan por lo menos $1$ valor atípicos a
+ambos extremos, siendo mayor en numero a derecha. La districion parace tener
+una forama mesocúrtica a pesar de la presencia de valores atipicos. La media y
+ma moda se encuentra muy cercanas. El valor medio del error es de $0.941493$
+con una dispersión de $0.007620$. Se destaca que este modelo tiene el menor
+error y dispersión en comparación con los demas.
+
 \clearpage
 
 \section{Máquinas de factorización profundas (\textit{DeepFM})}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=13cm]{./images/metrics-DeppFM-train-val-loss.png}
+	\caption{
+		Esta gráfica describe el nivel de error sobre los
+		conjuntos de observaciones de entrenamiento y validación durante
+		el entrenamiento del modelo \textit{DeepFM}. Cada \textit{epoch} o época
+		indica una iteración de entrenamiento del modelo sobre el conjunto
+		completo de entrenamiento.
+	}
+	\label{fig:deepFmLoss}
+\end{figure}
+
+En la figura~\ref{fig:deepFmLoss} se observan el cruce entre las curvas de
+validación y entrenamiento en la segunda iteración, punto en el cual el modelo
+generaliza mejor según esta metricas. Luego, se puede apreciar que el modelo
+comienza a sobre ajusta inmediatamente hasta estabilizarse con una diferencia
+de casi una unidad de error (\textit{RMSE}).
+
+En cuando a la métricas \textit{mAP@5(4,5)}, en la figura~\ref{fig:deepFmMAP}
+se observa que el modelo tiene un valor medio de $0.397895$ y una dispersión
+$0.011369$ quedando por debajo de los modelos \textit{GMF} ($0.408787$) y
+\textit{B-GMF} ($0.406646$) respectivamente.
 
 \begin{figure}[h!]
 	\centering
@@ -2455,6 +2493,13 @@ modelo obtenga predicciones superiores al evaluarlo mediante la métrica
 	}
 	\label{fig:deepFmMAP}
 \end{figure}
+
+En la figura~\ref{fig:deepFmRMSE} se observan que el error (\textit{RMSE}) de
+$1.133637$ un $80\%$ (aproxiamadamente) por encima de \textit{NN-FM}
+($0.941493$), \textit{B-GMF} ($0.977382$) y \textit{GMF} ($0.982894$) y
+respectivamente. La dispersion tambien de $0.009183$ es mucho menor que
+\textit{B-GMF} ($0.009387$) y \textit{GMF} ($0.009419$), apesar que estos
+ultimos tiene un menor valor medio del error (\textit{RMSE}).
 
 \begin{figure}[h!]
 	\centering
