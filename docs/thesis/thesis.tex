@@ -1557,10 +1557,10 @@ recomendación por popularidad, es decir que se recomiendan los ítems mas
 populares sin tener en cuenta la personalización de las recomendaciones. Luego,
 a medida que vamos incrementando el tamaño del factor latente, estas
 recomendaciones serán cada vez más personalizadas, aumentando la calidad de las
-mismas. Cuando el tamaño del factor latente es muy grande, el modelos comienza
-a sobre ajustar (\textit{overfitting}) y por ende la calidad de las
-recomendaciones comenzara a empeorar. Para solucionar este problema, se suelen
-agregar términos de regularización en la función de error a minimizar:
+mismas. Cuando el tamaño del factor latente es muy grande, el modelos a sobre
+ajustar (\textit{ overfitting}) y por ende la calidad de las recomendaciones
+comenzara a empeorar. Para solucionar este problema, se suelen agregar términos
+de regularización en la función de error a minimizar:
 
 \begin{equation}
 	\underset{H, W}{\operatorname{arg\,min } }\, \|R - \tilde{R}\|_{\rm F} + \alpha\|H\| + \beta\|W\|
@@ -2041,7 +2041,7 @@ sobre la media. En parte, esto ultimo se debe al gran tamaño de la muestra
 tomada.
 
 La distribución presenta una forma mesocúrtica, dado que presenta una curtosis
-moderada, lo que significa quesus colas o extremos son relativamente menos
+moderada, lo que significa que sus colas o extremos son relativamente menos
 pesadas que las de una distribución leptocúrtica (con exceso de curtosis) y más
 pesadas que las de una distribución platicúrtica (con poca curtosis).
 
@@ -2063,9 +2063,9 @@ métrica \textit{RMSE} evaluada en el conjunto de observaciones de validación.
 Se aprecia por lo menos $1$ valor atípicos en el extremo derecho. Sin embargo
 esto no parece afectar a la forma de la distribución. La distribución esta
 sesgada a izquierda. Este sesgo arrastra a la media y mediana hacia valores mas
-bajos de error, siendo un comportamiento deseable para el error. Es decir,
-cuando mas probabilidad se acumule a izquierda mas probabilidad para los
-valores bajos de error.
+bajos del error, siendo un comportamiento deseable. Es decir, cuando mas
+probabilidad se acumule a izquierda mas probabilidad para los valores bajos de
+error.
 
 El valor medio del error es de $2.9523$. El $50$\% de las observaciones se
 encuentran entre $2.9684$ y $2.9361$ respectivamente, con una dispersión de
@@ -2094,14 +2094,14 @@ la media.
 
 En la figura~\ref{fig:knnItemMAP} se describe la distribución de valores de la
 métrica \textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
-validación. Se pueden apreciar por valores atípicos a ambos extremos. Fuera de
-esto la distribución tiene una forma gaussiana casi perfecta, indicando la
+validación. Se pueden apreciar valores atípicos a ambos extremos. Fuera de
+esto, la distribución tiene una forma gaussiana casi perfecta, indicando la
 ausencia de sesgos a derecha o izquierda.
 
-El valor medio de la predicción es de $0.380327$. El $50$\% de las
-observaciones se encuentran entre $0.365618$ y $0.395036$ respectivamente, con
-una dispersión de $0.014056$. La media es muy cercana a la mediana, con una
-diferencia de $0,000043$. La distribución presenta una forma mesocúrtica.
+El valor medio de la precisión es de $0.380327$. El $50$\% de las observaciones
+se encuentran entre $0.365618$ y $0.395036$ respectivamente, con una dispersión
+de $0.014056$. La media es muy cercana a la mediana, con una diferencia de
+$0,000043$. La distribución presenta una forma mesocúrtica.
 
 \clearpage
 
@@ -2128,7 +2128,7 @@ $0,014975$. La media es muy cercana a la mediana, con una diferencia de
 $0,000151$.
 
 Se aprecia un mayor error de predicción \textit{KNN Item Based} sobre
-\textit{KNN User Based}, afectando en la precisión desus predicciones en
+\textit{KNN User Based}, afectando en la predicción de sus predicciones en
 comparación.
 
 \subsection{Modelo ensamble de los algoritmos de los K
@@ -2149,16 +2149,16 @@ comparación.
 	\label{fig:knnEnsempleMAP}
 \end{figure}
 
-c se describe la distribución de valores de la métrica \textit{mAP@5(4,5)}
-evaluada en el conjunto de observaciones de validación. Se pueden apreciar por
-valores atípicos a ambos extremos y un leve sesgo a izquierda, debido al aporte
-del modelos basado en items.
+En la figura~\ref{fig:knnEnsempleMAP} se observa la distribución de valores de
+la métrica \textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
+validación. Se pueden apreciar valores atípicos a ambos extremos y un leve
+sesgo a izquierda, debido al aporte del modelos basado en ítems.
 
-Por otro lado, la distribución tiene colas mas pesadas en esta version de
-ensamble de ambos modelos (basado en usuarios e items).
+Por otro lado, la distribución tiene colas mas pesadas en esta versión de
+ensamble de ambos modelos (basado en usuarios e ítems).
 
-El valor medio de la predicción es de $0.384819$, ligeramente mayor a la
-precisión de ambos modelos (basado en usuarios e items). El desvío también
+El valor medio de la precisión es de $0.384819$, ligeramente mayor a la
+precisión de ambos modelos (basado en usuarios e ítems). El desvío también
 aumenta de $0.014$ a $0.015$.
 
 \begin{figure}[!htb]
@@ -2174,22 +2174,18 @@ aumenta de $0.014$ a $0.015$.
 	\label{fig:knnEnsempleRMSE}
 \end{figure}
 
-En la figura~\ref{fig:knnEnsempleRMSE} se describe la distribución de valores
-de la métrica \textit{RMSE} evaluada en el conjunto de observaciones de
+En la figura~\ref{fig:knnEnsempleRMSE} se aprecia la distribución de valores de
+la métrica \textit{RMSE} evaluada en el conjunto de observaciones de
 validación.
 
-Se aprecia por lo menos $1$ valor atípicos en el extremo derecho. La
+Se observa por lo menos $1$ valor atípicos en el extremo derecho. La
 distribución esta levemente sesgada a izquierda.
 
 El valor medio del error es de $2.917146$ con una dispersión de $0.015642$, en
 ambos casos menores a las mediciones sobre ambos modelos por separado.
 
-Se aprecia un mayor error de predicción \textit{KNN Item Based} sobre
-\textit{KNN User Based}, afectando en la precisión desus predicciones en
-comparación.
-
 En Resumen, el ensamble de ambos modelos obtiene una mayor precisión y un menor
-porcentaje de error en sus predicciones.
+porcentaje de error al realizar predicciones.
 
 \clearpage
 \section{Factorización Matricial General (\textit{General Matrix Factorization o GMF})}
@@ -2381,6 +2377,9 @@ mediana.
 \section{Factorización Matricial mediante Redes Neuronales
   (\textit{Neural Network Matrix Factorization o NN-FM})}
 
+A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
+\textit{NN-FM} al ser evaluado en los conjuntos de validación y entrenamiento:
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-NN-FM-train-val-loss.png}
@@ -2426,12 +2425,14 @@ modelo obtenga predicciones superiores al evaluarlo mediante la métrica
 	\label{fig:nnFmMAP}
 \end{figure}
 
-En la figura~\ref{fig:nnFmMAP} se pueden observar valores atípicos en ambos
-extremos. Fuera de esto la distribución tiene no presenta sesgos a simple
-vista. Por otro lado, pretans dos modas en la aprte central y el valir medio
-aprece tener un valor similar a una de las dos modas. El valor medio de la
-precisión es de $0.393447$ con una dispersión de $0.011711$. La media es muy
-cercana a la mediana, con una diferencia de $5*10^{-5}$.
+En la figura~\ref{fig:nnFmMAP} se describe la distribución de valores de la
+métrica \textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
+validación. Se pueden observar valores atípicos en ambos extremos. Fuera de
+esto la distribución tiene no presenta sesgos a simple vista. Por otro lado,
+pretans dos modas en la aprte central y el valir medio aprece tener un valor
+similar a una de las dos modas. El valor medio de la precisión es de $0.393447$
+con una dispersión de $0.011711$. La media es muy cercana a la mediana, con una
+diferencia de $5*10^{-5}$.
 
 \begin{figure}[h!]
 	\centering
@@ -2457,6 +2458,9 @@ error y dispersión en comparación con los demas.
 
 \section{Máquinas de factorización profundas (\textit{DeepFM})}
 
+A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
+\textit{DeepFM} al ser evaluado en los conjuntos de validación y entrenamiento:
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./images/metrics-DeppFM-train-val-loss.png}
@@ -2470,16 +2474,21 @@ error y dispersión en comparación con los demas.
 	\label{fig:deepFmLoss}
 \end{figure}
 
-En la figura~\ref{fig:deepFmLoss} se observan el cruce entre las curvas de
-validación y entrenamiento en la segunda iteración, punto en el cual el modelo
-generaliza mejor según esta metricas. Luego, se puede apreciar que el modelo
-comienza a sobre ajusta inmediatamente hasta estabilizarse con una diferencia
-de casi una unidad de error (\textit{RMSE}).
+En la figura~\ref{fig:deepFmLoss}, se representan las curvas que reflejan la
+métrica \textit{RMSE}, evaluada en relación a los resultados obtenidos del
+modelo \textit{DeepFM}, aplicado tanto al conjunto de datos de validación como
+al de entrenamiento. Es perceptible que el punto en el que las curvas
+correspondientes a estos dos conjuntos se intersectan ocurre durante la segunda
+iteración. Posteriormente, se puede observar que el modelo experimenta un
+fenómeno de sobreajuste, manifestándose inmediatamente después de esta
+intersección y estabilizándose con una discrepancia de aproximadamente una
+unidad.
 
-En cuando a la métricas \textit{mAP@5(4,5)}, en la figura~\ref{fig:deepFmMAP}
-se observa que el modelo tiene un valor medio de $0.397895$ y una dispersión
-$0.011369$ quedando por debajo de los modelos \textit{GMF} ($0.408787$) y
-\textit{B-GMF} ($0.406646$) respectivamente.
+Finalmente, el punto en el cual las curvas se cruzan se identifica como el
+punto de detención del proceso de entrenamiento, dado que no existe diferencia
+entre los errores de entrenamiento y validación.
+
+\clearpage
 
 \begin{figure}[h!]
 	\centering
@@ -2494,12 +2503,11 @@ $0.011369$ quedando por debajo de los modelos \textit{GMF} ($0.408787$) y
 	\label{fig:deepFmMAP}
 \end{figure}
 
-En la figura~\ref{fig:deepFmRMSE} se observan que el error (\textit{RMSE}) de
-$1.133637$ un $80\%$ (aproxiamadamente) por encima de \textit{NN-FM}
-($0.941493$), \textit{B-GMF} ($0.977382$) y \textit{GMF} ($0.982894$) y
-respectivamente. La dispersion tambien de $0.009183$ es mucho menor que
-\textit{B-GMF} ($0.009387$) y \textit{GMF} ($0.009419$), apesar que estos
-ultimos tiene un menor valor medio del error (\textit{RMSE}).
+En la figura~\ref{fig:deepFmMAP} se presenta la distribución de valores
+correspondientes a la métrica \textit{mAP@5(4,5)} evaluada en el conjunto de
+observaciones de validación. Se observa que el modelo tiene un valor medio de
+$0.397895$ y una dispersión $0.011369$ quedando por debajo de los modelos
+\textit{GMF} ($0.408787$) y \textit{B-GMF} ($0.406646$) respectivamente.
 
 \begin{figure}[h!]
 	\centering
@@ -2513,6 +2521,15 @@ ultimos tiene un menor valor medio del error (\textit{RMSE}).
 	}
 	\label{fig:deepFmRMSE}
 \end{figure}
+
+En la figura~\ref{fig:deepFmRMSE} se aprecia la distribución de valores
+correspondientes a la métrica \textit{RMSE} evaluada en el conjunto de
+observaciones de validación. Se observan que el error (\textit{RMSE}) de
+$1.133637$ un $80\%$ (aproxiamadamente) por encima de \textit{NN-FM}
+($0.941493$), \textit{B-GMF} ($0.977382$) y \textit{GMF} ($0.982894$) y
+respectivamente. La dispersion tambien de $0.009183$ es mucho menor que
+\textit{B-GMF} ($0.009387$) y \textit{GMF} ($0.009419$), apesar que estos
+ultimos tiene un menor valor medio del error (\textit{RMSE}).
 
 \chapter{Resultados}
 
