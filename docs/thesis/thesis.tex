@@ -1056,6 +1056,9 @@ forma granular y realizar un uso mas eficiente de los recursos disponible. Mas
 adelante veremos que esto puede impactar fuertemente en los tiempos de
 entrenamiento e inferencia.
 
+
+\clearpage
+
 \section{Enfoque Basados en Memoria}
 
 \subsection{
@@ -1073,8 +1076,6 @@ se puede mantener en memoria, persistir en una base de datos (como puede ser
 memoria no tiene por que ser estricta, pero si se entiende que los mejores
 tiempos de inferencia y entrenamiento se lograran cuando se tenga parte o la
 totalidad de estas matrices en memoria.
-
-\clearpage
 
 Luego, para realizar el entrenamiento del modelo se necesita una lista de
 tuplas, donde cada tupla contiene:
@@ -1113,6 +1114,8 @@ valores de la misma contienen las calificaciones.
 	\end{pmatrix}
 \end{equation}
 
+\clearpage
+
 \begin{description}
 	\item[Donde:]
 \end{description}
@@ -1132,7 +1135,6 @@ $Calificaciones_{u,i}$. Cabe aclarar que cada vector fila $F_u$ de la matriz de
 $Calificaciones_{u,i}$ representa a un usuario, ya que contiene todas las
 calificaciones realizadas por el mismo.
 
-\clearpage
 \begin{description}
 	\item[Matriz de distancias]
 \end{description}
@@ -1164,6 +1166,8 @@ general las distancias que mejor ajustan apra este dominio son las siguientes:
 
 Luego, para este trabajo se eligió utilizar la distancia coseno.
 
+\clearpage
+
 \begin{description}
 	\item[Distancia Coseno]
 \end{description}
@@ -1190,7 +1194,6 @@ como:
 	\item $0 <= Distancia \mspace{3mu} Coseno_{ua, ub} <= 1$. Cuanto menor sea el valor de $Distancia \mspace{3mu} Coseno_{u_a, u_b}$ mas similares serán los usuarios con los indices $u_a$ y $u_b$.
 \end{itemize}
 
-\clearpage
 \begin{description}
 	\item[Similitud Coseno]
 \end{description}
@@ -1281,6 +1284,10 @@ hiper parámetros regida por una métricas que valide la exactitud del modelo al
 momento de la predicción, obteniendo como resultado el $K$ para el cual el
 modelo tiene el resultado mas exactos posibles.
 
+
+\clearpage
+
+
 \subsection{
 	Algoritmo de los K vecinos cercanos basado en ítems
 	(\textit{KNN Item Based})
@@ -1315,11 +1322,15 @@ Finalmente, la predicción es un promedio pesado de las calificaciones del
 usuario $u$ para los ítems cercanos o similares al ítem $i$, pesadas por la el
 grado de similitud de cada ítem $o$ con el ítem $i$.
 
+
 \subsection{Modelo ensamble de los algoritmos de los K vecinos cercanos basados
 	en usuarios e ítems (\textit{KNN User-Item Based Ensemble})}
 
 Dado que contamos dos modelos basados en \textit{KNN} se realizo un ensamble de
 ambos modelos, el cual realiza un promedio de las salidas de ambos modelos.
+
+
+\clearpage
 
 \section{Enfoque basado en modelos}
 
@@ -1355,7 +1366,7 @@ suponemos que tenemos la siguiente variable:
 	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
 
-Si codificamossus valores usando una codificación \textit{one-hot}, obtendremos
+Si codificamos sus valores usando una codificación \textit{one-hot}, obtendremos
 los siguientes vectores:
 
 \begin{itemize}
@@ -1439,6 +1450,8 @@ asociados a cada clave son vectores \textit{embedding}. Cave aclarar que en
 general, estos vectores son inicializados con valores aleatorios. Finalmente,
 en la etapa de entrenamiento, el modelo irá ajustando los valores de cada
 vector \textit{embedding}.
+
+\clearpage
 
 En la etapa de \textit{forward pass}, se pasa como entrada un valor de la
 variable categórica codificado como numérico. Para nuestra variable Estado del
