@@ -2042,8 +2042,8 @@ tomada.
 
 La distribución presenta una forma mesocúrtica, dado que presenta una curtosis
 moderada, lo que significa que sus colas o extremos son relativamente menos
-pesadas que las de una distribución leptocúrtica (con exceso de curtosis) y más
-pesadas que las de una distribución platicúrtica (con poca curtosis).
+pesadas que en una distribución leptocúrtica (con exceso de curtosis) y más
+pesadas que en una distribución platicúrtica (con poca curtosis).
 
 \begin{figure}[!htb]
 	\centering
@@ -2064,11 +2064,11 @@ Se aprecia por lo menos $1$ valor atípicos en el extremo derecho. Sin embargo
 esto no parece afectar a la forma de la distribución. La distribución esta
 sesgada a izquierda. Este sesgo arrastra a la media y mediana hacia valores mas
 bajos del error, siendo un comportamiento deseable. Es decir, cuando mas
-probabilidad se acumule a izquierda mas probabilidad para los valores bajos de
-error.
+probabilidad se acumule a izquierda mayor sera la frecuencia de ocurrencia para
+valores bajos del error.
 
 El valor medio del error es de $2.9523$. El $50$\% de las observaciones se
-encuentran entre $2.9684$ y $2.9361$ respectivamente, con una dispersión de
+encuentran entre $2.9361$ y $2.9684$ respectivamente, con una dispersión de
 $0.016170$. La media es muy cercana a la mediana, con una diferencia de
 $0.000356$; también indicando una baja influencia de los valores atípicos sobre
 la media.
@@ -2100,8 +2100,9 @@ ausencia de sesgos a derecha o izquierda.
 
 El valor medio de la precisión es de $0.380327$. El $50$\% de las observaciones
 se encuentran entre $0.365618$ y $0.395036$ respectivamente, con una dispersión
-de $0.014056$. La media es muy cercana a la mediana, con una diferencia de
-$0,000043$. La distribución presenta una forma mesocúrtica.
+de $0.014056$. La media es muy cercana a la mediana con una diferencia de
+$0,000043$, indicando una baja influencia de valores atípicos sobre la misma.
+La distribución presenta una forma mesocúrtica.
 
 \clearpage
 
@@ -2124,12 +2125,12 @@ distribución esta levemente sesgada a izquierda.
 
 El valor medio del error es de $3.103917$. El $50$\% de las observaciones se
 encuentran entre $3,088942$ y $3,118892$ respectivamente, con una dispersión de
-$0,014975$. La media es muy cercana a la mediana, con una diferencia de
-$0,000151$.
+$0,014975$. La media es muy cercana a la mediana con una diferencia de
+$0,000151$, indicando una baja influencia de valores atipicos sobre la misma.
 
-Se aprecia un mayor error de predicción \textit{KNN Item Based} sobre
-\textit{KNN User Based}, afectando en la predicción de sus predicciones en
-comparación.
+Se aprecia un mayor error en las predicciones del modelo \textit{KNN Item
+	Based} ($3.103917$) en comparación con el modelo \textit{KNN User Based}
+($2.952305$).
 
 \subsection{Modelo ensamble de los algoritmos de los K
 	vecinos cercanos basados en usuarios e ítems
@@ -2207,9 +2208,9 @@ A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
 \end{figure}
 
 En la figura~\ref{fig:gmfLoss} se puede observar que desde la iteración
-(\textit{epoch}) 1 hasta la 5 inclusive, el modelo está aprendiendo a
-generalizar a partir de los datos de entrenamiento. En esta etapa inicial, el
-modelo no tuvo suficiente tiempo para ajustarse completamente a las
+(\textit{epoch}) primera a la cuarta (aproximadamente), el modelo está
+aprendiendo a generalizar a partir de los datos de entrenamiento. En esta etapa
+inicial, el modelo no tuvo suficiente tiempo para ajustarse completamente a las
 observaciones de entrenamiento. Por lo tanto, puede haber menos sobre ajuste y,
 en algunos casos, el modelo podría generalizar mejor a los datos de validación
 que a los datos de entrenamiento.
@@ -2221,7 +2222,7 @@ los datos de entrenamiento disminuya. Sin embargo, estos detalles pueden no ser
 generalizables y pueden causar que el modelo se desempeñe peor con
 observaciones nuevas (validación). En consecuencia, el error en el conjunto de
 validación puede comenzar a aumentar a medida que el modelo se sobreajusta a
-los datos de entrenamiento. Finalmente, se poede observar que el modelo
+los datos de entrenamiento. Finalmente, se puede observar que el modelo
 sobreajusta con una diferencia sostenida entre validación y entrenamiento. Mas
 alla del sobreajuste, la curva de validación dejar de descender luego de las
 $20$ iteraciones. En este caso se opta por frenar el entrenamiento en la
@@ -2248,8 +2249,9 @@ del modelo evaluado sobre el conjunto de validación:
 En la figura~\ref{fig:gmfMAP} se pueden apreciar al menos $1$ valor atípicos en
 el extremo derecho. Fuera de esto la distribución tiene una forma gaussiana
 casi perfecta, indicando la ausencia de sesgos a derecha o izquierda. El valor
-medio de la predicción es de $0.406646$ con una dispersión de $0.012513$. La
-media es muy cercana a la mediana, con una diferencia de $0.000224$. La
+medio de la precisión es de $0.406646$ con una dispersión de $0.012513$. La
+media esta muy cercana a la mediana con una diferencia de $0.000224$, esto
+indica una baja influencia de de valores atípicos sonre la media. La
 distribución presenta una forma mesocúrtica.
 
 \begin{figure}[h!]
@@ -2301,9 +2303,10 @@ En la figura~\ref{fig:bGMFLoss} se aprecia un comportamiento muy similar al
 modelo \textit{GMF}. La principal diferencia radica en el punto de cruce entre
 las curvas. El modelo \textit{B-GMF} parece generalizar con un error menor que
 el modelo \textit{GMF}. Aqui en donde se aprecia que la leve modificación al
-sumar un sesgos para usuarios y otro para ítems.
+sumar un sesgos (uno para usuarios y otro para ítems) disminuje el error sobre
+el punto de mayor generalización del modelo.
 
-Esto ocurre porque al incorporar estos sesgos, el modelo captura efectos c que
+Este fenomeno ocurre al incorporar los sesgos, el modelo captura efectos que
 influyen en las predicciones y que no son explicados completamente por la
 descomposición de matrices.
 
@@ -2331,21 +2334,21 @@ calificar. Algunos ejemplos de estos efectos adicionales podrían ser:
 	      atributos podrían afectar las calificaciones de manera consistente.
 \end{itemize}
 
-De esta forma, sumar los sesgos de usuario e ítem produce que el modelo cature
-efecto adiacioneles que influyen la calificaciones del usuario y no estan
-devidos unicamente en la hsitoria de las calificaciones. El modelo
-\textit{B-GMF} parece estar captando estos efecto, mejorando la predicciones y
-generalización del modelo \textit{B-GMF}.
+De esta forma, sumar los sesgos de usuarios e ítems produce que el modelo
+cature efecto adiacioneles que influyen la calificaciones del usuario y no
+estan devidos unicamente en la hsitoria de las calificaciones. El modelo
+\textit{B-GMF} parece estar captando estos efectos, mejorando la predicciones y
+generalización del mismo.
 
 En las figuras siguientes~\ref{fig:bGmfMap} y~\ref{fig:bGmfRMSE} se observa el
 comportamiento explicado anteriormente, donde la precisión aumenta de
 $0.406646$ (\textit{B-GMF}) a $0.408787$ (\textit{B-GMF}) (diff: $0.002141$) y
-disminuje el desvio levemente, de c (\textit{B-GMF}) (diff: $0.000323$).
+disminuje el desvio levemente a $0.012190$ (\textit{B-GMF}) (diff: $0.000323$).
 
-La precisión~\ref{fig:bGmfMap} a simplebisca no parece tern sesgos, presentando
-una forma mesocúrtica a diferencia del error~\ref{fig:bGmfRMSE}, donde se
-aprecia un sesgo muy leve a izquierda, con una moda a izquierda de la media y
-mediana.
+La precisión~\ref{fig:bGmfMap} a simple vista no parece tener sesgos,
+presentando una forma mesocúrtica a diferencia del error~\ref{fig:bGmfRMSE},
+donde se aprecia un sesgo muy leve a izquierda, con una moda a izquierda de la
+media y mediana.
 
 \begin{figure}[h!]
 	\centering
@@ -2393,7 +2396,7 @@ A continuación, se presentan las curvas de error (\textit{RMSE}) del modelo
 	\label{fig:nnFmLoss}
 \end{figure}
 
-En la figura~\ref{fig:nnFmLoss}, se observa un desvío en el punto de
+En la figura~\ref{fig:nnFmLoss}, se observa una diferencia en el punto de
 intersección entre las curvas de validación y entrenamiento en comparación con
 las representaciones en las figuras~\ref{fig:gmfLoss} (\textit{GMF})
 y~\ref{fig:bGMFLoss} (\textit{B-GMF}). A primera vista, el modelo
@@ -2428,11 +2431,12 @@ modelo obtenga predicciones superiores al evaluarlo mediante la métrica
 En la figura~\ref{fig:nnFmMAP} se describe la distribución de valores de la
 métrica \textit{mAP@5(4,5)} evaluada en el conjunto de observaciones de
 validación. Se pueden observar valores atípicos en ambos extremos. Fuera de
-esto la distribución tiene no presenta sesgos a simple vista. Por otro lado,
-pretans dos modas en la aprte central y el valir medio aprece tener un valor
-similar a una de las dos modas. El valor medio de la precisión es de $0.393447$
-con una dispersión de $0.011711$. La media es muy cercana a la mediana, con una
-diferencia de $5*10^{-5}$.
+esto la distribución no presenta sesgos a simple vista. Por otro lado, presenta
+dos modas que acompañan a la media en ambos extremos. La media parece tener un
+valor similar a la menor de las modas. El valor medio de la precisión es de
+$0.393447$ con una dispersión de $0.011711$. La media es muy cercana a la
+mediana con una diferencia de $5*10^{-5}$, indicando una baja infliencia de los
+valores atípicos sobre la media.
 
 \begin{figure}[h!]
 	\centering
@@ -2447,12 +2451,14 @@ diferencia de $5*10^{-5}$.
 	\label{fig:nnFmRMSE}
 \end{figure}
 
-En la figura~\ref{fig:nnFmRMSE} se observan por lo menos $1$ valor atípicos a
-ambos extremos, siendo mayor en numero a derecha. La districion parace tener
-una forama mesocúrtica a pesar de la presencia de valores atipicos. La media y
-ma moda se encuentra muy cercanas. El valor medio del error es de $0.941493$
-con una dispersión de $0.007620$. Se destaca que este modelo tiene el menor
-error y dispersión en comparación con los demas.
+En la figura~\ref{fig:nnFmRMSE} se observan valores atípicos a ambos extremos,
+siendo mayor en número a derecha. La districión parace tener una forma
+mesocúrtica a pesar de la presencia de valores atipicos. La media y la moda se
+encuentra muy cercanas. El valor medio del error es de $0.941493$ con una
+dispersión de $0.007620$.
+
+Se destaca que este modelo tiene el menor error y dispersión en comparación con
+los demas.
 
 \clearpage
 
@@ -2527,9 +2533,9 @@ correspondientes a la métrica \textit{RMSE} evaluada en el conjunto de
 observaciones de validación. Se observan que el error (\textit{RMSE}) de
 $1.133637$ un $80\%$ (aproxiamadamente) por encima de \textit{NN-FM}
 ($0.941493$), \textit{B-GMF} ($0.977382$) y \textit{GMF} ($0.982894$) y
-respectivamente. La dispersion tambien de $0.009183$ es mucho menor que
+respectivamente. La dispersión tambien de $0.009183$ es mucho menor que
 \textit{B-GMF} ($0.009387$) y \textit{GMF} ($0.009419$), apesar que estos
-ultimos tiene un menor valor medio del error (\textit{RMSE}).
+ultimos tienen un menor valor medio del error (\textit{RMSE}).
 
 \chapter{Resultados}
 
