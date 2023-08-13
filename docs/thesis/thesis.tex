@@ -2676,17 +2676,23 @@ precisión muy similar al modelo más preciso, \textit{B-GMF}.
 \chapter{Conclusiones}
 
 En resumen, al analizar los modelos expuesto en este trabajo, se encontró que
-todos tienen una precisión (\textit{AP@5(4,5)}) similar, con una diferencia de
-menos del $2\%$. Sin embargo, al considerar la implementación en un
-\textit{e-commerce}, se recomendaría elegir un modelo basado en \textit{deep
-	learning}, como \textit{B-GMF} o \textit{GMF}, ya que utilizan el algoritmo del
-gradiente descendente y pueden procesar las observaciones de entrenamiento en
-lotes, lo que permite ajustar el tamaño del lote según la memoria \textit{RAM}
-o \textit{VRAM} disponible. Por el contrario, no seria posible seleccionar
-modelos de la familia \textit{KNN} debido a que necesitan alocar todas las
-observaciones en entrenamiento en memoria, impidiendo escalar el conjunto de
-entrenamiento, limitando la ventana de datos a considerar para el entrenamiento
-del modelo.
+todos tienen una precisión (\textit{AP@5(4,5)}) similar, con una diferencia
+menor al $2\%$ para el conjunto de datos estudiado. Sin embargo, al considerar
+la implementación en un \textit{e-commerce}, se recomendaría elegir un modelo
+basado en \textit{deep learning}, como \textit{B-GMF} o \textit{NN-FM}, ya que
+utilizan el algoritmo del gradiente descendente y pueden procesar las
+observaciones de entrenamiento en lotes, lo que permite ajustar el tamaño del
+lote según la memoria \textit{RAM} o \textit{VRAM} disponible.
+
+Por el contrario, no seria posible seleccionar modelos de la familia
+\textit{KNN} debido a que necesitan alocar todas las observaciones en
+entrenamiento en memoria, impidiendo escalar el conjunto de entrenamiento,
+limitando la ventana de datos a considerar para el entrenamiento del modelo.
+
+Es importante aclarar que el modelo \textit{NN-FM} puede incluir en su entrada
+mas variables, a diferencia de los demas modelos. Esto permite mejorar el
+ajuste del modelo incluyendo variales que podrian influir positivamente en la
+predicción de las calificaciones.
 
 Por otro lado, se encontró que el modelo \textit{DeepFM} (estado del arte) no
 obtiene la precisión más alta, y su rendimiento es prácticamente igual a los
@@ -2695,9 +2701,20 @@ puede apreciar en la tabla~\ref{table:ap_at_k}, donde la diferencia en
 precisión entre \textit{DeepFM} y \textit{KNN} es del orden del $2\%$
 aproximadamente.
 
-En general, los modelos de \textit{deep learning} presentaron mejores
-resultados en este conjunto de pruebas en comparación con los modelos clásicos
-como \textit{KNN}, aunque las diferencias fueron son muy pequeñas.
+En términos generales, los modelos basados en \textit{deep learning} exhibieron
+un desempeño superior en este conjunto de pruebas en contraste con los enfoques
+clásicos como el método \textit{KNN}. No obstante, es importante señalar que
+las discrepancias en los resultados fueron bastante reducidas.
+
+Es importante destacar que los resultados obtenidos se encuentran en cierta
+medida condicionadas por el conjunto de datos utilizado para entrenar los
+modelos. Debido a esta consideración, resulta una práctica recomendable emplear
+múltiples conjuntos de datos, preferiblemente abarcando diversos modelos de
+negocio. Esto permite analizar las disparidades en el ajuste de cada modelo y
+adquirir un entendimiento más claro sobre qué modelo se adecua con mayor
+precisión a cada conjunto de datos en particular. Asimismo, este enfoque
+posibilita comprender en qué situaciones puede ser más pertinente aplicar un
+modelo en comparación con otro.
 
 %%%% BIBLIOGRAFÍA
 
