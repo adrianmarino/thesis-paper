@@ -2566,7 +2566,7 @@ El uso de la media y el desvío estándar permite obtener el valor promedio de
 las métricas y evaluar su grado de dispersión en los datos obtenidos. La media
 nos proporciona una idea del valor típico de las métricas en el conjunto de
 prueba, mientras que el desvío estándar nos indica qué tan dispersos están los
-valores las métricas en relación con la media.
+valores de las métricas en relación con la media.
 
 Además, se presenta la mediana como otra medida estadística relevante. A
 diferencia de la media, la mediana no se ve afectada por valores atípicos o
@@ -2607,22 +2607,22 @@ evaluación \textit{AP@5(4,5)}. Por otro lado, los modelos \textit{NN-MF} y
 \textit{Deep-FM} exhiben el menor sesgo, pero aún así, tienen una precisión
 inferior al modelo \textit{Biased-GMF}. Esto podría indicar un mayor grado de
 sobre ajuste en estos modelos. Por lo tanto, sería recomendable re-entrenar
-ambos modelos con un aumento en el valor del parámetro \textit{dropout} para
-mejorar la regularización y, posteriormente, comparar nuevamente sus resultados
-con el modelo \textit{Biased-GMF} para validar si su precisión mejora.
+ambos modelos con un aumento del parámetro \textit{dropout} para mejorar la
+regularización y, posteriormente, comparar nuevamente sus resultados con el
+modelo \textit{Biased-GMF} para validar si su precisión mejora.
 
 En cuanto a la familia de modelos \textit{KNN}, se observa que presenta el
 mayor sesgo. Sin embargo, a pesar de esto, se puede notar que la diferencia en
 la precisión, en comparación con los demás modelos, es bastante baja, siendo
-menos del 2\%.
+menos del $2\%$.
 
 En resumen, los resultados muestran que el modelo \textit{Biased-GMF} sobresale
 en cuanto a precisión, según la métrica \textit{AP@5(4,5)}. Los modelos
 \textit{NN-MF} y \textit{Deep-FM}, aunque tienen menos sesgo, deben ser
-re-entrenados con un mayor valor de \textit{dropout} para potencialmente
-mejorar su precisión. Por otro lado, la familia de modelos \textit{KNN}, a
-pesar de presentar un sesgo más alto, logra una precisión cercana a los demás
-modelos en comparación.
+re-entrenados con una mayor probabilidad de \textit{dropout} para
+potencialmente mejorar su precisión. Por otro lado, la familia de modelos
+\textit{KNN}, a pesar de presentar un sesgo más alto, logra una precisión
+cercana a los demás modelos en comparación.
 
 \clearpage
 
@@ -2690,9 +2690,9 @@ entrenamiento en memoria, impidiendo escalar el conjunto de entrenamiento,
 limitando la ventana de datos a considerar para el entrenamiento del modelo.
 
 Es importante aclarar que el modelo \textit{NN-FM} puede incluir en su entrada
-mas variables, a diferencia de los demas modelos. Esto permite mejorar el
-ajuste del modelo incluyendo variales que podrian influir positivamente en la
-predicción de las calificaciones.
+mas variables, a diferencia de los demas modelos. Esta característica
+posibilita una mejora en el ajuste del modelo incluyendo variables que podrian
+influir positivamente en la predicción de las calificaciones.
 
 Por otro lado, se encontró que el modelo \textit{DeepFM} (estado del arte) no
 obtiene la precisión más alta, y su rendimiento es prácticamente igual a los
@@ -2706,13 +2706,13 @@ un desempeño superior en este conjunto de pruebas en contraste con los enfoques
 clásicos como el método \textit{KNN}. No obstante, es importante señalar que
 las discrepancias en los resultados fueron bastante reducidas.
 
-Es importante destacar que los resultados obtenidos se encuentran en cierta
-medida condicionados por el conjunto de datos utilizado para entrenar los
-modelos. Debido a esta consideración, resulta una práctica recomendable emplear
-múltiples conjuntos de datos, preferiblemente abarcando diversos modelos de
-negocio. Esto permite analizar las disparidades en el ajuste de cada modelo y
-adquirir un entendimiento más claro sobre qué modelo se adecua con mayor
-precisión a cada conjunto de datos en particular. Asimismo, este enfoque
+Finalmente, es importante destacar que los resultados obtenidos se encuentran
+en cierta medida condicionados por el conjunto de datos utilizado para entrenar
+los modelos. Debido a esta consideración, resulta una práctica recomendable
+emplear múltiples conjuntos de datos, preferiblemente abarcando diversos
+modelos de negocio. Esto permite analizar las disparidades en el ajuste de cada
+modelo y adquirir un entendimiento más claro sobre qué modelo se adecua con
+mayor precisión a cada conjunto de datos en particular. Asimismo, este enfoque
 posibilita comprender en qué situaciones puede ser más pertinente aplicar un
 modelo en comparación con otro.
 
