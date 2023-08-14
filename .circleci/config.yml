@@ -37,6 +37,8 @@ jobs:
           name: Prepare Mamba Dependencies
           command: |
             conda install libarchive -c conda-forge
+            echo "ldconfig" > /etc/ld.so.conf
+            echo "ldconfig" > /usr/local/lib
       - run:
           name: Install Mamba
           command: |
