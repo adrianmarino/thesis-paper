@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Install Mamba
           command: |
-            conda install -c conda-forge mamba=1.47
+            conda install -c conda-forge mamba=1.4.7
       - run:
           name: Install Dependencies
           command: |
