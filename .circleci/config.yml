@@ -38,6 +38,10 @@ jobs:
           command: |
             conda install -c conda-forge mamba
       - run:
+          name: Prepare Mamba
+          command: |
+            mamba install libarchive=3.5.2=hb890918_2 -y
+      - run:
           name: Install Dependencies
           command: |
             mamba env create -f environment.yml
