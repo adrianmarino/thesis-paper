@@ -21,7 +21,7 @@ jobs:
     # The executor is the environment in which the steps below will be executed - below will use a python 3.10.2 container
     # Change the version below to your required version of python
     docker:
-      - image: continuumio/miniconda3
+      - image: continuumio/miniconda3:22.11.1
     environment:
       PYTHONPATH: ~/thesis/lib
     parallelism: 10
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Install Mamba
           command: |
-            conda install -c conda-forge mamba=1.4.7
+            conda install -c conda-forge mamba
       - run:
           name: Install Dependencies
           command: |
