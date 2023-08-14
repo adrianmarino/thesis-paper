@@ -38,6 +38,7 @@ jobs:
           command: |
             conda install libarchive -c conda-forge
             echo "ldconfig" > /etc/ld.so.conf
+            conda install -c anaconda libmambapy
       - run:
           name: Install Mamba
           command: |
