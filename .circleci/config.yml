@@ -36,10 +36,7 @@ jobs:
       - run:
           name: Prepare Mamba Depedencies
           command: |
-            conda init bash
-            source ~/.bashrc
-            conda activate base
-            conda install libarchive -n base -c conda-forge
+            conda install libarchive c conda-forge
       - run:
           name: Install Mamba
           command: |
@@ -47,10 +44,7 @@ jobs:
       - run:
           name: Use base environment
           command: |
-            conda init bash
-            source ~/.bashrc
-            conda activate base
-            conda install -n base -c conda-forge mamba
+            conda install -c conda-forge mamba
       - run:
           name: Install Dependencies
           command: |
