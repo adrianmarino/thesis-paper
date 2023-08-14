@@ -36,15 +36,11 @@ jobs:
       - run:
           name: Prepare Mamba Depedencies
           command: |
-            conda install libarchive c conda-forge
+            conda install libarchive -c conda-forge
       - run:
           name: Install Mamba
           command: |
-
-      - run:
-          name: Use base environment
-          command: |
-            conda install -c conda-forge mamba
+            conda install c conda-forge mamba
       - run:
           name: Install Dependencies
           command: |
