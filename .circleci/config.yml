@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Prepare Mamba Depedencies
+          name: Prepare Mamba Dependencies
           command: |
             conda install libarchive -c conda-forge
       - run:
