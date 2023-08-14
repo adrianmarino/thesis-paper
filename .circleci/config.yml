@@ -34,13 +34,13 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Prepare Mamba Depedencies
+          command: |
+            conda install libarchive -n base -c conda-forg
+      - run:
           name: Install Mamba
           command: |
             conda install -c conda-forge mamba
-      - run:
-          name: Prepare Mamba
-          command: |
-            mamba install libarchive=3.5.2=hb890918_2 -y
       - run:
           name: Install Dependencies
           command: |
