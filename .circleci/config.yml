@@ -35,7 +35,7 @@ jobs:
       - checkout
       - run:
           name: Install deps
-          command: sudo apt install -y libarchive
+          command: apt install -y libarchive
       - run:
           name: Prepare Mamba Dependencies
           command: |
