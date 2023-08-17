@@ -11,6 +11,7 @@ def python_callable(**ctx):
     import pandas as pd
     import service as sv
     import model as ml
+    import logging
 
     domain = DomainContext(cfg_path=ctx['recsys.client.cfg_path'])
 
@@ -28,6 +29,7 @@ def python_callable(**ctx):
     def load_df(path):
         return pd.read_json(f'{domain.cfg.temp_path}/{ctx[path]}', orient='records')
 
+
     def train_predict(train_df, test_df, columns, model):
         if 'knn_user_based' == model:
             predictor_name = 'knn_user_based'
@@ -37,14 +39,14 @@ def python_callable(**ctx):
             model_Type = ml.KNNType.ITEM_BASED
 
         predictor = sv.KNNPredictionService(
-            weights_path=domain.cfg.weights_path,
-            temp_path=domain.cfg.temp_path,
-            predictor_name=predictor_name,
-            user_seq_col=columns[0],
-            item_seq_col=columns[1],
-            rating_col=columns[2],
-            model_Type=model_Type,
-            n_neighbors = 50
+            weights_path    =   domain.cfg.weights_path,
+            temp_path       =   domain.cfg.temp_path,
+            predictor_name  =   predictor_name,
+            user_seq_col    =   columns[0],
+            item_seq_col    =   columns[1],
+            rating_col      =   columns[2],
+            model_Type      =   model_Type,
+            n_neighbors     =   50
         )
         predictor.fit_predict(train_df, test_df)
         predictor.delete()
@@ -58,12 +60,13 @@ def python_callable(**ctx):
 
     # Build ratings matrix from user-item interactions..
     future_interactions, filtered_train_interactions = domain.interaction_inference_service.predict(
-        interactions,
-        columns=('user_seq', 'item_seq', 'rating'),
-        train_predict_fn=lambda train, test, cols: train_predict(train, test, cols, ctx['model']),
-        min_n_interactions=ctx['min_n_interactions'],
-        rating_scale=ctx['rating_scale']
-    ),
+        train_interactions  =   interactions,
+        columns             =   ('user_seq', 'item_seq', 'rating'),
+        train_predict_fn    =   lambda train, test, cols: train_predict(train, test, cols, ctx['model']),
+        min_n_interactions  =   ctx['min_n_interactions'],
+        rating_scale        =   ctx['rating_scale']
+    )
+
     logging.info('LLEGO 1')
     del interactions
 
