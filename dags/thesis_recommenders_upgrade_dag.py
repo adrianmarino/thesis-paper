@@ -37,7 +37,12 @@ with DAG(
     catchup            = False,
     max_active_runs    = 1,
     max_active_tasks   = 2,
-    tags               = ['thesis', 'distance-matrix-computing', 'knn_user_based', 'knn_item_based']
+    tags               = [
+        'thesis',
+        'distance-matrix-computing',
+        'knn_user_based',
+        'knn_item_based'
+    ]
 ) as dag:
 
     fetch = ts.fetch_interactions_task(dag, task_id = 'fetch_interactions')

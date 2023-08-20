@@ -6,7 +6,6 @@ channels:
     - districtdatalabs
 
 dependencies:
-    - cxx-compiler
     - bunch
     - seaborn
     - matplotlib
@@ -27,10 +26,11 @@ dependencies:
     - pytest
     - pip
     - pip:
+        - --extra-index-url https://download.pytorch.org/whl/cu118
         - torch
         - ignite
         - torchtext
-        - torchmetrics
+        - torchmetrics==0.11.4
         - pytorch-common
         - singleton-decorator
         - chromadb

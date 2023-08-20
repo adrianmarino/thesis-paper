@@ -1,26 +1,26 @@
 import torch
 from pytorch_common.modules import FitMixin, PredictMixin, PersistentMixin
+
 import model as ml
-import logging
 
 
 class BiasedGMF(torch.nn.Module, FitMixin, PredictMixin, PersistentMixin):
     def __init__(self,
-            n_users: int,
-            n_items: int,
-            embedding_size: int,
-            sparse:bool=False
-    ):
+                 n_users: int,
+                 n_items: int,
+                 embedding_size: int,
+                 sparse: bool = False
+                 ):
         super().__init__()
         self.embedding = ml.MultiFeatureEmbedding(
-            features_n_values = [n_users, n_items],
-            embedding_size    = embedding_size,
-            sparse            = sparse
+            features_n_values=[n_users, n_items],
+            embedding_size=embedding_size,
+            sparse=sparse
         )
         self.embedding_bias = ml.MultiFeatureEmbedding(
-            features_n_values = [n_users, n_items],
-            embedding_size    = 1,
-            sparse            = sparse
+            features_n_values=[n_users, n_items],
+            embedding_size=1,
+            sparse=sparse
         )
         self.dot = ml.BatchDot()
 

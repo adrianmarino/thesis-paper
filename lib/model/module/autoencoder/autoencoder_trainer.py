@@ -49,7 +49,7 @@ class AutoEncoderTrainer:
                 data_loader,
                 loss_fn,
                 [encoder_optimizer, decoder_optimizer],
-                callback_manager.ctx.device
+                callback_manager.ctx._device
             )
 
             callback_manager.on_epoch_end(train_loss)

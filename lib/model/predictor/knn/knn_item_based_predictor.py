@@ -1,9 +1,8 @@
-from model.predictor.abstract_predictor import AbstractPredictor
-from model import NearestNeighbors
-from util import round_, delete
-import logging
-from data import RatingsMatrix
 import torch
+
+from data import RatingsMatrix
+from model import NearestNeighbors
+from model.predictor.abstract_predictor import AbstractPredictor
 
 
 class KNNItemBasedPredictor(AbstractPredictor):
@@ -52,4 +51,3 @@ class KNNItemBasedPredictor(AbstractPredictor):
         self.rm.delete()
         self.nn.delete()
         del self
-
