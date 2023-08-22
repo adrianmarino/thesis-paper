@@ -95,3 +95,7 @@ class RecSysDataset(Dataset):
 
     def _to_target(self, observations):
         return self._target_transform(observations, self._device)
+
+    def to(self, device):
+        self._device = device
+        return self
