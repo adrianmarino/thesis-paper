@@ -17,7 +17,9 @@ def histplot(
     show_outliers_leyend = True,
     remove_outliers      = False,
     decimals             = 3,
-    density               = True
+    density              = True,
+    output_path          = None,
+    output_ext           = 'svg'
 ):
     f, (ax_box, ax_hist) = plt.subplots(
         2,
@@ -73,5 +75,6 @@ def histplot(
 
     f.suptitle(title, fontsize=title_fontsize)
 
-
+    if output_path:
+        plt.savefig(f'{output_path}.{output_ext}', format=output_ext)
     plt.show()

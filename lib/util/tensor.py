@@ -5,8 +5,8 @@ def indexes_of(tensor, value):
     return ((tensor == value).nonzero(as_tuple=True)[0])
 
 
-def random_int(begin, end, size, device=pu.get_device()): 
-    return torch.randint(begin, end, (size,)).to(device)
+def random_int(begin, end, size):
+    return torch.randint(begin, end, (size,))
 
 def random_choice(tensor, size):
     n = tensor.size()[0]-1 if tensor.size()[0] > 1 else 1

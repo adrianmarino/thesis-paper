@@ -19,7 +19,9 @@ def describe_num_var(
     show_outliers_leyend = True,
     remove_outliers      = False,
     decimals             = 3,
-    density              = True
+    density              = True,
+    output_path          = None,
+    output_ext           = 'svg'
 ):
     if show_range or show_table:
         df_column = df[[column]]
@@ -41,7 +43,9 @@ def describe_num_var(
         show_outliers_leyend,
         remove_outliers,
         decimals,
-        density = density
+        density     = density,
+        output_path = output_path,
+        output_ext  = output_ext
     )
 
     if show_table:

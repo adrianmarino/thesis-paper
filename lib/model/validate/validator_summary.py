@@ -1,17 +1,21 @@
-import pandas as pd
-import data.plot as pl
 import numpy as np
+import pandas as pd
+
+import data.plot as pl
+from util import LogPathBuilder
 
 
 class ValidatorSummary:
+    @staticmethod
+    def load(file_path):
+        return ValidatorSummary(pd.read_json(f'{file_path}.json'))
 
     @staticmethod
-    def load(file_path): return ValidatorSummary(pd.read_json(f'{file_path}.json'))
+    def from_list(metrics_log):
+        return ValidatorSummary(pd.DataFrame(metrics_log))
 
-    @staticmethod
-    def from_list(metrics_log): return ValidatorSummary(pd.DataFrame(metrics_log))
-
-    def save(self, file_path): self.data.to_json(f'{file_path}.json')
+    def save(self, file_path):
+        self.data.to_json(f'{file_path}.json')
 
     @classmethod
     def load_and_join(clazz, paths):
@@ -21,7 +25,8 @@ class ValidatorSummary:
     def join(summaries):
         return ValidatorSummary(pd.concat([s.data for s in summaries], ignore_index=True))
 
-    def __init__(self, data): self.data = data
+    def __init__(self, data):
+        self.data = data
 
     def __predictor_names(self):
         return np.unique(self.data['predictor'].values)
@@ -30,11 +35,12 @@ class ValidatorSummary:
         return set(self.data.columns) - set(['predictor', 'sample'])
 
     def plot(
-        self,
-        bins                  = 10,
-        show_table            = False,
-        show_range            = False,
-        include_found_metrics = False
+            self,
+            bins=10,
+            show_table=False,
+            show_range=False,
+            include_found_metrics=False,
+            log_path_builder=LogPathBuilder()
     ):
         metric_names = self.__metric_names()
         if not include_found_metrics:
@@ -44,29 +50,36 @@ class ValidatorSummary:
 
         for metric in metric_names:
             pl.xl_flat_size()
-            pl.comparative_boxplot(self.data, x=metric, y="predictor", title=f'Metric: {metric}')
+            pl.comparative_boxplot(
+                self.data,
+                x=metric,
+                y="predictor",
+                title=f'Metric: {metric}',
+                output_path=log_path_builder.build(f'boxplot-{metric}')
+            )
 
         for metric_name in metric_names:
             for pre_name in predictor_names:
                 pl.xl_flat_size()
                 pl.describe_num_var(
-                    df         = self.data[self.data.predictor == pre_name],
-                    column     = metric_name,
-                    bins       = bins,
-                    title      = f'Model: {pre_name} - Metric: {metric_name}',
-                    show_table = show_table,
-                    show_range = show_range
+                    df=self.data[self.data.predictor == pre_name],
+                    column=metric_name,
+                    bins=bins,
+                    title=f'Model: {pre_name} - Metric: {metric_name}',
+                    show_table=show_table,
+                    show_range=show_range,
+                    output_path=log_path_builder.build(f'histplot-{metric_name}')
                 )
 
     def to_latex(self):
-        return self.show().style.format(thousands = ".").to_latex()
+        return self.show().style.format(thousands=".").to_latex()
 
     def show(
-        self,
-        sort_columns          = ['mAP@5(4,5)'],
-        select_columns        = [],
-        include_found_metrics = False,
-        ascending             = False
+            self,
+            sort_columns=['mAP@5(4,5)'],
+            select_columns=[],
+            include_found_metrics=False,
+            ascending=False
     ):
         columns = self.data.columns
 
@@ -77,7 +90,7 @@ class ValidatorSummary:
 
         print(f'Ordered by {", ".join(sort_columns)}:')
         return self \
-                .data[columns] \
-                .groupby('predictor') \
-                .mean() \
-                .sort_values(by=sort_columns, ascending=ascending)
+            .data[columns] \
+            .groupby('predictor') \
+            .mean() \
+            .sort_values(by=sort_columns, ascending=ascending)

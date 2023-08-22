@@ -1,26 +1,22 @@
-from data import progress_bar
-import data.dataset as ds
+import data as dt
 from .validator_summary import ValidatorSummary
-import torch
-import torch.multiprocessing as mp
-import os
 
 
 class Validator:
     def __init__(
-        self,
-        n_samples,
-        batch_size,
-        metrics,
-        predictors,
-        n_processes=5,
-        y_pred_transform_fn = lambda it: it,
-        y_true_transform_fn = lambda it: it.squeeze(1)
+            self,
+            n_samples,
+            batch_size,
+            metrics,
+            predictors,
+            n_processes=5,
+            y_pred_transform_fn=lambda it: it,
+            y_true_transform_fn=lambda it: it.squeeze(1)
     ):
-        self.n_samples   = n_samples
-        self.batch_size  = batch_size
-        self.metrics     = metrics
-        self.predictors  = predictors
+        self.n_samples = n_samples
+        self.batch_size = batch_size
+        self.metrics = metrics
+        self.predictors = predictors
         self.n_processes = n_processes
         self.y_pred_transform_fn = y_pred_transform_fn
         self.y_true_transform_fn = y_true_transform_fn
@@ -31,14 +27,13 @@ class Validator:
         summary = []
         for p in self.predictors:
             y_pred = p.predict_batch(X, **kwargs)
-            y_pred   = self.y_pred_transform_fn(y_pred)
+            y_pred = self.y_pred_transform_fn(y_pred)
 
-            result = { 'predictor': p.name, 'sample': sample}
+            result = {'predictor': p.name, 'sample': sample}
             for m in self.metrics:
                 result.update(m.perform(y_pred, y_true, X))
                 summary.append(result)
         return summary
-
 
     def validate(self, ds, **kwargs):
         summary = []
