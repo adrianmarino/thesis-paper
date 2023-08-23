@@ -33,36 +33,37 @@ import util as ut
 
 
 class ModuleTrainer:
-    def __init__(self, model):
-        self._model = model
+    def __init__(self, model, params):
+        self._model  = model.to(params.model.device)
+        self._params = params
+        ut.mkdir(self._params.model.weights_path)
+        ut.mkdir(self._params.metrics.path)
 
-    def __call__(self, train_ds, test_ds, params):
-        model = self._model.to(params.model.device)
-        ut.mkdir(params.model.weights_path)
-        ut.mkdir(params.metrics.path)
+    def train(self, train_ds, test_ds):
+        self.n_classes = len(train_ds.target_uniques)
 
         train_dl = DataLoader(
             train_ds,
-            params.train.batch_size,
-            num_workers = params.train.n_workers,
+            self._params.train.batch_size,
+            num_workers = self._params.train.n_workers,
             pin_memory  = True,
             shuffle     = True
         )
 
         test_dl  = DataLoader(
             test_ds,
-            params.train.batch_size,
-            num_workers = params.train.n_workers,
+            self._params.train.batch_size,
+            num_workers = self._params.train.n_workers,
             pin_memory  = True
         )
 
-        result = model.fit(
+        self._model.fit(
             train_dl,
-            epochs      = params.train.epochs,
+            epochs      = self._params.train.epochs,
             loss_fn     = ml.MSELossFn(),
             optimizer   = Adam(
-                params = model.parameters(),
-                lr     = params.train.lr
+                params = self._model.parameters(),
+                lr     = self._params.train.lr
             ),
             callbacks   = [
                 Validation(
@@ -73,44 +74,44 @@ class ModuleTrainer:
                 ReduceLROnPlateau(
                     metric   = 'val_loss',
                     mode     = 'min',
-                    factor   = params.train.lr_factor,
-                    patience = params.train.lr_patience
+                    factor   = self._params.train.lr_factor,
+                    patience = self._params.train.lr_patience
                 ),
                 MetricsPlotter(
                     metrics            = ['train_loss', 'val_loss'],
                     plot_each_n_epochs = 1,
-                    output_path        = f'{params.metrics.path}/loss'
+                    output_path        = f'{self._params.metrics.path}/loss'
                 ),
                 Logger(['time', 'epoch', 'train_loss', 'val_loss', 'patience', 'lr']),
                 SaveBestModel(
                     metric          = 'val_loss',
-                    path            = ut.mkdir(params.model.weights_path),
-                    experiment_name = params.metrics.experiment
+                    path            = ut.mkdir(self._params.model.weights_path),
+                    experiment_name = self._params.metrics.experiment
                 )
             ]
         )
 
-        n_classes = len(train_ds.target_uniques)
 
+    def evaluate(self, test_ds):
         validator = ml.Validator(
-            n_samples  = params.metrics.n_samples,
-            batch_size = params.metrics.batch_size,
+            n_samples  = self._params.metrics.n_samples,
+            batch_size = self._params.metrics.batch_size,
             metrics    = [
                 mt.RMSE(),
                 mt.MeanNdcgAtk            (k=5),
                 mt.MeanAveragePrecisionAtk(k=5, discretizer=dr.between(4, 5)),
-                mt.MeanUserFBetaScoreAtk  (k=5, n_classes=n_classes, discretizer=dr.between(4, 5)),
-                mt.MeanUserPrecisionAtk   (k=5, n_classes=n_classes, discretizer=dr.between(4, 5)),
-                mt.MeanUserRecallAtk      (k=5, n_classes=n_classes, discretizer=dr.between(4, 5))
+                mt.MeanUserFBetaScoreAtk  (k=5, n_classes=self.n_classes, discretizer=dr.between(4, 5)),
+                mt.MeanUserPrecisionAtk   (k=5, n_classes=self.n_classes, discretizer=dr.between(4, 5)),
+                mt.MeanUserRecallAtk      (k=5, n_classes=self.n_classes, discretizer=dr.between(4, 5))
             ],
-            predictors = [ml.ModulePredictor(model)]
+            predictors = [ml.ModulePredictor(self._model)]
         )
 
         summary = validator.validate(test_ds)
-        summary.save(f'{params.metrics.path}/metrics')
+        summary.save(f'{self._params.metrics.path}/metrics')
 
         results = summary.show()
 
-        summary.plot(log_path_builder=ut.LogPathBuilder(params.metrics.path))
+        summary.plot(log_path_builder=ut.LogPathBuilder(self._params.metrics.path))
 
         return results
