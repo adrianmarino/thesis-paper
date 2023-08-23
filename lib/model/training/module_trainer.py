@@ -9,12 +9,13 @@ from sklearn.metrics import roc_auc_score
 
 import pytorch_common.util as pu
 from pytorch_common.modules.fn import Fn
-from pytorch_common.callbacks import EarlyStop, \
-                                     ReduceLROnPlateau, \
-                                     Validation, \
-                                     SaveBestModel
-from pytorch_common.callbacks.output import Logger, \
-                                            MetricsPlotter
+from pytorch_common.callbacks import (
+    EarlyStop,
+    ReduceLROnPlateau,
+    Validation,
+    SaveBestModel
+)
+from pytorch_common.callbacks.output import Logger, MetricsPlotter
 
 import model as ml
 import data.dataset as ds
@@ -31,9 +32,8 @@ import random
 import util as ut
 
 
-
 class ModuleTrainer:
-    def __init__(self, model): 
+    def __init__(self, model):
         self._model = model
 
     def __call__(self, train_ds, test_ds, params):
@@ -42,10 +42,10 @@ class ModuleTrainer:
         ut.mkdir(params.metrics.path)
 
         train_dl = DataLoader(
-            train_ds, 
-            params.train.batch_size, 
-            num_workers = params.train.n_workers, 
-            pin_memory  = True, 
+            train_ds,
+            params.train.batch_size,
+            num_workers = params.train.n_workers,
+            pin_memory  = True,
             shuffle     = True
         )
 
@@ -71,13 +71,13 @@ class ModuleTrainer:
                     each_n_epochs = 1
                 ),
                 ReduceLROnPlateau(
-                    metric   = 'val_loss', 
-                    mode     = 'min', 
-                    factor   = params.train.lr_factor, 
+                    metric   = 'val_loss',
+                    mode     = 'min',
+                    factor   = params.train.lr_factor,
                     patience = params.train.lr_patience
                 ),
                 MetricsPlotter(
-                    metrics            = ['train_loss', 'val_loss'], 
+                    metrics            = ['train_loss', 'val_loss'],
                     plot_each_n_epochs = 1,
                     output_path        = f'{params.metrics.path}/loss'
                 ),
@@ -112,5 +112,5 @@ class ModuleTrainer:
         results = summary.show()
 
         summary.plot(log_path_builder=ut.LogPathBuilder(params.metrics.path))
-        
+
         return results
