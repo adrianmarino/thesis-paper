@@ -34,7 +34,7 @@ import util as ut
 
 class ModuleTrainer:
     def __init__(self, model, params):
-        self._model  = model.to(params.model.device)
+        self.model  = model.to(params.model.device)
         self._params = params
         ut.mkdir(self._params.model.weights_path)
         ut.mkdir(self._params.metrics.path)
@@ -57,12 +57,12 @@ class ModuleTrainer:
             pin_memory  = True
         )
 
-        self._model.fit(
+        self.model.fit(
             train_dl,
             epochs      = self._params.train.epochs,
             loss_fn     = ml.MSELossFn(),
             optimizer   = Adam(
-                params = self._model.parameters(),
+                params = self.model.parameters(),
                 lr     = self._params.train.lr
             ),
             callbacks   = [
@@ -104,7 +104,7 @@ class ModuleTrainer:
                 mt.MeanUserPrecisionAtk   (k=5, n_classes=self.n_classes, discretizer=dr.between(4, 5)),
                 mt.MeanUserRecallAtk      (k=5, n_classes=self.n_classes, discretizer=dr.between(4, 5))
             ],
-            predictors = [ml.ModulePredictor(self._model)]
+            predictors = [ml.ModulePredictor(self.model)]
         )
 
         summary = validator.validate(test_ds)

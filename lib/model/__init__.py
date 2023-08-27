@@ -48,6 +48,11 @@ from .module.collaborative_auto_encoder import *
 #
 # Content Based way...
 from .module.autoencoder                import *
+#
+from .module.training.dataset_factory   import DatasetFactory
+from .module.training.module_trainer    import ModuleTrainer
+
+from .module.model_wrapper              import ModelWrapper
 # -----------------------------------------------------------------------------
 
 
