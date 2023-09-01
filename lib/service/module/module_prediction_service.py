@@ -8,12 +8,13 @@ import model as ml
 import util as ut
 
 
+
 class ModulePredictionService:
     def __init__(self, model_loader):
         self._model_loader = model_loader
 
-    def predict(self, train_set: pd.DataFrame, test_set: pd.DataFrame):
-        model, params = self._model_loader.load(train_set, test_set)
+    def predict(self, dev_set: pd.DataFrame, test_set: pd.DataFrame):
+        model, params = self._model_loader.load(dev_set)
 
         data_loader = DataLoader(
             dataset     = ml.DatasetFactory().create_from(test_set),

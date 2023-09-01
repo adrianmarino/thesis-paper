@@ -1,1 +1,2 @@
 from .compute_knn_rating_matrix_task import compute_knn_rating_matrix_task
+from .compute_gmf_rating_matrix_task import compute_gmf_rating_matrix_task

@@ -5,15 +5,32 @@ import model as ml
 
 
 class GMFLoader(ModuleLoader):
-    def __init__(self,weights_path, metrics_path, tmp_path):
-        super().__init__(weights_path, metrics_path, tmp_path, 'bias-gmf')
+    def __init__(
+        self,weights_path,
+        metrics_path,
+        tmp_path,
+        user_seq_col         : str = 'user_seq',
+        item_seq_col         : str = 'item_seq',
+        rating_col           : str = 'rating',
+        update_period_in_min : int = 180
+    ):
+        super().__init__(
+            weights_path,
+            metrics_path,
+            tmp_path,
+            'gmf',
+            user_seq_col,
+            user_seq_col,
+            item_seq_col,
+            update_period_in_min
+        )
 
 
-    def _create_model(self, train_set):
+    def _create_model(self, dev_set):
         params = Bunch({
             'model': Bunch({
-                'n_users'       : train_set[self._user_seq_col].unique().shape[0],
-                'n_items'       : train_set[self._item_seq_col].unique().shape[0],
+                'n_users'       : dev_set[self._user_seq_col].unique().shape[0],
+                'n_items'       : dev_set[self._item_seq_col].unique().shape[0],
                 'device'        : pu.get_device(),
                 'embedding_size': 50,
                 'weights_path'  : self._weights_path
@@ -22,15 +39,16 @@ class GMFLoader(ModuleLoader):
                 'lr'         : 0.001,
                 'lr_factor'  : 0.05,
                 'lr_patience': 3,
-                'epochs'     : 12,
+                'epochs'     : 7,
                 'n_workers'  : 24,
-                'batch_size' : 64
+                'batch_size' : 64,
+                'eval_percent': 0.1
             }),
             'metrics': Bunch({
                 'experiment' : self._predictor_name,
                 'path'       : self._metrics_path,
-                'n_samples'  : 500,
-                'batch_size' : 3000
+                'n_samples'  : 250,
+                'batch_size' : 2000
             })
         })
         return ml.GMF(

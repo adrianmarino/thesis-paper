@@ -18,6 +18,10 @@ class DatasetFactory:
     ):
         self.__features_fn = lambda obs, device: to_tensor(obs, device, feature_columns)
         self.__target_fn   = lambda obs, device: to_tensor(obs, device, [target_column])
+        self.__target_column = target_column
 
     def create_from(self, df: pd.DataFrame):
+        if self.__target_column not in df.columns:
+            df[self.__target_column] = 0.0
+
         return ds.RecSysDataset(df, self.__features_fn, self.__target_fn)

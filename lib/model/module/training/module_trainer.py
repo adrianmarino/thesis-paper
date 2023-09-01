@@ -39,7 +39,7 @@ class ModuleTrainer:
         ut.mkdir(self._params.model.weights_path)
         ut.mkdir(self._params.metrics.path)
 
-    def train(self, train_ds, test_ds):
+    def train(self, train_ds, eval_ds):
         self.n_classes = len(train_ds.target_uniques)
 
         train_dl = DataLoader(
@@ -50,8 +50,8 @@ class ModuleTrainer:
             shuffle     = True
         )
 
-        test_dl  = DataLoader(
-            test_ds,
+        eval_dl  = DataLoader(
+            eval_ds,
             self._params.train.batch_size,
             num_workers = self._params.train.n_workers,
             pin_memory  = True
@@ -67,7 +67,7 @@ class ModuleTrainer:
             ),
             callbacks   = [
                 Validation(
-                    test_dl,
+                    eval_dl,
                     metrics       = { 'val_loss': ml.MSELossFn(float_result=True) },
                     each_n_epochs = 1
                 ),
@@ -92,7 +92,7 @@ class ModuleTrainer:
         )
 
 
-    def evaluate(self, test_ds):
+    def evaluate(self, eval_ds):
         validator = ml.Validator(
             n_samples  = self._params.metrics.n_samples,
             batch_size = self._params.metrics.batch_size,
@@ -107,7 +107,7 @@ class ModuleTrainer:
             predictors = [ml.ModulePredictor(self.model)]
         )
 
-        summary = validator.validate(test_ds)
+        summary = validator.validate(eval_ds)
         summary.save(f'{self._params.metrics.path}/metrics')
 
         results = summary.show()

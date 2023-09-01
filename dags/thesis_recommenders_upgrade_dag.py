@@ -41,7 +41,10 @@ with DAG(
         'thesis',
         'distance-matrix-computing',
         'knn_user_based',
-        'knn_item_based'
+        'knn_item_based',
+        'GMF',
+        'SVD',
+        'NMF'
     ]
 ) as dag:
 
@@ -54,6 +57,7 @@ with DAG(
         true_task_id = [
             'compute_svd_rating_matrix',
             'compute_nmf_rating_matrix',
+            'compute_gmf_rating_matrix',
             'compute_knn_user_based_rating_matrix',
             'compute_knn_item_based_rating_matrix'
         ]
@@ -79,6 +83,14 @@ with DAG(
         rating_scale       = np.arange(0, 6, 0.5)
     )
 
+    gmf_rating_matrix = tss.compute_gmf_rating_matrix_task(
+        dag,
+        task_id           = 'compute_gmf_rating_matrix',
+        interactions_path = 'fetch_interactions.json',
+        min_n_interactions = 20,
+        rating_scale       = np.arange(0, 6, 0.5)
+    )
+
     svd_rating_matrix = ts.compute_surprise_rating_matrix_task(
         dag,
         task_id           = 'compute_svd_rating_matrix',
@@ -90,9 +102,9 @@ with DAG(
 
     nmf_rating_matrix = ts.compute_surprise_rating_matrix_task(
         dag,
-        task_id           = 'compute_nmf_rating_matrix',
-        interactions_path = 'fetch_interactions.json',
-        model             = 'NMF',
+        task_id            = 'compute_nmf_rating_matrix',
+        interactions_path  = 'fetch_interactions.json',
+        model              = 'NMF',
         min_n_interactions = 20,
         rating_scale       = np.arange(0, 6, 0.5)
     )
@@ -125,6 +137,13 @@ with DAG(
         train_interactions_path  = 'compute_nmf_rating_matrix_train_interactions.json'
     )
 
+    gmf_sim = ts.compute_similarities_task(
+        dag,
+        task_id                  = 'compute_gmf_similarities',
+        future_interactions_path = 'compute_gmf_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_gmf_rating_matrix_train_interactions.json'
+    )
+
     upgrade_svd_rec = ts.update_recommender_task(
         dag,
         task_id                 = 'update_svd_recommender',
@@ -147,6 +166,17 @@ with DAG(
         n_most_similars_items   = 10
     )
 
+
+    upgrade_gmf_rec = ts.update_recommender_task(
+        dag,
+        task_id                 = 'update_gmf_recommender',
+        recommender_name        = 'GMF',
+        interactions_path       = 'compute_gmf_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_gmf_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_gmf_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
+    )
 
     upgrade_knn_user_based_rec = ts.update_recommender_task(
         dag,
@@ -179,4 +209,6 @@ with DAG(
     check_branch >> knn_user_based_rating_matrix >> knn_user_based_sim >> upgrade_knn_user_based_rec
     check_branch >> knn_item_based_rating_matrix >> knn_item_based_sim >> upgrade_knn_item_based_rec
 
-    [upgrade_svd_rec, upgrade_nmf_rec, upgrade_knn_user_based_rec, upgrade_knn_item_based_rec] >> mark
+    check_branch >> gmf_rating_matrix >> gmf_sim >> upgrade_gmf_rec
+
+    [upgrade_svd_rec, upgrade_nmf_rec, upgrade_knn_user_based_rec, upgrade_knn_item_based_rec, upgrade_gmf_rec] >> mark

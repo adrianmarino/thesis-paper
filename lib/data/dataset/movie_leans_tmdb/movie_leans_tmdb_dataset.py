@@ -34,7 +34,7 @@ class MovieLensTMDbDataset(RecSysDataset):
             rating_std = df_train['user_movie_rating'].std()
 
 
-        # Create normalized rattings column...
+        # Create normalized ratings column...
         df_train['user_movie_rating_norm'] = df_train \
             .apply(lambda row: round((row['user_movie_rating'] - row['user_movie_rating_mean']) / rating_std, 2), axis=1)
 
