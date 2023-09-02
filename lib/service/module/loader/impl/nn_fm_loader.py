@@ -19,7 +19,7 @@ class NNFMLoader(ModuleLoader):
             weights_path,
             metrics_path,
             tmp_path,
-            'nn_fm',
+            'nn-fm',
             user_seq_col,
             user_seq_col,
             item_seq_col,

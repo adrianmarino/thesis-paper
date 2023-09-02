@@ -7,8 +7,9 @@ import service as srv
 import pytorch_common.util as pu
 from sklearn.model_selection import train_test_split
 import logging
-import glob
-import os
+
+
+
 
 
 class ModuleLoader(ABC):
@@ -22,13 +23,13 @@ class ModuleLoader(ABC):
             item_seq_col         : str = 'item_seq',
             rating_col           : str = 'rating',
             update_period_in_min : int = 180,
-            disable_plot=True
+            disable_plot               = False
     ):
-        self._weights_path   = ut.mkdir(weights_path)
-        self._tmp_path       = ut.mkdir(tmp_path)
-        self._predictor_name = predictor_name
-        self._metrics_path   = ut.mkdir(metrics_path)
-        self._save_file_path = f'{self._weights_path}/{self._predictor_name}'
+        self._weights_path      = ut.mkdir(weights_path)
+        self._tmp_path          = ut.mkdir(tmp_path)
+        self._predictor_name    = predictor_name
+        self._metrics_path      = ut.mkdir(f'{metrics_path}/{self._predictor_name}')
+        self._save_file_path    = f'{self._weights_path}/{self._predictor_name}'
         model_state_change_path = f'{self._tmp_path}/{self._predictor_name}_change_state.picket'
 
         self._user_seq_col = user_seq_col
@@ -66,8 +67,7 @@ class ModuleLoader(ABC):
 
 
     def _train_evaluate(self, model, params, dev_set):
-        [os.remove(path) for path in glob.glob(f'{self._weights_path}/*{self._predictor_name}*')]
-        ut.remove_dir(self._metrics_path)
+        ut.recursive_remove_dir(self._metrics_path)
 
         trainer = ml.ModuleTrainer(model, params, disable_plot=self._disable_plot)
 

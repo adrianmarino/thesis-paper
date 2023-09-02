@@ -110,7 +110,7 @@ class ModuleTrainer:
         )
 
         summary = validator.validate(eval_ds)
-        summary.save(f'{self._params.metrics.path}/metrics')
+        summary.save(self._params.metrics.path)
 
         results = summary.show()
 
