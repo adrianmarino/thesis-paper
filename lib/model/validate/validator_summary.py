@@ -53,6 +53,7 @@ class ValidatorSummary:
         for metric in metric_names:
             if disable_plot:
                 plt.ioff()
+                plt.clf()
 
             pl.xl_flat_size()
             pl.comparative_boxplot(
@@ -67,6 +68,7 @@ class ValidatorSummary:
             for pre_name in predictor_names:
                 if disable_plot:
                     plt.ioff()
+                    plt.clf()
 
                 pl.xl_flat_size()
                 pl.describe_num_var(
