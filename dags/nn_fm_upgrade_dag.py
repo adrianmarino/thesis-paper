@@ -13,7 +13,7 @@ import numpy as np
 
 
 with DAG(
-    'GMF-Recommender-Upgrade',
+    'NN-FM-Recommender-Upgrade',
     default_args       = {
         'owner'           : 'airflow',
         'depends_on_past' : False,
@@ -38,37 +38,37 @@ with DAG(
     max_active_runs    = 1,
     max_active_tasks   = 2,
     tags               = [
-        'GMF',
+        'NNFM',
         'rec-sys'
     ]
 ) as dag:
 
     fetch = ts.fetch_interactions_task(dag, task_id = 'fetch_interactions')
 
-    gmf_rating_matrix = tss.compute_gmf_rating_matrix_task(
+    nn_fm_rating_matrix = tss.compute_nn_fm_rating_matrix_task(
         dag,
-        task_id           = 'compute_gmf_rating_matrix',
+        task_id           = 'compute_nn_fm_rating_matrix',
         interactions_path = 'fetch_interactions.json',
         min_n_interactions = 20,
         rating_scale       = np.arange(0, 6, 0.5)
     )
 
-    gmf_sim = ts.compute_similarities_task(
+    nn_fm_sim = ts.compute_similarities_task(
         dag,
-        task_id                  = 'compute_gmf_similarities',
-        future_interactions_path = 'compute_gmf_rating_matrix_future_interactions.json',
-        train_interactions_path  = 'compute_gmf_rating_matrix_train_interactions.json'
+        task_id                  = 'compute_nn_fm_similarities',
+        future_interactions_path = 'compute_nn_fm_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_nn_fm_rating_matrix_train_interactions.json'
     )
 
-    upgrade_gmf_rec = ts.update_recommender_task(
+    upgrade_nn_fm_rec = ts.update_recommender_task(
         dag,
-        task_id                 = 'update_gmf_recommender',
-        recommender_name        = 'GMF',
-        interactions_path       = 'compute_gmf_rating_matrix_train_interactions.json',
-        user_similarities_path  = 'compute_gmf_similarities_user_similarities.json',
-        item_similarities_path  = 'compute_gmf_similarities_item_similarities.json',
+        task_id                 = 'update_nn_fm_recommender',
+        recommender_name        = 'NNFM',
+        interactions_path       = 'compute_nn_fm_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_nn_fm_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_nn_fm_similarities_item_similarities.json',
         n_most_similars_users   = 500,
         n_most_similars_items   = 10
     )
 
-    fetch >> gmf_rating_matrix >> gmf_sim >> upgrade_gmf_rec
+    fetch >> nn_fm_rating_matrix >> nn_fm_sim >> upgrade_nn_fm_rec

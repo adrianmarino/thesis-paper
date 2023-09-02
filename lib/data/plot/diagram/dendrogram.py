@@ -40,4 +40,4 @@ def plot_dendrogram(X, max_top_levels=2):
     # Plot the top three levels of the dendrogram
     _plot_dendrogram(model, truncate_mode="level", p=max_top_levels)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
-    plt.show()
+    plt.show(block=False)

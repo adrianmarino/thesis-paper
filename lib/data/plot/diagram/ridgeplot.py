@@ -17,4 +17,4 @@ def ridgeplot(
         fade        = True,
         range_style = 'own',
         title       = title)
-    plt.show()
+    plt.show(block=False)

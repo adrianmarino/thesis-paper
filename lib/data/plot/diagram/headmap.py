@@ -13,4 +13,4 @@ def headmap(
 
     sns.set(rc={'figure.figsize': figsize})
     plt.title(title, fontsize=title_fontsize)
-    plt.show()
+    plt.show(block=False)

@@ -33,9 +33,10 @@ import util as ut
 
 
 class ModuleTrainer:
-    def __init__(self, model, params):
+    def __init__(self, model, params, disable_plot=False):
         self.model  = model.to(params.model.device)
         self._params = params
+        self._disable_plot = disable_plot
         ut.mkdir(self._params.model.weights_path)
         ut.mkdir(self._params.metrics.path)
 
@@ -80,7 +81,8 @@ class ModuleTrainer:
                 MetricsPlotter(
                     metrics            = ['train_loss', 'val_loss'],
                     plot_each_n_epochs = 1,
-                    output_path        = f'{self._params.metrics.path}/loss'
+                    output_path        = f'{self._params.metrics.path}/loss',
+                    disable_plot       = self._disable_plot
                 ),
                 Logger(['time', 'epoch', 'train_loss', 'val_loss', 'patience', 'lr']),
                 SaveBestModel(
@@ -112,6 +114,9 @@ class ModuleTrainer:
 
         results = summary.show()
 
-        summary.plot(log_path_builder=ut.LogPathBuilder(self._params.metrics.path))
+        summary.plot(
+            log_path_builder=ut.LogPathBuilder(self._params.metrics.path),
+            disable_plot=self._disable_plot
+        )
 
         return results

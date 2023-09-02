@@ -3,6 +3,7 @@ import pandas as pd
 
 import data.plot as pl
 from util import LogPathBuilder
+import matplotlib.pyplot as plt
 
 
 class ValidatorSummary:
@@ -40,7 +41,8 @@ class ValidatorSummary:
             show_table=False,
             show_range=False,
             include_found_metrics=False,
-            log_path_builder=LogPathBuilder()
+            log_path_builder=LogPathBuilder(),
+            disable_plot=False
     ):
         metric_names = self.__metric_names()
         if not include_found_metrics:
@@ -49,6 +51,9 @@ class ValidatorSummary:
         predictor_names = self.__predictor_names()
 
         for metric in metric_names:
+            if disable_plot:
+                plt.ioff()
+
             pl.xl_flat_size()
             pl.comparative_boxplot(
                 self.data,
@@ -60,6 +65,9 @@ class ValidatorSummary:
 
         for metric_name in metric_names:
             for pre_name in predictor_names:
+                if disable_plot:
+                    plt.ioff()
+
                 pl.xl_flat_size()
                 pl.describe_num_var(
                     df=self.data[self.data.predictor == pre_name],

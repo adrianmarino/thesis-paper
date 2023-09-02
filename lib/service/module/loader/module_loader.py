@@ -21,7 +21,8 @@ class ModuleLoader(ABC):
             user_seq_col         : str = 'user_seq',
             item_seq_col         : str = 'item_seq',
             rating_col           : str = 'rating',
-            update_period_in_min : int = 180
+            update_period_in_min : int = 180,
+            disable_plot=True
     ):
         self._weights_path   = ut.mkdir(weights_path)
         self._tmp_path       = ut.mkdir(tmp_path)
@@ -40,6 +41,7 @@ class ModuleLoader(ABC):
             item_seq_col,
             update_period_in_min
         )
+        self._disable_plot = disable_plot
 
 
     @abstractmethod
@@ -67,7 +69,7 @@ class ModuleLoader(ABC):
         [os.remove(path) for path in glob.glob(f'{self._weights_path}/*{self._predictor_name}*')]
         ut.remove_dir(self._metrics_path)
 
-        trainer = ml.ModuleTrainer(model, params)
+        trainer = ml.ModuleTrainer(model, params, disable_plot=self._disable_plot)
 
         train_set, eval_set = train_test_split(
             dev_set,

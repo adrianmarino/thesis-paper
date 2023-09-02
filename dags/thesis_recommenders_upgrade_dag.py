@@ -38,13 +38,15 @@ with DAG(
     max_active_runs    = 1,
     max_active_tasks   = 2,
     tags               = [
-        'thesis',
         'distance-matrix-computing',
         'knn_user_based',
         'knn_item_based',
-        'GMF',
         'SVD',
-        'NMF'
+        'NMF',
+        'GMF',
+        'DeepFM',
+        'NNMF',
+        'rec-sys'
     ]
 ) as dag:
 
@@ -58,6 +60,7 @@ with DAG(
             'compute_svd_rating_matrix',
             'compute_nmf_rating_matrix',
             'compute_gmf_rating_matrix',
+            'compute_deep_fm_rating_matrix',
             'compute_knn_user_based_rating_matrix',
             'compute_knn_item_based_rating_matrix'
         ]
@@ -86,6 +89,22 @@ with DAG(
     gmf_rating_matrix = tss.compute_gmf_rating_matrix_task(
         dag,
         task_id           = 'compute_gmf_rating_matrix',
+        interactions_path = 'fetch_interactions.json',
+        min_n_interactions = 20,
+        rating_scale       = np.arange(0, 6, 0.5)
+    )
+
+    deep_fm_rating_matrix = tss.compute_deep_fm_rating_matrix_task(
+        dag,
+        task_id           = 'compute_deep_fm_rating_matrix',
+        interactions_path = 'fetch_interactions.json',
+        min_n_interactions = 20,
+        rating_scale       = np.arange(0, 6, 0.5)
+    )
+
+    nn_fm_rating_matrix = tss.compute_nn_fm_rating_matrix_task(
+        dag,
+        task_id           = 'compute_nn_fm_rating_matrix',
         interactions_path = 'fetch_interactions.json',
         min_n_interactions = 20,
         rating_scale       = np.arange(0, 6, 0.5)
@@ -144,6 +163,20 @@ with DAG(
         train_interactions_path  = 'compute_gmf_rating_matrix_train_interactions.json'
     )
 
+    deep_fm_sim = ts.compute_similarities_task(
+        dag,
+        task_id                  = 'compute_deep_fm_similarities',
+        future_interactions_path = 'compute_deep_fm_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_deep_fm_rating_matrix_train_interactions.json'
+    )
+ 
+    nn_fm_sim = ts.compute_similarities_task(
+        dag,
+        task_id                  = 'compute_nn_fm_similarities',
+        future_interactions_path = 'compute_nn_fm_rating_matrix_future_interactions.json',
+        train_interactions_path  = 'compute_nn_fm_rating_matrix_train_interactions.json'
+    )
+
     upgrade_svd_rec = ts.update_recommender_task(
         dag,
         task_id                 = 'update_svd_recommender',
@@ -174,6 +207,28 @@ with DAG(
         interactions_path       = 'compute_gmf_rating_matrix_train_interactions.json',
         user_similarities_path  = 'compute_gmf_similarities_user_similarities.json',
         item_similarities_path  = 'compute_gmf_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
+    )
+
+    upgrade_deep_fm_rec = ts.update_recommender_task(
+        dag,
+        task_id                 = 'update_deep_fm_recommender',
+        recommender_name        = 'DeepFM',
+        interactions_path       = 'compute_deep_fm_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_deep_fm_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_deep_fm_similarities_item_similarities.json',
+        n_most_similars_users   = 500,
+        n_most_similars_items   = 10
+    )
+
+    upgrade_nn_fm_rec = ts.update_recommender_task(
+        dag,
+        task_id                 = 'update_nn_fm_recommender',
+        recommender_name        = 'NNFM',
+        interactions_path       = 'compute_nn_fm_rating_matrix_train_interactions.json',
+        user_similarities_path  = 'compute_nn_fm_similarities_user_similarities.json',
+        item_similarities_path  = 'compute_nn_fm_similarities_item_similarities.json',
         n_most_similars_users   = 500,
         n_most_similars_items   = 10
     )
@@ -209,6 +264,16 @@ with DAG(
     check_branch >> knn_user_based_rating_matrix >> knn_user_based_sim >> upgrade_knn_user_based_rec
     check_branch >> knn_item_based_rating_matrix >> knn_item_based_sim >> upgrade_knn_item_based_rec
 
-    check_branch >> gmf_rating_matrix >> gmf_sim >> upgrade_gmf_rec
+    check_branch >> gmf_rating_matrix     >> gmf_sim     >> upgrade_gmf_rec
+    check_branch >> deep_fm_rating_matrix >> deep_fm_sim >> upgrade_deep_fm_rec
+    check_branch >> nn_fm_rating_matrix   >> nn_fm_sim   >> upgrade_nn_fm_rec
 
-    [upgrade_svd_rec, upgrade_nmf_rec, upgrade_knn_user_based_rec, upgrade_knn_item_based_rec, upgrade_gmf_rec] >> mark
+    [
+        upgrade_svd_rec,
+        upgrade_nmf_rec,
+        upgrade_knn_user_based_rec,
+        upgrade_knn_item_based_rec,
+        upgrade_gmf_rec,
+        upgrade_deep_fm_rec,
+        upgrade_nn_fm_rec
+    ] >> mark

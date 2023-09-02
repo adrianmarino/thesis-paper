@@ -19,5 +19,5 @@ def lineplot(
     plt.title(title, fontsize=title_fontsize)
     plt.xlabel(x, fontsize=axis_fontsize)
     plt.ylabel(y, fontsize=axis_fontsize)
-    plt.show()
+    plt.show(block=False)
 

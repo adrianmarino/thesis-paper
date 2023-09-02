@@ -17,7 +17,7 @@ class KMedoisResult:
         plt.title('Clusters')
         plt.xlabel('X')
         plt.ylabel('Y')
-        plt.show()
+        plt.show(block=False)
         return self
 
 

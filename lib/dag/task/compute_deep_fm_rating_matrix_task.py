@@ -12,7 +12,6 @@ def python_callable(**ctx):
     import service as srv
     import matplotlib.pyplot as plt
 
-
     domain = DomainContext(cfg_path=ctx['recsys.client.cfg_path'])
 
     # --------------------------------------------------------------------------
@@ -32,7 +31,7 @@ def python_callable(**ctx):
         )
 
     def train_predict(train_df, test_df, columns):
-        model_loader = srv.GMFLoader(
+        model_loader = srv.DeepFMLoader(
             weights_path = domain.cfg.weights_path,
             metrics_path = domain.cfg.metrics_path,
             tmp_path     = domain.cfg.temp_path,
@@ -41,7 +40,6 @@ def python_callable(**ctx):
             rating_col   = columns[2],
             disable_plot = True
         )
-
         service = srv.ModulePredictionService(model_loader)
         service.predict(train_df, test_df)
 
@@ -72,7 +70,7 @@ def python_callable(**ctx):
     save_interactions(filtered_train_interactions, 'train')
 
 
-def compute_gmf_rating_matrix_task(
+def compute_deep_fm_rating_matrix_task(
         dag,
         task_id,
         interactions_path,

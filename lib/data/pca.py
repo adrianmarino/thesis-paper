@@ -52,7 +52,7 @@ class PCASummary:
             legend      = legend,
             scatter_kws = { "s": point_size}
         )
-        plt.show()
+        plt.show(block=False)
         return self
 
     def components(self, indexes=[0, 1]):
@@ -107,7 +107,7 @@ class PCASummary:
         plt.xlabel("PC{}".format(1))
         plt.ylabel("PC{}".format(2))
 
-        plt.show()
+        plt.show(block=False)
         return self
 
     def plot(self):

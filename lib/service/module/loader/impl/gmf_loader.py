@@ -12,7 +12,8 @@ class GMFLoader(ModuleLoader):
         user_seq_col         : str = 'user_seq',
         item_seq_col         : str = 'item_seq',
         rating_col           : str = 'rating',
-        update_period_in_min : int = 180
+        update_period_in_min : int = 180,
+        disable_plot         = False
     ):
         super().__init__(
             weights_path,
@@ -22,7 +23,8 @@ class GMFLoader(ModuleLoader):
             user_seq_col,
             user_seq_col,
             item_seq_col,
-            update_period_in_min
+            update_period_in_min,
+            disable_plot
         )
 
 

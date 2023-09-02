@@ -35,5 +35,5 @@ def words_clous_plot(
     plt.imshow(word_cloud, interpolation='bilinear')
     plt.axis("off")
     plt.title(title, fontsize=title_fontsize)
-    plt.show()
+    plt.show(block=False)
 
