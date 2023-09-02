@@ -42,12 +42,12 @@ class DeepFMLoader(ModuleLoader):
             }),
             'train': Bunch({
                 'lr'         : 0.001,
-                'lr_factor'  : 0.05,
-                'lr_patience': 3,
-                'epochs'     : 7,
+                'lr_factor'  : 0.1,
+                'lr_patience': 8,
+                'epochs'     : 10,
                 'n_workers'  : 24,
                 'batch_size' : 64,
-                'eval_percent': 0.1
+                'eval_percent': 0.15
             }),
             'metrics': Bunch({
                 'experiment' : self._predictor_name,
