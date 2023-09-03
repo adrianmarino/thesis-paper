@@ -61,6 +61,7 @@ with DAG(
             'compute_nmf_rating_matrix',
             'compute_gmf_rating_matrix',
             'compute_deep_fm_rating_matrix',
+            'compute_nn_fm_rating_matrix',
             'compute_knn_user_based_rating_matrix',
             'compute_knn_item_based_rating_matrix'
         ]
