@@ -18,3 +18,15 @@ def to_dict(df, key, value):
 
 def save_df(df, path): return df.to_json  (path, orient='records')
 def load_df(path):     return pd.read_json(path, orient='records')
+
+
+def datetime_to_seq(df, source, target):
+    # Convert str source column to datetime
+    datetime_col = pd.to_datetime(df[source])
+
+    target_df = df.copy()
+
+    # Add unique seq number using rank()
+    target_df[target]=  datetime_col.rank(method='dense').astype(int)
+
+    return target_df
