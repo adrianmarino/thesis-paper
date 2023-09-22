@@ -1,4 +1,3 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/adrianmarino/thesis-paper/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/adrianmarino/thesis-paper/tree/master)   ![Coverage](https://raw.githubusercontent.com/adrianmarino/thesis-paper/master/coverage.svg)
 
 # UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Híbridos 
 
