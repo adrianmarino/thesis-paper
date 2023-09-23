@@ -7,7 +7,8 @@ def ridgeplot(
     df,
     by,
     column,
-    title=''
+    title='',
+    kind = 'kde'
 ):
     joyplot(
         df,
@@ -16,5 +17,7 @@ def ridgeplot(
         colormap    = cm.autumn,
         fade        = True,
         range_style = 'own',
-        title       = title)
+        title       = title,
+        kind        = kind
+    )
     plt.show(block=False)

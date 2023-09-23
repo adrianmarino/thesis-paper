@@ -80,7 +80,7 @@ de ítems que puede ser extenso o un amplio espacio de búsqueda.
 \end{sloppypar}
 
 Si hablamos de un \textit{e-commerce} de productos, su objetivo consiste en
-proporcionar a los usuarios aquellos productos que satisfacensus necesidades, a
+proporcionar a los usuarios aquellos productos que satisfacen sus necesidades, a
 un precio que estén dispuestos a pagar. Además, se busca garantizar una
 experiencia satisfactoria con los vendedores.
 
@@ -127,7 +127,7 @@ popularidad de los ítems en cuestión. Algunos ejemplos de estas característic
 podría ser la cantidad de vistas, la cantidad de compras o la cantidad de
 comentarios positivos, o una combinación de ellas. Luego, estos sistemas buscan
 los K elementos más populares. Si bien este tipo de enfoque proporciona buenos
-resultados para nuevos usuarios,sus recomendaciones no tienen en cuenta las
+resultados para nuevos usuarios, sus recomendaciones no tienen en cuenta las
 preferencias individuales de cada usuario, ya que se basan en estadísticas
 comunes a todos los usuarios. Por esta razón, a menudo no se consideran
 sistemas de recomendación en sentido estricto. No obstante, siguen siendo
@@ -171,7 +171,7 @@ ingeniería de \textit{features}, lo que hace muy simple su implementación, ya
 que únicamente es necesario registrar las interacciones de los usuarios para
 con los ítems. Luego, el propio modelo encuentra automáticamente los
 \textit{features} mas relevantes dependiendo de la cantidad de columnas que se
-especifiquen (Dimensiones de un vector \textit{Embedding}). Ejemplos de
+especifiquen (dimensiones de un vector \textit{Embedding}). Ejemplos de
 interacciones podrían ser:
 
 \begin{itemize}
@@ -182,7 +182,7 @@ interacciones podrían ser:
 \end{itemize}
 
 Ambos tipo de modelos, basados en contenido y filtros colaborativos,
-personalizansus recomendaciones. Es decir, ajustan las recomendaciones a las
+personalizan sus recomendaciones. Es decir, ajustan las recomendaciones a las
 preferencias de cada usuario particular. Además, ambos permiten encontrar
 usuarios e ítems similares y recomendar ítems entre usuarios similares.
 
@@ -221,9 +221,9 @@ siguiente situaciones:
 	\item Usuarios con muchas interacciones: En este caso, el usuario tiene una gran
 	      cantidad de interacciones con ítems. Para estos usuarios, el modelo podrá
 	      ofrecer recomendaciones relevantes, ya que cuanto mas interacciones se tenga,
-	      el modelo se ajusta con mas facilidad asus preferencias. Por otro lado, esto
+	      el modelo se ajusta con mas facilidad a sus preferencias. Por otro lado, esto
 	      puede ser una gran desventaja, ya que se produce un efecto de túnel. Es decir,
-	      el usuario obtiene recomendaciones muy ajustadas asus preferencias, perdiendo
+	      el usuario obtiene recomendaciones muy ajustadas a sus preferencias, perdiendo
 	      la capacidad de descubrir nuevos ítems que podrían ser relevantes. Por esta
 	      cuestión se suelen mezclar tanto recomendaciones personalizadas como
 	      no-personalizadas, para favorecer el descubrimiento de nuevos ítems.
@@ -239,7 +239,7 @@ recomendación por popularidad, basados en contenido y filtros colaborativos. De
 esta forma, cuando los usuarios caen por debajo del umbral de interacciones
 necesarias por el modelo de filtro colaborativos, se utiliza un modelos basado
 en contenido, popularidad, o algún otro modelo que no requiere de interacciones
-del usuario para realizarsus recomendaciones.
+del usuario para realizar sus recomendaciones.
 
 \subsection{Categorías dentro de los modelos basados en filtros colaborativos}
 
@@ -249,7 +249,7 @@ predicciones.
 
 \subsubsection{Basados en Memoria}
 
-Este tipo de modelos, como su nombre lo indica, mantienesus datos en memoria.
+Este tipo de modelos, como su nombre lo indica, mantiene sus datos en memoria.
 Se recorren todos los datos (\textit{full scan}) cada vez que se necesita
 realizar un inferencia o predicción (fijando un número de vecinos a comparar).
 Un ejemplo de estos modelos es el algoritmo de k vecinos cercanos
@@ -304,14 +304,14 @@ Esta pregunta se refiere a comprender cuando es conveniente aplicar una técnica
 u otra teniendo en cuenta las ventajas y desventajas de cada enfoque y modelo.
 
 \subsection{¿Cómo se puede solucionar el problema de \textit{Cold start}
-	que sufre el enfoque de recomendación basado en filtros colaborativos? (Tesis)}
+	que sufre el enfoque de recomendación basado en filtros colaborativos? (tesis)}
 
 Como ya se comentó en la introducción, los modelos de filtro colaborativos
 necesitan un número mínimo de interacciones usuario-ítem para poder operar y
 producir recomendaciones aceptables. La propuesta es explorar enfoques que
 permiten lidiar con este problema. Uno de los enfoques más comunes es utilizar
 ensambles de modelos basados en filtros colaborativos con otros modelo basados
-en contenidos o popularidad. Estos ensambles puede diferir ensus técnicas
+en contenidos o popularidad. Estos ensambles puede diferir en sus técnicas
 dependiendo del dominio de los datos.
 
 \section{Objetivos}
@@ -323,7 +323,7 @@ la diferencia en \textit{performance} de cada técnica aplicada sobre el mismo
 set de datos, midiendo su \textit{performance} utilizando las mismas métricas.
 ¿Obtenemos diferencias significativas?
 
-Como segundo objetivo (Tesis), se busca proponer nuevas técnicas y/o explorar
+Como segundo objetivo (tesis), se busca proponer nuevas técnicas y/o explorar
 técnicas existentes que permite lidiar o solucionar el problema de \textit{Cold
 	start} que sufren los sistemas de recomendación basados en filtros
 colaborativos. Ademas, se compararan esta técnicas mediante un
@@ -341,12 +341,12 @@ el dominio clásico en \textit{papers} y literatura de sistemas de recomendació
 en general.
 
 Dada la propuesta de este trabajo, es necesario contar con datos de
-interacciones de usuarios con ítems (Películas en este caso). Además, dado que
+interacciones de usuarios con ítems (películas en este caso). Además, dado que
 se busca solucionar el problema de \textit{Cold start} para el enfoque de
 filtros colaborativos, se necesitará contar con otro enfoque de recomendación,
 el cual posiblemente pueda ser basado en contenido. Por esta cuestión,
 necesitamos contar con \textit{features} completos y consistentes para los
-ítems (Películas).
+ítems (películas).
 
 Dadas estas necesidades, se decidió utilizar los \textit{datasets} expuestos a
 continuación.
@@ -354,9 +354,9 @@ continuación.
 \subsection{\textit{MovieLens 25M Dataset}}
 
 Este \textit{dataset}~\cite{movielens} prácticamente no tiene \textit{features}
-para los ítems (Películas), pero si tiene la calificaciones realizadas por los
+para los ítems (películas), pero si tiene la calificaciones realizadas por los
 usuarios. También cuenta con un conjunto de \textit{tags} o palabras clave
-cargadas por los usuarios para cada ítem (Película). Otro punto importante, es
+cargadas por los usuarios para cada ítem (película). Otro punto importante, es
 que todos los usuarios tienen al menos $20$ interacciones, lo cual asegura no
 tener problemas de baja \textit{performance} por falta de estas. De esta forma,
 este \textit{dataset} sera muy util para entrenar modelos de recomendación
@@ -399,7 +399,7 @@ los ítems como sucede con el \textit{dataset MovieLens} anterior, pero si tiene
 varios \textit{features} referentes a películas. Estos \textit{features} pueden
 ser muy útiles para modelos basados en contenido e inclusive modelos híbridos,
 los cuales se busca explorar en el trabajo de tesis. Contiene datos de $5.000$
-películas ysus columnas se especifican en la tabla~\ref{table:tmdbColumns} a
+películas y sus columnas se especifican en la tabla~\ref{table:tmdbColumns} a
 continuación:
 
 \begin{table}[!htb]
@@ -444,8 +444,8 @@ Como parte inicial de la etapa de pre-procesamiento de datos, se utilizo una
 base de datos \textit{MongoDB}. Se utilizo \textit{MongoDB} y no
 \textit{Pandas} dado que \textit{Pandas} requiere cargar todo el
 \textit{dataset} en memoria. Si bien se podria lidiar con este problema,
-aumentado el tamaño de la memoria \textit{Swap} (Linux) o la memoria
-virtual(\textit{Windows}), podria ocasionar caídas de procesos y lentitudes
+aumentado el tamaño de la memoria \textit{Swap} Linux) o la memoria
+virtual (\textit{Windows}), podria ocasionar caídas de procesos y lentitudes
 innecesarias. En este caso, se selecciono una base de datos de tipo documento,
 la cual no necesita cargar todos los datos en memoria y por otro lado, existe
 la posibilidad de escalar la base de datos a mas nodos en caso de ser
@@ -606,7 +606,7 @@ anterior que tuvieran hasta \textit{6 \%} de valores faltantes. A continuación
 se removió la columna \textit{budget} por tener un porcentaje muy alto de
 valores faltantes, lo que la volvió inutilizable. Por otro lado, la tabla
 \textit{ratings\_tags\_v1} no se modifico, ya que no tenia valores faltantes en
-ninguna desus columnas.
+ninguna de sus columnas.
 
 \clearpage
 
@@ -659,8 +659,8 @@ En la figura~\ref{fig:ratingsHistPlot} se aprecia que la variable
 $0.5$. De esta forma, contamos con $10$ valores discretos de tipo real, siendo
 claramente una variable categórica. Nuevamente vemos algo parecido al diagrama
 de barras~\ref{fig:ratingsBarPlot}, el $50\%$ de las observaciones se
-encuentran entre los cuantiles $Q1$ y $Q3$ con $3.0$ y $4.5$ puntos (Rango
-inter-cuantil). La mediana (Cuantil $Q2$) esta claramente sobre los $4.0$
+encuentran entre los cuantiles $Q1$ y $Q3$ con $3.0$ y $4.5$ puntos (rango
+inter-cuantil). La mediana (cuantil $Q2$) esta claramente sobre los $4.0$
 puntos, coincidiendo con la moda. La media se encuentra en los $3.5$ puntos a
 izquierda de la mediana, debido a que tenemos puntos con frecuencia
 considerables a izquierda que mueven a la media en esa dirección. Por otro
@@ -681,11 +681,14 @@ A continuación segmentemos el anterior histograma por año:
 	\includegraphics[width=15cm]{./images/rating-by-year.png}
 	\caption{
 		Histograma de calificaciones segmentado por año.
-		Como aclaración, en esta gráfica se describen los histogramas
-		como funciones densidad, a pesar de que la variable \textit{rating}
-		es categóricas. De esta forma se puede apreciar con mas claridad
-		la diferencia en cantidad de observaciones y el grado de dispersión de cada
-		niveles por año.
+		En esta gráfica se muestran histogramas como funciones de densidad, 
+		a pesar de que la variable \textit{rating}
+		es categóricas. Las funciones de densidad se graficaron utilizando el 
+		método de estimación \textit{KDE} o \textit{Kernel Density Estimation}.
+		Si bien este método se utiliza para estimar la función de densidad 
+		de una variable aleatoria continua, en este caso permite apreciar con mayor claridad
+		la diferencia en la cantidad de observaciones y el grado de dispersión de cada
+		niveles de la variable \textit{rating} por año.
 	}
 	\label{fig:ratingsYearHistPlot}
 \end{figure}
@@ -752,7 +755,7 @@ votos menor. Lo mismo sucede entre las variables \textit{rating} y
 bajas.
 
 Si bien, en esta primera entrega no se están utilizando otras variables
-distintas a \textit{user\_id} (id de usuario), \textit{movie\_id} y
+distintas a \textit{user\_id} (Identificador del usuario), \textit{movie\_id} y
 \textit{rating}, es de interés analizar las variables correspondiente a
 features de películas, ya que en el siguiente entrega (tesis) se planea
 implementar modelos de recomendación híbridos, los cuales son ensambles de
@@ -889,7 +892,7 @@ posible (en orden descendente).
 \end{itemize}
 
 En la figura~\ref{fig:explainedVariancePlot}, inicialmente podemos apreciar que
-toda las componentes tiene niveles de variabilidad o varianza explicada muy
+todas las componentes tienen niveles de variabilidad o varianza explicada muy
 bajos, donde la primera componente llega solamente al $31$ \%. Esto indica que
 el grado de correlación de las variables originales es muy bajo. Utilizando el
 criterio del bastón roto podríamos seleccionar las 3 primeras componentes
@@ -990,11 +993,11 @@ segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se
 representan los vectores correspondientes a las variables originales. A primera
 vista observamos que las variables \textit{Popularity} (Popularidad) y
 \textit{Vote Count} (Cantidad de votos) tienen una correlación muy alta, ya que
-el ángulo entresus vectores es prácticamente cero. Esto tiene sentido, ya que
+el ángulo entre sus vectores es prácticamente cero. Esto tiene sentido, ya que
 ambas son medidas de popularidad de alta colinealidad. Las variables
 \textit{Popularity} (Popularidad), \textit{Vote Count} (Cantidad de votos) y
 \textit{Vote Mean} (Media de la cantidad de votos) tiene un aporte positivo
-sobre la componente $PC1$ (En menor media). Esto último se corresponde con los
+sobre la componente $PC1$ (en menor media). Esto último se corresponde con los
 coeficientes de las cargas analizados anteriormente. Las variables
 \textit{Movie ID} y \textit{Release Year} (Año de estreno) aportan en menor
 medida sobre la componente $PC1$. De esta forma, se constata lo visto
@@ -1025,7 +1028,7 @@ predicción de la clasificación de un usuario para una película que aun no ha
 visto. Para realizar esto, se utilizaron varios modelos basados en filtros
 colaborativos.
 
-Cada implementación tienesus particularidades: Su nivel de escalabilidad,sus
+Cada implementación tiene sus particularidades: Su nivel de escalabilidad, sus
 tiempos de entrenamiento y predicción, su implementación, la exactitud de las
 predicciones, su tendencia al sobre ajuste, etc.. Para este trabajo se
 eligieron dos grandes grupos. Por un lado, una implementación sencilla basada
@@ -1049,13 +1052,12 @@ cuenta que estos modelos son muy demandantes en cuanto a recursos de
 de \textit{CPU} como \textit{GPU}. De esta forma, se puede elegir cuando usar
 cada dispositivo y en que parte del flujo (pre-procesamiento, entrenamiento e
 inferencia). Ya elegido el \textit{framework}, se opto por implementar todos
-los modelos desdesus bases, ya que \textit{PyTorch} no cuenta con mucho modelos
-del estado del arte desarrollados de forma oficial. De esta forma se implemento
-cada modelo desde cero para poder hacer uso de \textit{CPU} y \textit{GPU} de
-forma granular y realizar un uso mas eficiente de los recursos disponible. Mas
-adelante veremos que esto puede impactar fuertemente en los tiempos de
-entrenamiento e inferencia.
-
+los modelos desde sus bases, ya que \textit{PyTorch} no cuenta con mucho
+modelos del estado del arte desarrollados de forma oficial. De esta forma se
+implemento cada modelo desde cero para poder hacer uso de \textit{CPU} y
+\textit{GPU} de forma granular y realizar un uso mas eficiente de los recursos
+disponible. Mas adelante veremos que esto puede impactar fuertemente en los
+tiempos de entrenamiento e inferencia.
 
 \clearpage
 
@@ -1284,9 +1286,7 @@ hiper parámetros regida por una métricas que valide la exactitud del modelo al
 momento de la predicción, obteniendo como resultado el $K$ para el cual el
 modelo tiene el resultado mas exactos posibles.
 
-
 \clearpage
-
 
 \subsection{
 	Algoritmo de los K vecinos cercanos basado en ítems
@@ -1314,7 +1314,7 @@ predicciones. A continuación la definición del cálculo de las predicciones:
 	\item $O$ (Mayúscula) es el conjunto de los $K$ ítems mas cercanos o similares
 	      al ítem $i$. El ítem $o$ (Minúscula) pertenece al conjunto $O$ de todos
 	      los ítems menos el ítem $i$.
-	\item $i \neq o$: Son los indices de los ítems $i$ y $o$, representando a ítems distintos.
+	\item $i \neq o$: Son los índices de los ítems $i$ y $o$, representando a ítems distintos.
 	\item $w_{i,o}$ es la similitud entre los ítems $i$ y $o$.
 \end{itemize}
 
@@ -1322,20 +1322,18 @@ Finalmente, la predicción es un promedio pesado de las calificaciones del
 usuario $u$ para los ítems cercanos o similares al ítem $i$, pesadas por la el
 grado de similitud de cada ítem $o$ con el ítem $i$.
 
-
 \subsection{Modelo ensamble de los algoritmos de los K vecinos cercanos basados
 	en usuarios e ítems (\textit{KNN User-Item Based Ensemble})}
 
 Dado que contamos dos modelos basados en \textit{KNN} se realizo un ensamble de
 ambos modelos, el cual realiza un promedio de las salidas de ambos modelos.
 
-
 \clearpage
 
 \section{Enfoque basado en modelos}
 
 Hasta aquí realizamos una descripción de los modelos \textit{KNN} utilizados en
-este trabajo ysus distintas implementaciones. Estos modelos tiene varias
+este trabajo y sus distintas implementaciones. Estos modelos tiene varias
 falencias. Entre las mas importantes encontramos el problema de escala, ya que
 el tamaño de los datos a procesar depende casi linealmente de los recursos de
 memoria, \textit{CPU} y/o \textit{GPU} disponibles. De esta forma, cuando es
@@ -1366,8 +1364,8 @@ suponemos que tenemos la siguiente variable:
 	\item Posibles valores: Nublado, Despegado y Lluvioso.
 \end{itemize}
 
-Si codificamos sus valores usando una codificación \textit{one-hot}, obtendremos
-los siguientes vectores:
+Si codificamos sus valores usando una codificación \textit{one-hot},
+obtendremos los siguientes vectores:
 
 \begin{itemize}
 	\item $Nublado    = [1, 0, 0]$
@@ -1378,12 +1376,12 @@ los siguientes vectores:
 Entonces, el valor \textit{Nublado} se convierte en 3 entradas para una red
 neuronal a las cuales se le pasa los numero $1$, $0$ y $0$ respectivamente.
 Ahora pensemos en la cantidad de usuarios que tiene \textit{Google} o
-\textit{Amazon}, ¿Que tamaño tendría el vector que representa a un solo
+\textit{Amazon}. ¿Qué tamaño tendría el vector que representa a un solo
 usuario?¿Por qué usar un vector 99\% ralo para representar un valor?¿No hay una
 forma mas compacta de realizar esta codificación?
 
 La respuesta corta es sí, en estos casos se utilizan \textit{Embeddings}. ¿Pero
-que son los \textit{Embeddings} y en que se diferencian de la codificación
+qué son los \textit{Embeddings} y en qué se diferencian de la codificación
 \textit{one-hot}?
 
 Un \textit{Embedding} no es mas que una forma de codificar valores de una
@@ -1399,7 +1397,7 @@ distancia entre vectores. Si tomamos dos vectores con codificación
 \textit{one-hot} y los gráficas en un espacio tridimensional o bidimensional,
 se aprecia que el ángulo entre estos siempre es el mismo, 90 grados. Supongamos
 el caso anterior de la variable Estado del Tiempo, si representamos en el
-espacio todossus valores, podemos ver que la distancia es las misma entre
+espacio todos sus valores, podemos ver que la distancia es las misma entre
 cualquier par de vectores. Si ahora codificamos la misma variable usando
 \textit{Embeddings} esto cambia, ya que los vectores que representan a los
 valores Nublado y Lluvioso tiene un ángulo menor a 90 grados. Por otro lado,
@@ -1411,7 +1409,7 @@ distintos a un dia despejado.
 
 De esta forma los \textit{Embeddings} tiene una doble ganancia sobre la
 codificación \textit{One-Hot}: comprimen la información y además captan
-información útil para la clusterización o agrupación desus valores. Algo
+información útil para la clusterización o agrupación de sus valores. Algo
 interesante a destacar, es que los modelos que entrenan \textit{Embeddings}
 captan esta información de forma automática en base a las observaciones usadas
 en el entrenamiento, generando estos espacios latentes llamados
@@ -1430,7 +1428,7 @@ y \textit{EmbeddingBag} en \textit{PyTorch} o simplemente \textit{Embedding} en
 
 Por un lado, podemos elegir el tamaño de los vectores \textit{embedding}, el
 cuál, como ya adelantamos, es un hiper-parámetro mas a optimizar. Por otro
-lado, debemos definir la cantidad de vectores \textit{embedding} que debe
+lado, debemos definir la cantidad de vectores de \textit{embedding} que debe
 contener la capa. Ésta es siempre igual al número total de valores que puede
 tomar la variable categórica a codificar.
 
@@ -1443,7 +1441,7 @@ codificación \textit{one-hot}, con la diferencia de que una capa
 categórica a diferencia de la codificación \textit{one-hot}.
 
 El modo de funcionamiento de la capa es muy simple. Esta se puede pensar como
-una tabla \textit{Hash}, donde cada clave es un valor de la variable
+una tabla de \textit{Hash}, donde cada clave es un valor de la variable
 categórica. Es decir, que tendremos tantas claves como valores pueda tomar la
 variable categórica. Estas claves son codificados a números y los valores
 asociados a cada clave son vectores \textit{embedding}. Cave aclarar que en
@@ -1455,7 +1453,7 @@ vector \textit{embedding}.
 
 En la etapa de \textit{forward pass}, se pasa como entrada un valor de la
 variable categórica codificado como numérico. Para nuestra variable Estado del
-Tiempo podríamos codificarsus valores como sigue:
+Tiempo podríamos codificar sus valores como sigue:
 
 \begin{itemize}
 	\item Nublado $=> 0$
@@ -1554,9 +1552,9 @@ En términos matriciales podemos verlo de la siguiente manera:
 	\item $U\in\mathbb{R}^{u \times f}$ es la matriz de vectores \textit{Embedding} de usuarios,
 	      la cuál tiene tantas filas $u$ como usuarios. $f$ es la dimensión del número de columnas
 	      (también llamada factor latente) corresponde al tamaño seleccionado para los vectores \textit{Embedding}
-	      (Como ya se aclaro anteriormente, este es un hiper-parámetro a ajustar).
+	      (como ya se aclaro anteriormente, este es un hiper-parámetro a ajustar).
 	\item $I\in\mathbb{R}^{f\times items}$ es la matriz de vectores \textit{Embedding} de ítems,
-	      la cual tiene tantas filas como factores latentes(posiciones) en los vectores \textit{Embedding}, y
+	      la cual tiene tantas filas como factores latentes (posiciones) en los vectores \textit{Embedding}, y
 	      tantas columnas como ítems se tenga.
 	\item $\tilde{R}\in\mathbb{R}^{usuarios \times items}$ es la matriz de calificaciones,
 	      donde cada fila corresponde a un usuario y cada columna a un ítem.
@@ -1571,7 +1569,7 @@ populares sin tener en cuenta la personalización de las recomendaciones. Luego,
 a medida que vamos incrementando el tamaño del factor latente, estas
 recomendaciones serán cada vez más personalizadas, aumentando la calidad de las
 mismas. Cuando el tamaño del factor latente es muy grande, el modelos a sobre
-ajustar (\textit{ overfitting}) y por ende la calidad de las recomendaciones
+ajustar (\textit{overfitting}) y por ende la calidad de las recomendaciones
 comenzara a empeorar. Para solucionar este problema, se suelen agregar términos
 de regularización en la función de error a minimizar:
 
@@ -1591,8 +1589,8 @@ de regularización en la función de error a minimizar:
 
 El modelo \textit{GMF} de \textit{Simon Funk}~\cite{afm, dlwkrs}, visto en el
 apartado anterior, realiza recomendaciones de muy buena calidad, pero tiene una
-limitación: sólo utilizar interacciones usuario-ítem que tengan que ver con
-valores numéricos referidos a interacciones explicitas, como calificaciones.
+limitación: sólo utiliza interacciones usuario-ítem que tengan que ver con
+valores numéricos referidos a interacciones explícitas, como calificaciones.
 Los sistemas de recomendación modernos deben explotar todas las interacciones
 posibles, tanto explícitas (calificaciones numéricas) como implícitas (compras,
 vistas, favoritos, etc..). Para solucionar este nuevo problema, donde es
@@ -1648,7 +1646,7 @@ El uso de redes neuronales presenta una ventaja significativa: la posibilidad
 de utilizar múltiples variables como entrada, no limitándose únicamente a las
 variables categóricas usuario e ítem. Es precisamente en esta característica
 donde radica su mayor potencial. No obstante, es importante mencionar que este
-modelo muestra una ligera disminución en la precisión desus predicciones en
+modelo muestra una ligera disminución en la precisión de sus predicciones en
 comparación con modelos anteriores.
 
 A continuación podemos ver un esquema del modelo, muy similar a \textit{GFM}
@@ -1691,7 +1689,7 @@ lo que permitiría abordar el problema como uno de clasificación.
 \subsection{Máquinas de Factorización (\textit{FM})}
 
 Antes de introducir el modelo de máquinas de factorización profundas
-(\textit{DeepFM}) se comenzara explicando uno desus componentes mas
+(\textit{DeepFM}) se comenzara explicando uno de sus componentes mas
 importantes: las máquinas de factorización~\cite{didlfm, zhangdive}.
 
 Las máquina de factorización propuestas por \textit{Steffen Rendle} en 2010
@@ -1706,8 +1704,8 @@ utiliza un kernel polinomial.
 A continuación, se define el modelo formalmente:
 
 \begin{itemize}
-	\item $x\in\mathbb{R}^{d}$ es un vector de \textit{features} donde cada una de
-	      sus componentes representa a una variable del \textit{dataset}, siendo $d$
+	\item $x\in\mathbb{R}^{d}$ es un vector de \textit{features} donde cada una de sus
+	      componentes representa a una variable del \textit{dataset}, siendo $d$
 	      la cantidad de variables. En nuestro caso,
 	      $x\in\mathbb{R}^{2}$ ya que tenemos dos variables, usuarios e ítems.
 	\item $y\in\mathbb{R}$ es la variable \textit{target} o resultado a predecir.
@@ -1785,10 +1783,10 @@ complejidad del método:
 	\end{split}
 \end{equation}
 
-Con esta re-formulación del último termino, la complejidad del método se reduce
+Con esta reformulación del último termino, la complejidad del método se reduce
 considerablemente. Además, para las variables ralas, solo se deben computar los
 valores distintos de cero, para que la complejidad general sea lineal.
-Finalmente, la expresión del método aplicando esta re-formulación queda como
+Finalmente, la expresión del método aplicando esta reformulación queda como
 sigue:
 
 \begin{equation}
@@ -1834,7 +1832,7 @@ modelo:
 
 Donde se puede apreciar que las entradas del modelo son las variables
 categóricas correspondiente a usuarios e ítems, como en los modelos previamente
-visto. Dado un identificador de usuario e ítem, se resuelvesus correspondientes
+visto. Dado un identificador de usuario e ítem, se resuelve sus correspondientes
 vectores \textit{Embedding}, los cuales se convierten en entradas para los
 siguientes dos bloques. Uno de los bloques intermedios, no es mas que una red
 neuronal multi capa con capas densas o \textit{fully connected}. Por el otro
@@ -1896,7 +1894,7 @@ los mismos.
 precisión para K observaciones, es una de las métricas mas usada
 para evaluar sistemas de recomendación~\cite{map_at_k_1, map_at_k_2, map_at_k_3}.
 
-Antes de comenzar, definamos a los sistemas de recomendación en términos desus
+Antes de comenzar, definamos a los sistemas de recomendación en términos de sus
 entradas y salida, donde:
 
 \begin{itemize}
@@ -2198,7 +2196,7 @@ distribución esta levemente sesgada a izquierda.
 El valor medio del error es de $2.917146$ con una dispersión de $0.015642$, en
 ambos casos menores a las mediciones sobre ambos modelos por separado.
 
-En Resumen, el ensamble de ambos modelos obtiene una mayor precisión y un menor
+En resumen, el ensamble de ambos modelos obtiene una mayor precisión y un menor
 porcentaje de error al realizar predicciones.
 
 \clearpage
