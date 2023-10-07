@@ -54,3 +54,17 @@ class ItemRecommenderBuilder:
             n_top_rated_user_items,
             n_sim_items
         )
+
+
+    def collaborative_filtering_item_recommender(
+        self,
+        model,
+        n_top_rated_user_items=10,
+        n_sim_items=3
+    ):
+        return rc.CFItemEmbDBRecommender(
+            self.repositories[model],
+            self.repositories.dataset,
+            n_top_rated_user_items,
+            n_sim_items
+        )

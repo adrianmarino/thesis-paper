@@ -18,3 +18,6 @@ from .emb_db.personalized_item_emb_db.recommender import PersonalizedItemEmbDBRe
 from .emb_db.personalized_item_emb_db_ensemble.result import PersonalizedItemEmbDBEnsembleRecommenderResult
 from .emb_db.personalized_item_emb_db_ensemble.recommender import PersonalizedItemEmbDBEnsembleRecommender
 
+
+from .emb_cb_filtering.recommender import EmbCBFilteringRecommender
+from .emb_cb_filtering.result import EmbCBFilteringRecommenderResult

@@ -3,6 +3,8 @@ from bunch import Bunch
 from database.chromadb import CollectionRepository
 import chromadb
 import pandas as pd
+import util as ut
+
 
 
 @singleton
@@ -21,10 +23,16 @@ class RepositoryFactory:
             name,
             file_path,
             metadata_cols,
-            embedding_col
+            embedding_col,
+            id_col = 'id'
     ):
-        return CollectionRepository(self.client, name).insert_from_df(
-            df            = pd.read_json(file_path),
+        repository = CollectionRepository(self.client, name)
+
+        repository.insert_from_df(
+            id_col        = id_col,
+            df            = ut.load_df(file_path),
             metadata_cols = metadata_cols,
             embedding_col = embedding_col
         )
+
+        return repository

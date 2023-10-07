@@ -56,3 +56,19 @@ from .module.training.module_trainer    import ModuleTrainer
 
 from .clustering.k_medoids  import KMedoisClustering
 from .module.mlp            import MultiLayerPerceptron
+
+
+
+# -----------------------------------------------------------------------------
+# Hyperparameters optimization...
+# -----------------------------------------------------------------------------
+from .optimization.optuna_trainer import HyperParamsSampler, OptunaTrainer
+# -----------------------------------------------------------------------------
+
+
+
+# -----------------------------------------------------------------------------
+# nsemble...
+# -----------------------------------------------------------------------------
+from .ensemble.fwls import *
+# -----------------------------------------------------------------------------

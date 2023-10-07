@@ -36,3 +36,8 @@ def delete(tensor):
 def free_gpu_memory():
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+        
+
+def value_counts(tensor):
+    values, counts = tensor.unique(return_counts=True)
+    return {values[idx].item(): counts[idx].item() for idx in range(len(values))}

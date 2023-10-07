@@ -1,11 +1,12 @@
 import torch
 from torch.utils.data import Dataset
+import pytorch_common.util as pu
 
 
 class BasicDataset(Dataset):
-    def __init__(self, df, feature_columns, target_column):
-        self.features = torch.tensor(df[feature_columns].to_numpy()).float()
-        self.target   = torch.tensor(df[target_column].to_numpy()).float()
+    def __init__(self, df, feature_cols, target_col, feat_type=torch.float, target_type=torch.float):
+        self.features = torch.tensor(df[feature_cols].to_numpy()).type(feat_type)
+        self.target   = torch.tensor(df[target_col].to_numpy()).type(target_type)
 
     def __len__(self): return self.target.shape[0]
 

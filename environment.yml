@@ -24,6 +24,8 @@ dependencies:
     - scikit-learn-extra
     - statsmodels
     - pytest
+    - optuna
+    - mysqlclient
     - pip
     - pip:
           - --extra-index-url https://download.pytorch.org/whl/cu118
@@ -36,3 +38,4 @@ dependencies:
           - chromadb
           - sentence-transformers
           - scikit-surprise
+          
