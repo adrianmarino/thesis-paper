@@ -1,5 +1,6 @@
 from .result import EmbCBFilteringRecommenderResult
 import pandas as pd
+import util as ut
 
 
 class EmbCBFilteringRecommender:
@@ -50,22 +51,23 @@ class EmbCBFilteringRecommender:
         recommendations['score'] = recommendations[self.__user_id_col] \
             .apply(lambda r:  (1 - user_distances[r]))  * df[self.__rating_col]
 
-        return recommendations.groupby([self.__item_id_col, self.__release_year_col])['score'] \
+        recommendations = ut.year_to_decade(recommendations, self.__release_year_col, 'decade')
+
+        return recommendations \
+            .groupby([self.__item_id_col, 'decade'])['score'] \
             .mean() \
             .reset_index() \
-            .sort_values(['score', self.__release_year_col], ascending=False)
+            .sort_values(['decade', 'score'], ascending=False)
 
     def __create_result(self, items_df, k):
-        items_df = items_df.drop([self.__release_year_col], axis=1)
-
         df = items_df.merge(self.__dataset.data, on=self.__item_id_col)
-        df = df[['score', self.__item_id_col, self.__imdb_id_col, self.__release_year_col]+self.__metadata]
+        df = df[['score', 'decade', self.__item_id_col, self.__imdb_id_col, self.__release_year_col]+self.__metadata]
         df = df.drop_duplicates(subset=[self.__item_id_col]).head(k)
 
         return EmbCBFilteringRecommenderResult(self.name, df, self.__imdb_id_col, 'score', self.__metadata + [self.__release_year_col])
 
 
-    def recommend(self, user_id: int = None, k: int = 5, k_sim_users: int = 15):
+    def recommend(self, user_id: int = None, k: int = 10, k_sim_users: int = 15):
         similar_users_result = self.__find_similar_users_by_id(user_id, k_sim_users)
 
         similar_users_items_df =  self.__similar_users_items(similar_users_result.ids)

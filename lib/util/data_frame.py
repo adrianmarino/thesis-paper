@@ -34,24 +34,23 @@ def datetime_to_seq(df, source, target):
 
 
 
-def get_dummies_from_list_col(df, column, prefix=''):
-    columns = np.unique(np.concatenate(df[column].apply(np.array).values))
+def get_dummies_from_list_col(df, source, prefix=''):
+    target_cols = np.unique(np.concatenate(df[source].apply(np.array).values))
 
-    column_values = {c:[] for c in columns}
+    target_col_values = {c:[] for c in target_cols}
 
     for _, row in df.iterrows():
-        values = row[column]
+        values = row[source]
 
-        for v in values:
-            column_values[v].append(1)
+        for col in values:
+            target_col_values[col].append(1)
 
-        for v in set(columns) - set(values):
-            column_values[v].append(0)
+        for col in set(target_cols) - set(values):
+            target_col_values[col].append(0)
 
     result = df.copy()
-    for name in column_values.keys():
-        col = f'{prefix}_{name.lower()}' if prefix  else name.lower() 
-        result[col] = column_values[name]
+    for col in target_col_values.keys():
+        result[f'{prefix}_{col.lower()}' if prefix  else col.lower()] = target_col_values[col]
 
     return result
 
@@ -67,9 +66,17 @@ def embedding_from_list_col(df, id_col, value_col, exclude=[]):
 
     emb_df = df[emb_columns]
     emb_df = emb_df.apply(lambda row: row / row.sum(), axis=1)
+    emb_df = emb_df.dropna()
 
     result_df = pd.DataFrame()
     result_df[f'{value_col}_embedding'] = emb_df[emb_columns].apply(lambda row: row.tolist(), axis=1)
     result_df.insert(0, id_col, df[id_col])
 
+    result_df
+
     return result_df
+
+
+def year_to_decade(df, source, target):
+    df[target] = df[source].apply(lambda year: int(year / 10) * 10)
+    return df
