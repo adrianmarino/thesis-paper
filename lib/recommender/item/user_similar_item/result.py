@@ -1,29 +1,18 @@
 from IPython.core.display import HTML
 
 from rest import IMDBApiClient
-from recommender import RecommenderResult
+from recommender import RecommenderResult, render_image
 
 
-def to_image_html(path, width=360): return F'<img src="{path}" width="{width}" >'
-
-
-def render_image(client, id, width=360):
-    try:
-        info = client.get_info(id)
-        return to_image_html(info['Poster'], width)
-    except:
-        return 'Not Found Image'
-
-
-class ItemEmbDBRecommenderResult(RecommenderResult):
+class UserSimilarItemRecommenderResult(RecommenderResult):
     def __init__(self, recommender_name, data, k):
         self.__client = IMDBApiClient()
         self.__recommender_name = recommender_name
         self.__data = data.sort_values(by=['rating'], ascending=False).head(k) if data.shape[0] > 0 else None
 
+
     @property
-    def data(self):
-        return self.__data
+    def data(self): return self.__data
 
     def show(self, image_width=300):
         print(f'\nItem Recommender: {self.__recommender_name}\n')

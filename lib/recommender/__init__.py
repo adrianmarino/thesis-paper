@@ -1,23 +1,15 @@
-from .emb_db.dataset_repository import DatasetRepository
-
-from .recommender_result import RecommenderResult
-from .personalized_item_recommender import PersonalizedItemRecommender
-from .item_recommender import ItemRecommender
-
+# Common Interfaces
+from .user_item_recommender import UserItemRecommender
+from .recommender_result    import RecommenderResult, to_image_html, render_image
+from .item_recommender      import ItemRecommender
 
 
-from .emb_db.item_emb_db.result import ItemEmbDBRecommenderResult
-from .emb_db.item_emb_db.recommender import ItemEmbDBRecommender
-
-from .emb_db.item_recommender_builder import ItemRecommenderBuilder, item_rec_sys_cfg
+# Collaborative and convent based recommenders
+from .user.filtering.recommender    import UserItemFilteringRecommender
 
 
-from .emb_db.personalized_item_emb_db.result import PersonalizedItemEmbDBRecommenderResult
-from .emb_db.personalized_item_emb_db.recommender import PersonalizedItemEmbDBRecommender
-
-from .emb_db.personalized_item_emb_db_ensemble.result import PersonalizedItemEmbDBEnsembleRecommenderResult
-from .emb_db.personalized_item_emb_db_ensemble.recommender import PersonalizedItemEmbDBEnsembleRecommender
-
-
-from .emb_cb_filtering.recommender import EmbCBFilteringRecommender
-from .emb_cb_filtering.result import EmbCBFilteringRecommenderResult
+# Item to item recommenders
+from .item.similar_item.recommender                 import SimilarItemRecommender
+from .item.user_similar_item_ensemble.recommender   import UserSimilarItemEnsembleRecommender
+from .item.user_similar_item.recommender            import UserSimilarItemRecommender
+from .item.item_recommender_builder                 import SimilarItemRecommenderBuilder, item_rec_sys_cfg

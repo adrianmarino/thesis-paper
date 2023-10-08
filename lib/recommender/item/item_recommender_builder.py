@@ -1,9 +1,10 @@
-import recommender as rc
+from .dataset_repository import DatasetRepository
 from singleton_decorator import singleton
 from data.dataset import MovieLensTMDBDataLoader
 from database.chromadb import RepositoryFactory
 from bunch import Bunch
 import logging
+import recommender as rc
 
 
 def item_rec_sys_cfg(dataset_path, field, model):
@@ -23,46 +24,33 @@ def item_rec_sys_cfg(dataset_path, field, model):
 
 
 @singleton
-class ItemRecommenderBuilder:
+class SimilarItemRecommenderBuilder:
     def __init__(self, base_path, cfgs):
         self.repositories = RepositoryFactory().create_from_cfg(cfgs)
 
-        self.repositories['dataset'] = rc.DatasetRepository(dataset = MovieLensTMDBDataLoader.df_from_path(base_path))
-
+        self.repositories['dataset'] = DatasetRepository(
+            dataset = MovieLensTMDBDataLoader.df_from_path(base_path)
+        )
 
     def item_recommender(
         self,
         model,
         n_sim_items=10
     ):
-        return rc.ItemEmbDBRecommender(
+        return rc.SimilarItemRecommender(
             self.repositories[model],
             self.repositories.dataset,
             n_sim_items
         )
 
 
-    def personalized_item_recommender(
+    def user_item_recommender(
         self,
         model,
         n_top_rated_user_items=10,
         n_sim_items=3
     ):
-        return rc.PersonalizedItemEmbDBRecommender(
-            self.repositories[model],
-            self.repositories.dataset,
-            n_top_rated_user_items,
-            n_sim_items
-        )
-
-
-    def collaborative_filtering_item_recommender(
-        self,
-        model,
-        n_top_rated_user_items=10,
-        n_sim_items=3
-    ):
-        return rc.CFItemEmbDBRecommender(
+        return rc.UserSimilarItemRecommender(
             self.repositories[model],
             self.repositories.dataset,
             n_top_rated_user_items,

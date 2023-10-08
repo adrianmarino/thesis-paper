@@ -1,14 +1,9 @@
 import pandas as pd
+from recommender import UserItemRecommender
+from .result import UserSimilarItemEnsembleRecommenderResult
 
 
-from recommender import PersonalizedItemRecommender, PersonalizedItemEmbDBEnsembleRecommenderResult
-
-
-def group_mean(df, group_col, mean_col):
-    return df.groupby([group_col])[mean_col].mean().reset_index()
-
-
-class PersonalizedItemEmbDBEnsembleRecommender(PersonalizedItemRecommender):
+class UserSimilarItemEnsembleRecommender(UserItemRecommender):
 
     def __init__(
             self,
@@ -42,7 +37,7 @@ class PersonalizedItemEmbDBEnsembleRecommender(PersonalizedItemRecommender):
             .mean() \
             .reset_index()
 
-        return PersonalizedItemEmbDBEnsembleRecommenderResult(self.name, recommendations, k)
+        return UserSimilarItemEnsembleRecommenderResult(self.name, recommendations, k)
 
 
     @property

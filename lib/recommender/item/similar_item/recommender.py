@@ -1,21 +1,12 @@
 import pandas as pd
 from bunch import Bunch
-
 import util as ut
 from recommender import ItemRecommender
-from .result import ItemEmbDBRecommenderResult
+from .result import SimilarItemRecommenderResult
 from ..sim_items_mixin import SimItemsMixin
 
 
-def group_mean(df, group_col, mean_col):
-    return df.groupby([group_col])[mean_col].mean().reset_index()
-
-
-def mean_by_key(df, key, value):
-    ut.to_dict(group_mean(df, key, value), key, value)
-
-
-class ItemEmbDBRecommender(ItemRecommender, SimItemsMixin):
+class SimilarItemRecommender(ItemRecommender, SimItemsMixin):
 
     def __init__(
             self,
@@ -29,7 +20,7 @@ class ItemEmbDBRecommender(ItemRecommender, SimItemsMixin):
 
 
     def recommend(self, item_id: int, k: int = 5):
-        return ItemEmbDBRecommenderResult(
+        return SimilarItemRecommenderResult(
             self.name,
             self._similar_items([item_id]),
             k

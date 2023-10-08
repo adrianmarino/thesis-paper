@@ -1,21 +1,9 @@
 from IPython.core.display import HTML
-
 from rest import IMDBApiClient
-from recommender import RecommenderResult
+from recommender import RecommenderResult, render_image
 
 
-def to_image_html(path, width=360): return F'<img src="{path}" width="{width}" >'
-
-
-def render_image(client, id, width=360):
-    try:
-        info = client.get_info(id)
-        return to_image_html(info['Poster'], width)
-    except:
-        return 'Not Found Image'
-
-
-class EmbCBFilteringRecommenderResult(RecommenderResult):
+class UserItemFilteringRecommenderResult(RecommenderResult):
     def __init__(self, recommender_name, data,imdb_id_col, rating_col, metadata):
         self.__client           = IMDBApiClient()
         self.__recommender_name = recommender_name
@@ -25,8 +13,7 @@ class EmbCBFilteringRecommenderResult(RecommenderResult):
         self.__metadata         = metadata
 
     @property
-    def data(self):
-        return self.__data
+    def data(self): return self.__data
 
     def show(self, image_width=300):
         print(f'\nRecommender: {self.__recommender_name}\n')

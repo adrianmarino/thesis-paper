@@ -1,9 +1,10 @@
-from .result import EmbCBFilteringRecommenderResult
+from recommender import UserItemRecommender
+from .result import UserItemFilteringRecommenderResult
 import pandas as pd
 import util as ut
 
 
-class EmbCBFilteringRecommender:
+class UserItemFilteringRecommender(UserItemRecommender):
     def __init__(
         self,
         field,
@@ -14,7 +15,8 @@ class EmbCBFilteringRecommender:
         rating_col       = 'user_movie_rating',
         imdb_id_col      = 'movie_imdb_id',
         release_year_col = 'movie_release_year',
-        metadata         = ['movie_genres']
+        metadata         = ['movie_genres'],
+        k_sim_users: int = 15
     ):
         self.__name = f'{field}-cb-recommender'
         self.__emb_repository   = emb_repository
@@ -25,9 +27,10 @@ class EmbCBFilteringRecommender:
         self.__imdb_id_col      = imdb_id_col
         self.__release_year_col = release_year_col
         self.__metadata         = metadata
+        self.__k_sim_users      = k_sim_users
 
 
-    def __find_similar_users_by_id(self, user_id, k):
+    def __find_similar_users_by_id(self, user_id):
         result = self.__emb_repository.search_by_ids([user_id])
 
         if result.empty:
@@ -35,7 +38,7 @@ class EmbCBFilteringRecommender:
 
         similar_users = self.__emb_repository.search_sims(
             embs=[result.embeddings[0]],
-            limit=k
+            limit=self.__k_sim_users
         )
 
         return similar_users
@@ -64,11 +67,11 @@ class EmbCBFilteringRecommender:
         df = df[['score', 'decade', self.__item_id_col, self.__imdb_id_col, self.__release_year_col]+self.__metadata]
         df = df.drop_duplicates(subset=[self.__item_id_col]).head(k)
 
-        return EmbCBFilteringRecommenderResult(self.name, df, self.__imdb_id_col, 'score', self.__metadata + [self.__release_year_col])
+        return UserItemFilteringRecommenderResult(self.name, df, self.__imdb_id_col, 'score', self.__metadata + [self.__release_year_col])
 
 
-    def recommend(self, user_id: int = None, k: int = 10, k_sim_users: int = 15):
-        similar_users_result = self.__find_similar_users_by_id(user_id, k_sim_users)
+    def recommend(self, user_id: int = None, k: int = 10):
+        similar_users_result = self.__find_similar_users_by_id(user_id)
 
         similar_users_items_df =  self.__similar_users_items(similar_users_result.ids)
 

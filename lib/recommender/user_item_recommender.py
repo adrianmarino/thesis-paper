@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class PersonalizedItemRecommender(ABC):
+class UserItemRecommender(ABC):
     @abstractmethod
     def recommend(self, user_id: int = None, k: int = 5):
         pass

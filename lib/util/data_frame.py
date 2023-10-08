@@ -80,3 +80,11 @@ def embedding_from_list_col(df, id_col, value_col, exclude=[]):
 def year_to_decade(df, source, target):
     df[target] = df[source].apply(lambda year: int(year / 10) * 10)
     return df
+
+
+def group_mean(df, group_col, mean_col):
+    return df.groupby([group_col])[mean_col].mean().reset_index()
+
+
+def mean_by_key(df, key, value):
+    ut.to_dict(group_mean(df, key, value), key, value)

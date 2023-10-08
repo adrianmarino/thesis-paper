@@ -1,14 +1,13 @@
 import pandas as pd
 from bunch import Bunch
-
 import util as ut
-from recommender import PersonalizedItemRecommender
-from .result import PersonalizedItemEmbDBRecommenderResult
+from recommender import UserItemRecommender
+from .result import UserSimilarItemRecommenderResult
 from ..sim_items_mixin import SimItemsMixin
 
 
 
-class PersonalizedItemEmbDBRecommender(PersonalizedItemRecommender, SimItemsMixin):
+class UserSimilarItemRecommender(UserItemRecommender, SimItemsMixin):
 
     def __init__(
             self,
@@ -31,7 +30,7 @@ class PersonalizedItemEmbDBRecommender(PersonalizedItemRecommender, SimItemsMixi
 
         recommendations = self._similar_items(item_ids=top_user_items.index.unique())
 
-        return PersonalizedItemEmbDBRecommenderResult(
+        return UserSimilarItemRecommenderResult(
             self.name,
             recommendations,
             k
