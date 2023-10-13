@@ -1,0 +1,23 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1.}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Tipos de sistemas de recomendación}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Basados en Popularidad}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Basados en Contenido}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Basados en Filtrado Colaborativos}{3}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Categorías dentro de los modelos basados en filtros colaborativos}{4}{subsection.1.1.4}%
+\contentsline {subsubsection}{Basados en Memoria}{4}{subsubsection*.2}%
+\contentsline {subsubsection}{Basados en Modelos}{5}{subsubsection*.3}%
+\contentsline {subsection}{\numberline {1.1.5}Modelos Híbridos o Ensambles}{6}{subsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.1.6}Estrategias de ensamble de modelos}{6}{subsection.1.1.6}%
+\contentsline {subsubsection}{Switching}{6}{subsubsection*.4}%
+\contentsline {subsubsection}{Mixing}{6}{subsubsection*.5}%
+\contentsline {subsubsection}{Weighted}{7}{subsubsection*.6}%
+\contentsline {subsubsection}{Regresión Lineal}{7}{subsubsection*.7}%
+\contentsline {subsubsection}{Stacking}{7}{subsubsection*.8}%
+\contentsline {subsubsection}{Feature-Weighted Linear Stacking}{7}{subsubsection*.9}%
+\contentsline {subsubsection}{K-Arm Bandit utilizando Thompson sampling}{8}{subsubsection*.10}%
+\contentsline {section}{\numberline {1.2}Descripción del problema y motivación}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit {Deep Learning}, obtienen mejores resultados que aquellas que no las utilizan?}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}¿Cuáles son las ventajas y desventajas de cada enfoque a la hora de aplicar estas técnicas?}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}¿Cómo se puede solucionar el problema de \textit {Cold start} que sufre el enfoque de recomendación basado en filtros colaborativos? (tesis)}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Objetivos}{9}{section.1.3}%
