@@ -137,34 +137,34 @@ grado de adecuación de cada ítems a los \textit{features} seleccionados.
 Por otro lado, existen dos formas de utilizas estos modelos:
 
 \begin{itemize}
-	\item El usuario esta registardo pero no realizo interacciones con los ítems: Este
+	\item El usuario esta registrado pero no realizo interacciones con los ítems: Este
 	      escenario se da con usuarios que se registraron pero aun no han calificado
-	      ningun ítems. En estos casos muchas aplicaciones optan por realizar un encuetra
-	      inicial. Esta encuentra se utiliza para consutar al usuario \textit{features}
-	      reelevantas que permitiran comenzar a realizar recomendaciones. Por ejemplo, se
-	      podria presentan una lista de géneros, actores, directores, etc. Luego, el
-	      usuario realiza un apuntuación de acuerdo al su nivel de gusto. Estas encuentas
-	      se suelen realizar cada cierto tiempo, dadoq ue hay usuarios que tinene una
-	      frecuencia muy baja de interacicon con el sistema.
-	\item El usaurio se registro hace un tiempo y tiene cirta frecuencia de interacciones
-	      con los ítems: En esta caso, se utilizan las clasificaciones del usuario sobre
-	      para realizar las recomendaciones. Este enfoque suele tener mejores resultados,
-	      ya que muchas veces (dependiendo del dominio de las recomendaciones) el usuario
-	      no conoce inicialmente que es lo que le gusta o bien puede cambiar de pareser
-	      en sus opiniones. En comparación este enfoqeu es mejor al enfoque anterior,
-	      dadoq ue el modelo tiene un concimiento mas acutalizado sobre los gustos del
-	      usuario, permitendo realiazr recomendaciones mas alineadas a los gustos del
-	      usaurio.
+	      ningún ítems. En estos casos muchas aplicaciones optan por realizar una
+	      encuesta inicial. Esta encuentra se utiliza para consultar al usuario
+	      \textit{features} relevantes que permitirán comenzar a realizar
+	      recomendaciones. Por ejemplo, se podría presentan una lista de géneros,
+	      actores, directores, etc. Luego, el usuario realiza una puntuación de acuerdo a
+	      su preferencia. Estas encuestas se suelen realizar cada cierto tiempo, dado que
+	      hay usuarios que tienen una frecuencia muy baja de interacción con el sistema.
+	\item El usuario se registro hace un tiempo y tiene cierta frecuencia de
+	      interacciones con los ítems: En esta caso, se utilizan las clasificaciones del
+	      usuario para realizar las recomendaciones. Este enfoque suele tener mejores
+	      resultados, ya que muchas veces (dependiendo del dominio de las
+	      recomendaciones) el usuario no conoce inicialmente cuales son sus preferencias
+	      o bien puede cambiar de parecer con el tiempo. En comparación, este enfoque es
+	      mejor al enfoque anterior, dado que el modelo tiene un conocimiento mas
+	      actualizado sobre las preferencias del usuario, permitiendo realizar
+	      recomendaciones mas alineadas a sus gustos.
 \end{itemize}
 
-Ambos emfoques puede combinarse. Supongamos que el cientifico de dados
-seleciona los generos como \textit{features}. Inicialmente peude realizar una
-encueta y conocer el gradode gusta del usuario por cada genero. Luego el
-usaurio coomenxa a calificar items. Estoa valores ahora pueden actualizarse
-utilizando alguna medida a aprtir de las calificaciones. De esta forman se
-podrian utilizar como enfoques complementarios.
+Ambos enfoques puede combinarse. Supongamos que el científico de datos
+seleccionar los géneros como \textit{features}. Inicialmente, puede realizar
+una encuesta para conocer el grado de preferencia del usuario por cada género.
+Luego, el usuario comienza a calificar ítems y estos valores se pueden
+actualizar utilizando alguna medida basada en las calificaciones. De esta
+forma, se podrían utilizar ambos enfoques de manera complementaria.
 
-Dadas estas interacciones de los usuarios, se puede definir el grado de
+Luego, teniendo interacciones de los usuarios, se puede definir el grado de
 preferencia de los usuarios a cada \textit{feature} definido para los ítems.
 Con esta información, es posible encontrar tanto ítems como usuarios similares
 y realizar recomendaciones del tipo:
@@ -172,9 +172,9 @@ y realizar recomendaciones del tipo:
 \begin{itemize}
 	\item Para el \textit{Usuario A} el cual tiene ciertos niveles de preferencia por
 	      cada \textit{features}, se pueden recomendar los \textit{Ítem X} e \textit{Ítem
-		      Y}. El modelo puede infererir el grado de preferencia del \textit{Usuario A}
-	      para cada item existente y luego ordenarlos. En este caso, el \textit{Ítem X}
-	      es de mayor preferencia para el usaurio que el \textit{Ítem Y}.
+		      Y}. El modelo puede inferir el grado de preferencia del \textit{Usuario A} para
+	      cada item existente y luego ordenarlos. En este caso, el \textit{Ítem X} es de
+	      mayor preferencia para el usuario que el \textit{Ítem Y}.
 
 	\item Dado el \textit{Usuario A}, el cual tiene preferencia por el \textit{Ítem X},
 	      también podría tener preferencia por el \textit{Ítem Y}, por ser muy cercano o
@@ -304,23 +304,25 @@ forma, es posible utilizarlos en dominios con una gran cantidad de datos.
 \clearpage
 \subsection{Modelos Híbridos o Ensambles}
 
-Son aquellos modelos que combinan mas de una técnica de recomendación, también
-llamados ensambles de modelos.
-
-Comunmente se utilizan para resolver el problema de \textit{Cold start} o
-arranque en frio que sufren los modelos de recomendación basados en filtros
-colaborativos.
+Lod modelos híbridos o ensambles, son aquellos modelos que combinan mas de una
+técnica de recomendación. Comúnmente son utilizados para resolver el problema
+de \textit{Cold start} o arranque en frio que sufren los modelos de
+recomendación basados en filtros colaborativos.
 
 Los modelos de recomendación colaborativos, no puede realizar recomendaciones a
-usuarios que aun no han calificado ítems. Para soplucinar esta probleamtica se
-utilizan modelos de recomendación que no dependen de las interacciones solo con
-estos usuarios solucionando parcialmente el problema de \textit{Cold start} o
-arranque en frio. Exiten distinto enfoques que permite abordar este problema.
-Los ensambles solucionan ese problema y al mismo tiempo puede realizar
-recomendaciones con mayor exactitud que las que puede realizara cada modelo por
-separado. Por otro ladu utilizar ensample no asegura una mejora en las
-recomendaciones, ya qeu es algo muy dependiende te los datos, de la
-heterogeneidad de los modelos y de la técnica de ensamblado que se utilice.
+usuarios que aun no han calificado ítems o que no han realizado ninguna
+interacción con la aplicación en cuestión. Para solucionar esta problemática,
+se utilizan modelos de recomendación que no dependan de las interacciones de
+los usuarios, como pueden ser modelos basados en contenido.
+
+El uso de ensambles de modelos puede solucionar este problema de \textit{Cold
+	start} o arranque en frio, y al mismo tiempo, es posible realizar
+recomendaciones de mayor calidad a aquellas resultado de la predicción de cada
+modelo por separado.
+
+Por otro lado, utilizar ensambles no asegura una mejora en las recomendaciones,
+ya que es algo muy dependiente de los datos, de la heterogeneidad de los
+resultados de los modelos y las técnicas de ensamblado que se utilicen.
 
 \subsection{Estrategias de ensamble de modelos}
 
@@ -328,102 +330,111 @@ A continuación se definen las estrategias de ensamble mas comunes:
 
 \subsubsection{Switching}
 
-Esta técnica consta de realizar un intercambio de los modelso de recomendacion
-dependiendo de la cantidad de interaccioens con las que cuente el usuario. Es
-una buena práctica tomar una un periodo de N horas, días o meses para calcular
-el número de interacciones. Un ejemplo podria ser:
+La técnica de \textit{switching} consiste en intercambiar los modelos de
+recomendación según la cantidad actual de interacciones de cada usuario. Es
+recomendable filtrar las interacciones dentro de un período de tiempo de N
+horas, días o meses, para luego calcular el número de interacciones del
+usuario. Un ejemplo sería:
 
 \begin{itemize}
 	\item Si el usuario tiene menos de N interacciones, se utiliza un recomendador por
-	      pupuladidad.
-	\item Si el usuario tiene enter 5 y 10 interacciones, se utiliza un recomendador
+	      popularidad.
+	\item Si el usuario tiene entre 5 y 10 interacciones, se utiliza un recomendador
 	      basado en contenido.
-	\item Si el usuario tiene mas de 20 interaccione, se utiliza un recomendador basado
-	      en contenido.
+	\item Si el usuario tiene mas de 20 interacciones, se utiliza un recomendador basado
+	      en filtros colaborativos.
 \end{itemize}
 
-El proncipal problema de este enfoque es el cambio abrupto en el patron de las
-recomendaciones al cambiar de una recomendación a otro, yaque las calidad de
-las recomendacion puede varias mucho, como en el caso de l ejemplo anterior.
+El principal problema de este enfoque es el cambio abrupto en el patrón de las
+recomendaciones al cambiar de un modelo de recomendación a otro, ya que la
+calidad de las recomendaciones puede variar mucho de un recomendador a otro. En
+el ejemplo anterior, el cambio del recomendador por popularidad al recomendador
+basado en contenido supone una mejora en la calidad de las recomendaciones, ya
+que a partir de ese momento se estarían personalizando los resultados. Sin
+embargo, ¿qué sucede cuando un usuario disminuye su frecuencia de interacción
+con la aplicación? En este caso, se cambiaría de modelos más personalizados a
+menos personalizados. Para disminuir los efectos de este problema, se podría
+aumentar la ventana de tiempo para filtrar la interacciones, ocasionando el
+efecto contrario a utilizar un ensamble.
 
 \subsubsection{Mixing}
 
-Esta técnica combina los ratings predichos por cada modelos de recomendacion,
-para dada item recomendado. Habitualmente se realiza una normalizacion por el
-rating mas alto. De esta forma cada ítem tiene un score entre 0 y 1. Donde 1 es
-la puntuación más alta. Otra alternativa sería realizar un \textit{scoring} por
-la media, promedio pesado, mediana de los \textit{rating} predichos por cada
-modelo para cada ítem. Esta técnica puede ser mas efectiva si se aplica en
-conjunto con la técnica de \textit{switching}, ya que permimite suabixar entre
-enter modelos, mezclando las recomendaciones de dos modelos cunado se llega a
-un rango de interacciones pre-establecido como frontera entre modelos.
+Esta técnica combina los \textit{ratings} predichos por cada modelo de
+recomendación para cada ítem recomendado. Normalmente, se realiza una
+normalización dividiendo por el \textit{rating} más alto, lo que da a cada ítem
+un \textit{score} entre $0$ y $1$, donde $1$ es la puntuación más alta. Otra
+alternativa seria calcular el \textit{score} mediante la media, promedio pesado
+o mediana de los \textit{ratings} predichos por cada modelo y para cada ítem.
+Esta técnica puede ser más efectiva si se combina con la técnica de
+\textit{switching}, que suaviza la transición entre modelos mezclando las
+recomendaciones de dos modelos cuando se alcanza un rango de interacciones
+preestablecido como frontera entre estos.
 
 \subsubsection{Weighted}
 
-Esta técnica en un caso particular de la técnica de \textit{Mixing}. Se refiere
-al caso en que se realiza un promedio pesado de los ratings predichos mor cada
-modelo para el mismo ítem. Los pesos se asigna manualmente, es decir no existe
-ningun proceso para optimizar o descubrir estos hiperprametros.
+La técnica de \textit{Weighted} en un caso particular de la técnica de
+\textit{Mixing}. Se refiere al caso en que se realiza un promedio pesado de los
+\textit{ratings} predichos por cada modelo, para el mismo ítem. El problema es
+que los pesos se asignan manualmente, ya sea arbitrariamente, o por
+conocimiento del dominio. Es decir, no existe ningún proceso para optimizar o
+descubrir estos hiper parámetros guiado por datos.
 
 \subsubsection{Regresión Lineal}
 
 Esta técnica es similar al enfoque \textit{Weighted}, pero en este caso, si se
 optimizan los pesos utilizando un modelo de regresión linear. El proceso consta
-de los siguietes pasos:
+de los siguientes pasos:
 
 \begin{enumerate}
 	\item Se entrena cada modelo de recomendación por separado utilizan el mismo conjunto
-	      de entrenamiento y evaluación
-	\item Con cada modelo se predice el \textit{rating} para todo el conjunto de
-	      entrenamiento. De esta forma como resultado, se tiene un nuevo conjunto de
-	      entrenamiento, donde se encuentra como columnas: usuario, item, los
-	      \textit{ratings} predichos por cada modelos como columnas, y finalmente el
-	      \textit{rating} real realizado por el usuario. Lomimsmo sucede con el conjunto
+	      de entrenamiento y evaluación.
+	\item Con cada modelo se predice valor de \textit{rating} que cada usuario asignara a
+	      cada ítem del conjunto de entrenamiento. De esta forma como resultado, se tiene
+	      un nuevo conjunto de entrenamiento con las siguientes columnas: usuario, item,
+	      los \textit{ratings} predichos por cada modelos como columnas, y finalmente el
+	      \textit{rating} real realizado por el usuario. Lo mismo sucede con el conjunto
 	      de evaluación.
-	\item Finalmente, se entrena y evalua una regresión lineal como los conjuntos
-	      construidos en el paso anterior.
-
-	      A diferencia del enfoque \textit{Weighted} ahora si los pesos se ajustan de
-	      acuerdo a los datos de entrenamiento.
-
+	\item Finalmente, se entrena y evalúa una regresión lineal como los conjuntos
+	      construidos en el paso anterior. A diferencia del enfoque \textit{Weighted}
+	      ahora si los pesos se ajustan de acuerdo a los datos de entrenamiento.
 \end{enumerate}
 
 \subsubsection{Stacking}
 
-El enfoque \textit{Stacking} es una genezalización del enfoque de
+El enfoque \textit{Stacking} es una generalización del enfoque de
 \textit{Regresión Lineal}. Este consta de aplicar cualquier modelo (incluido
-regresion lineal) para ajustar los pesos, pudiendo de aplicar culquier modelos
-linar o no linal como redes neuronales, regresiones polinomicas, etc.
+regresión lineal) para ajustar los pesos, pudiéndose aplicar cualquier modelos
+lineal o no lineal como: redes neuronales, regresiones polinómicas, etc.
 
 \subsubsection{Feature-Weighted Linear Stacking}
 
-Esta técnica a grandes razgos gaarda similitud con los últimos 3 métodos
+Esta técnica a grandes rasgos guarda similitud con los últimos 3 métodos
 expuestos (\textit{Weighted}, \textit{Regresión Lineal}, \textit{Stacking}).
 Consta de aplicar un función lineal similar a una regresión, donde cada modelo
-se puede pensar como una componentes de la regresión, cada una multplicada por
+se puede pensar como una componentes de la regresión, cada una multiplicada por
 una meta función o función \textit{feature-weights}. Estas meta funciones
 pueden ser pensadas como pesos guiados por reglas duras. Es decir, sus valores
-estan pesados por reglas duras. Esta reglas ayudan a manejar el nivel de
-contibución que tiene cada modelo sobre el \textit{rating} resultado de la
-prediccion. Por ejemplo, podriamos utilizar reglas duras para aumentar la
-contribución de un modelo basado en contenido cuando el usuario tiene pocas
-interacciones o aumentar la contrucon de un modelo de filtros colaborativos
-cuando el número de interacciones del usuario aumenta. En definitiva, es una
-formas de realizar lo que se llama \textit{blend} o mezcla de las
-construciciones de cada modelo al \textit{raging} resultado aplicando una
+están pesados por reglas estáticas definidas previamente. Esta reglas ayudan a
+manejar el nivel de contribución que tiene cada modelo sobre el \textit{rating}
+resultado de la predicción. Por ejemplo, podríamos utilizar reglas duras para
+aumentar la contribución de un modelo basado en contenido cuando el usuario
+tiene pocas interacciones o aumentar la contribución de un modelo de filtros
+colaborativos cuando el número de interacciones del usuario aumenta. En
+definitiva, es una formas de realizar lo que se llama \textit{blend} o mezcla
+de las contribuciones de cada modelo al \textit{rating} resultado aplicando una
 transición suave.
 
 \subsubsection{K-Arm Bandit utilizando Thompson sampling}
 
-La tecnica propuesta se basa en el conocido problema de los bandidos multi
-brazo o el problema de las maquinas tragamonedas.
+La técnica propuesta se basa en el conocido problema de los bandidos multi
+brazo o también llamado el problema de las maquinas traga monedas.
 
-El problema consiste en que tenemos una cantidad K de maquinas tragamonedas y
+El problema consiste en que tenemos una cantidad K de maquinas traga monedas y
 contamos con una cantidad limitadas de fichas. Se busca producir la mayor
-cantidad de ganancias y en el proceso descibrir cual es la probabilidad de
+cantidad de ganancias, y en el proceso descubrir cual es la probabilidad de
 existo de cada maquina. Todo esto utilizando la menor cantidad de fichas
 posible. En definitiva, se busca maximizar la ganancia descubriendo de forma
-temprana las probabilidades de existo de cada maquina.
+temprana las probabilidades de éxito de cada maquina.
 
 Este es un método iterativo, donde en cada iteración, el método selecciona una
 máquina, realiza una jugada y registra si se ganó o se perdió.
@@ -434,11 +445,11 @@ o método estadístico.
 Cuando la selección es al azar, se dice que se está en modo o etapa de
 exploración, es decir, se gastan fichas para acumular resultados de cada
 máquina y así registrar una serie de éxitos y pérdidas en cada máquina. Cada
-máquina se puede pensar como una variable binomial, es decir toma dos valores,
-gano o perdio.
+máquina se puede pensar como una variable binomial, es decir toma dos valores:
+gano o perdió.
 
 Luego, con esta sucesión de eventos, se estima una distribución beta para cada
-máquina y finalmente se toma una muestra de un valor de esa distribución. Este
+máquina, y finalmente se toma una muestra de un valor de esa distribución. Este
 valor sera el valor mas probable o la probabilidad de éxito de la máquina.
 
 Ya realizada una primera etapa de exploración, en las próximas iteraciones se
@@ -452,8 +463,8 @@ estrategia, elige de forma aleatoria entre ambas técnicas de selección, con un
 probabilidad de exploración \textit{epsilon}. Esta probabilidad ira
 disminuyendo a medida que aumenta el número de iteraciones. Esta es una mejora
 que permite restringir la exploración. Tiene mucho sentido, ya que a medida que
-se realizan más jugadas, se comprende más el problema y ya no es necesario
-realizar una selección al azar.
+se realizan más jugadas, hay una mejor comprensión del problema, y es menos
+necesario realizar una selección al azar.
 
 En conclusión, se busca determinar la probabilidad de éxito de cada máquina,
 realizando la menor cantidad de jugadas posibles.
@@ -464,64 +475,15 @@ decir, cuál es el modelo que tiene mayor probabilidad de realizar una
 recomendación similar a la que realizaría el usuario. Esta medición de éxito
 depende de la métrica a evaluar.
 
-A diferencia de varios de los modelos de ensamble anterioremente expuestos,
-donde se requiere relizar una misma predicción para todos los modelos parte de
-ensamble, este en foque realiza la predicción en un unico modelo, debido a que
-es una estrategia de selección de modelos. Esto se traduce en un uso mas
-eficiente de los recursos de CPU, GPU y memoria del sistema, ya que estos
-modelos en general se ejecutan como servicios \textit{cloud} (en la nuve) en
-\textit{AWS} (\textit{Amazon Web Services}) o \textit{GCP} (\textit{Google
-	Cloud Platform}), donde se paga unicamente por el uso de recursos que relizan
-los servicios o modelo en este caso.
-
-\clearpage
-\section{Descripción del problema y motivación}
-
-Con este trabajo se busca contestar a las siguientes preguntas:
-
-\subsection{¿Los modelos basado en filtro colaborativos que utilizan técnicos de
-	\textit{Deep Learning}, obtienen mejores resultados que aquellas que no las utilizan?}
-
-La idea detrás de esta pregunta es realizar \textit{benchmarks} sobre distintos
-modelos del estado de arte basados en \textit{Deep Learning} o no, utilizando
-el mismo set de datos y las mismas métricas. De esta forma, se busca comprender
-cual es la diferencia en \textit{performance} entre los modelos seleccionados.
-Por otro lado, se busca comprender cuando es mas adecuado utilizar cada
-enfoque. Como ya se comentó en el apartado de introducción, hay modelos que
-están mas limitados que otros según el número de recursos de \textit{hardware}
-o interacciones con los que se cuenta.
-
-\subsection{¿Cuáles son las ventajas y desventajas de cada enfoque a la hora de aplicar estas técnicas?}
-
-Esta pregunta se refiere a comprender cuando es conveniente aplicar una técnica
-u otra teniendo en cuenta las ventajas y desventajas de cada enfoque y modelo.
-
-\subsection{¿Cómo se puede solucionar el problema de \textit{Cold start}
-	que sufre el enfoque de recomendación basado en filtros colaborativos? (tesis)}
-
-Como ya se comentó en la introducción, los modelos de filtro colaborativos
-necesitan un número mínimo de interacciones usuario-ítem para poder operar y
-producir recomendaciones aceptables. La propuesta es explorar enfoques que
-permiten lidiar con este problema. Uno de los enfoques más comunes es utilizar
-ensambles de modelos basados en filtros colaborativos con otros modelo basados
-en contenidos o popularidad. Estos ensambles puede diferir en sus técnicas
-dependiendo del dominio de los datos.
-
-\section{Objetivos}
-
-Como primer objetivo, se pretender comprender cuales son los fundamentos
-teóricos sobre los que se apoya cada técnica aplicada y bajo que escenarios
-puede ser conveniente aplicarlas. Por otro lado, se intenta determinar cual es
-la diferencia en \textit{performance} de cada técnica aplicada sobre el mismo
-set de datos, midiendo su \textit{performance} utilizando las mismas métricas.
-¿Obtenemos diferencias significativas?
-
-Como segundo objetivo, se busca proponer nuevas técnicas y/o explorar técnicas
-existentes que permite lidiar o solucionar el problema de \textit{Cold start}
-que sufren los sistemas de recomendación basados en filtros colaborativos.
-Ademas, se compararan esta técnicas mediante un \textit{benchmark} propuesto,
-para compara como se comporta cada modelos ante usuarios con escasas o ninguna
-interacción en el set de datos propuesto.
+A diferencia de varios de los modelos de ensamble anteriormente expuestos,
+donde se requiere realizar una misma predicción para todos los modelos, este en
+foque se realiza la predicción en un único modelo, debido a que es una
+estrategia de selección de modelos. Esto se traduce en un uso mas eficiente de
+los recursos de CPU, GPU y memoria del sistema, ya que estos modelos en general
+se ejecutan como servicios \textit{cloud} (en la nube) en \textit{AWS}
+(\textit{Amazon Web Services}) o \textit{GCP} (\textit{Google Cloud Platform}),
+donde se paga unicamente por el uso de recursos que realizan los servicios o
+modelo en este caso.
 
 %%%% BIBLIOGRAFÍA
 
