@@ -129,8 +129,9 @@ conversión, a pesar de la falta de personalización.
 
 \subsection{Basados en Contenido}
 
-Este tipo de sistema de recomendación necesita un trabajo previo de ingeniería
-de \textit{features} sobre los ítems. Se busca definir cuales son los
+Este tipo de sistema de recomendación \cite{viedma2016introduccion,
+	glauber2019collaborative} necesita un trabajo previo de ingeniería de
+\textit{features} sobre los ítems. Se busca definir cuales son los
 \textit{features} mas significativos para la tarea en cuestión, y cual es el
 grado de adecuación de cada ítems a los \textit{features} seleccionados.
 
@@ -196,13 +197,14 @@ pueden lograr muy buenos resultados.
 
 \subsection{Basados en Filtrado Colaborativos}
 
-Estos modelos, a diferencia de los modelos basados en contenido, no requirieren
-ingeniería de \textit{features}, lo que hace muy simple su implementación, ya
-que únicamente es necesario registrar las interacciones de los usuarios para
-con los ítems. Luego, el propio modelo encuentra automáticamente los
-\textit{features} mas relevantes dependiendo de la cantidad de columnas que se
-especifiquen (dimensiones de un vector \textit{Embedding}). Ejemplos de
-interacciones podrían ser:
+Estos modelos \cite{viedma2016introduccion, glauber2019collaborative}, a
+diferencia de los modelos basados en contenido, no requirieren ingeniería de
+\textit{features}, lo que hace muy simple su implementación, ya que únicamente
+es necesario registrar las interacciones de los usuarios para con los ítems.
+Luego, el propio modelo encuentra automáticamente los \textit{features} mas
+relevantes dependiendo de la cantidad de columnas que se especifiquen
+(dimensiones de un vector \textit{Embedding}). Ejemplos de interacciones
+podrían ser:
 
 \begin{itemize}
 	\item El \textit{Usuario A} visualizo el \textit{Ítem X} el dia 2 de marzo de 2022.
@@ -304,16 +306,18 @@ forma, es posible utilizarlos en dominios con una gran cantidad de datos.
 \clearpage
 \subsection{Modelos Híbridos o Ensambles}
 
-Lod modelos híbridos o ensambles, son aquellos modelos que combinan mas de una
-técnica de recomendación. Comúnmente son utilizados para resolver el problema
-de \textit{Cold start} o arranque en frio que sufren los modelos de
-recomendación basados en filtros colaborativos.
+Lod modelos híbridos o ensambles \cite{criado2018analisis, falk2019practical},
+son aquellos modelos que combinan mas de una técnica de recomendación.
+Comúnmente son utilizados para resolver el problema de \textit{Cold start} o
+arranque en frio que sufren los modelos de recomendación basados en filtros
+colaborativos.
 
 Los modelos de recomendación colaborativos, no puede realizar recomendaciones a
 usuarios que aun no han calificado ítems o que no han realizado ninguna
 interacción con la aplicación en cuestión. Para solucionar esta problemática,
 se utilizan modelos de recomendación que no dependan de las interacciones de
-los usuarios, como pueden ser modelos basados en contenido.
+los usuarios, como pueden ser modelos basados en contenido
+\cite{glauber2019collaborative}.
 
 El uso de ensambles de modelos puede solucionar este problema de \textit{Cold
 	start} o arranque en frio, y al mismo tiempo, es posible realizar
@@ -408,7 +412,8 @@ lineal o no lineal como: redes neuronales, regresiones polinómicas, etc.
 
 \subsubsection{Feature-Weighted Linear Stacking}
 
-Esta técnica a grandes rasgos guarda similitud con los últimos 3 métodos
+La técnica \textit{Feature-Weighted Linear Stacking} \cite{sill2009feature,
+	falk2019practical} a grandes rasgos guarda similitud con los últimos 3 métodos
 expuestos (\textit{Weighted}, \textit{Regresión Lineal}, \textit{Stacking}).
 Consta de aplicar un función lineal similar a una regresión, donde cada modelo
 se puede pensar como una componentes de la regresión, cada una multiplicada por
@@ -434,7 +439,8 @@ contamos con una cantidad limitadas de fichas. Se busca producir la mayor
 cantidad de ganancias, y en el proceso descubrir cual es la probabilidad de
 existo de cada maquina. Todo esto utilizando la menor cantidad de fichas
 posible. En definitiva, se busca maximizar la ganancia descubriendo de forma
-temprana las probabilidades de éxito de cada maquina.
+temprana las probabilidades de éxito de cada maquina
+\cite{intro-reinforcement-learning}.
 
 Este es un método iterativo, donde en cada iteración, el método selecciona una
 máquina, realiza una jugada y registra si se ganó o se perdió.
@@ -448,9 +454,10 @@ máquina y así registrar una serie de éxitos y pérdidas en cada máquina. Cad
 máquina se puede pensar como una variable binomial, es decir toma dos valores:
 gano o perdió.
 
-Luego, con esta sucesión de eventos, se estima una distribución beta para cada
-máquina, y finalmente se toma una muestra de un valor de esa distribución. Este
-valor sera el valor mas probable o la probabilidad de éxito de la máquina.
+Luego, con esta sucesión de eventos, se estima una distribución beta
+\cite{thompson-sampling-intuition} para cada máquina, y finalmente se toma una
+muestra de un valor de esa distribución. Este valor sera el valor mas probable
+o la probabilidad de éxito de la máquina.
 
 Ya realizada una primera etapa de exploración, en las próximas iteraciones se
 puede hacer uso del conocimiento actual y seleccionar la máquina con mayor
@@ -470,7 +477,9 @@ En conclusión, se busca determinar la probabilidad de éxito de cada máquina,
 realizando la menor cantidad de jugadas posibles.
 
 Este enfoque se utiliza en el ámbito de sistemas de recomendación para
-determinar el modelo con mayor probabilidad de éxito para cada usuario. Es
+determinar el modelo con mayor probabilidad de éxito para cada usuario
+\cite{broden2018ensemble, canamares2019multi, chakrabarti2008mortal,
+	thompson-sampling-intuition, thompson-sampling-code, build-mab, solve-mab}. Es
 decir, cuál es el modelo que tiene mayor probabilidad de realizar una
 recomendación similar a la que realizaría el usuario. Esta medición de éxito
 depende de la métrica a evaluar.

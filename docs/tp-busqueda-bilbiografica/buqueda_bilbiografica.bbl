@@ -40,16 +40,15 @@ Brod{\'e}n, Bj{\"o}rn and Hammar, Mikael and Nilsson, Bengt J and Paraschakis, D
 \BIBentrySTDinterwordspacing
 
 
-
-\bibitem{chakrabarti2008mortal}
+\bibitem{falk2019practical}
 \BIBentryALTinterwordspacing
-Chakrabarti, Deepayan and Kumar, Ravi and Radlinski, Filip and Upfal, Eli. (2008). Mortal multi armed bandits. Advances in neural information processing systems.  \url{https://proceedings.neurips.cc/paper_files/paper/2008/file/788d986905533aba051261497ecffcbb-Paper.pdf}
+Falk, Kim. (2019). Practical recommender systems. Simon and Schuster. \url{https://github.com/GeorgeQLe/Textbooks-and-Papers/blob/master/%5BML%5D%20Practical%20Recommender%20Systems.pdf}
 \BIBentrySTDinterwordspacing
 
 
-\bibitem{chakrabarti2008mortal}
+\bibitem{glauber2019collaborative}
 \BIBentryALTinterwordspacing
-Chakrabarti, Deepayan and Kumar, Ravi and Radlinski, Filip and Upfal, Eli. (2008). Mortal multi armed bandits. Advances in neural information processing systems.  \url{https://proceedings.neurips.cc/paper_files/paper/2008/file/788d986905533aba051261497ecffcbb-Paper.pdf}
+Glauber, Rafael and Loula, Angelo. (2019). Collaborative Filtering vs. Content-Based Filtering: differences and similarities. arXiv preprint arXiv:1912.08932. \url{https://arxiv.org/pdf/1912.08932.pdf}
 \BIBentrySTDinterwordspacing
 
 
@@ -59,16 +58,45 @@ Sill, Joseph and Tak{\'a}cs, G{\'a}bor and Mackey, Lester and Lin, David. (2009)
 \BIBentrySTDinterwordspacing
 
 
-\bibitem{falk2019practical}
+
+\bibitem{canamares2019multi}
 \BIBentryALTinterwordspacing
-Falk, Kim. (2019). Practical recommender systems. Simon and Schuster. \url{https://github.com/GeorgeQLe/Textbooks-and-Papers/blob/master/%5BML%5D%20Practical%20Recommender%20Systems.pdf}
+Ca{\~n}amares, Roc{\'\i}o and Redondo, Marcos and Castells Pablo. (2019). Multi-armed recommender system bandit ensembles. Proceedings of the 13th ACM Conference on Recommender Systems \url{https://castells.github.io/papers/recsys2019-rcanamares.pdf}
 \BIBentrySTDinterwordspacing
 
 
-\bibitem{falk2019practical}
+\bibitem{chakrabarti2008mortal}
 \BIBentryALTinterwordspacing
-Glauber, Rafael and Loula, Angelo. (2019). Collaborative Filtering vs. Content-Based Filtering: differences and similarities. arXiv preprint arXiv:1912.08932. \url{https://arxiv.org/pdf/1912.08932.pdf}
+Chakrabarti, Deepayan and Kumar, Ravi and Radlinski, Filip and Upfal, Eli. (2008). Mortal multi armed bandits. Advances in neural information processing systems.  \url{https://proceedings.neurips.cc/paper_files/paper/2008/file/788d986905533aba051261497ecffcbb-Paper.pdf}
 \BIBentrySTDinterwordspacing
+
+
+\bibitem{intro-reinforcement-learning}
+\BIBentryALTinterwordspacing
+Markel Sanz Ausin (Deep Learning Engineer, NVIDIA) (2020). Introducción al aprendizaje por refuerzo. Parte 1: el problema del bandido multibrazo. \url{https://markelsanz14.medium.com/introducci%C3%B3n-al-aprendizaje-por-refuerzo-parte-1-el-problema-del-bandido-multibrazo-afe05c0c372e}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{thompson-sampling-intuition}
+\BIBentryALTinterwordspacing
+Sophia Yang, Ph.D. (2022). Multi-Armed Bandit Algorithms: Thompson Sampling. Intuition, Bayes, and an example. \url{https://towardsdatascience.com/multi-armed-bandit-algorithms-thompson-sampling-6d91a88145db}
+\BIBentrySTDinterwordspacing
+
+\bibitem{thompson-sampling-code}
+\BIBentryALTinterwordspacing
+James McCaffrey. (2019). How to Do Thompson Sampling Using Python. \url{https://visualstudiomagazine.com/articles/2019/06/01/thompson-sampling.aspx}
+\BIBentrySTDinterwordspacing
+
+\bibitem{build-mab}
+\BIBentryALTinterwordspacing
+Charl De Villiers. (2019). How to Build a Product Recommender Using Multi-Armed Bandit Algorithms. \url{https://www.offerzen.com/blog/how-to-build-a-product-recommender-using-multi-armed-bandit-algorithms}
+\BIBentrySTDinterwordspacing
+
+\bibitem{solve-mab}
+\BIBentryALTinterwordspacing
+Anson Wong. (2017). Solving the Multi-Armed Bandit Problem. \url{https://towardsdatascience.com/solving-the-multi-armed-bandit-problem-b72de40db97c}
+\BIBentrySTDinterwordspacing
+
 
 
 \end{thebibliography}
