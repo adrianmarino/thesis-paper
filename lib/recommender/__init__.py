@@ -4,9 +4,10 @@ from .recommender_result    import RecommenderResult, to_image_html, render_imag
 from .item_recommender      import ItemRecommender
 
 
-# Collaborative and convent based recommenders
-from .user.filtering.recommender    import UserItemFilteringRecommender
-
+# Collaborative and content based recommenders
+from .user.filtering.recommender                                 import UserItemFilteringRecommender
+from .user.content_based.user_profile_recommender                import UserProfileRecommender
+from .user.content_based.multi_feature_user_profile_recommender  import MultiFeatureUserProfileRecommender
 
 # Item to item recommenders
 from .item.similar_item.recommender                 import SimilarItemRecommender

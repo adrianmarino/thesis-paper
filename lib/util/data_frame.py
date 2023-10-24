@@ -118,3 +118,60 @@ def group_mean(df, group_col, mean_col):
 
 def mean_by_key(df, key, value):
     ut.to_dict(group_mean(df, key, value), key, value)
+
+
+def column_types(df):
+    types_list = df  \
+        .dtypes \
+        .to_frame(name='type') \
+        .reset_index() \
+        .rename(columns= {'index': 'column'}) \
+        .to_dict('records')
+
+    result = {}
+
+    for row in types_list:
+        if row['type'] == np.dtypes.ObjectDType:
+            v = next(v for v in df[row['column']].values if v is not None)
+            if hasattr(v, '__len__'):
+                result[row['column']] = 'list'
+        elif type(row['type']) == np.dtypes.DateTime64DType:
+            result[row['column']] = 'datetime'
+        elif type(row['type']) == np.dtypes.BoolDType:
+            result[row['column']] = 'bool'
+        elif type(row['type']) == np.dtypes.Int64DType:
+            result[row['column']] = 'int'
+        elif type(row['type']) == np.dtypes.Float64DType:
+            result[row['column']] = 'float'
+        elif row['type'] == 'string':
+            result[row['column']] = 'str'
+        else:
+            result[row['column']] = row['type']
+
+    return result
+
+
+
+def one_hot(df, cols, col_bucket={}):
+    col_types = column_types(df)
+
+    result = df
+
+    for col in cols:
+        if col in col_types:
+            col_type = col_types[col]
+
+            if col_type == 'list':
+                result = get_dummies_from_list_col(result, col, col)
+
+            elif col_type in ['str', 'bool']:
+                result = pd.get_dummies(result, columns=[col], prefix=col)
+
+            elif col_type == 'int':
+                if col in col_bucket:
+                    bucket_size = col_bucket[col]
+                    result[f'{col}_bucket'] = result[col].apply(lambda v: int(v / bucket_size) * bucket_size)
+
+                result = pd.get_dummies(result, columns=[f'{col}_bucket'], prefix=col)
+
+    return result
