@@ -7,6 +7,7 @@ import logging
 import pandas as pd
 import util as ut
 from abc import ABCMeta, abstractmethod
+from .result import UserProfileRecommenderResult
 
 
 class UserProfileRecommender(rc.UserItemRecommender, metaclass=ABCMeta):
@@ -14,83 +15,142 @@ class UserProfileRecommender(rc.UserItemRecommender, metaclass=ABCMeta):
         self,
         user_id_col,
         item_id_col,
+        rating_col,
         emb_cols,
-        col_bucket
+        col_bucket,
+        unrated_items   = True,
+        exclude_columns = []
     ):
-        self._user_id_col  = user_id_col
-        self._item_id_col  = item_id_col
-        self._emb_cols     = emb_cols
-        self._col_bucket   = col_bucket
-        self._user_profile = None
-        self._item_profile = None
+        self._user_id_col     = user_id_col
+        self._item_id_col     = item_id_col
+        self._rating_col      = rating_col
+        self._emb_cols        = emb_cols
+        self._col_bucket      = col_bucket
+        self._user_profile    = None
+        self._item_profile    = None
+        self._imdb_id_col     = 'imdb_id'
+        self._unrated_items   = unrated_items
+        self._exclude_columns = exclude_columns
+
 
     @property
     def user_profile(self): return self._user_profile
 
+
     @property
     def item_profile(self): return self._item_profile
 
+
     @abstractmethod
-    def fit(self, df):
+    def _train(self, df):
         pass
+
+
+    def fit(self, df):
+        self._train(df)
+
+        self.imdb_id_by_item_id = ut.to_dict(df, self._item_id_col, self._imdb_id_col)
+
+        self.votes_id_by_item_id  = ut.to_dict(
+            df.groupby(self._item_id_col, as_index=False)[self._rating_col].count(),
+            self._item_id_col,
+            self._rating_col
+        )
+
+        self.rating_by_item_id  = ut.to_dict(
+            df.groupby(self._item_id_col, as_index=False)[self._rating_col].mean(),
+            self._item_id_col,
+            self._rating_col
+        )
+
+        self.items_by_user_id = ut.to_dict(df, self._user_id_col, self._item_id_col)
+
+        self.user_item_df   = df[[self._user_id_col, self._item_id_col]].drop_duplicates()
+
+        self.item_features_df = df[[self._item_id_col] + self._emb_cols].drop_duplicates(subset=[self._item_id_col])
+
+        return self
 
 
     def _user_emb(self, user_id):
         return self._user_profile[self._user_profile[self._user_id_col] == user_id]
 
 
-    def _score(self, result_df, user_id, sort):
+    def _score(self, result_df, user_id):
+        import warnings
+        warnings.filterwarnings('ignore')
+
+        # Add user_id, imdb_id, and rating columns
+        result_df[self._user_id_col] = user_id
+
+        result_df[self._rating_col]  = result_df[self._item_id_col].apply(lambda x: self.rating_by_item_id[x])
+        result_df[self._imdb_id_col] = result_df[self._item_id_col].apply(lambda x: self.imdb_id_by_item_id[x])
+        result_df['votes']           = result_df[self._item_id_col].apply(lambda x: self.votes_id_by_item_id[x])
+
+
+        # Add Score columns
         target_emb_col  = list(set(self._item_profile.columns) - set([self._item_id_col]))
+        # Sum of all columns score
         result_df['score'] = result_df[target_emb_col].sum(axis=1)
-        result_df = result_df[[self._item_id_col, 'score']]
-        result_df.insert(0, self._user_id_col, user_id)
-        result_df = result_df[result_df['score'] > 0]
-        return result_df.sort_values(['score'], ascending=False) if sort else result_df
+
+        result_df['popularity'] = (result_df[self._rating_col] * result_df['votes']) / (result_df[self._rating_col].max() * result_df['votes'].sum())
+
+        result_df['raw_score'] = result_df['score']
+
+        result_df['score'] = (0.5 * result_df['score'] + 0.5 * result_df['popularity']) / (result_df['score'] + result_df['popularity'])
 
 
-    def recommend(self, user_id, k=10):
+        # Filter unrated items for user
+        if self._unrated_items:
+            user_rated_items = self._user_rated_items(user_id)
+            result_df = result_df[~result_df[self._item_id_col].isin(user_rated_items)]
+
+        # Descendent order by score
+        return result_df.sort_values(['score'], ascending=False)
+
+
+    def recommend(self, user_id, k=3):
         user_emb = self._user_emb(user_id)
 
         if user_emb.shape[0] == 0:
             logging.warning(f'Not found user profile for {user_id} user id.')
-            return pd.DataFrame(columns=[self._user_id_col, self._item_id_col, 'score'])
+            return self._result(
+                pd.DataFrame(columns=[self._user_id_col, self._item_id_col, 'score']),
+                k
+            )
 
         result_df = self._item_profile.copy()
-        target_emb_col  = list(set(self._item_profile.columns) - set([self._item_id_col]))
-        for c in target_emb_col:
-            result_df[c] = result_df[c].apply(lambda x: x *user_emb[c].values[0] )
 
-        result_df = self._score(result_df, user_id, k is not None)
-
-        return result_df.head(k) if k else result_df
+        for emb_col in list(set(self._item_profile.columns) - set([self._item_id_col])):
+            result_df[emb_col] = result_df[emb_col].apply(lambda v: v * user_emb[emb_col].values[0] )
 
 
-    def recommend_all(self, user_ids, k=10):
-        parallel = ut.ParallelExecutor()
+        result_df = result_df.merge(self.item_features_df, on=[self._item_id_col], how='left')
 
-        result = parallel(
+        return self._result(self._score(result_df, user_id), k)
+
+
+    def recommend_all(self, user_ids, k=3):
+        return ut.ParallelExecutor()(
             self._rec_fn,
             params          = [[u, k] for u in np.unique(user_ids)],
             fallback_result = {}
         )
 
-        result = self._concat_user_recs(result)
-
-        result_df = pd.DataFrame.from_dict(result)
-
-        return result_df
 
     def _rec_fn(self, user_id, k):
-        return self.recommend(user_id, k).to_dict('list')
+        return self.recommend(user_id, k)
 
-    def _concat_user_recs(self, users_rec):
-        result = {}
+    def _result(self, df, k):
+        return UserProfileRecommenderResult(
+            self.__class__.__name__,
+            df,
+            k,
+            user_id_col = self._user_id_col,
+            item_id_col = self._item_id_col,
+            rating_col  = self._rating_col
+        )
 
-        for recs in users_rec:
-            for key in recs.keys():
-                if key in result:
-                    result[key].extend(recs[key])
-                else:
-                    result[key] = recs[key]
 
-        return result
+    def _user_rated_items(self, user_id):
+        return self.user_item_df[self.user_item_df[self._user_id_col] == user_id][self._item_id_col].unique()
