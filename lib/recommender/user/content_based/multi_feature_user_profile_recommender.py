@@ -34,25 +34,46 @@ class MultiFeatureUserProfileRecommender(rc.UserProfileRecommender):
 
 
     def _train(self, df):
-        cols = [self._user_id_col, self._item_id_col] + self._emb_cols
+        cols = [self.user_id_col, self.item_id_col] + self.emb_cols
 
-        df = df[cols]
+        one_hot_df = ut.one_hot(df[cols], self.emb_cols, self._col_bucket)
 
-        one_hot_df = ut.one_hot(df, self._emb_cols, self._col_bucket)
+        self._user_profile = self._build_user_profile(df, one_hot_df)
 
-        self._user_profile = one_hot_df[subtract(one_hot_df.columns, self._emb_cols + [self._item_id_col] + self._exclude_columns)]
-
-        self._user_profile = group_count(self._user_profile, self._user_id_col)
-
-        emb_cols = subtract(self._user_profile.columns, [self._user_id_col])
-
-        emb_df = self._user_profile[emb_cols]
-        emb_df = emb_df.apply(lambda row: row / row.sum(), axis=1)
-        emb_df = emb_df.dropna()
-        emb_df.insert(0, self._user_id_col, self._user_profile[self._user_id_col])
-        self._user_profile = emb_df
-
-        self._item_profile = one_hot_df[subtract(one_hot_df.columns, self._emb_cols + [self._user_id_col] + self._exclude_columns)]
-        self._item_profile = self._item_profile.drop_duplicates(subset=[self._item_id_col])
+        self._item_profile = self._build_item_profile(one_hot_df)
 
         return self
+
+
+    def _build_user_profile(self, df, one_hot_df):
+        # Add rating
+        one_hot_df2 = one_hot_df.copy()
+        one_hot_df2[self.rating_col] = df[self.rating_col]
+
+        # Multiply emb_cols by rating
+        tmp_df = ut.multiply_by(one_hot_df2, self._target_emb_cols(one_hot_df), self.rating_col)
+        # Get total
+        total = tmp_df.apply(lambda row: row.sum(), axis=1).sum()
+
+        tmp_df[self.user_id_col] = one_hot_df2[self.user_id_col]
+
+        # Sum all emb_cols by user
+        tmp_df2 = ut.group_sum(tmp_df, self.user_id_col)
+
+        # Sum normalize emb_cols by total
+        tmp_df3 = tmp_df2[ut.subtract(tmp_df2.columns, [self.user_id_col])] / total
+        tmp_df3[self.user_id_col] = tmp_df2[self.user_id_col]
+
+        return tmp_df3.drop(columns=self._exclude_columns, errors='ignore')
+
+
+    def _build_item_profile(self, one_hot_df):
+        return one_hot_df[self._target_emb_cols(one_hot_df) + [self.item_id_col]] \
+            .drop_duplicates(subset=[self.item_id_col]) \
+            .drop(columns=self._exclude_columns, errors='ignore')
+
+
+    def _target_emb_cols(self, df):
+        non_emb_cols = [self.user_id_col, self.item_id_col, self.rating_col] + self.emb_cols
+
+        return ut.subtract(df.columns, non_emb_cols)

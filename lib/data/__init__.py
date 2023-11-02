@@ -17,9 +17,9 @@ from .pipes import  select, distinct, rename, drop, \
                     join_str_list, append_emb_vectors, \
                     tf_idf, sum_cols, concat_columns
 
-from .pca   import  PCASummary, PCAAnalisys
-
 from .normalizer import Normalizer
 
 from .interaction_change_detector import InteractionsChangeDetector
 
+from .dimensionality_reduction import *
+from .clustering import *

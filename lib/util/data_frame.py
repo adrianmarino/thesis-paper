@@ -175,3 +175,10 @@ def one_hot(df, cols, col_bucket={}):
                 result = pd.get_dummies(result, columns=[f'{col}_bucket'], prefix=col)
 
     return result
+
+def multiply_by(df, columns, by_column):
+    return df[columns].multiply(df[by_column], axis="index")
+
+
+def group_sum(df, group_col):
+    return df.groupby([group_col]).sum().reset_index()

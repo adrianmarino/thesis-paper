@@ -5,7 +5,7 @@ class DateTimeDiff:
     def __init__(self, days, hours, minutes, seconds):
         self.days    = days
         self.hours   = hours
-        self.minutes = minutes 
+        self.minutes = minutes
         self.seconds = seconds
 
     def __str__(self): return f'{self.days} days -> {self.hours} hours -> {self.minutes} minutes -> {self.seconds} seconds'
@@ -14,7 +14,7 @@ class DateTimeDiff:
 
 class Days:
     def __init__(self, value): self.value = value
-    
+
     def to_hours(self): return self.value * 24
 
     def to_minutes(self): return self.to_hours() * 60
@@ -24,13 +24,13 @@ class Days:
 
 class Seconds:
     def __init__(self, value): self.value = value
-    
+
     def to_hours(self): return self.value // 60
 
     def to_minutes(self): return self.value // 3600 
 
     def to_days(self): return self.value // 3600
-    
+
 
 
 
@@ -42,7 +42,7 @@ class DateTimeUtils:
 
     @classmethod
     def diff_with_now(clz, datetime): return clz.diff(datetime, clz.now())
-    
+
     @staticmethod
     def diff(datetime_a, datetime_b):
         diff = datetime_b - datetime_a
