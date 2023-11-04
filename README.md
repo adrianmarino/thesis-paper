@@ -119,7 +119,8 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
    * Se calcularan las metricas propuesta luego de cada nueva interacción del usuario, generando una serie de tiempo por usuario y meticas.
    * En este modo, se busca maximizar las metricas en cada instance de tiempo.
 
-* [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+* **Extras**
+    * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
 
 ## Using or based on
