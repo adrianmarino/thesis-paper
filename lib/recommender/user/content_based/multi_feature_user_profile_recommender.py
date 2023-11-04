@@ -32,6 +32,10 @@ class MultiFeatureUserProfileRecommender(rc.UserProfileRecommender):
             exclude_columns
         )
 
+    @property
+    def name(self):
+        return f'UserProfileRecommender({", ".join(self.emb_cols)})'
+
 
     def _train(self, df):
         cols = [self.user_id_col, self.item_id_col] + self.emb_cols

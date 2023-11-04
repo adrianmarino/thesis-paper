@@ -47,6 +47,8 @@ class UserProfileRecommender(rc.UserItemRecommender, metaclass=ABCMeta):
 
 
     def fit(self, df):
+        sw = pu.Stopwatch()
+        logging.info('Begin training')
         self._train(df)
 
         self.imdb_id_by_item_id = ut.to_dict(df, self.item_id_col, self._imdb_id_col)
@@ -69,6 +71,7 @@ class UserProfileRecommender(rc.UserItemRecommender, metaclass=ABCMeta):
 
         self.item_features_df = df[[self.item_id_col] + self.emb_cols].drop_duplicates(subset=[self.item_id_col])
 
+        logging.info(f'Training finished. Time: {sw.to_str()}.')
         return self
 
 
