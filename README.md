@@ -132,7 +132,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 ## Requisites
 
-* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
 * [mongodb](https://www.mongodb.com)
 * [Studio3T](https://studio3t.com/) (Optional)
 
