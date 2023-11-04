@@ -69,14 +69,12 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 
 ## Referencias
-   [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
-
-   ### Using or based on
-
-   * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
-   * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
-   * [deep-fm](https://github.com/adrianmarino/deep-fm)
-   * [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
+   * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+   * Using or based on
+      * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
+      * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
+      * [deep-fm](https://github.com/adrianmarino/deep-fm)
+      * [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
 
 
 ## Notebooks
