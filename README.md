@@ -69,8 +69,13 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 
 ## Referencias
+   [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
 
-[References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+   ### Using or based on
+      * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
+      * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
+      * [deep-fm](https://github.com/adrianmarino/deep-fm)
+      * [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
 
 
 ## Notebooks
@@ -122,13 +127,6 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 * **Extras**
     * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
 
-
-## Using or based on
-
-* [pytorch-common](https://github.com/adrianmarino/pytorch-common)
-* [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
-* [deep-fm](https://github.com/adrianmarino/deep-fm)
-* [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
 
 ## Requisites
 
