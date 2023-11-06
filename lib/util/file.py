@@ -21,3 +21,9 @@ def recursive_remove_dir(path):
     if len(files) > 0:
         [os.remove(path) for path in files]
     remove_dir(path)
+    
+
+def write(path, content):
+    with open(path, "w", newline="") as file:
+        file.write(content)
+    return path

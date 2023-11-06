@@ -131,6 +131,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
 * [mongodb](https://www.mongodb.com)
+*  [mongosh]()
 * [Studio3T](https://studio3t.com/) (Optional)
 * GPU 6/10GB to have reasonable execution times (Optional)
 
