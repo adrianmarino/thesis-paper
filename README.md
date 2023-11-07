@@ -177,7 +177,7 @@ Now is necessary run next two notebooks in order:
 
 This create two fiels into `datasets` path:
 
-* movies.json`
-* interactions.json`
+* `movies.json`
+* `interactions.json`
 
 These files conform the project dataset and are used for all notebooks.
