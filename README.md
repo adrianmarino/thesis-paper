@@ -47,7 +47,7 @@ Otras métricas utilizadas:
 * ¿Los modelos basados en deep learning obtienen mejores resultados que modelos no basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
 * ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
 
-## Datos
+## Data
 
 Para poder realizar las pruebas necesarias con ambos enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
 
@@ -60,7 +60,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 * [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el \textit{dataset} anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
 
 
-## Referencias
+## References
    * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
    * Using or based on
       * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
