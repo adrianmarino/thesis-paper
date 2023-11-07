@@ -4,6 +4,7 @@ channels:
     - defaults
     - conda-forge
     - districtdatalabs
+    - plotly
 
 dependencies:
     - bunch
@@ -21,11 +22,10 @@ dependencies:
     - coverage-badge
     - requests
     - yellowbrick
-    - scikit-learn-extra
     - statsmodels
     - pytest
     - optuna
-    - mysqlclient
+    - plotly
     - pip
     - pip:
           - --extra-index-url https://download.pytorch.org/whl/cu118
@@ -38,4 +38,5 @@ dependencies:
           - chromadb
           - sentence-transformers
           - scikit-surprise
+          - scikit-learn-extra
           
