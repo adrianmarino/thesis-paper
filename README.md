@@ -24,20 +24,12 @@ A continuación se especifican los modelos a comparar. Para mas detalle se recom
     *   **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
     *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
     *   **Deep Factorization Machine**
-     
- * **Enfoque Híbrido**: Combinación de filtros colaborativos(CF) con enfoque basado en contenido(CB). Esto permite lidiar con el problema de cold-start de CF.
-    * **Modelos Híbrido 1: Modelo de CF + Sparse Auto-Encoder (CB)**
-        * Si el usuario tiene menos de 20 interacciones:
-            1. Se entrena un modelo de CF y generamos los embedding de usuarios e items.
-            2. Sparse Auto-Encoder: Se entrena un Auto-Encoder para cada variable tipo texto (title, genres, tags y overview). Como resultado tenemos embeddings para cada variable.
-            3. Finalmente, se genera una lista de recomendaciones para un item promediando las distancias coseno con todos los embeddings: el embedding de items y todo los embeddings de variables tipo texto generados con los Auto-Encoders.
-            4. Se realiza un promedio pesado por cada variable para poder controlar cuanto influye cada una en el ranking final.
-        * Cuando el usuario tiene mas de 20 interacciones:
-            * Se usa el modelo de CF. 
-            * Lo idea seria mezclar recomendaciones de ambos modelos, ya que CF puede tener recomendaciones muy personalizadas o long tail. 
-    * **Modelos Híbrido 2: Modelo CF + Sentence Transformer**
-        * Es la misma idea que el modelo 1, pero se utiliza un modelo de lenguaje Sentence Transformer en vez de un Sparse Auto-Encoder, el cual genera un embedding para cada frase de texto para variables tipo texto.     
- * **Ensample/Stacking de modelos**
+ 
+ * **Ensamples**
+   * Content based and Collaborative based models Stacking.
+   * Feature Weighted Linear Stacking.
+   * Muti-Bandit approch based on besta distribution.
+
 
 ## Métricas
 
