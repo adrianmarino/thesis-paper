@@ -165,7 +165,7 @@ http://localhost:8888/?token=45efe99607fa6......
 ## Build Dataset
 
 
-To carry out this process, it is necessary to have **MongoDB** database engine installed and listening into `localhost:27017`that is the default host & port for a homemade installation. For more instructions see:
+To carry out this process, it is necessary to have **MongoDB** database engine installed and listening into `localhost:27017` that is the default host & port for a homemade installation. For more instructions see:
 
 * [Install MongoDB Community Edition on Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux)
 * [Install MongoDB Community Edition on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows)
