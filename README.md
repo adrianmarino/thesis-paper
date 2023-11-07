@@ -169,3 +169,17 @@ http://localhost:8888/?token=45efe99607fa6......
 
 **Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
 
+
+## Build Dataset
+
+To build dataset run next notbooks in the given order:
+
+1. [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
+2. [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
+
+This create two fiels into `datasets` path:
+
+* movies.json`
+* interactions.json`
+
+These files conform the project dataset and are used for all notebooks.
