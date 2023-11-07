@@ -172,7 +172,13 @@ http://localhost:8888/?token=45efe99607fa6......
 
 ## Build Dataset
 
-To build dataset run next notbooks in the given order:
+
+To carry out this process, it is necessary to have **MongoDB** database engine installed and listening into `localhost:27017`that is the default host & port for a homemade installation. For more instructions see:
+
+* [Install MongoDB Community Edition on Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux)
+* [Install MongoDB Community Edition on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows)
+
+Now is necessary run next two notebooks in order:
 
 1. [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
 2. [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
