@@ -13,8 +13,25 @@ class Mongo:
         command = ['mongosh',  '--file', commnand_file_path]
 
         ut.ProcessHelper.run([command])
-    
-    
+
+    @staticmethod
+    def list_collections(database):
+        Mongo.command(
+            database,
+            """
+            db.runCommand({
+                listCollections: 1.0,
+                nameOnly: true
+            })
+            """
+        )
+
+    @staticmethod
+    def drop(database, collections):
+        for collection in collections:
+            Mongo.command(database,  f"db.getCollection('{collection}').drop();")
+
+
     @staticmethod 
     def import_csv(database, file_paths):
         commands = []
@@ -22,8 +39,8 @@ class Mongo:
         for file_path in file_paths:
             commands.append(
                 [
-                    'mongoimport', 
-                    '-d', 
+                    'mongoimport',
+                    '-d',
                     database,
                     '-c',
                     os.path.basename(file_path).split('.csv')[0],
@@ -34,7 +51,7 @@ class Mongo:
                     '--headerline'
                 ]
             )
-        
+
         ut.ProcessHelper.run(commands)
 
 
