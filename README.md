@@ -26,9 +26,9 @@ A continuación se especifican los modelos a comparar. Para mas detalle se recom
     *   **Deep Factorization Machine**
  
  * **Ensamples**
-   * Content based and Collaborative based models Stacking.
+   * Content-based and Collaborative based models Stacking.
    * Feature Weighted Linear Stacking.
-   * Muti-Bandit approch based on besta distribution.
+   * Muti-Bandit approach based on beta distribution.
 
 
 ## Métricas
@@ -94,7 +94,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
     * **Content Based**
         * **User Profile**
             * [User-Item filtering model (using genres only)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/1_user-item-filtering-model.ipynb)
-            * [Multi feature user profile model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/2_multi-feature-user-profile-model.ipynb)
+            * [Multi-feature user profile model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/2_multi-feature-user-profile-model.ipynb)
         * **Item to Item**
            * **Sparse Auto-Encoder + Distance Weighted Mean**
                * [Movie Title Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/1_title_sparse_autoencoder.ipynb)
@@ -110,7 +110,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
                * [Ensemple CB recommender based on Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/5_ensample_sentence_transformer.ipynb)
 
     * **Ensembles**
-        * [Content based and Collaborative based models Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/1_stacking.ipynb)
+        * [Content-based and Collaborative based models Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/1_stacking.ipynb)
 
         * [Feature Weighted Linear Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/2_fwls.ipynb)
 
@@ -150,7 +150,7 @@ $ conda env create -f environment.yml
 $ conda activate thesis
 ```
 
-**Step 2**: Under project directory boot jupyter lab.
+**Step 2**: Under the project directory boot jupyter lab.
 
 ```bash
 $ jupyter lab
@@ -165,19 +165,19 @@ http://localhost:8888/?token=45efe99607fa6......
 ## Build Dataset
 
 
-To carry out this process, it is necessary to have **MongoDB** database engine installed and listening into `localhost:27017` that is the default host & port for a homemade installation. For more instructions see:
+To carry out this process, it is necessary to have **MongoDB** database engine installed and listen into `localhost:27017` which is the default host & port for a homemade installation. For more instructions see:
 
 * [Install MongoDB Community Edition on Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux)
 * [Install MongoDB Community Edition on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows)
 
-Now is necessary run next two notebooks in order:
+Now is necessary to run the next two notebooks in order:
 
 1. [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
 2. [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
 
-This create two fiels into `datasets` path:
+This creates two files in `datasets` path:
 
 * `movies.json`
 * `interactions.json`
 
-These files conform the project dataset and are used for all notebooks.
+These files conform to the project dataset and are used for all notebooks.
