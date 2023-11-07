@@ -162,7 +162,7 @@ http://localhost:8888/?token=45efe99607fa6......
 **Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
 
 
-## Build Dataset
+## Build dataset
 
 
 To carry out this process, it is necessary to have **MongoDB** database engine installed and listen into `localhost:27017` which is the default host & port for a homemade installation. For more instructions see:
