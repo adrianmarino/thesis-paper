@@ -26,6 +26,7 @@ dependencies:
     - pytest
     - optuna
     - plotly
+    - mysqlclient
     - pip
     - pip:
           - --extra-index-url https://download.pytorch.org/whl/cu118
@@ -39,4 +40,3 @@ dependencies:
           - sentence-transformers
           - scikit-surprise
           - scikit-learn-extra
-          
