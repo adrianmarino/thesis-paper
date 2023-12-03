@@ -61,7 +61,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 
 ## References
-   * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/references.ipynb)
+   * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/5_references.ipynb)
    * Using or based on
       * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
       * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
@@ -74,8 +74,10 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 * [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
 * [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
 
-* **Models**    
-    * [Models Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_models_comparatives.ipynb)
+* **Models**
+    * [Models Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparatives.ipynb)
+    
+    * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 
     * **Collaborative Filtering**
       * **Memory based**

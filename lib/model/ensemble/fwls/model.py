@@ -20,7 +20,7 @@ class FeatureWeightLinearStacking(torch.nn.Module, FitMixin, PredictMixin, Persi
         for idx, predictor in enumerate(self.predictors):
             fw_fn = self.feature_weight_fns[idx]
 
-            predictions = predictor(user_item_batch).to(self.device)
+            predictions = predictor.predict_batch(user_item_batch).to(self.device)
 
             fw_fn_value = fw_fn(user_item_batch)
 

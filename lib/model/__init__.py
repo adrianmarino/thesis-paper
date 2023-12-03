@@ -28,7 +28,8 @@ from .predictor.knn.knn_predictor_factory     import KNNPredictorFactory, KNNTyp
 from .predictor.module_predictor              import ModulePredictor
 from .predictor.sample_cached_predictor       import SampleCachedPredictor
 from .predictor.cached_predictor              import CachedPredictor
-
+from .predictor.static_predictor              import StaticPredictor
+from .predictor.random_predictor              import RandomPredictor
 
 # Predictors Ensemple...
 from .predictor.ensemple.combine.ensemple_combine_strategy           import EnsempleCombineStrategy
@@ -45,7 +46,7 @@ from .validate.validator                     import Validator, ValidatorSummary
 # -----------------------------------------------------------------------------
 # Models...
 # -----------------------------------------------------------------------------
-# Collavorative Filtering based way...
+# Collaborative Filtering based way...
 from .module.deep_fm                    import DeepFM
 from .module.nnmf                       import NNMF
 from .module.gmf                        import GMF
