@@ -20,6 +20,7 @@ class RandomPredictor(AbstractPredictor):
     def predict_dl(self, data_loader, n_neighbors=10, debug=False):
         predictions = []
 
+
         with progress_bar(len(data_loader), f'{self.name} batch prediction') as bar:
             for features, target in data_loader:
                 predictions.append(self.predict_batch(features, n_neighbors, debug))
