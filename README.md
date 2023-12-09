@@ -129,7 +129,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 * [mongodb](https://www.mongodb.com)
 *  [mongosh]()
 * [Studio3T](https://studio3t.com/) (Optional)
-* GPU 6/10GB to have reasonable execution times (Optional)
+* 6/10GB GPU to have reasonable execution times (Optional)
 
 ## Getting started
 
