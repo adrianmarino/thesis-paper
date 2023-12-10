@@ -54,6 +54,25 @@ class Mongo:
 
         ut.ProcessHelper.run(commands)
 
+        @staticmethod 
+    def import_json(database, file_paths):
+        commands = []
+
+        for file_path in file_paths:
+            commands.append(
+                [
+                    'mongoimport',
+                    '-d',
+                    database,
+                    '-c',
+                    os.path.basename(file_path).split('.json')[0],
+                    '--file',
+                    file_path
+                ]
+            )
+
+        ut.ProcessHelper.run(commands)
+
 
     @staticmethod
     def export_to_json(database, path, collections):

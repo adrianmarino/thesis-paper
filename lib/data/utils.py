@@ -53,7 +53,7 @@ def group_by(df, column, asc_order=False):
 
 
 def list_column_to_dummy_columns(df, column, prefix=None):
-    data =  df.drop(column, 1).join(df[column].str.join('|').str.get_dummies())
+    data =  df.drop([column], axis=1).join(df[column].str.join('|').str.get_dummies())
 
     new_columns = list(set(data.columns) - set(df.columns))
 
