@@ -11,7 +11,6 @@ class AbstractPredictor(ABC):
     @property
     def name(self): return str(self.__class__.__name__)
 
-
     @abstractmethod
     def predict(self, user_idx, item_idx, n_neighbors=10, debug=False):
         pass

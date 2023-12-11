@@ -4,29 +4,31 @@ import util as ut
 
 
 class StaticPredictor(AbstractPredictor):
-
     @staticmethod
     def from_data_frame(
       df,
-      rating_col,
+      name        = None,
+      rating_col  = 'rating',
       user_id_col = 'user_id',
       item_id_col = 'movie_id'
     ):
-      return StaticPredictor(df, rating_col, user_id_col, item_id_col)
+      return StaticPredictor(df, name, rating_col, user_id_col, item_id_col)
 
 
     def __init__(
       self,
       df,
-      rating_col,
+      name        = None,
+      rating_col  = 'rating',
       user_id_col = 'user_id',
       item_id_col = 'movie_id'
     ):
       self.index = ut.ValueIndex(df, rating_col, [user_id_col, item_id_col])
+      self._name  = name
 
 
-    def predict(self, user_id, item_id, debug=False):
-      return torch.tensor(self.index[[(user_id, item_id)]])
+    def predict(self, user_id, item_id, n_neighbors=10, debug=False):
+      return torch.tensor(self.index[[(user_id.item(), item_id.item())]])
 
 
     def predict_batch(self, batch, n_neighbors=10, debug=False):
@@ -42,6 +44,11 @@ class StaticPredictor(AbstractPredictor):
                 bar.update()
 
         return torch.concat(predictions)
+
+
+    @property
+    def name(self):
+      return self._name if self._name else str(self.__class__.__name__)
 
 
     def __repr__(self): return str(self.index)
