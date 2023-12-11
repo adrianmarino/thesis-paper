@@ -1,5 +1,8 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from scipy import stats
 
 
 def comparative_boxplot(
@@ -10,11 +13,14 @@ def comparative_boxplot(
     title_fontsize = 20,
     axis_fontsize  = 16,
     x_rotation     = 60,
-    figsize        = (15, 6),
+    figsize        = (20, 6),
     output_path    = None,
-    output_ext     = 'svg'
+    output_ext     = 'svg',
+    ascending      = False
 ):
-    sns.boxplot(x=x,  y=y, data=data)
+    mean_by_x = data.groupby([y])[x].median().sort_values(ascending=ascending)
+
+    sns.boxplot(x=x,  y=y, data=data,  order=mean_by_x.index)
 
     plt.xticks(rotation=x_rotation)
     sns.set(rc={'figure.figsize': figsize})
