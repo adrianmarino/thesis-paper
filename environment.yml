@@ -40,3 +40,4 @@ dependencies:
           - sentence-transformers
           - scikit-surprise
           - scikit-learn-extra
+          - api-client
