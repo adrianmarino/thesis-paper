@@ -1,2 +1,2 @@
-from .api_client import OllamaApiClient
-from .query_response import OllamaQueryResponse
+from .client import OllamaApiClient
+from .query  import OllamaQuery

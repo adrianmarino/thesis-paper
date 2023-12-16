@@ -36,4 +36,4 @@ class OllamaApiClient:
             return OllamaQuery(msg, message, metadata)
 
         else:
-            raise Exception(f"Unexpected Response Status: '{response.status_code}': Body: '{response.text}'")
+            raise Exception(f"REST Api Respond with '{response.status_code}' status code. Detail: '{response.text}'")
