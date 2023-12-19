@@ -3,6 +3,10 @@ FROM llama2
 # set the temperature to 1 [higher is more creative, lower is more coherent]
 PARAMETER temperature 0.3
 
+PARAMETER num_gpu 200
+
+PARAMETER num_thread 24
+
 # set the system message
 SYSTEM """
 """

@@ -3,33 +3,40 @@ from bunch import Bunch
 from typing import List
 import util as ut
 import re
+import logging
+from pydantic import BaseModel, PrivateAttr
 
 
-class MovieRecommenderOutputParser(BaseOutputParser[List[str]]):
+class MovieRecommenderDiscListOutputParser(BaseOutputParser[List[str]]):
+    __list_size: int = PrivateAttr(True)
+
+    def __init__(self, list_size):
+        super().__init__()
+        self.__list_size = list_size
+
     def parse(self, text: str) -> List[str]:
-        recs = ut.between(
-            text.lower(),
-            'comienza lista de recommendaciones:',
-            'fin de lista de recommendaciones:'
-        )
+            results = []
+            for idx in range(self.__list_size):
+                try:
+                    line = ut.between(text, f'\n{idx+1}.', f'\n{idx+2}.')
 
+                except Exception as e:
+                    logging.error(f'Error to parse response. {e}')
+                    return results
 
-        results = []
-        for line in recs.split('\n'):
-            data = re.split(r'\(|\)\:', line, 2)
+                data = re.split(r'\(|\)\:', line)
 
-            if len(data) <= 1:
-                continue
+                if len(data) <= 1:
+                    continue
 
-            (position, title) = re.split(r'\.', data[0], 1)
-            (release, rating) = re.split(r',', data[1], 1)
+                (release, rating) = re.split(r',', data[1], 1)
 
-            results.append({
-                'position'   : int(position),
-                'title'      : title.strip().capitalize(),
-                'release'    : int(release),
-                'rating'     : float(rating),
-                'description': data[2].strip().capitalize()
-            })
+                results.append({
+                    'position'   : int(idx+1),
+                    'title'      : data[0].strip().capitalize(),
+                    'release'    : int(release),
+                    'rating'     : float(rating),
+                    'description': data[2].strip().capitalize()
+                })
 
-        return results
+            return results

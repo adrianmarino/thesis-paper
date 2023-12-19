@@ -9,4 +9,5 @@ class OllamaChatParamsResolver:
             candidates   = kargs['candidates'] if 'candidates' in kargs else 'Aun no se dispone de películas cantidatas',
             limit        = kargs['limit'] if 'limit' in kargs else 5,
             query        = f'Usuario: {kargs["query"]}.' if 'query' in kargs else '¿Me recomendarias una película?',
+            chat_history = kargs['memory'] if 'memory' in kargs else None
         )
