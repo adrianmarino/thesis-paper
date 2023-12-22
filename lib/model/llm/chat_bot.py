@@ -1,28 +1,30 @@
-from model.llm import OllamaChatParamsResolver, OllamaChainBuilder, MovieRecommenderDiscListOutputParser
+from .chain_builder import OllamaChainBuilder
 
 
-class MovieRecommenderChatBot:
+class ChatBot:
     def __init__(
         self,
         model,
-        promp,
-        list_size,
+        prompt,
+        params_resolver,
+        output_parser,
         message = '¿Que queres que te recomiende hoy?'
     ):
-        self.__chain = OllamaChainBuilder().chat(model, promp)
-        self.__output_parser = MovieRecommenderDiscListOutputParser(list_size=list_size)
+        self.__chain = OllamaChainBuilder.default(model, prompt)
+        self.__output_parser = output_parser
         self.__message = message
+        self.__params_resolver = params_resolver
         self.memory = []
         self.recommendations = []
 
 
     def _build_params(self, query):
-        return OllamaChatParamsResolver().resolve(query=query, chat_history=self.memory)
+        return self.__params_resolver.resolve(input=query, chat_history=self.memory)
 
 
     def _save_response(self, query, response):
-        self.recommendations.append(self.__output_parser.parse(response.content))
-        self.memory.append((query, response.content))
+        self.recommendations.append(self.__output_parser.parse(response))
+        self.memory.append((query, response))
 
 
     def start(self):

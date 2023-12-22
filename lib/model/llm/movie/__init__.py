@@ -1,0 +1,1 @@
+from .movie_recommender_chat_bot_factory import MovieRecommenderChatBotFactory

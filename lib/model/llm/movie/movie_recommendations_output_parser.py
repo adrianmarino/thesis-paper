@@ -7,7 +7,7 @@ import logging
 from pydantic import BaseModel, PrivateAttr
 
 
-class MovieRecommenderDiscListOutputParser(BaseOutputParser[List[str]]):
+class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
     __list_size: int = PrivateAttr(True)
 
     def __init__(self, list_size):
@@ -39,4 +39,4 @@ class MovieRecommenderDiscListOutputParser(BaseOutputParser[List[str]]):
                     'description': data[2].strip().capitalize()
                 })
 
-            return results
+            return { 'recommendations': results }
