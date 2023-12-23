@@ -14,3 +14,6 @@ from .item.similar_item.recommender                 import SimilarItemRecommende
 from .item.user_similar_item_ensemble.recommender   import UserSimilarItemEnsembleRecommender
 from .item.user_similar_item.recommender            import UserSimilarItemRecommender
 from .item.item_recommender_builder                 import SimilarItemRecommenderBuilder, item_rec_sys_cfg
+
+from .chatbot import *
+from .chatbot.movie import *

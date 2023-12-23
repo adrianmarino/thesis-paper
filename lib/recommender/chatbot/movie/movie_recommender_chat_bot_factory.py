@@ -1,4 +1,4 @@
-from ..chain_builder import OllamaChainBuilder
+from model import OllamaChainBuilder
 from ..chat_bot import ChatBot
 from .movie_recommendations_output_parser import MovieRecommendationsOutputParser
 from .movie_recommender_params_resolver import MovieRecommenderParamsResolver

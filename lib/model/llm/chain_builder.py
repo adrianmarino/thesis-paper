@@ -26,7 +26,7 @@ class OllamaChatPromptTemplateFactory:
     def create(prompt):
         return ChatPromptTemplate.from_messages([
             ('system', prompt),
-            ('human', '{input}')
+            ('human', '{request}')
         ])
 
 
