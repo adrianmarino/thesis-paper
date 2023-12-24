@@ -5,6 +5,7 @@ channels:
     - conda-forge
     - districtdatalabs
     - plotly
+    - tornado
 
 dependencies:
     - python=3.10
@@ -28,6 +29,9 @@ dependencies:
     - optuna
     - plotly
     - mysqlclient
+    - fastapi
+    - uvicorn[standard]
+
     - pip
     - pip:
           - --extra-index-url https://download.pytorch.org/whl/cu118
@@ -42,3 +46,5 @@ dependencies:
           - scikit-surprise
           - scikit-learn-extra
           - langchain
+          - motor[tornado]
+          - pymongo

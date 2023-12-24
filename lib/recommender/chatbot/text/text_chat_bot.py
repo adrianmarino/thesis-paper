@@ -1,21 +1,21 @@
 from model import OllamaChainBuilder
-from .chat_bot_request import ChatBotRequest
+from .chat_bot_request import ChatBotRequestFactory
 from .chat_bot_history import ChatBotHistory, ChatBotHistoryEntry
 
 
-class ChatBot:
+class TextChatBot:
     def __init__(
         self,
         model,
         prompt,
         params_resolver,
         output_parser,
-        chat_bot_prompt
+        request_prompt
     ):
         self._chain           = OllamaChainBuilder.default(model, prompt)
         self._output_parser   = output_parser
-        self._chat_bot_prompt = chat_bot_prompt
         self._params_resolver = params_resolver
+        self._request_prompt  = request_prompt
         self.memory           = []
         self.history          = []
 
@@ -36,16 +36,16 @@ class ChatBot:
         self.memory.append((request, response))
 
 
-    def _create_request(self):
-        return ChatBotRequest(
-            request_prompt = self._chat_bot_prompt,
-            first          = len(self.history) == 0
+    def start(self, user_profile):
+        request_factory = ChatBotRequestFactory(
+            self._request_prompt,
+            user_profile,
+            self.history
         )
 
-
-    def start(self):
         while True:
-            request = self._create_request().content
+            request = request_factory.create().content
+
             if request == None:
                 break
 

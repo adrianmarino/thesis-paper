@@ -1,5 +1,7 @@
 from model import OllamaChainBuilder
-from ..chat_bot import ChatBot
+from ..text.text_chat_bot import TextChatBot
+from ..stateless.stateless_chat_bot import StatelessChatBot
+
 from .movie_recommendations_output_parser import MovieRecommendationsOutputParser
 from .movie_recommender_params_resolver import MovieRecommenderParamsResolver
 
@@ -36,22 +38,36 @@ El título, año de estreno, calificación y descripción debe especificarse en 
 """
 
 
-CHAT_BOT_PROMPT = '¿Que querés que te recomiende hoy?'
+CHAT_BOT_PROMPT = 'Hola {user_name}, ¿Que querés que te recomiende hoy?'
 
 
 class MovieRecommenderChatBotFactory:
     @staticmethod
-    def create(
+    def text(
         model           = 'movie_recommender',
         model_prompt    = MODEL_PROMPT,
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5),
         chat_bot_prompt = CHAT_BOT_PROMPT
     ):
-        return ChatBot(
+        return TextChatBot(
             model,
             model_prompt,
             params_resolver,
             output_parser,
             chat_bot_prompt
+        )
+
+    @staticmethod
+    def stateless(
+        model           = 'movie_recommender',
+        model_prompt    = MODEL_PROMPT,
+        params_resolver = MovieRecommenderParamsResolver(),
+        output_parser   = MovieRecommendationsOutputParser(list_size=5)
+    ):
+        return StatelessChatBot(
+            model,
+            model_prompt,
+            params_resolver,
+            output_parser,
         )

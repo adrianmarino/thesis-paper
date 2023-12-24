@@ -10,14 +10,16 @@ class OllamaModelBuilder:
     def chat(model='movie_recommender'):
         return ChatOllama(
             model=model,
-            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()])
+            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
+            verbose=False
         )
 
     @staticmethod
     def default(model='movie_recommender'):
         return Ollama(
             model=model,
-            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()])
+            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
+            verbose=False
         )
 
 
