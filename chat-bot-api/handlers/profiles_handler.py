@@ -4,37 +4,35 @@ from repository import EntityAlreadyExistsException
 
 
 def profiles_handler(base_url, ctx):
-  router = APIRouter(prefix=f'{base_url}/profiles')
+    router = APIRouter(prefix=f'{base_url}/profiles')
 
-  @router.post('', status_code=204)
-  async def add_profile(userProfile: UserProfile):
-      try:
-          await ctx.profiles_repository.add_one(userProfile)
-          return await ctx.profiles_repository.find_by_id(userProfile.email)
-      except EntityAlreadyExistsException as e:
-        raise HTTPException(
-            status_code=400, 
-            detail=f"Already exist a profile with {userProfile.email} email. Cause: {e}"
-        )
+    @router.post('', status_code=204)
+    async def add_profile(user_profile: UserProfile):
+        try:
+            return await ctx.profile_service.add(user_profile)
+        except EntityAlreadyExistsException as e:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Already exist a profile with {user_profile.email} email. Cause: {e}"
+            )
 
-  @router.put('/{email}', status_code=200)
-  async def update_profile(email: str, userProfile: UserProfile):
-      await ctx.profiles_repository.update(userProfile)
-      return await ctx.profiles_repository.find_by_id(email)
+    @router.put('/{email}', status_code=200)
+    async def update_profile(email: str, user_profile: UserProfile):
+        return await ctx.profile_service.update(user_profile)
 
 
-  @router.get("/{email}", status_code=200)
-  async def get_profile(email: str):
-    profile = await ctx.profiles_repository.find_by_id(email)
+    @router.get("/{email}", status_code=200)
+    async def get_profile(email: str):
+        profile = await ctx.profile_service.find(email)
 
-    if profile == None:
-        raise HTTPException(status_code=404, detail=f'Not found {email} profile')
-    else:
-        return profile
+        if profile == None:
+            raise HTTPException(status_code=404, detail=f'Not found {email} profile')
+        else:
+            return profile
 
-  @router.get('', status_code=200)
-  async def get_all_profile():
-      return await ctx.profiles_repository.find_all()
+    @router.get('', status_code=200)
+    async def get_all_profile():
+        return await ctx.profile_service.all()
 
 
-  return router
+    return router

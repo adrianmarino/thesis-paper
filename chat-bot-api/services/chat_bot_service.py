@@ -6,25 +6,12 @@ class ChatBotService:
     self.ctx = ctx
 
   async def send(self, user_message: UserMessage):
-    history = await self.ctx.histories_repository.find_by_id(user_message.author)
+    history = await self.ctx.history_service.upsert(user_message.author)
 
-    response = self.ctx.chat_bot.send(user_message.content, history.as_content_list() if history else [])
+    response = self.ctx.chat_bot.send(user_message.content, history.as_content_list())
 
-    ai_message = AIMessage(content=response.message, metadata=response.metadata)
+    ai_message = AIMessage.from_response(response)
 
-    await self.__add_dialog(history, [user_message, ai_message], user_message)
-
-    return ai_message
-
-  async def __add_dialog(self, history, dialogue, user_message):
-    if history == None:
-      history = ChatHistory(
-        email = user_message.author,
-        sessions=[ChatSession(dialogue = dialogue)]
-      )
-      await self.ctx.histories_repository.add_one(history)
-    else:
-      history.sessions[0].dialogue.extend(dialogue)
-      await self.ctx.histories_repository.update(history)
+    await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
     
-    return history
+    return ai_message

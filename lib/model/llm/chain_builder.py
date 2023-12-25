@@ -7,20 +7,14 @@ from langchain.prompts import ChatPromptTemplate
 
 class OllamaModelBuilder:
     @staticmethod
-    def chat(model='movie_recommender'):
-        return ChatOllama(
-            model=model,
-            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-            verbose=False
-        )
+    def chat(model='movie_recommender', verbose=False):
+        callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]) if verbose else None
+        return ChatOllama(model=model, callback_manager=callback_manager)
 
     @staticmethod
-    def default(model='movie_recommender'):
-        return Ollama(
-            model=model,
-            callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-            verbose=False
-        )
+    def default(model='movie_recommender', verbose=False):
+        callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]) if verbose else None
+        return Ollama(model=model, callback_manager=callback_manager)
 
 
 class OllamaChatPromptTemplateFactory:

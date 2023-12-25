@@ -3,7 +3,7 @@ sys.path.append('../lib')
 
 import recommender as rd
 from repository import Repository, ConnectionFactory, UserProfileMapper, ChatHistoryMapper
-from services import ChatBotService
+from services import ChatBotService, ChatHistoryService, ProfileService
 
 from langchain.globals import set_debug, set_verbose
 
@@ -33,3 +33,7 @@ class AppContext:
     self.chat_bot = rd.MovieRecommenderChatBotFactory.stateless()
 
     self.chat_bot_service = ChatBotService(self)
+
+    self.history_service = ChatHistoryService(self)
+
+    self.profile_service = ProfileService(self)

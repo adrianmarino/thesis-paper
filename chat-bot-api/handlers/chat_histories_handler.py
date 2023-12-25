@@ -6,7 +6,7 @@ def chat_histories_handler(base_url, ctx):
 
   @router.get('/{email}')
   async def get_history(email: str):
-    history = await ctx.histories_repository.find_by_id(email)
+    history = await ctx.history_service.find(email)
 
     if history == None:
         raise HTTPException(status_code=404, detail=f'Not found {email} history')
@@ -15,7 +15,7 @@ def chat_histories_handler(base_url, ctx):
 
   @router.delete('/{email}', status_code=204)
   async def delete_history(email: str):
-      return await ctx.histories_repository.delete(email)
+      return await ctx.history_service.delete(email)
 
 
   return router
