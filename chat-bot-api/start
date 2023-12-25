@@ -3,4 +3,4 @@
 export DATABASE="chatbot"
 export MONGODB_URL="mongodb://localhost:27017"
 
-uvicorn api:app --reload  --host 0.0.0.0 --port 8787
+uvicorn api:app --reload  --host 0.0.0.0 --port 8080

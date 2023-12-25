@@ -1,5 +1,6 @@
 from models import UserProfile
 from fastapi import HTTPException, APIRouter
+from repository import EntityAlreadyExistsException
 
 
 def profiles_handler(base_url, ctx):
@@ -10,8 +11,11 @@ def profiles_handler(base_url, ctx):
       try:
           await ctx.profiles_repository.add_one(userProfile)
           return await ctx.profiles_repository.find_by_id(userProfile.email)
-      except Exception as e:
-          raise HTTPException(status_code=400, detail="user email already registered")
+      except EntityAlreadyExistsException as e:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Already exist a profile with {userProfile.email} email. Cause: {e}"
+        )
 
   @router.put('/{email}', status_code=200)
   async def update_profile(email: str, userProfile: UserProfile):

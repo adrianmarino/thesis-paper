@@ -2,6 +2,8 @@ import json
 import typing
 from models import Model
 from .mapper import ModelMapper
+from .entity_already_exists_exception import EntityAlreadyExistsException
+from pymongo.errors import DuplicateKeyError, BulkWriteError
 
 
 class Repository:
@@ -16,9 +18,12 @@ class Repository:
     return self.add_many([model])
 
 
-  def add_many(self, models: list[Model]):
-    entities = [self.mapper.to_dict(e) for e in models]
-    return self.collection.insert_many(entities)
+  async def add_many(self, models: list[Model]):
+    entities = [self.mapper.to_dict(model) for model in models]
+    try:
+      return await self.collection.insert_many(entities)
+    except (DuplicateKeyError, BulkWriteError) as e:
+      raise EntityAlreadyExistsException(e)
 
 
   def update(self, model):

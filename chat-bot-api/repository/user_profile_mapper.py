@@ -10,9 +10,9 @@ class UserProfileMapper(ModelMapper):
       metadata = document['metadata']
     )
 
-    def to_dict(self):
-        return {
-            'name': self.name,
-            'email': self.email,
-            'metadata': self.metadata
-        }
+  def to_dict(self, model):
+    return {
+        'name': model.name,
+        'email': model.email,
+        'metadata': model.metadata
+    }
