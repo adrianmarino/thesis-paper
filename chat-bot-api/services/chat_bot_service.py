@@ -13,5 +13,5 @@ class ChatBotService:
     ai_message = AIMessage.from_response(response)
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
-    
+
     return ai_message

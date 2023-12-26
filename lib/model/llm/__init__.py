@@ -1,1 +1,1 @@
-from .chain_builder     import OllamaChainBuilder
+from .chain_builder     import OllamaChainBuilder, OllamaChatPromptTemplateFactory, OllamaModelBuilder

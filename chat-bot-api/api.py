@@ -4,8 +4,12 @@ from fastapi.responses import JSONResponse
 
 from app_context import AppContext
 from handlers import profiles_handler, chats_handler, chat_histories_handler
+import logging
 
 BASE_URL = '/api/v1'
+
+# Setup loggers
+logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 app = FastAPI()
 ctx = AppContext()

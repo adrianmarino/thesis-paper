@@ -1,5 +1,7 @@
-from model import OllamaChainBuilder
-from .chat_bot_response import ChatBotResponse
+from model import OllamaChainBuilder, OllamaChatPromptTemplateFactory, OllamaModelBuilder
+from .chat_bot_response_factory import ChatBotResponseFactory
+import logging
+
 
 class StatelessChatBot:
     def __init__(
@@ -9,18 +11,18 @@ class StatelessChatBot:
         params_resolver,
         output_parser
     ):
-        self._chain           = OllamaChainBuilder.default(model, prompt)
-        self._output_parser   = output_parser
-        self._params_resolver = params_resolver
+        self._params_resolver  = params_resolver
+        template_factory       = OllamaChatPromptTemplateFactory.create(prompt)
+        self._chain            = template_factory | OllamaModelBuilder.default(model)
+        self._response_factory = ChatBotResponseFactory(output_parser, template_factory)
+
 
     def send(self, request, history):
-        message = self._params_resolver.resolve(
+        params = self._params_resolver.resolve(
             request      = request,
             chat_history = history
         )
 
-        response = self._chain.invoke(message)
+        response = self._chain.invoke(params)
 
-        metadata = self._output_parser.parse(response)
-
-        return ChatBotResponse(response, metadata)
+        return self._response_factory.create(params, response)

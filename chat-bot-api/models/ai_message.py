@@ -4,9 +4,9 @@ import typing
 class AIMessage(Model):
     author: str = 'AI'
     content : str
-    metadata: typing.Dict[str, typing.Any]
+    metadata: typing.Dict[str, typing.Any] = {}
 
 
     @staticmethod
     def from_response(response):
-        return AIMessage(content=response.message, metadata=response.metadata)
+        return AIMessage(content=response.content, metadata=response.metadata)

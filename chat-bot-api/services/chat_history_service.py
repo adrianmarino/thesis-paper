@@ -11,8 +11,8 @@ class ChatHistoryService:
 
         if history == None:
             history = ChatHistory(
-            email = email,
-            sessions=[ChatSession(dialogue = [])]
+                email = email,
+                sessions=[ChatSession(dialogue = [])]
             )
             await self.ctx.histories_repository.add_one(history)
 
@@ -30,4 +30,4 @@ class ChatHistoryService:
 
 
     async def delete(self, email):
-      return await self.ctx.histories_repository.delete(email)
+        return await self.ctx.histories_repository.delete(email)
