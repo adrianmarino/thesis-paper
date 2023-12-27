@@ -6,15 +6,17 @@ from repository import EntityAlreadyExistsException
 def profiles_handler(base_url, ctx):
     router = APIRouter(prefix=f'{base_url}/profiles')
 
+
     @router.post('', status_code=204)
     async def add_profile(user_profile: UserProfile):
         try:
             return await ctx.profile_service.add(user_profile)
         except EntityAlreadyExistsException as e:
             raise HTTPException(
-                status_code=400, 
+                status_code=400,
                 detail=f"Already exist a profile with {user_profile.email} email. Cause: {e}"
             )
+
 
     @router.put('/{email}', status_code=200)
     async def update_profile(email: str, user_profile: UserProfile):
@@ -31,7 +33,7 @@ def profiles_handler(base_url, ctx):
             return profile
 
     @router.get('', status_code=200)
-    async def get_all_profile():
+    async def get_all_profiles():
         return await ctx.profile_service.all()
 
 

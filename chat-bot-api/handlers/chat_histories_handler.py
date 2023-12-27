@@ -1,4 +1,4 @@
-from fastapi import HTTPException, APIRouter
+from fastapi import HTTPException, APIRouter, Response
 
 
 def chat_histories_handler(base_url, ctx):
@@ -13,8 +13,9 @@ def chat_histories_handler(base_url, ctx):
         else:
             return history
 
-    @router.delete("/{email}", status_code=204)
+    @router.delete("/{email}")
     async def delete_history(email: str):
-        return await ctx.history_service.delete(email)
+        await ctx.history_service.delete_by_id(email)
+        return Response(status_code=202)
 
     return router

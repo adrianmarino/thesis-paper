@@ -1,7 +1,7 @@
 import json
 import typing
 from models import Model
-from .mapper import ModelMapper
+from mappers import ModelMapper
 from .entity_already_exists_exception import EntityAlreadyExistsException
 from pymongo.errors import DuplicateKeyError, BulkWriteError
 
@@ -36,16 +36,46 @@ class Repository:
     return self.mapper.to_model(result) if result else None
 
 
-  def add_index(self, field, unique=True):
-    self.collection.create_index([(field, 1)], unique=True)
+  async def find_one_by(self, **kwargs):
+    result = await self.collection.find_one(kwargs)
+    return self.mapper.to_model(result) if result else None
 
 
-  async def find_all(self, limit=100):
-    cursor = self.collection.find({}).limit(limit)
-    
+  async def find_many_by(self, **kwargs):
+    cursor = self.collection.find(kwargs)
+
     models = []
-    for document in await cursor.to_list(length=10):   
+    for document in await cursor.to_list(length=10):
       models.append(self.mapper.to_model(document))
 
     return models
 
+
+  def add_single_index(self, field, unique=True):
+    self.add_multi_index([field], unique)
+
+
+  def add_multi_index(self, fields, unique=True):
+    self.collection.create_index([(f, 1) for f in fields], unique=unique)
+
+
+  async def find_all(self, limit=100):
+    cursor = self.collection.find({}).limit(limit)
+
+    models = []
+    for document in await cursor.to_list(length=10):
+      models.append(self.mapper.to_model(document))
+
+    return models
+
+
+  async def delete_by_id(self, id):
+    await self.collection.delete_one({self.id: id})
+
+
+  async def delete_one_by(self, **kwargs):
+    await self.collection.delete_one(kwargs)
+
+
+  async def delete_many_by(self, **kwargs):
+    await self.collection.delete_many(kwargs)

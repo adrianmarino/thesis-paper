@@ -3,7 +3,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
 from app_context import AppContext
-from handlers import profiles_handler, chats_handler, chat_histories_handler
+from handlers import profiles_handler, chats_handler, chat_histories_handler, interactions_handler, items_handler
 import logging
 
 BASE_URL = '/api/v1'
@@ -26,17 +26,22 @@ chat_histories_router = chat_histories_handler(BASE_URL, ctx)
 app.include_router(chat_histories_router)
 
 
+interactions_router = interactions_handler(BASE_URL, ctx)
+app.include_router(interactions_router)
 
+
+items_router = items_handler(BASE_URL, ctx)
+app.include_router(items_router)
 
 
 @app.exception_handler(500)
 async def internal_exception_handler(request: Request, e: Exception):
   return JSONResponse(
-    status_code = 500, 
+    status_code = 500,
     content     = jsonable_encoder(
         {
-            'code': 500, 
+            'code': 500,
             'msg': f'Internal Server Error. Cause: {e}',
         }
     )
- )
+)

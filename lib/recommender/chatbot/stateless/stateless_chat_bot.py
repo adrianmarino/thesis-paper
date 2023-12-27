@@ -17,12 +17,9 @@ class StatelessChatBot:
         self._response_factory = ChatBotResponseFactory(output_parser, template_factory)
 
 
-    def send(self, request, history):
-        params = self._params_resolver.resolve(
-            request      = request,
-            chat_history = history
-        )
+    def send(self, **kargs):
+        params = self._params_resolver.resolve(**kargs)
 
         response = self._chain.invoke(params)
 
-        return self._response_factory.create(params, response)
+        return self._response_factory.create(kargs, response)

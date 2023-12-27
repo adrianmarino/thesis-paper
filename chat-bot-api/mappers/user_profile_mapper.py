@@ -1,6 +1,7 @@
 from .mapper import ModelMapper
 from models import UserProfile
 
+
 class UserProfileMapper(ModelMapper):
   def to_model(self, document):
     return UserProfile(

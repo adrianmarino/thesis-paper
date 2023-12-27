@@ -7,3 +7,8 @@ def combinations(items):
 
 def subtract(a, b):
     return list(set(a) - set(b))
+
+
+
+def empty(list):
+    return list is None or len(list) == 0
