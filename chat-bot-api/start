@@ -1,8 +1,0 @@
-#!/bin/bash
-export HOST="0.0.0.0"
-export API_PORT="8080"
-export DB_PORT="27017"
-export DATABASE="chatbot"
-export MONGODB_URL="mongodb://$HOST:$DB_PORT"
-
-uvicorn api:app --reload  --host $HOST --port $API_PORT

@@ -24,7 +24,6 @@ from services import (
     ItemService,
     EmbService
 )
-from chromadb import PersistentClient
 
 
 class AppContext:
@@ -95,9 +94,9 @@ class AppContext:
 
         self.item_emb_mapper = ItemEmbMapper(self.emb_service)
 
-        client = PersistentClient(path='.')
+        self.repo_factory = ChromaRepositoryFactory()
 
-        self.items_emb_repository = ChromaRepositoryFactory().create(
+        self.items_emb_repository = self.repo_factory.create(
             'items',
             self.item_emb_mapper
         )

@@ -41,7 +41,6 @@ dependencies:
           - torchmetrics==0.11.4
           - pytorch-common
           - singleton-decorator
-          - chromadb
           - sentence-transformers
           - scikit-surprise
           - scikit-learn-extra
