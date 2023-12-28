@@ -1,9 +1,6 @@
-import sys
-sys.path.append('../lib')
-
 from models import UserInteraction
 from fastapi import HTTPException, APIRouter, Response
-from repository import EntityAlreadyExistsException
+from repository.mongo import EntityAlreadyExistsException
 import util as ut
 
 

@@ -1,7 +1,7 @@
 import os
 import motor
 
-class ConnectionFactory:
+class MongoConnectionFactory:
     @staticmethod
     def create(
         uri=os.environ['MONGODB_URL'],

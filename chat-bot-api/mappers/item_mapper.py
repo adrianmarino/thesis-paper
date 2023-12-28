@@ -11,7 +11,6 @@ class ItemMapper(ModelMapper):
       release = document['release']
     )
 
-
   def to_dict(self, model):
     return {
         'item_id': model.id,

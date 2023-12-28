@@ -114,3 +114,7 @@ class CollectionRepository:
 
     def search_by_ids(self, ids, include=['embeddings', 'metadatas', 'documents']):
         return CollectionRepositorySearchByIdResult(self.collection.get(ids=[str(id) for id in ids], include=include))
+
+
+    def delete(self, ids):
+        self.collection.delete(ids=[str(id) for id in ids])

@@ -6,7 +6,7 @@ from .entity_already_exists_exception import EntityAlreadyExistsException
 from pymongo.errors import DuplicateKeyError, BulkWriteError
 
 
-class Repository:
+class MongoRepository:
   def __init__(self, db, collection, mapper: ModelMapper, id):
     self.db = db
     self.collection = db.get_collection(collection)

@@ -5,3 +5,4 @@ from .chat_session_mapper import ChatSessionMapper
 from .chat_message_mapper import ChatMessageMapper
 from .interaction_mapper  import InteractionMapper
 from .item_mapper         import ItemMapper
+from .item_emb_mapper     import ItemEmbMapper
