@@ -8,7 +8,7 @@ class Item(Model):
     release: str
     embedding : list[float] = None
 
-    def set_embedding(self, embedding):
+    def with_embedding(self, embedding):
         return Item(
             id=self.id,
             title=self.title,

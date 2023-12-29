@@ -31,7 +31,7 @@ dependencies:
     - mysqlclient
     - fastapi
     - uvicorn[standard]
-
+    - chromadb
     - pip
     - pip:
           - --extra-index-url https://download.pytorch.org/whl/cu118

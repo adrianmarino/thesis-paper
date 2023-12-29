@@ -7,12 +7,9 @@ from .repository import ChromaRepository
 
 class ChromaRepositoryFactory:
     def __init__(self):
-      self.client = chromadb.HttpClient(host='localhost', port=9090)
+      self.client = chromadb.HttpClient(host='0.0.0.0', port=9090)
       self.factory = RepositoryFactory(self.client)
 
 
     def create(self, name, mapper):
       return ChromaRepository(self.factory.create(name), mapper)
-
-
-

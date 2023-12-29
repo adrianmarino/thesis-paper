@@ -29,6 +29,11 @@ def items_handler(base_url, ctx):
             return item
 
 
+    @router.get('', status_code = 200)
+    async def get_item(email: str):
+        return await ctx.item_service.find_by_user_id(email)
+
+
     @router.delete("/{item_id}", status_code = 202)
     async def delete_item(item_id: str):
         await ctx.item_service.delete(item_id)

@@ -77,6 +77,7 @@ class AppContext:
             'user_id'
         )
         self.interactions_repository.add_multi_index(['user_id', 'item_id'])
+        self.interactions_repository.add_multi_index(['item_id'], unique=False)
 
 
         self.item_mapper = ItemMapper()
@@ -87,6 +88,7 @@ class AppContext:
             'item_id'
         )
         self.items_repository.add_single_index('item_id')
+        self.items_repository.add_single_index('user_id', unique=False)
 
 
     def _build_chroma_repositories(self):
