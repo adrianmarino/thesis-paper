@@ -17,7 +17,7 @@ class ChatBotService:
 
     response = self.ctx.chat_bot.send(
       request      = user_message.content,
-      user_profile = self.ctx.profile_mapper.to_dict(profile),
+      user_profile = str(profile),
       candidates   = [],
       limit        = 5,
       user_history = user_interactions,
