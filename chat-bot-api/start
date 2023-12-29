@@ -1,8 +1,13 @@
 #!/bin/bash
-export HOST="0.0.0.0"
+export API_HOST="0.0.0.0"
 export API_PORT="8080"
-export DB_PORT="27017"
-export DATABASE="chatbot"
-export MONGODB_URL="mongodb://$HOST:$DB_PORT"
 
-uvicorn api:app --reload  --host $HOST --port $API_PORT
+export MONGODB_DATABASE="chatbot"
+export MONGODB_HOST="0.0.0.0"
+export MONGODB_PORT="27017"
+export MONGODB_URL="mongodb://$MONGODB_HOST:$MONGODB_PORT"
+
+export CHROMA_HOST="0.0.0.0"
+export CHROMA_PORT="9090"
+
+uvicorn api:app --reload  --host $API_HOST --port $API_PORT

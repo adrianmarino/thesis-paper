@@ -32,8 +32,7 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
                 (release, rating) = re.split(r',', data[1], 1)
 
                 results.append({
-                    # 'position'   : int(idx+1),
-                    'title'      : data[0].strip().capitalize(),
+                    'title'      : data[0].strip().replace('"', '').capitalize(),
                     'rating'     : float(rating),
                     'description': data[2].strip().capitalize(),
                     'release'    : int(release)

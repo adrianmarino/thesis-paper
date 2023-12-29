@@ -3,11 +3,16 @@ import chromadb
 import logging
 from bunch import Bunch
 from .repository import ChromaRepository
+import os
 
 
 class ChromaRepositoryFactory:
-    def __init__(self):
-      self.client = chromadb.HttpClient(host='0.0.0.0', port=9090)
+    def __init__(
+      self,
+      host=os.environ['CHROMA_HOST'],
+      port=os.environ['CHROMA_PORT'],
+    ):
+      self.client = chromadb.HttpClient(host=host, port=port)
       self.factory = RepositoryFactory(self.client)
 
 

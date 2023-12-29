@@ -35,7 +35,7 @@ class UserProfile(Model):
             text += f'\n- Preferencias de películas:'
 
             if 'from' in prefered_movies.release:
-                text += f'\n  - Películas estrenadas a apartir del año {prefered_movies.release["from"]}'
+                text += f'\n  - Películas estrenadas a partir del año {prefered_movies.release["from"]}'
 
             if prefered_movies.genres:
                 text += f'\n  - Películas que tengan los siguientes géneros: {", ".join(prefered_movies.genres)}'

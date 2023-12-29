@@ -6,7 +6,10 @@ from .movie_recommendations_output_parser import MovieRecommendationsOutputParse
 from .movie_recommender_params_resolver import MovieRecommenderParamsResolver
 
 
-MODEL_PROMPT = """
+
+
+
+TEXT_MODEL_PROMPT = """
 Eres un servicio que recomienda películas a sus usuarios. Además te comunicas con tus usuarios en lenguaje español.
 
 Quiero que recomiendes una película a un usuario basándote en información personal y
@@ -45,7 +48,7 @@ class MovieRecommenderChatBotFactory:
     @staticmethod
     def text(
         model           = 'movie_recommender',
-        model_prompt    = MODEL_PROMPT,
+        model_prompts   = TEXT_MODEL_PROMPT,
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5),
         chat_bot_prompt = CHAT_BOT_PROMPT
@@ -60,8 +63,8 @@ class MovieRecommenderChatBotFactory:
 
     @staticmethod
     def stateless(
+        model_prompt,
         model           = 'movie_recommender',
-        model_prompt    = MODEL_PROMPT,
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5)
     ):

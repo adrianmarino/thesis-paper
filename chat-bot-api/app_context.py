@@ -1,7 +1,6 @@
 import sys
 sys.path.append('../lib')
 
-import recommender as rd
 from mappers import (
     UserProfileMapper,
     ChatHistoryMapper,
@@ -22,7 +21,9 @@ from services import (
     ProfileService,
     InteractionService,
     ItemService,
-    EmbService
+    EmbService,
+    InteractionInfoService,
+    ChatBotPoolService
 )
 
 
@@ -34,7 +35,7 @@ class AppContext:
 
 
     def _build_services(self):
-        self.chat_bot = rd.MovieRecommenderChatBotFactory.stateless()
+        self.chat_bot_pool_service = ChatBotPoolService()
 
         self.chat_bot_service = ChatBotService(self)
 
@@ -45,6 +46,7 @@ class AppContext:
         self.interaction_service = InteractionService(self)
 
         self.item_service = ItemService(self)
+
 
     def _build_mongo_repositories(self):
         self.mongo_connection = MongoConnectionFactory.create()
@@ -89,6 +91,8 @@ class AppContext:
         )
         self.items_repository.add_single_index('item_id')
         self.items_repository.add_single_index('user_id', unique=False)
+
+        self.interaction_info_service = InteractionInfoService(self)
 
 
     def _build_chroma_repositories(self):

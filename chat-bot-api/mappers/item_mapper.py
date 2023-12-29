@@ -7,6 +7,7 @@ class ItemMapper(ModelMapper):
     return Item(
       id = document['item_id'],
       title = document['title'],
+      genres = document['genres'],
       description = document['description'],
       release = document['release']
     )
@@ -15,6 +16,7 @@ class ItemMapper(ModelMapper):
     return {
         'item_id': model.id,
         'title': model.title,
+        'genres': model.genres,
         'description': model.description,
         'release': model.release
     }
