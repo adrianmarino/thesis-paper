@@ -15,13 +15,21 @@ class ItemEmbMapper(ModelMapper):
     )
 
 
-  def to_params(self, model):
-    document = f'{model.title}:({model.release}): {model.description}'
-    embedding = self._item_service.embeddings([document])[0].tolist()
+  def to_params(self, models):
+    documents = []
+    metadatas = []
+    ids = []
+
+    for model in models:
+      documents.append(f'{model.title}:({model.release}): {model.description}')
+      metadatas.append({'title': model.title})
+      ids.append(model.id)
+
+    embeddings = self._item_service.embeddings(documents).tolist()
 
     return Bunch({
-        'embeddings': [embedding],
-        'documents' : [document],
-        'metadatas' : [{'title': model.title}],
-        'ids'       : [model.id]
+        'embeddings': embeddings,
+        'documents' : documents,
+        'metadatas' : metadatas,
+        'ids'       : ids
     })

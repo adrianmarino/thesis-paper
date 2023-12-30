@@ -6,8 +6,12 @@ class ChromaRepository:
     self._mapper = mapper
 
 
-  def add(self, model):
-    params = self._mapper.to_params(model)
+  def add_one(self, model):
+    params = self._mapper.to_params([model])
+    self._repository.insert(params)
+
+  def add_many(self, models):
+    params = self._mapper.to_params(models)
     self._repository.insert(params)
 
 

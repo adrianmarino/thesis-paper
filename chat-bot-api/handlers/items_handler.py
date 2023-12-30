@@ -8,7 +8,7 @@ def items_handler(base_url, ctx):
     router = APIRouter(prefix=f'{base_url}/items')
 
 
-    @router.post('')
+    @router.post('', status_code=201)
     async def add_item(item: Item):
         try:
             return await ctx.item_service.add(item)
@@ -16,6 +16,18 @@ def items_handler(base_url, ctx):
             raise HTTPException(
                 status_code=400,
                 detail=f"Already exist this item. Cause: {e}"
+            )
+
+
+    @router.post('/bulk', status_code=201)
+    async def add_items(items: list[Item]):
+        try:
+            await ctx.item_service.add_many(items)
+            return Response(status_code=201)
+        except EntityAlreadyExistsException as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Already exist any item. Cause: {e}"
             )
 
 
@@ -30,13 +42,13 @@ def items_handler(base_url, ctx):
 
 
     @router.get('', status_code = 200)
-    async def get_item(email: str | None = None, title: str | None = None, all: bool = False):
+    async def get_item(email: str | None = None, title: str | None = None, all: bool = False, limit: int = 3):
         if all:
             return await ctx.item_service.find_all()
         elif email:
             return await ctx.item_service.find_by_user_id(email)
         elif title:
-            return await ctx.item_service.find_by_title(title)
+            return await ctx.item_service.find_by_title(title, limit)
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 

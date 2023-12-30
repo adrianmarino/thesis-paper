@@ -18,6 +18,10 @@ class MongoRepository:
     return self.add_many([model])
 
 
+  def add_many(self, models: list[Model]):
+    return self.add_many(models)
+
+
   async def add_many(self, models: list[Model]):
     entities = [self.mapper.to_dict(model) for model in models]
     try:
