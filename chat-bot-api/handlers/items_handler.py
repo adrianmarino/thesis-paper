@@ -32,23 +32,23 @@ def items_handler(base_url, ctx):
 
 
     @router.get('/{item_id}', status_code = 200)
-    async def get_item(item_id: str):
+    async def get_item(item_id: str, hide_emb: bool = True):
         item = await ctx.item_service.find_by_id(item_id)
 
         if item is None:
             raise HTTPException(status_code=404, detail=f'Not found {item_id} item')
         else:
-            return item
+            return remove_embedding([item], hide_emb)[0]
 
 
     @router.get('', status_code = 200)
-    async def get_item(email: str | None = None, title: str | None = None, all: bool = False, limit: int = 3):
+    async def get_item(email: str | None = None, title: str | None = None, all: bool = False, limit: int = 3, hide_emb: bool = True):
         if all:
-            return await ctx.item_service.find_all()
+            return remove_embedding(await ctx.item_service.find_all(), hide_emb)
         elif email:
-            return await ctx.item_service.find_by_user_id(email)
+            return remove_embedding(await ctx.item_service.find_by_user_id(email), hide_emb)
         elif title:
-            return await ctx.item_service.find_by_title(title, limit)
+            return remove_embedding(await ctx.item_service.find_by_title(title, limit), hide_emb)
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 
@@ -60,3 +60,12 @@ def items_handler(base_url, ctx):
 
 
     return router
+
+
+def remove_embedding(items, hide_emb):
+    result = []
+    for item in items:
+        if hide_emb:
+            item.embedding = None
+        result.append(item.dict(exclude_none=True))
+    return result
