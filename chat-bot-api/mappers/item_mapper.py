@@ -6,10 +6,10 @@ class ItemMapper(ModelMapper):
   def to_model(self, document):
     return Item(
       id = document['item_id'],
-      title = document['title'],
-      genres = document['genres'],
-      description = document['description'],
-      release = document['release']
+      title = document['title'] if 'title' in  document else None,
+      genres = document['genres'] if 'genres' in document else [],
+      description = document['description'] if 'description' in  document else None,
+      release = document['release'] if 'release' in  document else None
     )
 
   def to_dict(self, model):

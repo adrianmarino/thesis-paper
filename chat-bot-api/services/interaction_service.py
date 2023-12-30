@@ -18,3 +18,4 @@ class InteractionService:
 
     async def delete_one_by(self, user_id, item_id):
         return await self.ctx.interactions_repository.delete_many_by(user_id=user_id, item_id=item_id)
+

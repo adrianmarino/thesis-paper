@@ -30,8 +30,15 @@ def items_handler(base_url, ctx):
 
 
     @router.get('', status_code = 200)
-    async def get_item(email: str):
-        return await ctx.item_service.find_by_user_id(email)
+    async def get_item(email: str | None = None, title: str | None = None, all: bool = False):
+        if all:
+            return await ctx.item_service.find_all()
+        elif email:
+            return await ctx.item_service.find_by_user_id(email)
+        elif title:
+            return await ctx.item_service.find_by_title(title)
+        else:
+            raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 
 
     @router.delete("/{item_id}", status_code = 202)

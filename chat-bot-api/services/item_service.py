@@ -28,9 +28,22 @@ class ItemService:
         return self._populate_embeddings(models)
 
 
+    async def find_all(self):
+        models = await self.ctx.items_repository.find_many_by()
+        return self._populate_embeddings(models)
+
+
     async def find_by_user_id(self, user_id: str):
         interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
         items = await self.find_by_ids([i.item_id for i in interactions])
+        return self._populate_embeddings(items)
+
+
+    async def find_by_title(self, title: str, limit=5):
+        embs = self.ctx.emb_service.embeddings([title])
+        result = self.ctx.items_emb_repository.search_sims(embs, limit)
+        print(result.ids)
+        items = await self.find_by_ids([str(id) for id in result.ids])
         return self._populate_embeddings(items)
 
 
