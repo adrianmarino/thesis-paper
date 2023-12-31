@@ -28,11 +28,11 @@ class OllamaChatPromptTemplateFactory:
 
 class OllamaChainBuilder:
     @staticmethod
-    def default(model, prompt):
+    def default(model, prompt, verbose=False):
         return OllamaChatPromptTemplateFactory.create(prompt) | \
-            OllamaModelBuilder.default(model)
+            OllamaModelBuilder.default(model, verbose)
 
     @staticmethod
-    def chat(model, prompt):
+    def chat(model, prompt, verbose=False):
         return OllamaChatPromptTemplateFactory.create(prompt) | \
-            OllamaModelBuilder.chat(model)
+            OllamaModelBuilder.chat(model, verbose)

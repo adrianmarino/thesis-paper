@@ -48,17 +48,19 @@ class MovieRecommenderChatBotFactory:
     @staticmethod
     def text(
         model           = 'movie_recommender',
-        model_prompts   = TEXT_MODEL_PROMPT,
+        model_prompt    = TEXT_MODEL_PROMPT,
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5),
-        chat_bot_prompt = CHAT_BOT_PROMPT
+        chat_bot_prompt = CHAT_BOT_PROMPT,
+        verbose         = True
     ):
         return TextChatBot(
             model,
             model_prompt,
             params_resolver,
             output_parser,
-            chat_bot_prompt
+            chat_bot_prompt,
+            verbose
         )
 
     @staticmethod

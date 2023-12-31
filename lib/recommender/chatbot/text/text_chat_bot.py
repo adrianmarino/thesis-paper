@@ -10,9 +10,10 @@ class TextChatBot:
         prompt,
         params_resolver,
         output_parser,
-        request_prompt
+        request_prompt,
+        verbose=False
     ):
-        self._chain           = OllamaChainBuilder.default(model, prompt)
+        self._chain           = OllamaChainBuilder.default(model, prompt, verbose)
         self._output_parser   = output_parser
         self._params_resolver = params_resolver
         self._request_prompt  = request_prompt

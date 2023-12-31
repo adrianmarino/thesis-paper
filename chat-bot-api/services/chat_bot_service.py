@@ -1,5 +1,6 @@
 from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
 import util as ut
+import pandas as pd
 
 class ChatBotService:
   def __init__(self, ctx):
@@ -18,7 +19,7 @@ class ChatBotService:
     candidates = []
     if len(interactions_info) >= self._interactions_count:
       chat_bot = self.ctx.chat_bot_pool_service.with_candidates
-      # Get cantidates where....
+      # Get candidates where....
     else:
       chat_bot = self.ctx.chat_bot_pool_service.without_candidates
 
@@ -27,7 +28,7 @@ class ChatBotService:
       user_profile = str(profile),
       candidates   = candidates,
       limit        = self._limit,
-      user_history = UserInteractionInfo.to_str(interactions_info),
+      user_history = '\n'.join([str(info) for info in interactions_info]),
       chat_history = history.as_content_list()
     )
 
@@ -37,3 +38,4 @@ class ChatBotService:
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
     return ai_message
+
