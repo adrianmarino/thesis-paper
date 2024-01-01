@@ -8,3 +8,4 @@ from .item import Item
 from .item_emb import ItemEmb
 from .model import Model
 from .user_interaction_info import UserInteractionInfo
+from .recommendation import Recommendation

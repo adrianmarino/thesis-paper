@@ -18,6 +18,14 @@ def interactions_handler(base_url, ctx):
                 detail=f"Already exist this interaction. Cause: {e}"
             )
 
+    @router.get('/make/{user_id}/{item_id}/{rating}', status_code=204)
+    async def make_interaction(user_id: str, item_id: str, rating: int):
+        try:
+            user_interaction = UserInteraction(user_id=user_id, item_id=item_id, rating=rating)
+            await ctx.interaction_service.add(user_interaction)
+        except EntityAlreadyExistsException as e:
+            return Response(status_code=204)
+
 
     @router.get('/{user_id}', status_code = 200)
     async def get_interactions_by_user_id(user_id: str):

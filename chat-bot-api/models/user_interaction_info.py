@@ -32,7 +32,7 @@ class UserInteractionInfo(Model):
 
 
     def __str__(self):
-        return f'- {self.title}({"|".join(self.genres)}): Calificada con {self.rating} puntos.'
+        return f'- {self.title.strip()} (Rating: {self.rating}).'
 
 
     def __hash__(self):

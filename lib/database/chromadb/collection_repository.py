@@ -85,7 +85,7 @@ class CollectionRepository:
                         ids         = [params.ids[idx]]
                     )
                 except Exception as error:
-                    logging.warn(f'{error}. EmbId: {params.ids[idx]}')
+                    logging.error(f'{error}. EmbId: {params.ids[idx]}')
                     non_inserted_ids.append(params.ids[idx])
                 bar.update()
 

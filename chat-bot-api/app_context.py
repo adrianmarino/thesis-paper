@@ -96,7 +96,7 @@ class AppContext:
 
 
     def _build_chroma_repositories(self):
-        self.emb_service = EmbService('all-roberta-large-v1')
+        self.emb_service = EmbService('all-mpnet-base-v2')
 
         self.item_emb_mapper = ItemEmbMapper(self.emb_service)
 

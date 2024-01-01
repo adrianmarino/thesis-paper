@@ -11,7 +11,7 @@ def items_handler(base_url, ctx):
     @router.post('', status_code=201)
     async def add_item(item: Item):
         try:
-            return await ctx.item_service.add(item)
+            return await ctx.item_service.add_one(item)
         except EntityAlreadyExistsException as e:
             raise HTTPException(
                 status_code=400,
@@ -42,13 +42,14 @@ def items_handler(base_url, ctx):
 
 
     @router.get('', status_code = 200)
-    async def get_item(email: str | None = None, title: str | None = None, all: bool = False, limit: int = 3, hide_emb: bool = True):
+    async def get_item(email: str | None = None, title: str | None = None, all: bool = False, limit: int = 5, hide_emb: bool = True):
         if all:
             return remove_embedding(await ctx.item_service.find_all(), hide_emb)
         elif email:
             return remove_embedding(await ctx.item_service.find_by_user_id(email), hide_emb)
         elif title:
-            return remove_embedding(await ctx.item_service.find_by_title(title, limit), hide_emb)
+            items, distances = await ctx.item_service.find_by_title(title, limit)
+            return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 

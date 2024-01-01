@@ -1,4 +1,4 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
+from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, Recommendation
 import util as ut
 import pandas as pd
 
@@ -9,7 +9,7 @@ class ChatBotService:
     self._limit              = 5
 
 
-  async def send(self, user_message: UserMessage):
+  async def send(self, user_message: UserMessage, base_url=''):
     history = await self.ctx.history_service.upsert(user_message.author)
 
     profile = await self.ctx.profile_service.find(user_message.author)
@@ -33,9 +33,24 @@ class ChatBotService:
     )
 
     response.metadata.pop('chat_history', None)
+
     ai_message = AIMessage.from_response(response)
+
+    recommendations = []
+    for r in list(response.metadata['recommendations']):
+      sim_items, distances = await self.ctx.item_service.find_by_title(r['title'], limit=1)
+
+      if distances[0] >= 0 and distances[0] <= 1:
+        item = sim_items[0]
+        recommendations.append(Recommendation(
+          title       = r['title'] + f' (Sim: {item.title.strip()})',
+          release     = r['release'],
+          description = r['description'],
+          rating      = r['rating'],
+          votes       = [ f'{base_url}api/v1/interactions/make/{user_message.author}/{item.id}/{i}' for i in range(1, 6)]
+        ))
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
-    return ai_message
+    return recommendations
 

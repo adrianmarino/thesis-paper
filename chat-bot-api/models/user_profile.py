@@ -10,34 +10,34 @@ class UserProfile(Model):
 
 
     def __str__(self):
-        text = f'Perfil del usuario:\n\n- Nombre: {self.name}'
+        text = f'\n- Name: {self.name}'
 
         metadata = Bunch(self.metadata)
 
         if metadata.genre:
-            text += f'\n- Género: {"Masculino" if metadata.genre.lower() == "male" else "Femenino"}'
+            text += f'\n- Genre: {"Male" if metadata.genre.lower() == "male" else "Female"}'
 
         if metadata.age:
-            text += f'\n- Edad: {metadata.age}'
+            text += f'\n- Age: {metadata.age}'
 
         if metadata.nationality:
-            text += f'\n- Nacionalidad: {metadata.nationality}'
+            text += f'\n- Nationality: {metadata.nationality}'
 
         if metadata.studies:
-            text += f'\n- Estudios: {metadata.studies}'
+            text += f'\n- Studies: {metadata.studies}'
 
         if metadata.work:
-            text += f'\n- Ocupación: {metadata.work}'
+            text += f'\n- Work: {metadata.work}'
 
         prefered_movies = Bunch(metadata.prefered_movies)
 
         if prefered_movies:
-            text += f'\n- Preferencias de películas:'
+            text += f'\n- Movie preferences:'
 
             if 'from' in prefered_movies.release:
-                text += f'\n  - Películas estrenadas a partir del año {prefered_movies.release["from"]}'
+                text += f'\n  - Movies released from the {prefered_movies.release["from"]} year'
 
             if prefered_movies.genres:
-                text += f'\n  - Películas que tengan los siguientes géneros: {", ".join(prefered_movies.genres)}'
+                text += f'\n  - Movies that have the following genres: {", ".join(prefered_movies.genres)}'
 
         return text

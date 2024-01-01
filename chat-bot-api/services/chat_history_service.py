@@ -29,5 +29,5 @@ class ChatHistoryService:
         return await self.ctx.histories_repository.find_by_id(email)
 
 
-    async def delete(self, email):
-        return await self.ctx.histories_repository.delete(email)
+    async def delete_by_id(self, email):
+        return await self.ctx.histories_repository.delete_by_id(email)

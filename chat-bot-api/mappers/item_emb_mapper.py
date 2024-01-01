@@ -21,14 +21,14 @@ class ItemEmbMapper(ModelMapper):
     ids = []
 
     for model in models:
-      documents.append(f'{model.title}:({model.release}): {model.description}')
+      documents.append(f'Title: {model.title}. Description: {model.description}. Genres: {", ".join(model.genres)}.')
       metadatas.append({'title': model.title})
       ids.append(model.id)
 
-    embeddings = self._item_service.embeddings(documents).tolist()
+    embeddings = self._item_service.embeddings(documents)
 
     return Bunch({
-        'embeddings': embeddings,
+        'embeddings': embeddings.tolist(),
         'documents' : documents,
         'metadatas' : metadatas,
         'ids'       : ids

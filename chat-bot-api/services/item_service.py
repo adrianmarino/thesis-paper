@@ -12,9 +12,9 @@ class ItemService:
         self.ctx.items_emb_repository.add_many(items)
 
 
-    async def add(self, item: Item):
+    async def add_one(self, item: Item):
         await self.ctx.items_repository.add_one(item)
-        self.ctx.items_emb_repository.add(item)
+        self.ctx.items_emb_repository.add_one(item)
         return await self.find_by_id(item.id)
 
 
@@ -47,9 +47,8 @@ class ItemService:
     async def find_by_title(self, title: str, limit=5):
         embeddings = self.ctx.emb_service.embeddings([title])
         result = self.ctx.items_emb_repository.search_sims(embeddings, limit)
-        print(result.ids)
         items = await self.find_by_ids([str(id) for id in result.ids])
-        return self._populate_embeddings(items)
+        return self._populate_embeddings(items), result.distances
 
 
     async def delete(self, item_id):
