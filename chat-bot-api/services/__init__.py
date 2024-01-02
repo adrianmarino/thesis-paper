@@ -6,3 +6,4 @@ from .item_service import ItemService
 from .emb_service import EmbService
 from .interaction_info_service import InteractionInfoService
 from .chatbot_pool_service import ChatBotPoolService
+from .recommendations_factory import RecommendationsFactory

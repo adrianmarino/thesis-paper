@@ -2,6 +2,7 @@ from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInterac
 import util as ut
 import pandas as pd
 
+
 class ChatBotService:
   def __init__(self, ctx):
     self.ctx = ctx
@@ -27,30 +28,19 @@ class ChatBotService:
       request      = user_message.content,
       user_profile = str(profile),
       candidates   = candidates,
-      limit        = self._limit,
+      limit        = self._limit + 5,
       user_history = '\n'.join([str(info) for info in interactions_info]),
       chat_history = history.as_content_list()
     )
 
-    response.metadata.pop('chat_history', None)
-
     ai_message = AIMessage.from_response(response)
-
-    recommendations = []
-    for r in list(response.metadata['recommendations']):
-      sim_items, distances = await self.ctx.item_service.find_by_title(r['title'], limit=1)
-
-      if distances[0] >= 0 and distances[0] <= 1:
-        item = sim_items[0]
-        recommendations.append(Recommendation(
-          title       = r['title'] + f' (Sim: {item.title.strip()})',
-          release     = r['release'],
-          description = r['description'],
-          rating      = r['rating'],
-          votes       = [ f'{base_url}api/v1/interactions/make/{user_message.author}/{item.id}/{i}' for i in range(1, 6)]
-        ))
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
-    return recommendations
+    recommendations = await self.ctx.recommendations_factory.create(
+      response.metadata['recommendations'][:self._limit],
+      user_message.author,
+      base_url
+    )
 
+    return recommendations

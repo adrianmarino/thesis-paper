@@ -48,7 +48,7 @@ class MovieRecommenderChatBotFactory:
     @staticmethod
     def text(
         model           = 'movie_recommender',
-        model_prompt    = TEXT_MODEL_PROMPT,
+        prompt          = TEXT_MODEL_PROMPT,
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5),
         chat_bot_prompt = CHAT_BOT_PROMPT,
@@ -56,7 +56,7 @@ class MovieRecommenderChatBotFactory:
     ):
         return TextChatBot(
             model,
-            model_prompt,
+            prompt,
             params_resolver,
             output_parser,
             chat_bot_prompt,
@@ -65,14 +65,14 @@ class MovieRecommenderChatBotFactory:
 
     @staticmethod
     def stateless(
-        model_prompt,
+        prompt,
         model           = 'movie_recommender',
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5)
     ):
         return StatelessChatBot(
             model,
-            model_prompt,
+            prompt,
             params_resolver,
             output_parser,
         )

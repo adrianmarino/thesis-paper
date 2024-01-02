@@ -23,7 +23,8 @@ from services import (
     ItemService,
     EmbService,
     InteractionInfoService,
-    ChatBotPoolService
+    ChatBotPoolService,
+    RecommendationsFactory
 )
 
 
@@ -93,6 +94,8 @@ class AppContext:
         self.items_repository.add_single_index('user_id', unique=False)
 
         self.interaction_info_service = InteractionInfoService(self)
+
+        self.recommendations_factory = RecommendationsFactory(self)
 
 
     def _build_chroma_repositories(self):

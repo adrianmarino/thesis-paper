@@ -1,1 +1,2 @@
 from .movie_recommender_chat_bot_factory import MovieRecommenderChatBotFactory
+from .movie_recommendations_output_parser import MovieRecommendationsOutputParser
