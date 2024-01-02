@@ -31,6 +31,9 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
 
                 (release, rating) = re.split(r',', data[1], 1)
 
+                if '/' in rating:
+                    rating = rating.split('/')[-1]
+
                 results.append({
                     'title'      : data[0].strip().replace('"', '').capitalize(),
                     'rating'     : float(rating.strip()),

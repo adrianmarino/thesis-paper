@@ -1,13 +1,13 @@
 from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, Recommendation
 import util as ut
 import pandas as pd
-
+import random
 
 class ChatBotService:
   def __init__(self, ctx):
     self.ctx = ctx
     self._interactions_count = 20
-    self._limit              = 5
+    self._limit = 5
 
 
   async def send(self, user_message: UserMessage, base_url=''):
@@ -28,20 +28,20 @@ class ChatBotService:
       request      = user_message.content,
       user_profile = str(profile),
       candidates   = candidates,
-      limit        = self._limit + 5,
+      limit        = 15,
       user_history = '\n'.join([str(info) for info in interactions_info]),
       chat_history = history.as_content_list()
     )
-    response.metadata['char_history'] = None
+    response.metadata['params']['char_history'] = None
 
     ai_message = AIMessage.from_response(response)
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
     recommendations = await self.ctx.recommendations_factory.create(
-      response.metadata['recommendations'][:self._limit],
+      response.metadata['recommendations'],
       user_message.author,
       base_url
     )
 
-    return recommendations
+    return random.sample(recommendations, self._limit) if len(recommendations) > self._limit else recommendations

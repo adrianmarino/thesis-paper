@@ -23,18 +23,26 @@ class RecommendationsFactory:
     for r in list(raw_recommendations):
       sim_items, distances = await self.ctx.item_service.find_by_title(r['title'], limit=1)
 
-      if distances[0] >= 0 and distances[0] <= 1.2:
+      if distances[0] < 0:
+        continue
+
+      total_sim = 1 - distances[0]
+
+      if total_sim > 0.1:
         item = sim_items[0]
 
         title_sim = cosine_similarity(r['title'], item.title.strip())
 
         if title_sim >= 0.5:
           recommendations.append(Recommendation(
-            title       = r['title'] + f' (Sim: {item.title.strip()})',
-            release     = r['release'],
-            description = r['description'],
-            rating      = r['rating'],
-            votes       = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)]
+            title         = r['title'],
+            release       = r['release'],
+            description   = r['description'],
+            rating        = r['rating'],
+            votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
+            total_sim     = total_sim,
+            db_title_sim  = title_sim,
+            db_title      = item.title.strip()
           ))
 
     return recommendations
