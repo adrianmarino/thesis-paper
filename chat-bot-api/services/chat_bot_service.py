@@ -32,6 +32,7 @@ class ChatBotService:
       user_history = '\n'.join([str(info) for info in interactions_info]),
       chat_history = history.as_content_list()
     )
+    response.metadata['char_history'] = None
 
     ai_message = AIMessage.from_response(response)
 

@@ -33,9 +33,9 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
 
                 results.append({
                     'title'      : data[0].strip().replace('"', '').capitalize(),
-                    'rating'     : float(rating),
+                    'rating'     : float(rating.strip()),
                     'description': data[2].strip().capitalize(),
-                    'release'    : int(release)
+                    'release'    : int(release.strip())
                 })
 
             return {
