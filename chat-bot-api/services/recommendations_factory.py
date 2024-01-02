@@ -28,7 +28,7 @@ class RecommendationsFactory:
 
       total_sim = 1 - distances[0]
 
-      if total_sim > 0.1:
+      if total_sim > 0.4:
         item = sim_items[0]
 
         title_sim = cosine_similarity(r['title'], item.title.strip())
