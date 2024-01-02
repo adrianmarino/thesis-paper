@@ -28,7 +28,7 @@ class RecommendationsFactory:
 
         title_sim = cosine_similarity(r['title'], item.title.strip())
 
-        if title_sim >= 0.3:
+        if title_sim >= 0.5:
           recommendations.append(Recommendation(
             title       = r['title'] + f' (Sim: {item.title.strip()})',
             release     = r['release'],
