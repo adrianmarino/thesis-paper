@@ -3,7 +3,7 @@ from models import UserMessage
 
 
 def chats_handler(base_url, ctx):
-  router = APIRouter(prefix=f'{base_url}/chats')
+  router = APIRouter(prefix=f'{base_url}/recommendations')
 
   @router.post('')
   async def chat(user_message: UserMessage, request: Request):
