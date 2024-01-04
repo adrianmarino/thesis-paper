@@ -5,7 +5,7 @@ class Recommendation(Model):
   title: str
   release: str
   description: str
-  rating: float
+  # rating: float
   votes: list[str]
   total_sim: float
   db_title_sim: float

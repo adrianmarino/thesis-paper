@@ -18,7 +18,7 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
             results = []
             for idx in range(self.__list_size):
                 try:
-                    line = ut.between(text, f'\n{idx+1}.', f'\n{idx+2}.')
+                    line = ut.between(text, f'{idx+1}.', f'{idx+2}.')
 
                 except Exception as e:
                     logging.error(f'Error to parse response. {e}')
@@ -29,18 +29,10 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
                 if len(data) <= 1:
                     continue
 
-                (release, rating) = re.split(r',', data[1], 1)
-
-                if '/' in rating:
-                    rating = rating.split('/')[-1]
-
                 results.append({
                     'title'      : data[0].strip().replace('"', '').capitalize(),
-                    'rating'     : float(rating.strip()),
                     'description': data[2].strip().capitalize(),
-                    'release'    : int(release.strip())
+                    'release'    : int(data[1].strip())
                 })
 
-            return {
-                'recommendations': sorted(results, key=lambda it: it['rating'], reverse=True)
-            }
+            return { 'recommendations': results }

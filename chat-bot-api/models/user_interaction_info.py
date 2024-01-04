@@ -30,11 +30,6 @@ class UserInteractionInfo(Model):
     @property
     def title(self): return self.item.title
 
-
-    def __str__(self):
-        return f'- {self.title.strip()} (Rating: {self.rating}).'
-
-
     def __hash__(self):
         return hash(self.id)
 

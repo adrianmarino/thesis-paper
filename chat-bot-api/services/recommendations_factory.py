@@ -1,6 +1,7 @@
 from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, Recommendation
 import util as ut
 import pandas as pd
+import random
 
 
 def cosine_similarity(text1, text2):
@@ -20,7 +21,10 @@ class RecommendationsFactory:
   async def create(self, raw_recommendations, email, base_url):
     recommendations = []
 
-    for r in list(raw_recommendations):
+    raw_recommendations = list(raw_recommendations)
+    random.shuffle(raw_recommendations)
+
+    for r in raw_recommendations:
       sim_items, distances = await self.ctx.item_service.find_by_title(r['title'], limit=1)
 
       if distances[0] < 0:
@@ -28,17 +32,17 @@ class RecommendationsFactory:
 
       total_sim = 1 - distances[0]
 
-      if total_sim > 0.4:
+      if total_sim > 0.1:
         item = sim_items[0]
 
         title_sim = cosine_similarity(r['title'], item.title.strip())
 
-        if title_sim >= 0.5:
+        if title_sim >= 0.1:
           recommendations.append(Recommendation(
             title         = r['title'],
             release       = r['release'],
             description   = r['description'],
-            rating        = r['rating'],
+            #rating        = r['rating'],
             votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
             total_sim     = total_sim,
             db_title_sim  = title_sim,

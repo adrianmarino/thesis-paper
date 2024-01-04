@@ -35,7 +35,7 @@ En caso de no tener ninguna información para recomendar elige entre las pelícu
 El formato de la respuesta debe ser siempre el mismo:
 
 Recomendaciones:
-Número. Título(Año de estreno, Calificación numérica entre los valores 1 y 5): Descripción.
+Número. Título(Año de estreno): Descripción.
 
 El título, año de estreno, calificación y descripción debe especificarse en lenguaje natural y no deben estar entre comillas.
 """
