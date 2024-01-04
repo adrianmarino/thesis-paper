@@ -1,4 +1,4 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, Recommendation
+from models import Recommendation, Recommendations
 import util as ut
 import pandas as pd
 import random
@@ -18,10 +18,10 @@ class RecommendationsFactory:
     self.ctx = ctx
 
 
-  async def create(self, raw_recommendations, email, base_url, include_metadata=False):
-    recommendations = []
+  async def create(self, response, email, base_url, include_metadata=False):
+    recommended_items = []
 
-    raw_recommendations = list(raw_recommendations)
+    raw_recommendations = list(response.metadata['recommendations'])
     random.shuffle(raw_recommendations)
 
     for r in raw_recommendations:
@@ -47,12 +47,14 @@ class RecommendationsFactory:
                 'db_title'     : item.title.strip()
               }
 
-          recommendations.append(Recommendation(
-            title         = r['title'],
-            release       = r['release'],
-            description   = r['description'],
-            votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
-            metadata      = metadata
-          ))
+          recommended_items.append(
+            Recommendation(
+              title         = r['title'],
+              release       = r['release'],
+              description   = r['description'],
+              votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
+              metadata      = metadata
+            ).dict(exclude_none=True)
+          )
 
-    return recommendations
+    return Recommendations(items=recommended_items, response=response)

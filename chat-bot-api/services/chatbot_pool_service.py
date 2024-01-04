@@ -1,4 +1,4 @@
-from promps import *
+from prompts import *
 import recommender as rd
 
 

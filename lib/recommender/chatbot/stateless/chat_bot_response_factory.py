@@ -11,9 +11,9 @@ class ChatBotResponseFactory:
 
     def create(self, params, response):
         metadata = self._output_parser.parse(response)
-        promp = self._template_factory.invoke(params)
+        prompt = self._template_factory.invoke(params)
 
         metadata['params'] = params
-        metadata['promps'] = list(map(lambda it: {'type': it.__class__.__name__, 'content':  it.content}, promp.messages))
+        metadata['prompts'] = list(map(lambda it: {'type': it.__class__.__name__, 'content':  it.content}, prompt.messages))
 
         return ChatBotResponse(response, metadata)

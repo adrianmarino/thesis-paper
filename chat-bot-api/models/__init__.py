@@ -9,3 +9,4 @@ from .item_emb import ItemEmb
 from .model import Model
 from .user_interaction_info import UserInteractionInfo
 from .recommendation import Recommendation
+from .recommendations import Recommendations

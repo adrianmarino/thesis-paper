@@ -1,4 +1,4 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, Recommendation
+from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
 import util as ut
 import pandas as pd
 
@@ -33,14 +33,13 @@ class ChatBotService:
       user_history = self.__str_user_history(interactions_info),
       chat_history = history.as_content_list()[-10:]
     )
-    response.metadata['params']['chat_history'] = None
 
     ai_message = AIMessage.from_response(response)
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
     return await self.ctx.recommendations_factory.create(
-      response.metadata['recommendations'],
+      response,
       user_message.author,
       base_url,
       include_metadata
