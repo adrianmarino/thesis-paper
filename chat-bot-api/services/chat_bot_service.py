@@ -10,7 +10,7 @@ class ChatBotService:
     self._limit = 5
 
 
-  async def send(self, user_message: UserMessage, base_url=''):
+  async def send(self, user_message: UserMessage, base_url='', include_metadata=False):
     history = await self.ctx.history_service.upsert(user_message.author)
 
     profile = await self.ctx.profile_service.find(user_message.author)
@@ -42,7 +42,8 @@ class ChatBotService:
     return await self.ctx.recommendations_factory.create(
       response.metadata['recommendations'],
       user_message.author,
-      base_url
+      base_url,
+      include_metadata
     )
 
 

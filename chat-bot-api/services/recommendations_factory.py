@@ -18,7 +18,7 @@ class RecommendationsFactory:
     self.ctx = ctx
 
 
-  async def create(self, raw_recommendations, email, base_url):
+  async def create(self, raw_recommendations, email, base_url, include_metadata=False):
     recommendations = []
 
     raw_recommendations = list(raw_recommendations)
@@ -38,15 +38,21 @@ class RecommendationsFactory:
         title_sim = cosine_similarity(r['title'], item.title.strip())
 
         if title_sim >= 0.1:
+
+          metadata = None
+          if include_metadata:
+            metadata      = {
+                'total_sim'    : total_sim,
+                'db_title_sim' : title_sim,
+                'db_title'     : item.title.strip()
+              }
+
           recommendations.append(Recommendation(
             title         = r['title'],
             release       = r['release'],
             description   = r['description'],
-            #rating        = r['rating'],
             votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
-            total_sim     = total_sim,
-            db_title_sim  = title_sim,
-            db_title      = item.title.strip()
+            metadata      = metadata
           ))
 
     return recommendations

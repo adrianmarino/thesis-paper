@@ -1,10 +1,16 @@
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-
-from app_context import AppContext
-from handlers import profiles_handler, chats_handler, chat_histories_handler, interactions_handler, items_handler
 import logging
+from app_context import AppContext
+from handlers import (
+    profiles_handler,
+    recommendations_handler,
+    chat_histories_handler,
+    interactions_handler,
+    items_handler
+)
+
 
 BASE_URL = '/api/v1'
 
@@ -18,8 +24,8 @@ profiles_router = profiles_handler(BASE_URL, ctx)
 app.include_router(profiles_router)
 
 
-chats_router = chats_handler(BASE_URL, ctx)
-app.include_router(chats_router)
+recommendations_router = recommendations_handler(BASE_URL, ctx)
+app.include_router(recommendations_router)
 
 
 chat_histories_router = chat_histories_handler(BASE_URL, ctx)

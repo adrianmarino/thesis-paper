@@ -34,7 +34,7 @@ def interactions_handler(base_url, ctx):
         if ut.empty(interactions):
             raise HTTPException(status_code=404, detail=f'Not found interactions for {user_id} profile')
         else:
-            return interactions
+            return [i.dict(exclude_none=True) for i in interactions]
 
 
     @router.delete("/{user_id}/{item_id}", status_code = 202)
