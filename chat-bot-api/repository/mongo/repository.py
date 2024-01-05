@@ -46,7 +46,13 @@ class MongoRepository:
 
 
   async def find_many_by(self, **kwargs):
+    limit = kwargs.get('limit', None)
+    kwargs.pop('limit', None)
+
+    print(kwargs)
     cursor = self.collection.find(kwargs)
+    if limit:
+      cursor = cursor.limit(limit)
 
     models = []
     for document in await cursor.to_list(length=None):

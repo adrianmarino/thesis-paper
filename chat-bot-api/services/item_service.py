@@ -44,6 +44,12 @@ class ItemService:
         return self._populate_embeddings(items)
 
 
+    async def find_by_unseen_by_user_id(self, user_id: str, limit: int=10):
+        interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
+        items = await self.ctx.items_repository.find_many_by(limit=limit, item_id={ '$nin': [str(i.item_id) for i in interactions]})
+        return self._populate_embeddings(items)
+
+
     async def find_by_title(self, title: str, limit=5):
         embeddings = self.ctx.emb_service.embeddings([title])
         result = self.ctx.items_emb_repository.search_sims(embeddings, limit)
