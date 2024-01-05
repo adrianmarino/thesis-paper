@@ -21,7 +21,7 @@ class Recommendations(Model):
   def plain(self):
     content = 'Prompt:\n-------\n'
     content += self.metadata['prompts'][0]['content']
-    content += '\n\nResponse:\n---------\n\n'
+    content += '\n\nResponse:\n---------\n'
     content += self.content
     return content
 
