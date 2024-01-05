@@ -49,7 +49,7 @@ class MongoRepository:
     cursor = self.collection.find(kwargs)
 
     models = []
-    for document in await cursor.to_list(length=10):
+    for document in await cursor.to_list(length=None):
       models.append(self.mapper.to_model(document))
 
     return models
@@ -67,7 +67,7 @@ class MongoRepository:
     cursor = self.collection.find({}).limit(limit)
 
     models = []
-    for document in await cursor.to_list(length=10):
+    for document in await cursor.to_list(length=None):
       models.append(self.mapper.to_model(document))
 
     return models

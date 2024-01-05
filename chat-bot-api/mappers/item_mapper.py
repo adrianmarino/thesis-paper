@@ -9,14 +9,16 @@ class ItemMapper(ModelMapper):
       title = document['title'] if 'title' in  document else None,
       genres = document['genres'] if 'genres' in document else [],
       description = document['description'] if 'description' in  document else None,
+      rating = document['rating'] if 'rating' in  document else None,
       release = document['release'] if 'release' in  document else None
     )
 
   def to_dict(self, model):
     return {
-        'item_id': model.id,
-        'title': model.title,
-        'genres': model.genres,
+        'item_id'    : model.id,
+        'title'      : model.title,
+        'genres'     : model.genres,
         'description': model.description,
-        'release': model.release
+        'rating'     : model.rating,
+        'release'    : model.release
     }
