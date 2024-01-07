@@ -49,7 +49,6 @@ class MongoRepository:
     limit = kwargs.get('limit', None)
     kwargs.pop('limit', None)
 
-    print(kwargs)
     cursor = self.collection.find(kwargs)
     if limit:
       cursor = cursor.limit(limit)

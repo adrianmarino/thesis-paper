@@ -10,7 +10,8 @@ class UserProfile(Model):
 
 
     def __str__(self):
-        text = f'\n- Name: {self.name}'
+        text = f'User profile:\n'
+        text += f'- Name: {self.name}'
 
         metadata = Bunch(self.metadata)
 

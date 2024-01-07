@@ -22,7 +22,7 @@ def recommendations_handler(base_url, ctx):
     if plain:
       return Response(content=recommendations.plain, media_type='text/plain')
     else:
-      return recommendations.items
+      return [item.dict(exclude_none=True) for item in recommendations.items]
 
 
   return router

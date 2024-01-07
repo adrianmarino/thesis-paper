@@ -9,6 +9,7 @@ class Item(Model):
     release: str
     genres: list[str]
     rating: float = None
+    poster: str
     embedding : list[float] = None
 
     def with_embedding(self, embedding):
@@ -20,5 +21,6 @@ class Item(Model):
             genres=self.genres,
             release=self.release,
             rating=self.rating,
+            poster=self.poster,
             embedding=embedding
         )

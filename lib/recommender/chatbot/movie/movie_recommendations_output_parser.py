@@ -32,7 +32,7 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
                 results.append({
                     'title'      : data[0].strip().replace('"', '').capitalize(),
                     'description': data[2].strip().capitalize(),
-                    'release'    : int(data[1].strip())
+                    'release'    : data[1].strip()
                 })
 
             return { 'recommendations': results }

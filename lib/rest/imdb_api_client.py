@@ -4,7 +4,7 @@ import logging
 class IMDBApiClient:
     def __init__(self, apikey='20b2b3d5'):
         self.__apikey = apikey
-    
+
     def __complete_id(self, id):
         return 'tt' + ( ('0' * (7 - len(id))) + id if len(id) < 7 else id )
 

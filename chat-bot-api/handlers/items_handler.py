@@ -42,17 +42,28 @@ def items_handler(base_url, ctx):
 
 
     @router.get('', status_code = 200)
-    async def get_item(email: str | None = None, seen: bool = True, title: str | None = None, all: bool = False, limit: int = 5, hide_emb: bool = True):
+    async def get_item(
+        email    : str | None = None,
+        seen     : bool       = True,
+        content  : str | None = None,
+        all      : bool       = False,
+        limit    : int        = 5,
+        hide_emb : bool       = True
+    ):
         if all:
             return remove_embedding(await ctx.item_service.find_all(), hide_emb)
-        elif email:
+        elif email and content is None:
             if seen:
                 return remove_embedding(await ctx.item_service.find_by_user_id(email), hide_emb)
             else:
                 return remove_embedding(await ctx.item_service.find_by_unseen_by_user_id(email, limit), hide_emb)
-        elif title:
-            items, distances = await ctx.item_service.find_by_title(title, limit)
-            return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
+        elif content:
+            if seen:
+                items, distances = await ctx.item_service.find_by_content(content, limit)
+                return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
+            else:
+                items, distances = await ctx.item_service.find_unseen_by_content(email, content, limit)
+                return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 

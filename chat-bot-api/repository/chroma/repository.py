@@ -27,5 +27,9 @@ class ChromaRepository:
     self._repository.delete([id])
 
 
-  def search_sims(self, embs, limit):
-    return self._repository.search_sims(embs=embs, limit=limit)
+  def search_sims(self, embs, limit, where_metadata={}):
+    return self._repository.search_sims(
+      embs=embs,
+      where_metadata=where_metadata,
+      limit=limit
+    )
