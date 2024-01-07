@@ -45,6 +45,10 @@ class MongoRepository:
     return self.mapper.to_model(result) if result else None
 
 
+  async def count(self, **kwargs):
+    return await self.collection.count_documents(kwargs)
+
+
   async def find_many_by(self, **kwargs):
     limit = kwargs.get('limit', None)
     kwargs.pop('limit', None)
@@ -68,8 +72,14 @@ class MongoRepository:
     self.collection.create_index([(f, 1) for f in fields], unique=unique)
 
 
-  async def find_all(self, limit=100):
-    cursor = self.collection.find({}).limit(limit)
+  async def find_all(self, skip=None, limit=None):
+    cursor = self.collection.find({})
+
+    if skip:
+      cursor = cursor.skip(skip)
+
+    if limit:
+      cursor = cursor.limit(limit)
 
     models = []
     for document in await cursor.to_list(length=None):

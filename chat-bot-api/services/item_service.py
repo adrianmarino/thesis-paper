@@ -1,5 +1,8 @@
 from models import Item
 import util as ut
+import logging
+import pytorch_common.util as pu
+import math
 
 
 class ItemService:
@@ -57,7 +60,14 @@ class ItemService:
         return self._populate_embeddings(items), result.distances
 
 
-    async def find_unseen_by_content(self, user_id: str, content: str, limit=5):
+    async def find_unseen_by_content(
+        self,
+        user_id: str,
+        content: str,
+        release_from: int,
+        genres: list[str],
+        limit=5
+    ):
         interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
 
         embeddings = self.ctx.emb_service.embeddings(texts=[content])
@@ -66,8 +76,12 @@ class ItemService:
             embeddings,
             limit,
             where_metadata = {
-                'id': { '$nin': [str(i.item_id) for i in interactions] }
+                "$and": [
+                    { 'id'      : { '$nin': [str(i.item_id) for i in interactions] } },
+                    { 'release' : { '$gte': release_from } }
+                ]
             }
+            # where_document = { '$contains': genres[0].lower() }
         )
 
         items = await self.find_by_ids([str(id) for id in result.ids])
@@ -78,6 +92,28 @@ class ItemService:
     async def delete(self, item_id):
         self.ctx.items_emb_repository.delete(item_id)
         return await self.ctx.items_repository.delete_by_id(item_id)
+
+
+    async def rebuild_embeddings(self, batch_size=1000):
+        sw = pu.Stopwatch()
+        count = await self.ctx.items_repository.count()
+
+        total_pages = math.ceil(count/batch_size)
+        page = 0
+        for index in range(0, count, batch_size):
+            page +=1
+            logging.info(f'Embedding rebuilding - page: {page}/{total_pages} - index: {index} - batch_size: {batch_size}')
+            items = await self.ctx.items_repository.find_all(skip=index, limit=batch_size)
+            self.ctx.items_emb_repository.delete_many([str(item.id) for item in items])
+            self.ctx.items_emb_repository.add_many(items)
+
+
+        return {
+            'elapsed_time': sw.to_str(),
+            'updated': count,
+            'pages': page,
+            'batch_size': batch_size,
+        }
 
 
     def _populate_embeddings(self, models):

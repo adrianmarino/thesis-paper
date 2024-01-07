@@ -20,7 +20,7 @@ PROMPT_WITHOUT_CANDIDATES = """
 {candidates}
 
 Select {limit} candidate movies based on user profile and seen movies.
-Return a list of candidate movies with next regex pattern:
+Return a list of candidate movies with the specific next format:
 
 Number. Title (release year): Description.
 """

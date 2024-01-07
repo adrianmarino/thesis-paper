@@ -9,6 +9,16 @@ class UserProfile(Model):
     metadata: typing.Dict[str, typing.Any]
 
 
+    @property
+    def release_from(self):
+        return int(self.metadata['preferred_movies']['release']['from'].strip())
+
+
+    @property
+    def genres(self):
+        return self.metadata['preferred_movies']['genres']
+
+
     def __str__(self):
         text = f'User profile:\n'
         text += f'- Name: {self.name}'
@@ -30,15 +40,15 @@ class UserProfile(Model):
         if metadata.work:
             text += f'\n- Work: {metadata.work}'
 
-        prefered_movies = Bunch(metadata.prefered_movies)
+        preferred_movies = Bunch(metadata.preferred_movies)
 
-        if prefered_movies:
+        if preferred_movies:
             text += f'\n- Movie preferences:'
 
-            if 'from' in prefered_movies.release:
-                text += f'\n  - Released from {prefered_movies.release["from"]}'
+            if 'from' in preferred_movies.release:
+                text += f'\n  - Released from {preferred_movies.release["from"]}'
 
-            if prefered_movies.genres:
-                text += f'\n  - Genres: {", ".join(prefered_movies.genres)}'
+            if preferred_movies.genres:
+                text += f'\n  - Genres: {", ".join(preferred_movies.genres)}'
 
         return text

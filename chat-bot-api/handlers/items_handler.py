@@ -48,7 +48,9 @@ def items_handler(base_url, ctx):
         content  : str | None = None,
         all      : bool       = False,
         limit    : int        = 5,
-        hide_emb : bool       = True
+        hide_emb : bool       = True,
+        release  : int        = 1950,
+        genres   : str        = ''
     ):
         if all:
             return remove_embedding(await ctx.item_service.find_all(), hide_emb)
@@ -62,12 +64,15 @@ def items_handler(base_url, ctx):
                 items, distances = await ctx.item_service.find_by_content(content, limit)
                 return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
             else:
-                items, distances = await ctx.item_service.find_unseen_by_content(email, content, limit)
+                items, distances = await ctx.item_service.find_unseen_by_content(email, content, release, genres.split(','), limit)
                 return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 
 
+    @router.put('/embeddings/build', status_code = 202)
+    async def get_item(batch_size=1000):
+        return await ctx.item_service.rebuild_embeddings(batch_size)
 
 
     @router.delete("/{item_id}", status_code = 202)

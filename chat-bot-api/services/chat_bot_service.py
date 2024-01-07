@@ -24,24 +24,26 @@ class ChatBotService:
     interactions_info = await self.ctx.interaction_info_service.find_by_user_id(user_message.author)
     seen_items = [info.item for info in interactions_info]
 
-    if len(interactions_info) >= self._interactions_count:
-      chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=True)
+    #if len(interactions_info) >= self._interactions_count:
+      # chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=True)
       # Get candidates where....
-    else:
-      candidate_items,_ = await self.ctx.item_service.find_unseen_by_content(
-        user_id = user_message.author,
-        content = user_message.content,
-        limit   = 20
-      )
-      chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
+    #else:
+    candidate_items,_ = await self.ctx.item_service.find_unseen_by_content(
+      user_id = user_message.author,
+      content = user_message.content,
+      release_from = profile.release_from,
+      genres = profile.genres,
+      limit   = 30
+    )
+    chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
 
     response = chat_bot.send(
       request      = user_message.content,
       user_profile = str(profile),
       candidates   = self.__items_to_str_list(candidate_items, 'Candidate movies (with rating)'),
-      limit        = 5,
+      limit        = 15,
       user_history = self.__items_to_str_list(seen_items, 'Seen movies (with rating)'),
-      chat_history = history.as_content_list()[-10:]
+      chat_history = []
     )
 
     ai_message = AIMessage.from_response(response)
@@ -52,7 +54,8 @@ class ChatBotService:
       response,
       user_message.author,
       base_url,
-      include_metadata
+      limit = 5,
+      include_metadata = include_metadata
     )
 
 

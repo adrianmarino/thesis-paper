@@ -16,23 +16,26 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
 
     def parse(self, text: str) -> List[str]:
             results = []
-            for idx in range(self.__list_size):
-                try:
-                    line = ut.between(text, f'{idx+1}.', f'{idx+2}.')
 
+            for idx in range(self.__list_size-1):
+                try:
+                    line = re.findall(f'\n{idx+1}.\s*(.*?)\n{idx+2}.\s*', text)[0]
                 except Exception as e:
-                    logging.error(f'Error to parse response. {e}')
+                    logging.error(f'Error to parse line between {idx+1} and {idx+2}. {e}')
                     return results
 
-                data = re.split(r'\(|\)\:', line)
+                try:
+                    data = re.split(r'\(|\)\:', line)
 
-                if len(data) <= 1:
-                    continue
+                    if len(data) <= 1:
+                        continue
 
-                results.append({
-                    'title'      : data[0].strip().replace('"', '').capitalize(),
-                    'description': data[2].strip().capitalize(),
-                    'release'    : data[1].strip()
-                })
+                    results.append({
+                        'title'      : data[0].replace('"', '').replace('\"', '"').replace('\d\.', '').strip().capitalize(),
+                        'description': data[2].strip().capitalize(),
+                        'release'    : data[1].strip()
+                    })
+                except Exception as e:
+                    logging.error(f'Error to parse line: "{line}"')
 
             return { 'recommendations': results }

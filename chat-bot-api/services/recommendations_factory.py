@@ -18,7 +18,7 @@ class RecommendationsFactory:
     self.ctx = ctx
 
 
-  async def create(self, response, email, base_url, include_metadata=False):
+  async def create(self, response, email, base_url, limit, include_metadata=False):
     recommended_items = []
 
     for r in response.metadata['recommendations']:
@@ -27,7 +27,7 @@ class RecommendationsFactory:
 
       title_sim = cosine_similarity(r['title'], item.title.strip())
 
-      if title_sim >= 0.1:
+      if (1 - abs(distances[0])) > 0.05 and title_sim >= 0.1:
         metadata = None
         if include_metadata:
           metadata      = {
@@ -51,4 +51,4 @@ class RecommendationsFactory:
           ).dict(exclude_none=True)
         )
 
-    return Recommendations(items=recommended_items, response=response)
+    return Recommendations(items=recommended_items[:limit], response=response)

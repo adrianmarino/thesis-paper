@@ -24,12 +24,17 @@ class ChromaRepository:
 
 
   def delete(self, id: str):
-    self._repository.delete([id])
+    self.delete_many([id])
 
 
-  def search_sims(self, embs, limit, where_metadata={}):
+  def delete_many(self, ids: list[str]):
+    self._repository.delete(ids)
+
+
+  def search_sims(self, embs, limit, where_metadata={}, where_document={}):
     return self._repository.search_sims(
       embs=embs,
       where_metadata=where_metadata,
+      where_document=where_document,
       limit=limit
     )
