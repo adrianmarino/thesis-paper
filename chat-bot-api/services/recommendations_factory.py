@@ -18,7 +18,7 @@ class RecommendationsFactory:
     self.ctx = ctx
 
 
-  async def create(self, response, email, base_url, limit, include_metadata=False):
+  async def create(self, response, email, base_url, limit, include_metadata=False, shuffle=False):
     recommended_items = []
 
     for r in response.metadata['recommendations']:
@@ -27,22 +27,29 @@ class RecommendationsFactory:
 
       title_sim = cosine_similarity(r['title'], item.title.strip())
 
-      if distances[0] > 0 and title_sim >= 0.1:
+      release_sim = cosine_similarity(r['release'], item.release.strip())
+
+      if (1 - distances[0]) > 0 and title_sim >= 0.1 and release_sim >= 0.5:
         metadata = None
         if include_metadata:
           metadata      = {
-            'position' : r['number'],
+            'result_item': {
+              'position' : r['number'],
+              'title': r['title']
+            },
             'db_item': {
-              'title'     : item.title.strip(),
-              'rating'    : item.rating,
-              'query_sim' : 1 - distances[0],
-              'title_sim' : title_sim
+              'release'     : item.release,
+              'rating'      : item.rating,
+              'query_sim'   : 1 - distances[0],
+              'title'       : item.title.strip(),
+              'title_sim'   : title_sim,
+              'release_sim' : release_sim
             }
           }
 
         recommended_items.append(
           Recommendation(
-            title         = r['title'],
+            title         = item.title.strip(),
             poster        = None if item.poster == 'None' else item.poster,
             release       = r['release'],
             description   = r['description'],
@@ -53,7 +60,10 @@ class RecommendationsFactory:
         )
 
     if len(recommended_items) > limit:
-      recommended_items = random.sample(recommended_items, limit)
+      if shuffle:
+        recommended_items = random.sample(recommended_items, limit)
+      else:
+        recommended_items = recommended_items[:limit]
 
     return Recommendations(
       items=recommended_items,

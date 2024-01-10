@@ -16,7 +16,8 @@ class ChatBotService:
     user_message: UserMessage,
     model: str = 'ollama2',
     base_url='',
-    include_metadata=False
+    include_metadata=False,
+    shuffle=False
   ):
     history = await self.ctx.history_service.upsert(user_message.author)
 
@@ -62,8 +63,9 @@ class ChatBotService:
       response,
       user_message.author,
       base_url,
-      limit = 5,
-      include_metadata = include_metadata
+      limit            = 5,
+      include_metadata = include_metadata,
+      shuffle          = shuffle
     )
 
 

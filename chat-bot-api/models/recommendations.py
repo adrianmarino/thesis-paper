@@ -18,6 +18,10 @@ class Recommendations(Model):
 
 
   @property
+  def empty(self): return len(self.items) == 0
+
+
+  @property
   def plain(self):
     content = 'Prompt:\n-------\n'
     content += self.metadata['prompts'][0]['content']
