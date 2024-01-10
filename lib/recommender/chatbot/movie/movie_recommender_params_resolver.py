@@ -10,5 +10,5 @@ class MovieRecommenderParamsResolver(ParamsResolver):
             candidates   = ut.to_json(kargs['candidates']) if 'candidates' in kargs else 'Aun no se dispone de películas cantidatas',
             limit        = kargs['limit'] if 'limit' in kargs else 5,
             request      = f'Usuario: {kargs["request"]}.' if 'request' in kargs else '¿Me recomendarias una película?',
-            chat_history = kargs['memory'] if 'memory' in kargs else None
+            chat_history = kargs['chat_history'] if 'chat_history' in kargs else None
         )

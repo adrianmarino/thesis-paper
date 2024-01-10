@@ -4,7 +4,7 @@ import recommender as rd
 
 class ChatBotPoolService:
   def __init__(self):
-    output_parser = rd.MovieRecommendationsOutputParser(list_size=5)
+    output_parser = rd.MovieRecommendationsOutputParser(list_size=15)
 
     self.with_candidates = {
       'ollama2': rd.MovieRecommenderChatBotFactory.stateless(
@@ -15,7 +15,7 @@ class ChatBotPoolService:
 
     self.without_candidates = {
       'ollama2': rd.MovieRecommenderChatBotFactory.stateless(
-        prompt = PROMPT_WITHOUT_CANDIDATES,
+        prompt        = PROMPT_WITHOUT_CANDIDATES,
         output_parser = output_parser
       )
     }

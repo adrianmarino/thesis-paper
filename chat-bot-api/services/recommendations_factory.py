@@ -27,12 +27,14 @@ class RecommendationsFactory:
 
       title_sim = cosine_similarity(r['title'], item.title.strip())
 
-      if (1 - abs(distances[0])) > 0.05 and title_sim >= 0.1:
+      if distances[0] > 0 and title_sim >= 0.1:
         metadata = None
         if include_metadata:
           metadata      = {
+            'position' : r['number'],
             'db_item': {
               'title'     : item.title.strip(),
+              'rating'    : item.rating,
               'query_sim' : 1 - distances[0],
               'title_sim' : title_sim
             }
@@ -45,10 +47,15 @@ class RecommendationsFactory:
             release       = r['release'],
             description   = r['description'],
             genres        = item.genres,
-            rating        = item.rating,
             votes         = [ f'{base_url}api/v1/interactions/make/{email}/{item.id}/{i}' for i in range(1, 6)],
             metadata      = metadata
           ).dict(exclude_none=True)
         )
 
-    return Recommendations(items=recommended_items[:limit], response=response)
+    if len(recommended_items) > limit:
+      recommended_items = random.sample(recommended_items, limit)
+
+    return Recommendations(
+      items=recommended_items,
+      response=response
+    )

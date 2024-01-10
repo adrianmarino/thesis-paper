@@ -7,7 +7,6 @@ class Recommendation(Model):
   poster: str | None
   release: str
   description: str
-  rating: float
   genres: list[str]
   votes: list[str]
   metadata: typing.Dict[str, typing.Any] | None

@@ -22,5 +22,5 @@ PROMPT_WITHOUT_CANDIDATES = """
 Select {limit} candidate movies based on user profile and seen movies.
 Return a list of candidate movies with the specific next format:
 
-Number. Title (release year): Description.
+* Title (release year): Description.
 """

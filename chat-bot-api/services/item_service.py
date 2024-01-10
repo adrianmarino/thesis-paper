@@ -70,17 +70,23 @@ class ItemService:
     ):
         interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
 
-        embeddings = self.ctx.emb_service.embeddings(texts=[content])
-
-        result = self.ctx.items_emb_repository.search_sims(
-            embeddings,
-            limit,
+        if len(interactions) > 0:
             where_metadata = {
                 "$and": [
                     { 'id'      : { '$nin': [str(i.item_id) for i in interactions] } },
                     { 'release' : { '$gte': release_from } }
                 ]
             }
+        else:
+            where_metadata = {}
+
+
+        embeddings = self.ctx.emb_service.embeddings(texts=[content])
+
+        result = self.ctx.items_emb_repository.search_sims(
+            embeddings,
+            limit,
+            where_metadata = where_metadata
             # where_document = { '$contains': genres[0].lower() }
         )
 
