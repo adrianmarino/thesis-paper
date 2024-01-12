@@ -1,7 +1,6 @@
 from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
 import util as ut
 import pandas as pd
-import sys
 
 
 class ChatBotService:
@@ -36,7 +35,7 @@ class ChatBotService:
         content = user_message.content,
         release_from = profile.release_from,
         genres = profile.genres,
-        limit   = 30
+        limit   = 50
       )
       chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
 
@@ -52,8 +51,6 @@ class ChatBotService:
       ),
       chat_history = history.as_content_list()
     )
-
-    # sys.breakpointhook()
 
     ai_message = AIMessage.from_response(response)
 
