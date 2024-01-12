@@ -14,3 +14,10 @@ class IMDBApiClient:
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
         return response.json()
+
+    def get_poster_by_id(self, id):
+        try:
+            info = client.get_info(str(id))
+            return info['Poster']
+        except Exception as e:
+            return None
