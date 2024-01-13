@@ -1,7 +1,7 @@
 from model import OllamaChainBuilder, OllamaChatPromptTemplateFactory, OllamaModelBuilder
 from .chat_bot_response_factory import ChatBotResponseFactory
 import logging
-
+import sys
 
 class StatelessChatBot:
     def __init__(
@@ -13,7 +13,7 @@ class StatelessChatBot:
     ):
         self._params_resolver  = params_resolver
         template_factory       = OllamaChatPromptTemplateFactory.create(prompt)
-        self._chain            = template_factory | OllamaModelBuilder.default(model)
+        self._chain            = template_factory | OllamaModelBuilder.chat(model)
         self._response_factory = ChatBotResponseFactory(output_parser, template_factory)
 
 

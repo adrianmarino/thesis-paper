@@ -1,6 +1,7 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
+from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, LangChainMessageMapper
 import util as ut
 import pandas as pd
+import sys
 
 
 class ChatBotService:
@@ -39,6 +40,8 @@ class ChatBotService:
       )
       chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
 
+    chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-4:]
+
     response = chat_bot.send(
       request      = user_message.content,
       user_profile = str(profile),
@@ -49,10 +52,10 @@ class ChatBotService:
         'Seen movies (with rating)',
         'The user has not seen any movie at the moment.'
       ),
-      chat_history = history.as_content_list()
+      chat_history = chat_history
     )
 
-    ai_message = AIMessage.from_response(response)
+    ai_message = AIMessage.from_response(response, user_message.author)
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 

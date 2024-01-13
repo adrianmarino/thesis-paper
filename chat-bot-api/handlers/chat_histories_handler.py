@@ -1,4 +1,5 @@
 from fastapi import HTTPException, APIRouter, Response
+import sys
 
 
 def chat_histories_handler(base_url, ctx):

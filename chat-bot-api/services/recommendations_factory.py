@@ -2,6 +2,7 @@ from models import Recommendation, Recommendations
 import util as ut
 import pandas as pd
 import random
+import sys
 
 
 def cosine_similarity(text1, text2):
@@ -65,7 +66,4 @@ class RecommendationsFactory:
       else:
         recommended_items = recommended_items[:limit]
 
-    return Recommendations(
-      items=recommended_items,
-      response=response
-    )
+    return Recommendations(items=recommended_items, response=response)

@@ -1,5 +1,6 @@
 from .mapper import ModelMapper
 from models import AIMessage, UserMessage
+import sys
 
 
 class ChatMessageMapper(ModelMapper):

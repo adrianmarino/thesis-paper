@@ -1,5 +1,6 @@
 from fastapi import HTTPException, APIRouter, Response, Request
 from models import UserMessage
+import sys
 
 
 def recommendations_handler(base_url, ctx):
@@ -22,13 +23,9 @@ def recommendations_handler(base_url, ctx):
         include_metadata=metadata,
         shuffle=shuffle
       )
-
       if not recommendations.empty or retry == 0:
         break
-
       retry -= 1
-
-
 
     if plain:
       return Response(content=recommendations.plain, media_type='text/plain')

@@ -1,5 +1,5 @@
-from models import ChatSession, ChatHistory
-
+from models import ChatHistory
+import sys
 
 class ChatHistoryService:
     def __init__(self, ctx):
@@ -10,10 +10,7 @@ class ChatHistoryService:
         history = await self.ctx.histories_repository.find_by_id(email)
 
         if history == None:
-            history = ChatHistory(
-                email = email,
-                sessions=[ChatSession(dialogue = [])]
-            )
+            history = ChatHistory(email = email, dialogue = [])
             await self.ctx.histories_repository.add_one(history)
 
         return history

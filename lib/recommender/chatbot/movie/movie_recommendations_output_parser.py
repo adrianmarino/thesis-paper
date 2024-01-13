@@ -30,7 +30,8 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
                             try:
                                 line = re.findall(f'\n\n{idx}.(.*?)\.', text)[0]
                             except Exception as e:
-                                logging.error(f'Error to parse {idx} line. {e}')
+                                logging.error(f'Error to parse line {idx}. {e}')
+                                # logging.error(f'Text: {text}')
                                 return { 'recommendations': results }
 
 

@@ -1,20 +1,20 @@
 from .mapper import ModelMapper
-from .chat_session_mapper import ChatSessionMapper
+from .chat_message_mapper import ChatMessageMapper
 from models import ChatHistory
-
+import sys
 
 
 class ChatHistoryMapper(ModelMapper):
-  session_mapper = ChatSessionMapper()
+  msg_mapper = ChatMessageMapper()
 
   def to_model(self, document):
     return ChatHistory(
       email = document['email'],
-      sessions = [self.session_mapper.to_model(s) for s in document['sessions']]
+      dialogue=[self.msg_mapper.to_model(m) for m in document['dialogue']]
     )
 
   def to_dict(self, model):
     return {
       'email': model.email,
-      'sessions': [self.session_mapper.to_dict(s) for s in model.sessions]
+      'dialogue': [self.msg_mapper.to_dict(m) for m in model.dialogue]
     }
