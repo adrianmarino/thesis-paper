@@ -5,7 +5,7 @@ PROMPT_WITH_CANDIDATES = """
 
 {candidates}
 
-Select a quantity of {limit} candidate movies based on user profile and seen movies.
+Select {limit} candidate movies based on user profile and seen movies.
 Return a list of candidate movies with next regex pattern:
 
 Number. Title (release year): Description.
@@ -19,7 +19,7 @@ PROMPT_WITHOUT_CANDIDATES = """
 
 {candidates}
 
-Select a quantity of {limit} candidate movies based on user profile and seen movies.
+Select {limit} movies from candidate movies list based on user profile and seen movies.
 Return a list of candidate movies with the specific next format:
 
 Number. Title (release year): Description.

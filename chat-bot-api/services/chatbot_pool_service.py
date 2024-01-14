@@ -8,12 +8,22 @@ class ChatBotPoolService:
 
     self.with_candidates = {
       'llama2-7b-chat': rd.MovieRecommenderChatBotFactory.stateless(
-        model         = 'llama2_7b_chat',
+        model         = 'llama2_7b_chat_model',
         prompt        = PROMPT_WITH_CANDIDATES,
         output_parser = output_parser
       ),
       'llama2-13b-chat': rd.MovieRecommenderChatBotFactory.stateless(
-        model         = 'llama2_13b_chat',
+        model         = 'llama2_13b_chat_model',
+        prompt        = PROMPT_WITH_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'mixtral': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'mixtral_model',
+        prompt        = PROMPT_WITH_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'mistral': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'mistral_model',
         prompt        = PROMPT_WITH_CANDIDATES,
         output_parser = output_parser
       )
@@ -21,12 +31,22 @@ class ChatBotPoolService:
 
     self.without_candidates = {
       'llama2-7b-chat': rd.MovieRecommenderChatBotFactory.stateless(
-        model         = 'llama2_7b_chat',
+        model         = 'llama2_7b_chat_model',
         prompt        = PROMPT_WITHOUT_CANDIDATES,
         output_parser = output_parser
       ),
       'llama2-13b-chat': rd.MovieRecommenderChatBotFactory.stateless(
-        model         = 'llama2_13b_chat',
+        model         = 'llama2_13b_chat_model',
+        prompt        = PROMPT_WITHOUT_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'mixtral': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'mixtral_model',
+        prompt        = PROMPT_WITHOUT_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'mistral': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'mistral_model',
         prompt        = PROMPT_WITHOUT_CANDIDATES,
         output_parser = output_parser
       )
@@ -34,8 +54,12 @@ class ChatBotPoolService:
 
 
   def available_models(self):
-    return list(self.with_candidates.keys())
-
+    return [
+      'mistral',
+      'llama2-7b-chat',
+      'mixtral',
+      'llama2-13b-chat',
+    ]
 
   def get(self, model, with_candidates):
     if model not in self.with_candidates or model not in self.without_candidates:

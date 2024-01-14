@@ -1,4 +1,4 @@
-FROM llama2:13b-chat
+FROM mistral
 
 PARAMETER temperature 1
 

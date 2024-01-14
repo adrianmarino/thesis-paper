@@ -34,7 +34,7 @@ def recommendations_handler(base_url, ctx):
       )
       if not recommendations.empty or settings.retry == 0:
         break
-      retry -= 1
+      settings.retry -= 1
 
     if settings.plain:
       return Response(content=recommendations.plain, media_type='text/plain')

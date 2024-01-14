@@ -48,7 +48,7 @@ class ChatBotService:
       )
       chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
 
-    chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-4:]
+    chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-2:]
 
     sw = pu.Stopwatch()
     logging.info(f'Start inference with {model} model')
