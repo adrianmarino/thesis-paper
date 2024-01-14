@@ -1,7 +1,6 @@
 from .ai_message import AIMessage
 from .user_message import UserMessage
 from .model import Model
-from .chat_session import ChatSession
 import typing
 
 class ChatHistory(Model):

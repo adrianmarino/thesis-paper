@@ -6,25 +6,18 @@ import recommender as rd
 
 class Recommendations(Model):
   items: list[Recommendation]
-  response: rd.ChatBotResponse
-
-
-  @property
-  def content(self): return self.response.content
-
+  metadata: typing.Dict[str, typing.Any] = {}
 
   @property
-  def metadata(self): return self.response.metadata
-
+  def content(self): return self.metadata['response'].content
 
   @property
   def empty(self): return len(self.items) == 0
 
-
   @property
   def plain(self):
     content = 'Prompt:\n-------\n'
-    content += self.metadata['prompts'][0]['content']
+    content += self.metadata['response'].metadata['prompts'][0]['content']
     content += '\n\nResponse:\n---------\n'
     content += self.content
     return content

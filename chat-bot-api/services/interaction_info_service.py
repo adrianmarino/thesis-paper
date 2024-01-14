@@ -1,4 +1,4 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo
+from models import UserMessage, AIMessage, ChatHistory, UserInteractionInfo
 import util as ut
 
 class InteractionInfoService:

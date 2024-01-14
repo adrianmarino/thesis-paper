@@ -1,23 +1,31 @@
-from models import UserMessage, AIMessage, ChatSession, ChatHistory, UserInteractionInfo, LangChainMessageMapper
+from models import UserMessage, AIMessage, ChatHistory, UserInteractionInfo, LangChainMessageMapper
 import util as ut
 import pandas as pd
 import sys
+import logging
+import pytorch_common.util as pu
 
 
 class ChatBotService:
   def __init__(self, ctx):
     self.ctx = ctx
     self._interactions_count = 20
-    self._limit = 5
+
+
+  def available_models(self):
+    return self.ctx.chat_bot_pool_service.available_models()
 
 
   async def send(
     self,
     user_message: UserMessage,
-    model: str = 'ollama2',
-    base_url='',
-    include_metadata=False,
-    shuffle=False
+    model: str,
+    base_url         = '',
+    include_metadata = False,
+    shuffle          = False,
+    candidates_limit = 50,
+    parse_limit      = 15,
+    result_limit     = 5
   ):
     history = await self.ctx.history_service.upsert(user_message.author)
 
@@ -36,17 +44,19 @@ class ChatBotService:
         content = user_message.content,
         release_from = profile.release_from,
         genres = profile.genres,
-        limit   = 50
+        limit   = candidates_limit
       )
       chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
 
     chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-4:]
 
+    sw = pu.Stopwatch()
+    logging.info(f'Start inference with {model} model')
     response = chat_bot.send(
       request      = user_message.content,
       user_profile = str(profile),
       candidates   = self.__items_to_str_list(candidate_items, 'Candidate movies (with rating)'),
-      limit        = 15,
+      limit        = parse_limit,
       user_history = self.__items_to_str_list(
         seen_items,
         'Seen movies (with rating)',
@@ -54,19 +64,24 @@ class ChatBotService:
       ),
       chat_history = chat_history
     )
+    logging.info(f'End {model} model inference. Elapsed time: {sw.to_str()}.')
 
     ai_message = AIMessage.from_response(response, user_message.author)
 
     await self.ctx.history_service.append_dialogue(history, user_message, ai_message)
 
-    return await self.ctx.recommendations_factory.create(
+    result = await self.ctx.recommendations_factory.create(
       response,
       user_message.author,
       base_url,
-      limit            = 5,
+      limit            = result_limit,
       include_metadata = include_metadata,
       shuffle          = shuffle
     )
+
+    result.metadata['elapsed_time'] = sw.to_str()
+
+    return result
 
 
   def __items_to_str_list(self, items, title, fallback=''):

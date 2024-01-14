@@ -7,18 +7,34 @@ class ChatBotPoolService:
     output_parser = rd.MovieRecommendationsOutputParser(list_size=15)
 
     self.with_candidates = {
-      'ollama2': rd.MovieRecommenderChatBotFactory.stateless(
+      'llama2-7b-chat': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'llama2_7b_chat',
+        prompt        = PROMPT_WITH_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'llama2-13b-chat': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'llama2_13b_chat',
         prompt        = PROMPT_WITH_CANDIDATES,
         output_parser = output_parser
       )
     }
 
     self.without_candidates = {
-      'ollama2': rd.MovieRecommenderChatBotFactory.stateless(
+      'llama2-7b-chat': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'llama2_7b_chat',
+        prompt        = PROMPT_WITHOUT_CANDIDATES,
+        output_parser = output_parser
+      ),
+      'llama2-13b-chat': rd.MovieRecommenderChatBotFactory.stateless(
+        model         = 'llama2_13b_chat',
         prompt        = PROMPT_WITHOUT_CANDIDATES,
         output_parser = output_parser
       )
     }
+
+
+  def available_models(self):
+    return list(self.with_candidates.keys())
 
 
   def get(self, model, with_candidates):

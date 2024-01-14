@@ -1,0 +1,619 @@
+{
+	"info": {
+		"_postman_id": "64bbb2e5-2968-4c15-a56e-ba22f14025ac",
+		"name": "CharBot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20147953"
+	},
+	"item": [
+		{
+			"name": "Profiles",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Adrian\",\n    \"email\": \"adrianmarino@gmail.com\",\n    \"metadata\": {\n        \"studies\": \"Engineering\",\n        \"age\": 32,\n        \"genre\": \"Male\",\n        \"nationality\": \"Argentina\",\n        \"work\": \"Software Engineer\",\n        \"prefered_movies\": {\n            \"release\": {\n                \"from\" : \"1970\"\n            },\n            \"genres\": [\n                \"thiller\", \"suspense\", \"science fiction\", \"love\", \"comedy\"\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profiles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Adrian\",\n    \"email\": \"adrianmarino@gmail.com\",\n    \"metadata\": {\n        \"studies\": \"Engineering\",\n        \"age\": 32,\n        \"genre\": \"Male\",\n        \"nationality\": \"Argentine\",\n        \"work\": \"Software Engineer\",\n        \"preferred_movies\": {\n            \"release\": {\n                \"from\" : \"1950\"\n            },\n            \"genres\": [\n                \"thriller\", \"suspense\", \"science fiction\", \"love\", \"comedy\"\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profiles/adrianmarino@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profiles",
+								"adrianmarino@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profiles/adrianmarino@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profiles",
+								"adrianmarino@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profiles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Histories",
+			"item": [
+				{
+					"name": "By email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/histories/adrianmarino@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"histories",
+								"adrianmarino@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/histories/adrianmarino@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"histories",
+								"adrianmarino@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recommendations",
+			"item": [
+				{
+					"name": "By email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    body {",
+									"        background-color: #222;",
+									"        color: #fff;",
+									"    }",
+									"    .tftable {",
+									"        font-size:14px;",
+									"        color:#fff;",
+									"        width:auto; /* Change width to auto for automatic column width */",
+									"        border-width: 1px;",
+									"        border-color: #fffff",
+									"    }",
+									"    .tftable th {",
+									"        font-size:18px;",
+									"        background-color:#222;",
+									"        border-width: 1px;",
+									"        padding: 8px;",
+									"        border-style: solid;",
+									"        border-color: #fffff;",
+									"        text-align:left;",
+									"    }",
+									"    .tftable tr {",
+									"        background-color:#333;",
+									"    }",
+									"    .tftable td {",
+									"        font-size:14px;",
+									"        border-width: 1px;",
+									"        padding: 8px;",
+									"        border-style: solid;",
+									"        border-color: #fffff;",
+									"    }",
+									"    .tftable tr:hover {",
+									"        background-color:#444;",
+									"    }",
+									"    .poster {",
+									"        max-width: 400px;",
+									"        max-height: 450px;",
+									"    }",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th></th>",
+									"        <th>Title</th>",
+									"        <th>Description</th>",
+									"        <th>Genres</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response}}",
+									"        <tr>",
+									"            <td><img src=\"{{poster}}\" class=\"poster\" alt=\"No Poster Available\"></td>",
+									"            <td>{{title}} ({{release}})</td>",
+									"            <td>{{description}}</td>",
+									"            <td>{{genres}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return { response: pm.response.json() }",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see a terror movie\"\n    },\n    \"recommender_settings\": {\n        \"model\": \"llama2-7b-chat\",\n        \"plain\": false,\n        \"metadata\": false,\n        \"retry\": 2,\n        \"shuffle\": false,\n        \"limit\": 50,\n        \"parse_limit\": 15,\n        \"candidates_limit\": 50\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/recommendations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recommendations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Models",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/recommendations/models",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recommendations",
+								"models"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interactions",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"adrianmarino@gmail.com\",\n    \"item_id\": \"3\",\n    \"rating\": 5.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/interactions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"interactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/interactions/make/adrianmarino@gmail.com/3/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"interactions",
+								"make",
+								"adrianmarino@gmail.com",
+								"3",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/interactions/adrianmarino@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"interactions",
+								"adrianmarino@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/interactions/adrianmarino@gmail.com/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"interactions",
+								"adrianmarino@gmail.com",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"2\",\n    \"title\": \"Pepito\",\n    \"description\": \"Tu abuelo en sunga\",\n    \"genres\": [\"accion\"],\n    \"release\": \"2010-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/items",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rebuild embs",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"2\",\n    \"title\": \"Pepito\",\n    \"description\": \"Tu abuelo en sunga\",\n    \"genres\": [\"accion\"],\n    \"release\": \"2010-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/items/embeddings/build",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"embeddings",
+								"build"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"1\",\n        \"title\": \"barman 1\",\n        \"description\": \"Tu abuelo en sunga\",\n        \"genres\": [\"accion\", \"cience fiction\"],\n        \"release\": \"2010-01-01\",\n        \"imdb_id\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"title\": \"barman 2\",\n        \"description\": \"Tu abuelo en sunga\",\n        \"genres\": [\"accion\", \"cience fiction\"],\n        \"release\": \"2010-01-01\",\n        \"imdb_id\": \"2\"\n    },\n    {\n        \"id\": \"3\",\n        \"title\": \"barman 3\",\n        \"genres\": [\"accion\", \"cience fiction\"],\n        \"description\": \"Tu abuelo en sunga\",\n        \"release\": \"2010-01-01\",\n        \"imdb_id\": \"3\"\n    }\n]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/items/bulk",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/items?email=adrianmarino@gmail.com&seen=true&limit=100",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "adrianmarino@gmail.com"
+								},
+								{
+									"key": "seen",
+									"value": "true"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/items/26370?hide_emb=false",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"26370"
+							],
+							"query": [
+								{
+									"key": "hide_emb",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/items?content=The legend of mor'du&limit=50&release=2012",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "The legend of mor'du"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "release",
+									"value": "2012"
+								},
+								{
+									"key": "genres",
+									"value": "accion,thriller",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/items/54",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"54"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

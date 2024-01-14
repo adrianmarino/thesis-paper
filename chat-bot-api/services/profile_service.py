@@ -1,4 +1,4 @@
-from models import ChatSession, ChatHistory
+from models import ChatHistory
 from models import UserProfile
 
 
