@@ -248,7 +248,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see a terror movie\"\n    },\n    \"recommender_settings\": {\n        \"model\": \"llama2-7b-chat\",\n        \"plain\": false,\n        \"metadata\": false,\n        \"retry\": 2,\n        \"shuffle\": false,\n        \"limit\": 50,\n        \"parse_limit\": 15,\n        \"candidates_limit\": 50\n    }\n}",
+							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see a terror movie\"\n    },\n    \"recommender_settings\": {\n        \"model\": \"mistral\",\n        \"plain\": false,\n        \"metadata\": false,\n        \"retry\": 2,\n        \"shuffle\": false,\n        \"limit\": 50,\n        \"parse_limit\": 15,\n        \"candidates_limit\": 30\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
