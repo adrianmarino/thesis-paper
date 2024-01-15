@@ -11,10 +11,17 @@ class StatelessChatBot:
         params_resolver,
         output_parser
     ):
+        self._model  = model
+        self._prompt = prompt
+
         self._params_resolver  = params_resolver
         template_factory       = OllamaChatPromptTemplateFactory.create(prompt)
         self._chain            = template_factory | OllamaModelBuilder.chat(model)
         self._response_factory = ChatBotResponseFactory(output_parser, template_factory)
+
+
+    @property
+    def name(self): return f'Model: {self._model}. Prompt: {self._prompt}'
 
 
     def send(self, **kargs):

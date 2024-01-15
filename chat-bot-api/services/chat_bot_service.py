@@ -32,26 +32,28 @@ class ChatBotService:
     profile = await self.ctx.profile_service.find(user_message.author)
 
     interactions_info = await self.ctx.interaction_info_service.find_by_user_id(user_message.author)
-    seen_items = [info.item for info in interactions_info]
 
-    if len(interactions_info) >= self._interactions_count:
-      chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=True)
-      # Get candidates from a recommendation model.
-      candidate_items = []
-    else:
-      candidate_items,_ = await self.ctx.item_service.find_unseen_by_content(
-        user_id = user_message.author,
-        content = user_message.content,
-        release_from = profile.release_from,
-        genres = profile.genres,
-        limit   = candidates_limit
-      )
-      chat_bot = self.ctx.chat_bot_pool_service.get(model, with_candidates=False)
+    prompt = f'prompt{int(len(interactions_info) >= self._interactions_count)}'
+
+    chat_bot = self.ctx.chat_bot_pool_service.get(
+      model  = model,
+      prompt = prompt
+    )
+
+    candidate_items,_ = await self.ctx.item_service.find_unseen_by_content(
+      user_id = user_message.author,
+      content = user_message.content,
+      release_from = profile.release_from,
+      genres = profile.genres,
+      limit   = candidates_limit
+    )
 
     chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-2:]
 
+    seen_items = [info.item for info in interactions_info]
+
     sw = pu.Stopwatch()
-    logging.info(f'Start inference with {model} model')
+    logging.info(f'Start inference - Model: {model}. Prompt: {prompt}')
     response = chat_bot.send(
       request      = user_message.content,
       user_profile = str(profile),

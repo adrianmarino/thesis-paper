@@ -1,4 +1,4 @@
-PROMPT_WITH_CANDIDATES = """
+PROMPT_LOW_INTERACTIONS = """
 {user_profile}
 
 {user_history}
@@ -12,7 +12,7 @@ Number. Title (release year): Description.
 """
 
 
-PROMPT_WITHOUT_CANDIDATES = """
+PROMPT_REQUIRED_INTERACTIONS = """
 {user_profile}
 
 {user_history}
