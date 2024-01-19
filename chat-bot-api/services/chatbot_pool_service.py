@@ -14,6 +14,7 @@ class ChatBotPoolService:
     default_model = 'mistral',
     models  = [
       'mistral',
+      'mistral-instruct',
       'llama2-7b-chat',
       'llama2-13b-chat',
       'mixtral',

@@ -52,7 +52,7 @@ class MovieRecommenderChatBotFactory:
         params_resolver = MovieRecommenderParamsResolver(),
         output_parser   = MovieRecommendationsOutputParser(list_size=5),
         chat_bot_prompt = CHAT_BOT_PROMPT,
-        verbose         = True
+        verbose         = False
     ):
         return TextChatBot(
             model,

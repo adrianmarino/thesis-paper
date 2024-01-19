@@ -1,0 +1,11 @@
+FROM mistral:instruct
+
+PARAMETER temperature 1
+
+PARAMETER num_thread 12
+
+PARAMETER num_gpu 500
+
+# set the system message
+SYSTEM """
+"""
