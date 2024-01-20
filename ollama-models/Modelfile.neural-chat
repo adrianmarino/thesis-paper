@@ -1,0 +1,7 @@
+FROM neural-chat
+
+PARAMETER temperature 1
+
+# set the system message
+SYSTEM """
+"""
