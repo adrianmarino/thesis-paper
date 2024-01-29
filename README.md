@@ -140,11 +140,14 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
 * [mongodb](https://www.mongodb.com)
-*  [mongosh]()
+* [chromadb](https://www.trychroma.com)
+* [mongosh](Optional)
 * [Studio3T](https://studio3t.com/) (Optional)
 * 6/10GB GPU to have reasonable execution times (Optional)
 
 ## Getting started
+
+### Edit & run notebooks
 
 **Step 1**: Clone repo.
 
@@ -198,3 +201,4 @@ This creates two files in `datasets` path:
 * `interactions.json`
 
 These files conform to the project dataset and are used for all notebooks.
+

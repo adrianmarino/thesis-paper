@@ -19,6 +19,7 @@ BASE_URL = '/api/v1'
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 app = FastAPI()
+
 ctx = AppContext()
 
 app.include_router(profiles_handler(BASE_URL, ctx))
