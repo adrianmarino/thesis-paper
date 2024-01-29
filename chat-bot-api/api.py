@@ -70,7 +70,7 @@ async def startup_event():
 
     ------------------------------------------
     See docs:
-     - Redoc......: http://0.0.0.0:8080/redoc
-     - Swagger Doc: http://0.0.0.0:8080/docs
+     - Redoc..: http://0.0.0.0:8080/redoc
+     - Swagger: http://0.0.0.0:8080/docs
     ------------------------------------------
 """)
