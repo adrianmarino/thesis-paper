@@ -71,12 +71,11 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 
 ## Notebooks
 
-* [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
-* [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
 
-* **Models**
+* **Recommendation Models**
+
     * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
-    
+
     * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 
     * **Collaborative Filtering**
@@ -117,6 +116,20 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
         * [Feature Weighted Linear Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/2_fwls.ipynb)
 
         * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
+
+        * **Recommendation ChatBot**
+            * Paper in which was chatbot is inspired
+                * [Chat-REC: Towards Interactive and Explainable
+                LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
+                * [Large Language Models as Zero-Shot Conversational
+                Recommenders](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf)
+                * [Large Language Models are Competitive Near Cold-start
+                Recommenders for Language- and Item-based Preferences](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf)
+            * [Load movie items to chatbot database](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/1_load-items-to-database.ipynb)
+            * [Update Users and Items embeddings using DeepFM model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/2_embedding-db-updater.ipynb)
+            * [LLM Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/3_llm-tests.ipynb)
+            * [LLM Output Parser Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/4_output-parser-tests.ipynb)
+
 
 
 * **Extras**
