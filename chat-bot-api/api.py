@@ -18,7 +18,16 @@ BASE_URL = '/api/v1'
 # Setup loggers
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
-app = FastAPI()
+app = FastAPI(
+    title="Rec ChatBot API",
+    description='Allow recommends movies to users base on your profile and seen movies.',
+    version="0.5.0",
+    contact={
+        "name": "Adria Norberto Marino",
+        "url": "https://github.com/adrianmarino",
+        "email": "adrianmarino@gmail.com",
+    }
+)
 
 ctx = AppContext()
 
@@ -44,3 +53,24 @@ async def internal_exception_handler(request: Request, e: Exception):
         }
     )
 )
+
+
+
+@app.on_event("startup")
+async def startup_event():
+    logger = logging.getLogger(__name__)
+    logger.info("""
+
+    _____              _____ _                ____        _
+    |  __ \            / ____| |              |  _ \      | |
+    | |__) |___  ___  | |    | |__   __ _ _ __| |_) | ___ | |_
+    |  _  // _ \/ __| | |    | '_ \ / _` | '__|  _ < / _ \| __|
+    | | \ \  __/ (__  | |____| | | | (_| | |  | |_) | (_) | |_
+    |_|  \_\___|\___|  \_____|_| |_|\__,_|_|  |____/ \___/ \__|
+
+    ------------------------------------------
+    See docs:
+     - Redoc......: http://0.0.0.0:8080/redoc
+     - Swagger Doc: http://0.0.0.0:8080/docs
+    ------------------------------------------
+""")
