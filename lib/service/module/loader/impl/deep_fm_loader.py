@@ -2,11 +2,13 @@ from ..module_loader import ModuleLoader
 from bunch import Bunch
 import pytorch_common.util as pu
 import model as ml
+import logging
 
 
 class DeepFMLoader(ModuleLoader):
     def __init__(
-        self,weights_path,
+        self,
+        weights_path,
         metrics_path,
         tmp_path,
         user_seq_col         : str = 'user_seq',
@@ -21,18 +23,18 @@ class DeepFMLoader(ModuleLoader):
             tmp_path,
             'deep_fm',
             user_seq_col,
-            user_seq_col,
             item_seq_col,
+            rating_col,
             update_period_in_min,
             disable_plot
         )
 
-    def _create_model(self, dev_set):
+    def create_model(self, dev_set):
         params = Bunch({
             'model': Bunch({
                 'features_n_values' : [
-                    dev_set[self._user_seq_col].unique().shape[0],
-                    dev_set[self._item_seq_col].unique().shape[0]
+                    dev_set[self._user_seq_col].max()+1,
+                    dev_set[self._item_seq_col].max()+1
                 ],
                 'units_per_layer'   : [20, 1],
                 'dropout'           : 0.1,
@@ -56,9 +58,13 @@ class DeepFMLoader(ModuleLoader):
                 'batch_size' : 2000
             })
         })
-        return ml.DeepFM(
+        model = ml.DeepFM(
             params.model.features_n_values,
             params.model.embedding_size,
             params.model.units_per_layer,
             params.model.dropout
-        ).to(params.model.device), params
+        ).to(params.model.device)
+
+        logging.info(model)
+
+        return model, params

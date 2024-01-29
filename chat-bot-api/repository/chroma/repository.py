@@ -6,11 +6,11 @@ class ChromaRepository:
     self._mapper = mapper
 
 
-  def add_one(self, model):
+  def upsert_one(self, model):
     params = self._mapper.to_params([model])
     self._repository.insert(params)
 
-  def add_many(self, models):
+  def upsert_many(self, models):
     params = self._mapper.to_params(models)
     self._repository.insert(params)
 
@@ -38,3 +38,7 @@ class ChromaRepository:
       where_document=where_document,
       limit=limit
     )
+
+
+  def count(self):
+    return self._repository.count()

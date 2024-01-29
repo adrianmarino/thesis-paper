@@ -75,7 +75,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
 * [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
 
 * **Models**
-    * [Models Comparatives](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparatives.ipynb)
+    * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
     
     * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 

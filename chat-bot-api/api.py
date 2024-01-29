@@ -8,7 +8,8 @@ from handlers import (
     recommendations_handler,
     chat_histories_handler,
     interactions_handler,
-    items_handler
+    items_handler,
+    recommenders_handler
 )
 
 
@@ -20,20 +21,11 @@ logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 app = FastAPI()
 ctx = AppContext()
 
-profiles_router = profiles_handler(BASE_URL, ctx)
-app.include_router(profiles_router)
-
-
-recommendations_router = recommendations_handler(BASE_URL, ctx)
-app.include_router(recommendations_router)
-
-
-chat_histories_router = chat_histories_handler(BASE_URL, ctx)
-app.include_router(chat_histories_router)
-
-
-interactions_router = interactions_handler(BASE_URL, ctx)
-app.include_router(interactions_router)
+app.include_router(profiles_handler(BASE_URL, ctx))
+app.include_router(recommendations_handler(BASE_URL, ctx))
+app.include_router(chat_histories_handler(BASE_URL, ctx))
+app.include_router(interactions_handler(BASE_URL, ctx))
+app.include_router(recommenders_handler(BASE_URL, ctx))
 
 
 items_router = items_handler(BASE_URL, ctx)

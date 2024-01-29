@@ -12,12 +12,12 @@ class ItemService:
 
     async def add_many(self, items: list[Item]):
         await self.ctx.items_repository.add_many(items)
-        self.ctx.items_emb_repository.add_many(items)
+        self.ctx.items_content_emb_repository.upsert_many(items)
 
 
     async def add_one(self, item: Item):
         await self.ctx.items_repository.add_one(item)
-        self.ctx.items_emb_repository.add_one(item)
+        self.ctx.items_content_emb_repository.upsert_one(item)
         return await self.find_by_id(item.id)
 
 
@@ -36,9 +36,9 @@ class ItemService:
         return self._populate_embeddings(models)
 
 
-    async def find_all(self):
+    async def find_all(self, with_embeddings=False):
         models = await self.ctx.items_repository.find_many_by()
-        return self._populate_embeddings(models)
+        return self._populate_embeddings(models) if with_embeddings else models
 
 
     async def find_by_user_id(self, user_id: str):
@@ -55,7 +55,7 @@ class ItemService:
 
     async def find_by_content(self, content: str, limit=5):
         embeddings = self.ctx.emb_service.embeddings(texts=[content])
-        result = self.ctx.items_emb_repository.search_sims(embeddings, limit)
+        result = self.ctx.items_content_emb_repository.search_sims(embeddings, limit)
         items = await self.find_by_ids([str(id) for id in result.ids])
         return self._populate_embeddings(items), result.distances
 
@@ -83,7 +83,7 @@ class ItemService:
 
         embeddings = self.ctx.emb_service.embeddings(texts=[content])
 
-        result = self.ctx.items_emb_repository.search_sims(
+        result = self.ctx.items_content_emb_repository.search_sims(
             embeddings,
             limit,
             where_metadata = where_metadata
@@ -96,7 +96,7 @@ class ItemService:
 
 
     async def delete(self, item_id):
-        self.ctx.items_emb_repository.delete(item_id)
+        self.ctx.items_content_emb_repository.delete(item_id)
         return await self.ctx.items_repository.delete_by_id(item_id)
 
 
@@ -110,8 +110,8 @@ class ItemService:
             page +=1
             logging.info(f'Embedding rebuilding - page: {page}/{total_pages} - index: {index} - batch_size: {batch_size}')
             items = await self.ctx.items_repository.find_all(skip=index, limit=batch_size)
-            self.ctx.items_emb_repository.delete_many([str(item.id) for item in items])
-            self.ctx.items_emb_repository.add_many(items)
+            self.ctx.items_content_emb_repository.delete_many([str(item.id) for item in items])
+            self.ctx.items_content_emb_repository.add_many(items)
 
 
         return {
@@ -125,7 +125,7 @@ class ItemService:
     def _populate_embeddings(self, models):
         results = []
         for m in models:
-            emb = self.ctx.items_emb_repository.find_by_id(m.id)
+            emb = self.ctx.items_content_emb_repository.find_by_id(m.id)
             if emb:
                 results.append(m.with_embedding(emb.emb))
         return results

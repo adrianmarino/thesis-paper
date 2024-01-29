@@ -23,7 +23,7 @@ class ModuleLoader(ABC):
             item_seq_col         : str = 'item_seq',
             rating_col           : str = 'rating',
             update_period_in_min : int = 180,
-            disable_plot               = False
+            disable_plot          = False
     ):
         self._weights_path      = ut.mkdir(weights_path)
         self._tmp_path          = ut.mkdir(tmp_path)
@@ -46,15 +46,15 @@ class ModuleLoader(ABC):
 
 
     @abstractmethod
-    def _create_model(self, train_set):
+    def create_model(self, train_set):
         pass
 
 
-    def load(self, dev_set: pd.DataFrame):
-        model, params = self._create_model(dev_set)
+    def load(self, dev_set: pd.DataFrame, eval_set: pd.DataFrame=None):
+        model, params = self.create_model(dev_set)
 
         if self._change_detector.detect(dev_set):
-            self._train_evaluate(model, params, dev_set)
+            self._train_evaluate(model, params, dev_set, eval_set)
 
             model.save(self._save_file_path)
 
@@ -66,17 +66,24 @@ class ModuleLoader(ABC):
             return model, params
 
 
-    def _train_evaluate(self, model, params, dev_set):
+    def _train_evaluate(self, model, params, dev_set, eval_set):
         ut.recursive_remove_dir(self._metrics_path)
 
         trainer = ml.ModuleTrainer(model, params, disable_plot=self._disable_plot)
 
-        train_set, eval_set = train_test_split(
-            dev_set,
-            shuffle=True,
-            test_size=params.train.eval_percent
-        )
+        if eval_set is None or eval_set.empty:
+            train_set, eval_set = train_test_split(
+                dev_set,
+                shuffle=True,
+                test_size=params.train.eval_percent
+            )
+        else:
+            logging.info('Does not split')
+            train_set = dev_set
+            eval_set  = eval_set
+
         logging.info(f'Train: {train_set.shape[0]}, Eval: {eval_set.shape[0]}')
+
 
         train_ds = ml.DatasetFactory().create_from(train_set)
         eval_ds  = ml.DatasetFactory().create_from(eval_set)

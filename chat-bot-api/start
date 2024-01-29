@@ -10,4 +10,10 @@ export MONGODB_URL="mongodb://$MONGODB_HOST:$MONGODB_PORT"
 export CHROMA_HOST="0.0.0.0"
 export CHROMA_PORT="9090"
 
+export TMP_PATH="../tmp"
+export DATASET_PATH="../datasets"
+export WEIGHTS_PATH="../weights"
+export METRICS_PATH="../metrics"
+
+
 uvicorn api:app --reload  --host $API_HOST --port $API_PORT

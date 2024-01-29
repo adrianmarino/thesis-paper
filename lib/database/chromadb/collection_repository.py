@@ -118,3 +118,7 @@ class CollectionRepository:
 
     def delete(self, ids):
         self.collection.delete(ids=[str(id) for id in ids])
+
+
+    def count(self):
+        return self.collection.count()

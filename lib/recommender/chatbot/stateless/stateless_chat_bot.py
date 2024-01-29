@@ -1,4 +1,6 @@
-from model import OllamaChainBuilder, OllamaChatPromptTemplateFactory, OllamaModelBuilder
+import importlib
+
+ml = importlib.import_module('model')
 from .chat_bot_response_factory import ChatBotResponseFactory
 import logging
 import sys
@@ -15,8 +17,8 @@ class StatelessChatBot:
         self._prompt = prompt
 
         self._params_resolver  = params_resolver
-        template_factory       = OllamaChatPromptTemplateFactory.create(prompt)
-        self._chain            = template_factory | OllamaModelBuilder.chat(model)
+        template_factory       = ml.OllamaChatPromptTemplateFactory.create(prompt)
+        self._chain            = template_factory | ml.OllamaModelBuilder.chat(model)
         self._response_factory = ChatBotResponseFactory(output_parser, template_factory)
 
 

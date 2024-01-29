@@ -6,7 +6,8 @@ from mappers import (
     ChatHistoryMapper,
     InteractionMapper,
     ItemMapper,
-    ItemEmbMapper
+    ItemContentEmbMapper,
+    EntityEmbMapper
 )
 from repository.mongo import (
     MongoRepository,
@@ -21,11 +22,14 @@ from services import (
     ProfileService,
     InteractionService,
     ItemService,
-    EmbService,
+    SentenceEmbeddingService,
     InteractionInfoService,
     ChatBotPoolService,
-    RecommendationsFactory
+    RecommendationsFactory,
+    RecommenderService
 )
+
+from jobs import CFEmbUpdateJob
 
 
 class AppContext:
@@ -33,6 +37,7 @@ class AppContext:
         self._build_mongo_repositories()
         self._build_chroma_repositories()
         self._build_services()
+        self.__build_jobs()
 
 
     def _build_services(self):
@@ -47,6 +52,8 @@ class AppContext:
         self.interaction_service = InteractionService(self)
 
         self.item_service = ItemService(self)
+
+        self.recommender_service = RecommenderService(self)
 
 
     def _build_mongo_repositories(self):
@@ -99,13 +106,28 @@ class AppContext:
 
 
     def _build_chroma_repositories(self):
-        self.emb_service = EmbService('all-mpnet-base-v2')
+        self.sentence_emb_service = SentenceEmbeddingService(model='all-mpnet-base-v2')
 
-        self.item_emb_mapper = ItemEmbMapper(self.emb_service)
+        self.item_emb_mapper = ItemContentEmbMapper(self.sentence_emb_service)
+        self.entity_emb_mapper = EntityEmbMapper()
 
         self.repo_factory = ChromaRepositoryFactory()
 
-        self.items_emb_repository = self.repo_factory.create(
-            'items',
+        self.items_content_emb_repository = self.repo_factory.create(
+            'items_content',
             self.item_emb_mapper
         )
+
+        self.items_cf_emb_repository = self.repo_factory.create(
+            'items_cf',
+            self.entity_emb_mapper
+        )
+
+        self.users_cf_emb_repository = self.repo_factory.create(
+            'users_cf',
+            self.entity_emb_mapper
+        )
+
+
+    def __build_jobs(self):
+        self.cf_emb_update_job = CFEmbUpdateJob(self)

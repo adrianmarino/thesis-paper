@@ -53,7 +53,7 @@ def items_handler(base_url, ctx):
         genres   : str        = ''
     ):
         if all:
-            return remove_embedding(await ctx.item_service.find_all(), hide_emb)
+            return remove_embedding(await ctx.item_service.find_all(not hide_emb), hide_emb)
         elif email and content is None:
             if seen:
                 return remove_embedding(await ctx.item_service.find_by_user_id(email), hide_emb)

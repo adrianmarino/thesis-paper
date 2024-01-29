@@ -27,12 +27,22 @@ def interactions_handler(base_url, ctx):
             return Response(status_code=204)
 
 
-    @router.get('/{user_id}', status_code = 200)
-    async def get_interactions_by_user_id(user_id: str):
+    @router.get('/users/{user_id}', status_code = 200)
+    async def get_interactions_by_user_id(user_id: str | None = None):
         interactions = await ctx.interaction_service.find_by_user_id(user_id)
 
         if ut.empty(interactions):
             raise HTTPException(status_code=404, detail=f'Not found interactions for {user_id} profile')
+        else:
+            return [i.dict(exclude_none=True) for i in interactions]
+
+
+    @router.get('', status_code = 200)
+    async def get_interactions_by_user_id(user_id: str | None = None):
+        interactions = await ctx.interaction_service.find_all()
+
+        if ut.empty(interactions):
+            raise HTTPException(status_code=404, detail=f'Not found interactions')
         else:
             return [i.dict(exclude_none=True) for i in interactions]
 

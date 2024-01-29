@@ -1,4 +1,6 @@
-from model import OllamaChainBuilder
+import importlib
+
+ml = importlib.import_module('model')
 from .chat_bot_request import ChatBotRequestFactory
 from .chat_bot_history import ChatBotHistory, ChatBotHistoryEntry
 
@@ -13,7 +15,7 @@ class TextChatBot:
         request_prompt,
         verbose=False
     ):
-        self._chain           = OllamaChainBuilder.default(model, prompt, verbose)
+        self._chain           = ml.OllamaChainBuilder.default(model, prompt, verbose)
         self._output_parser   = output_parser
         self._params_resolver = params_resolver
         self._request_prompt  = request_prompt

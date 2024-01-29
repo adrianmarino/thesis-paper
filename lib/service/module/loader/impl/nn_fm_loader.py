@@ -27,7 +27,7 @@ class NNFMLoader(ModuleLoader):
             disable_plot
         )
 
-    def _create_model(self, dev_set):
+    def create_model(self, dev_set):
         params = Bunch({
             'model': Bunch({
                 'features_n_values' : [

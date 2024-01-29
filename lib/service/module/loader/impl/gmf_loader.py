@@ -28,7 +28,7 @@ class GMFLoader(ModuleLoader):
         )
 
 
-    def _create_model(self, dev_set):
+    def create_model(self, dev_set):
         params = Bunch({
             'model': Bunch({
                 'n_users'       : dev_set[self._user_seq_col].unique().shape[0],
@@ -39,11 +39,11 @@ class GMFLoader(ModuleLoader):
             }),
             'train': Bunch({
                 'lr'         : 0.001,
-                'lr_factor'  : 0.05,
-                'lr_patience': 3,
+                'lr_factor'  : 0.03,
+                'lr_patience': 5,
                 'epochs'     : 7,
                 'n_workers'  : 24,
-                'batch_size' : 64,
+                'batch_size' : 128,
                 'eval_percent': 0.1
             }),
             'metrics': Bunch({

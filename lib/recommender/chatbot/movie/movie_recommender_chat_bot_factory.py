@@ -1,4 +1,3 @@
-from model import OllamaChainBuilder
 from ..text.text_chat_bot import TextChatBot
 from ..stateless.stateless_chat_bot import StatelessChatBot
 

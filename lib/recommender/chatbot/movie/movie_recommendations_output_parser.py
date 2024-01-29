@@ -6,7 +6,6 @@ import re
 import logging
 from pydantic import BaseModel, PrivateAttr
 
-
 class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
     __list_size: int = PrivateAttr(True)
 
