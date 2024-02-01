@@ -46,7 +46,7 @@ class DeepFMLoader(ModuleLoader):
                 'lr'         : 0.001,
                 'lr_factor'  : 0.1,
                 'lr_patience': 8,
-                'epochs'     : 10,
+                'epochs'     : 4,
                 'n_workers'  : 24,
                 'batch_size' : 64,
                 'eval_percent': 0.15

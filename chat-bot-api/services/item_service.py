@@ -100,7 +100,7 @@ class ItemService:
         return await self.ctx.items_repository.delete_by_id(item_id)
 
 
-    async def rebuild_embeddings(self, batch_size=1000):
+    async def rebuild_content_embeddings(self, batch_size=1000):
         sw = pu.Stopwatch()
         count = await self.ctx.items_repository.count()
 

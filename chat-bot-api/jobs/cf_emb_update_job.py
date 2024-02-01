@@ -3,6 +3,7 @@ from .dataset_helper import *
 from .emb_helper import *
 import os
 from .job import Job
+import pytorch_common.util as pu
 
 
 class CFEmbUpdateJob(Job):
@@ -30,8 +31,12 @@ class CFEmbUpdateJob(Job):
 
 
   def __call__(self):
+    pu.set_device_name('gpu')
+
     interactions_df = get_interactions()
+
     last_size = self._cfg['interactions_count'] if self._cfg else 0
+
     if last_size > 0:
       diff = abs(len(interactions_df) - last_size)
       logging.info(f'Interactions difference: {diff}. Previous: {last_size}, Current: {len(interactions_df)}')
@@ -49,7 +54,7 @@ class CFEmbUpdateJob(Job):
       int_test_size   = self.int_test_size
     )
 
-    model_loader = model_loader = srv.DeepFMLoader(
+    model_loader = srv.DeepFMLoader(
         weights_path          = os.environ['WEIGHTS_PATH'],
         metrics_path          = os.environ['METRICS_PATH'],
         tmp_path              = self.tmp_path,

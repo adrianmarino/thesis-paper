@@ -37,7 +37,7 @@ class AppContext:
         self._build_mongo_repositories()
         self._build_chroma_repositories()
         self._build_services()
-        self.__build_jobs()
+        self._build_jobs()
 
 
     def _build_services(self):
@@ -129,5 +129,5 @@ class AppContext:
         )
 
 
-    def __build_jobs(self):
+    def _build_jobs(self):
         self.cf_emb_update_job = CFEmbUpdateJob(self)

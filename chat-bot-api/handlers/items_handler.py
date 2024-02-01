@@ -2,6 +2,7 @@ from models import Item
 from fastapi import HTTPException, APIRouter, Response
 from repository.mongo import EntityAlreadyExistsException
 import util as ut
+import pytorch_common.util as pu
 
 
 def items_handler(base_url, ctx):
@@ -70,13 +71,21 @@ def items_handler(base_url, ctx):
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 
 
-    @router.put('/embeddings/build', status_code = 202)
+    @router.put('/embeddings/content/build', status_code = 202)
     async def get_item(batch_size=1000):
-        return await ctx.item_service.rebuild_embeddings(batch_size)
+        return await ctx.item_service.rebuild_content_embeddings(batch_size)
+
+
+    @router.put('/embeddings/cf/build', status_code = 202)
+    def get_item():
+        sw = pu.Stopwatch()
+        ctx.cf_emb_update_job()
+        return { 'elapsed_time': sw.to_str() }
 
 
     @router.delete("/{item_id}", status_code = 202)
     async def delete_item(item_id: str):
+        pu.set_device_name('gpu')
         await ctx.item_service.delete(item_id)
         return Response(status_code=202)
 

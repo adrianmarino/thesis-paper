@@ -16,6 +16,8 @@ def load_raw_dataset(path, start_year=2004):
     features_fn = lambda obs, device: to_tensor(obs, device, ['user_seq', 'movie_seq'])
     target_fn   = lambda obs, device: to_tensor(obs, device, ['user_movie_rating'])
 
+    logging.info(f'PATH: {path}')
+
     return ds.MovieLensTMDBDatasetFactory.from_path(
         path             = path,
         transform        = features_fn,
@@ -97,4 +99,5 @@ def build_datasets(
 
 
 def get_interactions():
-    return pd.DataFrame(rest.ChatBotV1ApiClient().interactions())
+    data = rest.ChatBotV1ApiClient().interactions()
+    return pd.DataFrame(data)

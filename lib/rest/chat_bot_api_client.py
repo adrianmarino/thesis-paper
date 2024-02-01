@@ -11,7 +11,7 @@ class ChatBotV1ApiClient:
         self.__base_url = f'http://{host}:{port}/api/v1'
 
     def items(
-        self, 
+        self,
         email    : str  = '',
         seen     : bool = True,
         content  : str  = '',
@@ -25,8 +25,8 @@ class ChatBotV1ApiClient:
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
         return response.json()
-    
-    
+
+
     def interactions_by_user(
         self,
         email    : str  = '',
@@ -35,7 +35,7 @@ class ChatBotV1ApiClient:
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
         return response.json()
-    
+
     def interactions(self):
         api_url = f'{self.__base_url}/interactions'
         logging.debug(f'GET {api_url}')
