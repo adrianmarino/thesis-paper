@@ -7,9 +7,13 @@ class InteractionService:
         self.ctx = ctx
 
 
-    async def add(self, user_interaction: UserInteraction):
+    async def add_one(self, user_interaction: UserInteraction):
         await self.ctx.interactions_repository.add_one(user_interaction)
         return user_interaction
+
+
+    async def add_many(self, user_interactions: list[UserInteraction]):
+        await self.ctx.interactions_repository.add_many(user_interactions)
 
 
     async def find_by_user_id(self, user_id: str):

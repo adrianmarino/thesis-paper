@@ -11,12 +11,25 @@ def interactions_handler(base_url, ctx):
     @router.post('')
     async def add_interaction(user_interaction: UserInteraction):
         try:
-            return await ctx.interaction_service.add(user_interaction)
+            return await ctx.interaction_service.add_one(user_interaction)
         except EntityAlreadyExistsException as e:
             raise HTTPException(
                 status_code=400,
                 detail=f"Already exist this interaction. Cause: {e}"
             )
+
+
+    @router.post('/bulk', status_code=201)
+    async def add_interactions(user_interactions: list[UserInteraction]):
+        try:
+            await ctx.interaction_service.add_many(user_interactions)
+            return Response(status_code=201)
+        except EntityAlreadyExistsException as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Already exist any interaction. Cause: {e}"
+            )
+
 
     @router.get('/make/{user_id}/{item_id}/{rating}', status_code=204)
     async def make_interaction(user_id: str, item_id: str, rating: int):

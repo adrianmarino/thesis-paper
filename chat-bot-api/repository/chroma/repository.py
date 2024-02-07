@@ -1,5 +1,6 @@
 from bunch import Bunch
 
+
 class ChromaRepository:
   def __init__(self, repository, mapper):
     self._repository = repository
@@ -9,6 +10,7 @@ class ChromaRepository:
   def upsert_one(self, model):
     params = self._mapper.to_params([model])
     self._repository.insert(params)
+
 
   def upsert_many(self, models):
     params = self._mapper.to_params(models)
@@ -29,6 +31,10 @@ class ChromaRepository:
 
   def delete_many(self, ids: list[str]):
     self._repository.delete(ids)
+
+
+  def find_similars_by_id(self, id, limit=10):
+      return self._repository.find_similars_by_id(id, limit)
 
 
   def search_sims(self, embs, limit, where_metadata={}, where_document={}):

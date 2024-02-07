@@ -5,11 +5,24 @@ from bunch import Bunch
 import json
 
 
+EMPTY_RESULT = {
+    'ids'        : [],
+    'metadatas'  : [],
+    'embeddings' : [],
+    'documents'  : [],
+    'distances'  : []
+}
+
+
 class CollectionRepositorySearchByIdResult:
-    def __init__(self, result = {}): self._result = result
+    def __init__(self, result = EMPTY_RESULT): 
+        self._result = result
 
     @property
     def ids(self): return [int(id) for id in self._result['ids']]
+
+    @property
+    def str_ids(self): return [str(id) for id in self._result['ids']]
 
     @property
     def metadatas(self): return self._result['metadatas']
@@ -26,7 +39,7 @@ class CollectionRepositorySearchByIdResult:
     def __repr__(self): return json.dumps(self._result, indent=4, sort_keys=True)
 
     @property
-    def empty(self): return len(self.ids) == 0
+    def empty(self): return len(self._result['ids']) == 0
 
     @property
     def not_empty(self): return self.empty
@@ -112,8 +125,21 @@ class CollectionRepository:
             )
         )
 
+
     def search_by_ids(self, ids, include=['embeddings', 'metadatas', 'documents']):
         return CollectionRepositorySearchByIdResult(self.collection.get(ids=[str(id) for id in ids], include=include))
+
+
+    def find_similars_by_id(self, id, limit=10):
+        result = self.search_by_ids([id])
+
+        if result.empty:
+            return CollectionRepositorySearchByIdResult()
+
+        return self.search_sims(
+            embs  = [result.embeddings[0]],
+            limit = limit
+        )
 
 
     def delete(self, ids):

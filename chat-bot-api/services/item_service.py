@@ -54,7 +54,7 @@ class ItemService:
 
 
     async def find_by_content(self, content: str, limit=5):
-        embeddings = self.ctx.emb_service.embeddings(texts=[content])
+        embeddings = self.ctx.sentence_emb_service.generate(texts=[content])
         result = self.ctx.items_content_emb_repository.search_sims(embeddings, limit)
         items = await self.find_by_ids([str(id) for id in result.ids])
         return self._populate_embeddings(items), result.distances
@@ -81,7 +81,7 @@ class ItemService:
             where_metadata = {}
 
 
-        embeddings = self.ctx.emb_service.embeddings(texts=[content])
+        embeddings = self.ctx.sentence_emb_service.generate(texts=[content])
 
         result = self.ctx.items_content_emb_repository.search_sims(
             embeddings,
