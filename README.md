@@ -10,24 +10,23 @@ This study aims to compare different approaches to recommendation based on colla
 
 ## Models
 
-A continuación se especifican los modelos a comparar. Para mas detalle se recomienda ver el documento de tesis del apartado anterior.
+The following are the models to be compared. For more details, it is recommended to refer to the thesis document in the previous section.
 
- *  **Memory based CF**: Baseline o modelo de referencia.
-    * **KNN (Distancia Coseno)**
-      * User Based.
-      * Item Based.
-      * Ensample User/Item Based.
- 
- *  **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
-    *   **Generalized Matrix Factorization (GMF)**: User/Item embeddings dot product.
-    *   **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
-    *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
-    *   **Deep Factorization Machine**
- 
- * **Ensamples**
-   * Content-based and Collaborative based models Stacking.
+*  **Memory based CF**: Baseline or reference model.
+   * **KNN (Cosine Distance)**
+   * User-Based.
+   * Item-Based.
+   * Ensemble User/Item-Based.
+* **Model-Based CF**: Collaborative filter models based on neural networks.
+   * **Generalized Matrix Factorization (GMF)**: User/Item embeddings dot product.
+   * **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
+   * **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Fully Connected.
+   * **Deep Factorization Machine**
+* ***Ensembles**
+   * Content-based and Collaborative-based models Stacking.
    * Feature Weighted Linear Stacking.
-   * Muti-Bandit approach based on beta distribution.
+   * Multi-Bandit approach based on beta distribution.
+   * LLM's + Collaborative filtering ensemble.
 
 
 ## Metrics
