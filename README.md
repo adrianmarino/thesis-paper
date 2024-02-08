@@ -4,12 +4,12 @@
 Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Es decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
 
 
-## Thesis
+## Documents
 
-[Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+* [Specialization](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+* [Thesis (In progress)]
 
-
-## Modelos
+## Models
 
 A continuación se especifican los modelos a comparar. Para mas detalle se recomienda ver el documento de tesis del apartado anterior.
 
@@ -31,7 +31,7 @@ A continuación se especifican los modelos a comparar. Para mas detalle se recom
    * Muti-Bandit approach based on beta distribution.
 
 
-## Métricas
+## Metrics
 
 Para comparar los modelos basados en filtros colaborativos se utilizan las métricas **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)**. Ratings entre 4 y 5 puntos pertenecen a la clase positiva y restro en la clase negativa.
 
@@ -42,7 +42,7 @@ Otras métricas utilizadas:
 * Recall@K
 * RMSE
 
-## Hipótesis
+## Hypothesis
 
 * ¿Los modelos basados en deep learning obtienen mejores resultados que modelos no basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
 * ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
