@@ -6,7 +6,7 @@ Este trabajo busca realizar una comparativa de distintos enfoques de recomendaci
 
 ## Documents
 
-* [Specialization](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+* [Specialization: Collaborative recommendation systems](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
 * Thesis (In progress)
 
 ## Models
