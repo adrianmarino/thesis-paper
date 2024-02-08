@@ -118,7 +118,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
         * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
 
         * **Recommendation ChatBot**
-            * Paper in which was chatbot is inspired
+            * Papers on which the chatbot was based.
                 * [Chat-REC: Towards Interactive and Explainable
                 LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
                 * [Large Language Models as Zero-Shot Conversational
