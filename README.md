@@ -32,10 +32,10 @@ A continuación se especifican los modelos a comparar. Para mas detalle se recom
 
 ## Metrics
 
-Para comparar los modelos basados en filtros colaborativos se utilizan las métricas **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)**. Ratings entre 4 y 5 puntos pertenecen a la clase positiva y restro en la clase negativa.
 
-Otras métricas utilizadas:
+To compare collaborative filtering models, the metrics **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)** are used. Ratings between 4 and 5 points belong to the positive class, and the rest belong to the negative class.
 
+Other metrics used:
 * FBetaScore@K
 * Precision@K
 * Recall@K
@@ -43,20 +43,20 @@ Otras métricas utilizadas:
 
 ## Hypothesis
 
-* ¿Los modelos basados en deep learning obtienen mejores resultados que modelos no basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
-* ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
+* Do deep learning-based models achieve better results than non-deep learning-based models? What are the advantages and disadvantages of each approach?
+* How can the cold-start problem be solved in a collaborative filtering-based recommendation approach? Any proposed solutions?
 
 ## Data
 
-Para poder realizar las pruebas necesarias con ambos enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
+To conduct the necessary tests with both collaborative filtering (CF) and content-based (CB) approaches, we need:
 
-* Calificaciones de cada ítems(movies) por parte de los usuarios (CF).
-* Features propios de los ítems (CB).
+* Ratings of each item (movies) by the users (CF).
+* Item-specific features (CB).
 
-Dadas estas necesidades, se combinaron los siguientes datasets:
+Based on these requirements, the following datasets were combined:
 
-* [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
-* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el \textit{dataset} anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
+* [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): It has practically no information about the movies, but it does have user ratings.
+* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): It does not have personalized ratings like the previous dataset, but it has several features corresponding to the movies or items which will be necessary when training content-based models.
 
 
 ## References
