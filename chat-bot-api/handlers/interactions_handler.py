@@ -35,7 +35,7 @@ def interactions_handler(base_url, ctx):
     async def make_interaction(user_id: str, item_id: str, rating: int):
         try:
             user_interaction = UserInteraction(user_id=user_id, item_id=item_id, rating=rating)
-            await ctx.interaction_service.add(user_interaction)
+            await ctx.interaction_service.add_one(user_interaction)
         except EntityAlreadyExistsException as e:
             return Response(status_code=204)
 

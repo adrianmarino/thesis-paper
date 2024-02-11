@@ -1,23 +1,27 @@
 import pandas as pd
 import logging
 from bunch import Bunch
+import data as dt
 
 
 class TrainTestSplitter:
   def __init__(
     self,
-    split_year = 2018,
-    cols       = Bunch(
-      user_seq    = 'user_seq',
-      item_seq    = 'movie_seq',
-      rating      = 'user_movie_rating',
-      rating_year = 'user_movie_rating_year',
-      rating_mean = 'user_movie_rating_mean',
-      rating_norm = 'user_movie_rating_norm' 
+    n_min_interactions = 20,
+    test_size          = 0.3,
+    cols               = Bunch(
+      order_col   = 'timestamp',
+      user_id     = 'user_id',
+      item_id     = 'item_id',
+      rating      = 'rating',
+      rating_mean = 'rating_mean',
+      rating_norm = 'rating_norm' 
     )
   ):
-    self.split_year = split_year
-    self.cols       = cols
+    self.n_min_interactions = n_min_interactions
+    self.test_size          = test_size
+    self.cols               = cols
+
 
 
   def __call__(
@@ -26,60 +30,41 @@ class TrainTestSplitter:
       rating_mean_df = pd.DataFrame(), 
       rating_std     = None
   ):
-    # ----------
-    # Train set:
-    # ----------
-    df_train = self.query_train_set(dataset)
+    train_df, test_df = dt.interactions_train_test_split(
+        dataset,
+        order_col          = self.cols.order_col,
+        user_id_col        = self.cols.user_id,
+        item_id_col        = self.cols.item_id,
+        n_min_interactions = self.n_min_interactions,
+        test_size          = self.test_size
+    )
 
     # Add mean rating column by user...
     if rating_mean_df.empty:
-        rating_mean_df = self.rating_mean_by_user_seq(df_train)
+        rating_mean_df = self.rating_mean_by_user_id(train_df)
 
     # Compute users rating std deviation from train_set...
     if rating_std == None:
-        rating_std = self.rating_std(df_train)
+        rating_std = self.rating_std(train_df)
 
-    df_train = self.join_by_user_seq(df_train, rating_mean_df)
+    train_df = self.join_by_user_id(train_df, rating_mean_df)
 
-    df_train = self.append_rating_norm(df_train, rating_std)
+    train_df = self.append_rating_norm(train_df, rating_std)
 
     # ---------------
     # Validation set:
     # ---------------
-    # - Include only movies an used that exists in train set.
-    df_eval = self.query_test_set(dataset, df_train, self.split_year)
+    test_df = self.join_by_user_id(test_df, rating_mean_df)
 
-    df_eval = self.join_by_user_seq(df_eval, rating_mean_df)
+    test_df = self.append_rating_norm(test_df, rating_std)
 
-    df_eval = self.append_rating_norm(df_eval, rating_std)
+    logging.info(f'Train: {(len(train_df)/len(dataset))*100:.2f} % - Test: {(len(test_df)/len(dataset))*100:.2f} %')
 
-    logging.info(f'Train: {(len(df_train)/len(dataset))*100:.2f} % - Test: {(len(df_eval)/len(dataset))*100:.2f} %')
-
-    return df_train, df_eval, rating_mean_df, rating_std
+    return train_df, test_df, rating_mean_df, rating_std
 
 
-
-  def query_train_set(self, dataset):
-    df_train = dataset[dataset[self.cols.rating_year] < self.split_year]
-    return df_train.loc[:, ~df_train.columns.isin([self.cols.rating_mean, self.cols.rating_norm])]
-
-
-
-  def query_test_set(self, dataset, df_train, split_year):
-    """ 
-    Include only movies an used that exists in train set.
-    """
-    df_eval = dataset[
-        (dataset[self.cols.rating_year] >= self.split_year) &
-        (dataset[self.cols.user_seq].isin(df_train[self.cols.user_seq].values)) &
-        (dataset[self.cols.item_seq].isin(df_train[self.cols.item_seq].values))
-    ]
-    return df_eval.loc[:, ~df_eval.columns.isin([self.cols.rating_mean, self.cols.rating_norm])]
-
-
-
-  def rating_mean_by_user_seq(self, df):
-    return df.groupby(self.cols.user_seq)[self.cols.rating] \
+  def rating_mean_by_user_id(self, df):
+    return df.groupby(self.cols.user_id)[self.cols.rating] \
             .mean() \
             .reset_index(name=self.cols.rating_mean)
 
@@ -88,19 +73,22 @@ class TrainTestSplitter:
     return df[self.cols.rating].std()
 
 
-  def join_by_user_seq(self, df_a, df_b):
+  def join_by_user_id(self, df_a, df_b):
     return pd.merge(
         df_a,
         df_b,
         how      = 'inner',
-        left_on  = [self.cols.user_seq],
-        right_on = [self.cols.user_seq]
-    ).dropna()
+        left_on  = [self.cols.user_id],
+        right_on = [self.cols.user_id]
+    )
 
   
   def append_rating_norm(self, df, std):
-    """
-    Create normalized rattng column...
-    """
-    df[self.cols.rating_norm] = df.apply(lambda row: round((row[self.cols.rating] - row[self.cols.rating_mean]) / std, 2), axis=1)
-    return df
+    return dt.normalize(
+      df,
+      self.cols.rating,
+      self.cols.rating_norm,
+      self.cols.rating_mean,
+      std,
+    )
+

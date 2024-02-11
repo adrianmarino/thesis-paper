@@ -111,7 +111,7 @@ class ItemService:
             logging.info(f'Embedding rebuilding - page: {page}/{total_pages} - index: {index} - batch_size: {batch_size}')
             items = await self.ctx.items_repository.find_all(skip=index, limit=batch_size)
             self.ctx.items_content_emb_repository.delete_many([str(item.id) for item in items])
-            self.ctx.items_content_emb_repository.add_many(items)
+            self.ctx.items_content_emb_repository.upsert_many(items)
 
 
         return {

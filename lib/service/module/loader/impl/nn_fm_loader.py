@@ -6,7 +6,8 @@ import model as ml
 
 class NNFMLoader(ModuleLoader):
     def __init__(
-        self,weights_path,
+        self,
+        weights_path,
         metrics_path,
         tmp_path,
         user_seq_col         : str = 'user_seq',
@@ -27,12 +28,12 @@ class NNFMLoader(ModuleLoader):
             disable_plot
         )
 
-    def create_model(self, dev_set):
+    def create_model(self, dataset):
         params = Bunch({
             'model': Bunch({
                 'features_n_values' : [
-                    dev_set[self._user_seq_col].unique().shape[0],
-                    dev_set[self._item_seq_col].unique().shape[0]
+                    dataset[self._user_seq_col].unique().shape[0],
+                    dataset[self._item_seq_col].unique().shape[0]
                 ],
                 'units_per_layer'   : [50, 10, 1],
                 'dropout'           : 0.2,

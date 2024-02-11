@@ -28,11 +28,11 @@ class GMFLoader(ModuleLoader):
         )
 
 
-    def create_model(self, dev_set):
+    def create_model(self, dataset):
         params = Bunch({
             'model': Bunch({
-                'n_users'       : dev_set[self._user_seq_col].unique().shape[0],
-                'n_items'       : dev_set[self._item_seq_col].unique().shape[0],
+                'n_users'       : dataset[self._user_seq_col].unique().shape[0],
+                'n_items'       : dataset[self._item_seq_col].unique().shape[0],
                 'device'        : pu.get_device(),
                 'embedding_size': 50,
                 'weights_path'  : self._weights_path

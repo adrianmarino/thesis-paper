@@ -11,6 +11,8 @@ import logging
 import util as ut
 from models import EntityEmb
 from bunch import Bunch 
+import logging
+import sys
 
 
 class CFEmbUpdateJob(Job):
@@ -18,7 +20,7 @@ class CFEmbUpdateJob(Job):
   def __init__(
     self,
     ctx,
-    split_year           = 2018,
+    split_year           = 2019,
     update_period_in_min = 1,
     int_trigger_diff     = 10,
   ):
@@ -38,18 +40,13 @@ class CFEmbUpdateJob(Job):
     pu.set_device_name('gpu')
 
     interactions_df = pd.DataFrame(self.api_client.interactions())
-    if not self.__must_update(interactions_df):
-      return [], []
 
     # Create year columns...
     interactions_df['year'] = interactions_df['timestamp'].apply(pd.to_datetime).dt.year
 
     # Generate sequences....
-    user_seq = dt.Sequencer('user_id', 'user_seq')
-    item_seq = dt.Sequencer('item_id', 'item_seq')
-
-    interactions_df = user_seq.perform(interactions_df)
-    interactions_df = item_seq.perform(interactions_df)
+    interactions_df = dt.Sequencer('user_id', 'user_seq').perform(interactions_df)
+    interactions_df = dt.Sequencer('item_id', 'item_seq').perform(interactions_df)
 
     data_splitter = ds.TrainTestSplitter(
       split_year = self.split_year,
@@ -63,8 +60,7 @@ class CFEmbUpdateJob(Job):
       )
     )
 
-    train_set, test_set, _, _ = data_splitter(interactions_df)
-
+    train_set, test_set, rating_mean_df, rating_std = data_splitter(interactions_df)
 
     model_loader = srv.DeepFMLoader(
         weights_path          = os.environ['WEIGHTS_PATH'],
@@ -77,28 +73,12 @@ class CFEmbUpdateJob(Job):
 
     model, params = model_loader.load(train_set, test_set)
 
-    user_embs, item_embs = self.__upload(interactions_df, model.embedding.feature_embeddings)
+    # Note: split filter items and users from eval_set that inly exist into train_set...
+    filtered_interactions_df = pd.concat([train_set, test_set], axis=1)
+
+    user_embs, item_embs = self.__upload(filtered_interactions_df, model.embedding.feature_embeddings)
 
     self._cfg = { 'interactions_count': len(interactions_df) }
-
-    return user_embs, item_embs
-
-
-  def __must_update(self, interactions_df):
-    last_size = self._cfg['interactions_count'] if self._cfg else 0
-
-    if last_size > 0:
-      diff = abs(len(interactions_df) - last_size)
-      logging.info(f'Interactions difference: {diff}. Previous: {last_size}, Current: {len(interactions_df)}')
-      if diff < self.int_trigger_diff:
-        logging.info(f'Wait for trigger diff: {self.int_trigger_diff}')
-        return False
-      logging.info(f'{self.int_trigger_diff} interactions threshold ' +
-        'is exceeded. Retrain model an update embedding into chroma-db.')
-    else:
-      logging.info(f'Train model an update embedding into chroma-db.')
-
-    return True
 
 
   def __upload(self, interactions_df, feature_embeddings):
@@ -108,7 +88,7 @@ class CFEmbUpdateJob(Job):
       seq_to_id = ut.to_dict(df, seq_col, id_col)
       return [
           EntityEmb(
-              id  = id,
+              id  = str(id),
               emb = embeddings[seq].tolist()
           )
           for seq, id in seq_to_id.items()

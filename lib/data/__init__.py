@@ -1,7 +1,18 @@
-from .utils import  is_list, dtype, is_nan_array, \
-                    frequency, MONTHS, WEEK, \
-                    group_by, list_column_to_dummy_columns, \
-                    exclude_cols, subset, outliers_range, mode
+from .utils import (
+  is_list, dtype,
+  is_nan_array,
+  frequency,
+  MONTHS,
+  WEEK,
+  group_by,
+  list_column_to_dummy_columns,
+  exclude_cols,
+  subset,
+  outliers_range,
+  mode,
+  normalize,
+  unnormalize
+)
 
 from .ratings_matrix import RatingsMatrix
 
@@ -23,3 +34,5 @@ from .interaction_change_detector import InteractionsChangeDetector
 
 from .dimensionality_reduction import *
 from .clustering import *
+
+from .interactions_train_test_split import interactions_train_test_split

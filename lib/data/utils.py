@@ -84,3 +84,13 @@ def mode(values):
     vals, counts = np.unique(values, return_counts=True)
     index = np.argmax(counts)
     return vals[index]
+
+
+def normalize(df, source_col, target_col, mean_col, std):
+    df[target_col] = df.apply(lambda row: (row[source_col] - row[mean_col]) / std, axis=1)
+    return df
+
+
+def unnormalize(df, source_col, target_col, mean_col, std):
+    df[target_col] = df.apply(lambda row: (row[source_col] * std) + row[mean_col], axis=1)
+    return df

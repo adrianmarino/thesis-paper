@@ -46,14 +46,16 @@ class ModuleLoader(ABC):
 
 
     @abstractmethod
-    def create_model(self, train_set):
+    def create_model(self, train_set, eval_set):
         pass
 
 
     def load(self, dev_set: pd.DataFrame, eval_set: pd.DataFrame=None):
-        model, params = self.create_model(dev_set)
+        dataset = dev_set if eval_set is None else pd.concat([dev_set, eval_set])
 
-        if self._change_detector.detect(dev_set):
+        model, params = self.create_model(dataset)
+
+        if self._change_detector.detect(dataset):
             self._train_evaluate(model, params, dev_set, eval_set)
 
             model.save(self._save_file_path)
