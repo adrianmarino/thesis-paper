@@ -1,63 +1,61 @@
 
-# UBA - Maestria en Explotación de Datos y Descubrimiento de Conocimiento - Thesis - Sistemas de Recomendación Colaborativos e Híbridos 
+# University of Buenos Aires (UBA) - Data Mining and Knowledge Discovery Master - Thesis - Collaborative and hybrid recommendation systems
 
-Este trabajo busca realizar una comparativa de distintos enfoques de recomendación basados en filtros colaborativos e híbridos (Es decir, una combinación de filtros colaborativos y basados en contenido), explicando ventajas y desventajas de cada enfoque, su arquitectura y funcionamiento para cada modelo propuesto.
+This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model.
 
+## Documents
 
-## Thesis
+* [Specialization: Collaborative recommendation systems](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+* Thesis (In progress)
 
-[Thesis (In progress)](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
+## Models
 
+The following are the models to be compared. For more details, it is recommended to refer to the thesis document in the previous section.
 
-## Modelos
-
-A continuación se especifican los modelos a comparar. Para mas detalle se recomienda ver el documento de tesis del apartado anterior.
-
- *  **Memory based CF**: Baseline o modelo de referencia.
-    * **KNN (Distancia Coseno)**
-      * User Based.
-      * Item Based.
-      * Ensample User/Item Based.
- 
- *  **Model Based CF**: Modelos de filtros colaborativos basados en redes neuronales.
-    *   **Generalized Matrix Factorization (GMF)**: User/Item embeddings dot product.
-    *   **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
-    *   **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Full Connected.
-    *   **Deep Factorization Machine**
- 
- * **Ensamples**
-   * Content-based and Collaborative based models Stacking.
+*  **Memory based CF**: Baseline or reference model.
+   * **KNN (Cosine Distance)**
+   * User-Based.
+   * Item-Based.
+   * Ensemble User/Item-Based.
+* **Model-Based CF**: Collaborative filter models based on neural networks.
+   * **Generalized Matrix Factorization (GMF)**: User/Item embeddings dot product.
+   * **Biased Generalized Matrix Factorization (B-GMF)**: User/Item embeddings dot product + user/item biases.
+   * **Neural Network Matrix Factorization**: User/Item Embedding + flatten + Fully Connected.
+   * **Deep Factorization Machine**
+* ***Ensembles**
+   * Content-based and Collaborative-based models Stacking.
    * Feature Weighted Linear Stacking.
-   * Muti-Bandit approach based on beta distribution.
+   * Multi-Bandit approach based on beta distribution.
+   * LLM's + Collaborative filtering ensemble.
 
 
-## Métricas
+## Metrics
 
-Para comparar los modelos basados en filtros colaborativos se utilizan las métricas **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)**. Ratings entre 4 y 5 puntos pertenecen a la clase positiva y restro en la clase negativa.
 
-Otras métricas utilizadas:
+To compare collaborative filtering models, the metrics **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)** are used. Ratings between 4 and 5 points belong to the positive class, and the rest belong to the negative class.
 
+Other metrics used:
 * FBetaScore@K
 * Precision@K
 * Recall@K
 * RMSE
 
-## Hipótesis
+## Hypothesis
 
-* ¿Los modelos basados en deep learning obtienen mejores resultados que modelos no basados en deep learning? ¿Cuáles son las ventajas y desventajas de cada enfoque?
-* ¿Cómo se puede solucionar el problema de cold-start que sufre el enfoque de recomendación basado en filtros colaborativos? ¿Propuestas de solución?
+* Do deep learning-based models achieve better results than non-deep learning-based models? What are the advantages and disadvantages of each approach?
+* How can the cold-start problem be solved in a collaborative filtering-based recommendation approach? Any proposed solutions?
 
 ## Data
 
-Para poder realizar las pruebas necesarias con ambos enfoques (filtros colaborativos(CF) y basados en contenido(CB)) necesitamos:
+To conduct the necessary tests with both collaborative filtering (CF) and content-based (CB) approaches, we need:
 
-* Calificaciones de cada ítems(movies) por parte de los usuarios (CF).
-* Features propios de los ítems (CB).
+* Ratings of each item (movies) by the users (CF).
+* Item-specific features (CB).
 
-Dadas estas necesidades, se combinaron los siguientes datasets:
+Based on these requirements, the following datasets were combined:
 
-* [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): Prácticamente no tiene información de las películas pero si tiene las calificaciones de los usuarios.
-* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): No tiene calificaciones personalizadas como el \textit{dataset} anterior, pero tiene varios features corrspondiente a las películas o items los cuales seran necesarios cunado se entrenen modelos basados en contenido.
+* [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): It has practically no information about the movies, but it does have user ratings.
+* [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): It does not have personalized ratings like the previous dataset, but it has several features corresponding to the movies or items which will be necessary when training content-based models.
 
 
 ## References
@@ -118,7 +116,7 @@ Dadas estas necesidades, se combinaron los siguientes datasets:
         * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
 
         * **Recommendation ChatBot**
-            * Paper in which was chatbot is inspired
+            * Papers on which the chatbot was based.
                 * [Chat-REC: Towards Interactive and Explainable
                 LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
                 * [Large Language Models as Zero-Shot Conversational
