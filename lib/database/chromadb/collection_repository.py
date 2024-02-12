@@ -66,6 +66,7 @@ class CollectionRepositorySimSearchResult(CollectionRepositorySearchByIdResult):
 class CollectionRepository:
     def __init__(self, client, collection_name):
         self.client = client
+        self.collection_name = collection_name
         self.collection = client.get_or_create_collection(collection_name)
 
     def insert_from_df(
@@ -88,7 +89,7 @@ class CollectionRepository:
 
     def insert(self, params):
         non_inserted_ids = []
-        with dt.progress_bar(len(params.ids), title='Insert Embeddings') as bar:
+        with dt.progress_bar(len(params.ids), title=f'Insert embeddings into "{self.collection_name}" collection (chroma-db)') as bar:
             for idx in range(len(params.ids)):
                 try:
                     self.collection.add(

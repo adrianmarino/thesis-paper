@@ -37,7 +37,7 @@ class Validator:
 
     def validate(self, ds, **kwargs):
         summary = []
-        with dt.progress_bar(self.n_samples) as bar:
+        with dt.progress_bar(self.n_samples, title='Computing metrics using validation set') as bar:
             for sample in range(self.n_samples):
                 X, y_true = ds.sample(self.batch_size)
                 for p in self.predictors:
