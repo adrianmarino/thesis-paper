@@ -90,6 +90,17 @@ class AppContext:
         self.interactions_repository.add_multi_index(['item_id'], unique=False)
 
 
+        self.pred_interaction_mapper = InteractionMapper()
+        self.pred_interactions_repository = MongoRepository(
+            self.mongo_connection,
+            'pred_interactions',
+            self.pred_interaction_mapper,
+            'user_id'
+        )
+        self.pred_interactions_repository.add_multi_index(['user_id', 'item_id'])
+        self.pred_interactions_repository.add_multi_index(['item_id'], unique=False)
+
+
         self.item_mapper = ItemMapper()
         self.items_repository = MongoRepository(
             self.mongo_connection,

@@ -30,6 +30,11 @@ class MongoRepository:
       raise EntityAlreadyExistsException(e)
 
 
+  async def upsert_many(self, models: list[Model]):
+    await self.delete_many_by()
+    await self.add_many(models)
+
+
   def update(self, model):
     properties = self.mapper.to_dict(model)
     return self.collection.update_one({self.id: properties[self.id]}, {'$set': properties})

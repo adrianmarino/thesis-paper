@@ -1,6 +1,7 @@
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
+import logging
 
 
 def interactions_train_test_split(
@@ -47,5 +48,7 @@ def interactions_train_test_split(
         (test_df[user_id_col].isin(train_df[user_id_col].values)) &
         (test_df[item_id_col].isin(train_df[item_id_col].values))
     ]
+
+    logging.info(f'Train: {(len(train_df)/len(dataset))*100:.2f} % - Test: {(len(test_df)/len(dataset))*100:.2f} %')
 
     return train_df, test_df
