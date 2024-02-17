@@ -1,6 +1,6 @@
 from IPython.core.display import HTML
 from rest import IMDBApiClient
-from recommender import RecommenderResult, render_image
+from recommender import RecommenderResult, render_imdb_image
 
 
 class UserSimilarItemEnsembleRecommenderResult(RecommenderResult):
@@ -21,7 +21,7 @@ class UserSimilarItemEnsembleRecommenderResult(RecommenderResult):
 
         df = self.__data.copy()
 
-        df['sim_image'] = df['sim_imdb_id'].apply(lambda id: render_image(self.__client, id, width=image_width))
+        df['sim_image'] = df['sim_imdb_id'].apply(lambda id: render_imdb_image(self.__client, id, width=image_width))
 
         df = df[['sim_rating', 'sim_image', 'sim']]
 

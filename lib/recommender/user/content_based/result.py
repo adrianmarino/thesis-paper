@@ -1,7 +1,7 @@
 from IPython.core.display import HTML
 
 from rest import IMDBApiClient
-from recommender import RecommenderResult, render_image
+from recommender import RecommenderResult, render_imdb_image
 
 
 class UserProfileRecommenderResult(RecommenderResult):
@@ -32,7 +32,7 @@ class UserProfileRecommenderResult(RecommenderResult):
 
         df = self.__data.copy()
 
-        df['image'] = df['imdb_id'].apply(lambda id: render_image(self.__client, id, width=image_width))
+        df['image'] = df['imdb_id'].apply(lambda id: render_imdb_image(self.__client, id, width=image_width))
 
         df = df[[self.__score_col, 'raw_score', 'popularity', self.__rating_col, 'votes', 'image', self.__user_id_col, self.__item_id_col]]
         df = df.rename(columns={

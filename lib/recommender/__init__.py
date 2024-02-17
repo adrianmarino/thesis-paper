@@ -1,6 +1,6 @@
 # Common Interfaces
 from .user_item_recommender import UserItemRecommender
-from .recommender_result    import RecommenderResult, to_image_html, render_image
+from .recommender_result    import RecommenderResult, to_image_html, render_imdb_image
 from .item_recommender      import ItemRecommender
 
 
