@@ -25,7 +25,7 @@ class RecommendationsFactory:
     excluded_recommended_items = []
 
     for r in response.metadata['recommendations']:
-      sim_items, distances = await self.ctx.item_service.find_by_content(r['title'], limit=5)
+      sim_items, distances = await self.ctx.item_service.find_by(r['title'], limit=5)
 
       for idx, item in enumerate(sim_items):
         query_sim   = 1 - distances[idx]

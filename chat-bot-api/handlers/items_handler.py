@@ -2,6 +2,7 @@ from models import Item
 from fastapi import HTTPException, APIRouter, Response
 from repository.mongo import EntityAlreadyExistsException
 import util as ut
+from services import ItemSimQuery 
 
 
 def items_handler(base_url, ctx):
@@ -50,7 +51,7 @@ def items_handler(base_url, ctx):
         limit    : int        = 5,
         hide_emb : bool       = True,
         release  : int        = 1950,
-        genres   : str        = ''
+        rating   : float      = 0.0
     ):
         if all:
             return remove_embedding(await ctx.item_service.find_all(not hide_emb), hide_emb)
@@ -58,14 +59,18 @@ def items_handler(base_url, ctx):
             if seen:
                 return remove_embedding(await ctx.item_service.find_by_user_id(email), hide_emb)
             else:
-                return remove_embedding(await ctx.item_service.find_by_unseen_by_user_id(email, limit), hide_emb)
+                return remove_embedding(await ctx.item_service.find_unseen_by_user_id(email, limit), hide_emb)
         elif content:
-            if seen:
-                items, distances = await ctx.item_service.find_by_content(content, limit)
-                return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
-            else:
-                items, distances = await ctx.item_service.find_unseen_by_content(email, content, release, genres.split(','), limit)
-                return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
+            query = ItemSimQuery() \
+                    .with_user_id(email) \
+                    .is_seen(seen) \
+                    .with_rating(rating) \
+                    .with_content(content) \
+                    .with_release_gte(release) \
+                    .with_limit(limit)
+
+            items, distances = await ctx.item_service.find_similars_by(query)
+            return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
         else:
             raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
 

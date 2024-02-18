@@ -1,1 +1,2 @@
 from .repository_factory import ChromaRepositoryFactory
+from .where_metadata_builder import WhereMetadataBuilder

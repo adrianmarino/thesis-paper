@@ -3,6 +3,7 @@ import util as ut
 import logging
 import pytorch_common.util as pu
 import math
+from .item_sim_query import ItemSimQuery
 
 
 class ItemService:
@@ -47,50 +48,29 @@ class ItemService:
         return self._populate_embeddings(items)
 
 
-    async def find_by_unseen_by_user_id(self, user_id: str, limit: int=10):
+    async def find_unseen_by_user_id(self, user_id: str, limit: int=10):
         interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
         items = await self.ctx.items_repository.find_many_by(limit=limit, item_id={ '$nin': [str(i.item_id) for i in interactions]})
         return self._populate_embeddings(items)
 
 
-    async def find_by_content(self, content: str, limit=5):
-        embeddings = self.ctx.sentence_emb_service.generate(texts=[content])
-        result = self.ctx.items_content_emb_repository.search_sims(embeddings, limit)
-        items = await self.find_by_ids([str(id) for id in result.ids])
-        return self._populate_embeddings(items), result.distances
+    async def find_similars_by(self, query = ItemSimQuery()):
+        if query.user_id:
+            interactions = await self.ctx.interactions_repository.find_many_by(user_id=query.user_id)
+            query.id_in([i.item_id for i in interactions], negate=not query.seen)
 
-
-    async def find_unseen_by_content(
-        self,
-        user_id: str,
-        content: str,
-        release_from: int,
-        genres: list[str],
-        limit=5
-    ):
-        interactions = await self.ctx.interactions_repository.find_many_by(user_id=user_id)
-
-        if len(interactions) > 0:
-            where_metadata = {
-                "$and": [
-                    { 'id'      : { '$nin': [str(i.item_id) for i in interactions] } },
-                    { 'release' : { '$gte': release_from } }
-                ]
-            }
-        else:
-            where_metadata = {}
-
-
-        embeddings = self.ctx.sentence_emb_service.generate(texts=[content])
+        embeddings = self.ctx.sentence_emb_service.generate(texts=[query.content])
 
         result = self.ctx.items_content_emb_repository.search_sims(
             embeddings,
-            limit,
-            where_metadata = where_metadata
-            # where_document = { '$contains': genres[0].lower() }
+            query.limit,
+            where_metadata = query.where
         )
 
-        items = await self.find_by_ids([str(id) for id in result.ids])
+        items = await self.ctx.items_repository.find_many_by(
+            item_id = { '$in': [str(id) for id in result.ids] },
+            rating  = { '$gte': query.rating }
+        )
 
         return self._populate_embeddings(items), result.distances
 
