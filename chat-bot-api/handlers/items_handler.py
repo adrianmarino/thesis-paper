@@ -72,7 +72,7 @@ def items_handler(base_url, ctx):
             items, distances = await ctx.item_service.find_similars_by(query)
             return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
         else:
-            raise HTTPException(status_code=400, detail=f'Missing filter params: email | title')
+            raise HTTPException(status_code=400, detail=f'Missing filter params: all | email | content')
 
 
     @router.put('/embeddings/content/build', status_code = 202)
