@@ -4,6 +4,7 @@ import pandas as pd
 import sys
 import logging
 import pytorch_common.util as pu
+from .item_sim_query import ItemSimQuery
 
 
 class ChatBotService:
@@ -40,15 +41,17 @@ class ChatBotService:
       prompt = prompt
     )
 
-    candidate_items,_ = await self.ctx.item_service.find_unseen_by_content(
-      user_id = user_message.author,
-      content = user_message.content,
-      release_from = profile.release_from,
-      genres = profile.genres,
-      limit   = candidates_limit
+    candidate_items,_ = await self.ctx.item_service.find_similars_by(
+      ItemSimQuery() \
+        .user_id_eq(user_message.author) \
+        .is_seen(False) \
+        .contains(user_message.content) \
+        .release_gte(profile.release_from) \
+        .limit_eq(candidates_limit)
     )
 
-    chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-2:]
+    # chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-2:]
+    chat_history = []
 
     seen_items = [info.item for info in interactions_info]
 

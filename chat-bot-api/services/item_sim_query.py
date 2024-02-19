@@ -4,13 +4,13 @@ from repository.chroma import WhereMetadataBuilder
 class ItemSimQuery:
     def __init__(self):
         self.__content = None
-        self.__limit   = None
+        self.__limit   = 5
         self.__user_id = None
         self.__rating  = 0
         self.__seen    = False
         self.__where_medata = WhereMetadataBuilder()
     
-    def with_user_id(self, value):
+    def user_id_eq(self, value):
         self.__user_id = value
         return self
 
@@ -18,30 +18,30 @@ class ItemSimQuery:
         self.__seen = value
         return self
 
-    def with_rating(self, value):
+    def rating_gte(self, value):
         if value is not None:
             value = int(value)
             if value > 0:
                 self.__rating = value
         return self
 
-    def with_content(self, value):
+    def contains(self, value):
         if value is not None and len(value) > 0:
             self.__content = value
         return self
 
-    def with_limit(self, value):
+    def limit_eq(self, value):
         if value is not None:
             value = int(value)
             if value > 0:
                 self.__limit = value
         return self
 
-    def with_release_gte(self, value):
+    def release_gte(self, value):
         self.__where_medata.gte('release', value)
         return self
 
-    def with_id_in(self, values, negate=False):
+    def id_in(self, values, negate=False):
         self.__where_medata.is_in('id', values, negate=negate)
         return self
 

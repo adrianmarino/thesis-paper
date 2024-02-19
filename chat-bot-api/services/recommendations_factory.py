@@ -4,6 +4,7 @@ import pandas as pd
 import random
 import sys
 import logging
+from .item_sim_query import ItemSimQuery
 
 
 def cosine_similarity(text1, text2):
@@ -25,7 +26,13 @@ class RecommendationsFactory:
     excluded_recommended_items = []
 
     for r in response.metadata['recommendations']:
-      sim_items, distances = await self.ctx.item_service.find_by(r['title'], limit=5)
+      sim_items, distances = await self.ctx.item_service.find_similars_by(
+        ItemSimQuery() \
+          .user_id_eq(email) \
+          .is_seen(False) \
+          .contains(r['title']) \
+          .limit_eq(5)
+      )
 
       for idx, item in enumerate(sim_items):
         query_sim   = 1 - distances[idx]

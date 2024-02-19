@@ -58,7 +58,7 @@ class RecChatBotV1ApiClient:
                 'imdb_id'     : str(row['movie_imdb_id']),
                 'poster'     : str(row['poster'])
             }
-        return self._bulk_add(items, 'items/bulk', to_dto, pase_size=1000)
+        return self._bulk_add(items, 'items/bulk', to_dto, page_size=1000)
 
             
     def add_interactions(self, interactions):
@@ -69,25 +69,37 @@ class RecChatBotV1ApiClient:
                 'rating'    : int(row['rating']),
                 'timestamp' : str(row['timestamp']),
             }
-        return self._bulk_add(interactions, 'interactions/bulk', to_dto, pase_size=5000)
+        return self._bulk_add(interactions, 'interactions/bulk', to_dto, page_size=5000)
 
 
-    def _bulk_add(self, df, url, to_dto, pase_size=500):
-        error_rows= []
-        page        = []
-        page_counter = 0
-        for _, row in df.iterrows():
-            if page_counter < pase_size:
-                page.append(to_dto(row))
-                page_counter += 1
-            else:
-                try:
-                    headers =  {"Content-Type":"application/json"}
-                    response = requests.post(f'{self.__base_url}/{url}', data=json.dumps(page), headers=headers)
-                except Exception as e:
-                    print(e)
-                    error_rows.extend(page)
-                finally:
-                    page_counter = 0
-                    page         = []
+    def _bulk_add(
+        self,
+        df,
+        url,
+        to_dto,
+        page_size = 500
+    ):
+        error_rows = []
+        n_pages    = len(df) // page_size + 1
+
+        logging.info(f'Page Size: {page_size}')
+
+        for page in range(n_pages):
+            page_df = df.iloc[page_size * page : page_size * (page + 1)]
+            dtos = [to_dto(row) for idx, row in  page_df.iterrows()]
+
+            try:
+                response = requests.post(
+                    f'{self.__base_url}/{url}', 
+                    data    = json.dumps(dtos), 
+                    headers = {
+                        'Content-Type': 'application/json'
+                    }
+                )
+                logging.info(f'Page: {1+page}/{n_pages}, Size: {len(dtos)}')
+
+            except Exception as error:
+                print(error)
+                error_rows.extend(page_df)
+
         return error_rows

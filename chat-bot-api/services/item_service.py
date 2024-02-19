@@ -57,7 +57,8 @@ class ItemService:
     async def find_similars_by(self, query = ItemSimQuery()):
         if query.user_id:
             interactions = await self.ctx.interactions_repository.find_many_by(user_id=query.user_id)
-            query.id_in([i.item_id for i in interactions], negate=not query.seen)
+            seen_item_ids = [i.item_id for i in interactions]
+            query.id_in(seen_item_ids, negate=not query.seen)
 
         embeddings = self.ctx.sentence_emb_service.generate(texts=[query.content])
 

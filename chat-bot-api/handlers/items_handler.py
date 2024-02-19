@@ -62,12 +62,12 @@ def items_handler(base_url, ctx):
                 return remove_embedding(await ctx.item_service.find_unseen_by_user_id(email, limit), hide_emb)
         elif content:
             query = ItemSimQuery() \
-                    .with_user_id(email) \
+                    .user_id_eq(email) \
                     .is_seen(seen) \
-                    .with_rating(rating) \
-                    .with_content(content) \
-                    .with_release_gte(release) \
-                    .with_limit(limit)
+                    .rating_gte(rating) \
+                    .contains(content) \
+                    .release_gte(release) \
+                    .limit_eq(limit)
 
             items, distances = await ctx.item_service.find_similars_by(query)
             return { 'items': remove_embedding(items, hide_emb), 'distances': distances}
