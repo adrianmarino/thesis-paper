@@ -1,5 +1,5 @@
 from recommender import UserItemRecommender
-from .result import UserItemFilteringRecommenderResult
+from .user_item_filtering_recommender_result import UserItemFilteringRecommenderResult
 import pandas as pd
 import util as ut
 
