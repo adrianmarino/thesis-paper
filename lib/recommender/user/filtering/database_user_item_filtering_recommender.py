@@ -23,8 +23,7 @@ class DatabaseUserItemFilteringRecommender:
 
 
     def __users_distance(self, similar_users):
-        return { similar_users.str_ids[idx]: similar_users.distances[idx] for idx in range(len(similar_users.str_ids)) }            
-
+        return { similar_users.str_ids[idx]: similar_users.distances[idx] for idx in range(len(similar_users.str_ids)) }
     
     
     def __select_interactions(self, interactions, percent, max_items_by_user):
@@ -44,42 +43,60 @@ class DatabaseUserItemFilteringRecommender:
         
         return interactions
     
-    
-    async def recommend(
-        self,
-        user_id                        : int  = None,
-        not_seen                       : bool = True,
-        k_sim_users                    : int = 5,
-        random_selection_items_by_user : int = 0.5,
-        max_items_by_user              : int = 5
-    ):
-        similar_users = self.__user_emb_repository.find_similars_by_id(user_id, limit=k_sim_users)
-        
-        if similar_users.empty: return []
+
+    def __empty_result(self):
+        return DatabaseUserItemFilteringRecommenderResult(self.__class__.__name__, [], [])
+
+
+
+    def __find_similar_user_ids(self, user_id, k_sim_users):
+        similar_users = self.__user_emb_repository.find_similars_by_id(
+            user_id, 
+            limit = k_sim_users
+        )
+        if similar_users.empty:
+            raise Exception('Not found similar users')
+
 
         similar_user_ids = [id for id in similar_users.str_ids if id != user_id]
-
         if len(similar_user_ids) ==0:
-            logging.warning('Not found similar users')
-            return []
+            raise Exception('Not found similar users')
 
-        interactions = await self.__interactions_repository.find_many_by(user_id={'$in': similar_user_ids})
-        
-        interactions = self.__select_interactions(
-            interactions,
+        return similar_users, similar_user_ids
+
+
+
+    async def __find_similar_user_interactions(
+        self,
+        similar_user_ids,
+        random_selection_items_by_user,
+        max_items_by_user
+    ):
+        sim_user_interactions = await self.__interactions_repository.find_many_by(
+            user_id={'$in': similar_user_ids}
+        )
+
+        sim_user_interactions = self.__select_interactions(
+            sim_user_interactions,
             percent           = random_selection_items_by_user,
             max_items_by_user = max_items_by_user
         )
-    
-        if len(interactions) ==0:
-            logging.warning('Not found sumilar users interactions')
-            return []
+
+        if len(sim_user_interactions) ==0:
+            raise Exception('Not found similar users interactions')
         
-        item_ids = np.unique([i.item_id for i in interactions]).tolist()
-        
+        return sim_user_interactions
+
+
+    async def __find_items(
+        self,
+        user_id,
+        sim_user_interactions,
+        not_seen
+    ):
+        item_ids = np.unique([i.item_id for i in sim_user_interactions]).tolist()  
         if len(item_ids) ==0:
-            logging.warning('Not found items')
-            return []
+            raise Exception('Not found items')
 
         user_interactions = await self.__interactions_repository.find_many_by(user_id=user_id)
  
@@ -87,10 +104,21 @@ class DatabaseUserItemFilteringRecommender:
             seen_item_ids = [i.item_id for i in user_interactions]
             item_ids = [item_id for item_id in item_ids if item_id not in seen_item_ids]
 
-        
         items = await self.__items_repository.find_many_by(item_id={'$in': item_ids})
-    
-        pred_interactions =  await self.__pred_interactions_repository.find_many_by(
+
+        return items, item_ids, user_interactions
+
+
+
+    async def __score_items(
+        self,
+        user_id,
+        items,
+        item_ids,
+        similar_users,
+        sim_user_interactions
+    ):
+        pred_interactions = await self.__pred_interactions_repository.find_many_by(
             user_id=user_id,
             item_id={'$in': item_ids}
         )
@@ -99,7 +127,7 @@ class DatabaseUserItemFilteringRecommender:
         
         distance_by_user_id = self.__users_distance(similar_users)
         
-        distance_by_item_id = {i.item_id:distance_by_user_id[i.user_id] for i in interactions}
+        distance_by_item_id = {i.item_id:distance_by_user_id[i.user_id] for i in sim_user_interactions}
         
         max_rating      = np.max([item.rating for item in items])
         
@@ -120,8 +148,11 @@ class DatabaseUserItemFilteringRecommender:
             
             scored_items.append((item, item_score1, item_score2, item_sim, norm_rating))
 
-    
-        recommended_items = pd.DataFrame([
+        return scored_items, pred_rating_by_item_id
+
+
+    def __build_Recommendations(self, scored_items, pred_rating_by_item_id):
+        return pd.DataFrame([
             {
                 'id'    : item[0].id,
                 'user_sim_weighted_rating_score'      : item[1],
@@ -135,8 +166,9 @@ class DatabaseUserItemFilteringRecommender:
             }
             for item in scored_items
         ])
-        
-        
+
+    
+    async def __build_seen_items(self, user_interactions):
         seen_item_rating_by_id = {i.item_id: i.rating for i in user_interactions}
         seen_items = await self.__items_repository.find_many_by(
             item_id={'$in': list(seen_item_rating_by_id.keys())}
@@ -152,9 +184,64 @@ class DatabaseUserItemFilteringRecommender:
             }
             for item in seen_items
         ])
+
+
+    async def __build_result(
+        self, 
+        scored_items, 
+        pred_rating_by_item_id, 
+        user_interactions
+    ):
+        recommended_items = self.__build_Recommendations(
+            scored_items,
+            pred_rating_by_item_id
+        )
+
+        seen_items = await self.__build_seen_items(user_interactions)
         
         return DatabaseUserItemFilteringRecommenderResult(
             self.__class__.__name__,
             recommended_items,
             seen_items
+        )
+
+
+    async def recommend(
+        self,
+        user_id                        : int  = None,
+        not_seen                       : bool = True,
+        k_sim_users                    : int = 5,
+        random_selection_items_by_user : int = 0.5,
+        max_items_by_user              : int = 5
+    ):
+        similar_users, similar_user_ids = self.__find_similar_user_ids(user_id, k_sim_users)
+
+
+        sim_user_interactions = await self.__find_similar_user_interactions(
+            similar_user_ids,
+            random_selection_items_by_user,
+            max_items_by_user
+        )
+
+
+        items, item_ids, user_interactions = await self.__find_items(
+            user_id,
+            sim_user_interactions,
+            not_seen,
+        )
+
+      
+        scored_items, pred_rating_by_item_id = await self.__score_items(
+            user_id,
+            items,
+            item_ids,
+            similar_users,
+            sim_user_interactions
+        )
+
+
+        return await self.__build_result(
+            scored_items, 
+            pred_rating_by_item_id, 
+            user_interactions
         )
