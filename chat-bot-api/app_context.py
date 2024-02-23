@@ -30,6 +30,7 @@ from services import (
 )
 
 from jobs import CFEmbUpdateJob
+from recommender import DatabaseUserItemFilteringRecommender
 
 
 class AppContext:
@@ -38,6 +39,17 @@ class AppContext:
         self._build_chroma_repositories()
         self._build_services()
         self._build_jobs()
+        self._build_recommenders()
+
+
+
+    def _build_recommenders(self):
+        self.database_user_item_filtering_recommender = DatabaseUserItemFilteringRecommender(
+            user_emb_repository          = self.users_cf_emb_repository,
+            items_repository             = self.items_repository,
+            interactions_repository      = self.interactions_repository,
+            pred_interactions_repository = self.pred_interactions_repository,
+        )
 
 
     def _build_services(self):
