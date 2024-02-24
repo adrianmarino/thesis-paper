@@ -94,7 +94,7 @@ class DatabaseUserItemFilteringRecommender:
         if len(sim_user_interactions) ==0:
             raise Exception('Not found similar users interactions')
         
-        logging.info(f'Select {len(sim_user_interactions)} similar users interactions')
+        logging.info(f'Select {len(sim_user_interactions)} similar users interactions (max by user: {max_items_by_user}, min rating: {min_rating_by_user})')
 
         return sim_user_interactions
 
@@ -213,8 +213,10 @@ class DatabaseUserItemFilteringRecommender:
         seen_items = await self.__items_repository.find_many_by(
             item_id={'$in': list(seen_item_rating_by_id.keys())}
         )
-   
-        seen_items = pd.DataFrame([
+
+        logging.info(f'{len(seen_items)} movies seen by {user_id} user')
+
+        return pd.DataFrame([
             {
                 'id'    : item.id,
                 'rating': seen_item_rating_by_id.get(item.id, 0),
