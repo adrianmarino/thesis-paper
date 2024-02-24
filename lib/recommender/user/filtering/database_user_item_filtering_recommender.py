@@ -54,7 +54,7 @@ class DatabaseUserItemFilteringRecommender:
     def __find_similar_user_ids(self, user_id, k_sim_users):
         similar_users = self.__user_emb_repository.find_similars_by_id(
             user_id, 
-            limit = k_sim_users
+            limit = k_sim_users+1
         )
         if similar_users.empty:
             raise Exception('Not found similar users')
