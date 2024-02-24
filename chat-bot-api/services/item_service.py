@@ -3,7 +3,6 @@ import util as ut
 import logging
 import pytorch_common.util as pu
 import math
-from .item_sim_query import ItemSimQuery
 
 
 class ItemService:
@@ -54,7 +53,8 @@ class ItemService:
         return self._populate_embeddings(items)
 
 
-    async def find_similars_by(self, query = ItemSimQuery()):
+
+    async def find_raw_similars_by(self, query):
         if query.user_id:
             interactions = await self.ctx.interactions_repository.find_many_by(user_id=query.user_id)
             seen_item_ids = [i.item_id for i in interactions]
@@ -62,18 +62,22 @@ class ItemService:
 
         embeddings = self.ctx.sentence_emb_service.generate(texts=[query.content])
 
-        result = self.ctx.items_content_emb_repository.search_sims(
+        return self.ctx.items_content_emb_repository.search_sims(
             embeddings,
             query.limit,
             where_metadata = query.where
         )
 
+
+    async def find_similars_by(self, query):
+        result = await self.find_raw_similars_by(query)
+
         items = await self.ctx.items_repository.find_many_by(
             item_id = { '$in': [str(id) for id in result.ids] },
             rating  = { '$gte': query.rating }
         )
-
         return self._populate_embeddings(items), result.distances
+        
 
 
     async def delete(self, item_id):

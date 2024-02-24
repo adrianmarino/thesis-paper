@@ -49,6 +49,7 @@ class AppContext:
             items_repository             = self.items_repository,
             interactions_repository      = self.interactions_repository,
             pred_interactions_repository = self.pred_interactions_repository,
+            item_service                 = self.item_service
         )
 
 

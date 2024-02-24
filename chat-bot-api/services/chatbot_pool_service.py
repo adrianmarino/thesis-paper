@@ -1,5 +1,5 @@
 from prompts import *
-import recommender as rd
+from recommender.chatbot.movie import MovieRecommendationsOutputParser, MovieRecommenderChatBotFactory
 import sys
 
 
@@ -24,10 +24,14 @@ class ChatBotPoolService:
     self._default_prompt = default_prompt
     self._models         = models
 
-    output_parser = rd.MovieRecommendationsOutputParser(list_size=list_size)
+    output_parser = MovieRecommendationsOutputParser(list_size=list_size)
     self._chat_bots      = {
       p: {
-        m: rd.MovieRecommenderChatBotFactory.stateless(model=m, prompt=prompts[p], output_parser=output_parser) for m in models
+        m: MovieRecommenderChatBotFactory.stateless(
+          model         = m,
+          prompt        = prompts[p],
+          output_parser = output_parser
+        ) for m in models
       } for p in prompts.keys()
     }
 

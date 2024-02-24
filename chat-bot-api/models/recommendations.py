@@ -1,7 +1,6 @@
 from .model import Model
 from .recommendation import Recommendation
 import typing
-import recommender as rd
 
 
 class Recommendations(Model):
