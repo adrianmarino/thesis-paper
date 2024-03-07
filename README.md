@@ -115,7 +115,7 @@ Based on these requirements, the following datasets were combined:
 
         * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
 
-        * **Recommendation ChatBot**
+        * **Recommendation ChatBot API**
             * Papers on which the chatbot was based.
                 * [Chat-REC: Towards Interactive and Explainable
                 LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
