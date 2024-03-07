@@ -14,6 +14,7 @@ from bunch import Bunch
 import logging
 import sys
 from .cf_emb_update_helper import CFEmbUpdateJobHelper
+import logging
 
 
 class CFEmbUpdateJob(Job):
@@ -42,6 +43,14 @@ class CFEmbUpdateJob(Job):
     pu.set_device_name('gpu')
 
     interactions_df = self.helper.get_interactions()
+
+    if  self._cfg.get('interactions_count', 0) == len(interactions_df):
+      logging.warn("""
+        No changes were found in user interactions, therefore updating
+        user and item embeddings, as well as predictions for ratings
+        of items not seen by users, is not necessary.
+      """)
+      return
 
     train_set, test_set = self.helper.split_dataset(interactions_df)
 
