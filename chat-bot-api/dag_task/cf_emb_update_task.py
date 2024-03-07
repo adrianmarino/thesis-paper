@@ -1,6 +1,5 @@
 import numpy as np
 import os
-
 from dag.task import python_thesis_operator
 
 
@@ -19,9 +18,13 @@ def python_callable(**ctx):
     import sys
     sys.path.append(f'{ctx["thesis.src_path"]}')
     sys.path.append(f'{ctx["thesis.src_path"]}/../chat-bot-api')
-    from app_context import AppContext
 
-    AppContext().cf_emb_update_job()
+    async def run_cf_emb_update_job():
+        from app_context import AppContext
+        await AppContext().cf_emb_update_job()
+
+    import asyncio
+    asyncio.run(run_cf_emb_update_job())
 
 
 def cf_emb_update_task(dag, task_id='cf_emb_update_task'):
