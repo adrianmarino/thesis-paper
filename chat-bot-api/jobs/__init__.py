@@ -1,1 +1,2 @@
 from .cf_emb_update_job import CFEmbUpdateJob
+from .cf_emb_update_helper import CFEmbUpdateJobHelper

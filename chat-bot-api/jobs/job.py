@@ -33,5 +33,5 @@ class Job(ABC):
 
 
   @abstractmethod
-  def __call__(self):
+  async def __call__(self):
     pass
