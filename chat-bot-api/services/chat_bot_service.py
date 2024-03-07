@@ -5,6 +5,8 @@ import sys
 import logging
 import pytorch_common.util as pu
 from .item_sim_query import ItemSimQuery
+import random
+
 
 
 class ChatBotService:
@@ -28,11 +30,9 @@ class ChatBotService:
     parse_limit      = 15,
     result_limit     = 5
   ):
-    history = await self.ctx.history_service.upsert(user_message.author)
-
-    profile = await self.ctx.profile_service.find(user_message.author)
-
-    interactions_info = await self.ctx.interaction_info_service.find_by_user_id(user_message.author)
+    interactions_info = await self.ctx.interaction_info_service.find_by_user_id(
+      user_message.author
+    )
 
     prompt = f'prompt{int(len(interactions_info) >= self._interactions_count)}'
 
@@ -41,15 +41,16 @@ class ChatBotService:
       prompt = prompt
     )
 
-    candidate_items,_ = await self.ctx.item_service.find_similars_by(
-      ItemSimQuery() \
-        .user_id_eq(user_message.author) \
-        .is_seen(False) \
-        .contains(user_message.content) \
-        .release_gte(profile.release_from) \
-        .limit_eq(candidates_limit)
+    profile = await self.ctx.profile_service.find(user_message.author)
+
+    candidate_items = await self.__find_candidates(
+      user_message,
+      profile,
+      candidates_limit,
+      interactions_info
     )
 
+    history = await self.ctx.history_service.upsert(user_message.author)
     # chat_history = LangChainMessageMapper().to_lang_chain_messages(history.dialogue)[-2:]
     chat_history = []
 
@@ -91,8 +92,46 @@ class ChatBotService:
 
   def __items_to_str_list(self, items, title, fallback=''):
     if len(items) > 0:
-      str_items = [f'- {item.title.strip()}: {item.rating}' for item in items]
+      str_items = [f'- {item.title.strip()}: {item.rating:.1f}' for item in items]
 
       return f'{title}:\n' + '\n'.join(str_items)
     else:
       return f'{fallback}\n'
+
+
+  def __has_min_interactions(self, interactions_info):
+    return int(len(interactions_info) >= self._interactions_count)
+
+
+  async def __find_candidates(
+    self,
+    user_message,
+    profile,
+    candidates_limit,
+    interactions_info
+  ):
+    if self.__has_min_interactions(interactions_info):
+      recommendations = await self.ctx.database_user_item_filtering_recommender.recommend(
+          user_id            = user_message.author,
+          text_query         = user_message.content,
+          k_sim_users        = 10,
+          max_items_by_user  = 50,
+          text_query_limit   = 700,
+          min_rating_by_user = 4,
+          not_seen           = False
+      )
+
+      item_ids = recommendations.data['id'].unique().tolist()[:candidates_limit]
+
+      return await self.ctx.item_service.find_by_ids(item_ids)
+    else:
+      query = ItemSimQuery() \
+          .user_id_eq(user_message.author) \
+          .is_seen(False) \
+          .contains(user_message.content) \
+          .release_gte(profile.release_from) \
+          .limit_eq(candidates_limit)
+
+      candidate_items, _ = await self.ctx.item_service.find_similars_by(query)
+
+      return candidate_items

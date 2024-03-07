@@ -1,0 +1,13 @@
+[Unit]
+Description=Recommendation Chatbot API for %u user
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=%h/chat-bot-api
+ExecStart=%h/chat-bot-api/bin/start
+ExecStop=%h/chat-bot-api/bin/stop
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target

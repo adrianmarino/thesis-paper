@@ -11,7 +11,7 @@ class ChatBotResponseFactory:
 
     def create(self, params, response):
         content = self._get_content(response)
-        
+
         metadata = self._output_parser.parse(content)
         prompt = self._template_factory.invoke(params)
 

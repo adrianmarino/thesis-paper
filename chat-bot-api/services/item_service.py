@@ -77,7 +77,7 @@ class ItemService:
             rating  = { '$gte': query.rating }
         )
         return self._populate_embeddings(items), result.distances
-        
+
 
 
     async def delete(self, item_id):

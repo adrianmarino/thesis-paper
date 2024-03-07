@@ -13,9 +13,10 @@ class ChatBotPoolService:
     },
     default_model = 'mistral',
     models  = [
+      'llama2-13b-chat',
+      'llama2-7b-chat',
       'neural-chat',
       'mistral-instruct',
-      'llama2-7b-chat',
       'mistral'
     ],
     list_size = 15

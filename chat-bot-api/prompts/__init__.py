@@ -5,22 +5,27 @@ PROMPT_LOW_INTERACTIONS = """
 
 {candidates}
 
-Select {limit} candidate movies based on user profile and seen movies.
-Return a list of candidate movies with next regex pattern:
+Recommend {limit} movies from candidate movies list, based on user profile and seen movies.
+Return only one list of recommendation with next format:
 
 Number. Title (release year): Description.
+
+Does not add any summary.
 """
 
 
 PROMPT_REQUIRED_INTERACTIONS = """
-{user_profile}
-
 {user_history}
 
 {candidates}
 
-Select {limit} movies from candidate movies list based on user profile and seen movies.
-Return a list of candidate movies with the specific next format:
+Recommend {limit} movies from candidate movies list, excluding seen movies and does
+not add movies that does not exists in the candidates list.
+
+Return only one list of recommendation with next format:
 
 Number. Title (release year): Description.
+
+Does not add any summary.
 """
+

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "64bbb2e5-2968-4c15-a56e-ba22f14025ac",
-		"name": "CharBot",
+		"name": "Recomendation Chatbot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20147953"
 	},
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Adrian\",\n    \"email\": \"adrianmarino@gmail.com\",\n    \"metadata\": {\n        \"studies\": \"Engineering\",\n        \"age\": 32,\n        \"genre\": \"Male\",\n        \"nationality\": \"Argentine\",\n        \"work\": \"Software Engineer\",\n        \"preferred_movies\": {\n            \"release\": {\n                \"from\" : \"1950\"\n            },\n            \"genres\": [\n                \"thriller\", \"suspense\", \"science fiction\", \"love\", \"comedy\"\n            ]\n        }\n    }\n}",
+							"raw": "{\n    \"name\": \"Adrian\",\n    \"email\": \"adrianmarino@gmail.com\",\n    \"metadata\": {\n        \"studies\": \"Software Engineering. Data science\",\n        \"age\": 42,\n        \"genre\": \"Male\",\n        \"nationality\": \"Argentine\",\n        \"work\": \"Software Engineer\",\n        \"preferred_movies\": {\n            \"release\": {\n                \"from\" : \"1980\"\n            },\n            \"genres\": [\n                \"suspense\", \"science fiction\", \"love\"\n            ]\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,7 +248,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see a terror movie\"\n    },\n    \"recommender_settings\": {\n        \"model\": \"mistral\",\n        \"plain\": false,\n        \"metadata\": false,\n        \"retry\": 2,\n        \"shuffle\": false,\n        \"limit\": 50,\n        \"parse_limit\": 15,\n        \"candidates_limit\": 30\n    }\n}",
+							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want see marvel movies\"\n    },\n    \"recommender_settings\": {\n        \"model\"           : \"llama2-7b-chat\",\n        \"plain\"           : false,\n        \"metadata\"        : false,\n        \"retry\"           : 2,\n        \"shuffle\"         : true,\n        \"limit\"           : 10,\n        \"parse_limit\"     : 30,\n        \"candidates_limit\": 30\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -302,6 +302,58 @@
 								"v1",
 								"recommendations",
 								"models"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recommenders",
+			"item": [
+				{
+					"name": "train",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/recommenders/train",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recommenders",
+								"train"
 							]
 						}
 					},
@@ -369,7 +421,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/interactions/adrianmarino@gmail.com",
+							"raw": "{{URL}}/api/v1/interactions/users/adrianmarino@gmail.com",
 							"host": [
 								"{{URL}}"
 							],
@@ -377,6 +429,7 @@
 								"api",
 								"v1",
 								"interactions",
+								"users",
 								"adrianmarino@gmail.com"
 							]
 						}
@@ -438,7 +491,7 @@
 					"response": []
 				},
 				{
-					"name": "Rebuild embs",
+					"name": "Rebuild content embs",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -452,7 +505,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/items/embeddings/build",
+							"raw": "{{URL}}/api/v1/items/embeddings/content/build",
 							"host": [
 								"{{URL}}"
 							],
@@ -461,6 +514,38 @@
 								"v1",
 								"items",
 								"embeddings",
+								"content",
+								"build"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rebuild cf embs",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"2\",\n    \"title\": \"Pepito\",\n    \"description\": \"Tu abuelo en sunga\",\n    \"genres\": [\"accion\"],\n    \"release\": \"2010-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/items/embeddings/cf/build",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"embeddings",
+								"cf",
 								"build"
 							]
 						}
@@ -557,11 +642,62 @@
 				},
 				{
 					"name": "Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"    .tftable img {max-width: 400px; max-height: 400px;} /* Updated size for images */",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Title</th>",
+									"        <th>Description</th>",
+									"        <th>Release Date</th>",
+									"        <th>Genres</th>",
+									"        <th>Rating</th>",
+									"        <th>Poster</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.items}}",
+									"        <tr>",
+									"            <td>{{id}}</td>",
+									"            <td>{{title}}</td>",
+									"            <td>{{description}}</td>",
+									"            <td>{{release}}</td>",
+									"            <td>{{genres}}</td>",
+									"            <td>{{rating}}</td>",
+									"            <td><img src=\"{{poster}}\" alt=\"Poster\" height=\"400\"></td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    var visualizerData = pm.response.json();",
+									"    return {response: visualizerData};",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/items?content=The legend of mor'du&limit=50&release=2012",
+							"raw": "{{URL}}/api/v1/items?limit=100&release=1990&rating=3.5&content=A thriller movie",
 							"host": [
 								"{{URL}}"
 							],
@@ -572,21 +708,55 @@
 							],
 							"query": [
 								{
-									"key": "content",
-									"value": "The legend of mor'du"
-								},
-								{
 									"key": "limit",
-									"value": "50"
+									"value": "100"
 								},
 								{
 									"key": "release",
-									"value": "2012"
+									"value": "1990"
 								},
 								{
 									"key": "genres",
 									"value": "accion,thriller",
 									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "3.5"
+								},
+								{
+									"key": "content",
+									"value": "A thriller movie"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/items?all=true",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "genres",
+									"value": "accion,thriller",
+									"disabled": true
+								},
+								{
+									"key": "all",
+									"value": "true"
 								}
 							]
 						}

@@ -200,3 +200,102 @@ This creates two files in `datasets` path:
 
 These files conform to the project dataset and are used for all notebooks.
 
+
+
+# Recommendation Chatbot API
+
+
+## Setup as a systemd service
+
+### Objetives
+* Install `cha-bot-api` as a `systemd` daemon.
+* Run daemon with your regular user.
+
+**Note**: `systemd` is an initialization and service management system for Unix-like operating systems. It is responsible for starting the system and managing the running processes and services. `systemd` has replaced traditional initialization systems like `SysV init` in many Linux distributions due to its greater efficiency and advanced features.
+
+
+### Setup
+
+
+**Step 1**: Copy service file user level `system` config path:
+
+```bash
+$ cp chat-bot-api/chat-bot-api.service ~/.config/systemd/user/
+```
+
+**Step 2**: Refresh systemd daemon with updated config.
+
+```bash
+$ systemctl --user daemon-reload
+```
+
+**Step 3**: Start `chat-bot-api` daemon on boot.
+
+```bash
+$ systemctl --user enable chat-bot-api
+```
+
+**Step 6**: Start `chat-bot-api` as `systemd` daemon.
+
+```bash
+$ systemctl --user start chat-bot-api
+```
+
+## Config file
+
+`config.conf`:
+```bash
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+CONDA_PATH="/opt/miniconda3"
+CONDA_ENV="thesis"
+# -----------------------------------------------------------------------------
+#
+#
+#
+# -----------------------------------------------------------------------------
+# API
+# -----------------------------------------------------------------------------
+HOME_PATH="$(pwd)"
+PARENT_PATH="$(dirname "$HOME_PATH")"
+SERVICE_NAME="Recommendation ChatBot API"
+PROCESS_NAME="uvicorn"
+export API_HOST="0.0.0.0"
+export API_PORT="8080"
+# -----------------------------------------------------------------------------
+#
+#
+#
+# -----------------------------------------------------------------------------
+# Mongo DB
+# -----------------------------------------------------------------------------
+export MONGODB_DATABASE="chatbot"
+export MONGODB_HOST="0.0.0.0"
+export MONGODB_PORT="27017"
+export MONGODB_URL="mongodb://$MONGODB_HOST:$MONGODB_PORT"
+# -----------------------------------------------------------------------------
+#
+#
+#
+# -----------------------------------------------------------------------------
+# Chroma DB
+# -----------------------------------------------------------------------------
+export CHROMA_HOST="0.0.0.0"
+export CHROMA_PORT="9090"
+# -----------------------------------------------------------------------------
+#
+#
+#
+# -----------------------------------------------------------------------------
+# Training Jobs
+# -----------------------------------------------------------------------------
+export TMP_PATH="$PARENT_PATH/tmp"
+export DATASET_PATH="$PARENT_PATH/datasets"
+export WEIGHTS_PATH="$PARENT_PATH/weights"
+export METRICS_PATH="$PARENT_PATH/metrics"
+# -----------------------------------------------------------------------------
+#
+#
+#
+```
