@@ -6,9 +6,8 @@ from .item_recommender      import ItemRecommender
 
 # Collaborative and content based recommenders
 from .user.filtering.user_item_filtering_recommender                  import UserItemFilteringRecommender
-from .user.filtering.database_user_item_filtering_recommender         import DatabaseUserItemFilteringRecommender
 from .user.filtering.user_item_filtering_recommender_result           import UserItemFilteringRecommenderResult
-from .user.filtering.database_user_item_filtering_recommender_result  import DatabaseUserItemFilteringRecommenderResult
+
 
 from .user.content_based.user_profile_recommender                import UserProfileRecommender
 from .user.content_based.multi_feature_user_profile_recommender  import MultiFeatureUserProfileRecommender

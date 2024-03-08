@@ -30,7 +30,7 @@ from services import (
 )
 
 from jobs import CFEmbUpdateJob
-from recommender import DatabaseUserItemFilteringRecommender
+from recommenders import DatabaseUserItemFilteringRecommender
 
 
 class AppContext:
