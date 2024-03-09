@@ -3,6 +3,49 @@
 
 This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model.
 
+
+Table of Contents
+=================
+
+* [Requisites](#requisites)
+* [Hypothesis](#metrics)
+* [Documents](#documents)
+* [Models](#models)
+* [Metrics](#metrics)
+* [Data](#data)
+* [Notebooks](#notebooks)
+    * [Recommendation Models](#notebooks)
+        * [Collaborative Filtering](#notebooks)
+        * [Content Based](#notebooks)
+        * [Ensembles](#notebooks)
+    * [Extras](#notebooks)
+* [Getting started](#)
+    * [Edit & run notebooks](#)
+    * [See notebooks in jupyter lab](#)
+* [Build dataset](#)
+* [Recommendation Chatbot API](#)
+    * [Setup as a systemd service](#)
+        * [Objetives](#)
+        * [Setup](#)
+        * [Config file](#)
+* [Example recommendations](#)
+* [References](#references)
+
+## Requisites
+
+* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
+* [mongodb](https://www.mongodb.com)
+* [chromadb](https://www.trychroma.com)
+* [mongosh](Optional)
+* [Studio3T](https://studio3t.com/) (Optional)
+* 6/10GB GPU to have reasonable execution times (Optional)
+
+## Hypothesis
+
+* Do deep learning-based models achieve better results than non-deep learning-based models? What are the advantages and disadvantages of each approach?
+* How can the cold-start problem be solved in a collaborative filtering-based recommendation approach? Any proposed solutions?
+
+
 ## Documents
 
 * [Specialization: Collaborative recommendation systems](https://github.com/adrianmarino/thesis-paper/blob/master/docs/thesis/thesis.pdf)
@@ -31,7 +74,6 @@ The following are the models to be compared. For more details, it is recommended
 
 ## Metrics
 
-
 To compare collaborative filtering models, the metrics **Mean Average Precision at k (mAP@k)** y **Normalized Discounted Cumulative Gain At K (NDCG@k)** are used. Ratings between 4 and 5 points belong to the positive class, and the rest belong to the negative class.
 
 Other metrics used:
@@ -40,10 +82,6 @@ Other metrics used:
 * Recall@K
 * RMSE
 
-## Hypothesis
-
-* Do deep learning-based models achieve better results than non-deep learning-based models? What are the advantages and disadvantages of each approach?
-* How can the cold-start problem be solved in a collaborative filtering-based recommendation approach? Any proposed solutions?
 
 ## Data
 
@@ -58,90 +96,79 @@ Based on these requirements, the following datasets were combined:
 * [TMDB Movie Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv): It does not have personalized ratings like the previous dataset, but it has several features corresponding to the movies or items which will be necessary when training content-based models.
 
 
-## References
-   * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/5_references.ipynb)
-   * Using or based on
-      * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
-      * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
-      * [deep-fm](https://github.com/adrianmarino/deep-fm)
-      * [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
-
 
 ## Notebooks
 
+### Recommendation Models
 
-* **Recommendation Models**
+* [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 
-    * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
+* [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 
-    * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
+#### Collaborative Filtering
 
-    * **Collaborative Filtering**
-      * **Memory based**
-          * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/1_knn.ipynb)
-      * **Model based**
-          * **Supervised**
-              * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/2_gmf.ipynb): Embedding's + dot product.
-              * [Biased Generalized Matrix Factorization (B-GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/3_biased_gmf.ipynb): Embedding's + dot product + user/item bias.
-              * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/4_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
-              * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/5_deep_fm.ipynb)
-          * **Unsupervised**
-              * [Collaborative Deep Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/7_cf-deep-ae.ipynb)
-              * [Collaborative Denoising Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cf-denoising-ae.ipynb)
-              * [Collaborative Variational Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/8_cf-variational-ae.ipynb)
-      * [Supervised Stacking Ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/9_stacking.ipynb)
-    * **Content Based**
-        * **User Profile**
-            * [User-Item filtering model (using genres only)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/1_user-item-filtering-model.ipynb)
-            * [Multi-feature user profile model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/2_multi-feature-user-profile-model.ipynb)
-        * **Item to Item**
-           * **Sparse Auto-Encoder + Distance Weighted Mean**
-               * [Movie Title Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/1_title_sparse_autoencoder.ipynb)
-               * [Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/2_tags_sparse_autoencoder.ipynb)
-               * [Movie Genres Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/3_genres_sparse_autoencoder.ipynb)
-               * [Movie Overview Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/4_overview_sparse_autoencoder.ipynb)
-               * [Ensemple CB recommender based on Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/5_ensample_sparse_autoencoder.ipynb)
-           * **Sentence Transformer + Distance Weighted Mean**
-               * [Movie Title Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/1_title_sentence_transformer.ipynb)
-               * [Movie Tags Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/2_tags_sentence_transformer.ipynb)
-               * [Movie Genres Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/3_genres_sentence_transformer.ipynb)
-               * [Movie Overview Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/4_overview_sentence_transformer.ipynb)
-               * [Ensemple CB recommender based on Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/5_ensample_sentence_transformer.ipynb)
-
-    * **Ensembles**
-        * [Content-based and Collaborative based models Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/1_stacking.ipynb)
-
-        * [Feature Weighted Linear Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/2_fwls.ipynb)
-
-        * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
-
-        * **Recommendation ChatBot API**
-            * Papers on which the chatbot was based.
-                * [Chat-REC: Towards Interactive and Explainable
-                LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
-                * [Large Language Models as Zero-Shot Conversational
-                Recommenders](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf)
-                * [Large Language Models are Competitive Near Cold-start
-                Recommenders for Language- and Item-based Preferences](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf)
-            * [Load movie items and interactions to chatbot database](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/1_load-items-interractions-to-database.ipynb)
-            * [Update Users and Items embeddings using DeepFM model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/2_embedding-db-updater.ipynb)
-            * [LLM/Collaborative Filtering recommender ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/5_recommender.ipynb)
-            * [LLM Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/3_llm-tests.ipynb)
-            * [LLM Output Parser Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/4_output-parser-tests.ipynb)
+* **Memory based**
+    * [KNN User/Item/Ensemple Predictors](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/1_knn.ipynb)
+* **Model based**
+    * **Supervised**
+        * [Generalized Matrix Factorization (GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/2_gmf.ipynb): Embedding's + dot product.
+        * [Biased Generalized Matrix Factorization (B-GMF)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/3_biased_gmf.ipynb): Embedding's + dot product + user/item bias.
+        * [Neural Network Matrix Factorization](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/4_nn_mf.ipynb):  User/Item Embedding + flatten + Full Connected.
+        * [Deep Factorization Machine](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/5_deep_fm.ipynb)
+    * **Unsupervised**
+        * [Collaborative Deep Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/7_cf-deep-ae.ipynb)
+        * [Collaborative Denoising Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/6_cf-denoising-ae.ipynb)
+        * [Collaborative Variational Auto Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/8_cf-variational-ae.ipynb)
+* [Supervised Stacking Ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cf/9_stacking.ipynb)
 
 
-* **Extras**
-    * [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+#### Content Based
+
+* **User Profile**
+    * [User-Item filtering model (using genres only)](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/1_user-item-filtering-model.ipynb)
+    * [Multi-feature user profile model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/2_multi-feature-user-profile-model.ipynb)
+* **Item to Item**
+    * **Sparse Auto-Encoder + Distance Weighted Mean**
+        * [Movie Title Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/1_title_sparse_autoencoder.ipynb)
+        * [Movie Tags Sparse Autoencoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/2_tags_sparse_autoencoder.ipynb)
+        * [Movie Genres Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/3_genres_sparse_autoencoder.ipynb)
+        * [Movie Overview Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/4_overview_sparse_autoencoder.ipynb)
+        * [Ensemple CB recommender based on Sparse Auto-Encoder](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sparse/5_ensample_sparse_autoencoder.ipynb)
+    * **Sentence Transformer + Distance Weighted Mean**
+        * [Movie Title Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/1_title_sentence_transformer.ipynb)
+        * [Movie Tags Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/2_tags_sentence_transformer.ipynb)
+        * [Movie Genres Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/3_genres_sentence_transformer.ipynb)
+        * [Movie Overview Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/4_overview_sentence_transformer.ipynb)
+        * [Ensemple CB recommender based on Sentence Transformer](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/cb/sentence/5_ensample_sentence_transformer.ipynb)
+
+#### Ensembles
+
+* [Content-based and Collaborative based models Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/1_stacking.ipynb)
+
+* [Feature Weighted Linear Stacking](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/2_fwls.ipynb)
+
+* [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
+
+* **Recommendation ChatBot API**
+    * Papers on which the chatbot was based.
+        * [Chat-REC: Towards Interactive and Explainable
+        LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
+        * [Large Language Models as Zero-Shot Conversational
+        Recommenders](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf)
+        * [Large Language Models are Competitive Near Cold-start
+        Recommenders for Language- and Item-based Preferences](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf)
+    * [Load movie items and interactions to chatbot database](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/1_load-items-interractions-to-database.ipynb)
+    * [Update Users and Items embeddings using DeepFM model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/2_embedding-db-updater.ipynb)
+    * [LLM/Collaborative Filtering recommender ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/5_recommender.ipynb)
+    * [LLM Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/3_llm-tests.ipynb)
+    * [LLM Output Parser Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/4_output-parser-tests.ipynb)
 
 
-## Requisites
+### Extras
 
-* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
-* [mongodb](https://www.mongodb.com)
-* [chromadb](https://www.trychroma.com)
-* [mongosh](Optional)
-* [Studio3T](https://studio3t.com/) (Optional)
-* 6/10GB GPU to have reasonable execution times (Optional)
+* [Multi-categorical variable embedding module](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/weighted_avg_embedding_bag.ipynb)
+
+
 
 ## Getting started
 
@@ -202,19 +229,19 @@ These files conform to the project dataset and are used for all notebooks.
 
 
 
-# Recommendation Chatbot API
+## Recommendation Chatbot API
 
 
-## Setup as a systemd service
+### Setup as a systemd service
 
-### Objetives
+#### Objetives
 * Install `cha-bot-api` as a `systemd` daemon.
 * Run daemon with your regular user.
 
 **Note**: `systemd` is an initialization and service management system for Unix-like operating systems. It is responsible for starting the system and managing the running processes and services. `systemd` has replaced traditional initialization systems like `SysV init` in many Linux distributions due to its greater efficiency and advanced features.
 
 
-### Setup
+#### Setup
 
 
 **Step 1**: Copy service file user level `system` config path:
@@ -241,7 +268,7 @@ $ systemctl --user enable chat-bot-api
 $ systemctl --user start chat-bot-api
 ```
 
-## Config file
+### Config file
 
 `config.conf`:
 ```bash
@@ -458,3 +485,13 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
     ]
 }
 ```
+
+
+
+## References
+   * [References](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/5_references.ipynb)
+   * Using or based on
+      * [pytorch-common](https://github.com/adrianmarino/pytorch-common)
+      * [knn-cf-rec-sys](https://github.com/adrianmarino/knn-cf-rec-sys)
+      * [deep-fm](https://github.com/adrianmarino/deep-fm)
+      * [recommendation-system-approaches](https://github.com/adrianmarino/recommendation-system-approaches)
