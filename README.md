@@ -28,7 +28,7 @@ Table of Contents
         * [Objetives](#objetives)
         * [Setup](#setup)
         * [Config file](#config-file)
-    * [Example recommendations](#example-recommendations)
+    * [Test API](#test-api)
 * [References](#references)
 
 ## Requisites
@@ -328,7 +328,7 @@ export METRICS_PATH="$PARENT_PATH/metrics"
 ```
 
 
-## Example recommendations
+## Test API
 
 
 **Step 1**: Create a user profile.
