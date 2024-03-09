@@ -373,9 +373,10 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations/models'
     "models": [
         "llama2-13b-chat",
         "llama2-7b-chat",
-        "neural-chat",
+        "gemma-7b",
         "mistral-instruct",
-        "mistral"
+        "mistral",
+        "neural-chat"
     ]
 }
 ```

@@ -15,9 +15,10 @@ class ChatBotPoolService:
     models  = [
       'llama2-13b-chat',
       'llama2-7b-chat',
-      'neural-chat',
+      'gemma-7b',
       'mistral-instruct',
-      'mistral'
+      'mistral',
+      'neural-chat'
     ],
     list_size = 15
   ):
