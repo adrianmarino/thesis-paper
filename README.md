@@ -394,7 +394,7 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
         "content": "I want see marvel movies"
     },
     "settings": {
-        "llm"                                   : "llama2-7b-chat",
+        "llm"                                   : "gemma-7b",
         "retry"                                 : 2,
         "plain"                                 : false,
         "include_metadata"                      : false,
