@@ -4,8 +4,7 @@
 This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model.
 
 
-Table of Contents
-=================
+# Table of Contents
 
 1. [Requisites](#requisites)
 2. [Hypothesis](#hypothesis)
