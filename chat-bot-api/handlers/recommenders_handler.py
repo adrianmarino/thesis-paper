@@ -1,6 +1,4 @@
 from fastapi import HTTPException, APIRouter, Response, Request
-from models import RecommendationsRequest
-import sys
 
 
 def recommenders_handler(base_url, ctx):

@@ -21,7 +21,16 @@ class RecommendationsFactory:
     self.ctx = ctx
 
 
-  async def create(self, response, email, base_url, limit, include_metadata=False, shuffle=False):
+  async def create(
+    self,
+    response,
+    email,
+    base_url,
+    limit,
+    similar_items_augmentation_limit: int = 5,
+    include_metadata = False,
+    shuffle          = False,
+  ):
     recommended_item_by_title = {}
     excluded_recommended_items = []
 
@@ -31,7 +40,7 @@ class RecommendationsFactory:
           .user_id_eq(email) \
           .is_seen(False) \
           .contains(r['title']) \
-          .limit_eq(5)
+          .limit_eq(similar_items_augmentation_limit)
       )
 
       for idx, item in enumerate(sim_items):

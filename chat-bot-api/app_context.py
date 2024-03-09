@@ -17,7 +17,7 @@ from repository.chroma import (
     ChromaRepositoryFactory
 )
 from services import (
-    ChatBotService,
+    RecommendationChatService,
     ChatHistoryService,
     ProfileService,
     InteractionService,
@@ -56,7 +56,7 @@ class AppContext:
     def _build_services(self):
         self.chat_bot_pool_service = ChatBotPoolService()
 
-        self.chat_bot_service = ChatBotService(self)
+        self.recommendation_chat_service = RecommendationChatService(self)
 
         self.history_service = ChatHistoryService(self)
 

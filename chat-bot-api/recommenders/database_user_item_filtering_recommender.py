@@ -26,8 +26,8 @@ class DatabaseUserItemFilteringRecommender:
 
     def __users_distance(self, similar_users):
         return { similar_users.str_ids[idx]: similar_users.distances[idx] for idx in range(len(similar_users.str_ids)) }
-    
-    
+
+
     def __select_interactions(self, interactions, percent, max_items_by_user, min_rating_by_user=3.5):
         interactions_by_user_id = {}
         for i in interactions:
@@ -38,22 +38,21 @@ class DatabaseUserItemFilteringRecommender:
 
             if random.random() >= percent and len(inters) <= max_items_by_user and i.rating >= min_rating_by_user:
                 inters.append(i)
-    
+
         interactions = []
         for inters in interactions_by_user_id.values():
             interactions.extend(inters)
-        
+
         return interactions
-    
+
 
     def __empty_result(self):
         return DatabaseUserItemFilteringRecommenderResult(self.__class__.__name__, [], [])
 
 
-
     def __find_similar_user_ids(self, user_id, k_sim_users):
         similar_users = self.__user_emb_repository.find_similars_by_id(
-            user_id, 
+            user_id,
             limit = k_sim_users+1
         )
         if similar_users.empty:
@@ -93,7 +92,7 @@ class DatabaseUserItemFilteringRecommender:
 
         if len(sim_user_interactions) ==0:
             raise Exception('Not found similar users interactions')
-        
+
         logging.info(f'Select {len(sim_user_interactions)} similar users interactions (max by user: {max_items_by_user}, min rating: {min_rating_by_user})')
 
         return sim_user_interactions
@@ -107,7 +106,7 @@ class DatabaseUserItemFilteringRecommender:
         text_query,
         text_query_limit = 12_000
     ):
-        item_ids = np.unique([i.item_id for i in sim_user_interactions]).tolist()  
+        item_ids = np.unique([i.item_id for i in sim_user_interactions]).tolist()
         if len(item_ids) == 0:
             raise Exception('Not found items')
 
@@ -126,7 +125,7 @@ class DatabaseUserItemFilteringRecommender:
             logging.info(f'Found {len(result.ids)} items by text query')
 
             item_ids = [id for id in item_ids if int(id) in result.ids]
-        
+
             if len(item_ids) == 0:
                 raise Exception('There are any items by text query')
 
@@ -135,7 +134,7 @@ class DatabaseUserItemFilteringRecommender:
         items = await self.__items_repository.find_many_by(item_id={'$in': item_ids})
 
         user_interactions = await self.__interactions_repository.find_many_by(user_id=user_id)
-        
+
         if not_seen:
             seen_item_ids = [i.item_id for i in user_interactions]
             item_ids = [item_id for item_id in item_ids if item_id not in seen_item_ids]
@@ -160,14 +159,14 @@ class DatabaseUserItemFilteringRecommender:
             item_id={'$in': item_ids}
         )
         pred_rating_by_item_id = {i.item_id: i.rating for i in pred_interactions}
-        
-        
+
+
         distance_by_user_id = self.__users_distance(similar_users)
-        
+
         distance_by_item_id = {i.item_id:distance_by_user_id[i.user_id] for i in sim_user_interactions}
-        
+
         max_rating      = np.max([item.rating for item in items])
-        
+
         max_pred_rating = np.max(list(pred_rating_by_item_id.values()))
 
 
@@ -178,11 +177,11 @@ class DatabaseUserItemFilteringRecommender:
             norm_rating = item.rating / max_rating
 
             item_score1  = norm_rating * item_sim
-            
+
             norm_pred_rating = pred_rating_by_item_id.get(item.id, 0) / max_pred_rating
-                
+
             item_score2  = norm_pred_rating * item_sim
-            
+
             scored_items.append((item, item_score1, item_score2, item_sim, norm_rating))
 
         return scored_items, pred_rating_by_item_id
@@ -204,12 +203,12 @@ class DatabaseUserItemFilteringRecommender:
             for item in scored_items
         ])
 
-    
+
     async def __build_seen_items(self, user_id):
         user_interactions = await self.__interactions_repository.find_many_by(user_id=str(user_id))
 
         seen_item_rating_by_id = {i.item_id: i.rating for i in user_interactions}
-        
+
         seen_items = await self.__items_repository.find_many_by(
             item_id={'$in': list(seen_item_rating_by_id.keys())}
         )
@@ -231,7 +230,7 @@ class DatabaseUserItemFilteringRecommender:
     async def __build_result(
         self,
         user_id,
-        scored_items, 
+        scored_items,
         pred_rating_by_item_id
     ):
         recommended_items = self.__build_Recommendations(
@@ -240,7 +239,7 @@ class DatabaseUserItemFilteringRecommender:
         )
 
         seen_items = await self.__build_seen_items(user_id)
-        
+
         return DatabaseUserItemFilteringRecommenderResult(
             self.__class__.__name__,
             recommended_items,
@@ -288,6 +287,6 @@ class DatabaseUserItemFilteringRecommender:
 
         return await self.__build_result(
             user_id,
-            scored_items, 
+            scored_items,
             pred_rating_by_item_id
         )
