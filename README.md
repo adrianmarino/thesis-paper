@@ -28,7 +28,7 @@ Table of Contents
         * [Objetives](#objetives)
         * [Setup](#setup)
         * [Config file](#config-file)
-* [Example recommendations](#example-recommendations)
+    * [Example recommendations](#example-recommendations)
 * [References](#references)
 
 ## Requisites
