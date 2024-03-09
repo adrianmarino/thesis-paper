@@ -28,6 +28,7 @@ This study aims to compare different approaches to recommendation based on colla
         2. [Setup](#setup)
         3. [Config file](#config-file)
     2. [Test API](#test-api)
+    3. [API Postman Collection](#api-postman-collection)
 11. [References](#references)
 
 ## Requisites
@@ -327,7 +328,7 @@ export METRICS_PATH="$PARENT_PATH/metrics"
 ```
 
 
-## Test API
+### Test API
 
 
 **Step 1**: Create a user profile.
@@ -486,6 +487,9 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 }
 ```
 
+### API Postman Collection
+
+[Recommendation Charbot API postman collection](https://github.com/adrianmarino/thesis-paper/blob/master/chat-bot-api/postman_collection.json)
 
 
 ## References
