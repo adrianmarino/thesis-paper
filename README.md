@@ -36,7 +36,7 @@ This study aims to compare different approaches to recommendation based on colla
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
 * [mongodb](https://www.mongodb.com)
 * [chromadb](https://www.trychroma.com)
-* [mongosh](Optional)
+* [mongosh](Optional) (Optional)
 * [Studio3T](https://studio3t.com/) (Optional)
 * [Postman](https://www.postman.com/) (Optional)
 * 6/10GB GPU to have reasonable execution times (Optional)
