@@ -37,7 +37,7 @@ class RecommendationChatService:
     prompt = f'prompt{int(len(interactions_info) >= self._interactions_count)}'
 
     chat_bot = self.ctx.chat_bot_pool_service.get(
-      model  = query.settings.model,
+      model  = query.settings.llm,
       prompt = prompt
     )
 
@@ -55,7 +55,7 @@ class RecommendationChatService:
 
     sw = pu.Stopwatch()
 
-    logs.append(f'Start inference - Model: {query.settings.model}. Prompt: {prompt}')
+    logs.append(f'Start inference - LLM: {query.settings.llm}. Prompt: {prompt}')
     logging.info(logs[-1])
     response = chat_bot.send(
       request      = query.message.content,
@@ -69,7 +69,7 @@ class RecommendationChatService:
       ),
       chat_history = chat_history
     )
-    logs.append(f'End {query.settings.model} model inference. Elapsed time: {sw.to_str()}.')
+    logs.append(f'End {query.settings.llm} llm inference. Elapsed time: {sw.to_str()}.')
     logging.info(logs[-1])
 
     ai_message = AIMessage.from_response(response, query.message.author)
@@ -86,8 +86,12 @@ class RecommendationChatService:
       similar_items_augmentation_limit = rec_settings.similar_items_augmentation_limit
     )
 
-    result.metadata['elapsed_time'] = sw.to_str()
-    result.metadata['logs'] = logs
+
+    if query.settings.include_metadata:
+      result.metadata['elapsed_time'] = sw.to_str()
+      result.metadata['logs'] = logs
+    else:
+      result.metadata = None
 
     return result
 

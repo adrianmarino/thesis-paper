@@ -26,6 +26,6 @@ def recommendations_handler(base_url, ctx):
       return Response(content=recommendations.plain, media_type='text/plain')
     else:
       recommendations.items = [item.dict(exclude_none=True) for item in recommendations.items]
-      return recommendations
+      return recommendations.dict(exclude_none=True)
 
   return router

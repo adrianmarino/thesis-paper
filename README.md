@@ -299,3 +299,162 @@ export METRICS_PATH="$PARENT_PATH/metrics"
 #
 #
 ```
+
+
+### Example recommendations
+
+
+**Step 1**: Create a user profile.
+
+    ```bash
+    curl --location 'http://nonosoft.ddns.net:8080/api/v1/profiles' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "name": "Adrian",
+        "email": "adrianmarino@gmail.com",
+        "metadata": {
+            "studies"        : "Engineering",
+            "age"            : 42,
+            "genre"          : "Male",
+            "nationality"    : "Argentina",
+            "work"           : "Software Engineer",
+            "prefered_movies": {
+                "release": {
+                    "from" : "1970"
+                },
+                "genres": [
+                    "thiller",
+                    "suspense",
+                    "science fiction",
+                    "love",
+                    "comedy"
+                ]
+            }
+        }
+    }'
+    ```
+
+
+**Step 2**: Query supported `llm`models.
+
+
+    ```bash
+    curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations/models'
+    ```
+
+    ```json
+    {
+        "models": [
+            "llama2-13b-chat",
+            "llama2-7b-chat",
+            "neural-chat",
+            "mistral-instruct",
+            "mistral"
+        ]
+    }
+    ```
+
+
+**Step 2**: Ask for recommendations.
+
+
+    ```bash
+    curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "message": {
+            "author": "adrianmarino@gmail.com",
+            "content": "I want see marvel movies"
+        },
+        "settings": {
+            "llm"                                   : "llama2-7b-chat",
+            "retry"                                 : 2,
+            "plain"                                 : false,
+            "include_metadata"                      : false,
+            "rag": {
+                "shuffle"                           : true,
+                "candidates_limit"                  : 50,
+                "llm_response_limit"                : 50,
+                "recommendations_limit"             : 5,
+                "similar_items_augmentation_limit"  : 5,
+                "not_seen": true
+            },
+            "collaborative_filtering": {
+                "shuffle"                           : true,
+                "candidates_limit"                  : 50,
+                "llm_response_limit"                : 50,
+                "recommendations_limit"             : 5,
+                "similar_items_augmentation_limit"  : 5,
+                "text_query_limit"                  : 5000,
+                "k_sim_users"                       : 10,
+                "random_selection_items_by_user"    : 0.5,
+                "max_items_by_user"                 : 10,
+                "min_rating_by_user"                : 3.5,
+                "not_seen"                          : true
+            }
+        }
+    }'
+    ```
+
+    ```json
+    {
+        "items": [
+            {
+                "title": "Thor",
+                "poster": "http://image.tmdb.org/t/p/w500/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg",
+                "release": "2011",
+                "description": "Chris hemsworth stars as the norse god of thunder, who must reclaim his rightful place on the throne and defeat an evil nemesis.",
+                "genres": [
+                    "action",
+                    "adventure",
+                    "drama",
+                    "fantasy",
+                    "imax"
+                ],
+                "votes": [
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/86332/1",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/86332/2",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/86332/3",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/86332/4",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/86332/5"
+                ]
+            },
+            {
+                "title": "Avengers, The",
+                "poster": "http://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+                "release": "2012",
+                "description": "Earth's mightiest heroes team up to save the world from an alien invasion in this epic superhero movie.",
+                "genres": [
+                    "action",
+                    "adventure",
+                    "sci-fi",
+                    "imax"
+                ],
+                "votes": [
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/89745/1",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/89745/2",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/89745/3",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/89745/4",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/89745/5"
+                ]
+            },
+            {
+                "title": "Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",
+                "poster": "http://image.tmdb.org/t/p/w500/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg",
+                "release": "2011",
+                "description": "Chris hemsworth stars as the norse god of thunder, who must reclaim his rightful place on the throne and defeat an evil nemesis.",
+                "genres": [
+                    "fantasy",
+                    "sci-fi"
+                ],
+                "votes": [
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/168040/1",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/168040/2",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/168040/3",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/168040/4",
+                    "http://nonosoft.ddns.net:8080/api/v1/interactions/make/adrianmarino@gmail.com/168040/5"
+                ]
+            }
+        ]
+    }
+    ```
