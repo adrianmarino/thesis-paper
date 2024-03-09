@@ -38,6 +38,7 @@ This study aims to compare different approaches to recommendation based on colla
 * [chromadb](https://www.trychroma.com)
 * [mongosh](Optional)
 * [Studio3T](https://studio3t.com/) (Optional)
+* [Postman](https://www.postman.com/) (Optional)
 * 6/10GB GPU to have reasonable execution times (Optional)
 
 ## Hypothesis
