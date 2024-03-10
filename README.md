@@ -16,11 +16,12 @@ This study aims to compare different approaches to recommendation based on colla
 5. [Metrics](#metrics)
 6. [Data](#data)
 7. [Notebooks](#notebooks)
-    1. [Recommendation Models](#recommendation-models)
+    1. [Data pre-processing & analysis](#)
+    2. [Recommendation Models](#recommendation-models)
         1. [Collaborative Filtering](#collaborative-filtering)
         2. [Content Based](#content-based)
         3. [Ensembles](#ensembles)
-    2. [Extras](#extras)
+    3. [Extras](#extras)
 8. [Getting started](#getting-started)
     1. [Edit & run notebooks](#edit--run-notebooks)
     2. [See notebooks in jupyter lab](#see-notebooks-in-jupyter-lab)
@@ -103,11 +104,15 @@ Based on these requirements, the following datasets were combined:
 
 ## Notebooks
 
-### Recommendation Models
-
+### Data pre-processing & analysis
 
 * [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data_preprocessing.ipynb)
 * [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
+
+
+### Recommendation Models
+
+
 * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 
