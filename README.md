@@ -244,7 +244,6 @@ These files conform to the project dataset and are used for all notebooks.
 
 ## Recommendation Chatbot API
 
-<div id="content" style="width: 100%;>
 <div style="width: 70%; float:left">
   <p>
     A chatbot API that recommends movies based on a user's text request, their profile data, and ratings. Papers on which the chatbot was based:<br/>
@@ -262,7 +261,6 @@ These files conform to the project dataset and are used for all notebooks.
     <p align="center">
       <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 300px; height: auto;" />
     </p>      
-</div>
 </div>
 
 
