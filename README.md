@@ -1,8 +1,11 @@
 
 # University of Buenos Aires (UBA) - Data Mining and Knowledge Discovery Master - Thesis - Collaborative and hybrid recommendation systems
 
-This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model.
+This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model. The movie lens and TMDB datasets were chosen as the basis for defining a dataset, as they are classic datasets commonly used for comparing recommendation models.
 
+<p align="center">
+  <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/logo.jng?raw=true"  height="330" />
+</p>
 
 ## Table of Contents
 
