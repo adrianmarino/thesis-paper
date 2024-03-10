@@ -244,30 +244,26 @@ These files conform to the project dataset and are used for all notebooks.
 
 ## Recommendation Chatbot API
 
-<table width="100%"  style="border:0px solid white; width:100%;">
-  <tbody width="100%"  style="border:0px solid white; width:100%;">
-   <tr>
-      <td style="border:0px;">
-        <p>
-          A chatbot API that recommends movies based on a user's text request, their profile data, and ratings. Papers on which the chatbot was based:<br/>
-          <ul>
-            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf">Chat-REC: Towards Interactive and Explainable
-          LLMs-Augmented Recommender System</a></li>
-            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf">Large Language Models as Zero-Shot Conversational
-          Recommenders</a></li>
-            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf">Large Language Models are Competitive Near Cold-start
-          Recommenders for Language- and Item-based Preferences</a></li>
-          </ul>        
-        </p>      
-      </td>
-      <td style="border:0px;">
-        <p align="center">
-          <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 350px; height: auto;" />
-        </p>      
-      </td>
-   </tr>
-  </tbody>
-</table>
+<div id="content" style="width: 100%;>
+<div style="width: 70%; float:left">
+  <p>
+    A chatbot API that recommends movies based on a user's text request, their profile data, and ratings. Papers on which the chatbot was based:<br/>
+    <ul>
+      <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf">Chat-REC: Towards Interactive and Explainable
+    LLMs-Augmented Recommender System</a></li>
+      <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf">Large Language Models as Zero-Shot Conversational
+    Recommenders</a></li>
+      <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf">Large Language Models are Competitive Near Cold-start
+    Recommenders for Language- and Item-based Preferences</a></li>
+    </ul>        
+  </p>      
+</div>
+<div style="width: 30%; float:right">
+    <p align="center">
+      <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 300px; height: auto;" />
+    </p>      
+</div>
+</div>
 
 
 
