@@ -244,10 +244,10 @@ These files conform to the project dataset and are used for all notebooks.
 
 ## Recommendation Chatbot API
 
-<table>
-  <tbody>
+<table width="100%"  style="border:0px solid white; width:100%;">
+  <tbody width="100%"  style="border:0px solid white; width:100%;">
    <tr>
-      <td style="border: none">
+      <td style="border:0px;">
         <p>
           A chatbot API that recommends movies based on a user's text request, their profile data, and ratings. Papers on which the chatbot was based:<br/>
           <ul>
@@ -260,7 +260,7 @@ These files conform to the project dataset and are used for all notebooks.
           </ul>        
         </p>      
       </td>
-      <td style="border: none">
+      <td style="border:0px;">
         <p align="center">
           <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 350px; height: auto;" />
         </p>      
