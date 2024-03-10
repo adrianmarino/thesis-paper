@@ -265,7 +265,7 @@ These files conform to the project dataset and are used for all notebooks.
 
 
 
-### Setup as a systemd service
+### Install as systemd service
 
 #### Objetives
 * Install `cha-bot-api` as a `systemd` daemon.
@@ -277,13 +277,13 @@ These files conform to the project dataset and are used for all notebooks.
 #### Setup
 
 
-**Step 1**: Copy service file user level `system` config path:
+**Step 1**: Copy `chat-bot-api.service` to user `system` config path:
 
 ```bash
 $ cp chat-bot-api/chat-bot-api.service ~/.config/systemd/user/
 ```
 
-**Step 2**: Refresh systemd daemon with updated config.
+**Step 2**: Refresh `systemd` daemon with updated config.
 
 ```bash
 $ systemctl --user daemon-reload
