@@ -105,8 +105,10 @@ Based on these requirements, the following datasets were combined:
 
 ### Recommendation Models
 
-* [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 
+* [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data_preprocessing.ipynb)
+* [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
+* [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
 
 #### Collaborative Filtering
