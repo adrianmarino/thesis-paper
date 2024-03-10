@@ -221,7 +221,7 @@ To carry out this process, it is necessary to have **MongoDB** database engine i
 
 Now is necessary to run the next two notebooks in order:
 
-1. [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data-preprocessing.ipynb)
+1. [Data pre-processing](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/1_data_preprocessing.ipynb)
 2. [Exploratory data analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/2_eda.ipynb)
 
 This creates two files in `datasets` path:
