@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 import logging
 from app_context import AppContext
 from handlers import (
@@ -19,13 +20,18 @@ BASE_URL = '/api/v1'
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 app = FastAPI(
-    title="Rec ChatBot API",
-    description='Allow recommends movies to users base on your profile and seen movies.',
-    version="0.5.0",
+    title='Recommendation Chatbot API',
+    description='Provide personalized movie recommendations to users based on their profile, watched movies, and rating behavior.',
+    version='0.9.0',
     contact={
-        "name": "Adrian Norberto Marino",
-        "url": "https://github.com/adrianmarino",
-        "email": "adrianmarino@gmail.com",
+        'name'  : 'Adrian Norberto Marino',
+        'url'   : 'https://github.com/adrianmarino',
+        'email' : 'adrianmarino@gmail.com',
+    },
+    swagger_ui_parameters={
+        'deepLinking'           : True,
+        'displayRequestDuration': True,
+        'syntaxHighlight.theme' : 'monokai'
     }
 )
 
@@ -55,8 +61,7 @@ async def internal_exception_handler(request: Request, e: Exception):
 )
 
 
-
-@app.on_event("startup")
+@app.on_event('startup')
 async def startup_event():
     logger = logging.getLogger(__name__)
     logger.info("""

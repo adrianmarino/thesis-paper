@@ -1,7 +1,13 @@
 
-# University of Buenos Aires (UBA) - Data Mining and Knowledge Discovery Master - Thesis - Collaborative and hybrid recommendation systems
+<p align="left">
 
-This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model. The movie lens and TMDB datasets were chosen as the basis for defining a dataset, as they are classic datasets commonly used for comparing recommendation models.
+<b>University of Buenos Aires</br>Faculty of Exact and natural sciences</br>Master in Data Mining and Knowledge Discovery</b>
+</p>
+
+# Collaborative and hybrid recommendation systems</h1>
+
+
+This study aims to compare different approaches to recommendation based on collaborative and hybrid filtering (i.e., a combination of collaborative and content-based filters), explaining the advantages and disadvantages of each approach, as well as their architecture and operation for each proposed model. In the realm of hybrid models or ensembles, experiments were conducted with ensembles of different types including LLM(Large language models), content-based models, and collaborative filtering-based models. The MovieLens and TMDB datasets were chosen as the basis for defining a dataset, as they are classic datasets commonly used for comparing recommendation models.
 
 <p align="center">
   <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/logo.png?raw=true"  height="800" />
@@ -16,7 +22,7 @@ This study aims to compare different approaches to recommendation based on colla
 5. [Metrics](#metrics)
 6. [Data](#data)
 7. [Notebooks](#notebooks)
-    1. [Data pre-processing & analysis](#)
+    1. [Data pre-processing & analysis](#data-pre-processing--analysis)
     2. [Recommendation Models](#recommendation-models)
         1. [Collaborative Filtering](#collaborative-filtering)
         2. [Content Based](#content-based)
@@ -31,8 +37,10 @@ This study aims to compare different approaches to recommendation based on colla
         1. [Objetives](#objetives)
         2. [Setup](#setup)
         3. [Config file](#config-file)
-    2. [Test API](#test-api)
-    3. [API Postman Collection](#api-postman-collection)
+    2. [Register Airflow DAG](#register-airflow-dag)
+    3. [Test API](#test-api)
+    4. [API Postman Collection](#api-postman-collection)
+    5. [API Documentation](#api-documentation)
 11. [References](#references)
 
 ## Requisites
@@ -40,6 +48,7 @@ This study aims to compare different approaches to recommendation based on colla
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html) / [mamba](https://github.com/mamba-org/mamba)
 * [mongodb](https://www.mongodb.com)
 * [chromadb](https://www.trychroma.com)
+* [airflow](https://airflow.apache.org/)
 * [mongosh](Optional) (Optional)
 * [Studio3T](https://studio3t.com/) (Optional)
 * [Postman](https://www.postman.com/) (Optional)
@@ -160,14 +169,7 @@ Based on these requirements, the following datasets were combined:
 
 * [K-Arm Bandit + Thompson sampling](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/ensemble/3_k_arm_bandit_thompson_sampling.ipynb)
 
-* **Recommendation ChatBot API**
-    * Papers on which the chatbot was based.
-        * [Chat-REC: Towards Interactive and Explainable
-        LLMs-Augmented Recommender System](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf)
-        * [Large Language Models as Zero-Shot Conversational
-        Recommenders](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf)
-        * [Large Language Models are Competitive Near Cold-start
-        Recommenders for Language- and Item-based Preferences](https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf)
+* [Recommendation Chatbot API](#recommendation-chatbot-api)
     * [Load movie items and interactions to chatbot database](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/1_load-items-interractions-to-database.ipynb)
     * [Update Users and Items embeddings using DeepFM model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/2_embedding-db-updater.ipynb)
     * [LLM/Collaborative Filtering recommender ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/5_recommender.ipynb)
@@ -241,6 +243,32 @@ These files conform to the project dataset and are used for all notebooks.
 
 
 ## Recommendation Chatbot API
+
+<table>
+  <tbody>
+   <tr>
+      <td style="border: none">
+        <p>
+          A chatbot API that recommends movies based on a user's text request, their profile data, and ratings. Papers on which the chatbot was based:<br/>
+          <ul>
+            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/2303.14524.pdf">Chat-REC: Towards Interactive and Explainable
+          LLMs-Augmented Recommender System"</a></li>
+            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf">Large Language Models as Zero-Shot Conversational
+          Recommenders</a></li>
+            <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf">Large Language Models are Competitive Near Cold-start
+          Recommenders for Language- and Item-based Preferences</a></li>
+          </ul>        
+        </p>      
+      </td>
+      <td style="border: none">
+        <p align="center">
+          <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 350px; height: auto;" />
+        </p>      
+      </td>
+   </tr>
+  </tbody>
+</table>
+
 
 
 ### Setup as a systemd service
@@ -338,6 +366,11 @@ export METRICS_PATH="$PARENT_PATH/metrics"
 #
 ```
 
+### Register Airflow DAG
+
+```bash
+cp dags/cf_emb_update_dag.py $AIRFLOW_HOME/dags
+```
 
 ### Test API
 
@@ -502,6 +535,12 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 
 * [Recommendation Charbot API postman collection](https://github.com/adrianmarino/thesis-paper/blob/master/chat-bot-api/postman_collection.json)
 * [How to import a Postman collection](https://www.youtube.com/watch?v=M-qHvBhULes)
+
+
+### API Documentation
+
+* [Swagger UI](http://nonosoft.ddns.net:8080/docs)
+* [Redoc](http://nonosoft.ddns.net:8080/redoc)
 
 
 ## References
