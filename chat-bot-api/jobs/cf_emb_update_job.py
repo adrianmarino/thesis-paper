@@ -38,7 +38,9 @@ class CFEmbUpdateJob(Job):
 
     interactions_df = self.helper.get_interactions()
 
-    if  self._cfg.get('interactions_count', 0) == len(interactions_df):
+    chat_bot_interactions = interactions_df[interactions_df["user_id"].str.contains("@")]
+
+    if len(chat_bot_interactions) == 0 or self._cfg.get('interactions_count', 0) == len(interactions_df):
       logging.warn("""
         No changes were found in user interactions, therefore updating
         user and item embeddings, as well as predictions for ratings

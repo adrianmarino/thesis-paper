@@ -69,6 +69,9 @@ class RecChatBotV1ApiClient:
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
 
+        if  response.status_code != 404:
+            return []
+
         if  response.status_code != 200:
             raise Exception(f'Error when query interactions by "{email}" user id. Detail: {response.json()}')
 
