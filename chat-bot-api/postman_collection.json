@@ -249,7 +249,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want see marvel movies\"\n    },\n    \"settings\": {\n        \"llm\"                                   : \"gemma-7b\",\n        \"retry\"                                 : 2,\n        \"plain\"                                 : false,\n        \"include_metadata\"                      : false,\n        \"rag\": {\n            \"shuffle\"                           : true,\n            \"candidates_limit\"                  : 50,\n            \"llm_response_limit\"                : 50,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"not_seen\": true\n        },\n        \"collaborative_filtering\": {\n            \"shuffle\"                           : true,\n            \"candidates_limit\"                  : 50,\n            \"llm_response_limit\"                : 50,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"text_query_limit\"                  : 5000,\n            \"k_sim_users\"                       : 10,\n            \"random_selection_items_by_user\"    : 0.5,\n            \"max_items_by_user\"                 : 10,\n            \"min_rating_by_user\"                : 3.5,\n            \"not_seen\"                          : true\n        }\n    }\n}",
+							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want see marvel movies\"\n    },\n    \"settings\": {\n        \"llm\"                                   : \"llama2-7b-chat\",\n        \"retry\"                                 : 2,\n        \"plain\"                                 : false,\n        \"include_metadata\"                      : false,\n        \"rag\": {\n            \"shuffle\"                           : true,\n            \"candidates_limit\"                  : 50,\n            \"llm_response_limit\"                : 50,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"not_seen\": true\n        },\n        \"collaborative_filtering\": {\n            \"shuffle\"                           : true,\n            \"candidates_limit\"                  : 50,\n            \"llm_response_limit\"                : 50,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"text_query_limit\"                  : 5000,\n            \"k_sim_users\"                       : 10,\n            \"random_selection_items_by_user\"    : 0.5,\n            \"max_items_by_user\"                 : 10,\n            \"min_rating_by_user\"                : 3.5,\n            \"not_seen\"                          : true\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -417,7 +417,7 @@
 					"response": []
 				},
 				{
-					"name": "Get by email",
+					"name": "By email",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -438,12 +438,12 @@
 					"response": []
 				},
 				{
-					"name": "Remove",
+					"name": "By email",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/interactions/adrianmarino@gmail.com/3",
+							"raw": "{{URL}}/api/v1/interactions/users/adrianmarino@gmail.com/all",
 							"host": [
 								"{{URL}}"
 							],
@@ -451,7 +451,31 @@
 								"api",
 								"v1",
 								"interactions",
+								"users",
 								"adrianmarino@gmail.com",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By email and item id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/interactions/users/adrianmarino@gmail.com/items/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"interactions",
+								"users",
+								"adrianmarino@gmail.com",
+								"items",
 								"3"
 							]
 						}
