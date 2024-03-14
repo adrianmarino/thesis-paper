@@ -1,4 +1,4 @@
-import rest
+import client
 import data as dt
 import util as ut
 from models import EntityEmb
@@ -15,7 +15,7 @@ class CFEmbUpdateJobHelper:
         self.ctx = ctx
 
     def get_interactions(self):
-        api_client = rest.RecChatBotV1ApiClient()
+        api_client = client.RecChatBotV1ApiClient()
         return pd.DataFrame(api_client.interactions())
 
     def split_dataset(self, interactions_df):

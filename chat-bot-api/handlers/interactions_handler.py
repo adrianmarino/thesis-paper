@@ -60,9 +60,15 @@ def interactions_handler(base_url, ctx):
             return [i.dict(exclude_none=True) for i in interactions]
 
 
-    @router.delete("/{user_id}/{item_id}", status_code = 202)
+    @router.delete("/users/{user_id}/items/{item_id}", status_code = 202)
     async def delete_interactions(user_id: str, item_id: str):
         await ctx.interaction_service.delete_one_by(user_id=user_id, item_id=item_id)
+        return Response(status_code=202)
+
+
+    @router.delete("/users/{user_id}", status_code = 202)
+    async def delete_interactions(user_id: str):
+        await ctx.interaction_service.delete_all_by_user_id(user_id)
         return Response(status_code=202)
 
 

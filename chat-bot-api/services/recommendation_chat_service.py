@@ -144,6 +144,8 @@ class RecommendationChatService:
 
       candidate_items, _ = await self.ctx.item_service.find_similars_by(sim_items_query)
 
+      candidate_items = candidate_items[:query.settings.rag.candidates_limit]
+
       logs.append(f'Candidates items source: RAG Query')
       logging.info(logs[-1])
 

@@ -12,6 +12,32 @@ class RecChatBotV1ApiClient:
     ):
         self.__base_url = f'http://{host}:{port}/api/v1'
 
+
+    def remove_interactions_by_user_id(self, user_id):
+        api_url = f'{self.__base_url}/interactions/users/{user_id}'
+        logging.info(f'DELETE {api_url}')
+
+        response = requests.delete(api_url)
+
+        if  response.status_code != 202:
+            raise Exception(f'Error when remove user interactions!. Detail: {response.json()}')
+
+
+    def recommendations(self, query):
+        api_url = f'{self.__base_url}/recommendations'
+        logging.info(f'POST {api_url}')
+        response = requests.post(
+            api_url,
+            data    = json.dumps(query),
+            headers = { 'Content-Type': 'application/json' }
+        )
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when query recommendations by query: {query.json()}. Detail: {response.json()}')
+
+        return response.json()
+
+
     def items(
         self,
         email    : str  = '',
@@ -23,9 +49,15 @@ class RecChatBotV1ApiClient:
         release  : int  = 1950,
         genres   : str  = ''
     ):
-        api_url = f'{self.__base_url}/items?email={email}&seen={seen}&content={content}&all={all}&limit={limit}&hide_emb={hide_emb}&release={release}&genres={genres}'
+        criterion = f'email={email}&seen={seen}&content={content}&all={all}&limit={limit}&hide_emb={hide_emb}&release={release}&genres={genres}'
+        api_url = f'{self.__base_url}/items?{criterion}'
         logging.debug(f'GET {api_url}')
+
         response = requests.get(api_url)
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when query items by {criterion} criterion. Detail: {response.json()}')
+
         return response.json()
 
 
@@ -36,14 +68,25 @@ class RecChatBotV1ApiClient:
         api_url = f'{self.__base_url}/interactions/users/{email}'
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when query interactions by "{email}" user id. Detail: {response.json()}')
+
         return response.json()
+
 
 
     def interactions(self):
         api_url = f'{self.__base_url}/interactions'
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when query interactions!. Detail: {response.json()}')
+
         return response.json()
+
+
 
 
     def add_items(self, items):
@@ -60,7 +103,7 @@ class RecChatBotV1ApiClient:
             }
         return self._bulk_add(items, 'items/bulk', to_dto, page_size=1000)
 
-            
+
     def add_interactions(self, interactions):
         def to_dto(row):
             return {
@@ -90,13 +133,17 @@ class RecChatBotV1ApiClient:
 
             try:
                 response = requests.post(
-                    f'{self.__base_url}/{url}', 
-                    data    = json.dumps(dtos), 
+                    f'{self.__base_url}/{url}',
+                    data    = json.dumps(dtos),
                     headers = {
                         'Content-Type': 'application/json'
                     }
                 )
-                logging.info(f'Page: {1+page}/{n_pages}, Size: {len(dtos)}')
+
+                if  response.status_code == 201:
+                    logging.info(f'Page: {1+page}/{n_pages}, Size: {len(dtos)}')
+                else:
+                    error_rows.extend(page_df)
 
             except Exception as error:
                 print(error)

@@ -2,7 +2,6 @@ import service as srv
 import os
 from .job import Job
 import pytorch_common.util as pu
-import rest
 import pandas as pd
 import torch
 import data.dataset as ds
@@ -22,15 +21,10 @@ class CFEmbUpdateJob(Job):
   def __init__(
     self,
     ctx,
-    split_year           = 2019,
     update_period_in_min = 1,
-    int_trigger_diff     = 10,
   ):
     self.ctx = ctx
-    self.split_year           = split_year
     self.update_period_in_min = update_period_in_min
-    self.int_trigger_diff     = int_trigger_diff
-    self.api_client           = rest.RecChatBotV1ApiClient()
     super().__init__(
       ctx        = ctx,
       name       = self.__class__.__name__,
