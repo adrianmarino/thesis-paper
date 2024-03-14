@@ -2,6 +2,7 @@ import requests
 import logging
 import requests
 import json
+from .recommendations_dto import RecommendationsDto
 
 
 class RecChatBotV1ApiClient:
@@ -35,7 +36,7 @@ class RecChatBotV1ApiClient:
         if  response.status_code != 200:
             raise Exception(f'Error when query recommendations by query: {query.json()}. Detail: {response.json()}')
 
-        return response.json()
+        return RecommendationsDto(response.json())
 
 
     def items(
@@ -69,7 +70,7 @@ class RecChatBotV1ApiClient:
         logging.debug(f'GET {api_url}')
         response = requests.get(api_url)
 
-        if  response.status_code != 404:
+        if  response.status_code == 404:
             return []
 
         if  response.status_code != 200:
