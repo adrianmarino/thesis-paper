@@ -17,7 +17,8 @@ from .data_frame        import (
     column_types,
     one_hot,
     multiply_by,
-    group_sum
+    group_sum,
+    bins_column
 )
 
 from .seed              import set_seed

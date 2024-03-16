@@ -182,3 +182,29 @@ def multiply_by(df, columns, by_column):
 
 def group_sum(df, group_col):
     return df.groupby([group_col]).sum().reset_index()
+
+
+
+def bins_column(df, column, bins):
+    bins = np.concatenate([[0], bins, [np.inf]])
+
+    def skip_empty_desimals(value):
+        return str(value).rstrip('0').rstrip('.')
+
+    prev_bin = bins[0]
+    labels   = []
+    for curr_bin in bins[1:]:
+        if curr_bin == np.inf:
+            labels.append(f'{skip_empty_desimals(prev_bin)}+')
+        else:
+            labels.append(f'{skip_empty_desimals(prev_bin)}-{skip_empty_desimals(curr_bin-1)}')
+            prev_bin = curr_bin
+
+    df[f'{column}_bin'] = pd.cut(
+        df[column],
+        bins           = bins,
+        labels         = labels,
+        include_lowest = True
+    )
+
+    return df
