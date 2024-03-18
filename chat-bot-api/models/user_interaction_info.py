@@ -1,9 +1,9 @@
-from .model import Model
+from pydantic import BaseModel
 from .user_interaction import UserInteraction
 from .item import Item
 
 
-class UserInteractionInfo(Model):
+class UserInteractionInfo(BaseModel):
     interaction : UserInteraction
     item : Item
 

@@ -1,5 +1,5 @@
 from models import UserProfile
-from fastapi import HTTPException, APIRouter
+from fastapi import HTTPException, APIRouter, Response
 from repository.mongo import EntityAlreadyExistsException
 
 
@@ -35,6 +35,12 @@ def profiles_handler(base_url, ctx):
     @router.get('', status_code=200)
     async def get_all_profiles():
         return await ctx.profile_service.all()
+
+
+    @router.delete('/{email}', status_code=202)
+    async def delete_profile(email: str):
+        await ctx.profile_service.delete(email)
+        return Response(status_code=202)
 
 
     return router

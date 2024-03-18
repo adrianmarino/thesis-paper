@@ -1,9 +1,9 @@
-from .model import Model
+from pydantic import BaseModel
 import typing
 from bunch import Bunch
 
 
-class UserProfile(Model):
+class UserProfile(BaseModel):
     name : str
     email : str
     metadata: typing.Dict[str, typing.Any]

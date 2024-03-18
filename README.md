@@ -301,6 +301,27 @@ $ systemctl --user enable chat-bot-api
 $ systemctl --user start chat-bot-api
 ```
 
+
+**Step 7**: Check `chat-bot-api` health.
+
+```bash
+$ chat-bot-api/bin/./health
+```
+
+```json
+{
+   "airflow" : {
+      "metadatabase" : true,
+      "scheduler" : true
+   },
+   "chatbot_api" : true,
+   "ollama_api" : true,
+   "choma_database" : true,
+   "mongo_database" : true
+}
+```
+
+
 ### Config file
 
 `config.conf`:

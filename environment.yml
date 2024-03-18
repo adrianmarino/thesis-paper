@@ -8,7 +8,7 @@ channels:
     - tornado
 
 dependencies:
-    - python=3.10
+    - python=3.11
     - bunch
     - seaborn
     - matplotlib
@@ -30,11 +30,12 @@ dependencies:
     - plotly
     - mysqlclient
     - fastapi
+    - pydantic
     - uvicorn[standard]
-    - chromadb
+    - Faker
+    - strsimpy
     - pip
     - pip:
-          - --extra-index-url https://download.pytorch.org/whl/cu118
           - torch
           - ignite
           - torchtext
@@ -45,5 +46,8 @@ dependencies:
           - scikit-surprise
           - scikit-learn-extra
           - langchain
+          - langchain-community
           - motor[tornado]
           - pymongo
+          - chromadb
+          - fastapi-health

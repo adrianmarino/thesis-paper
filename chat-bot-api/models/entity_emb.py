@@ -1,6 +1,6 @@
-from .model import Model
+from pydantic import BaseModel
 
 
-class EntityEmb(Model):
+class EntityEmb(BaseModel):
     id : str
     emb : list[float]

@@ -1,9 +1,9 @@
 from .ai_message import AIMessage
 from .user_message import UserMessage
-from .model import Model
-import typing
+from pydantic import BaseModel
 
-class ChatHistory(Model):
+
+class ChatHistory(BaseModel):
     email: str
     dialogue: list
 

@@ -1,0 +1,14 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch
+ignite
+torchtext
+torchmetrics==0.11.4
+pytorch-common
+singleton-decorator
+sentence-transformers
+scikit-surprise
+scikit-learn-extra
+langchain
+motor[tornado]
+pymongo
+chromadbp

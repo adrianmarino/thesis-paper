@@ -1,10 +1,9 @@
-from .model import Model
+from pydantic import BaseModel
 from .cf_settings import CFSettings
 from .rag_settings import RagSettings
-import typing
 
 
-class RecommendationSettings(Model):
+class RecommendationSettings(BaseModel):
     llm                     : str  = 'llama2-7b-chat'
     retry                   : int  = 2
     base_url                : str  = ""

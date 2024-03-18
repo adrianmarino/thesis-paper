@@ -1,8 +1,8 @@
-from .model import Model
+from pydantic import BaseModel
 import typing
 
 
-class Recommendation(Model):
+class Recommendation(BaseModel):
   title: str
   poster: str | None
   release: str

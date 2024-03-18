@@ -1,10 +1,10 @@
-from .model import Model
 import typing
 from .user_message import UserMessage
 import langchain.schema
+from pydantic import BaseModel
 
 
-class AIMessage(Model):
+class AIMessage(BaseModel):
     author: str = 'AI'
     content : str
     metadata: typing.Dict[str, typing.Any] = {}

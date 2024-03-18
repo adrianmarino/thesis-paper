@@ -1,8 +1,7 @@
-from .model import Model
-import typing
+from pydantic import BaseModel
 
 
-class RecommenderSettings(Model):
+class RecommenderSettings(BaseModel):
     shuffle                           : bool = False
     candidates_limit                  : int  = 20
     llm_response_limit                : int  = 20

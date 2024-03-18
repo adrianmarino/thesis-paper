@@ -1,6 +1,5 @@
-from .model import Model
-import typing
+from pydantic import BaseModel
 
-class UserMessage(Model):
+class UserMessage(BaseModel):
     author: str
     content: str

@@ -1,9 +1,9 @@
-from .model import Model
+from pydantic import BaseModel
 from .user_message import UserMessage
 from .recommendation_settings import RecommendationSettings
 
 
-class RecommendationQuery(Model):
+class RecommendationQuery(BaseModel):
     message: UserMessage
     settings: RecommendationSettings
 

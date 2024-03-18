@@ -10,7 +10,8 @@ from handlers import (
     chat_histories_handler,
     interactions_handler,
     items_handler,
-    recommenders_handler
+    recommenders_handler,
+    health_handler
 )
 
 
@@ -42,10 +43,10 @@ app.include_router(recommendations_handler(BASE_URL, ctx))
 app.include_router(chat_histories_handler(BASE_URL, ctx))
 app.include_router(interactions_handler(BASE_URL, ctx))
 app.include_router(recommenders_handler(BASE_URL, ctx))
+app.include_router(items_handler(BASE_URL, ctx))
+health_handler(app, BASE_URL, ctx)
 
 
-items_router = items_handler(BASE_URL, ctx)
-app.include_router(items_router)
 
 
 @app.exception_handler(500)
@@ -59,6 +60,8 @@ async def internal_exception_handler(request: Request, e: Exception):
         }
     )
 )
+
+
 
 
 @app.on_event('startup')

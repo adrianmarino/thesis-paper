@@ -1,7 +1,7 @@
-from .model import Model
+from pydantic import BaseModel
 
 
-class Item(Model):
+class Item(BaseModel):
     id : str
     imdb_id: str = None
     title : str
@@ -14,13 +14,13 @@ class Item(Model):
 
     def with_embedding(self, embedding):
         return Item(
-            id=self.id,
-            imdb_id=self.imdb_id,
-            title=self.title,
-            description=self.description,
-            genres=self.genres,
-            release=self.release,
-            rating=self.rating,
-            poster=self.poster,
-            embedding=embedding
+            id          =   str(self.id),
+            imdb_id     =   str(self.imdb_id),
+            title       =   self.title,
+            description =   self.description,
+            genres      =   self.genres,
+            release     =   self.release,
+            rating      =   self.rating,
+            poster      =   self.poster,
+            embedding   =   embedding
         )

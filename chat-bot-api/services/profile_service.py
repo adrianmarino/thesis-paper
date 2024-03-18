@@ -23,3 +23,7 @@ class ProfileService:
 
     async def all(self):
         return await self.ctx.profiles_repository.find_all()
+
+
+    async def delete(self, email: str):
+        return await self.ctx.profiles_repository.delete_by_id(email)

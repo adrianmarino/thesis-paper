@@ -3,6 +3,7 @@ import logging
 import requests
 import json
 from .recommendations_dto import RecommendationsDto
+from .user_profile_dto    import UserProfileDto
 
 
 class RecChatBotV1ApiClient:
@@ -14,6 +15,18 @@ class RecChatBotV1ApiClient:
         self.__base_url = f'http://{host}:{port}/api/v1'
 
 
+    @property
+    def health(self):
+        api_url = f'{self.__base_url}/health'
+        logging.info(f'GET {api_url}')
+        response = requests.get(api_url)
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when get health. Detail: {response.json()}')
+
+        return response.json()
+
+
     def remove_interactions_by_user_id(self, user_id):
         api_url = f'{self.__base_url}/interactions/users/{user_id}'
         logging.info(f'DELETE {api_url}')
@@ -21,10 +34,44 @@ class RecChatBotV1ApiClient:
         response = requests.delete(api_url)
 
         if  response.status_code != 202:
-            raise Exception(f'Error when remove user interactions!. Detail: {response.json()}')
+            raise Exception(f'Error when remove user interactions. Detail: {response.json()}')
 
 
-    def recommendations(self, query):
+
+    def add_profile(self, profile: UserProfileDto)->UserProfileDto:
+        api_url = f'{self.__base_url}/profiles'
+        logging.info(f'POST {api_url}')
+        response = requests.post(
+            api_url,
+            data    = profile.to_json(),
+            headers = { 'Content-Type': 'application/json' }
+        )
+
+        if  response.status_code != 204:
+            raise Exception(f'Error when add user profile. Detail: {response.json()}')
+
+
+    def delete_profile(self, email: str):
+        api_url = f'{self.__base_url}/profiles/{email}'
+        logging.info(f'DELETE {api_url}')
+        response = requests.delete(api_url)
+
+        if  response.status_code != 202:
+            raise Exception(f'Error when delete user profile. Detail: {response.json()}')
+
+
+    def profiles(self)-> list[UserProfileDto]:
+        api_url = f'{self.__base_url}/profiles'
+        logging.info(f'GET {api_url}')
+        response = requests.get(api_url)
+
+        if  response.status_code != 200:
+            raise Exception(f'Error when query user profile. Detail: {response.json()}')
+
+        return [UserProfileDto.from_json(data) for data in response.json()]
+
+
+    def recommendations(self, query)-> list[RecommendationsDto]:
         api_url = f'{self.__base_url}/recommendations'
         logging.info(f'POST {api_url}')
         response = requests.post(

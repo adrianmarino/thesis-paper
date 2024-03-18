@@ -1,8 +1,8 @@
-from .model import Model
+from pydantic import BaseModel
 import typing
 
 
-class RecommenderTrainResult(Model):
+class RecommenderTrainResult(BaseModel):
   metadata: typing.Dict[str, typing.Any] = {}
 
   class Config:

@@ -1,9 +1,9 @@
-from .model import Model
+from pydantic import BaseModel
 from .recommendation import Recommendation
 import typing
 
 
-class Recommendations(Model):
+class Recommendations(BaseModel):
   items: list[Recommendation]
   metadata: typing.Dict[str, typing.Any] = {}
 

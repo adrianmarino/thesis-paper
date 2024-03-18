@@ -2,7 +2,7 @@ from models import Item
 from fastapi import HTTPException, APIRouter, Response
 from repository.mongo import EntityAlreadyExistsException
 import util as ut
-from services import ItemSimQuery 
+from services import ItemSimQuery
 
 
 def items_handler(base_url, ctx):

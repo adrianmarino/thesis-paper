@@ -1,6 +1,6 @@
 import json
 import typing
-from models import Model
+from pydantic import BaseModel
 from mappers import ModelMapper
 from .entity_already_exists_exception import EntityAlreadyExistsException
 from pymongo.errors import DuplicateKeyError, BulkWriteError
@@ -14,15 +14,15 @@ class MongoRepository:
     self.id = id
 
 
-  def add_one(self, model: Model):
+  def add_one(self, model: BaseModel):
     return self.add_many([model])
 
 
-  def add_many(self, models: list[Model]):
+  def add_many(self, models: list[BaseModel]):
     return self.add_many(models)
 
 
-  async def add_many(self, models: list[Model]):
+  async def add_many(self, models: list[BaseModel]):
     entities = [self.mapper.to_dict(model) for model in models]
     try:
       return await self.collection.insert_many(entities)
@@ -30,12 +30,12 @@ class MongoRepository:
       raise EntityAlreadyExistsException(e)
 
 
-  async def upsert_many(self, models: list[Model]):
+  async def upsert_many(self, models: list[BaseModel]):
     await self.delete_many_by()
     await self.add_many(models)
 
 
-  def update(self, model):
+  def update(self, model: BaseModel):
     properties = self.mapper.to_dict(model)
     return self.collection.update_one({self.id: properties[self.id]}, {'$set': properties})
 

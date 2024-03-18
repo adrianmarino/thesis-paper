@@ -1,8 +1,9 @@
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.llms import Ollama
-from langchain.chat_models import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_community.chat_models import ChatOllama
+from langchain_community.llms import Ollama
+
 
 
 class OllamaModelBuilder:
