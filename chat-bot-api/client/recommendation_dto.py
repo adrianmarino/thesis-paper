@@ -50,18 +50,14 @@ class RecommendationDto:
         if  response.status_code != 204:
             raise Exception(f'Error to vote "{self.title}"({self.id}) with {value} point. Detail: {response.json()}')
 
+    def to_json(self):
+        return json.dumps(
+            self.__data,
+            default=lambda o: o.__dict__,
+            sort_keys=True, indent=4
+        )
 
     def __str__(self):
-        return f"""
-(
-    Id         : {self.id}
-    Title      : {self.title}
-    Release    : {self.release}
-    Genres     : {self.genres}
-    Rating     : {self.rating}
-    Poster     : {self.poster}
-    Description: {self.description}
-)
-"""
+        return self.to_json()
 
     def __repr__(self): return str(self)
