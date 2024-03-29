@@ -32,6 +32,6 @@ from .parallel          import ParallelExecutor
 
 from .process_helper    import ProcessHelper
 
-from .string            import between
+from .string            import between, str_join
 
 from .json_utils        import to_json, to_minified_json

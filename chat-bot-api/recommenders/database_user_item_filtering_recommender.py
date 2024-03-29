@@ -6,6 +6,7 @@ import pandas as pd
 from .database_user_item_filtering_recommender_result  import DatabaseUserItemFilteringRecommenderResult
 import random
 from services import ItemSimQuery
+from .exceptions import *
 
 
 class DatabaseUserItemFilteringRecommender:
@@ -51,17 +52,17 @@ class DatabaseUserItemFilteringRecommender:
 
 
     def __find_similar_user_ids(self, user_id, k_sim_users):
-        similar_users = self.__user_emb_repository.find_similars_by_id(
+        similar_users = self.__user_emb_repository.find_similar_by_id(
             user_id,
             limit = k_sim_users+1
         )
         if similar_users.empty:
-            raise Exception('Not found similar users')
+            raise NotFoundSimilarUsersException(user_id, k_sim_users)
 
 
         similar_user_ids = [id for id in similar_users.str_ids if id != user_id]
         if len(similar_user_ids) ==0:
-            raise Exception('Not found similar users')
+            raise NotFoundSimilarUsersException(user_id, k_sim_users)
 
 
         logging.info(f'Found {len(similar_user_ids)} similar users')
@@ -91,7 +92,12 @@ class DatabaseUserItemFilteringRecommender:
         )
 
         if len(sim_user_interactions) ==0:
-            raise Exception('Not found similar users interactions')
+            raise NotFoundSimilarUserInteractionsException(
+                similar_user_ids,
+                max_items_by_user,
+                min_rating_by_user
+            )
+
 
         logging.info(f'Select {len(sim_user_interactions)} similar users interactions (max by user: {max_items_by_user}, min rating: {min_rating_by_user})')
 
@@ -108,11 +114,11 @@ class DatabaseUserItemFilteringRecommender:
     ):
         item_ids = np.unique([i.item_id for i in sim_user_interactions]).tolist()
         if len(item_ids) == 0:
-            raise Exception('Not found items')
+            raise NotFoundSimilarInteractionItemsException()
 
 
         if text_query:
-            result = await self.__item_service.find_raw_similars_by(
+            result = await self.__item_service.find_raw_similar_by(
                 query = ItemSimQuery() \
                         .user_id_eq(user_id) \
                         .is_seen(False) \
@@ -120,14 +126,14 @@ class DatabaseUserItemFilteringRecommender:
                         .limit_eq(text_query_limit)
             )
             if len(result.ids) == 0:
-                raise Exception('Not found items by text query')
+                raise NotFoundItemByTextQueryException(text_query, text_query_limit)
 
             logging.info(f'Found {len(result.ids)} items by text query')
 
             item_ids = [id for id in item_ids if int(id) in result.ids]
 
             if len(item_ids) == 0:
-                raise Exception('There are any items by text query')
+                raise NotFoundItemByTextQueryException(text_query, text_query_limit)
 
             logging.info(f'Select {len(item_ids)} similar user items by text query')
 

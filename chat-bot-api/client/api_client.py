@@ -4,22 +4,43 @@ import requests
 import json
 from .recommendations_dto import RecommendationsDto
 from .user_profile_dto    import UserProfileDto
+from bunch import Bunch
+from .exceptions          import *
 
 
 class RecChatBotV1ApiClient:
     def __init__(
         self,
-        host    = 'nonosoft.ddns.net',
-        port    = 8080
+        host      = 'nonosoft.ddns.net',
+        port      = 8080,
+        timeout   = 30,
+        verbose   = True
     ):
         self.__base_url = f'http://{host}:{port}/api/v1'
+        self.__timeout = timeout
+        self.__logger = logging.getLogger(self.__class__.__name__)
+        self.__verbose = verbose
 
+
+    def _log(self, value):
+        if self.__verbose:
+            self.__logger.info(value)
+
+    @property
+    def verbose_off(self):
+        self.__verbose = False
+
+    @property
+    def verbose_on(self):
+        self.__verbose = True
 
     @property
     def health(self):
         api_url = f'{self.__base_url}/health'
-        logging.info(f'GET {api_url}')
-        response = requests.get(api_url)
+
+        self._log(f'GET {api_url}')
+
+        response = requests.get(api_url, timeout=self.__timeout)
 
         if  response.status_code != 200:
             raise Exception(f'Error when get health. Detail: {response.json()}')
@@ -29,9 +50,9 @@ class RecChatBotV1ApiClient:
 
     def remove_interactions_by_user_id(self, user_id):
         api_url = f'{self.__base_url}/interactions/users/{user_id}'
-        logging.info(f'DELETE {api_url}')
+        self._log(f'DELETE {api_url}')
 
-        response = requests.delete(api_url)
+        response = requests.delete(api_url, timeout=self.__timeout)
 
         if  response.status_code != 202:
             raise Exception(f'Error when remove user interactions. Detail: {response.json()}')
@@ -40,11 +61,12 @@ class RecChatBotV1ApiClient:
 
     def add_profile(self, profile: UserProfileDto)->UserProfileDto:
         api_url = f'{self.__base_url}/profiles'
-        logging.info(f'POST {api_url}')
+        self._log(f'POST {api_url}')
         response = requests.post(
             api_url,
             data    = profile.to_json(),
-            headers = { 'Content-Type': 'application/json' }
+            headers = { 'Content-Type': 'application/json' },
+            timeout = self.__timeout
         )
 
         if  response.status_code != 204:
@@ -53,8 +75,8 @@ class RecChatBotV1ApiClient:
 
     def delete_profile(self, email: str):
         api_url = f'{self.__base_url}/profiles/{email}'
-        logging.info(f'DELETE {api_url}')
-        response = requests.delete(api_url)
+        self._log(f'DELETE {api_url}')
+        response = requests.delete(api_url, timeout=self.__timeout)
 
         if  response.status_code != 202:
             raise Exception(f'Error when delete user profile. Detail: {response.json()}')
@@ -62,8 +84,8 @@ class RecChatBotV1ApiClient:
 
     def profiles(self)-> list[UserProfileDto]:
         api_url = f'{self.__base_url}/profiles'
-        logging.info(f'GET {api_url}')
-        response = requests.get(api_url)
+        self._log(f'GET {api_url}')
+        response = requests.get(api_url, timeout=self.__timeout)
 
         if  response.status_code != 200:
             raise Exception(f'Error when query user profile. Detail: {response.json()}')
@@ -73,17 +95,21 @@ class RecChatBotV1ApiClient:
 
     def recommendations(self, query)-> list[RecommendationsDto]:
         api_url = f'{self.__base_url}/recommendations'
-        logging.info(f'POST {api_url}')
+        self._log(f'POST {api_url}')
         response = requests.post(
             api_url,
             data    = json.dumps(query),
             headers = { 'Content-Type': 'application/json' }
         )
 
-        if  response.status_code != 200:
-            raise Exception(f'Error when query recommendations by query: {query.json()}. Detail: {response.json()}')
+        if  response.status_code == 404:
+            raise NotFoundException(response.content)
 
-        return RecommendationsDto(response.json())
+        if  response.status_code != 200:
+            raise Exception(response)
+
+
+        return RecommendationsDto(response.json(), self.__verbose)
 
 
     def items(
@@ -99,7 +125,7 @@ class RecChatBotV1ApiClient:
     ):
         criterion = f'email={email}&seen={seen}&content={content}&all={all}&limit={limit}&hide_emb={hide_emb}&release={release}&genres={genres}'
         api_url = f'{self.__base_url}/items?{criterion}'
-        logging.debug(f'GET {api_url}')
+        self._log(f'GET {api_url}')
 
         response = requests.get(api_url)
 
@@ -114,8 +140,8 @@ class RecChatBotV1ApiClient:
         email    : str  = '',
     ):
         api_url = f'{self.__base_url}/interactions/users/{email}'
-        logging.debug(f'GET {api_url}')
-        response = requests.get(api_url)
+        self._log(f'GET {api_url}')
+        response = requests.get(api_url, timeout=self.__timeout)
 
         if  response.status_code == 404:
             return []
@@ -123,14 +149,14 @@ class RecChatBotV1ApiClient:
         if  response.status_code != 200:
             raise Exception(f'Error when query interactions by "{email}" user id. Detail: {response.json()}')
 
-        return response.json()
+        return [Bunch(item) for item in response.json()]
 
 
 
     def interactions(self):
         api_url = f'{self.__base_url}/interactions'
-        logging.debug(f'GET {api_url}')
-        response = requests.get(api_url)
+        self._log(f'GET {api_url}')
+        response = requests.get(api_url, timeout=self.__timeout)
 
         if  response.status_code != 200:
             raise Exception(f'Error when query interactions!. Detail: {response.json()}')
@@ -176,7 +202,7 @@ class RecChatBotV1ApiClient:
         error_rows = []
         n_pages    = len(df) // page_size + 1
 
-        logging.info(f'Page Size: {page_size}')
+        self._log(f'Page Size: {page_size}')
 
         for page in range(n_pages):
             page_df = df.iloc[page_size * page : page_size * (page + 1)]
@@ -188,11 +214,12 @@ class RecChatBotV1ApiClient:
                     data    = json.dumps(dtos),
                     headers = {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    timeout=self.__timeout
                 )
 
                 if  response.status_code == 201:
-                    logging.info(f'Page: {1+page}/{n_pages}, Size: {len(dtos)}')
+                    self._log(f'Page: {1+page}/{n_pages}, Size: {len(dtos)}')
                 else:
                     error_rows.extend(page_df)
 

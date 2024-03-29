@@ -107,7 +107,7 @@ class DatabaseUserItemFilteringRecommenderResult(RecommenderResult):
     ):
         display(HTML(f'<h2>User Seen items</h2>'))
 
-        if self.__seen_items is None:
+        if self.__seen_items is None or self.__seen_items.empty:
             print('Not Found items!')
             return
 

@@ -4,8 +4,15 @@ import json
 
 
 class RecommendationDto:
-    def __init__(self, data):
-        self.__data = data
+    def __init__(self, data, verbose):
+        self.__data    = data
+        self.__verbose = verbose
+        self.__logger = logging.getLogger(self.__class__.__name__)
+
+
+    def _log(self, value):
+        if self.__verbose:
+            self.__logger.info(value)
 
     @property
     def id(self): return self.__data['metadata']['db_item']['id']
@@ -41,11 +48,11 @@ class RecommendationDto:
 
         value_url = value_url[0]
 
-        logging.info(f'GET {value_url}')
+        self._log(f'GET {value_url}')
 
         response = requests.get(value_url)
 
-        logging.info(response.status_code)
+        self._log(response.status_code)
 
         if  response.status_code != 204:
             raise Exception(f'Error to vote "{self.title}"({self.id}) with {value} point. Detail: {response.json()}')

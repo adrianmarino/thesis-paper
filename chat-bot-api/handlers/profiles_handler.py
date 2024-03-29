@@ -1,6 +1,7 @@
 from models import UserProfile
 from fastapi import HTTPException, APIRouter, Response
 from repository.mongo import EntityAlreadyExistsException
+import logging
 
 
 def profiles_handler(base_url, ctx):

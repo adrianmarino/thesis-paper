@@ -54,7 +54,7 @@ class ItemService:
 
 
 
-    async def find_raw_similars_by(self, query):
+    async def find_raw_similar_by(self, query):
         if query.user_id:
             interactions = await self.ctx.interactions_repository.find_many_by(user_id=query.user_id)
             seen_item_ids = [i.item_id for i in interactions]
@@ -70,7 +70,7 @@ class ItemService:
 
 
     async def find_similars_by(self, query):
-        result = await self.find_raw_similars_by(query)
+        result = await self.find_raw_similar_by(query)
 
         items = await self.ctx.items_repository.find_many_by(
             item_id = { '$in': [str(id) for id in result.ids] },

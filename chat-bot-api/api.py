@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Request
-from fastapi.encoders import jsonable_encoder
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
 import logging
 from app_context import AppContext
@@ -11,29 +11,31 @@ from handlers import (
     interactions_handler,
     items_handler,
     recommenders_handler,
-    health_handler
+    health_handler,
 )
+from recommenders import NotFoundRecommenderException
 
 
-BASE_URL = '/api/v1'
+BASE_URL = "/api/v1"
+
 
 # Setup loggers
-logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
+logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
 
 app = FastAPI(
-    title='Recommendation Chatbot API',
-    description='Provide personalized movie recommendations to users based on their profile, watched movies, and rating behavior.',
-    version='0.9.0',
+    title="Recommendation Chatbot API",
+    description="Provide personalized movie recommendations to users based on their profile, watched movies, and rating behavior.",
+    version="0.9.0",
     contact={
-        'name'  : 'Adrian Norberto Marino',
-        'url'   : 'https://github.com/adrianmarino',
-        'email' : 'adrianmarino@gmail.com',
+        "name": "Adrian Norberto Marino",
+        "url": "https://github.com/adrianmarino",
+        "email": "adrianmarino@gmail.com",
     },
     swagger_ui_parameters={
-        'deepLinking'           : True,
-        'displayRequestDuration': True,
-        'syntaxHighlight.theme' : 'monokai'
-    }
+        "deepLinking": True,
+        "displayRequestDuration": True,
+        "syntaxHighlight.theme": "monokai",
+    },
 )
 
 ctx = AppContext()
@@ -49,25 +51,26 @@ health_handler(app, BASE_URL, ctx)
 
 
 
-@app.exception_handler(500)
+@app.exception_handler(NotFoundRecommenderException)
 async def internal_exception_handler(request: Request, e: Exception):
-  return JSONResponse(
-    status_code = 500,
-    content     = jsonable_encoder(
-        {
-            'code': 500,
-            'msg': f'Internal Server Error. Cause: {e}',
-        }
+    return JSONResponse(
+        status_code = 404,
+        content     = jsonable_encoder({ 'code': 404, 'msg': e.message })
     )
-)
 
 
+@app.exception_handler(Exception)
+async def error_exception_handler(request: Request, e: Exception):
+    return JSONResponse(
+        status_code = 500,
+        content     = jsonable_encoder({ 'code': 500, 'msg': str(e) })
+    )
 
-
-@app.on_event('startup')
+@app.on_event("startup")
 async def startup_event():
     logger = logging.getLogger(__name__)
-    logger.info("""
+    logger.info(
+        """
 
 
     ______            _____ _           _  ______       _
@@ -83,4 +86,5 @@ async def startup_event():
      - Redoc..: http://0.0.0.0:8080/redoc
      - Swagger: http://0.0.0.0:8080/docs
     --------------------------------------
-""")
+"""
+    )

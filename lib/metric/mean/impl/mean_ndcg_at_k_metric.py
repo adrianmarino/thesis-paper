@@ -2,10 +2,7 @@ from ..mean_user_at_k_metric import MeanUserAtkMetric
 from metric.discretizer import identity
 import torch
 import math
-
-
-def discount_cumulative_gain(ratings):
-    return sum([r / math.log((i+1)+1) for i, r in enumerate(ratings.float())])
+from metric.ndcg import dcg
 
 
 class MeanNdcgAtk(MeanUserAtkMetric):
@@ -20,4 +17,4 @@ class MeanNdcgAtk(MeanUserAtkMetric):
         y_true_ordered         = y_true[y_true_ordered_index]
 
 
-        return discount_cumulative_gain(y_true_ordered_by_pred) / discount_cumulative_gain(y_true_ordered)
+        return dcg(y_true_ordered_by_pred.float()) / dcg(y_true_ordered.float())

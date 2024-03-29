@@ -33,8 +33,8 @@ class ChromaRepository:
     self._repository.delete(ids)
 
 
-  def find_similars_by_id(self, id, limit=10):
-      return self._repository.find_similars_by_id(id, limit)
+  def find_similar_by_id(self, id, limit=10):
+      return self._repository.find_similar_by_id(id, limit)
 
 
   def search_sims(self, embs, limit, where_metadata={}, where_document={}):

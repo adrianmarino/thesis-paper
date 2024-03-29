@@ -26,4 +26,4 @@ class ProfileService:
 
 
     async def delete(self, email: str):
-        return await self.ctx.profiles_repository.delete_by_id(email)
+        return await self.ctx.profiles_repository.delete_many_by(email=email)

@@ -15,3 +15,4 @@ from .mean.impl.mean_ndcg_at_k_metric              import MeanNdcgAtk
 # Error...
 from .error.rmse_metric import RMSE
 
+from .ndcg import ndcg, idcg, dcg

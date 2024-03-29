@@ -131,7 +131,7 @@ class CollectionRepository:
         return CollectionRepositorySearchByIdResult(self.collection.get(ids=[str(id) for id in ids], include=include))
 
 
-    def find_similars_by_id(self, id, limit=10):
+    def find_similar_by_id(self, id, limit=10):
         result = self.search_by_ids([id])
 
         if result.empty:

@@ -42,7 +42,6 @@ class AppContext:
         self._build_recommenders()
 
 
-
     def _build_recommenders(self):
         self.database_user_item_filtering_recommender = DatabaseUserItemFilteringRecommender(
             user_emb_repository          = self.users_cf_emb_repository,
