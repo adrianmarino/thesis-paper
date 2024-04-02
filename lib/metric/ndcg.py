@@ -1,4 +1,4 @@
-import math
+from math import log2
 
 
 def idcg(ratings):
@@ -6,7 +6,7 @@ def idcg(ratings):
 
 
 def dcg(ratings):
-  return sum([rating / math.log2(idx+2) for idx, rating in enumerate(ratings)])
+  return sum([rating / log2(position+1) for position, rating in enumerate(ratings, start=1)])
 
 
 def ndcg(ratings):
