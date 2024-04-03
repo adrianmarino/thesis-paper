@@ -121,10 +121,15 @@ Based on these requirements, the following datasets were combined:
 
 ### Recommendation Models
 
+#### Evaliation
 
 * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
-* [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
+* [Chatbot Evaluation Metrics](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation.ipynb)
 
+#### Baseline
+
+* [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
+ 
 #### Collaborative Filtering
 
 * **Memory based**
@@ -173,7 +178,6 @@ Based on these requirements, the following datasets were combined:
     * [Load movie items and interactions to chatbot database](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/1_load-items-interractions-to-database.ipynb)
     * [Update Users and Items embeddings using DeepFM model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/2_embedding-db-updater.ipynb)
     * [LLM/Collaborative Filtering recommender ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/5_recommender.ipynb)
-    * [Chatbot Evaluation Metrics](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation.ipynb)
     * [LLM Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/3_llm-tests.ipynb)
     * [LLM Output Parser Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/4_output-parser-tests.ipynb)
 
