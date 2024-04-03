@@ -24,9 +24,11 @@ This study aims to compare different approaches to recommendation based on colla
 7. [Notebooks](#notebooks)
     1. [Data pre-processing & analysis](#data-pre-processing--analysis)
     2. [Recommendation Models](#recommendation-models)
-        1. [Collaborative Filtering](#collaborative-filtering)
-        2. [Content Based](#content-based)
-        3. [Ensembles](#ensembles)
+        1. [Evaluation](#evaluation)
+        2. [Baseline](#baseline)
+        3. [Collaborative Filtering](#collaborative-filtering)
+        4. [Content Based](#content-based)
+        5. [Ensembles](#ensembles)
     3. [Extras](#extras)
 8. [Getting started](#getting-started)
     1. [Edit & run notebooks](#edit--run-notebooks)
@@ -121,7 +123,7 @@ Based on these requirements, the following datasets were combined:
 
 ### Recommendation Models
 
-#### Evaliation
+#### Evaluation
 
 * [Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 * [Chatbot Evaluation Metrics](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation.ipynb)
