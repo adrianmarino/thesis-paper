@@ -126,7 +126,7 @@ Based on these requirements, the following datasets were combined:
 #### Evaluation
 
 * [Recommendation Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
-* [Recommender Chatbot API: Evaluation](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation.ipynb)
+* [Recommender Chatbot API Evaluation](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation.ipynb)
 
 #### Baseline
 
