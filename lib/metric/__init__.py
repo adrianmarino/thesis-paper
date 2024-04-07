@@ -15,4 +15,4 @@ from .mean.impl.mean_ndcg_at_k_metric              import MeanNdcgAtk
 # Error...
 from .error.rmse_metric import RMSE
 
-from .ndcg import ndcg, idcg, dcg
+from .common import ndcg, idcg, dcg, recall, mean_reciprocal_rank, average_precision, mean_average_precision, serendipity, catalog_coverage

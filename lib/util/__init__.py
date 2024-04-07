@@ -1,6 +1,6 @@
 from .math              import round_all, round_
 from .tensor             import indexes_of, random_int, random_choice, apply, is_int, delete, free_gpu_memory, value_counts
-from .list              import combinations, subtract, empty
+from .list              import combinations, subtract, empty, nanmean, nanmedian
 from .data_frame        import (
     norm,
     id_by_seq,
@@ -35,3 +35,7 @@ from .process_helper    import ProcessHelper
 from .string            import between, str_join
 
 from .json_utils        import to_json, to_minified_json
+
+from .printable         import printable
+
+from .iterable_object   import iterable_object

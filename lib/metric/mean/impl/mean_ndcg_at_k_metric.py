@@ -2,7 +2,7 @@ from ..mean_user_at_k_metric import MeanUserAtkMetric
 from metric.discretizer import identity
 import torch
 import math
-from metric.ndcg import dcg
+from metric.common import dcg
 
 
 class MeanNdcgAtk(MeanUserAtkMetric):

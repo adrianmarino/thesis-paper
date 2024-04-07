@@ -108,7 +108,6 @@ class RecChatBotV1ApiClient:
         if  response.status_code != 200:
             raise Exception(response)
 
-
         return RecommendationsDto(response.json(), self.__verbose)
 
 
