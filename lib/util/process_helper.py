@@ -11,8 +11,8 @@ class ProcessHelper:
         for command in commands:
             processes.append(
                 subprocess.Popen(
-                    command, 
-                    stdout=subprocess.PIPE, 
+                    command,
+                    stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT
                 )
             )

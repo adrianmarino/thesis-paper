@@ -18,3 +18,5 @@ from .recommendation_settings import RecommendationSettings
 from .recommender_settings import RecommenderSettings
 from .cf_settings import CFSettings
 from .rag_settings import RagSettings
+
+from .evaluation import *
