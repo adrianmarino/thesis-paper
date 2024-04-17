@@ -62,7 +62,8 @@ class SessionsGroup:
 
 
     @property
-    def mean_ndgc_evolution(self): return ut.nanmean(self.ndgc_evolution, axis=0)
+    def mean_ndgc_evolution(self):
+        return ut.nanmean(self.ndgc_evolution, axis=0)
 
     def catalog_coverage(self, item_ids):
         recommended_item_ids = []

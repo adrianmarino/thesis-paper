@@ -24,7 +24,7 @@ class RecSysDataset(Dataset):
             raise e
 
     def sample(self, size):
-        indexes = torch.randint(0, len(self) - 1, (size,))
+        indexes = torch.randint(0, len(self) - 1, (size,)).numpy()
         df_sample = pd.DataFrame(self.data.iloc[indexes, :])
         features, target = self._to_feats_target(df_sample)
         return features, target

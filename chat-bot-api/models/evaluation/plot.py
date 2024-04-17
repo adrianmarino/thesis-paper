@@ -41,6 +41,8 @@ def plot_mean_ndgc_evolution(
     sns.set_style("whitegrid")
     plt.figure(figsize=figsize)
 
+
+
     smooth_lineplot(
         x                         = list(range(1, len(values)+1)),
         y                         = values,
