@@ -74,7 +74,7 @@ class EvaluationState:
     def plot_metrics(self, item_ids=[]):
         plot_ndcg_sessions(
             {
-                size: value.mean_ndgc_evolution
+                size: value.mean_ndcg
                 for size, value in self.sessions.split_by_size.items()
             },
             smooth_level=0.8,
@@ -127,11 +127,12 @@ class EvaluationState:
 
         plt.show()
 
-        logging.info(
-            f"Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}"
-        )
+        logging.info(f"Mean NDCG: {self.sessions.mean_mean_ndcg:.2}")
         logging.info(
             f"Mean Average Precision: {self.sessions.mean_mean_average_precision:.2}"
+        )
+        logging.info(
+            f"Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}"
         )
         logging.info(f"Recall: {self.sessions.mean_mean_recall:.2}")
         if len(item_ids) > 0:

@@ -71,7 +71,11 @@ class SessionsGroup:
         return [s.mean_recall for s in self.sessions]
 
     @property
-    def mean_ndgc_evolution(self):
+    def mean_mean_ndcg(self):
+        return np.mean(self.mean_ndcg)
+
+    @property
+    def mean_ndcg(self):
         return ut.nanmean(self.ndgc_evolution, axis=0)
 
     def catalog_coverage(self, item_ids):
