@@ -71,14 +71,14 @@ class EvaluationState:
         )
 
 
-    def plot_metrics(self, item_ids=[]):
+    def plot_metrics(self, item_ids=[], figsize=(20, 5)):
         plot_ndcg_sessions(
             {
                 size: value.mean_ndcg
                 for size, value in self.sessions.split_by_size.items()
             },
             smooth_level=0.8,
-            figsize=(14, 6),
+            figsize=figsize,
         )
 
         plot_smooth_line(
@@ -87,7 +87,7 @@ class EvaluationState:
             ylabel="Mean user NDGC",
             title="Mean User NDGC by Session Step",
             smooth_level=1,
-            figsize=(14, 6),
+            figsize=figsize,
         )
 
         plot_smooth_line(
@@ -96,7 +96,7 @@ class EvaluationState:
             ylabel="Mean Average Precision",
             title="Mean User Average Precision by Session Step",
             smooth_level=1,
-            figsize=(14, 6),
+            figsize=figsize,
         )
 
         plot_smooth_line(
@@ -105,7 +105,7 @@ class EvaluationState:
             ylabel="Mean Reciprocal Rank",
             title="Mean User Reciprocal Rank by Session Step",
             smooth_level=1,
-            figsize=(14, 6),
+            figsize=figsize,
         )
 
         plot_smooth_line(
@@ -114,7 +114,7 @@ class EvaluationState:
             ylabel="Mean Recall",
             title="Mean User Recall by Session Step",
             smooth_level=1,
-            figsize=(14, 6),
+            figsize=figsize,
         )
 
         plot_n_users_by_session_evolution_size(
@@ -122,7 +122,7 @@ class EvaluationState:
                 (n_steps, len(sessions))
                 for n_steps, sessions in self.sessions.split_by_size.items()
             ],
-            figsize=(14, 4),
+            figsize=figsize,
         )
 
         plt.show()
