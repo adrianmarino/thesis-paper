@@ -65,11 +65,11 @@ class EvaluationState:
         self.metrics_by_user_id.get(user_id).append(session)
 
     @property
-    def session_steps_by_user(self):
-        groups = SessionStepDict()
-        for user_id, session in self.metrics_by_user_id.items():
-            groups.put_session(user_id, Session(session))
-        return groups
+    def sessions(self):
+        return SessionsGroup(
+            [Session(steps) for steps in self.metrics_by_user_id.values()]
+        )
+
 
     def plot_metrics(self, item_ids=[]):
         plot_ndcg_sessions(
@@ -134,14 +134,8 @@ class EvaluationState:
         logging.info(
             f"Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}"
         )
-        logging.info(f"Recall: {self.sessions.mean_mean_recall:.2}")
+        logging.info(f"Mean Recall: {self.sessions.mean_mean_recall:.2}")
         if len(item_ids) > 0:
             logging.info(
                 f"Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}"
             )
-
-    @property
-    def sessions(self):
-        return SessionsGroup(
-            [Session(steps) for steps in self.metrics_by_user_id.values()]
-        )
