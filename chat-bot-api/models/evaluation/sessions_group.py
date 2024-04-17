@@ -4,6 +4,7 @@ import numpy as np
 from .session_step_dict import SessionStepDict
 from .session import Session
 
+
 @ut.printable
 @ut.iterable_object
 class SessionsGroup:
@@ -12,15 +13,14 @@ class SessionsGroup:
         self.reset()
         [self.append(s) for s in sessions]
 
+    def append(self, session):
+        self.sessions.append(session if type(session) == Session else Session(session))
 
-    def append(self, session): self.sessions.append(session if type(session) == Session else Session(session))
+    def _state(self):
+        return self.sessions
 
-
-    def _state(self): return self.sessions
-
-
-    def _elements(self): return self._state()
-
+    def _elements(self):
+        return self._state()
 
     @property
     def ndgc_evolution(self):
@@ -31,35 +31,44 @@ class SessionsGroup:
             if len(session) > max_steps:
                 max_steps = len(session)
 
-            sessions_ndgc.append(session.steps_ndcg)
+            sessions_ndgc.append(session.ndcg)
 
         rows = []
         for values in sessions_ndgc:
             rows.append(
                 np.pad(
-                np.array(values),
-                (0, max_steps - len(values)),
-                mode            = 'constant',
-                constant_values = 0
-            ))
+                    np.array(values),
+                    (0, max_steps - len(values)),
+                    mode="constant",
+                    constant_values=0,
+                )
+            )
 
         return np.array(rows)
 
-
     @property
     def mean_mean_reciprocal_rank(self):
-        return np.mean([s.mean_reciprocal_rank for s in self.sessions])
+        return np.mean(self.mean_reciprocal_rank)
 
+    @property
+    def mean_reciprocal_rank(self):
+        return [s.mean_reciprocal_rank for s in self.sessions]
 
     @property
     def mean_mean_average_precision(self):
-        return np.mean([s.mean_average_precision for s in self.sessions])
+        return np.mean(self.mean_average_precision)
 
+    @property
+    def mean_average_precision(self):
+        return [s.mean_average_precision for s in self.sessions]
 
     @property
     def mean_mean_recall(self):
-        return np.mean([s.mean_recall for s in self.sessions])
+        return np.mean(self.mean_recall)
 
+    @property
+    def mean_recall(self):
+        return [s.mean_recall for s in self.sessions]
 
     @property
     def mean_ndgc_evolution(self):
@@ -77,9 +86,8 @@ class SessionsGroup:
         groups = SessionStepDict()
         for session in self.sessions:
             for idx, step in enumerate(session):
-                groups.put_step(idx+1, step)
+                groups.put_step(idx + 1, step)
         return groups
-
 
     @property
     def split_by_size(self):

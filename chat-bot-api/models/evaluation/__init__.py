@@ -5,7 +5,7 @@ from .session_step_dict  import SessionStepDict
 
 from .plot import (
   smooth_lineplot,
-  plot_mean_ndgc_evolution,
+  plot_smooth_line,
   plot_ndcg_sessions,
   plot_n_users_by_session_evolution_size
 )

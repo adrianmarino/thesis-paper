@@ -30,7 +30,16 @@ class Session:
         )
 
     @property
-    def mean_recall(self): return np.stack([s.recall for s in self.steps]).mean()
+    def mean_recall(self): return np.stack(self.recall).mean()
+
+    @property
+    def recall(self): return [s.recall for s in self.steps]
+
+    @property
+    def mean_ndcg(self): return np.stack(self.ndcg).mean()
+
+    @property
+    def ndcg(self): return [s.ndcg for s in self.steps]
 
     @property
     def recommended_item_ids(self): return [c.recommended_item_ids for c in self.steps]
@@ -41,5 +50,3 @@ class Session:
 
     def _elements(self): return self._state()
 
-    @property
-    def steps_ndcg(self): return [s.ndcg for s in self.steps]

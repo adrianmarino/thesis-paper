@@ -33,25 +33,26 @@ def smooth_lineplot(
     )
 
 
-def plot_mean_ndgc_evolution(
+def plot_smooth_line(
     values,
+    xlabel,
+    ylabel,
+    title,
     smooth_level = 2,
     figsize      = (5,3)
 ):
     sns.set_style("whitegrid")
     plt.figure(figsize=figsize)
 
-
-
     smooth_lineplot(
-        x                         = list(range(1, len(values)+1)),
-        y                         = values,
+        x                         = [k for k, _ in values.items()],
+        y                         = [v for _, v in values.items()],
         smooth_level              = smooth_level
     )
 
-    plt.xlabel("Session step")
-    plt.ylabel("Mean user NDGC")
-    plt.title("Mean user NDGC by session step")
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
 
 
 def plot_ndcg_sessions(
