@@ -1,34 +1,46 @@
 from ..diagram import histplot
+import pandas as pd
 
 
-def array_num_to_str(numbers): return [str(n) for n in numbers]
+def array_num_to_str(numbers):
+    return [str(n) for n in numbers]
+
+
+def describe_num_var_array(values, title="", figsize=None):
+    describe_num_var(
+        pd.DataFrame({title: values}),
+        column=title,
+        title=f"{title} (count: {len(values)})",
+        figsize=figsize,
+    )
 
 
 def describe_num_var(
     df,
     column,
-    bins                 = 'auto',
-    stat                 = 'count',
-    title                = '',
-    title_fontsize       = 16,
-    show_table           = False,
-    show_range           = False,
-    show_mean            = True,
-    show_median          = True,
-    show_mode            = True,
-    show_outliers_leyend = True,
-    remove_outliers      = False,
-    decimals             = 3,
-    density              = True,
-    output_path          = None,
-    output_ext           = 'svg'
+    bins="auto",
+    stat="count",
+    title="",
+    title_fontsize=16,
+    show_table=False,
+    show_range=False,
+    show_mean=True,
+    show_median=True,
+    show_mode=True,
+    show_outliers_leyend=True,
+    remove_outliers=False,
+    decimals=3,
+    density=True,
+    output_path=None,
+    output_ext="svg",
+    figsize=None,
 ):
     if show_range or show_table:
         df_column = df[[column]]
 
     if show_range:
         column_range = (min(df_column.values)[0], max(df_column.values)[0])
-        print(f'\nRange: {column_range}\n')
+        print(f"\nRange: {column_range}\n")
 
     histplot(
         df,
@@ -43,11 +55,12 @@ def describe_num_var(
         show_outliers_leyend,
         remove_outliers,
         decimals,
-        density     = density,
-        output_path = output_path,
-        output_ext  = output_ext
+        density=density,
+        output_path=output_path,
+        output_ext=output_ext,
+        figsize=figsize,
     )
 
     if show_table:
-        print('\nMetrics:\n')
+        print("\nMetrics:\n")
         display(df_column.describe())

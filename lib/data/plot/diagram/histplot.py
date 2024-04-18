@@ -19,13 +19,18 @@ def histplot(
     decimals             = 3,
     density              = True,
     output_path          = None,
-    output_ext           = 'svg'
+    output_ext           = 'svg',
+    figsize              = None
 ):
+
     f, (ax_box, ax_hist) = plt.subplots(
         2,
         sharex=True,
         gridspec_kw= {"height_ratios": (0.2, 1)}
     )
+
+    if figsize:
+        f.set_size_inches(figsize[0], figsize[1])
 
     values = df[column].values
     outyliers_lower, outliers_upper = outliers_range(values)
@@ -77,4 +82,5 @@ def histplot(
 
     if output_path:
         plt.savefig(f'{output_path}.{output_ext}', format=output_ext)
+
     plt.show(block=False)

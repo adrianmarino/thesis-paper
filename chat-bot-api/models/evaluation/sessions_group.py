@@ -16,6 +16,8 @@ class SessionsGroup:
     def append(self, session):
         self.sessions.append(session if type(session) == Session else Session(session))
 
+    def __getitem__(self, key): return self.sessions[key]
+
     def _state(self):
         return self.sessions
 
@@ -63,19 +65,32 @@ class SessionsGroup:
         return [s.mean_average_precision for s in self.sessions]
 
     @property
-    def mean_mean_recall(self):
-        return np.mean(self.mean_recall)
-
-    @property
-    def mean_recall(self):
+    def step_mean_recall(self):
         return [s.mean_recall for s in self.sessions]
 
     @property
-    def mean_mean_ndcg(self):
-        return np.mean(self.mean_ndcg)
+    def mean_recall(self):
+        return np.mean(self.recall)
+
+    @property
+    def recall(self):
+        return np.stack([s.recall for s in self.steps])
 
     @property
     def mean_ndcg(self):
+        return np.mean(self.ndcg)
+
+    @property
+    def ndcg(self):
+        return np.stack([s.ndcg for s in self.steps])
+
+
+    @property
+    def steps(self):
+        return [step for session in self.sessions for step in session]
+
+    @property
+    def steps_mean_ndcg(self):
         return ut.nanmean(self.ndgc_evolution, axis=0)
 
     def catalog_coverage(self, item_ids):
@@ -94,7 +109,7 @@ class SessionsGroup:
         return groups
 
     @property
-    def split_by_size(self):
+    def group_by_steps_count(self):
         result = {}
         for session in self.sessions:
             sessions = result.get(len(session), SessionsGroup())

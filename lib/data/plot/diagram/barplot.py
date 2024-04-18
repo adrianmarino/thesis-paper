@@ -13,7 +13,6 @@ def barplot(
     figsize        = (15, 6)
 ):
     sns.barplot(x=data[x],  y=data[y].astype('float'))
-
     plt.xticks(rotation=x_rotation)
     sns.set(rc={'figure.figsize': figsize})
     plt.title(title, fontsize=title_fontsize)

@@ -15,6 +15,7 @@ import logging
 import client
 from faker import Faker
 import pandas as pd
+import data.plot as dpl
 
 
 class EvaluationState:
@@ -70,12 +71,11 @@ class EvaluationState:
             [Session(steps) for steps in self.metrics_by_user_id.values()]
         )
 
-
-    def plot_metrics(self, item_ids=[], figsize=(20, 5)):
+    def plot_metrics(self, item_ids=[], figsize=(20, 6)):
         plot_ndcg_sessions(
             {
-                size: value.mean_ndcg
-                for size, value in self.sessions.split_by_size.items()
+                n_steps: sessions.steps_mean_ndcg
+                for n_steps, sessions in self.sessions.group_by_steps_count.items()
             },
             smooth_level=0.8,
             figsize=figsize,
@@ -120,21 +120,52 @@ class EvaluationState:
         plot_n_users_by_session_evolution_size(
             [
                 (n_steps, len(sessions))
-                for n_steps, sessions in self.sessions.split_by_size.items()
+                for n_steps, sessions in self.sessions.group_by_steps_count.items()
             ],
             figsize=figsize,
         )
 
         plt.show()
 
-        logging.info(f"Mean NDCG: {self.sessions.mean_mean_ndcg:.2}")
+        dpl.describe_num_var_array(
+            self.sessions.ndcg, "User Session Steps NDCG", figsize=figsize
+        )
+
+        dpl.describe_num_var_array(
+            [len(s) for s in self.sessions],
+            "User Session Steps Count",
+            figsize=figsize,
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.recall, "User Session Steps Recall", figsize=figsize
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.mean_reciprocal_rank,
+            "Mean Reciprocal Rank by USer Session",
+            figsize=(20, 4),
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.mean_average_precision,
+            "Mean Average Precision by USer Session",
+            figsize=(20, 4),
+        )
+
+        logging.info(f"User sessions Count: {len(self.sessions)}")
+        logging.info(
+            f"User sessions Steps Count: {len(self.sessions.steps)}"
+        )
+
+        logging.info(f"Mean NDCG: {self.sessions.mean_ndcg:.2}")
         logging.info(
             f"Mean Average Precision: {self.sessions.mean_mean_average_precision:.2}"
         )
         logging.info(
             f"Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}"
         )
-        logging.info(f"Mean Recall: {self.sessions.mean_mean_recall:.2}")
+        logging.info(f"Mean Recall: {self.sessions.mean_recall:.2}")
         if len(item_ids) > 0:
             logging.info(
                 f"Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}"

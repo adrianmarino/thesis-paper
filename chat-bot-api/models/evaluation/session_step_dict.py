@@ -8,8 +8,8 @@ from .session           import Session
 @ut.printable
 @ut.iterable_object
 class SessionStepDict:
-    def __init__(self):
-        self.session_by_key = {}
+    def __init__(self, session_by_key = {}):
+        self.session_by_key = session_by_key
         self.reset()
 
     def put_step(self, key, step):
@@ -19,10 +19,13 @@ class SessionStepDict:
         return self
 
     def put_session(self, key, session):
-        self.session_by_key[key] = session if type(session) == Session else Session(step)
+        self.session_by_key[key] = session if type(session) == Session else Session(session)
         return self
 
     def __getitem__(self, key): return self.session_by_key[key]
+
+    def filter_by_min_sessions(self, min_sessions=1):
+        return SessionStepDict({stepIdx: steps for stepIdx, steps in self if len(steps) >= min_sessions})
 
     @property
     def keys(self): return self.session_by_key.keys()
@@ -58,6 +61,9 @@ class SessionStepDict:
     @property
     def mean_ndcg(self):
         return {stepIdex: session.mean_ndcg for stepIdex, session in self.items}
+
+    @property
+    def counts(self): return {stepIdex: len(session) for stepIdex, session in self }
 
     def _state(self): return self.session_by_key
 

@@ -15,6 +15,8 @@ class Session:
     def append(self, step):
         self.steps.append(step if type(step) == SessionStep else SessionStep(step))
 
+    def __getitem__(self, idx): return self.steps[idx]
+
     @property
     def mean_reciprocal_rank(self):
         return mt.mean_reciprocal_rank(
@@ -30,13 +32,13 @@ class Session:
         )
 
     @property
-    def mean_recall(self): return np.stack(self.recall).mean()
+    def mean_recall(self): return np.mean(self.recall)
 
     @property
     def recall(self): return [s.recall for s in self.steps]
 
     @property
-    def mean_ndcg(self): return np.stack(self.ndcg).mean()
+    def mean_ndcg(self): return np.mean(self.ndcg)
 
     @property
     def ndcg(self): return [s.ndcg for s in self.steps]
