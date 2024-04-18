@@ -70,9 +70,9 @@ def plot_ndcg_sessions(
             smooth_level              = smooth_level
         )
 
-    plt.xlabel("Session step")
-    plt.ylabel("Mean user NDGC")
-    plt.title("Mean user NDGC by session step")
+    plt.xlabel('User Session step')
+    plt.ylabel('NDGC')
+    plt.title('NDGC by User Session Step')
     plt.legend()
 
 
@@ -89,4 +89,4 @@ def plot_n_users_by_session_evolution_size(
     ax.bar_label(ax.containers[0], fontsize=10);
     plt.xlabel("Sessions steps")
     plt.ylabel("Users Count")
-    plt.title("Users count by sessions steps")
+    plt.title("Users Count by Session Steps")

@@ -83,36 +83,36 @@ class EvaluationState:
 
         plot_smooth_line(
             self.sessions.steps_by_index.mean_ndcg,
-            xlabel="Session step",
-            ylabel="Mean user NDGC",
-            title="Mean User NDGC by Session Step",
+            xlabel='User Session Step',
+            ylabel='NDGC',
+            title="NDGC by User Session Step",
             smooth_level=1,
             figsize=figsize,
         )
 
         plot_smooth_line(
             self.sessions.steps_by_index.mean_average_precision,
-            xlabel="Session step",
-            ylabel="Mean Average Precision",
-            title="Mean User Average Precision by Session Step",
+            xlabel='User Session Step',
+            ylabel='Mean Average Precision',
+            title='Mean Average Precision by User Session Step',
             smooth_level=1,
             figsize=figsize,
         )
 
         plot_smooth_line(
             self.sessions.steps_by_index.mean_reciprocal_rank,
-            xlabel="Session step",
-            ylabel="Mean Reciprocal Rank",
-            title="Mean User Reciprocal Rank by Session Step",
+            xlabel='User Session Step',
+            ylabel='Mean Reciprocal Rank',
+            title='Mean User Reciprocal Rank by User Session Step',
             smooth_level=1,
             figsize=figsize,
         )
 
         plot_smooth_line(
             self.sessions.steps_by_index.mean_recall,
-            xlabel="Session step",
-            ylabel="Mean Recall",
-            title="Mean User Recall by Session Step",
+            xlabel='User Session Step',
+            ylabel='Mean Recall',
+            title='Mean User Recall by User Session Step',
             smooth_level=1,
             figsize=figsize,
         )
@@ -128,45 +128,45 @@ class EvaluationState:
         plt.show()
 
         dpl.describe_num_var_array(
-            self.sessions.ndcg, "User Session Steps NDCG", figsize=figsize
+            self.sessions.ndcg, 'User Session Steps NDCG', figsize=figsize
         )
 
         dpl.describe_num_var_array(
             [len(s) for s in self.sessions],
-            "User Session Steps Count",
+            'User Session Steps Count',
             figsize=figsize,
         )
 
         dpl.describe_num_var_array(
-            self.sessions.recall, "User Session Steps Recall", figsize=figsize
+            self.sessions.recall, 'User Session Steps Recall', figsize=figsize
         )
 
         dpl.describe_num_var_array(
             self.sessions.mean_reciprocal_rank,
-            "Mean Reciprocal Rank by USer Session",
+            'User Sessions Mean Reciprocal Rank',
             figsize=(20, 4),
         )
 
         dpl.describe_num_var_array(
             self.sessions.mean_average_precision,
-            "Mean Average Precision by USer Session",
+            'User Sessions Mean Average Precision',
             figsize=(20, 4),
         )
 
-        logging.info(f"User sessions Count: {len(self.sessions)}")
+        logging.info(f'User Sessions - Count: {len(self.sessions)}')
         logging.info(
-            f"User sessions Steps Count: {len(self.sessions.steps)}"
+            f'User Sessions - Steps Count: {len(self.sessions.steps)}'
         )
 
-        logging.info(f"Mean NDCG: {self.sessions.mean_ndcg:.2}")
+        logging.info(f'User Sessions - NDCG: {self.sessions.mean_ndcg:.2}')
         logging.info(
-            f"Mean Average Precision: {self.sessions.mean_mean_average_precision:.2}"
+            f'User Sessions - Mean Average Precision: {self.sessions.mean_mean_average_precision:.2}'
         )
         logging.info(
-            f"Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}"
+            f'User Sessions - Mean Reciprocal Rank: {self.sessions.mean_mean_reciprocal_rank:.2}'
         )
-        logging.info(f"Mean Recall: {self.sessions.mean_recall:.2}")
+        logging.info(f'User Sessions - Recall: {self.sessions.mean_recall:.2}')
         if len(item_ids) > 0:
             logging.info(
-                f"Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}"
+                f'Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}'
             )
