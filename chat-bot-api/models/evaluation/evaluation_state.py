@@ -72,87 +72,6 @@ class EvaluationState:
         )
 
     def plot_metrics(self, item_ids=[], figsize=(20, 6)):
-        plot_ndcg_sessions(
-            {
-                n_steps: sessions.steps_mean_ndcg
-                for n_steps, sessions in self.sessions.group_by_steps_count.items()
-            },
-            smooth_level=0.8,
-            figsize=figsize,
-        )
-
-        plot_smooth_line(
-            self.sessions.steps_by_index.mean_ndcg,
-            xlabel='User Session Step',
-            ylabel='NDGC',
-            title="NDGC by User Session Step",
-            smooth_level=1,
-            figsize=figsize,
-        )
-
-        plot_smooth_line(
-            self.sessions.steps_by_index.mean_average_precision,
-            xlabel='User Session Step',
-            ylabel='Mean Average Precision',
-            title='Mean Average Precision by User Session Step',
-            smooth_level=1,
-            figsize=figsize,
-        )
-
-        plot_smooth_line(
-            self.sessions.steps_by_index.mean_reciprocal_rank,
-            xlabel='User Session Step',
-            ylabel='Mean Reciprocal Rank',
-            title='Mean User Reciprocal Rank by User Session Step',
-            smooth_level=1,
-            figsize=figsize,
-        )
-
-        plot_smooth_line(
-            self.sessions.steps_by_index.mean_recall,
-            xlabel='User Session Step',
-            ylabel='Mean Recall',
-            title='Mean User Recall by User Session Step',
-            smooth_level=1,
-            figsize=figsize,
-        )
-
-        plot_n_users_by_session_evolution_size(
-            [
-                (n_steps, len(sessions))
-                for n_steps, sessions in self.sessions.group_by_steps_count.items()
-            ],
-            figsize=figsize,
-        )
-
-        plt.show()
-
-        dpl.describe_num_var_array(
-            self.sessions.ndcg, 'User Session Steps NDCG', figsize=figsize
-        )
-
-        dpl.describe_num_var_array(
-            [len(s) for s in self.sessions],
-            'User Session Steps Count',
-            figsize=figsize,
-        )
-
-        dpl.describe_num_var_array(
-            self.sessions.recall, 'User Session Steps Recall', figsize=figsize
-        )
-
-        dpl.describe_num_var_array(
-            self.sessions.mean_reciprocal_rank,
-            'User Sessions Mean Reciprocal Rank',
-            figsize=(20, 4),
-        )
-
-        dpl.describe_num_var_array(
-            self.sessions.mean_average_precision,
-            'User Sessions Mean Average Precision',
-            figsize=(20, 4),
-        )
-
         logging.info(f'User Sessions - Count: {len(self.sessions)}')
         logging.info(
             f'User Sessions - Steps Count: {len(self.sessions.steps)}'
@@ -170,3 +89,87 @@ class EvaluationState:
             logging.info(
                 f'Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}'
             )
+
+        dpl.describe_num_var_array(
+            [len(s) for s in self.sessions],
+            'User Session Steps Count',
+            figsize=figsize,
+        )
+
+        plot_n_users_by_session_evolution_size(
+            [
+                (n_steps, len(sessions))
+                for n_steps, sessions in self.sessions.group_by_steps_count.items()
+            ],
+            figsize=figsize,
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.ndcg, 'User Session Steps NDCG', figsize=figsize
+        )
+
+        plot_smooth_line(
+            self.sessions.steps_by_index.mean_ndcg,
+            xlabel='User Session Step',
+            ylabel='NDGC',
+            title="NDGC by User Session Step",
+            smooth_level=1,
+            figsize=figsize,
+        )
+
+
+        plot_ndcg_sessions(
+            {
+                n_steps: sessions.steps_mean_ndcg
+                for n_steps, sessions in self.sessions.group_by_steps_count.items()
+            },
+            smooth_level=0.8,
+            figsize=figsize,
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.mean_average_precision,
+            'User Sessions Mean Average Precision',
+            figsize=figsize,
+        )
+
+        plot_smooth_line(
+            self.sessions.steps_by_index.mean_average_precision,
+            xlabel='User Session Step',
+            ylabel='Mean Average Precision',
+            title='Mean Average Precision by User Session Step',
+            smooth_level=1,
+            figsize=figsize,
+        )
+
+        dpl.describe_num_var_array(
+            self.sessions.mean_reciprocal_rank,
+            'User Sessions Mean Reciprocal Rank',
+            figsize=figsize,
+        )
+
+        plot_smooth_line(
+            self.sessions.steps_by_index.mean_reciprocal_rank,
+            xlabel='User Session Step',
+            ylabel='Mean Reciprocal Rank',
+            title='Mean User Reciprocal Rank by User Session Step',
+            smooth_level=1,
+            figsize=figsize,
+        )
+
+
+        dpl.describe_num_var_array(
+            self.sessions.recall, 'User Session Steps Recall', figsize=figsize
+        )
+
+        plot_smooth_line(
+            self.sessions.steps_by_index.mean_recall,
+            xlabel='User Session Step',
+            ylabel='Mean Recall',
+            title='Mean User Recall by User Session Step',
+            smooth_level=1,
+            figsize=figsize,
+        )
+
+        plt.show()
+
