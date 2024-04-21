@@ -57,7 +57,7 @@ class RecommendationChatService:
 
     logs.append(f'Start inference - LLM: {query.settings.llm}. Prompt: {prompt}')
     logging.info(logs[-1])
-    response = chat_bot.send(
+    response = chat_bot(
       request      = query.message.content,
       user_profile = str(profile),
       candidates   = self.__items_to_str_list(candidate_items, 'Candidate movies (with rating)'),

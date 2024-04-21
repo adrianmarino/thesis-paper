@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 
 class ParamsResolver(ABC):
     @abstractmethod
-    def resolve(self, **kargs):
+    def __call__(self, **kargs):
         pass

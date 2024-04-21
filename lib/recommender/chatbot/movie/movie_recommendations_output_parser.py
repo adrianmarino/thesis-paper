@@ -1,19 +1,15 @@
-from langchain.schema import BaseOutputParser
-from bunch import Bunch
 from typing import List
-import util as ut
 import re
 import logging
-from pydantic import BaseModel, PrivateAttr
 
-class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
-    list_size: int
-
+class MovieRecommendationsOutputParser():
+    def __init__(self, size: int):
+        self._size = size
 
     def parse(self, text: str) -> List[str]:
             results = []
 
-            for idx in range(1, self.list_size+1):
+            for idx in range(1, self._size+1):
                 try:
                     line = re.findall(f'\n{idx}.\s*(.*?)\n', text)[0]
                 except Exception as e:
@@ -46,7 +42,7 @@ class MovieRecommendationsOutputParser(BaseOutputParser[List[str]]):
 
                         results.append(self._build_item(idx, data))
                     except Exception as e:
-                        logging.error(f'Error to parse line: "{line}"')
+                        logging.error(f'Error to parse line: "{line}". Detail: {e}')
 
 
             return { 'recommendations': results }

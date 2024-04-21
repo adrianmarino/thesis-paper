@@ -1,7 +1,7 @@
 import requests
 import json
 from bunch import Bunch
-from .query import OllamaQuery
+from .query import OllamaQueryResult
 
 
 class OllamaApiClient:
@@ -9,16 +9,14 @@ class OllamaApiClient:
     def __init__(
         self,
         host  = 'localhost:11434',
-        model = 'llama2'
     ):
         self.base_url = f'http://{host}/api'
-        self.model    = model
 
 
-    def query(self, msg):
+    def query(self, msg, model):
         response = requests.post(
             f'{self.base_url}/generate',
-            json   = { 'model': self.model, 'prompt': msg },
+            json   = { 'model': model, 'prompt': msg },
             stream = True
         )
 
@@ -33,7 +31,20 @@ class OllamaApiClient:
                     else:
                         message += decoded_json.response
 
-            return OllamaQuery(msg, message, metadata)
+            return OllamaQueryResult(msg, message, metadata)
 
+        else:
+            raise Exception(f"REST Api Respond with '{response.status_code}' status code. Detail: '{response.text}'")
+
+
+    def models(self):
+        return [tag['name'] for tag in self.tags()]
+
+
+    def tags(self):
+        response = requests.get(f'{self.base_url}/tags')
+
+        if response.status_code == 200:
+            return response.json()['models']
         else:
             raise Exception(f"REST Api Respond with '{response.status_code}' status code. Detail: '{response.text}'")

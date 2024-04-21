@@ -8,9 +8,7 @@ PROMPT_LOW_INTERACTIONS = """
 Recommend {limit} movies from candidate movies list, based on user profile and seen movies.
 Return only one list of recommendation with next format:
 
-Number. Title (release year): Description.
-
-Does not add any summary.
+Number. Title (release year): Synopsis.
 """
 
 
@@ -24,8 +22,6 @@ not add movies that does not exists in the candidates list.
 
 Return only one list of recommendation with next format:
 
-Number. Title (release year): Description.
-
-Does not add any summary.
+Number. Title (release year): Synopsis.
 """
 
