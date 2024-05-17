@@ -15,11 +15,13 @@ class Recommendations(BaseModel):
 
   @property
   def plain(self):
-    content = 'Prompt:\n-------\n'
-    content += self.metadata['response'].metadata['prompts'][0]['content']
-    content += '\n\nResponse:\n---------\n'
-    content += self.content
+    if self.metadata:
+      content = 'Prompt:\n-------\n' + self.metadata['response'].metadata['prompt']
+      content += '\n\nResponse:\n---------\n' + self.content
+    else:
+      content = 'Must include metadata to see a plant result!'
     return content
+
 
 
   class Config:

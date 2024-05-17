@@ -1,6 +1,7 @@
 from prompts import *
 from recommender.chatbot.movie import MovieRecommendationsOutputParser, MovieRecommenderChatBotFactory
 import sys
+from rest.ollama import OllamaApiClient
 
 
 class ChatBotPoolService:
@@ -12,26 +13,19 @@ class ChatBotPoolService:
       'prompt1': PROMPT_REQUIRED_INTERACTIONS
     },
     default_model = 'mistral',
-    models  = [
-      'llama2-13b-chat',
-      'llama2-7b-chat',
-      'gemma-7b',
-      'mistral-instruct',
-      'mistral',
-      'neural-chat'
-    ],
-    list_size = 15
+    models        = OllamaApiClient().models(),
+    list_size     = 15
   ):
     self._default_model  = default_model
     self._default_prompt = default_prompt
     self._models         = models
 
-    output_parser = MovieRecommendationsOutputParser(list_size=list_size)
+    output_parser = MovieRecommendationsOutputParser(size=list_size)
     self._chat_bots      = {
       p: {
-        m: MovieRecommenderChatBotFactory.stateless(
-          model         = m,
+        m: MovieRecommenderChatBotFactory.create(
           prompt        = prompts[p],
+          model         = m,
           output_parser = output_parser
         ) for m in models
       } for p in prompts.keys()

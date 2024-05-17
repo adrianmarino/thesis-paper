@@ -1,4 +1,4 @@
-class OllamaQuery:
+class OllamaQueryResult:
     def __init__(self, query, response, metadata):
         self.query    = query
         self.response = response
