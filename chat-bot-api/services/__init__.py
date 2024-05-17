@@ -5,6 +5,7 @@ from .interaction_service import InteractionService
 from .item_service import ItemService
 from .item_sim_query import ItemSimQuery
 from .sentence_embedding_service import SentenceEmbeddingService
+from .ollama_sentense_embedding_service import OllamaSentenceEmbeddingService
 from .interaction_info_service import InteractionInfoService
 from .chatbot_pool_service import ChatBotPoolService
 from .recommendations_factory import RecommendationsFactory

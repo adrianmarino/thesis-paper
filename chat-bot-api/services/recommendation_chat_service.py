@@ -51,14 +51,14 @@ class RecommendationChatService:
 
     seen_items = [info.item for info in interactions_info]
 
-    rec_settings = query.settings.rag if self.__has_min_interactions(interactions_info) else query.settings.collaborative_filtering
+    rec_settings = query.settings.collaborative_filtering if self.__has_min_interactions(interactions_info) else query.settings.rag
 
     sw = pu.Stopwatch()
 
     logs.append(f'Start inference - LLM: {query.settings.llm}. Prompt: {prompt}')
     logging.info(logs[-1])
     response = chat_bot(
-      request      = query.message.content,
+      request      = f'Question:\n {query.message.content}',
       user_profile = str(profile),
       candidates   = self.__items_to_str_list(candidate_items, 'Candidate movies (with rating)'),
       limit        = rec_settings.llm_response_limit,
@@ -106,7 +106,7 @@ class RecommendationChatService:
 
 
   def __has_min_interactions(self, interactions_info):
-    return int(len(interactions_info) >= self._interactions_count)
+    return len(interactions_info) >= self._interactions_count
 
 
   async def __find_candidates(

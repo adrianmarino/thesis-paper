@@ -13,14 +13,13 @@ class ChatBotPoolService:
       'prompt1': PROMPT_REQUIRED_INTERACTIONS
     },
     default_model = 'mistral',
-    models        = OllamaApiClient().models(),
-    list_size     = 15
+    models        = OllamaApiClient().models()
   ):
     self._default_model  = default_model
     self._default_prompt = default_prompt
     self._models         = models
 
-    output_parser = MovieRecommendationsOutputParser(size=list_size)
+    output_parser = MovieRecommendationsOutputParser()
     self._chat_bots      = {
       p: {
         m: MovieRecommenderChatBotFactory.create(

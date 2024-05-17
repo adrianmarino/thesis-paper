@@ -31,7 +31,7 @@ def profiles_handler(base_url, ctx):
         if profile == None:
             raise HTTPException(status_code=404, detail=f'Not found {email} profile')
         else:
-            return profile.dict(exclude_none=True)
+            return profile.model_dump(exclude_none=True)
 
     @router.get('', status_code=200)
     async def get_all_profiles():

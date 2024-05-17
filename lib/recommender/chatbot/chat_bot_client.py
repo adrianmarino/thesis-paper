@@ -1,4 +1,5 @@
 from rest.ollama import OllamaApiClient
+import logging
 
 class ChatBotClient:
     def __init__(
@@ -23,6 +24,10 @@ class ChatBotClient:
     def __call__(self, **kargs):
         params = self._params_resolver(**kargs)
 
+        query = self._template(params)
+
+        logging.debug(f'PROMPT: {query}')
+
         result = self._client.query(
             msg   = self._template(params),
             model = self._model
@@ -31,7 +36,7 @@ class ChatBotClient:
         return self._create_result(result, params)
 
     def _create_result(self, result, params):
-        metadata = self._output_parser.parse(result.response)
+        metadata = self._output_parser.parse(result.response, lines_size=params['limit'])
         metadata['params'] = params
         metadata['prompt'] = result.query
 

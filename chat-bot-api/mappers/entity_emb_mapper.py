@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 class EntityEmbMapper(ModelMapper):
   def to_model(self, result):
     return EntityEmb(
-      id = result.ids[0],
+      id = str(result.ids[0]),
       emb = result.embeddings[0]
     )
 

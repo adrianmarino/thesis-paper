@@ -3,13 +3,10 @@ import re
 import logging
 
 class MovieRecommendationsOutputParser():
-    def __init__(self, size: int):
-        self._size = size
-
-    def parse(self, text: str) -> List[str]:
+    def parse(self, text: str, lines_size: int) -> List[str]:
             results = []
 
-            for idx in range(1, self._size+1):
+            for idx in range(1, lines_size+1):
                 try:
                     line = re.findall(f'\n{idx}.\s*(.*?)\n', text)[0]
                 except Exception as e:

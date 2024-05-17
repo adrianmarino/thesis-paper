@@ -85,19 +85,20 @@ class ItemService:
         return await self.ctx.items_repository.delete_by_id(item_id)
 
 
-    async def rebuild_content_embeddings(self, batch_size=1000):
+    async def rebuild_content_embeddings(self, batch_size=100):
         sw = pu.Stopwatch()
         count = await self.ctx.items_repository.count()
 
         total_pages = math.ceil(count/batch_size)
         page = 0
         for index in range(0, count, batch_size):
+            psw = pu.Stopwatch()
             page +=1
             logging.info(f'Embedding rebuilding - page: {page}/{total_pages} - index: {index} - batch_size: {batch_size}')
             items = await self.ctx.items_repository.find_all(skip=index, limit=batch_size)
             self.ctx.items_content_emb_repository.delete_many([str(item.id) for item in items])
             self.ctx.items_content_emb_repository.upsert_many(items)
-
+            logging.info(f'Elapsed time: {psw.to_str()}')
 
         return {
             'elapsed_time': sw.to_str(),

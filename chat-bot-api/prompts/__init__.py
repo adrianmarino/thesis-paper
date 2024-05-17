@@ -3,9 +3,11 @@ PROMPT_LOW_INTERACTIONS = """
 
 {user_history}
 
+{request}
+
 {candidates}
 
-Recommend {limit} movies from candidate movies list, based on user profile and seen movies.
+Recommend {limit} movies from candidate movies list, based on 'question', 'user profile' and 'seen movies'.
 Return only one list of recommendation with next format:
 
 Number. Title (release year): Synopsis.
@@ -15,9 +17,11 @@ Number. Title (release year): Synopsis.
 PROMPT_REQUIRED_INTERACTIONS = """
 {user_history}
 
+{request}
+
 {candidates}
 
-Recommend {limit} movies from candidate movies list, excluding seen movies and does
+Recommend {limit} movies from candidate movies list, based on 'question' and 'excluding seen movies' and does
 not add movies that does not exists in the candidates list.
 
 Return only one list of recommendation with next format:

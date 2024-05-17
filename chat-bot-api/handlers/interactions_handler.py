@@ -47,7 +47,7 @@ def interactions_handler(base_url, ctx):
         if ut.empty(interactions):
             raise HTTPException(status_code=404, detail=f'Not found interactions for {user_id} profile')
         else:
-            return [i.dict(exclude_none=True) for i in interactions]
+            return [i.model_dump(exclude_none=True) for i in interactions]
 
 
     @router.get('', status_code = 200)
@@ -57,7 +57,7 @@ def interactions_handler(base_url, ctx):
         if ut.empty(interactions):
             raise HTTPException(status_code=404, detail=f'Not found interactions')
         else:
-            return [i.dict(exclude_none=True) for i in interactions]
+            return [i.model_dump(exclude_none=True) for i in interactions]
 
 
     @router.delete("/users/{user_id}/items/{item_id}", status_code = 202)

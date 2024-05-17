@@ -22,6 +22,11 @@ source "$ABSDIR/../config.conf"
 function get_pit() {
     ps -fea | grep -v grep | grep $1 | grep -v grep | awk '{print $2}' | head -n 1
 }
+
+function get_pit_by_port() {
+    PORT=$1
+    ss -lptn "sport = :$PORT" |  awk -F'[(),]' '{for(i=1;i<=NF;i++) if($i~/pid=/) print substr($i,5)}'
+}
 # -----------------------------------------------------------------------------
 #
 #
@@ -29,5 +34,29 @@ function get_pit() {
 # -----------------------------------------------------------------------------
 # Main
 # -----------------------------------------------------------------------------
-kill -9 $(get_pit $PROCESS_NAME)
+echo $PROCESS_NAME
+
+PROCESS_PID=$(get_pit $PROCESS_NAME)
+
+if [ -z "$PROCESS_PID" ]
+then
+    echo "Not found pid for '$PROCESS_NAME' process. Use '$API_PORT' api port to select pid as fallback..."
+    PIDS=$(get_pit_by_port $API_PORT)
+    
+    IFS=$'\n' read -rd '' -a PIDS_LIST <<< "$PIDS"
+    
+    if [ ${#PIDS_LIST[@]} -eq 0 ]; then
+        echo "Not found any pids for '$API_PORT' api port. Service is not running"
+    else
+        echo "Pids: $PIDS_LIST"
+        for PID in $PIDS_LIST; do
+            kill -9 $pid
+        done
+    fi
+else
+    echo "Found $PROCESS_PID for $PROCESS_NAME process. Kill process."
+    kill -9 $(get_pit $PROCESS_NAME)
+fi
 # -----------------------------------------------------------------------------
+
+

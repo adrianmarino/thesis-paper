@@ -76,7 +76,7 @@ def items_handler(base_url, ctx):
 
 
     @router.put('/embeddings/content/build', status_code = 202)
-    async def get_item(batch_size=1000):
+    async def build_content_embeddings(batch_size: int =100):
         return await ctx.item_service.rebuild_content_embeddings(batch_size)
 
 
@@ -95,5 +95,5 @@ def remove_embedding(items, hide_emb):
     for item in items:
         if hide_emb:
             item.embedding = None
-        result.append(item.dict(exclude_none=True))
+        result.append(item.model_dump(exclude_none=True))
     return result

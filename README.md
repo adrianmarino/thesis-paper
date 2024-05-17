@@ -127,8 +127,15 @@ Based on these requirements, the following datasets were combined:
 
 * [Recommendation Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 * Recommendation Chatbot API Evaluation
+<<<<<<< HEAD
   * [Using Llama 2 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama2.ipynb)
   * [Using Llama 3 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama3.ipynb)
+=======
+    * [Using Llama 3 Content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama2.ipynb)
+    * [Using Llama 3 Content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama3.ipynb)
+
+
+>>>>>>> d3aaf1d (feat: finish evaluation with llama 3 model)
 
 #### Baseline
 

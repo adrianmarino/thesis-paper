@@ -23,6 +23,7 @@ from services import (
     InteractionService,
     ItemService,
     SentenceEmbeddingService,
+    OllamaSentenceEmbeddingService,
     InteractionInfoService,
     ChatBotPoolService,
     RecommendationsFactory,
@@ -130,6 +131,8 @@ class AppContext:
 
     def _build_chroma_repositories(self):
         self.sentence_emb_service = SentenceEmbeddingService(model='all-mpnet-base-v2')
+        # self.sentence_emb_service = OllamaSentenceEmbeddingService(model='mxbai-embed-large')
+        # self.sentence_emb_service = OllamaSentenceEmbeddingService(model='llama3:text')
 
         self.item_emb_mapper = ItemContentEmbMapper(self.sentence_emb_service)
         self.entity_emb_mapper = EntityEmbMapper()

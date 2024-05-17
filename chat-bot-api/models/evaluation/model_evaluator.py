@@ -6,6 +6,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 import pytorch_common.util as pu
 import util as ut
 import client
+import time
 
 
 def sample(df, size):
@@ -199,8 +200,11 @@ class ModelEvaluator:
             self.evaluation_state.save(self.path)
             logging.info(f"State saved into {self.path}")
 
-            if times % self.evaluation_state.plot_interval == 0:
+            if times % self.evaluation_state.plot_interval == 0 and times > 1:
                 self.plot()
+
+            if times % 4 == 0:
+                time.sleep(10)
 
             times += 1
 
@@ -217,6 +221,9 @@ class ModelEvaluator:
             [f"- {e}" for e in remaining_items_sample["movie_title"].values.tolist()]
         )
         prompt = f"I want to see:\n{titles}"
+
+        if self.verbose: # and logging.DEBUG >= logging.root.level:
+            logging.info(f"Prompt - {prompt}")
 
         sw = pu.Stopwatch()
         response = api_client.recommendations(
