@@ -10,7 +10,6 @@ from .session           import Session
 class SessionStepDict:
     def __init__(self, session_by_key = {}):
         self.session_by_key = session_by_key
-        self.reset()
 
     def put_step(self, key, step):
         session = self.session_by_key.get(key, Session())

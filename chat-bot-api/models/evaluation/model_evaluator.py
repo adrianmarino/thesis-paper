@@ -183,9 +183,9 @@ class ModelEvaluator:
                         f'{log_prefix}Found {len(result_relevant_items)} relevant items from a list of {len(result.items)} - Votes: {", ".join(votes)}.'
                     )
 
-                self.evaluation_state.save_session(
+                self.evaluation_state.save_step_session(
                     user_id,
-                    session={
+                    session_step={
                         "recommended_items": [item.id for item in result.items],
                         "recommended_item_ratings": {
                             int(item.id): item.rating for item in result.items

@@ -1,14 +1,12 @@
 def iterable_object(cls):
-    def __iter__(self): return self
-    cls.__iter__ = __iter__
-
-    def reset(self): 
+    def __iter__(self):
         self.index = 0
-    cls.reset = reset
+        return self
+    cls.__iter__ = __iter__
 
     def __len__(self): return len(self._elements())
     cls.__len__ = __len__
-    
+
     def __next__(self):
         if self.index < len(self):
             value = self._elements()[self.index]

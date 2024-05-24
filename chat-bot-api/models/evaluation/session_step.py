@@ -5,20 +5,21 @@ import numpy as np
 
 @ut.printable
 class SessionStep:
-    def __init__(self, data): self.data = data
+    def __init__(self, properties):
+        self.properties = properties.copy()
 
     @property
-    def recommended_item_ids(self): return [int(id) for id in self.data['recommended_items']]
+    def recommended_item_ids(self): return [int(id) for id in self.properties['recommended_items']]
 
     @property
-    def relevant_item_ids(self): return [int(id) for id in self.data['relevant_item_ratings'].keys()]
+    def relevant_item_ids(self): return [int(id) for id in self.properties['relevant_item_ratings'].keys()]
 
     @property
     def recall(self): return np.array(mt.recall(self.recommended_item_ids, self.relevant_item_ids))
 
-    def relevante_rating(self, item_id): return self.data['relevant_item_ratings'][item_id]
+    def relevante_rating(self, item_id): return self.properties['relevant_item_ratings'][item_id]
 
-    def _state(self): return self.data
+    def _state(self): return self.properties
 
     @property
     def ndcg(self):

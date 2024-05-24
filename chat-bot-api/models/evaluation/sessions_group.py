@@ -10,13 +10,16 @@ from .session import Session
 class SessionsGroup:
     def __init__(self, sessions=[]):
         self.sessions = []
-        self.reset()
+        self.append_all(sessions)
+
+    def append_all(self, sessions):
         [self.append(s) for s in sessions]
 
     def append(self, session):
         self.sessions.append(session if type(session) == Session else Session(session))
 
-    def __getitem__(self, key): return self.sessions[key]
+    def __getitem__(self, key):
+        return self.sessions[key]
 
     def _state(self):
         return self.sessions
@@ -74,7 +77,11 @@ class SessionsGroup:
 
     @property
     def recall(self):
-        return np.stack([s.recall for s in self.steps])
+        return (
+            np.stack([s.recall for s in self.steps])
+            if len(self.steps) > 0
+            else np.array([0])
+        )
 
     @property
     def mean_ndcg(self):
@@ -82,8 +89,11 @@ class SessionsGroup:
 
     @property
     def ndcg(self):
-        return np.stack([s.ndcg for s in self.steps])
-
+        return (
+            np.stack([s.ndcg for s in self.steps])
+            if len(self.steps) > 0
+            else np.array([0])
+        )
 
     @property
     def steps(self):
