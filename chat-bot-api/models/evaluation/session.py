@@ -8,15 +8,11 @@ from .session_step import SessionStep
 @ut.iterable_object
 class Session:
     def __init__(self, steps=[]):
-        self.steps = []
-        self.append_all(steps)
-
-
-    def append_all(self, steps):
-        [self.append(s) for s in steps]
+        self.steps = steps
 
     def append(self, step):
-        self.steps.append(step if type(step) == SessionStep else SessionStep(step))
+        self.steps.append(step)
+        return self
 
     def __getitem__(self, idx):
         return self.steps[idx]

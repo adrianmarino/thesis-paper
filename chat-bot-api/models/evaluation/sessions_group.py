@@ -1,22 +1,14 @@
 import metric as mt
 import util as ut
 import numpy as np
-from .session_step_dict import SessionStepDict
 from .session import Session
+from .sessions_plotter import SessionsPlotter
 
 
 @ut.printable
-@ut.iterable_object
 class SessionsGroup:
-    def __init__(self, sessions=[]):
-        self.sessions = []
-        self.append_all(sessions)
-
-    def append_all(self, sessions):
-        [self.append(s) for s in sessions]
-
-    def append(self, session):
-        self.sessions.append(session if type(session) == Session else Session(session))
+    def __init__(self, sessions):
+        self.sessions = sessions
 
     def __getitem__(self, key):
         return self.sessions[key]
@@ -97,7 +89,7 @@ class SessionsGroup:
 
     @property
     def steps(self):
-        return [step for session in self.sessions for step in session]
+        return [step for session in self.sessions for step in session.steps]
 
     @property
     def steps_mean_ndcg(self):
@@ -112,11 +104,12 @@ class SessionsGroup:
 
     @property
     def steps_by_index(self):
-        groups = SessionStepDict()
+        from .session_step_dict import SessionStepDict
+        session_steps = SessionStepDict()
         for session in self.sessions:
-            for idx, step in enumerate(session):
-                groups.put_step(idx + 1, step)
-        return groups
+            for idx, step in enumerate(session.steps):
+                session_steps.put_step(idx + 1, step)
+        return session_steps
 
     @property
     def group_by_steps_count(self):
@@ -127,3 +120,7 @@ class SessionsGroup:
             result[len(session)] = sessions
 
         return dict(sorted(result.items()))
+
+
+    @property
+    def plotter(self): return SessionsPlotter(self)

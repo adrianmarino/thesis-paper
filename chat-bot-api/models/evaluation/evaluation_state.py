@@ -3,6 +3,7 @@ import numpy as np
 from .session_step import SessionStep
 from .session import Session
 from .sessions_group import SessionsGroup
+from .session_step import SessionStep
 
 
 class EvaluationState:
@@ -55,5 +56,5 @@ class EvaluationState:
     @property
     def sessions(self):
         return SessionsGroup(
-            [Session(steps) for steps in self.metrics_by_user_id.values()]
+            [Session([SessionStep(s) for s in steps]) for steps in self.metrics_by_user_id.values()]
         )

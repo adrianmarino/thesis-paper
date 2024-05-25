@@ -11,6 +11,6 @@ from .plot import (
 )
 
 from .evaluation_state          import EvaluationState
-from .session_plotter           import SessionsPlotter
+from .sessions_plotter          import SessionsPlotter
 from .evaluation_state_factory  import EvaluationStateFactory
 from .model_evaluator           import ModelEvaluator
