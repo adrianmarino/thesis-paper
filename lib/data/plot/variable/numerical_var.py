@@ -6,11 +6,17 @@ def array_num_to_str(numbers):
     return [str(n) for n in numbers]
 
 
-def describe_num_var_array(values, title="", figsize=None):
+def describe_num_var_array(
+    values,
+    title='',
+    figsize=None,
+    title_fontsize=16,
+):
     describe_num_var(
         pd.DataFrame({title: values}),
         column=title,
         title=f"{title} (count: {len(values)})",
+        title_fontsize=title_fontsize,
         figsize=figsize,
     )
 

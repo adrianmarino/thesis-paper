@@ -10,6 +10,8 @@ from .plot import (
   plot_n_users_by_session_evolution_size
 )
 
+from .plot_metric_evolutions import *
+
 from .evaluation_state          import EvaluationState
 from .sessions_plotter          import SessionsPlotter
 from .evaluation_state_factory  import EvaluationStateFactory

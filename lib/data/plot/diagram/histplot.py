@@ -16,7 +16,7 @@ def histplot(
     show_mode            = True,
     show_outliers_leyend = True,
     remove_outliers      = False,
-    decimals             = 3,
+    decimals             = 10,
     density              = True,
     output_path          = None,
     output_ext           = 'svg',

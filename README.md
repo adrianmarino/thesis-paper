@@ -129,6 +129,7 @@ Based on these requirements, the following datasets were combined:
 * Recommendation Chatbot API Evaluation
   * [Using Llama 2 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama2.ipynb)
   * [Using Llama 3 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama3.ipynb)
+  * [Llama 3 va Llama 2 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/8_evaluation-llama2_vs_3.ipynb)
 
 #### Baseline
 

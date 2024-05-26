@@ -91,6 +91,14 @@ class SessionsPlotter:
                 f"Catalog Coverage: {self.sessions.catalog_coverage(item_ids):.2}"
             )
 
+
+
+    def plot_ndcg_dist(self, figsize=(20, 6)):
+        dpl.describe_num_var_array(
+            self.sessions.ndcg, "User Session Steps NDCG",
+            figsize=figsize
+        )
+
     def plot(self, item_ids=[], figsize=(20, 6)):
         self.metrics(item_ids)
 
@@ -108,9 +116,7 @@ class SessionsPlotter:
             figsize=figsize,
         )
 
-        dpl.describe_num_var_array(
-            self.sessions.ndcg, "User Session Steps NDCG", figsize=figsize
-        )
+        self.plot_ndcg_dist(figsize)
 
         self.plot_mean_ndcg_evolution(figsize=figsize)
 
