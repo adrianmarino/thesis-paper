@@ -24,7 +24,7 @@ class MannWhitneyWilcoxonTestResult:
             p_value_desc = f'(>={self.significance_level})'
 
         return f"""
-Prueba de Man Whiney - Wilcoxon de comparación de medianas:
+Prueba de Mann Whiney - Wilcoxon para la comparación de medianas:
 ==========================================================
 
 - Tamaño de las muestras: Dist1({len(self.dist1)}), Dist2({len(self.dist2)}).
