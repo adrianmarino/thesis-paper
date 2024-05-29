@@ -37,8 +37,6 @@ class EvaluationState:
             last_patience = patience
             if size <= patience_size:
                 return patience
-        return last_patience
-
     def save(self, path):
         ut.Picket.save(self.path, self)
 
