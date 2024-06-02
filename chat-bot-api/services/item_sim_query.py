@@ -9,7 +9,7 @@ class ItemSimQuery:
         self.__rating  = 0
         self.__seen    = False
         self.__where_medata = WhereMetadataBuilder()
-    
+
     def user_id_eq(self, value):
         self.__user_id = value
         return self
@@ -33,7 +33,7 @@ class ItemSimQuery:
     def limit_eq(self, value):
         if value is not None:
             value = int(value)
-            if value > 0:
+            if value >= 0:
                 self.__limit = value
         return self
 

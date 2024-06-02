@@ -33,6 +33,14 @@ class ChatBotClient:
             model = self._model
         )
 
+        logging.info(f"""
+PROMPT:
+{query}
+
+ANSWER:
+{result.response}
+""")
+
         return self._create_result(result, params)
 
     def _create_result(self, result, params):

@@ -1,5 +1,6 @@
 from fastapi import HTTPException, APIRouter, Response, Request
 from models import RecommendationQuery
+import logging
 
 
 def recommendations_handler(base_url, ctx):
@@ -19,8 +20,10 @@ def recommendations_handler(base_url, ctx):
     query: RecommendationQuery
   ):
     query.settings.base_url = str(request.base_url)
+    logging.info(f'Query:\n{query.model_dump(exclude_none=True)}')
 
     recommendations = await ctx.recommendation_chat_service.ask(query)
+
 
     if query.settings.plain:
       return Response(content=recommendations.plain, media_type='text/plain')
