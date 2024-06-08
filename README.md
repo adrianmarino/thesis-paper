@@ -451,12 +451,21 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations/models'
 ```json
 {
     "models": [
-        "llama2-13b-chat",
-        "llama2-7b-chat",
-        "gemma-7b",
-        "mistral-instruct",
-        "mistral",
-        "neural-chat"
+        "phi3:mini",
+        "llama3-rec:latest",
+        "mxbai-embed-large:latest",
+        "snowflake-arctic-embed:latest",
+        "llama3:text",
+        "llama3:instruct",
+        "llama3-8b-instruct:latest",
+        "mistral:latest",
+        "gemma-7b:latest",
+        "gemma:7b",
+        "llama2-7b-chat:latest",
+        "mistral-instruct:latest",
+        "mistral:instruct",
+        "mixtral:latest",
+        "llama2:7b-chat"
     ]
 }
 ```
