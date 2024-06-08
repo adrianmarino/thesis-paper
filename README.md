@@ -35,15 +35,16 @@ This study aims to compare different approaches to recommendation based on colla
     2. [See notebooks in jupyter lab](#see-notebooks-in-jupyter-lab)
 9. [Build dataset](#build-dataset)
 10. [Recommendation Chatbot API](#recommendation-chatbot-api)
-    1. [Setup as a systemd service](#setup-as-a-systemd-service)
+    1. [Arquitecture Diagram](#arquitecture-diagram)
+    2. [Setup as a systemd service](#setup-as-a-systemd-service)
         1. [Objetives](#objetives)
         2. [Setup](#setup)
         3. [Config file](#config-file)
-    2. [Register Airflow DAG](#register-airflow-dag)
-    3. [Test API](#test-api)
-    4. [API Postman Collection](#api-postman-collection)
-    5. [API Documentation](#api-documentation)
-11. [References](#references)
+    3. [Register Airflow DAG](#register-airflow-dag)
+    4. [Test API](#test-api)
+    5. [API Postman Collection](#api-postman-collection)
+    6. [API Documentation](#api-documentation)
+12. [References](#references)
 
 ## Requisites
 
@@ -273,7 +274,7 @@ These files conform to the project dataset and are used for all notebooks.
     </p>
 </div>
 
-## Arquitecture Diagram
+### Arquitecture Diagram
 
 <a href="[https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf](https://github.com/adrianmarino/thesis-paper/tree/master/docs/diagrams/recommendation-chatbot.drawio.png)">
 <div style="width: 100%; float:right">
