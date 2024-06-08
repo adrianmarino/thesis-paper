@@ -475,6 +475,7 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
     },
     "settings": {
         "llm"                                   : "llama3:instruct",
+                                                  // llama2:7b-chat, mistral:instruct
         "retry"                                 : 3,
         "plain"                                 : false,
         "include_metadata"                      : true,
