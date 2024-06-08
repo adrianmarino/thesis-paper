@@ -498,7 +498,10 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
             "max_items_by_user"                 : 10,
             "min_rating_by_user"                : 3.5,
             "not_seen"                          : true,
-            "rank_criterion"                    : "user_sim_weighted_pred_rating_score" // # user_sim_weighted_rating_score, user_item_sim, pred_user_rating
+            "rank_criterion"                    : "user_sim_weighted_pred_rating_score"
+                                                // user_sim_weighted_rating_score
+                                                // user_item_sim
+                                                // pred_user_rating
         }
     }
 }'
