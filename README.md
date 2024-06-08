@@ -273,7 +273,15 @@ These files conform to the project dataset and are used for all notebooks.
     </p>
 </div>
 
-[General Diagram](https://github.com/adrianmarino/thesis-paper/tree/master/docs/diagrams/recommendation-chatbot.drawio.png)
+## Arquitecture Diagram
+
+<a href="[https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf](https://github.com/adrianmarino/thesis-paper/tree/master/docs/diagrams/recommendation-chatbot.drawio.png)">
+<div style="width: 100%; float:right">
+    <p align="center">
+      <img src="https://github.com/adrianmarino/thesis-paper/blob/master/docs/diagrams/recommendation-chatbot.drawio.png?raw=true"  style="width: 100%; height: auto;" />
+    </p>
+</div>
+</a>
 
 
 ### Install as systemd service
