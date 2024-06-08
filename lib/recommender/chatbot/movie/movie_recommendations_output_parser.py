@@ -47,7 +47,13 @@ class MovieRecommendationsOutputParser():
     def _build_item(self, idx, data):
         return {
             'number'     : idx,
-            'title'      : data[0].replace('"', '').replace('\"', '"').replace('\d\.', '').strip().capitalize(),
+            'title'      : data[0] \
+                .replace('"', '') \
+                .replace('\"', '"') \
+                .replace('\d\.', '') \
+                .replace('**', '') \
+                .strip() \
+                .capitalize(),
             'description': data[2].strip().capitalize(),
             'release'    : data[1].strip()
         }

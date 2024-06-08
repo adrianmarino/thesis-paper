@@ -462,33 +462,34 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 --data-raw '{
     "message": {
         "author": "adrianmarino@gmail.com",
-        "content": "I want see marvel movies"
+        "content": "I want to see marvel movies"
     },
     "settings": {
-        "llm"                                   : "gemma-7b",
-        "retry"                                 : 2,
+        "llm"                                   : "llama3:instruct",
+        "retry"                                 : 3,
         "plain"                                 : false,
-        "include_metadata"                      : false,
+        "include_metadata"                      : true,
         "rag": {
-            "shuffle"                           : true,
-            "candidates_limit"                  : 50,
-            "llm_response_limit"                : 50,
+            "shuffle"                           : false,
+            "candidates_limit"                  : 30,
+            "llm_response_limit"                : 30,
             "recommendations_limit"             : 5,
             "similar_items_augmentation_limit"  : 5,
-            "not_seen": true
+            "not_seen"                          : true
         },
         "collaborative_filtering": {
-            "shuffle"                           : true,
-            "candidates_limit"                  : 50,
-            "llm_response_limit"                : 50,
+            "shuffle"                           : false,
+            "candidates_limit"                  : 100,
+            "llm_response_limit"                : 30,
             "recommendations_limit"             : 5,
-            "similar_items_augmentation_limit"  : 5,
+            "similar_items_augmentation_limit"  : 2,
             "text_query_limit"                  : 5000,
             "k_sim_users"                       : 10,
             "random_selection_items_by_user"    : 0.5,
             "max_items_by_user"                 : 10,
             "min_rating_by_user"                : 3.5,
-            "not_seen"                          : true
+            "not_seen"                          : true,
+            "rank_criterion"                    : "user_sim_weighted_pred_rating_score" // # user_sim_weighted_rating_score, user_item_sim, pred_user_rating
         }
     }
 }'

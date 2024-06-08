@@ -9,3 +9,4 @@ class CFSettings(RecommenderSettings):
     random_selection_items_by_user : float = 0.5,
     max_items_by_user              : int   = 5,
     min_rating_by_user             : float = 3.5
+    rank_criterion                 : str   = 'user_sim_weighted_pred_rating_score' # user_sim_weighted_rating_score, user_item_sim, pred_user_rating

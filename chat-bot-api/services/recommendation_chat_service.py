@@ -127,7 +127,19 @@ class RecommendationChatService:
           not_seen           = query.settings.collaborative_filtering.not_seen
       )
 
-      item_ids = recommendations.data['id'].unique().tolist()[:query.settings.collaborative_filtering.candidates_limit]
+      ordered_recommendations = recommendations \
+        .data \
+        .sort_values(
+          by        = [query.settings.collaborative_filtering.rank_criterion],
+          ascending = False,
+        )
+
+      if len(ordered_recommendations['id']) > 0:
+        item_ids = ordered_recommendations['id'] \
+          .unique() \
+          .tolist()[:query.settings.collaborative_filtering.candidates_limit]
+      else:
+        item_ids = []
 
       candidate_items = await self.ctx.item_service.find_by_ids(item_ids)
 

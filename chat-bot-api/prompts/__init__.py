@@ -20,7 +20,7 @@ best recommendations to stand out above the rest, as the competition is intense.
 # Task
 
 Recommend {limit} movies from candidate movies list, based on 'question', 'user profile' and 'seen movies'.
-Return only one list of recommendation with next format:
+Return only one list of recommendations with next format:
 
 Number. Title (release year): Synopsis.
 """
@@ -48,7 +48,7 @@ best recommendations to stand out above the rest, as the competition is intense.
 Recommend {limit} movies from candidate movies list, based on 'question' and 'excluding seen movies' and does
 not add movies that does not exists in the candidates list.
 
-Return only one list of recommendation with next format:
+Return only one list of recommendations with next format:
 
 Number. Title (release year): Synopsis.
 """

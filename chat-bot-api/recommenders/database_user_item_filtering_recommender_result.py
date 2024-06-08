@@ -57,7 +57,7 @@ class DatabaseUserItemFilteringRecommenderResult(RecommenderResult):
                 'rating',
                 'pred_user_rating',
                 'user_sim_weighted_rating_score',
-                'user_sim_weighted_pred_rating_score', 
+                'user_sim_weighted_pred_rating_score',
                 'user_item_sim'
             ]]
 
