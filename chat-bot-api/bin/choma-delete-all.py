@@ -16,7 +16,7 @@ deleted = 0
 for collection in client.list_collections():
     try:
         client.delete_collection(collection.name)
-        logging.info(f'==> "{collection.name}" collection deletedssss')
+        logging.info(f'==> "{collection.name}" collection deleted...')
         deleted += 1
     except Exception as e:
         logging.error(f"Can't remove {collection.name} collection. Detail: {e}")

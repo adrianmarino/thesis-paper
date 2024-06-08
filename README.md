@@ -42,8 +42,9 @@ This study aims to compare different approaches to recommendation based on colla
         3. [Config file](#config-file)
     3. [Register Airflow DAG](#register-airflow-dag)
     4. [Test API](#test-api)
-    5. [API Postman Collection](#api-postman-collection)
-    6. [API Documentation](#api-documentation)
+    5. [Reset data to start evaluation process](#reset-data-to-start-evaluation-process)
+    6. [API Postman Collection](#api-postman-collection)
+    7. [API Documentation](#api-documentation)
 12. [References](#references)
 
 ## Requisites
@@ -583,31 +584,31 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 ### Reset data to start evaluation process
 
 
-**Step 1**: Remove all chatbot user interactions.
+**Step 1**: Remove all chatbot user interactions in `mongodb`.
 
 ```javascript
 db.getCollection('interactions').deleteMany({ 'user_id': { $regex: /@/ }})
 ```
 
-**Step 2**: Remove all users profiles.
-F
+**Step 2**: Remove all users profiles in `mongodb`.
+
 ```javascript
 db.getCollection('profiles').drop();
 ```
 
-**Step 3**: Remove all predicted interactions.
+**Step 3**: Remove all predicted interactions in `mongodb`.
 
 ```javascript
 db.getCollection('pred_interactions').drop();
 ```
 
-**Step 4**: Remove users search history.
+**Step 4**: Remove users search history in `mongodb`.
 
 ```javascript
 db.getCollection('histories').drop();
 ```
 
-**Step 5**: Remove all chroma collections.
+**Step 5**: Remove all collections in `chroma` database.
 
 ```bash
 cd chat-bot-api
@@ -615,13 +616,13 @@ bin/./chroma-delete-all
 
 ENV: thesis
 2024-06-08 13:31:53,826 - INFO - Start: Delete all chroma db collections...
-2024-06-08 13:31:58,376 - INFO - ==> "items_cf" collection deletedssss
-2024-06-08 13:31:58,685 - INFO - ==> "items_content" collection deletedssss
-2024-06-08 13:31:59,130 - INFO - ==> "users_cf" collection deletedssss
+2024-06-08 13:31:58,376 - INFO - ==> "items_cf" collection deleted...
+2024-06-08 13:31:58,685 - INFO - ==> "items_content" collection deleted...
+2024-06-08 13:31:59,130 - INFO - ==> "users_cf" collection deleted...
 2024-06-08 13:31:59,130 - INFO - Finish: 3 collections deleted
 ```
 
-**Step 6**: Restart API
+**Step 6**: Restart `chat-bot-api`
 
 ```bash
 systemctl --user restart chat-bot-api
@@ -651,6 +652,16 @@ jun 08 13:35:12 skynet start[4092894]: INFO:     Will watch for changes in these
 jun 08 13:35:12 skynet start[4092894]: INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 jun 08 13:35:12 skynet start[4092894]: INFO:     Started reloader process [4092894] using WatchFiles
 ```
+
+
+**Step 7**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
+
+```bash
+cd ..
+jupyterlab
+```
+
+**Note**: The evaluation process takes between 4 to 5 hours.
 
 
 ### API Postman Collection
