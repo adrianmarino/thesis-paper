@@ -235,22 +235,48 @@
 									"        <th>Genres</th>",
 									"    </tr>",
 									"    ",
-									"    {{#each response}}",
+									"    {{#each response.items}}",
 									"        <tr>",
 									"            <td><img src=\"{{poster}}\" class=\"poster\" alt=\"No Poster Available\"></td>",
 									"            <td>{{title}} ({{release}})</td>",
 									"            <td>{{description}}</td>",
-									"            <td>{{genres}}</td>",
+									"            <td>",
+									"                <ul>",
+									"                    {{#each genres}}",
+									"                        <li>{{this}}</li>",
+									"                    {{/each}}",
+									"                </ul>",
+									"            </td>",
 									"        </tr>",
 									"    {{/each}}",
 									"</table>",
 									"`;",
 									"",
 									"function constructVisualizerPayload() {",
-									"    return { response: pm.response.json() }",
+									"    var items = pm.response.json().items.map(item => {",
+									"        return {",
+									"            poster: item.poster,",
+									"            title: item.title,",
+									"            release: item.release,",
+									"            description: item.description,",
+									"            genres: item.genres",
+									"        };",
+									"    });",
+									"",
+									"    return { response: { items: items } }",
 									"}",
 									"",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -264,12 +290,13 @@
 								"key": "Content-Type",
 								"value": "text/plain",
 								"type": "text",
+								"uuid": "83a5ef21-5778-4150-8a8f-b73aa53a40b6",
 								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see marvel movies\"\n    },\n    \"settings\": {\n        \"llm\"                                   : \"llama3-rec:latest\",\n        \"retry\"                                 : 1,\n        \"plain\"                                 : false,\n        \"include_metadata\"                      : false,\n        \"rag\": {\n            \"shuffle\"                           : false,\n            \"candidates_limit\"                  : 30,\n            \"llm_response_limit\"                : 30,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"not_seen\"                          : true\n        },\n        \"collaborative_filtering\": {\n            \"shuffle\"                           : false,\n            \"candidates_limit\"                  : 30,\n            \"llm_response_limit\"                : 30,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"text_query_limit\"                  : 5000,\n            \"k_sim_users\"                       : 10,\n            \"random_selection_items_by_user\"    : 0.5,\n            \"max_items_by_user\"                 : 10,\n            \"min_rating_by_user\"                : 3.5,\n            \"not_seen\"                          : true\n        }\n    }\n}",
+							"raw": "{\n    \"message\": {\n        \"author\": \"adrianmarino@gmail.com\",\n        \"content\": \"I want to see marvel movies\"\n    },\n    \"settings\": {\n        \"llm\"                                   : \"llama3:instruct\",\n                                                  // llama2:7b-chat, mistral:instruct\n        \"retry\"                                 : 3,\n        \"plain\"                                 : false,\n        \"include_metadata\"                      : true,\n        \"rag\": {\n            \"shuffle\"                           : false,\n            \"candidates_limit\"                  : 30,\n            \"llm_response_limit\"                : 30,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 5,\n            \"not_seen\"                          : true\n        },\n        \"collaborative_filtering\": {\n            \"shuffle\"                           : false,\n            \"candidates_limit\"                  : 100,\n            \"llm_response_limit\"                : 30,\n            \"recommendations_limit\"             : 5,\n            \"similar_items_augmentation_limit\"  : 2,\n            \"text_query_limit\"                  : 5000,\n            \"k_sim_users\"                       : 10,\n            \"random_selection_items_by_user\"    : 0.5,\n            \"max_items_by_user\"                 : 10,\n            \"min_rating_by_user\"                : 3.5,\n            \"not_seen\"                          : true,\n            \"rank_criterion\"                    : \"user_sim_weighted_pred_rating_score\"\n                                                // user_sim_weighted_rating_score\n                                                // user_item_sim\n                                                // pred_user_rating\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -310,6 +337,7 @@
 								"key": "Content-Type",
 								"value": "text/plain",
 								"type": "text",
+								"uuid": "3d99e932-5550-4b2f-8b81-06ffbffbe68c",
 								"disabled": true
 							}
 						],
@@ -353,6 +381,7 @@
 								"key": "Content-Type",
 								"value": "text/plain",
 								"type": "text",
+								"uuid": "3376dbb1-5d45-4525-86b9-e40f2691cf3a",
 								"disabled": true
 							}
 						],
@@ -516,17 +545,8 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": \"2\",\n    \"title\": \"Pepito\",\n    \"description\": \"Tu abuelo en sunga\",\n    \"genres\": [\"accion\"],\n    \"release\": \"2010-01-01\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{URL}}/api/v1/items/embeddings/content/build",
+							"raw": "{{URL}}/api/v1/items/embeddings/content/build?batch_size=5000",
 							"host": [
 								"{{URL}}"
 							],
@@ -537,37 +557,12 @@
 								"embeddings",
 								"content",
 								"build"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rebuild cf embs",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": \"2\",\n    \"title\": \"Pepito\",\n    \"description\": \"Tu abuelo en sunga\",\n    \"genres\": [\"accion\"],\n    \"release\": \"2010-01-01\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/api/v1/items/embeddings/cf/build",
-							"host": [
-								"{{URL}}"
 							],
-							"path": [
-								"api",
-								"v1",
-								"items",
-								"embeddings",
-								"cf",
-								"build"
+							"query": [
+								{
+									"key": "batch_size",
+									"value": "5000"
+								}
 							]
 						}
 					},
@@ -675,7 +670,7 @@
 									"    .tftable tr {background-color:#ffffff;}",
 									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
 									"    .tftable tr:hover {background-color:#e0ffff;}",
-									"    .tftable img {max-width: 400px; max-height: 400px;} /* Updated size for images */",
+									"    .tftable img {max-width: 200px; max-height: 200px;} /* Updated size for images */",
 									"</style>",
 									"",
 									"<table class=\"tftable\" border=\"1\">",
@@ -697,7 +692,7 @@
 									"            <td>{{release}}</td>",
 									"            <td>{{genres}}</td>",
 									"            <td>{{rating}}</td>",
-									"            <td><img src=\"{{poster}}\" alt=\"Poster\" height=\"400\"></td>",
+									"            <td><img src=\"{{poster}}\" alt=\"Poster\" height=\"200\"></td>",
 									"        </tr>",
 									"    {{/each}}",
 									"</table>",
@@ -710,6 +705,14 @@
 									"",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
 								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
 								"type": "text/javascript"
 							}
 						}
@@ -718,7 +721,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/items?limit=100&release=1990&rating=3.5&content=A thriller movie",
+							"raw": "{{URL}}/api/v1/items?content=\"i want to see  marvel movies\"&limit=30&release=2000",
 							"host": [
 								"{{URL}}"
 							],
@@ -729,25 +732,21 @@
 							],
 							"query": [
 								{
+									"key": "content",
+									"value": "\"i want to see  marvel movies\""
+								},
+								{
 									"key": "limit",
-									"value": "100"
+									"value": "30"
 								},
 								{
 									"key": "release",
-									"value": "1990"
+									"value": "2000"
 								},
 								{
 									"key": "genres",
 									"value": "accion,thriller",
 									"disabled": true
-								},
-								{
-									"key": "rating",
-									"value": "3.5"
-								},
-								{
-									"key": "content",
-									"value": "A thriller movie"
 								}
 							]
 						}
