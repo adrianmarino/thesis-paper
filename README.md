@@ -264,15 +264,16 @@ These files conform to the project dataset and are used for all notebooks.
     Recommenders</a></li>
       <li><a href="https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3604915.3608845.pdf">Large Language Models are Competitive Near Cold-start
     Recommenders for Language- and Item-based Preferences</a></li>
-    </ul>        
-  </p>      
+    </ul>
+  </p>
 </div>
 <div style="width: 30%; float:right">
     <p align="center">
       <img src="https://github.com/adrianmarino/thesis-paper/blob/master/images/chatbot.png?raw=true"  style="width: 300px; height: auto;" />
-    </p>      
+    </p>
 </div>
 
+[General Diagram](https://github.com/adrianmarino/thesis-paper/tree/master/docs/diagrams/recommendation-chatbot.drawio.png)
 
 
 ### Install as systemd service
