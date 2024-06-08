@@ -580,6 +580,79 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 }
 ```
 
+### Reset data to start evaluation process
+
+
+**Step 1**: Remove all chatbot user interactions.
+
+```javascript
+db.getCollection('interactions').deleteMany({ 'user_id': { $regex: /@/ }})
+```
+
+**Step 2**: Remove all users profiles.
+F
+```javascript
+db.getCollection('profiles').drop();
+```
+
+**Step 3**: Remove all predicted interactions.
+
+```javascript
+db.getCollection('pred_interactions').drop();
+```
+
+**Step 4**: Remove users search history.
+
+```javascript
+db.getCollection('histories').drop();
+```
+
+**Step 5**: Remove all chroma collections.
+
+```bash
+cd chat-bot-api
+bin/./chroma-delete-all
+
+ENV: thesis
+2024-06-08 13:31:53,826 - INFO - Start: Delete all chroma db collections...
+2024-06-08 13:31:58,376 - INFO - ==> "items_cf" collection deletedssss
+2024-06-08 13:31:58,685 - INFO - ==> "items_content" collection deletedssss
+2024-06-08 13:31:59,130 - INFO - ==> "users_cf" collection deletedssss
+2024-06-08 13:31:59,130 - INFO - Finish: 3 collections deleted
+```
+
+**Step 6**: Restart API
+
+```bash
+systemctl --user restart chat-bot-api
+```
+
+```bash
+systemctl --user status chat-bot-api
+
+● chat-bot-api.service - Recommendation Chatbot API for adrian user
+     Loaded: loaded (/home/adrian/.config/systemd/user/chat-bot-api.service; enabled; preset: enabled)
+     Active: active (exited) since Sat 2024-06-08 13:35:12 -03; 3s ago
+    Process: 4092833 ExecStart=/home/adrian/chat-bot-api/bin/start (code=exited, status=0/SUCCESS)
+   Main PID: 4092833 (code=exited, status=0/SUCCESS)
+      Tasks: 26 (limit: 38212)
+     Memory: 514.4M (peak: 515.0M)
+        CPU: 4.855s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/app.slice/chat-bot-api.service
+             ├─4092894 python -m uvicorn api:app --reload --host 0.0.0.0 --port 8080
+             ├─4092897 /home/adrian/.conda/envs/thesis/bin/python -c "from multiprocessing.resource_tracker import main;main(4)"
+             └─4092898 /home/adrian/.conda/envs/thesis/bin/python -c "from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)" --multiprocessing-fork
+
+jun 08 13:35:12 skynet systemd[1467]: Starting Recommendation Chatbot API for adrian user...
+jun 08 13:35:12 skynet start[4092833]: ENV: thesis
+jun 08 13:35:12 skynet start[4092833]: Start Recommendation ChatBot API...
+jun 08 13:35:12 skynet systemd[1467]: Finished Recommendation Chatbot API for adrian user.
+jun 08 13:35:12 skynet start[4092894]: INFO:     Will watch for changes in these directories: ['/home/adrian/development/personal/maestria/thesis-paper/chat-bot-api']
+jun 08 13:35:12 skynet start[4092894]: INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+jun 08 13:35:12 skynet start[4092894]: INFO:     Started reloader process [4092894] using WatchFiles
+```
+
+
 ### API Postman Collection
 
 * [Recommendation Charbot API postman collection](https://github.com/adrianmarino/thesis-paper/blob/master/chat-bot-api/postman_collection.json)
