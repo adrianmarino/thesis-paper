@@ -27,7 +27,6 @@ def python_callable(**ctx):
             await AppContext().cf_emb_update_job()
         except Exception as e:
             logging.error('Error to execute cf_emb_update_job!. Defaults: {e}')
-            # raise AirflowException(f'Error to execute run_cf_emb_update_job!. Defaults: {e}')
             sys.exit(1)
 
     try:
@@ -35,7 +34,6 @@ def python_callable(**ctx):
         asyncio.run(run_cf_emb_update_job())
     except Exception as e:
         logging.error(f'Error to execute run_cf_emb_update_job!. Defaults: {e}')
-        # raise AirflowException(f'Error to execute run_cf_emb_update_job!. Defaults: {e}')
         sys.exit(1)
 
 
