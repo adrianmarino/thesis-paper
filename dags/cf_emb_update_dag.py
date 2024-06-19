@@ -19,7 +19,7 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry'  : False,
         'retries'         : 3,
-        'retry_delay'     : timedelta(minutes=0)
+        'retry_delay'     : timedelta(minutes=5)
     },
     description       = """
         Generate and updated list of embeddings that represent users and items.
