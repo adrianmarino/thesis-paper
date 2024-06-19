@@ -63,8 +63,11 @@ def histplot(
     if show_mode:
         ax_hist.axvline(mode_value,   color='b', linestyle='-',  label=f'Mode ({round(mode_value, decimals)})')
     if show_outliers_leyend and not remove_outliers:
-        ax_hist.axvline(outyliers_lower,  color='black', linestyle='-', label=f'Outliers lower ({round(outyliers_lower, decimals)})')
-        ax_hist.axvline(outliers_upper,   color='black', linestyle='-', label=f'Outliers Upper ({round(outliers_upper, decimals)})')
+        outyliers_lower_percent = (len([v for v in values if v <= outyliers_lower])/len(values))*100
+        outliers_upper_percent = (len([v for v in values if v >= outliers_upper])/len(values))*100
+
+        ax_hist.axvline(outyliers_lower,  color='black', linestyle='-', label=f'Outliers lower ({round(outyliers_lower, decimals)} - {outyliers_lower_percent:.2f}%)')
+        ax_hist.axvline(outliers_upper,   color='black', linestyle='-', label=f'Outliers Upper ({round(outliers_upper, decimals)} - {outliers_upper_percent:.2f}%)')
 
 
     ax_hist.legend()

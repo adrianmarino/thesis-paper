@@ -183,7 +183,7 @@ class ModelEvaluator:
                         f'{log_prefix}Found {len(result_relevant_items)} relevant items from a list of {len(result.items)} - Votes: {", ".join(votes)}.'
                     )
 
-                self.evaluation_state.save_step_session(
+                self.evaluation_state.save_session_step(
                     user_id,
                     session_step={
                         "recommended_items": [item.id for item in result.items],
@@ -203,16 +203,16 @@ class ModelEvaluator:
             if times % self.evaluation_state.plot_interval == 0 and times > 1:
                 self.plot()
 
-            if times % 4 == 0:
-                time.sleep(10)
+            # if times % 4 == 0:
+                # time.sleep(10)
 
             times += 1
 
-        self.api_client.verbose_on
+        self.api_client.verbose_onn
 
     def plot(self):
         clear_output(wait=True)
-        self.evaluation_state.plot_metrics(self.api_item_ids)
+        self.evaluation_state.sessions.plotter.plot(self.api_item_ids)
 
     def make_request(
         self, api_client, hyper_params, log_prefix, profile, remaining_items_sample
@@ -222,7 +222,7 @@ class ModelEvaluator:
         )
         prompt = f"I want to see:\n{titles}"
 
-        if self.verbose: # and logging.DEBUG >= logging.root.level:
+        if self.verbose and logging.DEBUG >= logging.root.level:
             logging.info(f"Prompt - {prompt}")
 
         sw = pu.Stopwatch()

@@ -1,6 +1,6 @@
 FROM llama3:instruct
 
-PARAMETER temperature 0.5
+PARAMETER temperature 0.3
 
 TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
 

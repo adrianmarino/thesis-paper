@@ -7,8 +7,11 @@ from .sessions_plotter import SessionsPlotter
 
 @ut.printable
 class SessionsGroup:
-    def __init__(self, sessions):
+    def __init__(self, sessions = []):
         self.sessions = sessions
+
+    def append(self, session):
+        self.sessions.append(session)
 
     def __getitem__(self, key):
         return self.sessions[key]
@@ -115,12 +118,17 @@ class SessionsGroup:
     def group_by_steps_count(self):
         result = {}
         for session in self.sessions:
-            sessions = result.get(len(session), SessionsGroup())
+            key = len(session.steps)
+            sessions = result.get(key, SessionsGroup())
             sessions.append(session)
-            result[len(session)] = sessions
+            result[key] = sessions
 
         return dict(sorted(result.items()))
 
 
     @property
     def plotter(self): return SessionsPlotter(self)
+
+
+    def __len__(self):
+        return len(self.sessions)

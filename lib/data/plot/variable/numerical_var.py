@@ -15,7 +15,7 @@ def describe_num_var_array(
     describe_num_var(
         pd.DataFrame({title: values}),
         column=title,
-        title=f"{title} (count: {len(values)})",
+        title=f"{title} (observations: {len(values)})",
         title_fontsize=title_fontsize,
         figsize=figsize,
     )

@@ -24,25 +24,16 @@ class SessionStepDict:
     @property
     def items(self): return self.steps_by_key.items()
 
-    @property
-    def mean_recall(self):
-        return {key: Session(steps).mean_recall for key, steps in self.items}
+    def mean_recall(self, min_sessions_by_step=5):
+        return {step_index: Session(steps).mean_recall for step_index, steps in self.items if len(steps) >= min_sessions_by_step}
 
-    @property
-    def mean_average_precision(self):
-        return {key: Session(steps).mean_average_precision for key, steps in self.items}
+    def mean_average_precision(self, min_sessions_by_step=5):
+        return {step_index: Session(steps).mean_average_precision for step_index, steps in self.items if len(steps) >= min_sessions_by_step}
 
-    @property
-    def mean_reciprocal_rank(self):
-        return {key: Session(steps).mean_reciprocal_rank for key, steps in self.items}
+    def mean_reciprocal_rank(self, min_sessions_by_step=5):
+        return {step_index: Session(steps).mean_reciprocal_rank for step_index, steps in self.items if len(steps) >= min_sessions_by_step}
 
-
-    @property
-    def mean_reciprocal_rank(self):
-        return {key: Session(steps).mean_reciprocal_rank for key, steps in self.items}
-
-    @property
-    def mean_ndcg(self):
-        return {key: Session(steps).mean_ndcg for key, steps in self.items}
+    def mean_ndcg(self, min_sessions_by_step=1):
+        return {step_index: Session(steps).mean_ndcg for step_index, steps in self.items if len(steps) >= min_sessions_by_step}
 
     def _state(self): return self.steps_by_key

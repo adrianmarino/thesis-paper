@@ -622,7 +622,14 @@ ENV: thesis
 2024-06-08 13:31:59,130 - INFO - Finish: 3 collections deleted
 ```
 
-**Step 6**: Restart `chat-bot-api`
+
+**Step 6**: Rebuild item text embeddings used to search items by free text (Retrieval Augmented Generation).
+
+```bash
+curl --location --request PUT 'http://nonosoft.ddns.net:8080/api/v1/items/embeddings/content/build?batch_size=5000'
+```
+
+**Step 7**: Restart `chat-bot-api`
 
 ```bash
 systemctl --user restart chat-bot-api
