@@ -4,6 +4,8 @@ from scipy.ndimage import gaussian_filter1d
 import pytorch_common.util as pu
 import util as ut
 import numpy as np
+import pandas as pd
+import util as ut
 
 
 def smooth_lineplot(
@@ -76,17 +78,53 @@ def plot_ndcg_sessions(
     plt.legend()
 
 
-def bar_plot_sessions_by_step(
-    users_by_sessions_size,
+
+def bar_plot(
+    values_by_index,
+    xlabel='',
+    ylabel='',
+    title='',
+    sort_by='value',
+    ascending=True,
+    estimator="sum",
+    figsize =(5 ,4)
+):
+    df = pd.DataFrame(values_by_index, columns=['key', 'value'])
+    df = df.sort_values(by=sort_by, ascending=ascending)
+
+    plt.figure(figsize=figsize)
+    ax = sns.barplot(
+        data=df,
+        x = 'key',
+        y = 'value',
+        order= df[sort_by],
+        estimator=estimator
+    )
+    ax.bar_label(ax.containers[0], fontsize=10);
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+
+def bar_plot_df(
+    df,
+    x,
+    y,
+    sort_by,
+    xlabel='',
+    ylabel='',
+    title='',
+    estimator="sum",
     figsize =(5 ,4)
 ):
     plt.figure(figsize=figsize)
     ax = sns.barplot(
-        x = [i[0] for i in users_by_sessions_size],
-        y = [i[1] for i in users_by_sessions_size],
-        estimator="sum"
+        data=df,
+        x = x,
+        y = y,
+        order= df[sort_by],
+        estimator=estimator
     )
     ax.bar_label(ax.containers[0], fontsize=10);
-    plt.xlabel("Session Step")
-    plt.ylabel("Sessions Count")
-    plt.title("Sessions Count by Session Step")
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)

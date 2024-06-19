@@ -7,7 +7,8 @@ from .plot import (
   smooth_lineplot,
   plot_smooth_line,
   plot_ndcg_sessions,
-  bar_plot_sessions_by_step
+  bar_plot,
+  bar_plot_df
 )
 
 from .plot_metric_evolutions import *

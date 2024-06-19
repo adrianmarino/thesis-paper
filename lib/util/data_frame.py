@@ -184,6 +184,10 @@ def group_sum(df, group_col):
     return df.groupby([group_col]).sum().reset_index()
 
 
+def group_size(df, group_col):
+    return df.groupby([group_col]).size().to_frame('size').reset_index()
+
+
 
 def bins_column(df, column, bins):
     bins = np.concatenate([[0], bins, [np.inf]])

@@ -85,9 +85,16 @@ class ModelEvaluator:
 
             patience = 0
             while True:
-                remaining_interactions_df = interactions_df.pipe(
-                    is_remaining, self.api_client, profile
-                )
+                try:
+                    remaining_interactions_df = interactions_df.pipe(
+                        is_remaining, self.api_client, profile
+                    )
+
+                except Exception as err:
+                    logging.error(
+                        f"{log_prefix}End user evaluation. Error to fetch remaining interactions. Make retry."
+                    )
+                    continue
 
                 if (
                     self.evaluation_state.was_evaluated(user_id)

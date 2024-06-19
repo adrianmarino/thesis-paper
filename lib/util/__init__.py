@@ -12,12 +12,13 @@ from .data_frame        import (
     embedding_from_list_col,
     year_to_decade,
     group_mean,
+    group_sum,
+    group_size,
     mean_by_key,
     get_one_hot_from_list_col,
     column_types,
     one_hot,
     multiply_by,
-    group_sum,
     bins_column
 )
 

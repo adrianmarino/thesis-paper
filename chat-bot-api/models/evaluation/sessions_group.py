@@ -3,6 +3,7 @@ import util as ut
 import numpy as np
 from .session import Session
 from .sessions_plotter import SessionsPlotter
+import pandas as pd
 
 
 @ut.printable
@@ -128,6 +129,18 @@ class SessionsGroup:
 
     @property
     def plotter(self): return SessionsPlotter(self)
+
+
+    def n_session_with_more_than(self, n_items=30):
+        df = pd.DataFrame(
+            [(idx, len(s.found_items)) for idx, s in enumerate(self.sessions)],
+            columns=['session', 'found_items'],
+        ).pipe(ut.group_size, 'found_items')
+        df = df.rename(columns={'size': 'n_sessions', 'found_items': 'n_rated_items'})
+
+        df = df[df['n_rated_items'] >= n_items]
+
+        return df['n_sessions'].sum()
 
 
     def __len__(self):
