@@ -126,6 +126,22 @@ class SessionsGroup:
 
         return dict(sorted(result.items()))
 
+    @property
+    def steps(self):
+        steps = []
+        for session in self.sessions:
+            steps.extend(session.steps)
+        return steps
+
+
+    @property
+    def steps_n_found_items(self):
+        result = []
+        for session in self.sessions:
+            for step in session.steps:
+                result.append(len(step.found_items))
+        return result
+
 
     @property
     def plotter(self): return SessionsPlotter(self)

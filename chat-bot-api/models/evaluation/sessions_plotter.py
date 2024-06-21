@@ -119,6 +119,13 @@ class SessionsPlotter:
             figsize=figsize,
         )
 
+    def plot_n_found_items_by_session_step_dist(self, figsize=(20, 6)):
+        dpl.describe_num_var_array(
+            self.sessions.steps_n_found_items,
+            "Found items Count by Session Step Distribution",
+            figsize=figsize,
+        )
+
     def plot_n_rated_items_by_session_dist(self, figsize=(20, 6)):
         dpl.describe_num_var_array(
             [len(s.found_items) for s in self.sessions],
@@ -186,6 +193,8 @@ class SessionsPlotter:
         self.bar_plot_sessions_by_step(figsize=figsize)
 
         self.plot_n_rated_items_by_session_dist(figsize=figsize)
+
+        self.plot_n_found_items_by_session_step_dist(figsize=figsize)
 
         self.plot_mean_ndcg_by_session_step_dist(figsize=figsize)
 
