@@ -56,7 +56,7 @@ class CFEmbUpdateJob(Job):
         tmp_path              = os.environ['TMP_PATH'],
         user_seq_col          = 'user_seq',
         item_seq_col          = 'item_seq',
-        update_period_in_min  = 1,
+        update_period_in_min  = 10,
         params              = Bunch({
             'model': Bunch({
                 'units_per_layer'   : [20, 1],

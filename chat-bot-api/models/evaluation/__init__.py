@@ -3,13 +3,6 @@ from .session       import Session
 from .sessions_group import SessionsGroup
 from .session_step_dict  import SessionStepDict
 
-from .plot import (
-  smooth_lineplot,
-  plot_smooth_line,
-  plot_ndcg_sessions,
-  bar_plot,
-  bar_plot_df
-)
 
 from .plot_metric_evolutions import *
 

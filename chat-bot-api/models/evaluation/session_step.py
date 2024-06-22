@@ -15,7 +15,7 @@ class SessionStep:
     def relevant_item_ids(self): return [int(id) for id in self.properties['relevant_item_ratings'].keys()]
 
     @property
-    def found_items(self): return np.intersect1d(np.array(self.recommended_item_ids), np.array(self.relevant_item_ids))
+    def found_relevant_items(self): return np.intersect1d(np.array(self.recommended_item_ids), np.array(self.relevant_item_ids))
 
     @property
     def recall(self): return np.array(mt.recall(self.recommended_item_ids, self.relevant_item_ids))

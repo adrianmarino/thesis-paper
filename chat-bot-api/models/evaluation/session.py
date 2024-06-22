@@ -55,8 +55,8 @@ class Session:
         return mt.catalog_coverage(self.recommended_item_ids, item_ids)
 
     @property
-    def found_items(self):
-        return np.concatenate([step.found_items for step in self.steps if len(step.found_items) > 0])
+    def found_relevant_items(self):
+        return np.concatenate([step.found_relevant_items for step in self.steps if len(step.found_relevant_items) > 0])
 
     def _state(self):
         return self.steps

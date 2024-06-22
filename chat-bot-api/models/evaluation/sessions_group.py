@@ -127,21 +127,24 @@ class SessionsGroup:
         return dict(sorted(result.items()))
 
     @property
-    def steps(self):
-        steps = []
-        for session in self.sessions:
-            steps.extend(session.steps)
-        return steps
+    def n_found_relevant_items(self):
+        return np.array([len(step.found_relevant_items) for step in self.steps])
 
 
     @property
-    def steps_n_found_items(self):
-        result = []
-        for session in self.sessions:
-            for step in session.steps:
-                result.append(len(step.found_items))
-        return result
+    def n_found_relevant_items_by_step_index(self):
+        data = []
+        for step_index, steps in self.steps_by_index.items:
+            for step in steps:
+                data.append({
+                    'step_index': step_index,
+                    'n_found_relevant_items': len(step.found_relevant_items)
+                })
+        return pd.DataFrame(data)
 
+    @property
+    def steps(self):
+        return np.array([step for session in self.sessions for step in session.steps]).flatten()
 
     @property
     def plotter(self): return SessionsPlotter(self)
@@ -149,10 +152,10 @@ class SessionsGroup:
 
     def n_session_with_more_than(self, n_items=30):
         df = pd.DataFrame(
-            [(idx, len(s.found_items)) for idx, s in enumerate(self.sessions)],
-            columns=['session', 'found_items'],
-        ).pipe(ut.group_size, 'found_items')
-        df = df.rename(columns={'size': 'n_sessions', 'found_items': 'n_rated_items'})
+            [(idx, len(s.found_relevant_items)) for idx, s in enumerate(self.sessions)],
+            columns=['session', 'found_relevant_items'],
+        ).pipe(ut.group_size, 'found_relevant_items')
+        df = df.rename(columns={'size': 'n_sessions', 'found_relevant_items': 'n_rated_items'})
 
         df = df[df['n_rated_items'] >= n_items]
 

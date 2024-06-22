@@ -1,10 +1,3 @@
-from .plot import (
-    smooth_lineplot,
-    plot_smooth_line,
-    plot_ndcg_sessions,
-    bar_plot,
-    bar_plot_df
-)
 import matplotlib.pyplot as plt
 import logging
 import pandas as pd
@@ -34,7 +27,7 @@ class SessionsPlotter:
     def plot_mean_ndcg_by_session_steps_series(
         self, figsize=(20, 6), min_sessions_by_step=4
     ):
-        plot_smooth_line(
+        dpl.plot_smooth_line(
             self.sessions.steps_by_index.mean_ndcg(
                 min_sessions_by_step=min_sessions_by_step
             ),
@@ -50,7 +43,7 @@ class SessionsPlotter:
         figsize=(20, 6),
         min_sessions_by_step=4,
     ):
-        plot_smooth_line(
+        dpl.plot_smooth_line(
             self.sessions.steps_by_index.mean_average_precision(min_sessions_by_step),
             xlabel="Session Step",
             ylabel="Mean Average Precision",
@@ -64,7 +57,7 @@ class SessionsPlotter:
         figsize=(20, 6),
         min_sessions_by_step=4,
     ):
-        plot_smooth_line(
+        dpl.plot_smooth_line(
             self.sessions.steps_by_index.mean_reciprocal_rank(min_sessions_by_step),
             xlabel="Session Step",
             ylabel="Mean Reciprocal Rank",
@@ -78,7 +71,7 @@ class SessionsPlotter:
         figsize=(20, 6),
         min_sessions_by_step=4,
     ):
-        plot_smooth_line(
+        dpl.plot_smooth_line(
             self.sessions.steps_by_index.mean_recall(min_sessions_by_step),
             xlabel="Session Step",
             ylabel="Mean Recall",
@@ -119,22 +112,22 @@ class SessionsPlotter:
             figsize=figsize,
         )
 
-    def plot_n_found_items_by_session_step_dist(self, figsize=(20, 6)):
+    def plot_n_found_relevant_items_by_session_step_dist(self, figsize=(20, 6)):
         dpl.describe_num_var_array(
-            self.sessions.steps_n_found_items,
+            self.sessions.n_found_relevant_items,
             "Found items Count by Session Step Distribution",
             figsize=figsize,
         )
 
     def plot_n_rated_items_by_session_dist(self, figsize=(20, 6)):
         dpl.describe_num_var_array(
-            [len(s.found_items) for s in self.sessions],
+            [len(s.found_relevant_items) for s in self.sessions],
             "Rated items by Session Distribution",
             figsize=figsize,
         )
 
     def bar_plot_sessions_by_step(self, figsize=(20, 6)):
-        bar_plot(
+        dpl.dict_barplot(
             [
                 (n_steps, len(steps))
                 for n_steps, steps in self.sessions.steps_by_index.items
@@ -176,6 +169,25 @@ class SessionsPlotter:
             figsize=figsize,
         )
 
+
+    def plot_n_found_relevant_items_segments_by_step(self, figsize=(20, 6)):
+        df = self.sessions.n_found_relevant_items_by_step_index \
+            .groupby(['step_index', 'n_found_relevant_items'], as_index=False) \
+            .size()
+
+        dpl.stacked_barplot(
+            df,
+            x      = 'step_index',
+            hue    = 'n_found_relevant_items',
+            y      = 'size',
+            title  = 'Relevant items found by step index for all sessions',
+            xlabel = 'Session Step',
+            ylabel = 'Found Relevant Items Count',
+            legend = 'Found Relevant Items Count Segment',
+            figsize=figsize
+        )
+
+
     def plot(
         self, item_ids=[],
         min_sessions_by_step=4,
@@ -194,7 +206,11 @@ class SessionsPlotter:
 
         self.plot_n_rated_items_by_session_dist(figsize=figsize)
 
-        self.plot_n_found_items_by_session_step_dist(figsize=figsize)
+        self.plot_n_found_relevant_items_by_session_step_dist(figsize=figsize)
+
+        self.plot_n_found_relevant_items_segments_by_step(
+            figsize=(figsize[0]*0.825, figsize[1]*1.3)
+        )
 
         self.plot_mean_ndcg_by_session_step_dist(figsize=figsize)
 
@@ -219,3 +235,25 @@ class SessionsPlotter:
         self.plot_mean_recall_by_user_session_step(figsize=figsize)
 
         plt.show()
+
+
+
+def plot_ndcg_sessions(
+    ndcgs_by_sessions_size,
+    smooth_level = 0.8,
+    figsize      =(14, 5)
+):
+    plt.figure(figsize=figsize)
+
+    for size, ndcgs in sorted(ndcgs_by_sessions_size.items()):
+        dpt.smooth_lineplot(
+            x                         = list(range(1, len(ndcgs)+1)),
+            y                         = ndcgs,
+            label                     = f'{size} Session steps)',
+            smooth_level              = smooth_level
+        )
+
+    plt.xlabel('Session step')
+    plt.ylabel('Mean NDGC')
+    plt.title('Mean NDGC by Session Step')
+    plt.legend()
