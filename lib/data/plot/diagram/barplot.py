@@ -4,6 +4,7 @@ import pytorch_common.util as pu
 import util as ut
 import numpy as np
 import pandas as pd
+import math
 
 
 def barplot(
@@ -36,9 +37,8 @@ def dict_barplot(
     title_fontsize = 16,
     axis_fontsize  = 16,
     bar_fontsize   = 10,
-    sort_by='value',
+    sort_by='key',
     ascending=True,
-    estimator="sum",
     figsize =(5 ,4)
 ):
     df = pd.DataFrame(values_by_index, columns=['key', 'value'])
@@ -49,13 +49,14 @@ def dict_barplot(
         data=df,
         x = 'key',
         y = 'value',
-        order= df[sort_by],
-        estimator=estimator
+        order = df[sort_by]
     )
+
     ax.bar_label(ax.containers[0], fontsize=bar_fontsize);
     plt.xlabel(xlabel, fontsize=axis_fontsize)
     plt.ylabel(ylabel, fontsize=axis_fontsize)
     plt.title(title, fontsize=title_fontsize)
+
 
 def stacked_barplot(
     df,
@@ -63,7 +64,7 @@ def stacked_barplot(
     y,
     hue,
     title='',
-    title_fontsize   = 20,
+    title_fontsize   = 16,
     axis_fontsize    = 16,
     legend_fontsize  = 12,
     bar_fontsize     = 7,
@@ -72,7 +73,6 @@ def stacked_barplot(
     ylabel           = None,
     figsize          = (10, 6)
 ):
-    import math
     df_pivot = df.pivot(index=x, columns=hue, values=y)
 
     ax = df_pivot.plot(kind='bar', stacked=True, figsize=figsize)

@@ -127,11 +127,12 @@ class SessionsPlotter:
         )
 
     def bar_plot_sessions_by_step(self, figsize=(20, 6)):
-        dpl.dict_barplot(
-            [
+        result = [
                 (n_steps, len(steps))
                 for n_steps, steps in self.sessions.steps_by_index.items
-            ],
+            ]
+        dpl.dict_barplot(
+            result,
             xlabel="Session Step",
             ylabel="Sessions Count",
             title="Sessions Count by Session Step",

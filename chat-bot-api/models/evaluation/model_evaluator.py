@@ -210,12 +210,9 @@ class ModelEvaluator:
             if times % self.evaluation_state.plot_interval == 0 and times > 1:
                 self.plot()
 
-            # if times % 4 == 0:
-                # time.sleep(10)
-
             times += 1
 
-        self.api_client.verbose_onn
+        self.api_client.verbose_on
 
     def plot(self):
         clear_output(wait=True)
