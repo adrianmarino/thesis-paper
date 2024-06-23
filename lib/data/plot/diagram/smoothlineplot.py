@@ -11,6 +11,8 @@ import util as ut
 def smooth_lineplot(
     x,
     y,
+    title_fontsize = 16,
+    axis_fontsize  = 16,
     smooth_level              = 0.7,
     confidence_interval_alpha = 0.15,
     label                     = ''
@@ -40,6 +42,8 @@ def plot_smooth_line(
     xlabel,
     ylabel,
     title,
+    title_fontsize = 16,
+    axis_fontsize  = 16,
     smooth_level = 2,
     figsize      = (5,3)
 ):
@@ -52,6 +56,6 @@ def plot_smooth_line(
         smooth_level              = smooth_level
     )
 
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.title(title)
+    plt.xlabel(xlabel, fontsize=axis_fontsize)
+    plt.ylabel(ylabel, fontsize=axis_fontsize)
+    plt.title(title, fontsize=title_fontsize)

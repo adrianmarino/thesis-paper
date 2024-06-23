@@ -9,4 +9,4 @@ from .ridgeplot           import ridgeplot
 from .correlationplot     import correlation_plot
 from .comparative_boxplot import comparative_boxplot
 from .dendrogram          import plot_dendrogram
-from .smoothlineplot      import smooth_lineplot, plot_smooth_line
+from .smoothlineplot      import plot_smooth_line

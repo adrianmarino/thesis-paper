@@ -126,26 +126,15 @@ class SessionsPlotter:
             figsize=figsize,
         )
 
-    def bar_plot_sessions_by_step(self, figsize=(20, 6)):
-        result = [
+    def bar_plot_sessions_by_step(self, figsize=(20, 6)): 
+        dpl.dict_barplot(
+            [
                 (n_steps, len(steps))
                 for n_steps, steps in self.sessions.steps_by_index.items
-            ]
-        dpl.dict_barplot(
-            result,
+            ],
             xlabel="Session Step",
             ylabel="Sessions Count",
             title="Sessions Count by Session Step",
-            figsize=figsize,
-        )
-
-    def plot_mean_ndcg_by_session_step(self, figsize=(20, 6)):
-        plot_ndcg_sessions(
-            {
-                n_steps: sessions.steps_mean_ndcg
-                for n_steps, sessions in self.sessions.group_by_steps_count.items()
-            },
-            smooth_level=0.8,
             figsize=figsize,
         )
 
@@ -237,24 +226,3 @@ class SessionsPlotter:
 
         plt.show()
 
-
-
-def plot_ndcg_sessions(
-    ndcgs_by_sessions_size,
-    smooth_level = 0.8,
-    figsize      =(14, 5)
-):
-    plt.figure(figsize=figsize)
-
-    for size, ndcgs in sorted(ndcgs_by_sessions_size.items()):
-        dpt.smooth_lineplot(
-            x                         = list(range(1, len(ndcgs)+1)),
-            y                         = ndcgs,
-            label                     = f'{size} Session steps)',
-            smooth_level              = smooth_level
-        )
-
-    plt.xlabel('Session step')
-    plt.ylabel('Mean NDGC')
-    plt.title('Mean NDGC by Session Step')
-    plt.legend()

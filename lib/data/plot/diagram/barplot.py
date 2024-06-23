@@ -28,7 +28,6 @@ def barplot(
     plt.show(block=False)
 
 
-
 def dict_barplot(
     values_by_index,
     xlabel='',

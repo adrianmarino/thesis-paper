@@ -7,6 +7,7 @@ import pytorch_common.util as pu
 import util as ut
 import client
 import time
+import random
 
 
 def sample(df, size):
@@ -70,7 +71,8 @@ class ModelEvaluator:
         self.verbose = verbose
 
     def run(self):
-        user_ids = self.interactions_by_user_id_df.groups.keys()
+        user_ids = list(self.interactions_by_user_id_df.groups.keys())
+        random.shuffle(user_ids)
 
         times = 1
         self.api_client.verbose_off
@@ -234,7 +236,7 @@ class ModelEvaluator:
             RecQueryBuilder(hyper_params).user(profile.email).prompt(prompt).build()
         )
         if logging.DEBUG >= logging.root.level:
-            logging.debug(f"{log_prefix}Response time: {sw.to_str()} - Promp: {prompt}")
+            logging.debug(f"{log_prefix}Response time: {sw.to_str()} - Prompt: {prompt}")
         else:
             logging.info(f"{log_prefix}Response time: {sw.to_str()}")
 
