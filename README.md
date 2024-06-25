@@ -685,15 +685,20 @@ jun 08 13:35:12 skynet start[4092894]: INFO:     Uvicorn running on http://0.0.0
 jun 08 13:35:12 skynet start[4092894]: INFO:     Started reloader process [4092894] using WatchFiles
 ```
 
+**Step 10**: Remove previos model weights.
 
-**Step 10**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
+```bash
+rm -rf weights
+```
+
+**Step 11**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
 
 ```bash
 cd ..
 jupyterlab
 ```
 
-**Note**: The evaluation process takes between 4 to 5 hours.
+**Note**: The evaluation process takes between 4 to 5 days.
 
 
 ### API Postman Collection
