@@ -636,14 +636,19 @@ ENV: thesis
 2024-06-08 13:31:59,130 - INFO - Finish: 3 collections deleted
 ```
 
+**Step 7**: Restart charbot API.
 
-**Step 7**: Rebuild item text embeddings used to search items by free text (Retrieval Augmented Generation).
+```bash
+systemctl --user restart chat-bot-api
+```
+
+**Step 8**: Rebuild item text embeddings used to search items by free text (Retrieval Augmented Generation).
 
 ```bash
 curl --location --request PUT 'http://nonosoft.ddns.net:8080/api/v1/items/embeddings/content/build?batch_size=5000'
 ```
 
-**Step 7**: Restart `chat-bot-api`
+**Step 9**: Restart `chat-bot-api`
 
 ```bash
 systemctl --user restart chat-bot-api
@@ -675,7 +680,7 @@ jun 08 13:35:12 skynet start[4092894]: INFO:     Started reloader process [40928
 ```
 
 
-**Step 8**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
+**Step 10**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
 
 ```bash
 cd ..
