@@ -35,7 +35,7 @@ This study aims to compare different approaches to recommendation based on colla
     2. [See notebooks in jupyter lab](#see-notebooks-in-jupyter-lab)
 9. [Build dataset](#build-dataset)
 10. [Recommendation Chatbot API](#recommendation-chatbot-api)
-    1. [Interaction Diagram](#general-interaction-diagram)
+    1. [Interaction Diagram](#interaction-diagram)
     2. [Setup as a systemd service](#setup-as-a-systemd-service)
         1. [Objetives](#objetives)
         2. [Setup](#setup)
