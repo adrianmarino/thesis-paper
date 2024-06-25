@@ -584,13 +584,19 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 ### Reset data to start evaluation process
 
 
-**Step 1**: Remove all chatbot user interactions in `mongodb`.
+**Step 1**: Backup user interactions in `mongodb`.
+
+```bash
+mongoexport -d chatbot -c interactions --out interactions.json --jsonArray 
+```
+
+**Step 2**: Remove all chatbot user interactions in `mongodb`.
 
 ```javascript
 db.getCollection('interactions').deleteMany({ 'user_id': { $regex: /@/ }})
 ```
 
-**Step 2**: Backup and Remove all users profiles in `mongodb`.
+**Step 3**: Backup and Remove all users profiles in `mongodb`.
 
 ```bash
 mongoexport -d chatbot -c profiles --out profiles.json --jsonArray 
@@ -600,7 +606,7 @@ mongoexport -d chatbot -c profiles --out profiles.json --jsonArray
 db.getCollection('profiles').drop();
 ```
 
-**Step 3**: Backup and Remove all predicted interactions in `mongodb`.
+**Step 4**: Backup and Remove all predicted interactions in `mongodb`.
 
 ```bash
 mongoexport -d chatbot -c pred_interactions --out pre_interactions.json --jsonArray
@@ -610,13 +616,13 @@ mongoexport -d chatbot -c pred_interactions --out pre_interactions.json --jsonAr
 db.getCollection('pred_interactions').drop();
 ```
 
-**Step 4**: Remove users search history in `mongodb`.
+**Step 5**: Remove users search history in `mongodb`.
 
 ```javascript
 db.getCollection('histories').drop();
 ```
 
-**Step 5**: Remove all collections in `chroma` database.
+**Step 6**: Remove all collections in `chroma` database.
 
 ```bash
 cd chat-bot-api
@@ -631,7 +637,7 @@ ENV: thesis
 ```
 
 
-**Step 6**: Rebuild item text embeddings used to search items by free text (Retrieval Augmented Generation).
+**Step 7**: Rebuild item text embeddings used to search items by free text (Retrieval Augmented Generation).
 
 ```bash
 curl --location --request PUT 'http://nonosoft.ddns.net:8080/api/v1/items/embeddings/content/build?batch_size=5000'
@@ -669,7 +675,7 @@ jun 08 13:35:12 skynet start[4092894]: INFO:     Started reloader process [40928
 ```
 
 
-**Step 7**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
+**Step 8**: Start Jupyter Lab, go to `notebooks/chat-bot/6_evaluation-llama3.ipynb` and start notebook.
 
 ```bash
 cd ..
