@@ -590,13 +590,21 @@ curl --location 'http://nonosoft.ddns.net:8080/api/v1/recommendations' \
 db.getCollection('interactions').deleteMany({ 'user_id': { $regex: /@/ }})
 ```
 
-**Step 2**: Remove all users profiles in `mongodb`.
+**Step 2**: Backup and Remove all users profiles in `mongodb`.
+
+```bash
+mongoexport -d chatbot -c profiles --out profiles.json --jsonArray 
+```
 
 ```javascript
 db.getCollection('profiles').drop();
 ```
 
-**Step 3**: Remove all predicted interactions in `mongodb`.
+**Step 3**: Backup and Remove all predicted interactions in `mongodb`.
+
+```bash
+mongoexport -d chatbot -c pred_interactions --out pre_interactions.json --jsonArray
+```
 
 ```javascript
 db.getCollection('pred_interactions').drop();
