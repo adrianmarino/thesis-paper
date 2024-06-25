@@ -35,7 +35,7 @@ This study aims to compare different approaches to recommendation based on colla
     2. [See notebooks in jupyter lab](#see-notebooks-in-jupyter-lab)
 9. [Build dataset](#build-dataset)
 10. [Recommendation Chatbot API](#recommendation-chatbot-api)
-    1. [Arquitecture Diagram](#arquitecture-diagram)
+    1. [Interaction Diagram](#general-interaction-diagram)
     2. [Setup as a systemd service](#setup-as-a-systemd-service)
         1. [Objetives](#objetives)
         2. [Setup](#setup)
@@ -275,7 +275,7 @@ These files conform to the project dataset and are used for all notebooks.
     </p>
 </div>
 
-### Arquitecture Diagram
+### Interaction Diagram
 
 <a href="[https://github.com/adrianmarino/thesis-paper/blob/master/docs/ideas/3583780.3614949.pdf](https://github.com/adrianmarino/thesis-paper/tree/master/docs/diagrams/recommendation-chatbot.drawio.png)">
 <div style="width: 100%; float:right">
