@@ -124,11 +124,14 @@ class SessionsPlotter:
         figsize=(20, 6),
         min_found_relevant_items = 0
     ):
-        dpl.describe_num_var_array(
-            [len(s.found_relevant_items) for s in self.sessions if len(s.found_relevant_items) >= min_found_relevant_items],
-            f'Rated items by Session Distribution (min rated items: {min_found_relevant_items})',
-            figsize=figsize,
-        )
+        result = [len(s.found_relevant_items) for s in self.sessions if len(s.found_relevant_items) >= min_found_relevant_items]
+
+        if len(result) > 0:
+            dpl.describe_num_var_array(
+                result,
+                f'Rated items by Session Distribution (min rated items: {min_found_relevant_items})',
+                figsize=figsize,
+            )
 
     def bar_plot_sessions_by_step(self, figsize=(20, 6)): 
         dpl.dict_barplot(
