@@ -648,6 +648,12 @@ systemctl --user restart chat-bot-api
 curl --location --request PUT 'http://nonosoft.ddns.net:8080/api/v1/items/embeddings/content/build?batch_size=5000'
 ```
 
+Could use next command to see reindex process logs:
+
+```bash
+tail -f /var/tmp/chat-bot-api.log
+```
+
 **Step 9**: Restart `chat-bot-api`
 
 ```bash
