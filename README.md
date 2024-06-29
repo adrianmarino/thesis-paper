@@ -130,14 +130,20 @@ Based on these requirements, the following datasets were combined:
 
 * [Recommendation Models Comparative](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/4_models_comparative.ipynb)
 * Recommendation Chatbot API Evaluation
-  * [Using Llama 2 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama2.ipynb)
-  * [Using Llama 3 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama3.ipynb)
-  * [Llama 3 vs. Llama 2 as content based sub model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/8_evaluation-llama2_vs_3.ipynb)
+  * Ensemble using Llama 2 as content based sub model
+      * [Model Evaluation Process](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama2.ipynb)
+      * [Model Evaluation Results](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/9_evaluation-llama2-results.ipynb)
+
+  * Ensemble using Llama 3 as content based sub model
+    * [Model Evaluation Process](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/6_evaluation-llama3.ipynb)
+    * [Model Evaluation Results](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/10_evaluation-llama3-results.ipynb)
+
+  * [Ensemble Comparative Analysis](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/8_evaluation-llama2_vs_3.ipynb)
 
 #### Baseline
 
 * [Random Model](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/3_random_model.ipynb)
- 
+
 #### Collaborative Filtering
 
 * **Memory based**
