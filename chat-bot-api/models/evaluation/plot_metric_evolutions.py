@@ -1,11 +1,16 @@
 import data.plot as dp
 
 
-def plot_mean_ndcg_evolutions(llama2_sessions, llama3_sessions, moving_avg_window = 5):
+def plot_mean_ndcg_evolutions(
+    llama2_sessions,
+    llama3_sessions,
+    moving_avg_window = 5,
+    min_sessions_by_step = 10
+):
     dp.plot_lines(
         lines             = {
-            'Llama3': list(llama3_sessions.steps_by_index.mean_ndcg.values()),
-            'Llama2': list(llama2_sessions.steps_by_index.mean_ndcg.values())
+            'Llama3': list(llama3_sessions.steps_by_index.mean_ndcg(min_sessions_by_step).values()),
+            'Llama2': list(llama2_sessions.steps_by_index.mean_ndcg(min_sessions_by_step).values())
         },
         hue               = 'LLM',
         xlabel            = 'User Session Step',
@@ -15,11 +20,16 @@ def plot_mean_ndcg_evolutions(llama2_sessions, llama3_sessions, moving_avg_windo
         fill              = True,
     )
 
-def plot_mean_avg_precision_evolutions(llama2_sessions, llama3_sessions, moving_avg_window = 5):
+def plot_mean_avg_precision_evolutions(
+    llama2_sessions,
+    llama3_sessions,
+    moving_avg_window = 5,
+    min_sessions_by_step = 10
+):
     dp.plot_lines(
         lines             = {
-            'Llama3': list(llama3_sessions.steps_by_index.mean_average_precision.values()),
-            'Llama2': list(llama2_sessions.steps_by_index.mean_average_precision.values()),
+            'Llama3': list(llama3_sessions.steps_by_index.mean_average_precision(min_sessions_by_step).values()),
+            'Llama2': list(llama2_sessions.steps_by_index.mean_average_precision(min_sessions_by_step).values()),
         },
         hue               = 'LLM',
         xlabel            = 'User Session Step',
@@ -29,11 +39,16 @@ def plot_mean_avg_precision_evolutions(llama2_sessions, llama3_sessions, moving_
         fill              = True,
     )
 
-def plot_mean_reciprocal_rank_evolutions(llama2_sessions, llama3_sessions, moving_avg_window = 5):
+def plot_mean_reciprocal_rank_evolutions(
+    llama2_sessions,
+    llama3_sessions,
+    moving_avg_window = 5,
+    min_sessions_by_step = 10
+):
     dp.plot_lines(
         lines             = {
-            'Llama3': list(llama3_sessions.steps_by_index.mean_reciprocal_rank.values()),
-            'Llama2': list(llama2_sessions.steps_by_index.mean_reciprocal_rank.values())
+            'Llama3': list(llama3_sessions.steps_by_index.mean_reciprocal_rank(min_sessions_by_step).values()),
+            'Llama2': list(llama2_sessions.steps_by_index.mean_reciprocal_rank(min_sessions_by_step).values())
         },
         hue               = 'LLM',
         xlabel            = 'User Session Step',
@@ -43,11 +58,16 @@ def plot_mean_reciprocal_rank_evolutions(llama2_sessions, llama3_sessions, movin
         fill              = True,
     )
 
-def plot_mean_recall_evolutions(llama2_sessions, llama3_sessions, moving_avg_window = 5):
+def plot_mean_recall_evolutions(
+    llama2_sessions,
+    llama3_sessions,
+    moving_avg_window = 5,
+    min_sessions_by_step = 10
+):
     dp.plot_lines(
         lines             = {
-            'Llama3': list(llama3_sessions.steps_by_index.mean_recall.values()),
-            'Llama2': list(llama2_sessions.steps_by_index.mean_recall.values())
+            'Llama3': list(llama3_sessions.steps_by_index.mean_recall(min_sessions_by_step).values()),
+            'Llama2': list(llama2_sessions.steps_by_index.mean_recall(min_sessions_by_step).values())
         },
         hue               = 'LLM',
         xlabel            = 'User Session Step',
