@@ -37,7 +37,7 @@ This study aims to compare different approaches to recommendation based on colla
 10. [Recommendation Chatbot API](#recommendation-chatbot-api)
     1. [Deployment Diagram](#deployment-diagram)
     1. [Flow Diagram](#flow-diagram)
-    2. [Install as a systemd service](#install-as-a-systemd-service)
+    2. [Install as systemd service](#install-as-systemd-service)
         1. [Objetives](#objetives)
         2. [Setup](#setup)
         3. [Config file](#config-file)
