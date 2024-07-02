@@ -304,7 +304,7 @@ These files conform to the project dataset and are used for all notebooks.
 </a>
 
 
-### Install as systemd service
+### Install as `systemd` service
 
 #### Objetives
 * Install `cha-bot-api` as a `systemd` daemon.
