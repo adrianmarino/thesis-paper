@@ -1,0 +1,55 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1.}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Tipos de sistemas de recomendación}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Basados en Popularidad}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Basados en Contenido}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Basados en Filtrado Colaborativos}{3}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Modelos Híbridos}{5}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Categorías dentro de los modelos basados en filtros colaborativos}{5}{subsection.1.1.5}%
+\contentsline {subsubsection}{Basados en Memoria}{5}{subsubsection*.4}%
+\contentsline {subsubsection}{Basados en Modelos}{5}{subsubsection*.5}%
+\contentsline {section}{\numberline {1.2}Descripción del problema y motivación}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit {Deep Learning}, obtienen mejores resultados que aquellas que no las utilizan?}{6}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}¿Cuáles son las ventajas y desventajas de cada enfoque a la hora de aplicar estas técnicas?}{6}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}¿Cómo se puede solucionar el problema de \textit {Cold start} que sufre el enfoque de recomendación basado en filtros colaborativos? (tesis)}{6}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Objetivos}{6}{section.1.3}%
+\contentsline {chapter}{\numberline {2.}Materiales y Métodos}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Datos}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}\textit {MovieLens 25M Dataset}}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}\textit {TMDB Movie Dataset}}{8}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Pre-Procesamiento}{9}{subsection.2.1.3}%
+\contentsline {subsubsection}{Tabla de interacciones}{9}{subsubsection*.6}%
+\contentsline {section}{\numberline {2.2}Análisis exploratorio}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Variable \textit {Rating}}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Correlaciones}{14}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Variables de tipo texto}{15}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Análisis de Componentes Principales}{17}{subsection.2.2.4}%
+\contentsline {chapter}{\numberline {3.}Métodos}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Enfoque Basados en Memoria}{22}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1} Algoritmo de los K vecinos cercanos (\textit {K-Nearest-Neighbor} o \textit {KNN}) }{22}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2} Algoritmo de los K vecinos cercanos basado en usuarios (\textit {KNN User Based}) }{25}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3} Algoritmo de los K vecinos cercanos basado en ítems (\textit {KNN Item Based}) }{27}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Modelo ensamble de los algoritmos de los K vecinos cercanos basados en usuarios e ítems (\textit {KNN User-Item Based Ensemble})}{27}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Enfoque basado en modelos}{28}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Codificación \textit {One-Hot} vs \textit {Embeddings}}{28}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Capa o módulo \textit {Embedding}}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Arquitecturas Utilizadas}{31}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Factorización Matricial General (\textit {General Matrix Factorization o GMF})}{31}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Factorización Matricial General con Sesgo (\textit {Biased General Matrix Factorization o B-GFM})}{33}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}Factorización Matricial mediante Redes Neuronales (\textit {Neural Network Matrix Factorization o NN-FM})}{34}{subsection.3.2.6}%
+\contentsline {subsection}{\numberline {3.2.7}Máquinas de Factorización (\textit {FM})}{36}{subsection.3.2.7}%
+\contentsline {subsection}{\numberline {3.2.8}Máquinas de factorización profundas (\textit {DeepFM})}{38}{subsection.3.2.8}%
+\contentsline {section}{\numberline {3.3}Métricas}{39}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}\textit {Root Mean Square Error (RMSE)}}{39}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}\textit {Mean Average Precision at k (mAP@k)}}{39}{subsection.3.3.2}%
+\contentsline {chapter}{\numberline {4.}Experimentos}{43}{chapter.4}%
+\contentsline {section}{\numberline {4.1} Algoritmo de los K vecinos cercanos (\textit {K-Nearest-Neighbor} o \textit {KNN}) }{43}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1} Algoritmo de los K vecinos cercanos basado en usuarios (\textit {KNN User Based}) }{43}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2} Algoritmo de los K vecinos cercanos basado en ítems (\textit {KNN Item Based}) }{45}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Modelo ensamble de los algoritmos de los K vecinos cercanos basados en usuarios e ítems (\textit {KNN User-Item Based Ensemble}) }{46}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Factorización Matricial General (\textit {General Matrix Factorization o GMF})}{48}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Factorización Matricial General con Sesgo (\textit {Biased General Matrix Factorization o B-GFM})}{50}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Factorización Matricial mediante Redes Neuronales (\textit {Neural Network Matrix Factorization o NN-FM})}{52}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Máquinas de factorización profundas (\textit {DeepFM})}{55}{section.4.5}%
+\contentsline {chapter}{\numberline {5.}Resultados}{57}{chapter.5}%
+\contentsline {chapter}{\numberline {6.}Conclusiones}{61}{chapter.6}%

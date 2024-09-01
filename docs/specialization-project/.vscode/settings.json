@@ -1,0 +1,197 @@
+{
+    "cSpell.language": "es,es-ES",
+    "cSpell.enableSpanish": true,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdfLaTeX",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xelatex ➞ bibtex ➞ xelatex`×2",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        }
+    ],
+    "cSpell.words": [
+        "adult",
+        "animation",
+        "Average",
+        "back",
+        "Become",
+        "benchmark",
+        "benchmarks",
+        "bias",
+        "Biased",
+        "Biplot",
+        "Blood",
+        "Blue",
+        "boss",
+        "Christmas",
+        "clusterizar",
+        "Cold",
+        "commerce",
+        "cuantil",
+        "Cuantil",
+        "cuantiles",
+        "curtosis",
+        "Dark",
+        "deep",
+        "Deep",
+        "dropout",
+        "embedding",
+        "Embedding",
+        "embeddings",
+        "encoder",
+        "engagement",
+        "Ensemble",
+        "epoch",
+        "escalabilidad",
+        "ésimo",
+        "Etran",
+        "Factorization",
+        "Father",
+        "Find",
+        "Flatten",
+        "framework",
+        "frameworks",
+        "Friend",
+        "full",
+        "fully",
+        "Funk",
+        "Funny",
+        "genres",
+        "Girl",
+        "ieee",
+        "Independent",
+        "inter",
+        "interactions",
+        "Keras",
+        "kernel",
+        "keywords",
+        "languages",
+        "learning",
+        "Learning",
+        "Lens",
+        "leptocúrtica",
+        "loadings",
+        "Love",
+        "manhattan",
+        "Matrix",
+        "mesocúrtica",
+        "missing",
+        "movie",
+        "Movie",
+        "movies",
+        "muestreada",
+        "multi",
+        "Murder",
+        "naive",
+        "native",
+        "Nearest",
+        "Neighbor",
+        "newbie",
+        "Night",
+        "nominee",
+        "Nudity",
+        "otago",
+        "overview",
+        "papers",
+        "Pearson",
+        "performance",
+        "platicúrtica",
+        "popularity",
+        "poster",
+        "prize",
+        "production",
+        "rating",
+        "ratings",
+        "recomendadores",
+        "Rendle",
+        "revenue",
+        "Softmax",
+        "Steffen",
+        "story",
+        "Story",
+        "tagline",
+        "TMDB",
+        "Torch",
+        "underground",
+        "Violent",
+        "VRAM",
+        "Wife",
+        "woody",
+        "Year"
+    ]
+}

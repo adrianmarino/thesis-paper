@@ -1,0 +1,227 @@
+\relax 
+\providecommand\babel@aux[2]{}
+\@nameuse{bbl@beforestart}
+\catcode `"\active 
+\catcode `<\active 
+\catcode `>\active 
+\@nameuse{es@quoting}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\babel@aux{spanish}{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1.}Introducción}{1}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Tipos de sistemas de recomendación}{2}{section.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Clasificación de tipos de sistemas de recomendaciones.}}{2}{figure.1.1}\protected@file@percent }
+\newlabel{fig:clasification}{{1.1}{2}{Clasificación de tipos de sistemas de recomendaciones}{figure.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}Basados en Popularidad}{2}{subsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Basados en Contenido}{2}{subsection.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Basados en Filtrado Colaborativos}{3}{subsection.1.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.4}Modelos Híbridos}{5}{subsection.1.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.5}Categorías dentro de los modelos basados en filtros colaborativos}{5}{subsection.1.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Basados en Memoria}{5}{subsubsection*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Basados en Modelos}{5}{subsubsection*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Descripción del problema y motivación}{6}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}¿Los modelos basado en filtro colaborativos que utilizan técnicos de \textit  {Deep Learning}, obtienen mejores resultados que aquellas que no las utilizan?}{6}{subsection.1.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}¿Cuáles son las ventajas y desventajas de cada enfoque a la hora de aplicar estas técnicas?}{6}{subsection.1.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}¿Cómo se puede solucionar el problema de \textit  {Cold start} que sufre el enfoque de recomendación basado en filtros colaborativos? (tesis)}{6}{subsection.1.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Objetivos}{6}{section.1.3}\protected@file@percent }
+\citation{movielens}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2.}Materiales y Métodos}{7}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Datos}{7}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}\textit  {MovieLens 25M Dataset}}{7}{subsection.2.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces  Columnas del \textit  {dataset} \textit  {Movie Lens}, relevantes para este trabajo. }}{7}{table.2.1}\protected@file@percent }
+\newlabel{table:movieLensColumns}{{2.1}{7}{Columnas del \textit {dataset} \textit {Movie Lens}, relevantes para este trabajo}{table.2.1}{}}
+\citation{tmdb}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}\textit  {TMDB Movie Dataset}}{8}{subsection.2.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces  Columnas del \textit  {dataset} \textit  {TMDB}, relevantes para este trabajo. }}{8}{table.2.2}\protected@file@percent }
+\newlabel{table:tmdbColumns}{{2.2}{8}{Columnas del \textit {dataset} \textit {TMDB}, relevantes para este trabajo}{table.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Pre-Procesamiento}{9}{subsection.2.1.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces  \textit  {files} o tablas utilizadas en este trabajo, para construir un \textit  {dataset} unificado, el cual sirve como base para entrenamiento y evaluación de modelos. }}{9}{table.2.3}\protected@file@percent }
+\newlabel{table:tableRatings}{{2.3}{9}{\textit {files} o tablas utilizadas en este trabajo, para construir un \textit {dataset} unificado, el cual sirve como base para entrenamiento y evaluación de modelos}{table.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces  \textit  {files} resultado del pre-procesamiento. Estos forman parte del \textit  {dataset} de entrenamiento y evaluación en este trabajo practico. }}{9}{table.2.4}\protected@file@percent }
+\newlabel{table:tableFiles}{{2.4}{9}{\textit {files} resultado del pre-procesamiento. Estos forman parte del \textit {dataset} de entrenamiento y evaluación en este trabajo practico}{table.2.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Tabla de interacciones}{9}{subsubsection*.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces  Definición de tabla \textit  {ratings\_tags\_v1} o tabla de interacciones. }}{10}{table.2.5}\protected@file@percent }
+\newlabel{table:interactionsTableDef}{{2.5}{10}{Definición de tabla \textit {ratings\_tags\_v1} o tabla de interacciones}{table.2.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces  Definición de tabla \textit  {movies\_v4} o tabla de películas. }}{10}{table.2.6}\protected@file@percent }
+\newlabel{table:moviesTableDef}{{2.6}{10}{Definición de tabla \textit {movies\_v4} o tabla de películas}{table.2.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.7}{\ignorespaces Porcentaje de valores faltantes por columna en la \textit  {tabla movies\_v4}.}}{10}{table.2.7}\protected@file@percent }
+\newlabel{table:tab}{{2.7}{10}{Porcentaje de valores faltantes por columna en la \textit {tabla movies\_v4}}{table.2.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Análisis exploratorio}{11}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Variable \textit  {Rating}}{11}{subsection.2.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Este diagrama de barras expone la frecuencia o cantidad de observaciones para cada valor discreto de calificación o \textit  {rating}.}}{11}{figure.2.1}\protected@file@percent }
+\newlabel{fig:ratingsBarPlot}{{2.1}{11}{Este diagrama de barras expone la frecuencia o cantidad de observaciones para cada valor discreto de calificación o \textit {rating}}{figure.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Histograma y \textit  {Boxplot} de la variable \textit  {rating}. Los \textit  {ratings} son las calificaciones realizadas por los usuario para cada ítem o película.}}{12}{figure.2.2}\protected@file@percent }
+\newlabel{fig:ratingsHistPlot}{{2.2}{12}{Histograma y \textit {Boxplot} de la variable \textit {rating}. Los \textit {ratings} son las calificaciones realizadas por los usuario para cada ítem o película}{figure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces  Histograma de calificaciones segmentado por año. En esta gráfica se muestran histogramas como funciones de densidad, a pesar de que la variable \textit  {rating} es categóricas. Las funciones de densidad se graficaron utilizando el método de estimación \textit  {KDE} o \textit  {Kernel Density Estimation}. Si bien este método se utiliza para estimar la función de densidad de una variable aleatoria continua, en este caso permite apreciar con mayor claridad la diferencia en la cantidad de observaciones y el grado de dispersión de cada niveles de la variable \textit  {rating} por año. }}{13}{figure.2.3}\protected@file@percent }
+\newlabel{fig:ratingsYearHistPlot}{{2.3}{13}{Histograma de calificaciones segmentado por año. En esta gráfica se muestran histogramas como funciones de densidad, a pesar de que la variable \textit {rating} es categóricas. Las funciones de densidad se graficaron utilizando el método de estimación \textit {KDE} o \textit {Kernel Density Estimation}. Si bien este método se utiliza para estimar la función de densidad de una variable aleatoria continua, en este caso permite apreciar con mayor claridad la diferencia en la cantidad de observaciones y el grado de dispersión de cada niveles de la variable \textit {rating} por año}{figure.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Correlaciones}{14}{subsection.2.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Diagrama de correlación de \textit  {Person} aplicado a todas las variables numéricas resultado del \textit  {merge} entre las tablas \textit  {movies} e \textit  {interactions}.}}{14}{figure.2.4}\protected@file@percent }
+\newlabel{fig:correlationPlot}{{2.4}{14}{Diagrama de correlación de \textit {Person} aplicado a todas las variables numéricas resultado del \textit {merge} entre las tablas \textit {movies} e \textit {interactions}}{figure.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Variables de tipo texto}{15}{subsection.2.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Frecuencia de frases encontradas en la variable \textit  {Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma.}}{15}{figure.2.5}\protected@file@percent }
+\newlabel{fig:tagsCloud}{{2.5}{15}{Frecuencia de frases encontradas en la variable \textit {Tags}. El tamaño de cada frase representan la cantidad de apariciones de la misma}{figure.2.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces  Frecuencia de palabras encontradas en la variable \textit  {Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma. }}{16}{figure.2.6}\protected@file@percent }
+\newlabel{fig:overviewCloud}{{2.6}{16}{Frecuencia de palabras encontradas en la variable \textit {Overview}. El tamaño de cada palabra representan la cantidad de apariciones de la misma}{figure.2.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Frecuencia de palabras encontradas en la variable \textit  {Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma.}}{16}{figure.2.7}\protected@file@percent }
+\newlabel{fig:titleCloud}{{2.7}{16}{Frecuencia de palabras encontradas en la variable \textit {Title}. El tamaño de cada palabra representan la cantidad de apariciones de la misma}{figure.2.7}{}}
+\citation{pca}
+\citation{pca}
+\citation{pca}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Análisis de Componentes Principales}{17}{subsection.2.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Este diagrama de barras describe el grado de variabilidad o varianza explicada para cada componente principal resultado de aplicar el algoritmo\textit  {PCA}~\cite  {pca} sobre el conjunto de variables numericas originales.}}{17}{figure.2.8}\protected@file@percent }
+\newlabel{fig:explainedVariancePlot}{{2.8}{17}{Este diagrama de barras describe el grado de variabilidad o varianza explicada para cada componente principal resultado de aplicar el algoritmo\textit {PCA}~\cite {pca} sobre el conjunto de variables numericas originales}{figure.2.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.8}{\ignorespaces  Coeficientes de componentes principales vs variables originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal. }}{18}{table.2.8}\protected@file@percent }
+\newlabel{fig:loadingsTable}{{2.8}{18}{Coeficientes de componentes principales vs variables originales. Cada uno de estos valores representan el grado de correlación o aporte de cada variable original a cada componente principal}{table.2.8}{}}
+\citation{biplot}
+\citation{biplot}
+\citation{biplot}
+\citation{pca}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces  Diagrama~\cite  {biplot}\textit  {Biplot}. Este diagrama representa los valores de las variables originales coloreados en color rojo, negro y gris. Estos colores corresponden a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales. }}{19}{figure.2.9}\protected@file@percent }
+\newlabel{fig:biplot}{{2.9}{19}{Diagrama~\cite {biplot}\textit {Biplot}. Este diagrama representa los valores de las variables originales coloreados en color rojo, negro y gris. Estos colores corresponden a tres segmentos de calificaciones: $>2$, entre $2$ y $3.5$ y $>4$. También se pueden apreciar los vectores correspondientes a las variables originales}{figure.2.9}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3.}Métodos}{21}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Enfoque Basados en Memoria}{22}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1} Algoritmo de los K vecinos cercanos (\textit  {K-Nearest-Neighbor} o \textit  {KNN}) }{22}{subsection.3.1.1}\protected@file@percent }
+\citation{useritembasedinference}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2} Algoritmo de los K vecinos cercanos basado en usuarios (\textit  {KNN User Based}) }{25}{subsection.3.1.2}\protected@file@percent }
+\citation{useritembasedinference}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3} Algoritmo de los K vecinos cercanos basado en ítems (\textit  {KNN Item Based}) }{27}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Modelo ensamble de los algoritmos de los K vecinos cercanos basados en usuarios e ítems (\textit  {KNN User-Item Based Ensemble})}{27}{subsection.3.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Enfoque basado en modelos}{28}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Codificación \textit  {One-Hot} vs \textit  {Embeddings}}{28}{subsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Capa o módulo \textit  {Embedding}}{29}{subsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Esquema de una capa o módulo \textit  {Embedding}.}}{30}{figure.3.1}\protected@file@percent }
+\newlabel{fig:embeddingLayer}{{3.1}{30}{Esquema de una capa o módulo \textit {Embedding}}{figure.3.1}{}}
+\citation{afm}
+\citation{netflixprize}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Arquitecturas Utilizadas}{31}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Factorización Matricial General (\textit  {General Matrix Factorization o GMF})}{31}{subsection.3.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces  Esquema de un modelo \textit  {General Matrix Factorization (GMF)}. }}{31}{figure.3.2}\protected@file@percent }
+\newlabel{fig:GMFModel}{{3.2}{31}{Esquema de un modelo \textit {General Matrix Factorization (GMF)}}{figure.3.2}{}}
+\citation{embeddingsizedem}
+\citation{afm}
+\citation{dlwkrs}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Factorización Matricial General con Sesgo (\textit  {Biased General Matrix Factorization o B-GFM})}{33}{subsection.3.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces  Esquema de un modelo \textit  {Biased General Matrix Factorization (B-GMF)}. A diferencia del modelo \textit  {GMF}, este suma a la salida un \textit  {bias} o sesgo por cada variable de entrada. }}{33}{figure.3.3}\protected@file@percent }
+\newlabel{fig:BiasedGMFModel}{{3.3}{33}{Esquema de un modelo \textit {Biased General Matrix Factorization (B-GMF)}. A diferencia del modelo \textit {GMF}, este suma a la salida un \textit {bias} o sesgo por cada variable de entrada}{figure.3.3}{}}
+\citation{nnfm}
+\citation{ncf}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}Factorización Matricial mediante Redes Neuronales (\textit  {Neural Network Matrix Factorization o NN-FM})}{34}{subsection.3.2.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces  Esquema de un modelo \textit  {Neural Network Matrix Factorization (NN-MF)}. }}{34}{figure.3.4}\protected@file@percent }
+\newlabel{fig:NNMFModel}{{3.4}{34}{Esquema de un modelo \textit {Neural Network Matrix Factorization (NN-MF)}}{figure.3.4}{}}
+\citation{didlfm}
+\citation{zhangdive}
+\citation{fm}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.7}Máquinas de Factorización (\textit  {FM})}{36}{subsection.3.2.7}\protected@file@percent }
+\citation{dfmpaper}
+\citation{didldfm}
+\citation{wideanddeeppaper}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.8}Máquinas de factorización profundas (\textit  {DeepFM})}{38}{subsection.3.2.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces  Esquema de un modelo \textit  {Deep Factorization Machine (DeepFM)} o maquina de factorización basada en \textit  {Deep Learning}. }}{38}{figure.3.5}\protected@file@percent }
+\newlabel{fig:DeepMFModel}{{3.5}{38}{Esquema de un modelo \textit {Deep Factorization Machine (DeepFM)} o maquina de factorización basada en \textit {Deep Learning}}{figure.3.5}{}}
+\citation{map_at_k_1}
+\citation{map_at_k_2}
+\citation{map_at_k_3}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Métricas}{39}{section.3.3}\protected@file@percent }
+\newlabel{sec:metrics}{{3.3}{39}{Métricas}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}\textit  {Root Mean Square Error (RMSE)}}{39}{subsection.3.3.1}\protected@file@percent }
+\newlabel{sec:rmse_ref}{{3.3.1}{39}{\textit {Root Mean Square Error (RMSE)}}{subsection.3.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}\textit  {Mean Average Precision at k (mAP@k)}}{39}{subsection.3.3.2}\protected@file@percent }
+\newlabel{sec:map_ref}{{3.3.2}{39}{\textit {Mean Average Precision at k (mAP@k)}}{subsection.3.3.2}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4.}Experimentos}{43}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1} Algoritmo de los K vecinos cercanos (\textit  {K-Nearest-Neighbor} o \textit  {KNN}) }{43}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1} Algoritmo de los K vecinos cercanos basado en usuarios (\textit  {KNN User Based}) }{43}{subsection.4.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN User Based} sobre las observaciones de validación. }}{43}{figure.4.1}\protected@file@percent }
+\newlabel{fig:knnUserMAP}{{4.1}{43}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN User Based} sobre las observaciones de validación}{figure.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN User Based} sobre las observaciones de validación. }}{44}{figure.4.2}\protected@file@percent }
+\newlabel{fig:knnUserRMSE}{{4.2}{44}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN User Based} sobre las observaciones de validación}{figure.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2} Algoritmo de los K vecinos cercanos basado en ítems (\textit  {KNN Item Based}) }{45}{subsection.4.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN Item Based} sobre las observaciones de validación. }}{45}{figure.4.3}\protected@file@percent }
+\newlabel{fig:knnItemMAP}{{4.3}{45}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN Item Based} sobre las observaciones de validación}{figure.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN Item Based} sobre las observaciones de validación. }}{46}{figure.4.4}\protected@file@percent }
+\newlabel{fig:knnItemRMSE}{{4.4}{46}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN Item Based} sobre las observaciones de validación}{figure.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Modelo ensamble de los algoritmos de los K vecinos cercanos basados en usuarios e ítems (\textit  {KNN User-Item Based Ensemble}) }{46}{subsection.4.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN User-Item Based Ensemble} sobre las observaciones de validación. }}{46}{figure.4.5}\protected@file@percent }
+\newlabel{fig:knnEnsempleMAP}{{4.5}{46}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN User-Item Based Ensemble} sobre las observaciones de validación}{figure.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {KNN User-Item Based Ensemble} sobre las observaciones de validación. }}{47}{figure.4.6}\protected@file@percent }
+\newlabel{fig:knnEnsempleRMSE}{{4.6}{47}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {KNN User-Item Based Ensemble} sobre las observaciones de validación}{figure.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Factorización Matricial General (\textit  {General Matrix Factorization o GMF})}{48}{section.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces  Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit  {GFM}. Cada \textit  {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento. }}{48}{figure.4.7}\protected@file@percent }
+\newlabel{fig:gmfLoss}{{4.7}{48}{Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit {GFM}. Cada \textit {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento}{figure.4.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit  {GFM} sobre las observaciones de entrenamiento. }}{49}{figure.4.8}\protected@file@percent }
+\newlabel{fig:gmfMAP}{{4.8}{49}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit {GFM} sobre las observaciones de entrenamiento}{figure.4.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit  {GFM} sobre las observaciones de entrenamiento. }}{49}{figure.4.9}\protected@file@percent }
+\newlabel{fig:gmfRMSE}{{4.9}{49}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit {GFM} sobre las observaciones de entrenamiento}{figure.4.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Factorización Matricial General con Sesgo (\textit  {Biased General Matrix Factorization o B-GFM})}{50}{section.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces  Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit  {B-GFM}. Cada epoch o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento. }}{50}{figure.4.10}\protected@file@percent }
+\newlabel{fig:bGMFLoss}{{4.10}{50}{Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit {B-GFM}. Cada epoch o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento}{figure.4.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit  {B-GFM} sobre las observaciones de entrenamiento. }}{51}{figure.4.11}\protected@file@percent }
+\newlabel{fig:bGmfMap}{{4.11}{51}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit {B-GFM} sobre las observaciones de entrenamiento}{figure.4.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {B-GMF} sobre las observaciones de validación. }}{52}{figure.4.12}\protected@file@percent }
+\newlabel{fig:bGmfRMSE}{{4.12}{52}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {B-GMF} sobre las observaciones de validación}{figure.4.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Factorización Matricial mediante Redes Neuronales (\textit  {Neural Network Matrix Factorization o NN-FM})}{52}{section.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces  Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit  {NN-FM}. Cada \textit  {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento. }}{52}{figure.4.13}\protected@file@percent }
+\newlabel{fig:nnFmLoss}{{4.13}{52}{Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit {NN-FM}. Cada \textit {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento}{figure.4.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit  {NN-FM} sobre las observaciones de entrenamiento. }}{54}{figure.4.14}\protected@file@percent }
+\newlabel{fig:nnFmMAP}{{4.14}{54}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit {NN-FM} sobre las observaciones de entrenamiento}{figure.4.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {NN-FM} sobre las observaciones de validación. }}{54}{figure.4.15}\protected@file@percent }
+\newlabel{fig:nnFmRMSE}{{4.15}{54}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {NN-FM} sobre las observaciones de validación}{figure.4.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Máquinas de factorización profundas (\textit  {DeepFM})}{55}{section.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces  Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit  {DeepFM}. Cada \textit  {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento. }}{55}{figure.4.16}\protected@file@percent }
+\newlabel{fig:deepFmLoss}{{4.16}{55}{Esta gráfica describe el nivel de error sobre los conjuntos de observaciones de entrenamiento y validación durante el entrenamiento del modelo \textit {DeepFM}. Cada \textit {epoch} o época indica una iteración de entrenamiento del modelo sobre el conjunto completo de entrenamiento}{figure.4.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit  {DeepFM} sobre las observaciones de entrenamiento. }}{56}{figure.4.17}\protected@file@percent }
+\newlabel{fig:deepFmMAP}{{4.17}{56}{Esta gráfica describe la distribución de valores de la métrica \textit {mAP@5(4,5)} evaluado en el conjunto de observaciones de validación, luego de N procesos de entrenamiento del modelo \textit {DeepFM} sobre las observaciones de entrenamiento}{figure.4.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces  Esta gráfica describe la distribución de valores de la métrica \textit  {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit  {DeepFM} sobre las observaciones de validación. }}{56}{figure.4.18}\protected@file@percent }
+\newlabel{fig:deepFmRMSE}{{4.18}{56}{Esta gráfica describe la distribución de valores de la métrica \textit {RMSE} evaluada en el conjunto de observaciones de validación. Se realizo un muestreo de N inferencias del modelo \textit {DeepFM} sobre las observaciones de validación}{figure.4.18}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5.}Resultados}{57}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces  Mediana, media y desvío correspondientes a la distribución de \textit  {AP\makeatletter  @5(4,5)} muestreada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media.}}{57}{table.5.1}\protected@file@percent }
+\newlabel{table:ap_at_k}{{5.1}{57}{Mediana, media y desvío correspondientes a la distribución de \textit {AP\makeatletter @5(4,5)} muestreada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media}{table.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces  Mediana, media y desvío correspondientes a la distribución de la raíz cuadrada del error cuadrático medio (\textit  {RMSE}), muestreada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media. }}{59}{table.5.2}\protected@file@percent }
+\newlabel{table:rmse}{{5.2}{59}{Mediana, media y desvío correspondientes a la distribución de la raíz cuadrada del error cuadrático medio (\textit {RMSE}), muestreada para cada modelo. Las filas se encuentran ordenadas descendente-mente por la media}{table.5.2}{}}
+\bibstyle{IEEEtran}
+\bibdata{cites}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6.}Conclusiones}{61}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10pt}}
+\@writefile{lot}{\addvspace {10pt}}
+\bibcite{movielens}{1}
+\bibcite{tmdb}{2}
+\bibcite{pca}{3}
+\bibcite{biplot}{4}
+\bibcite{useritembasedinference}{5}
+\bibcite{afm}{6}
+\bibcite{netflixprize}{7}
+\bibcite{embeddingsizedem}{8}
+\bibcite{dlwkrs}{9}
+\bibcite{nnfm}{10}
+\bibcite{ncf}{11}
+\bibcite{didlfm}{12}
+\bibcite{zhangdive}{13}
+\bibcite{fm}{14}
+\bibcite{dfmpaper}{15}
+\bibcite{didldfm}{16}
+\bibcite{wideanddeeppaper}{17}
+\bibcite{map_at_k_1}{18}
+\bibcite{map_at_k_2}{19}
+\bibcite{map_at_k_3}{20}
+\gdef \@abspage@last{72}
