@@ -11,6 +11,8 @@ def describe_num_var_array(
     title='',
     figsize=None,
     title_fontsize=16,
+    output_path=None,
+    output_ext="svg",
 ):
     describe_num_var(
         pd.DataFrame({title: values}),
@@ -18,6 +20,8 @@ def describe_num_var_array(
         title=f"{title} (observations: {len(values)})",
         title_fontsize=title_fontsize,
         figsize=figsize,
+        output_path=output_path,
+        output_ext=output_ext,
     )
 
 

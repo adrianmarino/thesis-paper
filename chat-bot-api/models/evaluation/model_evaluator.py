@@ -217,8 +217,7 @@ class ModelEvaluator:
         self.api_client.verbose_on
 
     def plot(self):
-        clear_output(wait=True)
-        self.evaluation_state.sessions.plotter.plot(self.api_item_ids)
+        self.evaluation_state.plot(self.api_item_ids)
 
     def make_request(
         self, api_client, hyper_params, log_prefix, profile, remaining_items_sample

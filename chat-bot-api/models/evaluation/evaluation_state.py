@@ -1,3 +1,4 @@
+from IPython.display import clear_output
 import util as ut
 import numpy as np
 from .session_step import SessionStep
@@ -37,6 +38,7 @@ class EvaluationState:
             last_patience = patience
             if size <= patience_size:
                 return patience
+
     def save(self, path):
         ut.Picket.save(self.path, self)
 
@@ -54,5 +56,19 @@ class EvaluationState:
     @property
     def sessions(self):
         return SessionsGroup(
-            [Session([SessionStep(s) for s in steps]) for steps in self.metrics_by_user_id.values()]
+            [
+                Session([SessionStep(s) for s in steps])
+                for steps in self.metrics_by_user_id.values()
+            ]
+        )
+
+    def plot(
+        self,
+        item_ids=[],
+        save_path=None,
+    ):
+        clear_output(wait=True)
+        self.sessions.plotter.plot(
+            item_ids=item_ids,
+            save_path=save_path,
         )

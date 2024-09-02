@@ -20,9 +20,9 @@ def histplot(
     density              = True,
     output_path          = None,
     output_ext           = 'svg',
-    figsize              = None
+    figsize              = None,
+    instant_plot         = False,
 ):
-
     f, (ax_box, ax_hist) = plt.subplots(
         2,
         sharex=True,
@@ -86,4 +86,5 @@ def histplot(
     if output_path:
         plt.savefig(f'{output_path}.{output_ext}', format=output_ext)
 
-    plt.show(block=False)
+    if instant_plot:
+        plt.show(block=False)
