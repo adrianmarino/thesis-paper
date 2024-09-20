@@ -68,7 +68,7 @@ This study aims to compare different approaches to recommendation based on colla
 ## Documents
 
 * [Specialization: Collaborative recommendation systems](https://github.com/adrianmarino/thesis-paper/blob/master/docs/specialization-project/thesis.pdf)
-* Thesis (In progress)
+* [Thesis](https://www.overleaf.com/read/jfgdyvgmnxpf#77b08e) (In progress)
 
 ## Models
 
