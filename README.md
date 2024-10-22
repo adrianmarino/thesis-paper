@@ -194,7 +194,9 @@ Based on these requirements, the following datasets were combined:
     * [LLM/Collaborative Filtering recommender ensemble](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/5_recommender.ipynb)
     * [LLM Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/3_llm-tests.ipynb)
     * [LLM Output Parser Tests](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/4_output-parser-tests.ipynb)
-
+    * [Llama2 Ensable Evaluation Results](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/9_evaluation-llama2-results.ipynb)
+    * [Llama3 Ensable Evaluation Results](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/10_evaluation-llama3-results.ipynb)
+    * [Llama 2 vs Llama 3 Ensable Evaluation Results](https://github.com/adrianmarino/thesis-paper/tree/master/notebooks/chat-bot/8_evaluation-llama2_vs_3.ipynb)
 
 ### Extras
 
