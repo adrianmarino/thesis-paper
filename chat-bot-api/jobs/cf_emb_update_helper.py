@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 import data.dataset as ds
 import torch
 from models import UserInteraction
+import logging
 
 
 class CFEmbUpdateJobHelper:
@@ -55,13 +56,23 @@ class CFEmbUpdateJobHelper:
         self.ctx.items_cf_emb_repository.upsert_many(item_embs)
 
     async def update_database(self, train_set, model):
+        logging.info("Generate train_set")
+
         prediction_set = self.__to_prediction_dataset(train_set)
+
+        logging.info("Build train_set")
 
         predictor = ml.ModulePredictor(model)
 
+        logging.info("Predict ratings")
+
         predictions = predictor.predict_dl(self.__to_dataloader(prediction_set))
 
+        logging.info("Save predicted ratings")
+
         prediction_set["predicted_rating"] = predictions
+
+        logging.info("Create interactions")
 
         models = [
             UserInteraction(
@@ -72,7 +83,12 @@ class CFEmbUpdateJobHelper:
             for _, row in prediction_set.iterrows()
         ]
 
+        logging.info("UPSERT interaction into ")
+
         await self.ctx.pred_interactions_repository.upsert_many(models)
+
+        logging.info("FINISH UPSERT")
+
 
     def __to_prediction_dataset(self, train_set):
         items_df = train_set[["item_id", "item_seq"]].drop_duplicates()

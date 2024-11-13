@@ -54,7 +54,7 @@ class Mongo:
 
         ut.ProcessHelper.run(commands)
 
-        @staticmethod 
+    @staticmethod 
     def import_json(database, file_paths):
         commands = []
 

@@ -210,10 +210,10 @@ INPUT ./thesis.toc
 INPUT ./thesis.toc
 INPUT thesis.toc
 OUTPUT thesis.toc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT ./thesis.bbl
 INPUT ./thesis.bbl
 INPUT thesis.bbl
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT thesis.aux
 INPUT ./thesis.out
 INPUT ./thesis.out

@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex thesis"] 1725127035.75242 "thesis.aux" "thesis.bbl" "thesis" 1725127254.90481 0
-  "./cites.bib" 1725126737.29338 0 d41d8cd98f00b204e9800998ecf8427e ""
+["bibtex thesis"] 1725738197.9883 "thesis.aux" "thesis.bbl" "thesis" 1725741141.40768 0
+  "./cites.bib" 1725738202.2197 341 4874005cee2724f0838fc6f8a4106aca ""
   "/usr/share/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1716849630 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "thesis.aux" 1725127254.80267 660 60dd2b3d51047d185fcbface53a8755b "pdflatex"
+  "thesis.aux" 1725741141.29955 1345 fe8963fb95b190cb20e81b06b71db863 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1725127254.22319 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1725127254.90495 0
-  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1725127177.71241 1850 4a1760023395bd50d48c706f74139fb2 ""
+["pdflatex"] 1725741140.71839 "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1725741141.40781 0
+  "/home/adrian/development/personal/maestria/thesis-paper/docs/thesis/thesis.tex" 1725741140.85954 2746 0a417c4cd48c62e2db6c492f349d73b6 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1716849630 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1716849630 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1716849630 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -112,16 +112,16 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1716849630 41588 b43d3e860a4f94167ee1e725ff526a72 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1718035275.60951 5312047 b07fcd2a9090df96fc745b92a3db793b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1718035217 7135083 f0a9bd652779cf8c66371a207e5e9bb9 ""
-  "abstract.tex" 1725126749.39011 1417 90fb9b6f019d4ce2871ade69b821c66d ""
-  "cover.tex" 1725127254.836 729 98efef4b9bdc1f725ee144622bfa9681 ""
-  "dedication.tex" 1725117888.26897 623 5fc4411628322a28edecc3246c2f56a9 ""
-  "images/logouba.png" 1725117888.27563 52948 bcf01d58985233cae4d75267724136ba ""
-  "thesis.aux" 1725127254.80267 660 60dd2b3d51047d185fcbface53a8755b "pdflatex"
-  "thesis.bbl" 1725127035.78832 875 029899f8cae5a02a002a6c630007a1ad "bibtex thesis"
-  "thesis.cls" 1725117888.28897 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
-  "thesis.out" 1725127254.806 192 093da4b2ca1668baa35b7d855c05cbee "pdflatex"
-  "thesis.tex" 1725127177.71241 1850 4a1760023395bd50d48c706f74139fb2 ""
-  "thesis.toc" 1725127254.806 175 d0b9f95646543b376b1a1f2f5615f6f0 "pdflatex"
+  "abstract.tex" 1725223616.98395 1417 90fb9b6f019d4ce2871ade69b821c66d ""
+  "cover.tex" 1725223616.98395 729 98efef4b9bdc1f725ee144622bfa9681 ""
+  "dedication.tex" 1725223616.98395 623 5fc4411628322a28edecc3246c2f56a9 ""
+  "images/logouba.png" 1725223616.99061 52948 bcf01d58985233cae4d75267724136ba ""
+  "thesis.aux" 1725741141.29955 1345 fe8963fb95b190cb20e81b06b71db863 "pdflatex"
+  "thesis.bbl" 1725738198.01967 1204 f767c69ccca2e6354273ba2683ab39bc "bibtex thesis"
+  "thesis.cls" 1725223617.00061 36661 5c0f750a4a49a92323ccd4cddd1409c5 ""
+  "thesis.out" 1725741141.29955 588 172d04c56337f09f7c0af6c5d79d936b "pdflatex"
+  "thesis.tex" 1725741140.85954 2746 0a417c4cd48c62e2db6c492f349d73b6 ""
+  "thesis.toc" 1725741141.30288 440 e5e463ea08be13b9d99725759ca6c398 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
