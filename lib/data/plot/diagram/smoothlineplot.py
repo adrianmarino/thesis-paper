@@ -32,6 +32,7 @@ def plot_smooth_line(
     xlabel,
     ylabel,
     title,
+    legend="",
     title_fontsize=16,
     axis_fontsize=16,
     smooth_level=2,
@@ -51,6 +52,11 @@ def plot_smooth_line(
     plt.xlabel(xlabel, fontsize=axis_fontsize)
     plt.ylabel(ylabel, fontsize=axis_fontsize)
     plt.title(title, fontsize=title_fontsize)
+    plt.legend(legend, fontsize=axis_fontsize)
+
+    # Ajustar los márgenes
+    plt.subplots_adjust(left=0.05, right=0.95, bottom=0.1, top=0.9)
+
 
     if output_path:
         plt.savefig(f'{output_path}.{output_ext}', format=output_ext)

@@ -22,6 +22,7 @@ def histplot(
     output_ext           = 'svg',
     figsize              = None,
     instant_plot         = False,
+    axis_fontsize        = 16
 ):
     f, (ax_box, ax_hist) = plt.subplots(
         2,
@@ -70,18 +71,20 @@ def histplot(
         ax_hist.axvline(outliers_upper,   color='black', linestyle='-', label=f'Outliers Upper ({round(outliers_upper, decimals)} - {outliers_upper_percent:.2f}%)')
 
 
-    ax_hist.legend()
+    ax_hist.legend(fontsize=axis_fontsize)
 
     ax_hist.set_title(f'Histogram')
-    ax_hist.set(ylabel='Frequency')
-    ax_hist.set(xlabel=column)
-
+    ax_hist.set_ylabel('Frequency', fontsize=axis_fontsize)
+    ax_hist.set_xlabel(column, fontsize=axis_fontsize)
 
     title = title if title else column
     if remove_outliers:
         title  += ' (Without Outliers)'
 
     f.suptitle(title, fontsize=title_fontsize)
+
+    # Ajustar los márgenes
+    plt.subplots_adjust(left=0.05, right=0.95, bottom=0.1, top=0.9)
 
     if output_path:
         plt.savefig(f'{output_path}.{output_ext}', format=output_ext)

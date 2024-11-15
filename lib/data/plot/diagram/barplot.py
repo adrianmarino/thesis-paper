@@ -42,6 +42,7 @@ def dict_barplot(
     xlabel="",
     ylabel="",
     title="",
+    legend="",
     title_fontsize=16,
     axis_fontsize=16,
     bar_fontsize=10,
@@ -51,6 +52,7 @@ def dict_barplot(
     output_path=None,
     output_ext="svg",
     instant_plot=False,
+    legend_fontsize=16,
 ):
     df = pd.DataFrame(values_by_index, columns=["key", "value"])
     df = df.sort_values(by=sort_by, ascending=ascending)
@@ -62,6 +64,10 @@ def dict_barplot(
     plt.xlabel(xlabel, fontsize=axis_fontsize)
     plt.ylabel(ylabel, fontsize=axis_fontsize)
     plt.title(title, fontsize=title_fontsize)
+    plt.legend(title=legend, fontsize=legend_fontsize)
+
+    # Ajustar los márgenes
+    plt.subplots_adjust(left=0.05, right=0.95, bottom=0.1, top=0.9)
 
     if output_path:
         plt.savefig(f"{output_path}.{output_ext}", format=output_ext)
@@ -78,7 +84,7 @@ def stacked_barplot(
     title="",
     title_fontsize=16,
     axis_fontsize=16,
-    legend_fontsize=12,
+    legend_fontsize=16,
     bar_fontsize=7,
     legend="",
     xlabel=None,

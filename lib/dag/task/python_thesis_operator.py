@@ -1,6 +1,6 @@
 from airflow.operators.python import ExternalPythonOperator
 from airflow.models import Variable
-
+import logging
 
 def python_thesis_operator(dag, task_id, python_callable, params = {}):
     op_kwargs = {
