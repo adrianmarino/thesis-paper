@@ -723,7 +723,7 @@ jupyterlab
 
 ### API Postman Collection
 
-* [Recommendation Charbot API postman collection](https://github.com/adrianmarino/thesis-paper/blob/master/chat-bot-api/postman_collection.json)
+* [Recommendation Chatbot API postman collection](https://github.com/adrianmarino/thesis-paper/blob/master/chat-bot-api/postman_collection.json)
 * [How to import a Postman collection](https://www.youtube.com/watch?v=M-qHvBhULes)
 
 
