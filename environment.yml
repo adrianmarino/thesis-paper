@@ -34,6 +34,8 @@ dependencies:
     - uvicorn[standard]
     - Faker
     - strsimpy
+    - nltk
+    - ollama
     - pip
     - pip:
           - torch
@@ -51,3 +53,4 @@ dependencies:
           - pymongo
           - chromadb
           - fastapi-health
+          - ollama

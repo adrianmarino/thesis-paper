@@ -16,7 +16,8 @@ class CFEmbUpdateJobHelper:
         self.ctx = ctx
 
     def get_interactions(self):
-        api_client = client.RecChatBotV1ApiClient()
+        # Conectarse directamente de forma interna a localhost:8080 en lugar del DNS público para evitar el bloqueo del router
+        api_client = client.RecChatBotV1ApiClient(host='127.0.0.1', port=8080)
         return pd.DataFrame(api_client.interactions())
 
     def split_dataset(self, interactions_df):

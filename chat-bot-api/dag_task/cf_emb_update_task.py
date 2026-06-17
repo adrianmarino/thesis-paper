@@ -14,19 +14,19 @@ os.environ['CHROMA_HOST']      = '0.0.0.0'
 os.environ['CHROMA_PORT']      = '9090'
 
 
-def python_callable(**ctx):
+def python_callable(task_id, thesis_src_path, recsys_client_src_path, recsys_client_cfg_path, airflow_path):
     import sys
     import logging
-    from airflow.exceptions import AirflowException
-    sys.path.append(f'{ctx["thesis.src_path"]}')
-    sys.path.append(f'{ctx["thesis.src_path"]}/../chat-bot-api')
+    from airflow.sdk.exceptions import AirflowException
+    sys.path.append(f'{thesis_src_path}')
+    sys.path.append(f'{thesis_src_path}/../chat-bot-api')
 
     async def run_cf_emb_update_job():
         from app_context import AppContext
         try:
             await AppContext().cf_emb_update_job()
         except Exception as e:
-            logging.error('Error to execute cf_emb_update_job!. Defaults: {e}')
+            logging.error(f'Error to execute cf_emb_update_job!. Defaults: {e}')
             sys.exit(1)
 
     try:
@@ -37,10 +37,12 @@ def python_callable(**ctx):
         sys.exit(1)
 
 
-def cf_emb_update_task(dag, task_id='cf_emb_update_task'):
+def cf_emb_update_task(
+    dag,
+    task_id='cf_emb_update_task',
+):
     return python_thesis_operator(
         dag,
         task_id,
-        python_callable,
-        params={}
+        python_callable
     )
