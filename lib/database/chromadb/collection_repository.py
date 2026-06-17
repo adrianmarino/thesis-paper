@@ -115,15 +115,19 @@ class CollectionRepository:
             where_document={},
             include=['metadatas', 'distances']
     ):
+        query_args = {
+            "query_texts": texts,
+            "query_embeddings": embs,
+            "n_results": limit,
+            "include": include
+        }
+        if where_metadata:
+            query_args["where"] = where_metadata
+        if where_document:
+            query_args["where_document"] = where_document
+
         return CollectionRepositorySimSearchResult(
-            self.collection.query(
-                query_texts=texts,
-                query_embeddings=embs,
-                n_results=limit,
-                where=where_metadata,
-                where_document=where_document,
-                include=include
-            )
+            self.collection.query(**query_args)
         )
 
 
