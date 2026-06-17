@@ -4,7 +4,7 @@ from .rag_settings import RagSettings
 
 
 class RecommendationSettings(BaseModel):
-    llm                     : str  = 'llama2-7b-chat'
+    llm                     : str  = 'deepseek-r1:8b'
     retry                   : int  = 2
     base_url                : str  = ""
     plain                   : bool = False
