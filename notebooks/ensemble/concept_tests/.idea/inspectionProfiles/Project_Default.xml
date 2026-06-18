@@ -1,0 +1,15 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="modules.categorial_features_linear.CommonMixin" />
+          <option value="data.dataset_loader.ExampleUtil" />
+          <option value="dataset_builder.remove_dir" />
+          <option value="service.loader.impl.knn_predictor_loader.get_predictor_clazz" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,6 +1,6 @@
 import sys
 from datetime import timedelta
-from airflow.utils.dates import days_ago
+import pendulum
 from airflow import DAG
 from airflow.models import Variable
 
@@ -18,8 +18,8 @@ with DAG(
         'email'           : ['adrianmarino@gmail.com'],
         'email_on_failure': False,
         'email_on_retry'  : False,
-        'retries'         : 3,
-        'retry_delay'     : timedelta(minutes=5)
+        'retries'         : 10,
+        'retry_delay'     : timedelta(minutes=3)
     },
     description       = """
         Generate and updated list of embeddings that represent users and items.
@@ -28,8 +28,8 @@ with DAG(
         rec-chatbot databases. Finally upsert embeddings into rec-chatbot chroma-db
         collections. These embeddings are used to build personalized recommendations.
     """,
-    schedule_interval  = '*/5 * * * *',
-    start_date         = days_ago(0),
+    schedule  = '*/5 * * * *',
+    start_date         = pendulum.today('UTC'),
     catchup            = False,
     max_active_runs    = 1,
     max_active_tasks   = 2,

@@ -2,7 +2,8 @@ from airflow.providers.standard.operators.python import ExternalPythonOperator
 from airflow.models import Variable
 import logging
 
-def python_thesis_operator(dag, task_id, python_callable, params = {}):
+def python_thesis_operator(dag, task_id, python_callable, params = {}, is_gpu = True):
+    pool = 'gpu_pool' if is_gpu else 'default_pool'
     op_kwargs = {
         'task_id'                 : task_id,
         'recsys_client_src_path'  : Variable.get('recsys.client.src_path'),
@@ -19,5 +20,6 @@ def python_thesis_operator(dag, task_id, python_callable, params = {}):
         python_callable = python_callable,
 
         do_xcom_push    = True,
-        op_kwargs       = op_kwargs
+        op_kwargs       = op_kwargs,
+        pool            = pool
     )

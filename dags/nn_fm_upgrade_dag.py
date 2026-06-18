@@ -1,6 +1,6 @@
 import sys
 from datetime import timedelta
-from airflow.utils.dates import days_ago
+import pendulum
 from airflow import DAG
 from airflow.models import Variable
 
@@ -20,8 +20,8 @@ with DAG(
         'email'           : ['adrianmarino@gmail.com'],
         'email_on_failure': False,
         'email_on_retry'  : False,
-        'retries'         : 3,
-        'retry_delay'     : timedelta(minutes=120)
+        'retries'         : 10,
+        'retry_delay'     : timedelta(minutes=3)
     },
     description       = """
         This DAG perform next steps: Fetch all user interactions from rec-sys API,
@@ -32,8 +32,8 @@ with DAG(
         Finally, compute user-user and item-item similarity matrix using mean from
         all models similarity matrix and upsert to rec-sys API.
     """,
-    schedule_interval  = '*/10 * * * *',
-    start_date         = days_ago(0),
+    schedule  = '*/10 * * * *',
+    start_date         = pendulum.today('UTC'),
     catchup            = False,
     max_active_runs    = 1,
     max_active_tasks   = 2,

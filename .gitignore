@@ -148,3 +148,4 @@ tmp/
 
 metrics/llama3-evaluation-metrics/
 metrics/llama2-evaluation-metrics/
+notebooks/**/*.pt

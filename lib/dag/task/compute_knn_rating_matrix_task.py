@@ -108,5 +108,6 @@ def compute_knn_rating_matrix_task(
             'model': model,
             'min_n_interactions': min_n_interactions,
             'rating_scale': rating_scale
-        }
+        },
+        is_gpu=False
     )
