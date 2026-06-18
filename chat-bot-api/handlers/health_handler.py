@@ -12,7 +12,7 @@ def health_handler(app, base_url, ctx):
     def is_ollama_active():
         non_healthy = { 'ollama_api': False }
         try:
-            response = requests.get('http://nonosoft.ddns.net:7070/ollama/')
+            response = requests.get('http://localhost:7070/ollama/')
             if  response.status_code != 200:
                 return non_healthy
             else:
@@ -24,7 +24,7 @@ def health_handler(app, base_url, ctx):
     def is_airflow_active():
         non_healthy = { 'airflow': {'metadatabase': False, 'scheduler': False} }
         try:
-            response = requests.get('http://nonosoft.ddns.net:8686/health')
+            response = requests.get('http://localhost:8686/api/v2/monitor/health')
             if  response.status_code != 200:
                 return non_healthy
 
@@ -62,7 +62,13 @@ def health_handler(app, base_url, ctx):
         mongo: bool = Depends(is_mongodb_database_active),
     ):
         return {
-            'chatbot_api': ollama['ollama_api'] and airflow['airflow'] and chroma['choma_database'] and mongo['mongo_database']
+            'chatbot_api': (
+                ollama['ollama_api'] and
+                airflow['airflow']['metadatabase'] and
+                airflow['airflow']['scheduler'] and
+                chroma['choma_database'] and
+                mongo['mongo_database']
+            )
         }
 
 
