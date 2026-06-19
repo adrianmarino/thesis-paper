@@ -12,7 +12,7 @@ class ChatBotPoolService:
       'prompt0': PROMPT_LOW_INTERACTIONS,
       'prompt1': PROMPT_REQUIRED_INTERACTIONS
     },
-    default_model = 'mistral',
+    default_model = 'qwen2.5-coder:7b',
     models        = OllamaApiClient().models()
   ):
     self._default_model  = default_model
