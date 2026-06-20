@@ -2,9 +2,16 @@ from pydantic import BaseModel, Field
 from .recommendation import Recommendation
 import typing
 
+class ChatBotResultModel(BaseModel):
+  content: str = Field(..., description="The raw textual content returned by the LLM.", examples=["1. The Matrix (1999) - A masterpiece..."])
+  metadata: typing.Dict[str, typing.Any] = Field(default_factory=dict, description="Internal LLM metadata (e.g. prompts, prompt templates).")
+
+  class Config:
+    from_attributes = True
+
 class RecommendationsMetadata(BaseModel):
   excluded_items: list[Recommendation] = Field(default_factory=list, description="A list of candidate Recommendation objects that were discarded by the filtering/ranking logic.")
-  response: typing.Any = Field(None, description="The raw response object from the LLM, including the internal prompt used and the raw content generated.")
+  response: ChatBotResultModel | None = Field(None, description="The raw response object from the LLM, including the internal prompt used and the raw content generated.")
   elapsed_time: str | None = Field(None, description="The total execution time of the recommendation process.", examples=["3.45s"])
   logs: list[str] = Field(default_factory=list, description="Internal execution logs showing the details of the steps taken.")
 
