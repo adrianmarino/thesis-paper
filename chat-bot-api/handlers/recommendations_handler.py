@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter, Response, Request
-from models import RecommendationQuery
+from models import RecommendationQuery, Recommendations
 import logging
 
 
@@ -16,7 +16,7 @@ def recommendations_handler(base_url, ctx):
     }
 
 
-  @router.post('', summary="Generate Hybrid Recommendations")
+  @router.post('', response_model=Recommendations, summary="Generate Hybrid Recommendations")
   async def recommendations(
     request: Request,
     response: Response,

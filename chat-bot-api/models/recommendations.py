@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from .recommendation import Recommendation
 import typing
 
 
 class Recommendations(BaseModel):
-  items: list[Recommendation]
-  metadata: typing.Dict[str, typing.Any] = {}
+  items: list[Recommendation] = Field(..., description="The final list of recommended movies, retrieved via RAG/CF and filtered/ranked by the LLM.")
+  metadata: typing.Dict[str, typing.Any] = Field(default_factory=dict, description="Optional metadata containing the internal LLM logs, reasoning, prompt details, and execution times. Only populated if `include_metadata` was set to True in the request.")
 
   @property
   def content(self): return self.metadata['response'].content
