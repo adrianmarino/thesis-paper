@@ -24,6 +24,7 @@ from services import (
     ItemService,
     SentenceEmbeddingService,
     OllamaSentenceEmbeddingService,
+    CachedSentenceEmbeddingService,
     InteractionInfoService,
     ChatBotPoolService,
     RecommendationsFactory,
@@ -130,9 +131,12 @@ class AppContext:
 
 
     def _build_chroma_repositories(self):
-        self.sentence_emb_service = SentenceEmbeddingService(model='all-mpnet-base-v2')
-        # self.sentence_emb_service = OllamaSentenceEmbeddingService(model='mxbai-embed-large')
-        # self.sentence_emb_service = OllamaSentenceEmbeddingService(model='llama3:text')
+        raw_sentence_emb_service = SentenceEmbeddingService(model='all-mpnet-base-v2')
+        # raw_sentence_emb_service = OllamaSentenceEmbeddingService(model='mxbai-embed-large')
+        # raw_sentence_emb_service = OllamaSentenceEmbeddingService(model='llama3:text')
+
+        # Decorate the raw embedding service with our CachedSentenceEmbeddingService
+        self.sentence_emb_service = CachedSentenceEmbeddingService(raw_sentence_emb_service)
 
         self.item_emb_mapper = ItemContentEmbMapper(self.sentence_emb_service)
         self.entity_emb_mapper = EntityEmbMapper()

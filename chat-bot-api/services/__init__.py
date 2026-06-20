@@ -10,3 +10,4 @@ from .interaction_info_service import InteractionInfoService
 from .chatbot_pool_service import ChatBotPoolService
 from .recommendations_factory import RecommendationsFactory
 from .recommender_service import RecommenderService
+from .cached_sentence_embedding_service import CachedSentenceEmbeddingService
