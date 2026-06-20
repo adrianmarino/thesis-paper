@@ -5,6 +5,12 @@ class CachedOllamaApiClient:
         self._client = client
         self._cache = cache if cache is not None else {}
 
+    def invalidate(self, msg, model):
+        cache_key = (model, msg)
+        if cache_key in self._cache:
+            logging.info(f"Invalidating cache for model '{model}'")
+            del self._cache[cache_key]
+
     def query(self, msg, model):
         cache_key = (model, msg)
         if cache_key in self._cache:

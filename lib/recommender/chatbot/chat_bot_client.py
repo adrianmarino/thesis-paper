@@ -49,6 +49,10 @@ ANSWER:
         metadata['params'] = params
         metadata['prompt'] = result.query
 
+        if len(metadata.get('recommendations', [])) == 0:
+            logging.info(f"Parsed recommendations list is empty. Invalidating cache for model '{self._model}'...")
+            self._client.invalidate(msg=result.query, model=self._model)
+
         return ChatBotResult(result.response, metadata)
 
 class PromptTemplate:

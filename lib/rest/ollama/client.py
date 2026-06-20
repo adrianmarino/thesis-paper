@@ -12,6 +12,8 @@ class OllamaApiClient:
     ):
         self.base_url = f'http://{host}/api'
 
+    def invalidate(self, msg, model):
+        pass
 
     def query(self, msg, model):
         response = requests.post(
@@ -73,4 +75,3 @@ class OllamaApiClient:
         )
 
         return list(dict(sorted({e[0]:e[1]  for e in result}.items())).values())
-
