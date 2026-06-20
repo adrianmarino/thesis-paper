@@ -9,11 +9,13 @@ class MovieRecommenderChatBotFactory:
         prompt,
         model,
         params_resolver = MovieRecommenderParamsResolver(),
-        output_parser   = MovieRecommendationsOutputParser()
+        output_parser   = MovieRecommendationsOutputParser(),
+        client          = None
     ):
         return ChatBotClient(
             model,
             prompt,
             params_resolver,
             output_parser,
+            client          = client,
         )

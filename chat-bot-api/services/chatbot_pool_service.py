@@ -1,7 +1,7 @@
 from prompts import *
 from recommender.chatbot.movie import MovieRecommendationsOutputParser, MovieRecommenderChatBotFactory
 import sys
-from rest.ollama import OllamaApiClient
+from rest.ollama import OllamaApiClient, CachedOllamaApiClient
 
 
 class ChatBotPoolService:
@@ -19,13 +19,18 @@ class ChatBotPoolService:
     self._default_prompt = default_prompt
     self._models         = models
 
+    # Instantiate the raw client and wrap it with the CachedOllamaApiClient decorator
+    self._raw_client     = OllamaApiClient()
+    self._cached_client  = CachedOllamaApiClient(self._raw_client)
+
     output_parser = MovieRecommendationsOutputParser()
     self._chat_bots      = {
       p: {
         m: MovieRecommenderChatBotFactory.create(
           prompt        = prompts[p],
           model         = m,
-          output_parser = output_parser
+          output_parser = output_parser,
+          client        = self._cached_client
         ) for m in models
       } for p in prompts.keys()
     }

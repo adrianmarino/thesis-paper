@@ -8,14 +8,15 @@ class ChatBotClient:
         prompt,
         params_resolver,
         output_parser,
-        host  = 'localhost:11434'
+        host  = 'localhost:11434',
+        client = None
     ):
         self._model  = model
         self._prompt = prompt
 
         self._params_resolver  = params_resolver
         self._template         = PromptTemplate(prompt)
-        self._client           = OllamaApiClient(host)
+        self._client           = client or OllamaApiClient(host)
         self._output_parser    = output_parser
 
     @property
@@ -75,4 +76,3 @@ class ChatBotResult:
   def __init__(self, content, metadata):
     self.content = content
     self.metadata = metadata
-
