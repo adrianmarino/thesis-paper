@@ -15,6 +15,13 @@
 ## API Contract / Endpoints
 Base URL: `/api/v1`
 
+### OpenAPI / Swagger Documentation
+Because this project uses FastAPI, it automatically generates and serves its OpenAPI specification. When the server is running (usually on port `8080`), you can access the live contract here:
+- **Swagger UI (Interactive)**: `http://<host>:8080/docs`
+- **ReDoc**: `http://<host>:8080/redoc`
+- **OpenAPI JSON**: `http://<host>:8080/openapi.json`
+
+
 - **Profiles (`/profiles`)**: 
   - `GET /`, `GET /{email}`, `POST /`, `PUT /{email}`, `DELETE /{email}`
 - **Interactions (`/interactions`)**: 
