@@ -29,6 +29,12 @@ Base URL: `/api/v1`
 - **Recommenders (`/recommenders`)**: 
   - `PUT /train`
 
+
+## Airflow DAGs (External)
+The Airflow DAGs that feed data and train models for this API are located in the parent project's `../dags/` directory. The most relevant ones for the ChatBot API are:
+- **`cf_emb_update_dag.py`**: Generates and updates the embeddings representing users and items. It uses the tasks defined in this project (`dag_task/cf_emb_update_task.py`) to train a Collaborative Filtering model with new API interactions and upserts the fresh embeddings into ChromaDB.
+- **Recommender Upgrade DAGs** (e.g., `thesis_recommenders_upgrade_dag.py`): Fetch user interactions, train deep learning recommenders (DeepFM, GMF, etc.), and push similarity matrices back to the database.
+
 ## Tech Stack
 - **Framework**: FastAPI + Uvicorn + Pydantic.
 - **Databases**: 

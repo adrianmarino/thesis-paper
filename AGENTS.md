@@ -30,6 +30,13 @@ This is a monorepo containing several interconnected pieces. Always navigate to 
 2. **Model Training (Airflow)**: DAGs orchestrated by Airflow pull new interactions, train Collaborative Filtering models, and generate new embeddings and predictions.
 3. **Inference (ChatBot API)**: The user asks for a recommendation. The API uses Ollama (Llama2/3) to generate a textual list, uses ChromaDB (RAG) to match items via Sentence Embeddings, and ranks them using Collaborative Filtering predictions stored in MongoDB.
 
+
+## Airflow DAGs
+The files in the `dags/` directory orchestrate model training and data synchronization. 
+- **`1_bert_item_distance_matrix_dag.py`** to **`4_bert_item_distance_matrix_dag.py`**: Compute item distance matrices using various BERT models (`all-MiniLM-L12-v2`, `all-mpnet-base-v2`, etc.).
+- **`cf_emb_update_dag.py`**: Generates and updates user and item embeddings. It trains a collaborative filtering model combining pre-train datasets with `chat-bot-api` interactions, then upserts the embeddings into the API's ChromaDB for personalized recommendations.
+- **`deep_fm_upgrade_dag.py`**, **`gmf_upgrade_dag.py`**, **`nn_fm_upgrade_dag.py`**, **`thesis_recommenders_upgrade_dag.py`**: These DAGs fetch user interactions from the system, filter for users with >20 interactions, train their respective models (DeepFM, GMF, Neural FM), compute rating matrices, build similarity matrices, and upsert them back to the API.
+
 ## Global Conventions
 - **Shared Code**: If a feature is used by both the API and the Airflow DAGs, it MUST be placed in the `lib/` directory to avoid code duplication.
 - **Dependencies**: Any new dependency should be added to `environment.yml`.
