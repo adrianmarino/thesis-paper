@@ -45,3 +45,28 @@ The Airflow DAGs that feed data and train models for this API are located in the
 - Configurations are defined in `config.conf`.
 - **Start Service**: `bin/start` (Activates conda environment and runs Uvicorn in the background).
 - **Stop Service**: `bin/stop` (Kills Uvicorn process).
+
+## Code Quality, Architecture & Testing Standards
+
+### SOLID Principles in the API
+- **Single Responsibility (SRP)**: Keep FastAPI handlers thin (parsing inputs and delegating directly to services). Do not write business logic or DB calls inside handler endpoints.
+- **Dependency Inversion (DIP)**: All dependencies of services (repositories, external clients) must be injected via the constructor. Do not instantiate dependencies directly inside services. Use `app_context.py` as the composition root.
+- **Open/Closed (OCP)**: Decorate clients or services (e.g., adding caching decorators like `CachedOllamaApiClient` around the raw client) to extend functionality without modifying existing code.
+
+### Design Patterns (Patrones de Diseño)
+- **Proxy/Decorator Pattern**: Used to apply caching around the Ollama client seamlessly (`CachedOllamaApiClient` wraps the standard `OllamaApiClient` without changing its contract).
+- **Factory Pattern**: Utilized to instantiate recommender models and chatbot clients (e.g. `MovieRecommenderChatBotFactory`), centralizing construction logic.
+- **Dependency Injection (DI)**: Applied systematically through the constructor of all handlers, services, and repositories to invert dependencies (DIP), orchestrated via `AppContext`.
+
+### Test-Driven Development (TDD)
+- Implement test cases alongside endpoints and services under `tests/`.
+- Mock external systems (Ollama API, MongoDB, ChromaDB) in unit tests using unittest.mock or pytest-mock to ensure tests run fast and deterministically without external infrastructure requirements.
+
+### Mutation Testing
+- Test suite reliability should be verified by ensuring that altering code logic (e.g. changing comparison operators, removing lines) causes tests to fail (Mutation Testing). 
+- Avoid loose assertions (e.g., asserting `True` or simply checking if a function was called without checking its arguments and results).
+
+### Python & FastAPI Best Practices
+- Enforce full type annotations on all endpoints, services, and helper methods.
+- Use Pydantic's `BaseModel` for request validation and response models to leverage FastAPI's auto-generated Swagger/OpenAPI documentation.
+- Leverage async/await concurrency properly. Ensure any blocking synchronous calls (like synchronous client queries) are run in separate threads using executors to avoid blocking the Uvicorn event loop.
