@@ -6,11 +6,14 @@ from services import ItemSimQuery
 
 
 def items_handler(base_url, ctx):
-    router = APIRouter(prefix=f'{base_url}/items')
+    router = APIRouter(prefix=f'{base_url}/items', tags=["Items (Movies)"])
 
 
-    @router.post('', status_code=201)
+    @router.post('', status_code=201, summary="Add a single Item")
     async def add_item(item: Item):
+        """
+        Adds a new movie/item to the catalog.
+        """
         try:
             return await ctx.item_service.add_one(item)
         except EntityAlreadyExistsException as e:
@@ -20,8 +23,11 @@ def items_handler(base_url, ctx):
             )
 
 
-    @router.post('/bulk', status_code=201)
+    @router.post('/bulk', status_code=201, summary="Add Multiple Items in Bulk")
     async def add_items(items: list[Item]):
+        """
+        Efficiently inserts multiple movies at once.
+        """
         try:
             await ctx.item_service.add_many(items)
             return Response(status_code=201)
@@ -32,8 +38,11 @@ def items_handler(base_url, ctx):
             )
 
 
-    @router.get('/{item_id}', status_code = 200)
+    @router.get('/{item_id}', status_code = 200, summary="Get an Item by ID")
     async def get_item(item_id: str, hide_emb: bool = True):
+        """
+        Retrieves a movie's details based on its ID.
+        """
         item = await ctx.item_service.find_by_id(item_id)
 
         if item is None:
@@ -42,8 +51,8 @@ def items_handler(base_url, ctx):
             return remove_embedding([item], hide_emb)[0]
 
 
-    @router.get('', status_code = 200)
-    async def get_item(
+    @router.get('', status_code = 200, summary="Search and Filter Items")
+    async def search_items(
         email    : str | None = None,
         seen     : bool       = True,
         content  : str | None = None,
@@ -53,6 +62,10 @@ def items_handler(base_url, ctx):
         release  : int        = 1950,
         rating   : float      = 0.0
     ):
+        """
+        Search catalog items.
+        Can filter items seen or unseen by a user, or search by textual content using embeddings.
+        """
         if all:
             return remove_embedding(await ctx.item_service.find_all(not hide_emb), hide_emb)
         elif email and content is None:
@@ -75,14 +88,20 @@ def items_handler(base_url, ctx):
             raise HTTPException(status_code=400, detail=f'Missing filter params: all | email | content')
 
 
-    @router.put('/embeddings/content/build', status_code = 202)
+    @router.put('/embeddings/content/build', status_code = 202, summary="Trigger Sentence Embeddings Build")
     async def build_content_embeddings(batch_size: int =100):
+        """
+        Forces ChromaDB to recalculate the **Sentence Embeddings** for all items based on their titles and descriptions.
+        This relies on the configured embedding service (Ollama or MPNet) and is essential for the Content-Based / RAG functionality.
+        """
         return await ctx.item_service.rebuild_content_embeddings(batch_size)
 
 
-    @router.delete("/{item_id}", status_code = 202)
+    @router.delete("/{item_id}", status_code = 202, summary="Delete an Item")
     async def delete_item(item_id: str):
-        pu.set_device_name('gpu')
+        """
+        Removes an item from the database.
+        """
         await ctx.item_service.delete(item_id)
         return Response(status_code=202)
 

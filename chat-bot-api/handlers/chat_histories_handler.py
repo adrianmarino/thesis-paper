@@ -3,10 +3,13 @@ import sys
 
 
 def chat_histories_handler(base_url, ctx):
-    router = APIRouter(prefix=f"{base_url}/histories")
+    router = APIRouter(prefix=f"{base_url}/histories", tags=["Chat Histories"])
 
-    @router.get("/{email}")
+    @router.get("/{email}", summary="Get Chat History by Email")
     async def get_history(email: str):
+        """
+        Retrieves the conversational context (memory) that the user has maintained with the Chatbot.
+        """
         history = await ctx.history_service.find(email)
 
         if history == None:
@@ -14,8 +17,11 @@ def chat_histories_handler(base_url, ctx):
         else:
             return history
 
-    @router.delete("/{email}")
+    @router.delete("/{email}", summary="Delete Chat History")
     async def delete_history(email: str):
+        """
+        Clears the conversational context memory for the given user email.
+        """
         await ctx.history_service.delete_by_id(email)
         return Response(status_code=202)
 

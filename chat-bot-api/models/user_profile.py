@@ -1,12 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import typing
 from bunch import Bunch
 
 
 class UserProfile(BaseModel):
-    name : str
-    email : str
-    metadata: typing.Dict[str, typing.Any]
+    name : str = Field(..., description="The name of the user.", examples=["Adrian Marino"])
+    email : str = Field(..., description="The user's email, which acts as the unique identifier.", examples=["adrianmarino@gmail.com"])
+    metadata: typing.Dict[str, typing.Any] = Field(..., description="Additional profile metadata used to solve the cold-start problem (e.g., preferred_movies, age, genre).", examples=[{"preferred_movies": {"genres": ["Action", "Sci-Fi"], "release": {"from": "1990"}}}])
 
 
     @property

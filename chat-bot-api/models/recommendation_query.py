@@ -4,8 +4,8 @@ from .recommendation_settings import RecommendationSettings
 
 
 class RecommendationQuery(BaseModel):
-    message: UserMessage = Field(..., description="El mensaje del usuario y su identidad.")
-    settings: RecommendationSettings = Field(default_factory=RecommendationSettings, description="Configuraciones avanzadas de hiperparámetros para el motor de recomendación híbrido.")
+    message: UserMessage = Field(..., description="The user's message and identity.")
+    settings: RecommendationSettings = Field(default_factory=RecommendationSettings, description="Advanced hyperparameter configurations for the hybrid recommendation engine.")
 
     class Config:
         arbitrary_types_allowed = True
