@@ -24,7 +24,7 @@ logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
 
 app = FastAPI(
     title="Recommendation Chatbot API",
-    description="Provide personalized movie recommendations to users based on their profile, watched movies, and rating behavior.",
+    description="Provide personalized movie recommendations to users based on their profile, watched movies, and rating behavior.\n\n### Documentation Links\n- 📖 [ReDoc (Read-only Documentation)](/redoc)\n- ⚡ [Swagger UI (Interactive Documentation)](/docs)",
     version="0.9.0",
     contact={
         "name": "Adrian Norberto Marino",
