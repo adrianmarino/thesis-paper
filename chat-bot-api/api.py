@@ -2,7 +2,9 @@ from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 import logging
+import logging.config
 from app_context import AppContext
 from handlers import (
     profiles_handler,
@@ -38,6 +40,15 @@ app = FastAPI(
     },
 )
 
+# Enable CORS for frontend clients
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 ctx = AppContext()
 
 app.include_router(profiles_handler(BASE_URL, ctx))
@@ -65,6 +76,9 @@ async def error_exception_handler(request: Request, e: Exception):
         status_code = 500,
         content     = jsonable_encoder({ 'code': 500, 'msg': str(e) })
     )
+
+# Serve compiled static client at root URL (mount after API routers to avoid shadowing)
+app.mount("/", StaticFiles(directory="/home/adrian/development/personal/maestria/chatbot-web/dist", html=True), name="static")
 
 @app.on_event("startup")
 async def startup_event():
