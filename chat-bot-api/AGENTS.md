@@ -22,21 +22,6 @@ Because this project uses FastAPI, it automatically generates and serves its Ope
 - **OpenAPI JSON**: `http://<host>:8080/openapi.json`
 
 
-- **Profiles (`/profiles`)**: 
-  - `GET /`, `GET /{email}`, `POST /`, `PUT /{email}`, `DELETE /{email}`
-- **Interactions (`/interactions`)**: 
-  - `GET /`, `GET /users/{user_id}`, `POST /`, `POST /bulk`, `GET /make/{user_id}/{item_id}/{rating}`
-  - `DELETE /users/{user_id}`, `DELETE /users/{user_id}/items/{item_id}`
-- **Items (`/items`)**: 
-  - `GET /`, `GET /{item_id}`, `POST /`, `POST /bulk`, `PUT /embeddings/content/build`, `DELETE /{item_id}`
-- **Recommendations (`/recommendations`)**: 
-  - `GET /models`, `POST /`
-- **Chat Histories (`/histories`)**: 
-  - `GET /{email}`, `DELETE /{email}`
-- **Recommenders (`/recommenders`)**: 
-  - `PUT /train`
-
-
 ## Airflow DAGs (External)
 The Airflow DAGs that feed data and train models for this API are located in the parent project's `../dags/` directory. The most relevant ones for the ChatBot API are:
 - **`cf_emb_update_dag.py`**: Generates and updates the embeddings representing users and items. It uses the tasks defined in this project (`dag_task/cf_emb_update_task.py`) to train a Collaborative Filtering model with new API interactions and upserts the fresh embeddings into ChromaDB.
