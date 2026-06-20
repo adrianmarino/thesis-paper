@@ -26,19 +26,22 @@ def recommendations_handler(base_url, ctx):
     **Hybrid Recommendation Engine (Main Endpoint)**
     
     This endpoint processes a natural language request and generates highly personalized movie recommendations. 
-    It combines language understanding from **LLMs**, semantic similarity via **RAG (ChromaDB)**, and user preferences using **Collaborative Filtering (MongoDB)**.
+    It operates as a Retrieve-and-Generate pipeline, where databases act as the retrieval engine and Large Language Models (LLMs) act as the final personalized filter.
 
-    ### Use Cases
-    - **Contextual Recommendation / Exploration**: The user doesn't know what to watch and asks "I want a 90s sci-fi movie". The engine uses the LLM to infer candidates and uses RAG to find the exact movies in the database.
-    - **Historical Personalization (Cold-Start mitigated)**: By providing the `author` (email/ID) in the `message` field, the system loads the user's previous ratings and finds similar users (collaborative filtering) to boost or penalize certain movies within the final list.
+    ### Execution Flow
+    1. **Candidate Retrieval (RAG & Collaborative Filtering):** 
+       First, the system fetches a bounded list of candidate movies based on the user's interaction history count.
+       - *Cold-Start (< 20 ratings)*: The engine uses **RAG (Semantic Search)** against ChromaDB to find movies matching the text query and the release-date preferences of the user's profile.
+       - *Warm-Start (>= 20 ratings)*: The engine uses **Collaborative Filtering**, finding items rated highly by similar users (Nearest Neighbors) and scoring them against the user's query.
+    2. **LLM Context Injection & Selection:** 
+       The candidate movies obtained in Step 1 are passed as context to the chosen **LLM** (e.g., Llama3). The LLM also receives the user's full profile, their previously watched movies, and their natural language question. The LLM acts as the final judge, filtering and selecting the most appropriate movies from the candidates.
+    3. **Resolution & Augmentation:** 
+       The movies selected by the LLM are mapped back to the database. If configured (`similar_items_augmentation_limit`), the system will append semantically similar items to the final response to guarantee diversity before returning the JSON.
 
-    ### Internal Execution Flow
-    1. **LLM Inference**: A prompt is built by injecting the user's profile (if it exists). The language model returns a first draft of movies.
-    2. **RAG Augmentation**: Each title returned by the LLM is searched in ChromaDB to map them to real system IDs and increase variety with semantically very similar items.
-    3. **Ranking (Collaborative Filtering)**: The resulting candidates are scored and re-ranked based on the rating predictions of similar users (`k_sim_users`).
-    4. **Delivery**: Exactly `recommendations_limit` movies are returned, filtering out those the user has already seen (if `not_seen=True`).
-
-    *Note: If the `plain=True` property is activated in the `settings`, the JSON format is ignored and raw text is returned.*
+    ### Body Parameters Highlights
+    - **`message.author`**: The user's email. Mandatory to load historical data and profiles.
+    - **`message.content`**: The question itself (e.g., "I want a 90s sci-fi movie").
+    - **`settings.llm`**: Choose the underlying language model to use as the final filter.
     """
     query.settings.base_url = str(request.base_url)
     logging.info(f'Query:\n{query.model_dump(exclude_none=True)}')
