@@ -30,7 +30,7 @@ class ChatBotPoolService:
           prompt        = prompts[p],
           model         = m,
           output_parser = output_parser,
-          client        = self._cached_client
+          client        = self._raw_client # <-- Changed from self._cached_client to self._raw_client to bypass caching
         ) for m in models
       } for p in prompts.keys()
     }
