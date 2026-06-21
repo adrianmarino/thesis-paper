@@ -150,7 +150,7 @@ class RecommendationChatService:
       sim_items_query = ItemSimQuery() \
           .user_id_eq(query.message.author) \
           .contains(query.message.content) \
-          .is_seen(query.settings.rag.not_seen) \
+          .is_seen(not query.settings.rag.not_seen) \
           .release_gte(profile.release_from) \
           .limit_eq(query.settings.rag.candidates_limit)
 
