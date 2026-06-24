@@ -58,7 +58,8 @@ The Airflow DAGs that feed data and train models for this API are located in the
 - **Factory Pattern**: Utilized to instantiate recommender models and chatbot clients (e.g. `MovieRecommenderChatBotFactory`), centralizing construction logic.
 - **Dependency Injection (DI)**: Applied systematically through the constructor of all handlers, services, and repositories to invert dependencies (DIP), orchestrated via `AppContext`.
 
-### Test-Driven Development (TDD)
+### Test-Driven Development (TDD) (STRICTLY MANDATORY)
+- **TDD is strictly mandatory for any logical, algorithmic, or behavioral changes to the codebase.** No logic modifications should be made without creating or updating respective unit tests under `tests/`.
 - Implement test cases alongside endpoints and services under `tests/`.
 - Mock external systems (Ollama API, MongoDB, ChromaDB) in unit tests using unittest.mock or pytest-mock to ensure tests run fast and deterministically without external infrastructure requirements.
 
