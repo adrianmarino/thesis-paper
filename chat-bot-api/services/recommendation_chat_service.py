@@ -72,10 +72,6 @@ class RecommendationChatService:
     logs.append(f'End {query.settings.llm} llm inference. Elapsed time: {sw.to_str()}.')
     logging.info(logs[-1])
 
-    ai_message = AIMessage.from_response(response, query.message.author)
-
-    await self.ctx.history_service.append_dialogue(history, query.message, ai_message)
-
     result = await self.ctx.recommendations_factory.create(
       response,
       query.message.author,
@@ -85,6 +81,11 @@ class RecommendationChatService:
       shuffle                          = rec_settings.shuffle,
       similar_items_augmentation_limit = rec_settings.similar_items_augmentation_limit
     )
+
+    ai_message = AIMessage.from_response(response, query.message.author)
+    ai_message.metadata['recommendations'] = [item.model_dump(exclude_none=True) for item in result.items]
+
+    await self.ctx.history_service.append_dialogue(history, query.message, ai_message)
 
 
     if query.settings.include_metadata:
