@@ -20,9 +20,10 @@ class ItemSimQuery:
 
     def rating_gte(self, value):
         if value is not None:
-            value = int(value)
+            value = float(value)
             if value > 0:
                 self.__rating = value
+                self.__where_medata.gte('rating', value)
         return self
 
     def contains(self, value):

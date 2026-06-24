@@ -23,7 +23,12 @@ class ItemContentEmbMapper(ModelMapper):
 
     for model in models:
       documents.append(f'Title: {model.title}. Description: {model.description}. Genres: {", ".join(model.genres)}.')
-      metadatas.append({'id': model.id, 'release': int(model.release), 'genres': ','.join(model.genres)})
+      metadatas.append({
+          'id': model.id,
+          'release': int(model.release),
+          'genres': ','.join(model.genres),
+          'rating': float(model.rating) if model.rating is not None else 0.0
+      })
       ids.append(model.id)
 
     embeddings = self._item_service.generate(documents)

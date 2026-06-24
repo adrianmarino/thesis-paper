@@ -127,17 +127,13 @@ class RecommendationChatService:
           not_seen           = query.settings.collaborative_filtering.not_seen
       )
 
-      ordered_recommendations = recommendations \
-        .data \
-        .sort_values(
+      ordered_recommendations = recommendations         .data         .sort_values(
           by        = [query.settings.collaborative_filtering.rank_criterion],
           ascending = False,
         )
 
       if len(ordered_recommendations['id']) > 0:
-        item_ids = ordered_recommendations['id'] \
-          .unique() \
-          .tolist()[:query.settings.collaborative_filtering.candidates_limit]
+        item_ids = ordered_recommendations['id']           .unique()           .tolist()[:query.settings.collaborative_filtering.candidates_limit]
       else:
         item_ids = []
 
@@ -147,12 +143,7 @@ class RecommendationChatService:
       logging.info(logs[-1])
 
     else:
-      sim_items_query = ItemSimQuery() \
-          .user_id_eq(query.message.author) \
-          .contains(query.message.content) \
-          .is_seen(not query.settings.rag.not_seen) \
-          .release_gte(profile.release_from) \
-          .limit_eq(query.settings.rag.candidates_limit)
+      sim_items_query = ItemSimQuery()           .user_id_eq(query.message.author)           .contains(query.message.content)           .is_seen(not query.settings.rag.not_seen)           .release_gte(profile.release_from)           .rating_gte(query.settings.rag.min_rating_by_user)           .limit_eq(query.settings.rag.candidates_limit)
 
       candidate_items, _ = await self.ctx.item_service.find_similars_by(sim_items_query)
 

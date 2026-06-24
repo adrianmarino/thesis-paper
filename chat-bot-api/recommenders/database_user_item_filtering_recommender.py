@@ -137,14 +137,13 @@ class DatabaseUserItemFilteringRecommender:
 
             logging.info(f'Select {len(item_ids)} similar user items by text query')
 
-        items = await self.__items_repository.find_many_by(item_id={'$in': item_ids})
-
         user_interactions = await self.__interactions_repository.find_many_by(user_id=user_id)
 
         if not_seen:
             seen_item_ids = [i.item_id for i in user_interactions]
             item_ids = [item_id for item_id in item_ids if item_id not in seen_item_ids]
 
+        items = await self.__items_repository.find_many_by(item_id={'$in': item_ids})
 
         logging.info(f'Select {len(item_ids)} similar user unseen items')
 
@@ -219,7 +218,7 @@ class DatabaseUserItemFilteringRecommender:
             item_id={'$in': list(seen_item_rating_by_id.keys())}
         )
 
-        logging.info(f'{len(seen_items)} movies seen by {user_id} user')
+        logging.info(f"{len(seen_items)} movies seen by {user_id} user")
 
         return pd.DataFrame([
             {
