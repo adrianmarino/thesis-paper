@@ -117,31 +117,55 @@ class RecommendationChatService:
   ):
     logs = []
     if self.__has_min_interactions(interactions_info):
-      recommendations = await self.ctx.database_user_item_filtering_recommender.recommend(
-          user_id            = query.message.author,
-          text_query         = query.message.content,
-          k_sim_users        = query.settings.collaborative_filtering.k_sim_users,
-          max_items_by_user  = query.settings.collaborative_filtering.max_items_by_user,
-          text_query_limit   = query.settings.collaborative_filtering.text_query_limit,
-          min_rating_by_user = query.settings.collaborative_filtering.min_rating_by_user,
-          not_seen           = query.settings.collaborative_filtering.not_seen
-      )
-
-      ordered_recommendations = recommendations         .data         .sort_values(
-          by        = [query.settings.collaborative_filtering.rank_criterion],
-          ascending = False,
-        )
-
-      if len(ordered_recommendations['id']) > 0:
-        item_ids = ordered_recommendations['id']           .unique()           .tolist()[:query.settings.collaborative_filtering.candidates_limit]
-      else:
-        item_ids = []
+      current_k_sim_users       = query.settings.collaborative_filtering.k_sim_users
+      current_max_items_by_user = query.settings.collaborative_filtering.max_items_by_user
+      expansion_ratio           = query.settings.collaborative_filtering.neighborhood_expansion_ratio
+      max_attempts              = query.settings.collaborative_filtering.max_expansion_attempts
+      
+      attempts = 0
+      item_ids = []
+      
+      while len(item_ids) < query.settings.collaborative_filtering.candidates_limit and attempts <= max_attempts:
+        if attempts > 0:
+            logs.append(f'CF pool exhausted. Expanding neighborhood: Attempt {attempts}/{max_attempts}. Multiplying parameters by {expansion_ratio}x.')
+            logging.info(logs[-1])
+            current_k_sim_users       = int(current_k_sim_users * expansion_ratio)
+            current_max_items_by_user = int(current_max_items_by_user * expansion_ratio)
+            
+        try:
+            recommendations = await self.ctx.database_user_item_filtering_recommender.recommend(
+                user_id            = query.message.author,
+                text_query         = query.message.content,
+                k_sim_users        = current_k_sim_users,
+                max_items_by_user  = current_max_items_by_user,
+                text_query_limit   = query.settings.collaborative_filtering.text_query_limit,
+                min_rating_by_user = query.settings.collaborative_filtering.min_rating_by_user,
+                not_seen           = query.settings.collaborative_filtering.not_seen
+            )
+            
+            ordered_recommendations = recommendations.data.sort_values(
+                by        = [query.settings.collaborative_filtering.rank_criterion],
+                ascending = False,
+            )
+            
+            if len(ordered_recommendations['id']) > 0:
+                item_ids = ordered_recommendations['id'].unique().tolist()[:query.settings.collaborative_filtering.candidates_limit]
+            else:
+                item_ids = []
+        except Exception as e:
+            logs.append(f"CF Recommendation failed on attempt {attempts}: {str(e)}")
+            logging.error(logs[-1])
+            break
+            
+        if expansion_ratio <= 1.0 or len(item_ids) >= query.settings.collaborative_filtering.candidates_limit:
+            break
+            
+        attempts += 1
 
       candidate_items = await self.ctx.item_service.find_by_ids(item_ids)
 
       logs.append(f'Candidates items source: Collaborative Filtering Recommender')
       logging.info(logs[-1])
-
     else:
       sim_items_query = ItemSimQuery()           .user_id_eq(query.message.author)           .contains(query.message.content)           .is_seen(not query.settings.rag.not_seen)           .release_gte(profile.release_from)           .rating_gte(query.settings.rag.min_rating_by_user)           .limit_eq(query.settings.rag.candidates_limit)
 
