@@ -1,13 +1,15 @@
 import typing
 from .user_message import UserMessage
 import langchain.schema
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from datetime import datetime
 
 
 class AIMessage(BaseModel):
     author: str = 'AI'
     content : str
     metadata: typing.Dict[str, typing.Any] = {}
+    timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
 
     @staticmethod
     def from_response(response, author):

@@ -41,28 +41,90 @@ The files in the `dags/` directory orchestrate model training and data synchroni
 - **Shared Code**: If a feature is used by both the API and the Airflow DAGs, it MUST be placed in the `lib/` directory to avoid code duplication.
 - **Dependencies**: Any new dependency should be added to `environment.yml`.
 
-## Code Quality, Architecture & Testing Standards
+## Extra instructions
+### Agent development cycle (default, unless overridden)
+#### Mandatory Workflow Enforcement (Tool Usage)
+- **You MUST use the `todowrite` tool** at the very beginning of every new feature, bugfix, or refactor request.
+- You are strictly forbidden from writing production code before populating your TODO list with the following exact 5-step lifecycle:
+  1. **Analyze & Plan:** Analyze the requirement and propose a plan to the user. STOP and wait for approval.
+  2. **TDD (RED):** Write failing unit/integration tests that specify the desired behavior.
+  3. **TDD (GREEN):** Implement the minimum production code necessary to pass the tests.
+  4. **Refactor & Quality Gate:** Refactor the code applying SOLID principles, Clean Code, and explicitly handling errors/exceptions.
+  5. **Final Verification:** Run all quality checks (`pytest`, linters).
+- Keep the `todowrite` status updated in real-time as you progress through each step. Never skip the RED phase.
+- **Plan once:** Before coding, propose a TODO list oriented to iterative implementation and STOP. Ask for approval once. After approval, proceed without asking for the plan again unless new information invalidates it.
+- **Test-first (when supported):** If the repo has an existing test framework, write/update tests that specify the new behavior before implementing the production change.
+- **Quality gate (must answer "yes" before finishing):**
+    - **Task alignment:** Does the change meet every requirement from the original request (and nothing unrelated)?
+    - **Tests for new logic:** Did I add/adjust unit tests covering the success path and relevant error or edge cases?
+    - **Idiomatic + consistent:** Does the implementation follow Python and repo conventions?
+    - **Clarity + simplicity:** Is the code easy to read and minimizes complexity?
+    - **Error handling:** Are failure modes handled explicitly, with no silent failures?
+- **Final verification:** Run the applicable validation commands (e.g., `pytest`).
 
-### SOLID Principles
-- **Single Responsibility Principle (SRP)**: Each class must have a single reason to change (e.g., separating HTTP clients, caching decorators, and repositories).
-- **Open/Closed Principle (OCP)**: Extend behavior through decorators or subclassing (e.g., using `CachedOllamaApiClient` to add caching to `OllamaApiClient` without modifying it).
-- **Dependency Inversion Principle (DIP)**: High-level modules must depend on abstractions/interfaces rather than concrete implementations (e.g., `ChatBotClient` takes an injectable `client` interface). Use dependency injection container pattern (`app_context.py`).
+### Architecture instructions
+
+#### General Software Design & OOP Principles
+
+**1. The SOLID Principles**
+* **Single Responsibility (SRP):** A class should have one, and only one, reason to change. Keep components strictly focused.
+* **Open/Closed (OCP):** Software entities should be open for extension but closed for modification.
+* **Liskov Substitution (LSP):** Subclasses must be substitutable for their base classes without breaking the application.
+* **Interface Segregation (ISP):** Prefer multiple, highly specific interfaces over a single, general-purpose one.
+* **Dependency Inversion (DIP):** High-level modules should not depend on low-level modules; both should depend on abstractions. Depend on interfaces, not on concrete implementations.
+
+**2. DRY (Don't Repeat Yourself)**
+* Avoid duplicating code or logic. Every piece of knowledge must have a single, unambiguous representation.
+
+**3. KISS (Keep It Simple, Stupid)**
+* Systems work best when they are kept simple rather than made complicated.
+
+**4. YAGNI (You Aren't Gonna Need It)**
+* Always implement things when you actually need them, never when you just foresee that you might need them in the future.
+
+**5. Law of Demeter (Principle of Least Knowledge)**
+* An object should assume as little as possible about the structure of other objects. It should only interact with its immediate dependencies.
+
+**6. High Cohesion**
+* Ensure that all the methods and properties within a class are strongly related and focused on a unified purpose.
+
+**7. Low Coupling**
+* Minimize the dependencies between different classes. Changes in one class should have little to no impact on other classes.
+
+#### Python Object-Oriented Programming (OOP) Best Practices
+
+**1. Type Hinting Strictness**
+* Always use type hints (`typing` module, or built-in generic types) for function signatures, arguments, and class attributes.
+
+**2. Leverage Dataclasses and Pydantic**
+* Use `@dataclass` or Pydantic `BaseModel` for classes whose primary purpose is to hold data. This significantly reduces boilerplate and provides built-in validation.
+
+**3. Strict Encapsulation**
+* Hide implementation details. Use single leading underscores `_` to indicate internal/private methods and instance variables. Expose only what is necessary through public methods or properties.
+
+**4. Avoid Mutable Default Arguments**
+* Never use mutable structures (like `[]` or `{}`) as default arguments in functions to prevent unexpected side effects across function calls.
+
+**5. Composition over Inheritance**
+* Avoid inheriting from concrete classes whenever possible. If you need to extend behavior, prefer composition and dependency injection.
+
+**6. Explicit Exception Handling**
+* Catch specific exceptions rather than broad `Exception` classes. Fail fast and explicitly. Never use bare `except:` clauses.
 
 ### Design Patterns (Patrones de Diseño)
 - **Decorator & Proxy Patterns**: Enforce clean extensibility by decorating clients (e.g. `CachedOllamaApiClient` wrapping `OllamaApiClient`) to inject cross-cutting concerns (caching, logging) without modifying base logic.
 - **Factory Pattern**: Use dedicated Factories (e.g., `MovieRecommenderChatBotFactory`) to cleanly abstract complex object instantiation and configuration.
 - **Dependency Injection (DI)**: Register and resolve all singletons and services through a central composition root/container (`AppContext`), decoupling object lifetime management from business logic.
 
-### Test-Driven Development (TDD)
-- Write unit tests alongside or before implementing new features.
-- Design code to be testable: isolate side effects, avoid global state, mock external service dependencies (like MongoDB, ChromaDB, or Ollama APIs).
-- Run the test suite via pytest before committing.
+#### Development methodology and code quality
 
-### Mutation Testing
-- Apply mutation testing principles to evaluate test suite quality.
-- Your test assertions must be strong enough to detect changes (mutations) in the business logic code. Do not just assert that a method runs; assert specific side effects, schemas, and returned data.
+**1. Test-Driven Development (TDD)**
+- **Mandatory Approach:** All system changes (new features, bug fixes, refactoring) must be designed and implemented using **Test-Driven Development (TDD)**.
+- **Red-Green-Refactor Cycle:**
+  1. **Red:** Write a unit or integration test that fails, specifying the desired behavior.
+  2. **Green:** Implement the minimum code necessary to make the test pass successfully.
+  3. **Refactor:** Clean and optimize the implemented code, ensuring it follows the style guidelines and application architecture without breaking the tests.
 
-### Python Coding Best Practices
-- **Type Hinting**: Use Pydantic models for data parsing and validation, and enforce Python type annotations (`typing.Dict`, `typing.List`, etc.) for all function signatures.
-- **PEP 8 Formatting**: Adhere to clean code standards, readable indentation, snake_case naming for variables and functions, and CamelCase for classes.
-- **Shared Decoupling**: Keep the `lib/` package fully detached from specific API framework dependencies (FastAPI, Motor/MongoDB specific connections).
+**2. Mutation Testing**
+- **Test Suite Validation:** To ensure the quality and actual effectiveness of the tests, apply **Mutation Testing** principles.
+- **Goal:** Validate that the test suite is robust and fails in the presence of mutations. If tests still pass after changing logic, they are not rigorously validating the expected behavior.
