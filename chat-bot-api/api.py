@@ -72,9 +72,22 @@ async def internal_exception_handler(request: Request, e: Exception):
 
 @app.exception_handler(Exception)
 async def error_exception_handler(request: Request, e: Exception):
+    error_msg = str(e)
+    if "model '" in error_msg and "not found" in error_msg:
+        import re
+        match = re.search(r"model '([^']+)' not found", error_msg)
+        if match:
+            model_name = match.group(1)
+            return JSONResponse(
+                status_code = 400,
+                content     = jsonable_encoder({
+                    'code': 400,
+                    'msg': f"The selected LLM model '{model_name}' is not installed or available in the Ollama environment on skynet."
+                })
+            )
     return JSONResponse(
         status_code = 500,
-        content     = jsonable_encoder({ 'code': 500, 'msg': str(e) })
+        content     = jsonable_encoder({ 'code': 500, 'msg': error_msg })
     )
 
 # Serve compiled static client at root URL (mount after API routers to avoid shadowing)

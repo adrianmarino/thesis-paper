@@ -45,15 +45,11 @@ class MovieRecommendationsOutputParser():
             return { 'recommendations': results }
 
     def _build_item(self, idx, data):
+        clean_title = re.sub(r'^\s*\d+\.\s*', '', data[0])
+        clean_title = clean_title.replace('*', '').replace('"', '').replace('\"', '"').strip()
         return {
             'number'     : idx,
-            'title'      : data[0] \
-                .replace('"', '') \
-                .replace('\"', '"') \
-                .replace('\d\.', '') \
-                .replace('**', '') \
-                .strip() \
-                .capitalize(),
+            'title'      : clean_title.capitalize(),
             'description': data[2].strip().capitalize(),
             'release'    : data[1].strip()
         }
