@@ -26,4 +26,9 @@ class ProfileService:
 
 
     async def delete(self, email: str):
-        return await self.ctx.profiles_repository.delete_many_by(email=email)
+        result = await self.ctx.profiles_repository.delete_many_by(email=email)
+        try:
+            self.ctx.users_cf_emb_repository.delete(email)
+        except Exception:
+            pass
+        return result

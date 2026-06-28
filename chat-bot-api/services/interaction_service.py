@@ -29,5 +29,10 @@ class InteractionService:
 
 
     async def delete_all_by_user_id(self, user_id):
-        return await self.ctx.interactions_repository.delete_many_by(user_id=user_id)
+        result = await self.ctx.interactions_repository.delete_many_by(user_id=user_id)
+        try:
+            self.ctx.users_cf_emb_repository.delete(user_id)
+        except Exception:
+            pass
+        return result
 

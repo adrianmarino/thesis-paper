@@ -125,4 +125,18 @@ Parameters: Units [20, 1], Dropout: 0.25, Embedding Size: 50.
 
     await self.helper.update_database(train_set, model)
 
+    # Prune stale/cold-start embeddings for users with < 20 interactions
+    try:
+        profiles = await self.ctx.profile_service.all()
+        for profile in profiles:
+            user_interactions = interactions_df[interactions_df["user_id"] == profile.email]
+            if len(user_interactions) < 20:
+                try:
+                    self.ctx.users_cf_emb_repository.delete(profile.email)
+                    logging.info(f"Pruned stale/cold-start embedding from ChromaDB for user: {profile.email}")
+                except Exception:
+                    pass
+    except Exception as e:
+        logging.error(f"Error during stale embeddings cleanup: {e}")
+
     self._cfg = { 'interactions_count': len(interactions_df) }
