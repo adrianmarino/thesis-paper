@@ -19,7 +19,9 @@ def python_callable(task_id, thesis_src_path, recsys_client_src_path, recsys_cli
     import logging
     logging.getLogger().setLevel(logging.INFO)
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("httpcore").setLevel(logging.WARNING)
+        logging.getLogger("httpcore").setLevel(logging.WARNING)
+    import warnings
+    warnings.filterwarnings('ignore', category=UserWarning, module='seaborn')
     from airflow.sdk.exceptions import AirflowException
     sys.path.append(f'{thesis_src_path}')
     sys.path.append(f'{thesis_src_path}/../chat-bot-api')
