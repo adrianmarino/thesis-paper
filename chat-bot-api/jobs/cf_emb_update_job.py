@@ -40,15 +40,43 @@ class CFEmbUpdateJob(Job):
 
     chat_bot_interactions = interactions_df[interactions_df["user_id"].str.contains("@")]
 
-    if self._cfg is not None and (len(chat_bot_interactions) == 0 or self._cfg.get('interactions_count', 0) == len(interactions_df)):
-      logging.warn("""
-        No changes were found in user interactions, therefore updating
-        user and item embeddings, as well as predictions for ratings
-        of items not seen by users, is not necessary.
-      """)
+    current_count = len(interactions_df)
+    prev_count = self._cfg.get('interactions_count', 0) if self._cfg is not None else 0
+    delta = current_count - prev_count
+
+    if self._cfg is not None and (len(chat_bot_interactions) == 0 or prev_count == current_count):
+      logging.info(f"""
+================================================================================
+[STEP 1] 🛑 TRAINING SKIPPED (NO CHANGES DETECTED)
+================================================================================
+Reason: The total number of interactions has not changed since the last execution.
+  • Current Interactions: {current_count}
+  • Previous Interactions: {prev_count}
+  • Delta (Difference): {delta}
+
+No retraining required. ChromaDB embeddings and MongoDB predictions are up-to-date.
+================================================================================
+""")
       return
 
+    logging.info(f"""
+================================================================================
+[STEP 1] 🚀 DEEP-FM EMBEDDINGS UPDATE INITIATED
+================================================================================
+Reason: Changes detected in user interactions (New ratings submitted or deleted).
+  • Current Interactions: {current_count}
+  • Previous Interactions: {prev_count}
+  • Delta (Difference): {'+' if delta > 0 else ''}{delta}
+================================================================================
+""")
+
     train_set, test_set = self.helper.split_dataset(interactions_df)
+    
+    logging.info(f"""
+[STEP 3] 🧠 TRAINING NEURAL NETWORK (DEEP-FM)
+Starting PyTorch DeepFM training. Device set to GPU.
+Parameters: Units [20, 1], Dropout: 0.25, Embedding Size: 50.
+""")
 
     model_loader = srv.DeepFMLoader(
         weights_path          = os.environ['WEIGHTS_PATH'],

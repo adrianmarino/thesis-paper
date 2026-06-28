@@ -34,9 +34,30 @@ class CFEmbUpdateJobHelper:
 
         test_set = user_sequencer.perform(test_set)
         test_set = item_sequencer.perform(test_set)
+        
+        train_len = len(train_set)
+        test_len = len(test_set)
+        total_len = train_len + test_len
+        train_pct = (train_len / total_len) * 100 if total_len > 0 else 0
+        test_pct = (test_len / total_len) * 100 if total_len > 0 else 0
+
+        logging.info(f"""
+[STEP 2] 📊 DATASET PREPARATION & SPLITTING
+Interactions dataset successfully split (test_size=0.05):
+  • Train Set: {train_len} interactions ({train_pct:.1f}%)
+  • Test Set: {test_len} interactions ({test_pct:.1f}%)
+  • Total: {total_len} interactions
+""")
+
         return train_set, test_set
 
     def update_embeddings(self, model, train_set):
+        logging.info(f"""
+[STEP 4] 💾 UPDATING VECTOR SPACE IN CHROMADB
+Extracting learned embeddings from the DeepFM model layers...
+  • Upserting User embeddings into 'users_cf' collection.
+  • Upserting Item embeddings into 'items_cf' collection.
+""")
         [user_embeddings, item_embeddings] = model.embedding.feature_embeddings
 
         def to_entity_embs(df, seq_col, id_col, embeddings):
@@ -57,23 +78,20 @@ class CFEmbUpdateJobHelper:
         self.ctx.items_cf_emb_repository.upsert_many(item_embs)
 
     async def update_database(self, train_set, model):
-        logging.info("Generate train_set")
+        logging.info(f"""
+[STEP 5] 🔮 GENERATING PREDICTIONS FOR UNSEEN MOVIES (MONGODB)
+Building prediction dataset for Chatbot users...
+""")
 
         prediction_set = self.__to_prediction_dataset(train_set)
 
-        logging.info("Build train_set")
-
         predictor = ml.ModulePredictor(model)
 
-        logging.info("Predict ratings")
+        logging.info("Predicting ratings using DeepFM model...")
 
         predictions = predictor.predict_dl(self.__to_dataloader(prediction_set))
 
-        logging.info("Save predicted ratings")
-
         prediction_set["predicted_rating"] = predictions
-
-        logging.info("Create interactions")
 
         models = [
             UserInteraction(
@@ -84,11 +102,11 @@ class CFEmbUpdateJobHelper:
             for _, row in prediction_set.iterrows()
         ]
 
-        logging.info("UPSERT interaction into ")
+        logging.info(f"  • Upserting {len(models)} predictions into 'pred_interactions' collection in MongoDB...")
 
         await self.ctx.pred_interactions_repository.upsert_many(models)
 
-        logging.info("FINISH UPSERT")
+        logging.info("\n✅ PIPELINE SUCCESSFULLY COMPLETED!\n")
 
 
     def __to_prediction_dataset(self, train_set):
