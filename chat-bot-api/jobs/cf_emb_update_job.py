@@ -114,7 +114,6 @@ Parameters: Units [20, 1], Dropout: 0.25, Embedding Size: 50.
     except Exception as e:
         if 'size mismatch' in str(e) or 'state_dict' in str(e) or 'Error' in str(e):
             logging.warning(f"Failed to load model weights. Ignoring previous checkpoint and training from scratch. Details: {e}")
-            import os
             save_path = f"{os.environ['WEIGHTS_PATH']}/deep_fm.pt"
             if os.path.exists(save_path):
                 os.remove(save_path)
