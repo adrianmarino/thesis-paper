@@ -17,6 +17,7 @@ os.environ['CHROMA_PORT']      = '9090'
 def python_callable(task_id, thesis_src_path, recsys_client_src_path, recsys_client_cfg_path, airflow_path):
     import sys
     import logging
+    logging.getLogger().setLevel(logging.INFO)
     from airflow.sdk.exceptions import AirflowException
     sys.path.append(f'{thesis_src_path}')
     sys.path.append(f'{thesis_src_path}/../chat-bot-api')
