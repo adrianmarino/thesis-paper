@@ -38,12 +38,12 @@ class CFEmbUpdateJob(Job):
 
     interactions_df = self.helper.get_interactions()
 
-    # Prune stale/cold-start embeddings for users with < 20 interactions at the very beginning
+    # Prune stale/cold-start embeddings for users with exactly 0 interactions at the very beginning
     try:
         profiles = await self.ctx.profile_service.all()
         for profile in profiles:
             user_interactions = interactions_df[interactions_df["user_id"] == profile.email]
-            if len(user_interactions) < 20:
+            if len(user_interactions) == 0:
                 try:
                     self.ctx.users_cf_emb_repository.delete(profile.email)
                     logging.info(f"Pruned stale/cold-start embedding from ChromaDB for user: {profile.email}")
