@@ -56,6 +56,13 @@ class ModuleLoader(ABC):
         model, params = self.create_model(dataset)
 
         if self._change_detector.detect(dataset):
+            # Attempt to load old weights to continue training if shapes match
+            try:
+                model.load(self._save_file_path)
+            except Exception as e:
+                import logging
+                logging.warning(f"Could not load previous model weights (likely shape mismatch due to new users/items). Training from scratch. Details: {e}")
+            
             self._train_evaluate(model, params, dev_set, eval_set)
 
             model.save(self._save_file_path)
@@ -64,7 +71,14 @@ class ModuleLoader(ABC):
 
             return model, params
         else:
-            model.load(self._save_file_path)
+            try:
+                model.load(self._save_file_path)
+            except Exception as e:
+                import logging
+                logging.warning(f"Could not load previous model weights in else branch. Training from scratch. Details: {e}")
+                self._train_evaluate(model, params, dev_set, eval_set)
+                model.save(self._save_file_path)
+                self._change_detector.update(dev_set)
             return model, params
 
 

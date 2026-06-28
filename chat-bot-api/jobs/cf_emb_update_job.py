@@ -107,7 +107,20 @@ Parameters: Units [20, 1], Dropout: 0.25, Embedding Size: 50.
         })
     )
 
-    model, params = model_loader.load(train_set, test_set)
+    # If this fails with a state_dict error, it means the architecture changed (e.g., new users added to embedding).
+    # In that case, we can't load the old checkpoint. We must catch it.
+    try:
+        model, params = model_loader.load(train_set, test_set)
+    except Exception as e:
+        if 'size mismatch' in str(e) or 'state_dict' in str(e) or 'Error' in str(e):
+            logging.warning(f"Failed to load model weights. Ignoring previous checkpoint and training from scratch. Details: {e}")
+            import os
+            save_path = f"{os.environ['WEIGHTS_PATH']}/deep_fm.pt"
+            if os.path.exists(save_path):
+                os.remove(save_path)
+            model, params = model_loader.load(train_set, test_set)
+        else:
+            raise e
 
     self.helper.update_embeddings(model, train_set)
 
